@@ -1,0 +1,45 @@
+<mdc-top-app-bar style="position: unset" class="demo-top-app-bar-with-tabs">
+    <mdc-top-app-bar-row>
+        <mdc-top-app-bar-section align="start">
+            <button mdc-top-app-bar-nav-icon
+                    click.delegate="drawer.open = !drawer.open">
+                <mdc-icon>menu</mdc-icon>
+            </button>
+            <mdc-top-app-bar-title>App</mdc-top-app-bar-title>
+        </mdc-top-app-bar-section>
+        <mdc-top-app-bar-section end>
+            <mdc-icon mdc-top-app-bar-action-item>search</mdc-icon>
+            <mdc-icon mdc-top-app-bar-action-item>notifications_none</mdc-icon>
+            <button mdc-button class="button-secondary" click.delegate="profileMenu.open = !profileMenu.open">
+                <mdc-icon>login</mdc-icon>
+                Login with Discord
+            </button>
+            <div mdc-menu-surface-anchor ref="menuAnchor">
+                <mdc-menu view-model.ref="profileMenu" anchor.bind="menuAnchor">
+                    <mdc-list>
+                        <mdc-list-item>My Profile</mdc-list-item>
+                        <mdc-list-divider></mdc-list-divider>
+                        <mdc-list-item>Sign out</mdc-list-item>
+                    </mdc-list>
+                </mdc-menu>
+            </div>
+        </mdc-top-app-bar-section>
+    </mdc-top-app-bar-row>
+</mdc-top-app-bar>
+
+<div class="demo-drawer-app-content">
+    <mdc-drawer type="dismissible" view-model.ref="drawer">
+        <mdc-drawer-header title="Drawer Title" subtitle="Subtitle"></mdc-drawer-header>
+        <mdc-drawer-content>
+            <mdc-list>
+                <mdc-list-item repeat.for="link of links">
+                    <mdc-icon mdc-list-item-leading>${link.icon}</mdc-icon>
+                    ${link.label}
+                </mdc-list-item>
+            </mdc-list>
+        </mdc-drawer-content>
+    </mdc-drawer>
+    <mdc-drawer-app-content style="display: block; padding: 16px; height: 400px;">
+        <au-slot></au-slot>
+    </mdc-drawer-app-content>
+</div>

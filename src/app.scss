@@ -1,0 +1,7 @@
+@use 'styles/reset';
+
+@use '~@aurelia-mdc-web/all';
+
+.message {
+  background-color: lightblue;
+}
