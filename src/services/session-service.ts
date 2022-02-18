@@ -1,6 +1,7 @@
 import { inject, EventAggregator } from 'aurelia';
 import { ApiService } from "./api-service";
 import { DiscordService } from "./discord-service";
+import {ProfileResponse} from "./models/user";
 
 @inject(ApiService, DiscordService, EventAggregator)
 export class SessionService {
@@ -35,40 +36,49 @@ export class SessionService {
         this.eventAggregator.publish('user-updated', this.currentUser);
     }
 
-    async getProfile() {
+    async getUser(): Promise<ProfileResponse> {
         if (this.isTokenValid()) {
             if (this.currentUser) {
                 return this.currentUser;
+            } else {
+                return await this.refreshProfile();
             }
-            // this.currentUser = await this.apiService.doGet('profile');
-            return this.currentUser;
         }
     }
 
     async refreshProfile() {
-        if (this.isTokenValid()) {
-            this.currentUser = await this.apiService.doGet('profile');
-            if (!this.currentUser?.isDeleted) {
-                return this.currentUser;
-            } else if (this.currentUser?.isDeleted) {
-                await this.logout();
-            }
-            return this.currentUser;
-        }
+        this.currentUser = await this.apiService.doGet('User/Profile');
+
+        this.eventAggregator.publish('user-updated', this.currentUser);
+
+        return this.currentUser;
     }
 
     isTokenValid() {
         const token = this.getStorageItem(SessionService.TOKEN_KEY);
-        return token && token !== '' && token !== undefined && token !== 'undefined';
+        if (token && token !== '' && token !== undefined && token !== 'undefined') {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            if(JSON.parse(jsonPayload).exp * 1000 <= Date.now()) {
+                this.clearSession();
+                return false
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 
     async logout() {
         try {
             await this.apiService.doDelete('Logout');
         } finally {
-            this.destroyStorageItem(SessionService.TOKEN_KEY);
-            this.currentUser = null;
-            this.eventAggregator.publish('user-updated', {});
+            this.clearSession();
         }
     }
 

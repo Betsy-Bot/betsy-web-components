@@ -5,33 +5,31 @@
                     click.delegate="drawer.open = !drawer.open">
                 <mdc-icon>menu</mdc-icon>
             </button>
-            <a load="route:Home">
+            <a load="route:home">
                 <mdc-top-app-bar-title>App</mdc-top-app-bar-title>
             </a>
         </mdc-top-app-bar-section>
         <mdc-top-app-bar-section end>
             <mdc-icon mdc-top-app-bar-action-item>search</mdc-icon>
             <mdc-icon mdc-top-app-bar-action-item>notifications_none</mdc-icon>
-            <a if.bind="!user" external href="https://discord.com/api/oauth2/authorize?client_id=943260131599220856&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Flogin&response_type=code&scope=identify%20email">
+            <a if.bind="!user" external href="https://discord.com/api/oauth2/authorize?client_id=943260131599220856&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Flogin&response_type=code&scope=identify%20email%20guilds">
                 <button mdc-button class="button-secondary">
                     <mdc-icon>login</mdc-icon>
                     Login with Discord
                 </button>
             </a>
             <div else>
-                <img src="https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.png">
-                <button mdc-button class="button-secondary" click.delegate="profileMenu.open = !profileMenu.open">
-                    <mdc-icon>logout</mdc-icon>
-                    Logout
-                </button>
+                <img click.delegate="profileMenu.open = !profileMenu.open" src="https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.webp">
             </div>
 
             <div mdc-menu-surface-anchor ref="menuAnchor">
                 <mdc-menu view-model.ref="profileMenu" anchor.bind="menuAnchor">
                     <mdc-list>
-                        <mdc-list-item>My Profile</mdc-list-item>
+                        <a load="route:dashboard">
+                            <mdc-list-item>Dashboard</mdc-list-item>
+                        </a>
                         <mdc-list-divider></mdc-list-divider>
-                        <mdc-list-item>Sign out</mdc-list-item>
+                        <mdc-list-item click.delegate="logout()">Sign out</mdc-list-item>
                     </mdc-list>
                 </mdc-menu>
             </div>
@@ -52,6 +50,8 @@
         </mdc-drawer-content>
     </mdc-drawer>
     <mdc-drawer-app-content style="display: block; padding: 16px; height: 400px;">
-        <au-slot></au-slot>
+        <div class="container">
+            <au-slot></au-slot>
+        </div>
     </mdc-drawer-app-content>
 </div>

@@ -1,0 +1,14 @@
+<h2>Servers you can add to</h2>
+<div class="d-flex flex-wrap justify-content-around discord-servers">
+    <div class="card-container w-30 p-3 mb-3" repeat.for="guild of managedGuilds">
+        <server-card server.bind="guild"></server-card>
+    </div>
+</div>
+
+<h2>Other Servers</h2>
+
+<div class="d-flex flex-wrap justify-content-around discord-servers">
+    <div class="card-container w-30 p-3 mb-3" repeat.for="guild of otherGuilds">
+        <server-card server.bind="guild"></server-card>
+    </div>
+</div>

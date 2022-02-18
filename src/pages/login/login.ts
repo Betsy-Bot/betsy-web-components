@@ -10,6 +10,6 @@ export class Login implements IRouteViewModel {
         const code = current.queryParams.get('code');
         await this.sessionService.loginWithOAuthCode(code);
 
-        return 'home';
+        return 'dashboard';
     }
 }

@@ -12,6 +12,11 @@ import { SessionService } from "./services/session-service";
             path: 'login',
             component: import('./pages/login/login'),
             title: 'Login',
+        },
+        {
+            path: 'dashboard',
+            component: () => import('./pages/dashboard/dashboard'),
+            title: 'Dashboard'
         }
     ]
 })
@@ -24,16 +29,13 @@ export class App implements IRouteViewModel {
     constructor(private eventAggregator, private sessionService) {
     }
 
-    attached() {
-        this.user = this.sessionService.currentUser;
-        console.log(this.user);
+    async attached() {
+        this.user = await this.sessionService.getUser();
     }
 
     bound() {
         this.userSubscriber = this.eventAggregator.subscribe('user-updated', payload => {
-            this.user = payload;
-            console.log(this.user);
-            console.log('^ update')
+            this.user = payload.user;
         });
     }
 
