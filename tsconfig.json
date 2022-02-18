@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "emitDecoratorMetadata": true,
+    "emitDecoratorMetadata": false,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "skipLibCheck": true,

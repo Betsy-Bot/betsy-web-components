@@ -1,14 +1,15 @@
 import {IRouteViewModel, Params, RouteNode, inject} from "aurelia";
-import { DiscordService } from "../../services/discord-service";
+import { SessionService } from "../../services/session-service";
 
-@inject(DiscordService)
+@inject(SessionService)
 export class Login implements IRouteViewModel {
-    constructor(private discordService: DiscordService) {
+    constructor(private sessionService: SessionService) {
     }
 
-    load(params: Params, next: RouteNode, current: RouteNode | null): void | Promise<void> {
+    async canLoad(params: Params, next: RouteNode, current: RouteNode | null): Promise<string | boolean> {
         const code = current.queryParams.get('code');
-        console.log(code)
-        const responseToken = this.discordService.getToken(code);
+        await this.sessionService.loginWithOAuthCode(code);
+
+        return 'home';
     }
 }

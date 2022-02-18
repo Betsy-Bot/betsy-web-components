@@ -1,8 +1,5 @@
-import {IRouteViewModel, route} from "aurelia";
-
-const getPagePath = (name: string) : string => {
-    return `./pages/${name}/${name}`;
-}
+import {IRouteViewModel, route, EventAggregator, inject, IDisposable} from "aurelia";
+import { SessionService } from "./services/session-service";
 
 @route({
     routes: [
@@ -19,8 +16,28 @@ const getPagePath = (name: string) : string => {
     ]
 })
 
+@inject(EventAggregator, SessionService)
 export class App implements IRouteViewModel {
-    public message = 'Hello World!';
+    private userSubscriber: IDisposable;
+    private user: any;
 
-    public url = 'https://discord.com/api/oauth2/authorize?client_id=414202113070202880&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Flogin&response_type=code&scope=email%20identify';
+    constructor(private eventAggregator, private sessionService) {
+    }
+
+    attached() {
+        this.user = this.sessionService.currentUser;
+        console.log(this.user);
+    }
+
+    bound() {
+        this.userSubscriber = this.eventAggregator.subscribe('user-updated', payload => {
+            this.user = payload;
+            console.log(this.user);
+            console.log('^ update')
+        });
+    }
+
+    unbinding() {
+        this.userSubscriber.dispose();
+    }
 }

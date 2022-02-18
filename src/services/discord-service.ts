@@ -6,7 +6,12 @@ export class DiscordService {
     constructor(private api: ApiService) {
     }
 
-    async getToken(code: string): Promise<string> {
-        return await this.api.doGet('Discord/getToken', {code: code})
+    async exchangeCode(code: string): Promise<ExchangeCodeResponse> {
+        return this.api.doPost('Discord/OAuth/ExchangeCode', {code: code})
     }
+}
+
+interface ExchangeCodeResponse {
+    token: string,
+    id: string
 }
