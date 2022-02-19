@@ -1,0 +1,9 @@
+@import 'bootstrap';
+
+body {
+  --mdc-theme-primary: rgba(87, 98, 213, 1);
+  --mdc-theme-secondary: rgba(76, 96, 133, 1);
+  --mdc-theme-on-primary: $body-bg;
+  --mdc-background-primary: rgba(0, 0, 0, 0);
+  --mdc-theme-surface: rgba(76, 96, 133, 1);
+}

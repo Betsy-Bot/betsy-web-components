@@ -6,7 +6,7 @@
                 <mdc-icon>menu</mdc-icon>
             </button>
             <a load="route:home">
-                <mdc-top-app-bar-title>App</mdc-top-app-bar-title>
+                <mdc-top-app-bar-title>Betsy Bot</mdc-top-app-bar-title>
             </a>
         </mdc-top-app-bar-section>
         <mdc-top-app-bar-section end>
@@ -19,7 +19,7 @@
                 </button>
             </a>
             <div else>
-                <img click.delegate="profileMenu.open = !profileMenu.open" src="https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.webp">
+                <img class="avatar" click.delegate="profileMenu.open = !profileMenu.open" src="https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.webp">
             </div>
 
             <div mdc-menu-surface-anchor ref="menuAnchor">

@@ -6,7 +6,6 @@ import { Navigation } from "./resources/elements/navbar/navigation";
 import {ServerCard} from "./resources/elements/server-card/server-card";
 
 import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
 
 Aurelia
     .register(RouterConfiguration, AllConfiguration,

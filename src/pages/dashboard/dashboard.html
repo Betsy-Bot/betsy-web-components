@@ -1,14 +1,22 @@
-<h2>Servers you can add to</h2>
-<div class="d-flex flex-wrap justify-content-around discord-servers">
-    <div class="card-container w-30 p-3 mb-3" repeat.for="guild of managedGuilds">
-        <server-card server.bind="guild"></server-card>
+<section if.bind="managedGuilds">
+    <h2 class="mb-4">
+        Servers you can Invite to
+    </h2>
+    <div class="row g-5">
+        <div class="card-container col-12 col-sm-6 col-lg-4" repeat.for="guild of managedGuilds">
+            <server-card server.bind="guild"></server-card>
+        </div>
     </div>
-</div>
+</section>
 
-<h2>Other Servers</h2>
+<section if.bind="otherGuilds" class.bind="managedGuilds ? 'mt-5' : ''">
+    <h2 class="mb-4">
+        Other Servers
+    </h2>
 
-<div class="d-flex flex-wrap justify-content-around discord-servers">
-    <div class="card-container w-30 p-3 mb-3" repeat.for="guild of otherGuilds">
-        <server-card server.bind="guild"></server-card>
+    <div class="row g-5">
+        <div class="card-container col-12 col-sm-6 col-lg-4" repeat.for="guild of otherGuilds">
+            <server-card server.bind="guild"></server-card>
+        </div>
     </div>
-</div>
+</section>

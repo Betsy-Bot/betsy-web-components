@@ -1,7 +1,12 @@
 @use 'styles/reset';
 @use 'styles/bootstrap-extras';
-
 @use '~@aurelia-mdc-web/all';
+@use 'styles/bootstrap';
+@use 'styles/md-overrides';
+
+body {
+  background-color: #202225;
+}
 
 .message {
   background-color: lightblue;

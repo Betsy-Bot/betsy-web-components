@@ -1,6 +1,6 @@
 {
-  "name": "admin-panel",
-  "description": "Betsy Bot Admin Panel",
+  "name": "besty-bot-web-app",
+  "description": "Betsy Bot Web Application",
   "version": "0.1.0",
   "repository": {
     "type": "git",

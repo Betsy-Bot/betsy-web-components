@@ -1,15 +1,15 @@
-import { inject, EventAggregator } from 'aurelia';
+import { inject, IEventAggregator } from 'aurelia';
 import { ApiService } from "./api-service";
 import { DiscordService } from "./discord-service";
 import {ProfileResponse} from "./models/user";
 
-@inject(ApiService, DiscordService, EventAggregator)
+@inject(ApiService, DiscordService, IEventAggregator)
 export class SessionService {
     static TOKEN_KEY = 'jwt_token';
 
     public currentUser;
 
-    constructor(private apiService: ApiService, private discordService: DiscordService, private eventAggregator: EventAggregator) {
+    constructor(private apiService: ApiService, private discordService: DiscordService, private eventAggregator: IEventAggregator) {
     }
 
     saveStorageItem(key: string, value: string) {
