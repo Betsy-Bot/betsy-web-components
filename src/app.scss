@@ -3,6 +3,7 @@
 @use '~@aurelia-mdc-web/all';
 @use 'styles/bootstrap';
 @use 'styles/md-overrides';
+@use '~lets-toast/build/lets-toast.min';
 
 body {
   background-color: #202225;
