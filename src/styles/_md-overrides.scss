@@ -1,3 +1,5 @@
+@use '~@material/button';
+@use '~@material/theme';
 @import 'bootstrap';
 
 body {
@@ -6,4 +8,12 @@ body {
   --mdc-theme-on-primary: $body-bg;
   --mdc-background-primary: rgba(0, 0, 0, 0);
   --mdc-theme-surface: rgba(76, 96, 133, 1);
+}
+
+.button-secondary {
+  @include button.filled-accessible(theme.$secondary);
+}
+
+.button-primary {
+  @include button.filled-accessible(theme.$primary);
 }

@@ -1,12 +1,33 @@
 <section id="server-card">
-    <mdc-card mdc-elevation.bind="12">
+    <mdc-card mdc-elevation.bind="12" class="mb-2">
         <mdc-card-primary-action>
-            <mdc-card-media square class="server-card-media mx-auto my-2"
+            <mdc-card-media square class="server-card-media mx-auto my-3"
+                            if.bind="server.icon"
                             style="background-image: url(https://cdn.discordapp.com/icons/${server.id}/${server.icon}.${server.icon_extension})">
             </mdc-card-media>
-            <div class="server-card__primary">
-                <div class="demo-card__title" mdc-headline6>${server.name}</div>
+            <div square class="server-card-media mx-auto my-3" else>
+                <div class="fs-5 d-flex discord-text-square justify-content-center align-items-center d-flex">
+                    ${getServerText()}
+                </div>
             </div>
         </mdc-card-primary-action>
     </mdc-card>
+    <div class="row">
+        <div class="col-12 col-lg-8 my-auto">
+            <div class="fs-6" mdc-headline6>
+                ${server.name}
+            </div>
+            <div class="fs-7">
+                ${server.owner ? 'Owner' : 'Bot Manager'}
+            </div>
+        </div>
+        <div class="col-12 col-lg-4 text-lg-end my-auto">
+            <button mdc-button class="button-secondary" if.bind="!server.invited">
+                Setup
+            </button>
+            <button mdc-button class="button-primary" else>
+                Go
+            </button>
+        </div>
+    </div>
 </section>
