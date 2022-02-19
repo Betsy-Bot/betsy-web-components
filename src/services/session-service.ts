@@ -6,6 +6,7 @@ import {ProfileResponse} from "./models/user";
 @inject(ApiService, DiscordService, IEventAggregator)
 export class SessionService {
     static TOKEN_KEY = 'jwt_token';
+    static SIDEBAR_STATUS_KEY = 'sidebar_open';
 
     public currentUser;
 
@@ -13,11 +14,16 @@ export class SessionService {
     }
 
     saveStorageItem(key: string, value: string) {
-        window.localStorage[key] = value;
+        window.localStorage.setItem(key, value);
     }
 
-    getStorageItem(key: string): string {
-        return window.localStorage[key];
+    getStorageItem(key: string, defaultValue: any = null): string | boolean {
+        if (window.localStorage[key] !== undefined) {
+            return JSON.parse(window.localStorage.getItem(key));
+        } else {
+            this.saveStorageItem(key, defaultValue);
+            return defaultValue;
+        }
     }
 
     destroyStorageItem(key: string) {
@@ -36,13 +42,15 @@ export class SessionService {
         this.eventAggregator.publish('user-updated', this.currentUser);
     }
 
-    async getUser(): Promise<ProfileResponse> {
+    async getUser(): Promise<ProfileResponse | boolean> {
         if (this.isTokenValid()) {
             if (this.currentUser) {
                 return this.currentUser;
             } else {
                 return await this.refreshProfile();
             }
+        } else {
+            return false;
         }
     }
 
@@ -55,7 +63,7 @@ export class SessionService {
     }
 
     isTokenValid() {
-        const token = this.getStorageItem(SessionService.TOKEN_KEY);
+        const token = <string>this.getStorageItem(SessionService.TOKEN_KEY);
         if (token && token !== '' && token !== undefined && token !== 'undefined') {
             const base64Url = token.split('.')[1];
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

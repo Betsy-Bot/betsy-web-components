@@ -14,7 +14,6 @@ export class Dashboard {
     async attached() {
         this.user = await this.sessionService.getUser();
 
-        console.log(this.user);
         const userGuilds = await this.userService.getGuilds();
         for (const guild of userGuilds) {
             guild.icon_extension = guild.icon?.startsWith("a_") ? "gif" : "webp";

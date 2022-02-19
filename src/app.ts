@@ -1,6 +1,7 @@
 import {IRouteViewModel, route, EventAggregator, inject, IDisposable} from "aurelia";
 import { SessionService } from "./services/session-service";
 
+// @ts-ignore
 @route({
     routes: [
         {
@@ -16,7 +17,10 @@ import { SessionService } from "./services/session-service";
         {
             path: 'dashboard',
             component: () => import('./pages/dashboard/dashboard'),
-            title: 'Dashboard'
+            title: 'Dashboard',
+            data: {
+                auth: true
+            }
         }
     ]
 })
