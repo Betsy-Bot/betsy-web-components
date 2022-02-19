@@ -22,7 +22,10 @@
             </div>
         </div>
         <div class="col-12 col-lg-4 text-lg-end my-auto">
-            <button mdc-button class="button-secondary" if.bind="!server.invited">
+            <button mdc-button
+                    class="button-secondary"
+                    if.bind="!server.invited"
+                    click.delegate="openServerInvitePopup()">
                 Setup
             </button>
             <button mdc-button class="button-primary" else>

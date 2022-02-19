@@ -19,7 +19,12 @@ export class SessionService {
 
     getStorageItem(key: string, defaultValue: any = null): string | boolean {
         if (window.localStorage[key] !== undefined) {
-            return JSON.parse(window.localStorage.getItem(key));
+            console.log('storage item ' + key, window.localStorage.getItem(key))
+            try {
+                return JSON.parse(window.localStorage.getItem(key));
+            } catch(e) {
+                return window.localStorage.getItem(key);
+            }
         } else {
             this.saveStorageItem(key, defaultValue);
             return defaultValue;

@@ -33,11 +33,8 @@ export class App implements IRouteViewModel {
     constructor(private eventAggregator, private sessionService) {
     }
 
-    async attached() {
+    async bound() {
         this.user = await this.sessionService.getUser();
-    }
-
-    bound() {
         this.userSubscriber = this.eventAggregator.subscribe('user-updated', payload => {
             this.user = payload.user;
         });
