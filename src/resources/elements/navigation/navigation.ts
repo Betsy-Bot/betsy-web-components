@@ -19,6 +19,11 @@ export class Navigation {
         this.expandOptions[sectionName] = !this.expandOptions[sectionName];
     }
 
+    async handleServerChange(event: any) {
+        this.guildId = event?.detail?.value;
+        await this.router.load(`guild/${this.guildId}`);
+    }
+
     bound() {
         this.ea.subscribe('user-updated', payload => {
             this.user = payload;
@@ -44,5 +49,9 @@ export class Navigation {
         await this.sessionService.logout();
 
         await this.router.load('/home');
+    }
+
+    getServerName(id: string) {
+        return
     }
 }

@@ -18,6 +18,11 @@ import { SessionService } from "./services/session-service";
             path: 'guild/:guildId',
             component: import('./pages/guild/guild'),
             title: 'Guild',
+        },
+        {
+            path: 'guild/:guildId/response-message',
+            component: import('./pages/guild/response-message/response-message'),
+            title: 'Guild Response Messages',
         }
     ]
 })

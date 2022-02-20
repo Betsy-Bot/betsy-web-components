@@ -6,9 +6,18 @@
                         click.delegate="toggleSidebar()">
                     <mdc-icon>menu</mdc-icon>
                 </button>
-                <a href="/">
+                <a href="/" class="me-5">
                     <mdc-top-app-bar-title>Betsy Bot</mdc-top-app-bar-title>
                 </a>
+                <mdc-select change.delegate="handleServerChange($event)"
+                            class="ms-5" class="server-select" value.bind="guildId" label="Select Server to Manage">
+                    <mdc-icon mdc-select-icon>dns</mdc-icon>
+                    <mdc-list>
+                        <mdc-list-item repeat.for="server of user.activeServers" value.bind="server.guildId">
+                            ${server.name}
+                        </mdc-list-item>
+                    </mdc-list>
+                </mdc-select>
             </mdc-top-app-bar-section>
             <mdc-top-app-bar-section end>
                 <a if.bind="!user" external
@@ -49,7 +58,7 @@
                         </mdc-icon>
                     </mdc-list-item>
                     <div if.bind="expandOptions.customCommands">
-                        <a href="">
+                        <a load="/guild/${guildId}/response-message" if.bind="guildId">
                             <mdc-list-item class="list-item-padding">Response Messages</mdc-list-item>
                         </a>
                     </div>

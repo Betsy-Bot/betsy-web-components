@@ -31,8 +31,10 @@ export class Home {
         this.otherGuilds = userGuilds.filter(g => !g.can_add)
 
         for (const guild of this.managedGuilds) {
-            if (this.user.activeServers.find(x => x.guildId == guild.id)) {
+            let foundServerIndex = this.user.activeServers.findIndex(x => x.guildId == guild.id)
+            if (foundServerIndex >= 0) {
                 guild.exists = true;
+                this.user.activeServers[foundServerIndex].name = guild.name;
             }
         }
     }
