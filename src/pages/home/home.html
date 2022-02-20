@@ -1,2 +1,30 @@
-<h1>Betsy Bot</h1>
-<h3>The best of the bots</h3>
+<div class="container">
+    <section if.bind="managedGuilds">
+        <h2>
+            Available Servers
+        </h2>
+        <div class="fs-7 mb-4">
+            You have permission to invite a bot to these servers
+        </div>
+        <div class="row g-5">
+            <div class="card-container col-12 col-sm-6 col-lg-4" repeat.for="guild of managedGuilds">
+                <server-card server.bind="guild"></server-card>
+            </div>
+        </div>
+    </section>
+
+    <section if.bind="otherGuilds" class.bind="managedGuilds ? 'mt-5' : ''">
+        <h2>
+            Other Servers
+        </h2>
+        <div class="fs-7 mb-4">
+            You can not invite a bot to these servers
+        </div>
+
+        <div class="row g-5">
+            <div class="card-container col-12 col-sm-6 col-lg-4" repeat.for="guild of otherGuilds">
+                <server-card server.bind="guild" hide-button.bind="true"></server-card>
+            </div>
+        </div>
+    </section>
+</div>

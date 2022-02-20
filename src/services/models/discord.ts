@@ -20,3 +20,8 @@ export interface BaseDiscordServer {
     roles: DiscordRole[],
     commands: BaseDiscordCommand[]
 }
+
+export interface DiscordInvitedWebhookResponse {
+    invited: boolean;
+    guildId: string;
+}

@@ -9,14 +9,18 @@ export class Login implements IRouteViewModel {
 
     async canLoad(params: Params, next: RouteNode, current: RouteNode | null): Promise<string | boolean> {
         const code = current.queryParams.get('code');
-
-        try {
-            await this.sessionService.loginWithOAuthCode(code);
-            const s = new URLSearchParams(window.location.href);
-            console.log(s.delete('code')); // Figure out how to delete from url so they don't refresh and it tries twice
-            return 'dashboard';
-        } catch(e) {
-            toast("Failed to exchange code", {severity: 'error'});
+        if (code) {
+            try {
+                await this.sessionService.loginWithOAuthCode(code);
+                return 'home';
+            } catch(e) {
+                if (this.sessionService.isTokenValid()) {
+                    return 'home'
+                } else {
+                    toast("Failed to exchange code", {severity: 'error'});
+                }
+            }
         }
+        return true;
     }
 }

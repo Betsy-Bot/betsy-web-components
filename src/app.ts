@@ -15,12 +15,9 @@ import { SessionService } from "./services/session-service";
             title: 'Login',
         },
         {
-            path: 'dashboard',
-            component: () => import('./pages/dashboard/dashboard'),
-            title: 'Dashboard',
-            data: {
-                auth: true
-            }
+            path: 'guild/:guildId',
+            component: import('./pages/guild/guild'),
+            title: 'Guild',
         }
     ]
 })

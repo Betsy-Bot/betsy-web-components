@@ -11,4 +11,8 @@ export class DiscordService {
     async exchangeCode(code: string): Promise<discordModels.ExchangeCodeResponse> {
         return this.api.doPost('Discord/OAuth/ExchangeCode', {code: code})
     }
+
+    async createServer(guildId: string): Promise<discordModels.BaseDiscordServer> {
+        return this.api.doPost('Discord/Guilds', {guildId: guildId})
+    }
 }

@@ -17,20 +17,27 @@
             <div class="fs-6" mdc-headline6>
                 ${server.name}
             </div>
-            <div class="fs-7">
+            <div class="fs-7" if.bind="!hideButton && !loading">
                 ${server.owner ? 'Owner' : 'Bot Manager'}
             </div>
+            <div if.bind="loading" class="fs-7">
+                Waiting for bot to be invited...
+            </div>
         </div>
-        <div class="col-12 col-lg-4 text-lg-end my-auto">
+        <div class="col-12 col-lg-4 text-lg-end my-auto" if.bind="!hideButton">
             <button mdc-button
                     class="button-secondary"
-                    if.bind="!server.invited"
-                    click.delegate="openServerInvitePopup()">
+                    if.bind="!server.invited && !loading && !server.exists"
+                    click.delegate="handleServerInvite()">
                 Setup
             </button>
-            <button mdc-button class="button-primary" else>
-                Go
-            </button>
+            <a load="/guild/${server.id}" if.bind="server.exists">
+                <button mdc-button class="button-primary">
+                    Go
+                </button>
+            </a>
+            <mdc-circular-progress size="50" stroke-width="5" if.bind="loading"></mdc-circular-progress>
+        </div>
         </div>
     </div>
 </section>

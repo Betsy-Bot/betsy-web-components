@@ -2,10 +2,10 @@ import { HttpClient, inject, json } from 'aurelia';
 
 @inject(HttpClient)
 export class ApiService {
-    constructor(private http: HttpClient, private sessionService) {
+    constructor(private http: HttpClient) {
         http.configure((config) =>
             config
-                .withBaseUrl('http://localhost:5000/')
+                .withBaseUrl(process.env.API_ENDPOINT)
                 .withInterceptor({
                     request(request) {
                         const token = window.localStorage['jwt_token'];

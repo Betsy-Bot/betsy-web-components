@@ -5,13 +5,11 @@
                     click.delegate="toggleSidebar()">
                 <mdc-icon>menu</mdc-icon>
             </button>
-            <a load="route:home">
+            <a href="/">
                 <mdc-top-app-bar-title>Betsy Bot</mdc-top-app-bar-title>
             </a>
         </mdc-top-app-bar-section>
         <mdc-top-app-bar-section end>
-            <mdc-icon mdc-top-app-bar-action-item>search</mdc-icon>
-            <mdc-icon mdc-top-app-bar-action-item>notifications_none</mdc-icon>
             <a if.bind="!user" external href="https://discord.com/api/oauth2/authorize?client_id=943260131599220856&redirect_uri=http%3A%2F%2Flocalhost%3A9500%2Flogin&response_type=code&scope=identify%20email%20guilds">
                 <button mdc-button class="button-secondary">
                     <mdc-icon>login</mdc-icon>
@@ -19,13 +17,13 @@
                 </button>
             </a>
             <div else>
-                <img class="avatar" click.delegate="profileMenu.open = !profileMenu.open" src="https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.webp">
+                <img class="avatar" click.delegate="profileMenu.open = !profileMenu.open" src="https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.webp" alt="avatar">
             </div>
 
             <div mdc-menu-surface-anchor ref="menuAnchor">
                 <mdc-menu view-model.ref="profileMenu" anchor.bind="menuAnchor">
                     <mdc-list>
-                        <a load="route:dashboard">
+                        <a href="/">
                             <mdc-list-item>Dashboard</mdc-list-item>
                         </a>
                         <mdc-list-divider></mdc-list-divider>
