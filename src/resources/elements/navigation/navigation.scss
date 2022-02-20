@@ -1,7 +1,17 @@
-.avatar {
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
-  max-height: 100%;
-  max-width: 100%;
+#navigation {
+  .mdc-list-item--selected .mdc-list-item__primary-text, .mdc-list-item--activated .mdc-list-item__primary-text {
+    color: black !important;
+  }
+
+  .avatar {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  .list-item-padding {
+    padding-left: 25px;
+  }
 }

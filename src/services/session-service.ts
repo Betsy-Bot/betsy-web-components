@@ -19,7 +19,6 @@ export class SessionService {
 
     getStorageItem(key: string, defaultValue: any = null): string | boolean {
         if (window.localStorage[key] !== undefined) {
-            console.log('storage item ' + key, window.localStorage.getItem(key))
             try {
                 return JSON.parse(window.localStorage.getItem(key));
             } catch(e) {
@@ -41,7 +40,6 @@ export class SessionService {
         if (response.token) {
             this.saveStorageItem(SessionService.TOKEN_KEY, response.token);
         }
-        console.log(response);
 
         this.currentUser = response;
         this.eventAggregator.publish('user-updated', this.currentUser);

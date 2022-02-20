@@ -1,55 +1,76 @@
-<mdc-top-app-bar style="position: unset" class="demo-top-app-bar-with-tabs">
-    <mdc-top-app-bar-row>
-        <mdc-top-app-bar-section align="start">
-            <button mdc-top-app-bar-nav-icon
-                    click.delegate="toggleSidebar()">
-                <mdc-icon>menu</mdc-icon>
-            </button>
-            <a href="/">
-                <mdc-top-app-bar-title>Betsy Bot</mdc-top-app-bar-title>
-            </a>
-        </mdc-top-app-bar-section>
-        <mdc-top-app-bar-section end>
-            <a if.bind="!user" external href="https://discord.com/api/oauth2/authorize?client_id=943260131599220856&redirect_uri=http%3A%2F%2Flocalhost%3A9500%2Flogin&response_type=code&scope=identify%20email%20guilds">
-                <button mdc-button class="button-secondary">
-                    <mdc-icon>login</mdc-icon>
-                    Login with Discord
+<section id="navigation">
+    <mdc-top-app-bar style="position: unset" class="demo-top-app-bar-with-tabs">
+        <mdc-top-app-bar-row>
+            <mdc-top-app-bar-section align="start">
+                <button mdc-top-app-bar-nav-icon show.bind="guildId"
+                        click.delegate="toggleSidebar()">
+                    <mdc-icon>menu</mdc-icon>
                 </button>
-            </a>
-            <div else>
-                <img class="avatar" click.delegate="profileMenu.open = !profileMenu.open" src="https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.webp" alt="avatar">
-            </div>
+                <a href="/">
+                    <mdc-top-app-bar-title>Betsy Bot</mdc-top-app-bar-title>
+                </a>
+            </mdc-top-app-bar-section>
+            <mdc-top-app-bar-section end>
+                <a if.bind="!user" external
+                   href="https://discord.com/api/oauth2/authorize?client_id=943260131599220856&redirect_uri=http%3A%2F%2Flocalhost%3A9500%2Flogin&response_type=code&scope=identify%20email%20guilds">
+                    <button mdc-button class="button-secondary">
+                        <mdc-icon>login</mdc-icon>
+                        Login with Discord
+                    </button>
+                </a>
+                <div else>
+                    <img class="avatar" click.delegate="profileMenu.open = !profileMenu.open"
+                         src="https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.webp" alt="avatar">
+                </div>
 
-            <div mdc-menu-surface-anchor ref="menuAnchor">
-                <mdc-menu view-model.ref="profileMenu" anchor.bind="menuAnchor">
-                    <mdc-list>
-                        <a href="/">
-                            <mdc-list-item>Dashboard</mdc-list-item>
+                <div mdc-menu-surface-anchor ref="menuAnchor">
+                    <mdc-menu view-model.ref="profileMenu" anchor.bind="menuAnchor">
+                        <mdc-list>
+                            <a href="/">
+                                <mdc-list-item>Dashboard</mdc-list-item>
+                            </a>
+                            <mdc-list-divider></mdc-list-divider>
+                            <mdc-list-item click.delegate="logout()">Sign out</mdc-list-item>
+                        </mdc-list>
+                    </mdc-menu>
+                </div>
+            </mdc-top-app-bar-section>
+        </mdc-top-app-bar-row>
+    </mdc-top-app-bar>
+
+    <div class="demo-drawer-app-content">
+        <mdc-drawer type="dismissible" view-model.ref="drawer" show.bind="guildId">
+            <mdc-drawer-header title="Manage Server"></mdc-drawer-header>
+            <mdc-drawer-content>
+                <mdc-list single-selection>
+                    <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('customCommands')" no-list-action>
+                        <span>Custom Commands</span>
+                        <mdc-icon mdc-list-item-trailing>${expandOptions.customCommands ? 'expand_less' :'expand_more'}
+                        </mdc-icon>
+                    </mdc-list-item>
+                    <div if.bind="expandOptions.customCommands">
+                        <a href="">
+                            <mdc-list-item class="list-item-padding">Response Messages</mdc-list-item>
                         </a>
-                        <mdc-list-divider></mdc-list-divider>
-                        <mdc-list-item click.delegate="logout()">Sign out</mdc-list-item>
-                    </mdc-list>
-                </mdc-menu>
-            </div>
-        </mdc-top-app-bar-section>
-    </mdc-top-app-bar-row>
-</mdc-top-app-bar>
+                    </div>
 
-<div class="demo-drawer-app-content">
-    <mdc-drawer type="dismissible" view-model.ref="drawer">
-        <mdc-drawer-header title="Drawer Title" subtitle="Subtitle"></mdc-drawer-header>
-        <mdc-drawer-content>
-            <mdc-list>
-                <mdc-list-item repeat.for="link of links">
-                    <mdc-icon mdc-list-item-leading>${link.icon}</mdc-icon>
-                    ${link.label}
-                </mdc-list-item>
-            </mdc-list>
-        </mdc-drawer-content>
-    </mdc-drawer>
-    <mdc-drawer-app-content style="display: block; padding: 16px; height: 400px;">
-        <div class="container">
-            <au-slot></au-slot>
-        </div>
-    </mdc-drawer-app-content>
-</div>
+                    <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('moderation')" no-list-action>
+                        <span>Moderation</span>
+                        <mdc-icon mdc-list-item-trailing>${expandOptions.moderation ? 'expand_less' :'expand_more'}
+                        </mdc-icon>
+                    </mdc-list-item>
+                    <div if.bind="expandOptions.moderation">
+                        <mdc-list-item class="list-item-padding">Child 1</mdc-list-item>
+                        <mdc-list-item class="list-item-padding">Child 2</mdc-list-item>
+                    </div>
+                </mdc-list>
+            </mdc-drawer-content>
+        </mdc-drawer>
+        <mdc-drawer-app-content style="display: block; padding: 16px; height: 400px;">
+            <div class="container">
+                <au-slot></au-slot>
+            </div>
+        </mdc-drawer-app-content>
+    </div>
+
+</section>

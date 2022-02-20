@@ -9,8 +9,6 @@ export class AuthHook {
     }
 
     canLoad(viewModel, params: Params, next: RouteNode, current: RouteNode) {
-        console.log(next);
-        console.log('start of hook')
         const canProceed = next.data.auth && this.sessionService.isTokenValid() || !next.data.auth;
 
         if (canProceed) {

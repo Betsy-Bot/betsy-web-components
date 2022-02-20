@@ -26,12 +26,12 @@ export class ServerCard {
             await this.connection.start();
             this.connection.on('BotInvited', async(payload) => {
                 if (payload === this.server.id) {
-                    console.log('lets go to the server!');
+                    //Go to server
                     this.loading = false;
                 }
             });
 
-            //this.openServerInvitePopup();
+            this.openServerInvitePopup();
         } catch(e) {
             toast(e, {severity: 'error'});
             this.loading = false;

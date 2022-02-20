@@ -8,11 +8,23 @@ export class Navigation {
 
     @bindable() user: any;
     drawer;
+    guildId: any;
+
+    expandOptions = {
+        customCommands: true,
+        moderation: true
+    }
+
+    openSection(sectionName){
+        this.expandOptions[sectionName] = !this.expandOptions[sectionName];
+    }
 
     bound() {
         this.ea.subscribe('user-updated', payload => {
-            console.log(payload);
             this.user = payload;
+        });
+        this.ea.subscribe('guild-updated', payload => {
+            this.guildId = payload;
         });
     }
 

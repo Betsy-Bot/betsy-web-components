@@ -35,6 +35,5 @@ export class Home {
                 guild.exists = true;
             }
         }
-        console.log('managed guilds', this.managedGuilds)
     }
 }
