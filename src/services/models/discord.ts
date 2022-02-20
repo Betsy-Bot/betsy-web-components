@@ -11,7 +11,32 @@ export interface DiscordRole {
 export interface BaseDiscordCommand {
     name: string,
     description: string,
-    discordServerId: string
+    discordServerId: string,
+    discordCommandActions: DiscordCommandAction[]
+}
+
+export interface DiscordCommandAction {
+    type: number,
+    discordMessage: DiscordMessage
+}
+
+export interface DiscordMessage {
+    discordMessage: DiscordMessageContent
+}
+
+export interface DiscordMessageContent {
+    content: string
+    embeds: DiscordMessageEmbed[]
+}
+
+export interface DiscordMessageEmbed {
+    title: string;
+    description: string;
+    image: DiscordMessageImage
+}
+
+export interface DiscordMessageImage {
+    url: string;
 }
 
 export interface BaseDiscordServer {

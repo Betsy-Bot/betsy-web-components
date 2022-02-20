@@ -50,8 +50,4 @@ export class Navigation {
 
         await this.router.load('/home');
     }
-
-    getServerName(id: string) {
-        return
-    }
 }

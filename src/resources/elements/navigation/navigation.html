@@ -49,7 +49,9 @@
 
     <div class="demo-drawer-app-content">
         <mdc-drawer type="dismissible" view-model.ref="drawer" show.bind="guildId">
-            <mdc-drawer-header title="Manage Server"></mdc-drawer-header>
+            <a load="/guild/${guildId}" if.bind="guildId">
+                <mdc-drawer-header title="Manage Server"></mdc-drawer-header>
+            </a>
             <mdc-drawer-content>
                 <mdc-list single-selection>
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('customCommands')" no-list-action>
