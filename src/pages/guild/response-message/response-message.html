@@ -17,9 +17,9 @@
                 <mdc-icon mdc-list-item-leading>folder</mdc-icon>
                 <mdc-list-item-primary-text>/${command.name}</mdc-list-item-primary-text>
                 <mdc-list-item-secondary-text>${command.description}</mdc-list-item-secondary-text>
-                <button mdc-button mdc-list-item-trailing class="button-primary">
-                    Edit
-                </button>
+                <mdc-form-field mdc-list-item-trailing>
+                    <button mdc-switch selected.bind="command.active"></button>
+                </mdc-form-field>
             </mdc-list-item>
         </mdc-list>
     </div>
