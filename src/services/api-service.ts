@@ -69,7 +69,7 @@ export class ApiService {
         return this._request(path, options);
     }
 
-    doPost(path: string, body: Record<string, string>, isFile = false) {
+    doPost(path: string, body: any, isFile = false) {
         return this._push(path, body, false, isFile);
     }
 

@@ -1,5 +1,17 @@
-import {IRouteViewModel} from "aurelia";
+import {inject, IRouteViewModel, Params, RouteNode, IEventAggregator} from "aurelia";
 
+@inject(IEventAggregator)
 export class ResponseMessage implements IRouteViewModel {
+    constructor(private eventAggregator: IEventAggregator) {
+    }
 
+    guildId: string;
+
+    load(params: Params, next: RouteNode, current: RouteNode) {
+        this.guildId = params.guildId;
+    }
+
+    binding() {
+        this.eventAggregator.publish('guild-updated', this.guildId)
+    }
 }

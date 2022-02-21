@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-8">
+        <h3>Create a new Response Message Command</h3>
+        <mdc-text-field
+                label="Command"
+                required.bind="required"
+                prefix="/"
+                value.bind="command.name"
+        ></mdc-text-field>
+
+        <div class="my-2" repeat.for="action of command.discordCommandActions">
+            <mdc-text-field
+                    label="Content"
+                    value.bind="action.content"
+            ></mdc-text-field>
+        </div>
+
+        <button mdc-button
+                class="button-primary"
+                click.delegate="createCommand()">
+            Save
+        </button>
+    </div>
+    <div class="col-4">
+        <button mdc-button
+                class="button-secondary"
+                if.bind="command.discordCommandActions.length < 10"
+                click.delegate="createNewCommandAction()">
+            Add Action
+        </button>
+    </div>
+</div>

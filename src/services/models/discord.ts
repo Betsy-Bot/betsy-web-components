@@ -11,16 +11,12 @@ export interface DiscordRole {
 export interface BaseDiscordCommand {
     name: string,
     description: string,
-    discordServerId: string,
+    discordGuildId: string,
     discordCommandActions: DiscordCommandAction[]
 }
 
 export interface DiscordCommandAction {
     type: number,
-    discordMessage: DiscordMessage
-}
-
-export interface DiscordMessage {
     discordMessage: DiscordMessageContent
 }
 
@@ -49,4 +45,8 @@ export interface BaseDiscordServer {
 export interface DiscordInvitedWebhookResponse {
     invited: boolean;
     guildId: string;
+}
+
+export enum DiscordCommandType {
+    ResponseMessage = 1
 }

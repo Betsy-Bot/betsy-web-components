@@ -2,6 +2,7 @@ import { inject } from 'aurelia';
 import { ApiService } from './api-service';
 
 import * as discordModels from "./models/discord";
+import {BaseDiscordCommand} from "./models/discord";
 
 @inject(ApiService)
 export class DiscordService {
@@ -14,5 +15,9 @@ export class DiscordService {
 
     async createServer(guildId: string): Promise<discordModels.BaseDiscordServer> {
         return this.api.doPost('Discord/Guilds', {guildId: guildId})
+    }
+
+    async createResponseMessageCommand(command: BaseDiscordCommand): Promise<discordModels.BaseDiscordCommand> {
+        return this.api.doPost('Discord/ApplicationCommand', command);
     }
 }

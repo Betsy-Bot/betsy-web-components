@@ -23,6 +23,11 @@ import { SessionService } from "./services/session-service";
             path: 'guild/:guildId/response-message',
             component: import('./pages/guild/response-message/response-message'),
             title: 'Guild Response Messages',
+        },
+        {
+            path: 'guild/:guildId/response-message/create',
+            component: import('./pages/guild/response-message/create-response-message/create-response-message'),
+            title: 'Guild Response Messages',
         }
     ]
 })
@@ -41,7 +46,6 @@ export class App implements IRouteViewModel {
             this.user = payload.user;
         });
     }
-
     unbinding() {
         this.userSubscriber.dispose();
     }
