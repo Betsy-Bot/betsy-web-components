@@ -1,11 +1,26 @@
-<h2>Response Messages</h2>
-<div class="">
-    Response messages can be used to respond to any commands you create. The response can be done in several ways.
-    Each of the ways will be described in the options when creating a new response command.
-</div>
+<section id="response-message">
+    <h2>Response Messages</h2>
+    <div class="mb-3">
+        Response messages can be used to respond to any commands you create. The response can be done in several ways.
+        Each of the ways will be described in the options when creating a new response command.
+    </div>
 
-<a load="/guild/${guildId}/response-message/create" if.bind="guildId">
-    <button mdc-button class="button-primary">
-        Create New Command
-    </button>
-</a>
+    <a load="/guild/${guildId}/response-message/create" if.bind="guildId">
+        <button mdc-button class="button-primary">
+            Create New Command
+        </button>
+    </a>
+
+    <div class="existing-commands-area">
+        <mdc-list>
+            <mdc-list-item two-line repeat.for="command of commands" class="list-item-background" mdc-elevation="12">
+                <mdc-icon mdc-list-item-leading>folder</mdc-icon>
+                <mdc-list-item-primary-text>/${command.name}</mdc-list-item-primary-text>
+                <mdc-list-item-secondary-text>${command.description}</mdc-list-item-secondary-text>
+                <button mdc-button mdc-list-item-trailing class="button-primary">
+                    Edit
+                </button>
+            </mdc-list-item>
+        </mdc-list>
+    </div>
+</section>

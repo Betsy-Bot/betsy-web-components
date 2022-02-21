@@ -17,3 +17,7 @@ body {
 .button-primary {
   @include button.filled-accessible(theme.$primary);
 }
+
+.list-item-background {
+  background: rgba(76, 96, 133, 1) !important;
+}

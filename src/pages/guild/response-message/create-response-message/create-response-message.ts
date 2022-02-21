@@ -1,11 +1,11 @@
-import {inject, IRouteViewModel, Params, RouteNode, IEventAggregator, EventAggregator} from "aurelia";
-import {BaseDiscordCommand, DiscordCommandAction} from "../../../../services/models/discord";
+import {inject, IRouteViewModel, Params, RouteNode, IEventAggregator, EventAggregator, IRouter} from "aurelia";
+import {BaseDiscordCommand} from "../../../../services/models/discord";
 import {DiscordService} from "../../../../services/discord-service";
-import {create} from "domain";
+import {toast} from "lets-toast";
 
-@inject(IEventAggregator, DiscordService)
+@inject(IEventAggregator, DiscordService, IRouter)
 export class CreateResponseMessage implements IRouteViewModel {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService) {
+    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: IRouter) {
     }
 
     guildId: string;
@@ -44,9 +44,13 @@ export class CreateResponseMessage implements IRouteViewModel {
     }
 
     async createCommand() {
-        console.log('this.command', this.command);
-        this.command.discordGuildId = this.guildId;
-        const command = this.discordService.createResponseMessageCommand(this.command);
-        console.log('command', command)
+        try {
+            this.command.discordGuildId = this.guildId;
+            const command = this.discordService.createResponseMessageCommand(this.command);
+            toast("Command Created!");
+            this.router.load(`/guild/${this.guildId}/response-message`);
+        } catch(e) {
+            toast('Failed to create command', {severity: 'error'})
+        }
     }
 }
