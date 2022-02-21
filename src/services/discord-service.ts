@@ -24,4 +24,8 @@ export class DiscordService {
     async getResponseMessagesForGuild(guildId: string): Promise<discordModels.BaseDiscordCommand[]> {
         return this.api.doGet(`Discord/Guilds/${guildId}/ResponseMessages`);
     }
+
+    async toggleDiscordCommandActive(guildId: string, discordApplicationCommandId, active: boolean) {
+        return this.api.doPatch(`Discord/Guilds/${guildId}/DiscordCommand/${discordApplicationCommandId}/ToggleActive`, { active: active });
+    }
 }

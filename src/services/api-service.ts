@@ -40,9 +40,9 @@ export class ApiService {
         return null;
     }
 
-    _push(path: string, body: Record<string, string>, asPut = false, isFile = false) {
+    _push(path: string, body: Record<string, string>, method: string, isFile = false) {
         const options = {
-            method: asPut ? 'PUT' : 'POST',
+            method: method,
             body: isFile ? body : json(body)
         };
 
@@ -69,12 +69,16 @@ export class ApiService {
         return this._request(path, options);
     }
 
-    doPost(path: string, body: any, isFile = false) {
-        return this._push(path, body, false, isFile);
+    doPost(path: string, body: Record<string, any>, isFile = false) {
+        return this._push(path, body, 'POST', isFile);
     }
 
-    doPut(path: string, body: Record<string, string>) {
-        return this._push(path, body, true);
+    doPut(path: string, body: Record<string, any>) {
+        return this._push(path, body, 'PUT');
+    }
+
+    doPatch(path: string, body: Record<string, any>) {
+        return this._push(path, body, 'PATCH');
     }
 
     doDelete(path: string) {

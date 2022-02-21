@@ -18,7 +18,7 @@
                 <mdc-list-item-primary-text>/${command.name}</mdc-list-item-primary-text>
                 <mdc-list-item-secondary-text>${command.description}</mdc-list-item-secondary-text>
                 <mdc-form-field mdc-list-item-trailing>
-                    <button mdc-switch selected.bind="command.active"></button>
+                    <button mdc-switch selected.bind="command.active" value.bind="command.active" change.delegate="updateActive(command)"></button>
                 </mdc-form-field>
             </mdc-list-item>
         </mdc-list>
