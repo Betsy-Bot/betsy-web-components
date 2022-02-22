@@ -17,7 +17,7 @@
         <div class="my-2" repeat.for="action of command.discordCommandActions">
             <mdc-text-field
                     label="Content"
-                    value.bind="action.content"
+                    value.bind="action.discordMessage.message.content"
             ></mdc-text-field>
         </div>
 

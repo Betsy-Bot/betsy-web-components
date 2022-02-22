@@ -18,7 +18,11 @@ export interface BaseDiscordCommand {
 
 export interface DiscordCommandAction {
     type: number,
-    discordMessage: DiscordMessageContent
+    discordMessage: DiscordMessage
+}
+
+export interface DiscordMessage {
+    message: DiscordMessageContent
 }
 
 export interface DiscordMessageContent {

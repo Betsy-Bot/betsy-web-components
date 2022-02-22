@@ -30,8 +30,10 @@ export class CreateResponseMessage implements IRouteViewModel {
         this.command.discordCommandActions.push({
             type: 1,
             discordMessage: {
-                content: 'Some Content',
-                embeds: null
+                message: {
+                    content: 'Some Content',
+                    embeds: null
+                }
             }
         })
     }
