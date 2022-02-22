@@ -23,20 +23,30 @@
             <discord-message-creator message.bind="action.discordMessage.message"></discord-message-creator>
         </div>
 
-        <div class="mt-4">
+        <div class="text-end">
             <button mdc-button
-                    class="button-primary"
+                    class="button-secondary"
+                    if.bind="command.discordCommandActions.length < 10"
+                    click.delegate="createNewCommandAction()">
+                Add Action
+            </button>
+        </div>
+
+        <div class="mt-4">
+            <a load="/guild/${guildId}/response-message">
+                <button mdc-button class="button-secondary">
+                    Cancel
+                </button>
+            </a>
+            <button mdc-button
+                    class="button-primary ms-4"
                     click.delegate="createCommand()">
                 Save
             </button>
         </div>
     </div>
     <div class="col-4">
-        <button mdc-button
-                class="button-secondary"
-                if.bind="command.discordCommandActions.length < 10"
-                click.delegate="createNewCommandAction()">
-            Add Action
-        </button>
+        <h4 class="text-center">Message Preview</h4>
     </div>
+
 </div>

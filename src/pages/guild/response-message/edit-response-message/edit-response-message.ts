@@ -23,6 +23,18 @@ export class EditResponseMessage implements IRouteViewModel {
         this.command.discordCommandActions.slice(index);
     }
 
+    createNewCommandAction() {
+        this.command.discordCommandActions.push({
+            type: 1,
+            discordMessage: {
+                message: {
+                    content: 'Some Content',
+                    embeds: null
+                }
+            }
+        })
+    }
+
     async updateCommand() {
         try {
             // this.command.discordGuildId = this.guildId;

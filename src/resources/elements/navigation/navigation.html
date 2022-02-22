@@ -64,16 +64,6 @@
                             <mdc-list-item class="list-item-padding">Response Messages</mdc-list-item>
                         </a>
                     </div>
-
-                    <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('moderation')" no-list-action>
-                        <span>Moderation</span>
-                        <mdc-icon mdc-list-item-trailing>${expandOptions.moderation ? 'expand_less' :'expand_more'}
-                        </mdc-icon>
-                    </mdc-list-item>
-                    <div if.bind="expandOptions.moderation">
-                        <mdc-list-item class="list-item-padding">Child 1</mdc-list-item>
-                        <mdc-list-item class="list-item-padding">Child 2</mdc-list-item>
-                    </div>
                 </mdc-list>
             </mdc-drawer-content>
         </mdc-drawer>

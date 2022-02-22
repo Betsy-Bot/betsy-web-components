@@ -8,22 +8,26 @@ export class CreateResponseMessage implements IRouteViewModel {
     constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: IRouter) {
     }
 
-    guildId: string;
-
     load(params: Params, next: RouteNode, current: RouteNode) {
         this.guildId = params.guildId;
     }
 
-    bound() {
-        this.createNewCommandAction();
-    }
+    guildId: string;
 
     command: BaseDiscordCommand = {
         name: null,
         description : null,
         discordGuildId: null,
         type: DiscordCommandType.ResponseMessage,
-        discordCommandActions: []
+        discordCommandActions: [{
+            type: 1,
+            discordMessage: {
+                message: {
+                    content: 'Some Content',
+                    embeds: null
+                }
+            }
+        }]
     };
 
     createNewCommandAction() {
