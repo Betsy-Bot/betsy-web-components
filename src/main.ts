@@ -6,6 +6,8 @@ import { App } from './app';
 
 import { Navigation } from "./resources/elements/navigation/navigation";
 import { ServerCard } from "./resources/elements/server-card/server-card";
+import { DiscordMessageCreator } from "./resources/elements/discord-message-creator/discord-message-creator";
+import { EmbedEditor } from "./resources/elements/embed-editor/embed-editor";
 
 import 'bootstrap';
 
@@ -16,6 +18,8 @@ Aurelia
         StandardConfiguration,
         SVGAnalyzer,
         Navigation,
-        ServerCard
+        ServerCard,
+        DiscordMessageCreator,
+        EmbedEditor
     ).app(App)
     .start();

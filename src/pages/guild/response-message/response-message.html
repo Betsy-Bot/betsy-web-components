@@ -23,7 +23,7 @@
 
     <div class="existing-commands-area">
         <mdc-list>
-            <mdc-list-item two-line repeat.for="command of commands" class="list-item-background" mdc-elevation="12">
+            <mdc-list-item two-line repeat.for="command of commands" class="list-item-background mb-3" mdc-elevation="12" click.delegate="goToCommand(command)">
                 <mdc-icon mdc-list-item-leading>folder</mdc-icon>
                 <mdc-list-item-primary-text>/${command.name}</mdc-list-item-primary-text>
                 <mdc-list-item-secondary-text>${command.description}</mdc-list-item-secondary-text>

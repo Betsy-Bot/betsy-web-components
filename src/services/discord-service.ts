@@ -28,4 +28,8 @@ export class DiscordService {
     async toggleDiscordCommandActive(guildId: string, discordApplicationCommandId, active: boolean) {
         return this.api.doPatch(`Discord/Guilds/${guildId}/DiscordCommand/${discordApplicationCommandId}/ToggleActive`, { active: active });
     }
+
+    async getDiscordCommandDetails(discordApplicationCommandId: string): Promise<discordModels.BaseDiscordCommand> {
+        return this.api.doGet(`Discord/ApplicationCommand?discordApplicationCommandId=${discordApplicationCommandId}`);
+    }
 }

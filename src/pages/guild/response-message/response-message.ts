@@ -1,10 +1,10 @@
-import {inject, IRouteViewModel, Params, RouteNode, IEventAggregator} from "aurelia";
+import {inject, IRouteViewModel, Params, RouteNode, IEventAggregator, IRouter} from "aurelia";
 import {DiscordService} from "../../../services/discord-service";
 import {toast} from "lets-toast";
 
-@inject(IEventAggregator, DiscordService)
+@inject(IEventAggregator, DiscordService, IRouter)
 export class ResponseMessage implements IRouteViewModel {
-    constructor(private eventAggregator: IEventAggregator, private discordService: DiscordService) {
+    constructor(private eventAggregator: IEventAggregator, private discordService: DiscordService, private router: IRouter) {
     }
 
     guildId: string;
@@ -24,5 +24,9 @@ export class ResponseMessage implements IRouteViewModel {
         } else {
             toast("Error", {severity: "error"})
         }
+    }
+
+    async goToCommand(command) {
+        await this.router.load(`guild/${this.guildId}/response-message/${command.discordApplicationCommandId}`)
     }
 }

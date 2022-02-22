@@ -1,6 +1,8 @@
 <div class="row">
     <div class="col-8">
-        <h3>Create a new Response Message Command</h3>
+        <h3 class="mb-3">
+            Editing /${command.name}
+        </h3>
         <div class="mb-2">
             <mdc-text-field
                     label="Command"
@@ -17,19 +19,17 @@
             ></mdc-text-field>
         </div>
 
-        <div class="my-2" repeat.for="action of command.discordCommandActions">
+        <div class="my-3" repeat.for="action of command.discordCommandActions">
             <discord-message-creator message.bind="action.discordMessage.message"></discord-message-creator>
-<!--            <mdc-text-field-->
-<!--                    label="Content"-->
-<!--                    value.bind="action.discordMessage.message.content"-->
-<!--            ></mdc-text-field>-->
         </div>
 
-        <button mdc-button
-                class="button-primary"
-                click.delegate="createCommand()">
-            Save
-        </button>
+        <div class="mt-4">
+            <button mdc-button
+                    class="button-primary"
+                    click.delegate="createCommand()">
+                Save
+            </button>
+        </div>
     </div>
     <div class="col-4">
         <button mdc-button

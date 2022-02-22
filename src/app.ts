@@ -17,7 +17,7 @@ import { SessionService } from "./services/session-service";
         {
             path: 'guild/:guildId',
             component: import('./pages/guild/guild'),
-            title: 'Guild',
+            title: 'Server',
         }
     ]
 })

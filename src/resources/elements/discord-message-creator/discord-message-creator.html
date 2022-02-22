@@ -1,0 +1,20 @@
+<section id="discord-message-creator">
+    <mdc-tab-bar view-model.ref="tabBar" mdctabbar:activated.delegate="logTab($event)"
+                 use-automatic-activation.bind="useAutomaticActivation" focus-on-activate.bind="false">
+        <mdc-tab label="Message" active.bind="activeTab === 'message'" click.delegate="selectTab('message')"></mdc-tab>
+        <mdc-tab label="Embed" active.bind="activeTab === 'embed'" click.delegate="selectTab('embed')"></mdc-tab>
+    </mdc-tab-bar>
+
+    <div class="message-area" if.bind="activeTab === 'message'">
+        <mdc-text-field
+                rows="8"
+                class="w-100"
+                textarea
+                label="Content"
+                value.bind="message.content"
+        ></mdc-text-field>
+    </div>
+    <div class="embed-area" if.bind="activeTab === 'embed'">
+        <embed-editor></embed-editor>
+    </div>
+</section>

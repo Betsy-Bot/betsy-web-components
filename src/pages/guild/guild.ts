@@ -6,12 +6,17 @@ import {inject, IRouteViewModel, Params, RouteNode, IEventAggregator, route} fro
         {
             path: 'response-message',
             component: import('./response-message/response-message'),
-            title: 'Guild Response Messages',
+            title: 'Response Messages',
         },
         {
             path: 'response-message/create',
             component: import('./response-message/create-response-message/create-response-message'),
-            title: 'Guild Response Messages',
+            title: 'Response Messages',
+        },
+        {
+            path: 'response-message/:discordApplicationCommandId',
+            component: import('./response-message/edit-response-message/edit-response-message'),
+            title: 'Response Messages',
         }
     ]
 })

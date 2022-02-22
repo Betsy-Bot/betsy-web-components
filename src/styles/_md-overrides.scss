@@ -21,3 +21,19 @@ body {
 .list-item-background {
   background: rgba(76, 96, 133, 1) !important;
 }
+
+.mdc-tab .mdc-tab__text-label {
+  color: $body-color;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: $card-color
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: $body-color;
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: $body-color;
+}
