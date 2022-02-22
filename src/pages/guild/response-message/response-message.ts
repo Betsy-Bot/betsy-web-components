@@ -15,9 +15,7 @@ export class ResponseMessage implements IRouteViewModel {
     }
 
     async binding() {
-        this.eventAggregator.publish('guild-updated', this.guildId)
         this.commands = await this.discordService.getResponseMessagesForGuild(this.guildId);
-        console.log('commands', this.commands);
     }
 
     async updateActive(command) {

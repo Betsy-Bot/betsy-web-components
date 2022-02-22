@@ -24,9 +24,6 @@ export class Guild implements IRouteViewModel {
 
     load(params: Params, next: RouteNode, current: RouteNode) {
         this.guildId = params.guildId;
-    }
-
-    binding() {
-        this.eventAggregator.publish('guild-updated', this.guildId)
+        this.eventAggregator.publish('guild-updated', params.guildId)
     }
 }

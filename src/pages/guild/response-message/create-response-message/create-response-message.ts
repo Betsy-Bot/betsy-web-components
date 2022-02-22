@@ -14,10 +14,6 @@ export class CreateResponseMessage implements IRouteViewModel {
         this.guildId = params.guildId;
     }
 
-    binding() {
-        this.eventAggregator.publish('guild-updated', this.guildId)
-    }
-
     bound() {
         this.createNewCommandAction();
     }
