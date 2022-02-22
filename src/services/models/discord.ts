@@ -12,6 +12,7 @@ export interface BaseDiscordCommand {
     name: string,
     description: string,
     discordGuildId: string,
+    type: DiscordCommandType,
     discordCommandActions: DiscordCommandAction[]
 }
 

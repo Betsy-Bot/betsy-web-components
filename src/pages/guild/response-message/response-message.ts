@@ -10,11 +10,8 @@ export class ResponseMessage implements IRouteViewModel {
     guildId: string;
     commands;
 
-    load(params: Params, next: RouteNode, current: RouteNode) {
+    async load(params: Params, next: RouteNode, current: RouteNode) {
         this.guildId = params.guildId;
-    }
-
-    async binding() {
         this.commands = await this.discordService.getResponseMessagesForGuild(this.guildId);
     }
 

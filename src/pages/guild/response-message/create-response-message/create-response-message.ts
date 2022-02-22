@@ -1,5 +1,5 @@
-import {inject, IRouteViewModel, Params, RouteNode, IEventAggregator, EventAggregator, IRouter} from "aurelia";
-import {BaseDiscordCommand} from "../../../../services/models/discord";
+import {EventAggregator, IEventAggregator, inject, IRouter, IRouteViewModel, Params, RouteNode} from "aurelia";
+import {BaseDiscordCommand, DiscordCommandType} from "../../../../services/models/discord";
 import {DiscordService} from "../../../../services/discord-service";
 import {toast} from "lets-toast";
 
@@ -22,6 +22,7 @@ export class CreateResponseMessage implements IRouteViewModel {
         name: null,
         description : null,
         discordGuildId: null,
+        type: DiscordCommandType.ResponseMessage,
         discordCommandActions: []
     };
 
