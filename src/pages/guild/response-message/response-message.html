@@ -1,8 +1,18 @@
 <section id="response-message">
     <h2>Response Messages</h2>
-    <div class="mb-3">
+    <div>
         Response messages can be used to respond to any commands you create. The response can be done in several ways.
         Each of the ways will be described in the options when creating a new response command.
+    </div>
+
+    <div>
+        <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+        <span class="material-icons me-2">
+            warning
+        </span>
+            Servers have a limit of 200 command creation actions per day. Activating or creating a command count towards this limit.
+            Reaching this limit will prevent you from activating or creating for the day.
+        </div>
     </div>
 
     <a load="/guild/${guildId}/response-message/create" if.bind="guildId">
