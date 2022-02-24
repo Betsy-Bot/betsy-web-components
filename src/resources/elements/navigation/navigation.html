@@ -21,7 +21,7 @@
             </mdc-top-app-bar-section>
             <mdc-top-app-bar-section end>
                 <a if.bind="!user" external
-                   href="https://discord.com/api/oauth2/authorize?client_id=943260131599220856&redirect_uri=http%3A%2F%2Flocalhost%3A9500%2Flogin&response_type=code&scope=identify%20email%20guilds">
+                   href="${discordOauthUrl}">
                     <button mdc-button class="button-secondary">
                         <mdc-icon>login</mdc-icon>
                         Login with Discord
@@ -32,7 +32,7 @@
                          src="https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.webp" alt="avatar">
                 </div>
 
-                <div mdc-menu-surface-anchor ref="menuAnchor">
+                <div mdc-menu-surface-anchor href="menuAnchor">
                     <mdc-menu view-model.ref="profileMenu" anchor.bind="menuAnchor">
                         <mdc-list>
                             <a href="/">
