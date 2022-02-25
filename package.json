@@ -51,7 +51,7 @@
     "lint:html": "htmlhint -c .htmlhintrc src",
     "lint": "npm run lint:js && npm run lint:html",
     "pretest": "npm run lint",
-    "start": "webpack serve",
+    "start": "webpack serve --env development",
     "build": "rimraf dist && webpack --env production",
     "analyze": "rimraf dist && webpack --env production --analyze",
     "test": "jest"

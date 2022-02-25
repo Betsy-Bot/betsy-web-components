@@ -34,8 +34,10 @@ export class Home {
             let foundServerIndex = this.user.activeServers.findIndex(x => x.guildId == guild.id)
             if (foundServerIndex >= 0) {
                 guild.exists = true;
+                guild.invited = this.user.activeServers[foundServerIndex].invited;
                 this.user.activeServers[foundServerIndex].name = guild.name;
             }
         }
+        console.log(this.managedGuilds);
     }
 }

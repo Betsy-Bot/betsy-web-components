@@ -20,7 +20,7 @@ export class CreateResponseMessage implements IRouteViewModel {
         discordGuildId: null,
         type: DiscordCommandType.ResponseMessage,
         discordCommandActions: [{
-            type: 1,
+            type: 2,
             discordMessage: {
                 message: {
                     content: 'Some Content',
@@ -32,7 +32,7 @@ export class CreateResponseMessage implements IRouteViewModel {
 
     createNewCommandAction() {
         this.command.discordCommandActions.push({
-            type: 1,
+            type: 2,
             discordMessage: {
                 message: {
                     content: 'Some Content',
