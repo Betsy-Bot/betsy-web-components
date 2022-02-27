@@ -1,0 +1,11 @@
+#embed-editor {
+  .mdc-expandable {
+    &.mdc-expandable--open {
+      margin: 0;
+    }
+
+    .mdc-expandable__header.mdc-expandable__header--open {
+      height: 48px;
+    }
+  }
+}

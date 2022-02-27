@@ -1,7 +1,75 @@
 <section id="embed-editor">
-    <mdc-text-field
-            label="Embed Title"
-            value.bind="embed.title"
-    ></mdc-text-field>
+    <mdc-expandable>
+        <div au-slot="caption">Author</div>
+        <template au-slot>
+            <mdc-text-field
+                    class="w-100 mt-2"
+                    label="Author Name"
+                    value.bind="embed.author.name"
+            ></mdc-text-field>
+
+            <mdc-text-field
+                    class="w-100 mt-2"
+                    label="Author URL"
+                    value.bind="embed.author.url"
+            ></mdc-text-field>
+
+            <mdc-text-field
+                    class="w-100 mt-2"
+                    label="Author Icon URL"
+                    value.bind="embed.author.icon_url"
+            ></mdc-text-field>
+        </template>
+    </mdc-expandable>
+    <mdc-expandable>
+        <div au-slot="caption">Main Body</div>
+        <template au-slot>
+            <mdc-text-field
+                    class="w-100 mt-2"
+                    label="Embed Title"
+                    value.bind="embed.title"
+            ></mdc-text-field>
+
+            <mdc-text-field
+                    textarea rows="5"
+                    class="w-100 mt-2"
+                    label="Embed Description"
+                    value.bind="embed.description"
+            ></mdc-text-field>
+
+            <mdc-text-field
+                    class="w-100 mt-2"
+                    label="Embed URL"
+                    value.bind="embed.url & validate"
+            ></mdc-text-field>
+
+            <color-picker
+                    label="Embed Colour"
+                    value.bind="embed.color"
+            ></color-picker>
+        </template>
+    </mdc-expandable>
+    <mdc-expandable>
+        <div au-slot="caption">Footer</div>
+        <template au-slot>
+            <mdc-text-field
+                    class="w-100 mt-2"
+                    label="Footer Content"
+                    value.bind="embed.footer.text"
+            ></mdc-text-field>
+
+            <mdc-text-field
+                    class="w-100 mt-2"
+                    label="Footer Icon URL"
+                    value.bind="embed.footer.icon_url"
+            ></mdc-text-field>
+
+            <mdc-text-field
+                    class="w-100 mt-2"
+                    label="Footer Timestamp"
+                    value.bind="embed.timestamp"
+            ></mdc-text-field>
+        </template>
+    </mdc-expandable>
     <div id="editorjs"></div>
 </section>

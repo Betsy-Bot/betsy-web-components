@@ -55,3 +55,31 @@ export interface DiscordInvitedWebhookResponse {
 export enum DiscordCommandType {
     ResponseMessage = 1
 }
+
+export interface EmbedField {
+    name: string,
+    value: string,
+    inline: boolean
+}
+
+export interface EmbedFooter {
+    text: string,
+    icon_url: URL
+}
+
+export interface EmbedImage {
+    url: URL
+}
+
+export class Embed {
+    title: string;
+    description: string;
+    url: URL;
+    color: string;
+    fields: EmbedField[];
+    footer: EmbedFooter;
+    image: EmbedImage;
+    thumbnail: EmbedImage;
+    timestamp: Date
+}
+

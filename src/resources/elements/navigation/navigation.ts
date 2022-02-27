@@ -19,7 +19,7 @@ export class Navigation {
         this.expandOptions[sectionName] = !this.expandOptions[sectionName];
     }
 
-    async handleServerChange(event: any) {
+    async handleServerChange(event: CustomEvent) {
         this.guildId = event?.detail?.value;
         await this.router.load(`guild/${this.guildId}`);
     }
