@@ -28,7 +28,7 @@ export class EditResponseMessage implements IRouteViewModel {
             type: 1,
             discordMessage: {
                 message: {
-                    content: 'Some Content',
+                    content: null,
                     embeds: null
                 }
             }

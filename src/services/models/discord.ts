@@ -30,14 +30,14 @@ export interface DiscordMessage {
 }
 
 export interface DiscordMessageContent {
-    content: string
-    embeds: DiscordMessageEmbed[]
+    content?: string
+    embeds?: DiscordMessageEmbed[]
 }
 
 export interface DiscordMessageEmbed {
-    title: string;
-    description: string;
-    image: DiscordMessageImage
+    title?: string;
+    description?: string;
+    image?: DiscordMessageImage
 }
 
 export interface DiscordMessageImage {
@@ -60,30 +60,30 @@ export enum DiscordCommandType {
     ResponseMessage = 1
 }
 
-export interface EmbedField {
+export interface DiscordEmbedField {
     name: string,
     value: string,
     inline: boolean
 }
 
-export interface EmbedFooter {
+export interface DiscordEmbedFooter {
     text: string,
     icon_url: URL
 }
 
-export interface EmbedImage {
+export interface DiscordEmbedImage {
     url: URL
 }
 
-export class Embed {
-    title: string;
-    description: string;
-    url: URL;
-    color: string;
-    fields: EmbedField[];
-    footer: EmbedFooter;
-    image: EmbedImage;
-    thumbnail: EmbedImage;
-    timestamp: Date
+export class DiscordEmbed {
+    title?: string;
+    description?: string;
+    url?: URL;
+    color?: string;
+    fields?: DiscordEmbedField[];
+    footer?: DiscordEmbedFooter;
+    image?: DiscordEmbedImage;
+    thumbnail?: DiscordEmbedImage;
+    timestamp?: Date
 }
 

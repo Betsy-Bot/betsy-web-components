@@ -3,6 +3,11 @@ import {DiscordCommandAction} from "../../../services/models/discord";
 
 export class DiscordActionCreator {
     @bindable action: DiscordCommandAction;
+
+    bound() {
+        console.log('action', this.action);
+    }
+
     actions = [
         {
             label: 'Interaction Response',

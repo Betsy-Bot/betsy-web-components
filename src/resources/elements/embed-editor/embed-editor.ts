@@ -2,18 +2,21 @@ import { IValidationController } from '@aurelia/validation-html';
 import { IValidationRules, IValidateable, BaseValidationRule } from '@aurelia/validation';
 import { newInstanceForScope } from '@aurelia/kernel';
 import {bindable} from "aurelia";
-import {Embed} from "../../../services/models/discord";
+import { DiscordEmbed } from "../../../services/models/discord";
 
 export class EmbedEditor {
-    @bindable embed: Embed;
+    @bindable embed: DiscordEmbed = {};
 
     constructor(@newInstanceForScope(IValidationController) private validationController: IValidationController,
                 @IValidationRules private rules: IValidationRules) {
-        this.embed = new Embed();
         this.rules.on(this.embed)
             .ensure('url')
             .required()
             .satisfiesRule(new URLValidationRule()).withMessage("URL must be in the format 'http(s)://domain.com'")
+    }
+
+    bound() {
+        console.log('embed', this.embed);
     }
 }
 

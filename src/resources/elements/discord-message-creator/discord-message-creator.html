@@ -15,7 +15,8 @@
         ></mdc-text-field>
     </div>
     <div class="embed-area" if.bind="activeTab === 'embed'">
-        <div class="embed" repeat.for="embed of message.embeds"></div>
-        <embed-editor></embed-editor>
+        <div class="embed" repeat.for="embed of message.embeds">
+            <embed-editor embed.two-way="embed"></embed-editor>
+        </div>
     </div>
 </section>
