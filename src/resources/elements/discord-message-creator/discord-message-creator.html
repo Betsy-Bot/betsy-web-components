@@ -1,11 +1,11 @@
 <section id="discord-message-creator">
     <mdc-tab-bar view-model.ref="tabBar"
                  use-automatic-activation.bind="useAutomaticActivation" focus-on-activate.bind="false">
-        <mdc-tab label="Message" active.bind="activeTab === 'message'" click.delegate="selectTab('message')"></mdc-tab>
-        <mdc-tab label="Embed" active.bind="activeTab === 'embed'" click.delegate="selectTab('embed')"></mdc-tab>
+        <mdc-tab label="Message" active.bind="message.type === 'message'" click.delegate="selectTab('message')"></mdc-tab>
+        <mdc-tab label="Embed" active.bind="message.type === 'embed'" click.delegate="selectTab('embed')"></mdc-tab>
     </mdc-tab-bar>
 
-    <div class="message-area" if.bind="activeTab === 'message'">
+    <div class="message-area" if.bind="message.type === 'message'">
         <mdc-text-field
                 rows="8"
                 class="w-100"
@@ -14,9 +14,26 @@
                 value.bind="message.content"
         ></mdc-text-field>
     </div>
-    <div class="embed-area" if.bind="activeTab === 'embed'">
-        <div class="embed" repeat.for="embed of message.embeds">
+    <div class="embed-area" if.bind="message.type === 'embed'">
+        <mdc-text-field
+                class="w-100 mb-2"
+                label="Content"
+                value.bind="message.content"
+        ></mdc-text-field>
+        <button mdc-button
+                class="button-primary mb-2"
+                if.bind="!message.embeds || message.embeds.length <= 10"
+                click.delegate="addEmbed()">
+            Add Embed
+        </button>
+        <div class="embed mb-2" repeat.for="embed of message.embeds">
             <embed-editor embed.two-way="embed"></embed-editor>
+            <button mdc-button
+                    class="button-primary mb-2"
+                    if.bind="!message.embeds || message.embeds.length <= 10"
+                    click.delegate="deleteEmbed($index)">
+                Delete Embed
+            </button>
         </div>
     </div>
 </section>
