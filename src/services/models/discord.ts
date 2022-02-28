@@ -11,6 +11,7 @@ export interface DiscordRole {
 export interface BaseDiscordCommand {
     id?: string,
     name: string,
+    private: boolean,
     description: string,
     discordGuildId: string,
     type: DiscordCommandType,

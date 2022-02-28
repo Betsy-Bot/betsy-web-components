@@ -19,6 +19,7 @@ export class CreateResponseMessage implements IRouteViewModel {
         description : null,
         discordGuildId: null,
         type: DiscordCommandType.ResponseMessage,
+        private: true,
         discordCommandActions: [{
             type: 2,
             discordMessage: {
