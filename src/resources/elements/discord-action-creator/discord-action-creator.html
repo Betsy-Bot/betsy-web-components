@@ -1,0 +1,12 @@
+<section id="discord-action-creator">
+    <mdc-form-field repeat.for="act of actions">
+        <mdc-radio model.bind="act.value" checked.bind="action.type"></mdc-radio>
+        <label>
+            ${act.label}
+            <span class="material-icons fs-6" mdc-tooltip.bind="act.description">
+                help
+            </span>
+        </label>
+    </mdc-form-field>
+    <discord-message-creator message.bind="action.discordMessage.message"></discord-message-creator>
+</section>

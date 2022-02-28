@@ -21,6 +21,10 @@ export class DiscordService {
         return this.api.doPost('Discord/ApplicationCommand', command);
     }
 
+    async updateResponseMessageCommand(command: BaseDiscordCommand): Promise<discordModels.BaseDiscordCommand> {
+        return this.api.doPatch('Discord/ApplicationCommand', command);
+    }
+
     async getResponseMessagesForGuild(guildId: string): Promise<discordModels.BaseDiscordCommand[]> {
         return this.api.doGet(`Discord/Guilds/${guildId}/ResponseMessages`);
     }

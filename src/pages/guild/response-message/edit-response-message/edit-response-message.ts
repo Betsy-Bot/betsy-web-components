@@ -37,10 +37,9 @@ export class EditResponseMessage implements IRouteViewModel {
 
     async updateCommand() {
         try {
-            // this.command.discordGuildId = this.guildId;
-            // const command = this.discordService.createResponseMessageCommand(this.command);
-            // toast("Command Created!");
-            // this.router.load(`/guild/${this.guildId}/response-message`);
+            this.command.discordGuildId = this.guildId;
+            await this.discordService.updateResponseMessageCommand(this.command);
+            toast("Command Updated!");
         } catch(e) {
             toast('Failed to create command', {severity: 'error'})
         }

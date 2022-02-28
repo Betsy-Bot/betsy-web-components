@@ -9,6 +9,7 @@ export interface DiscordRole {
 }
 
 export interface BaseDiscordCommand {
+    id?: string,
     name: string,
     description: string,
     discordGuildId: string,
@@ -17,11 +18,13 @@ export interface BaseDiscordCommand {
 }
 
 export interface DiscordCommandAction {
+    id?: string,
     type: number,
     discordMessage: DiscordMessage
 }
 
 export interface DiscordMessage {
+    id?: string,
     message: DiscordMessageContent
 }
 

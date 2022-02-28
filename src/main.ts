@@ -10,6 +10,7 @@ import { ServerCard } from "./resources/elements/server-card/server-card";
 import { DiscordMessageCreator } from "./resources/elements/discord-message-creator/discord-message-creator";
 import { EmbedEditor } from "./resources/elements/embed-editor/embed-editor";
 import {ColorPicker} from "./resources/elements/color-picker/color-picker";
+import { DiscordActionCreator } from "./resources/elements/discord-action-creator/discord-action-creator";
 
 import 'bootstrap';
 
@@ -23,6 +24,7 @@ Aurelia
         ServerCard,
         DiscordMessageCreator,
         EmbedEditor,
-        ColorPicker
+        ColorPicker,
+        DiscordActionCreator
     ).app(App)
     .start();

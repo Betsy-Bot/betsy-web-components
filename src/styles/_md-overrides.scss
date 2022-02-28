@@ -8,6 +8,7 @@ body {
   --mdc-theme-on-primary: $body-bg;
   --mdc-background-primary: rgba(0, 0, 0, 0);
   --mdc-theme-surface: rgba(76, 96, 133, 1);
+  --mdc-theme-text-primary-on-background: $body-color;
 }
 
 .button-secondary {
