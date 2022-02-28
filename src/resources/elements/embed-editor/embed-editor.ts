@@ -1,13 +1,11 @@
 import { IValidationController } from '@aurelia/validation-html';
 import { IValidationRules, IValidateable, BaseValidationRule } from '@aurelia/validation';
 import { newInstanceForScope } from '@aurelia/kernel';
-import EditorJS from '@editorjs/editorjs';
 import {bindable} from "aurelia";
 import {Embed} from "../../../services/models/discord";
 
 export class EmbedEditor {
     @bindable embed: Embed;
-    editor: EditorJS;
 
     constructor(@newInstanceForScope(IValidationController) private validationController: IValidationController,
                 @IValidationRules private rules: IValidationRules) {
@@ -16,12 +14,6 @@ export class EmbedEditor {
             .ensure('url')
             .required()
             .satisfiesRule(new URLValidationRule()).withMessage("URL must be in the format 'http(s)://domain.com'")
-    }
-
-    created() {
-        this.editor = new EditorJS({
-            holder: 'editorjs',
-        })
     }
 }
 
