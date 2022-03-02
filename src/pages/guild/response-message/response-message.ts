@@ -1,17 +1,18 @@
-import {inject, IRouteViewModel, Params, RouteNode, IEventAggregator, IRouter} from "aurelia";
-import {DiscordService} from "../../../services/discord-service";
-import {toast} from "lets-toast";
+import { inject, Params, RouteNode, IEventAggregator } from "aurelia";
+import { DiscordService } from "../../../services/discord-service";
+import { toast } from "lets-toast";
+import { IRouter, IRouteableComponent, Parameters, RoutingInstruction, Navigation } from 'aurelia-direct-router';
 
 @inject(IEventAggregator, DiscordService, IRouter)
-export class ResponseMessage implements IRouteViewModel {
+export class ResponseMessage implements IRouteableComponent {
     constructor(private eventAggregator: IEventAggregator, private discordService: DiscordService, private router: IRouter) {
     }
 
     guildId: string;
     commands;
 
-    async load(params: Params, next: RouteNode, current: RouteNode) {
-        this.guildId = params.guildId;
+    async load?(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation) {
+        this.guildId = parameters.guildId as string;
         this.commands = await this.discordService.getResponseMessagesForGuild(this.guildId);
     }
 
@@ -20,9 +21,9 @@ export class ResponseMessage implements IRouteViewModel {
         if (foundCommandIndex >= 0) {
             await this.discordService.toggleDiscordCommandActive(this.guildId, command.discordApplicationCommandId, this.commands[foundCommandIndex].active);
             this.commands[foundCommandIndex].active = !command.active;
-            toast(`Active status has been updated for /${command.name}`, {severity: "success"})
+            toast(`Active status has been updated for /${command.name}`, { severity: "success" })
         } else {
-            toast("Error", {severity: "error"})
+            toast("Error", { severity: "error" })
         }
     }
 

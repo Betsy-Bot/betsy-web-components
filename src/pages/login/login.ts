@@ -1,14 +1,15 @@
-import {IRouteViewModel, Params, RouteNode, inject} from "aurelia";
+import { Params, RouteNode, inject} from "aurelia";
 import { SessionService } from "../../services/session-service";
 import {toast} from "lets-toast";
+import { IRouteableComponent, Parameters, RoutingInstruction, Navigation } from 'aurelia-direct-router';
 
 @inject(SessionService)
-export class Login implements IRouteViewModel {
+export class Login implements IRouteableComponent {
     constructor(private sessionService: SessionService) {
     }
 
-    async canLoad(params: Params, next: RouteNode, current: RouteNode | null): Promise<string | boolean> {
-        const code = current.queryParams.get('code');
+    async canLoad?(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation) {
+        const code = parameters.code as string;
         if (code) {
             try {
                 await this.sessionService.loginWithOAuthCode(code);
