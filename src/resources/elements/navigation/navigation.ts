@@ -1,5 +1,6 @@
-import { bindable, inject, IRouter, IEventAggregator } from 'aurelia';
+import { bindable, inject, IEventAggregator } from 'aurelia';
 import { SessionService } from "../../../services/session-service";
+import {IRouter} from 'aurelia-direct-router';
 
 @inject(SessionService)
 export class Navigation {
