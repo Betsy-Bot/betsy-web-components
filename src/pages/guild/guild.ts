@@ -1,5 +1,5 @@
 import { routes, IRouter } from 'aurelia-direct-router';
-import { inject, IRouteViewModel, Params, RouteNode, IEventAggregator } from "aurelia";
+import {inject, IRouteViewModel, IEventAggregator, customElement, RouteNode, Params} from "aurelia";
 
 @routes([
     {

@@ -3,6 +3,7 @@ import {DiscordCommandAction} from "../../../services/models/discord";
 
 export class DiscordActionCreator {
     @bindable action: DiscordCommandAction;
+    @bindable deleteFunction;
 
     actions = [
         {
@@ -16,5 +17,10 @@ export class DiscordActionCreator {
             value: 2
         }
     ]
+
+    deleteAction() {
+        console.log('delete action asdf');
+        this.deleteFunction({action: this.action});
+    }
 
 }

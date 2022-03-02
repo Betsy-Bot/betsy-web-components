@@ -19,8 +19,15 @@ export class EditResponseMessage implements IRouteViewModel {
         this.command = await this.discordService.getDiscordCommandDetails(this.discordApplicationCommandId)
     }
 
-    deleteAction(index) {
-        this.command.discordCommandActions.slice(index);
+    deleteAction(action) {
+        console.log('delete action hit')
+        console.log('this.command?.discordCommandActions', this.command?.discordCommandActions)
+        console.log('action', action);
+        const index = this.command?.discordCommandActions?.findIndex(action);
+        console.log('index', index)
+        if (index >= 0) {
+            this.command.discordCommandActions.slice(index);
+        }
     }
 
     createNewCommandAction() {
