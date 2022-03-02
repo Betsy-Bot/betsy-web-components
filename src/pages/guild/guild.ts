@@ -1,25 +1,32 @@
-import {inject, IRouteViewModel, Params, RouteNode, IEventAggregator, route} from "aurelia";
+import { routes } from 'aurelia-direct-router';
+import { inject, IRouteViewModel, Params, RouteNode, IEventAggregator } from "aurelia";
 
-// @ts-ignore
-@route({
-    routes: [
-        {
-            path: 'response-message',
-            component: import('./response-message/response-message'),
-            title: 'Response Messages',
-        },
-        {
-            path: 'response-message/create',
-            component: import('./response-message/create-response-message/create-response-message'),
-            title: 'Response Messages',
-        },
-        {
-            path: 'response-message/:discordApplicationCommandId',
-            component: import('./response-message/edit-response-message/edit-response-message'),
-            title: 'Response Messages',
+@routes([
+    {
+        path: 'response-message',
+        component: import('./response-message/response-message'),
+        title: 'Response Messages',
+        data: {
+            auth: false
         }
-    ]
-})
+    },
+    {
+        path: 'response-message/create',
+        component: import('./response-message/create-response-message/create-response-message'),
+        title: 'Response Messages',
+        data: {
+            auth: false
+        }
+    },
+    {
+        path: 'response-message/:discordApplicationCommandId',
+        component: import('./response-message/edit-response-message/edit-response-message'),
+        title: 'Response Messages',
+        data: {
+            auth: false
+        }
+    }
+])
 @inject(IEventAggregator)
 export class Guild implements IRouteViewModel {
     constructor(private eventAggregator: IEventAggregator) {

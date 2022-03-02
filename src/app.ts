@@ -1,27 +1,33 @@
-import {IRouteViewModel, route, EventAggregator, inject, IDisposable} from "aurelia";
+import { IRouteViewModel, route, EventAggregator, inject, IDisposable } from "aurelia";
 import { SessionService } from "./services/session-service";
+import { routes } from 'aurelia-direct-router';
 
-// @ts-ignore
-@route({
-    routes: [
-        {
-            path: ['', 'home'],
-            component: import('./pages/home/home'),
-            title: 'Home'
-        },
-        {
-            path: 'login',
-            component: import('./pages/login/login'),
-            title: 'Login',
-        },
-        {
-            path: 'guild/:guildId',
-            component: import('./pages/guild/guild'),
-            title: 'Server',
+@routes([
+    {
+        path: ['', 'home'],
+        component: import('./pages/home/home'),
+        title: 'Home',
+        data: {
+            auth: false
         }
-    ]
-})
-
+    },
+    {
+        path: 'login',
+        component: import('./pages/login/login'),
+        title: 'Login',
+        data: {
+            auth: false
+        }
+    },
+    {
+        path: 'guild/:guildId',
+        component: import('./pages/guild/guild'),
+        title: 'Server',
+        data: {
+            auth: false
+        }
+    }
+])
 @inject(EventAggregator, SessionService)
 export class App implements IRouteViewModel {
     private userSubscriber: IDisposable;
