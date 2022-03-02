@@ -38,6 +38,5 @@ export class Home {
                 this.user.activeServers[foundServerIndex].name = guild.name;
             }
         }
-        console.log(this.managedGuilds);
     }
 }

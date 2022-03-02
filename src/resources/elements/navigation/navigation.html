@@ -51,7 +51,7 @@
 
     <div class="demo-drawer-app-content">
         <mdc-drawer type="dismissible" view-model.ref="drawer" show.bind="guildId">
-            <a load="/guild/${guildId}" if.bind="guildId">
+            <a load="/guild/${guildId}/dashboard" if.bind="guildId">
                 <mdc-drawer-header title="Manage Server"></mdc-drawer-header>
             </a>
             <mdc-drawer-content>

@@ -14,10 +14,6 @@ export class EmbedEditor {
             .required()
             .satisfiesRule(new URLValidationRule()).withMessage("URL must be in the format 'http(s)://domain.com'")
     }
-
-    bound() {
-        console.log('embed', this.embed);
-    }
 }
 
 class URLValidationRule extends BaseValidationRule {

@@ -18,10 +18,10 @@ import 'bootstrap';
 
 Aurelia
     .register(RouterConfiguration.customize({
-        useUrlFragmentHash: false
+        useUrlFragmentHash: false,
+        title: 'Betsy Bot Web Application'
     }), 
     ValidationHtmlConfiguration,
-    AuthHook,
     AllConfiguration,
     StandardConfiguration,
     SVGAnalyzer,
