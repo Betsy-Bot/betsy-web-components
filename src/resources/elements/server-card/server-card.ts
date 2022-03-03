@@ -9,7 +9,6 @@ export class ServerCard {
     }
     @bindable() server;
     @bindable() hideButton;
-    connection: any;
     loading: boolean;
 
     getServerText() {
@@ -22,14 +21,6 @@ export class ServerCard {
         this.loading = true;
         try {
             await this.discordServer.createServer(this.server.id);
-            this.connection = this.webhookService.subscribeToGuildInvite();
-            await this.connection.start();
-            this.connection.on('BotInvited', async(payload) => {
-                if (payload === this.server.id) {
-                    //Go to server
-                    this.loading = false;
-                }
-            });
 
             this.openServerInvitePopup();
         } catch(e) {

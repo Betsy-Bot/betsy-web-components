@@ -28,6 +28,6 @@ export class ResponseMessage implements IRouteableComponent {
     }
 
     async goToCommand(command) {
-        await this.router.load(`guild/${this.guildId}/response-message/${command.discordApplicationCommandId}`)
+        await this.router.load(`/guild/${this.guildId}/response-message/${command.discordApplicationCommandId}`)
     }
 }

@@ -22,7 +22,7 @@ import { routes } from 'aurelia-direct-router';
     {
         path: 'guild/:guildId',
         component: import('./pages/guild/guild'),
-        title: 'Server',
+        title: 'Server Management',
         data: {
             auth: false
         }

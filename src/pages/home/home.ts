@@ -1,15 +1,18 @@
 import { inject } from "aurelia";
+import { IRouter } from 'aurelia-direct-router';
 import { SessionService } from "../../services/session-service";
 import { UserService } from "../../services/user-service";
+import { WebhookService } from "../../services/websocket-service";
 
-@inject(SessionService, UserService)
+@inject(SessionService, UserService, WebhookService, IRouter)
 export class Home {
-    constructor(private sessionService: SessionService, private userService: UserService) {
+    constructor(private sessionService: SessionService, private userService: UserService, private webhookService: WebhookService, private router: IRouter) {
     }
 
     private user;
     private managedGuilds;
     private otherGuilds;
+    connection;
 
     canLoad() {
         if (!this.sessionService.isTokenValid()) {
@@ -17,6 +20,7 @@ export class Home {
         }
         return true;
     }
+
 
     async attached() {
         this.user = await this.sessionService.getUser();
@@ -38,5 +42,16 @@ export class Home {
                 this.user.activeServers[foundServerIndex].name = guild.name;
             }
         }
+
+        this.connection = this.webhookService.subscribeToGuildInvite();
+        await this.connection.start();
+        this.connection.on('BotInvited', async(payload) => {
+            console.log('invited payload', payload);
+            if (this.managedGuilds.includes(x => x.id === payload)) {
+                console.log('exists');
+            }
+            console.log('route', `/guild/${payload}`)
+            await this.router.load(`/guild/${payload}`)
+        });
     }
 }
