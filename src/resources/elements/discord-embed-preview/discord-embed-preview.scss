@@ -1,0 +1,19 @@
+#discord-embed-preview {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+
+  //Replace with a JS function to apply based on color
+  border-left: 3px solid black;
+
+  .author, .field-name,.body-description {
+    font-size: 0.8rem;
+  }
+
+  .body-title {
+    font-size: 0.95rem;
+  }
+
+  .field-value, .footer-text {
+    font-size: 0.75rem;
+  }
+}

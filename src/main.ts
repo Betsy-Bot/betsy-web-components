@@ -16,6 +16,7 @@ import { ColorPicker } from "./resources/elements/color-picker/color-picker";
 import { DiscordActionCreator } from "./resources/elements/discord-action-creator/discord-action-creator";
 import { DiscordCommandCreator } from "./resources/elements/discord-command-creator/discord-command-creator";
 import { DiscordMessagePreview } from "./resources/elements/discord-message-preview/discord-message-preview";
+import { DiscordEmbedPreview } from "./resources/elements/discord-embed-preview/discord-embed-preview";
 
 Aurelia
     .register(RouterConfiguration.customize({
@@ -33,6 +34,7 @@ Aurelia
         ColorPicker,
         DiscordActionCreator,
         DiscordCommandCreator,
-        DiscordMessagePreview
+        DiscordMessagePreview,
+        DiscordEmbedPreview,
     ).app(App)
     .start();
