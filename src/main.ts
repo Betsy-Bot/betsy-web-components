@@ -1,6 +1,7 @@
 import Aurelia from 'aurelia';
-import { RouterConfiguration } from 'aurelia-direct-router';
+import 'bootstrap';
 
+import { RouterConfiguration } from 'aurelia-direct-router';
 import { AllConfiguration } from '@aurelia-mdc-web/all';
 import { StandardConfiguration, SVGAnalyzer } from '@aurelia/runtime-html';
 import { AuthHook } from "./resources/router-hooks/auth-hook";
@@ -14,8 +15,7 @@ import { EmbedEditor } from "./resources/elements/embed-editor/embed-editor";
 import { ColorPicker } from "./resources/elements/color-picker/color-picker";
 import { DiscordActionCreator } from "./resources/elements/discord-action-creator/discord-action-creator";
 import { DiscordCommandCreator } from "./resources/elements/discord-command-creator/discord-command-creator";
-
-import 'bootstrap';
+import { DiscordMessagePreview } from "./resources/elements/discord-message-preview/discord-message-preview";
 
 Aurelia
     .register(RouterConfiguration.customize({
@@ -32,6 +32,7 @@ Aurelia
         EmbedEditor,
         ColorPicker,
         DiscordActionCreator,
-        DiscordCommandCreator
+        DiscordCommandCreator,
+        DiscordMessagePreview
     ).app(App)
     .start();

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const Dotenv = require('dotenv-webpack');
 
@@ -74,6 +75,11 @@ module.exports = function (env, {analyze}) {
             new HtmlWebpackPlugin({template: 'index.html'}),
             new Dotenv({
                 path: `./.env${production ? '' : '.' + (process.env.NODE_ENV || 'development')}`,
+            }),
+            new CopyWebpackPlugin({
+                patterns: [
+                    {from: 'static', to: path.resolve(__dirname, 'dist'), globOptions: {ignore: ['.*']}},
+                ]
             }),
             analyze && new BundleAnalyzerPlugin()
         ].filter(p => p)
