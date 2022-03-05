@@ -43,6 +43,32 @@
                     value.bind="embed.url & validate"
             ></mdc-text-field>
 
+            <button mdc-button class="button-primary mt-3" click.delegate="addField()">
+                Add Field
+            </button>
+
+            <div class="row" if.bind="embed.fields">
+                <div class="col-6" repeat.for="field of embed.fields">
+                    <mdc-form-field class="mt-2">
+                        <button mdc-switch selected.bind="field.inline"></button>
+                        <label mdc-tooltip="Fields will be added in column form">Inline?</label>
+                    </mdc-form-field>
+                    <mdc-text-field
+                            class="w-100 mt-2"
+                            label="Field Name"
+                            value.bind="field.name"
+                    ></mdc-text-field>
+                    <mdc-text-field
+                            class="w-100 mt-2"
+                            label="Field Value"
+                            value.bind="field.value"
+                    ></mdc-text-field>
+                    <button mdc-button class="button-primary" click.delegate="deleteField(field)">
+                        Delete Field
+                    </button>
+                </div>
+            </div>
+
             <!-- <color-picker
                     label="Embed Colour"
                     value.two-way="embed.color"

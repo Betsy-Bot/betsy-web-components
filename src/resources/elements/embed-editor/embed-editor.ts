@@ -2,7 +2,7 @@ import { IValidationController } from '@aurelia/validation-html';
 import { IValidationRules, IValidateable, BaseValidationRule } from '@aurelia/validation';
 import { newInstanceForScope } from '@aurelia/kernel';
 import {bindable} from "aurelia";
-import { DiscordEmbed } from "../../../services/models/discord";
+import {DiscordEmbed, DiscordEmbedField} from "../../../services/models/discord";
 
 export class EmbedEditor {
     @bindable embed: DiscordEmbed = {};
@@ -13,6 +13,24 @@ export class EmbedEditor {
             .ensure('url')
             .required()
             .satisfiesRule(new URLValidationRule()).withMessage("URL must be in the format 'http(s)://domain.com'")
+    }
+
+    addField() {
+        if (!this.embed.fields) {
+            this.embed.fields = [];
+        }
+        this.embed.fields.push(new class implements DiscordEmbedField {
+            inline: false;
+            name: 'Some Name';
+            value: 'Value';
+        })
+    }
+
+    deleteField(field) {
+        let index = this.embed.fields.findIndex(field);
+        if (index >= 0) {
+            this.embed.fields.splice(index, 1);
+        }
     }
 }
 
