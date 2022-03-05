@@ -3,28 +3,8 @@
         <h3 class="mb-3">
             Editing /${command.name}
         </h3>
-        <div class="mb-2">
-            <mdc-text-field
-                    label="Command"
-                    required.bind="required"
-                    prefix="/"
-                    value.bind="command.name"
-            ></mdc-text-field>
-        </div>
-        <div class="mb-2">
-            <mdc-text-field
-                    label="Command Description"
-                    required.bind="required"
-                    value.bind="command.description"
-            ></mdc-text-field>
-        </div>
 
-        <div class="mb-2">
-            <mdc-form-field>
-                <button mdc-switch selected.bind="command.private"></button>
-                <label mdc-tooltip="The response to the interaction will be kept hidden from others (Only you can see this)">Private?</label>
-            </mdc-form-field>
-        </div>
+        <discord-command-creator command.two-way="command"></discord-command-creator>
 
         <div class="my-3" repeat.for="action of command.discordCommandActions">
             <discord-action-creator

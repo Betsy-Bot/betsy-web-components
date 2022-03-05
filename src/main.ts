@@ -13,6 +13,7 @@ import { DiscordMessageCreator } from "./resources/elements/discord-message-crea
 import { EmbedEditor } from "./resources/elements/embed-editor/embed-editor";
 import { ColorPicker } from "./resources/elements/color-picker/color-picker";
 import { DiscordActionCreator } from "./resources/elements/discord-action-creator/discord-action-creator";
+import { DiscordCommandCreator } from "./resources/elements/discord-command-creator/discord-command-creator";
 
 import 'bootstrap';
 
@@ -20,16 +21,17 @@ Aurelia
     .register(RouterConfiguration.customize({
         useUrlFragmentHash: false,
         title: 'Betsy Bot Web Application'
-    }), 
-    ValidationHtmlConfiguration,
-    AllConfiguration,
-    StandardConfiguration,
-    SVGAnalyzer,
-    Navigation,
-    ServerCard,
-    DiscordMessageCreator,
-    EmbedEditor,
-    ColorPicker,
-    DiscordActionCreator
+    }),
+        ValidationHtmlConfiguration,
+        AllConfiguration,
+        StandardConfiguration,
+        SVGAnalyzer,
+        Navigation,
+        ServerCard,
+        DiscordMessageCreator,
+        EmbedEditor,
+        ColorPicker,
+        DiscordActionCreator,
+        DiscordCommandCreator
     ).app(App)
     .start();
