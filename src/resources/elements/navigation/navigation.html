@@ -52,7 +52,7 @@
     <div class="demo-drawer-app-content">
         <mdc-drawer type="dismissible" view-model.ref="drawer" show.bind="guildId">
             <a load="/guild/${guildId}/dashboard" if.bind="guildId">
-                <mdc-drawer-header title="Manage Server"></mdc-drawer-header>
+                <mdc-drawer-header title="Dashboard"></mdc-drawer-header>
             </a>
             <mdc-drawer-content>
                 <mdc-list single-selection>
@@ -64,6 +64,17 @@
                     <div if.bind="expandOptions.customCommands">
                         <a load="/guild/${guildId}/response-message" if.bind="guildId">
                             <mdc-list-item class="list-item-padding">Response Messages</mdc-list-item>
+                        </a>
+                    </div>
+
+                    <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('moderation')" no-list-action>
+                        <span>Moderation</span>
+                        <mdc-icon mdc-list-item-trailing>${expandOptions.moderation ? 'expand_less' :'expand_more'}
+                        </mdc-icon>
+                    </mdc-list-item>
+                    <div if.bind="expandOptions.moderation">
+                        <a load="/guild/${guildId}/invite-links" if.bind="guildId">
+                            <mdc-list-item class="list-item-padding">Hide/Delete Invite Links</mdc-list-item>
                         </a>
                     </div>
                 </mdc-list>

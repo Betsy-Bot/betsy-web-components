@@ -40,16 +40,13 @@ export class Navigation {
 
     async toggleSidebar() {
         const newDrawerStatus = !this.drawer.open;
-
         this.drawer.open = newDrawerStatus;
-
         this.sessionService.saveStorageItem(SessionService.SIDEBAR_STATUS_KEY, String(newDrawerStatus));
     }
 
     async logout() {
         await this.sessionService.logout();
-
-        await this.router.load('/home');
+        await this.router.load('home');
     }
 
     get discordOauthUrl() {

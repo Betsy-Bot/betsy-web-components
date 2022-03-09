@@ -15,13 +15,14 @@ export class Login implements IRouteableComponent {
                 await this.sessionService.loginWithOAuthCode(code);
                 return 'home';
             } catch(e) {
-                if (this.sessionService.isTokenValid()) {
-                    return 'home'
-                } else {
-                    toast("Failed to exchange code", {severity: 'error'});
-                }
+                toast("Failed to exchange code", {severity: 'error'});
             }
         }
         return true;
+    }
+
+    detaching(): void | Promise<void> {
+        const params = new URLSearchParams(window.location.search);
+        params.delete('code')
     }
 }

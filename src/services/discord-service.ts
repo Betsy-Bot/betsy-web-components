@@ -6,6 +6,7 @@ import {BaseDiscordCommand} from "./models/discord";
 
 @inject(ApiService)
 export class DiscordService {
+    guild;
     constructor(private api: ApiService) {
     }
 
@@ -35,5 +36,12 @@ export class DiscordService {
 
     async getDiscordCommandDetails(discordApplicationCommandId: string): Promise<discordModels.BaseDiscordCommand> {
         return this.api.doGet(`Discord/ApplicationCommand?discordApplicationCommandId=${discordApplicationCommandId}`);
+    }
+
+    async getDiscordServerInformation(guildId: string): Promise<discordModels.BaseDiscordServer> {
+        if (!this.guild) {
+            this.guild = this.api.doGet(`Discord/Guilds/${guildId}`);
+        }
+        return this.guild;
     }
 }
