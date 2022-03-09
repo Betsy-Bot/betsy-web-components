@@ -26,11 +26,8 @@ export class EmbedEditor {
         })
     }
 
-    deleteField(field) {
-        let index = this.embed.fields.findIndex(field);
-        if (index >= 0) {
-            this.embed.fields.splice(index, 1);
-        }
+    deleteField(index) {
+        this.embed.fields.splice(index, 1);
     }
 }
 

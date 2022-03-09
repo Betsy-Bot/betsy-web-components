@@ -63,7 +63,7 @@
                             label="Field Value"
                             value.bind="field.value"
                     ></mdc-text-field>
-                    <button mdc-button class="button-primary" click.delegate="deleteField(field)">
+                    <button mdc-button class="button-primary" click.delegate="deleteField($index)">
                         Delete Field
                     </button>
                 </div>

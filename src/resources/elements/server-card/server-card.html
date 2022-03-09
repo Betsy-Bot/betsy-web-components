@@ -31,7 +31,7 @@
                     click.delegate="handleServerInvite()">
                 Setup
             </button>
-            <a load="/guild/${server.id}" if.bind="server.exists && server.invited">
+            <a load="/guild/${server.id}/dashboard" if.bind="server.exists && server.invited">
                 <button mdc-button class="button-primary">
                     Go
                 </button>

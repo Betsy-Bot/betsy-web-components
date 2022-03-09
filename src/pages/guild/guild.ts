@@ -1,4 +1,4 @@
-import { routes, IRouter } from 'aurelia-direct-router';
+import { routes } from 'aurelia-direct-router';
 import {inject, IRouteViewModel, IEventAggregator, RouteNode, Params} from "aurelia";
 
 @routes([
@@ -36,9 +36,9 @@ import {inject, IRouteViewModel, IEventAggregator, RouteNode, Params} from "aure
     }
 ])
 
-@inject(IEventAggregator, IRouter)
+@inject(IEventAggregator)
 export class Guild implements IRouteViewModel {
-    constructor(private eventAggregator: IEventAggregator, private router: IRouter) {
+    constructor(private eventAggregator: IEventAggregator) {
     }
 
     guildId: string;
@@ -46,8 +46,5 @@ export class Guild implements IRouteViewModel {
     load(params: Params, next: RouteNode, current: RouteNode) {
         this.guildId = params.guildId;
         this.eventAggregator.publish('guild-updated', params.guildId);
-        if (current.path == `guild/${params.guildId}`) {
-            this.router.load(`/guild/${params.guildId}/dashboard`);
-        }
     }
 }
