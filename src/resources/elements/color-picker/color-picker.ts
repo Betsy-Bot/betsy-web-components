@@ -6,7 +6,7 @@ export class ColorPicker {
     color;
 
     bound() {
-        this.color = `#${this.value.toString(16)}`;
+        this.color = `#${this.value?.toString(16)}`;
     }
 
     getDecimalValue() {
