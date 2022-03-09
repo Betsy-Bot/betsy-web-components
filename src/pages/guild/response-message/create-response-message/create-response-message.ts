@@ -1,4 +1,5 @@
-import {EventAggregator, IEventAggregator, inject, IRouter, IRouteViewModel, Params, RouteNode} from "aurelia";
+import { IRouter } from 'aurelia-direct-router';
+import {EventAggregator, IEventAggregator, inject, IRouteViewModel, Params, RouteNode} from "aurelia";
 import {BaseDiscordCommand, DiscordCommandType} from "../../../../services/models/discord";
 import {DiscordService} from "../../../../services/discord-service";
 import {toast} from "lets-toast";
@@ -54,6 +55,7 @@ export class CreateResponseMessage implements IRouteViewModel {
             toast("Command Created!");
             this.router.load(`/guild/${this.guildId}/response-message`);
         } catch(e) {
+            console.log(e);
             toast('Failed to create command', {severity: 'error'})
         }
     }

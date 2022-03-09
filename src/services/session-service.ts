@@ -2,6 +2,7 @@ import { inject, IEventAggregator } from 'aurelia';
 import { ApiService } from "./api-service";
 import { DiscordService } from "./discord-service";
 import {ProfileResponse} from "./models/user";
+import {toast} from "lets-toast";
 
 @inject(ApiService, DiscordService, IEventAggregator)
 export class SessionService {
@@ -59,9 +60,11 @@ export class SessionService {
 
     async refreshProfile() {
         this.currentUser = await this.apiService.doGet('User/Profile');
-
+        if (!this.currentUser) {
+            this.destroyStorageItem(SessionService.TOKEN_KEY);
+            toast("Please re-login", {severity: "error"});
+        }
         this.eventAggregator.publish('user-updated', this.currentUser);
-
         return this.currentUser;
     }
 

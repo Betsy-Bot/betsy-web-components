@@ -6,7 +6,7 @@ export class DiscordMessageCreator {
 
     bound() {
         if (this.message.embeds?.length > 0) {
-            this.message.type = "embed"
+            this.message.type = "embeds"
         } else {
             this.message.type = "message";
         }

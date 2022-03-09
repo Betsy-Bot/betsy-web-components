@@ -53,6 +53,6 @@ export class Navigation {
     }
 
     get discordOauthUrl() {
-        return `https://discord.com/api/oauth2/authorize?client_id=943260131599220856&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds`;
+        return `https://discord.com/api/oauth2/authorize?client_id=${process.env.BOT_CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URL}&response_type=code&scope=identify%20email%20guilds`;
     }
 }

@@ -2,7 +2,7 @@
     <mdc-tab-bar view-model.ref="tabBar"
                  use-automatic-activation.bind="useAutomaticActivation" focus-on-activate.bind="false">
         <mdc-tab label="Message" active.bind="message.type === 'message'" click.delegate="selectTab('message')"></mdc-tab>
-        <mdc-tab label="Embed" active.bind="message.type === 'embed'" click.delegate="selectTab('embed')"></mdc-tab>
+        <mdc-tab label="Embeds" active.bind="message.type === 'embeds'" click.delegate="selectTab('embeds')"></mdc-tab>
     </mdc-tab-bar>
 
     <div class="message-area" if.bind="message.type === 'message'">
@@ -14,7 +14,7 @@
                 value.bind="message.content"
         ></mdc-text-field>
     </div>
-    <div class="embed-area" if.bind="message.type === 'embed'">
+    <div class="embed-area" if.bind="message.type === 'embeds'">
         <mdc-text-field
                 class="w-100 mb-2"
                 label="Content"

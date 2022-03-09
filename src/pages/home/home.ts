@@ -14,16 +14,13 @@ export class Home {
     private otherGuilds;
     connection;
 
-    canLoad() {
-        if (!this.sessionService.isTokenValid()) {
-            return 'login';
-        }
-        return true;
-    }
-
 
     async attached() {
         this.user = await this.sessionService.getUser();
+        if (!this.user) {
+            this.router.load('login');
+            return;
+        }
 
         const userGuilds = await this.userService.getGuilds();
         for (const guild of userGuilds) {
@@ -45,13 +42,8 @@ export class Home {
 
         this.connection = this.webhookService.subscribeToGuildInvite();
         await this.connection.start();
-        this.connection.on('BotInvited', async(payload) => {
-            console.log('invited payload', payload);
-            if (this.managedGuilds.includes(x => x.id === payload)) {
-                console.log('exists');
-            }
-            console.log('route', `/guild/${payload}`)
-            await this.router.load(`/guild/${payload}`)
+        this.connection.on('BotInvited', async(id, name, description) => {
+            await this.router.load(`/guild/${id}`)
         });
     }
 }
