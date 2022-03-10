@@ -11,21 +11,21 @@
   ],
   "parserOptions": {
     "ecmaVersion": 2019,
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  },
+  "rules": {
+    "no-unused-vars": 0,
+    "@typescript-eslint/no-unused-vars": 0,
+    "no-prototype-builtins": 0,
+    "no-console": 0,
+    "getter-return": 0
   },
   "env": {
     "es6": true,
     "browser": true,
     "node": true,
     "jest": true
-  },
-  "rules": {
-    "indent": [
-      "error",
-      4,
-      {
-        "SwitchCase": 1
-      }
-    ]
   }
 }

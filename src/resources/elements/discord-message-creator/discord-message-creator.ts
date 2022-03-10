@@ -1,10 +1,10 @@
-import {bindable} from 'aurelia';
+import {bindable} from 'aurelia-framework';
 import {DiscordEmbed} from "../../../services/models/discord";
 
 export class DiscordMessageCreator {
     @bindable message;
 
-    bound() {
+    attached() {
         if (this.message.embeds?.length > 0) {
             this.message.type = "embeds"
         } else {

@@ -1,22 +1,24 @@
-<section id="discord-action-creator">
+<template>
+  <section id="discord-action-creator">
     <div class="row my-3">
-        <div class="col-8">
-            <mdc-form-field repeat.for="act of actions">
-                <mdc-radio model.bind="act.value" checked.bind="action.type"></mdc-radio>
-                <label>
-                    ${act.label}
-                    <span class="material-icons fs-6" mdc-tooltip.bind="act.description">
+      <div class="col-8">
+        <mdc-form-field repeat.for="act of actions">
+          <mdc-radio model.bind="act.value" checked.bind="action.type"></mdc-radio>
+          <label>
+            ${act.label}
+            <span class="material-icons fs-6" mdc-tooltip.bind="act.description">
                 help
             </span>
-                </label>
-            </mdc-form-field>
-        </div>
-        <div class="col-4 text-end">
-            <button mdc-button class="button-secondary" click.delegate="deleteAction()">
-                Delete Action
-            </button>
-        </div>
+          </label>
+        </mdc-form-field>
+      </div>
+      <div class="col-4 text-end">
+        <button mdc-button class="button-secondary" click.delegate="deleteAction()">
+          Delete Action
+        </button>
+      </div>
     </div>
 
     <discord-message-creator message.two-way="action.discordMessage.message"></discord-message-creator>
-</section>
+  </section>
+</template>

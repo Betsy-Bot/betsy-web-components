@@ -1,48 +1,76 @@
-import { IRouteViewModel, route, EventAggregator, inject, IDisposable } from "aurelia";
-import { SessionService } from "./services/session-service";
-import { routes } from 'aurelia-direct-router';
+import { activationStrategy, Router } from 'aurelia-router';
+import { inject, PLATFORM } from 'aurelia-framework';
+import {ScrollPageStep} from "./resources/pipelines/scroll-page-step";
+import {SessionService} from "./services/session-service";
+import {EventAggregator} from "aurelia-event-aggregator";
 
-@routes([
-    {
-        path: ['', 'home'],
-        component: import('./pages/home/home'),
-        title: 'Home',
-        data: {
-            auth: false
-        }
-    },
-    {
-        path: 'login',
-        component: import('./pages/login/login'),
-        title: 'Login',
-        data: {
-            auth: false
-        }
-    },
-    {
-        path: 'guild/:guildId',
-        component: import('./pages/guild/guild'),
-        title: 'Server Management',
-        data: {
-            auth: false
-        }
-    }
-])
-@inject(EventAggregator, SessionService)
-export class App implements IRouteViewModel {
-    private userSubscriber: IDisposable;
-    private user: any;
+@inject(Router, EventAggregator, SessionService)
+export class App {
+  constructor(private router: Router, private ea: EventAggregator, private sessionService: SessionService) {
+  }
+  user;
+  guildId;
+  drawer;
 
-    constructor(private eventAggregator, private sessionService) {
-    }
+  expandOptions = {
+    customCommands: true,
+    moderation: true
+  }
 
-    async bound() {
-        this.user = await this.sessionService.getUser();
-        this.userSubscriber = this.eventAggregator.subscribe('user-updated', payload => {
-            this.user = payload.user;
-        });
-    }
-    unbinding() {
-        this.userSubscriber.dispose();
-    }
+  async attached() {
+    this.ea.subscribe('user-updated', payload => {
+      this.user = payload;
+    });
+    this.ea.subscribe('guild-updated', payload => {
+      this.guildId = payload;
+    });
+    this.ea.subscribe('drawer-updated', payload => {
+      console.log(this.drawer);
+      this.drawer.open = payload;
+    });
+
+    this.user = await this.sessionService.getUser();
+
+    //For some reason without this timeout it fails to bind properly. Race condition
+    setTimeout(() => {
+      this.drawer.open = this.sessionService.getStorageItem(SessionService.SIDEBAR_STATUS_KEY);
+    }, 100)
+  }
+
+  openSection(sectionName){
+    this.expandOptions[sectionName] = !this.expandOptions[sectionName];
+  }
+
+  configureRouter(config, router) {
+    config.options.pushState = true;
+    config.title = 'Betsy Bot Panel';
+    config.titleSeparator = ' - ';
+    config.addPostRenderStep(ScrollPageStep);
+    config.map([
+      {
+        route: '',
+        name: 'home',
+        moduleId: PLATFORM.moduleName('pages/home/home'),
+        title: 'Betsy Bot'
+      },
+      {
+        route: 'login',
+        name: 'login',
+        moduleId: PLATFORM.moduleName('pages/login/login'),
+        title: 'Login'
+      },
+      {
+        route: 'guild/:guildId',
+        name: 'guild',
+        moduleId: PLATFORM.moduleName('pages/guild/guild'),
+        title: 'Guild Manage'
+      },
+   ]);
+
+    config.mapUnknownRoutes(() => {
+      return { redirect: '404' };
+    });
+
+    this.router = router;
+  }
 }

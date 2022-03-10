@@ -1,15 +1,16 @@
-import { IRouter } from 'aurelia-direct-router';
-import {EventAggregator, IEventAggregator, inject, IRouteViewModel, Params, RouteNode} from "aurelia";
+import {inject} from "aurelia-framework";
 import {BaseDiscordCommand, DiscordCommandType} from "../../../../services/models/discord";
 import {DiscordService} from "../../../../services/discord-service";
 import {toast} from "lets-toast";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { Router } from "aurelia-router";
 
-@inject(IEventAggregator, DiscordService, IRouter)
-export class CreateResponseMessage implements IRouteViewModel {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: IRouter) {
+@inject(EventAggregator, DiscordService, Router)
+export class CreateResponseMessage {
+    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
     }
 
-    load(params: Params, next: RouteNode, current: RouteNode) {
+    activate(params) {
         this.guildId = params.guildId;
     }
 
@@ -53,7 +54,7 @@ export class CreateResponseMessage implements IRouteViewModel {
             this.command.discordGuildId = this.guildId;
             const command = this.discordService.createResponseMessageCommand(this.command);
             toast("Command Created!");
-            this.router.load(`/guild/${this.guildId}/response-message`);
+            this.router.navigate(`/guild/${this.guildId}/response-message`);
         } catch(e) {
             console.log(e);
             toast('Failed to create command', {severity: 'error'})

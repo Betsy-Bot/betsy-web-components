@@ -1,0 +1,7 @@
+{
+  "debug": false,
+  "testing": false,
+  "apiEndpoint": "https://api.betsybot.xyz/",
+  "redirectUrl": "https://app.betsybot.xyz/login",
+  "botClientId": "946433944390340688"
+}

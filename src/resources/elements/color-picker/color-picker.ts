@@ -1,11 +1,12 @@
-import {bindable} from 'aurelia';
+import {bindable} from 'aurelia-framework';
+import './color-picker.scss'
 
 export class ColorPicker {
     @bindable label;
     @bindable value;
     color;
 
-    bound() {
+    attached() {
         this.color = `#${this.value?.toString(16)}`;
     }
 

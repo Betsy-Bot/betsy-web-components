@@ -1,91 +1,86 @@
-import { HttpClient, inject, json } from 'aurelia';
+import {inject, buildQueryString} from 'aurelia-framework';
+import { HttpClient, json } from 'aurelia-fetch-client';
 
 @inject(HttpClient)
 export class ApiService {
-    constructor(private http: HttpClient) {
-        http.configure((config) =>
-            config
-                .withBaseUrl(process.env.API_ENDPOINT)
-                .withInterceptor({
-                    request(request) {
-                        const token = window.localStorage['jwt_token'];
-                        if (token) { request.headers.append('Authorization', 'Bearer ' + token); }
-                        return request
-                    }
-                })
-        );
-    }
+  constructor(private http: HttpClient) {
+  }
 
-    async _request(path: string, options: object): null | Promise<any> {
-        const result = await this.http.fetch(path, options);
-        if(result) {
-            const status = result.status;
-            if(status === 204) {
-                return null;
-            }
-
-            if (status >= 400) {
-                return null;
-            }
-
-            let response;
-            if (result) {
-                response = await result.json();
-            }
-
-            if (status >= 200 && status < 400) {
-                return response;
-            }
-        }
+  async _request(path, options) {
+    const result = await this.http.fetch(path, options);
+    if (result) {
+      const status = result.status;
+      if (status === 204) {
         return null;
+      }
+
+      if (status >= 400) {
+        return null;
+      }
+
+      let response;
+      if (result) {
+        response = await result.json();
+      }
+
+      if (status >= 200 && status < 400) {
+        return response;
+      }
+    }
+    return null;
+  }
+
+  doGet(path, params = null) {
+    const options = {
+      method: 'GET'
+    };
+
+    if (params) {
+      path += `?${buildQueryString(params)}`;
     }
 
-    _push(path: string, body: Record<string, string>, method: string, isFile = false) {
-        const options = {
-            method: method,
-            body: isFile ? body : json(body)
-        };
+    return this._request(path, options);
+  }
 
-        return this._request(path, options);
-    }
+  doPatch(path, body) {
+    const options = {
+      method: 'PATCH',
+      body: json(body)
+    };
 
-    _fileUpload(path: string, formData: FormData) {
-        const options = {
-            method: 'POST',
-            body: formData
-        };
-        return this._request(path, options);
-    }
+    return this._request(path, options);
+  }
 
-    doGet(path: string, params?: Record<string, string>): Promise<any> {
-        const options = {
-            method: 'GET'
-        };
+  doPost(path, body, isFile = false) {
+    return this._push(path, body, false, isFile);
+  }
 
-        if (params) {
-            path += `?${new URLSearchParams(params).toString()}`;
-        }
+  doPut(path, body) {
+    return this._push(path, body, true);
+  }
 
-        return this._request(path, options);
-    }
+  _fileUpload(path, formData) {
+    const options = {
+      method: 'POST',
+      body: formData
+    };
+    return this._request(path, options);
+  }
 
-    doPost(path: string, body: Record<string, any>, isFile = false) {
-        return this._push(path, body, 'POST', isFile);
-    }
+  doDelete(path) {
+    const options = {
+      method: 'DELETE'
+    };
 
-    doPut(path: string, body: Record<string, any>) {
-        return this._push(path, body, 'PUT');
-    }
+    return this._request(path, options);
+  }
 
-    doPatch(path: string, body: Record<string, any>) {
-        return this._push(path, body, 'PATCH');
-    }
+  _push(path, body, asPut = false, isFile = false) {
+    const options = {
+      method: asPut ? 'PUT' : 'POST',
+      body: isFile ? body : json(body)
+    };
 
-    doDelete(path: string) {
-        const options = {
-            method: 'DELETE'
-        };
-
-        return this._request(path, options);
-    }
+    return this._request(path, options);
+  }
 }

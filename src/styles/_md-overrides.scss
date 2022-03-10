@@ -38,3 +38,7 @@ body {
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
   color: $body-color;
 }
+
+.mdc-drawer .mdc-drawer__title {
+  text-align: center;
+}

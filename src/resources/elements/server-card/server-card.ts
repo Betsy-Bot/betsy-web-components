@@ -1,7 +1,9 @@
-import {inject, bindable} from "aurelia";
+import {inject, bindable} from "aurelia-framework";
 import { WebhookService } from "../../../services/websocket-service";
 import { DiscordService } from "../../../services/discord-service";
-import {toast} from "lets-toast";
+import { toast } from "lets-toast";
+import { redirectUrl, botClientId } from "../../../environment";
+import './server-card.scss';
 
 @inject(WebhookService, DiscordService)
 export class ServerCard {
@@ -31,7 +33,7 @@ export class ServerCard {
 
     openServerInvitePopup() {
         window.open(
-            `https://discord.com/api/oauth2/authorize?client_id=${process.env.BOT_CLIENT_ID}&permissions=8&redirect_uri=${process.env.REDIRECT_URL}&scope=bot%20applications.commands&guild_id=${this.server.id}`,
+            `https://discord.com/api/oauth2/authorize?client_id=${botClientId()}&permissions=8&redirect_uri=${redirectUrl()}&scope=bot%20applications.commands&guild_id=${this.server.id}`,
             'popup',
             'width=600, height=900');
         return false;

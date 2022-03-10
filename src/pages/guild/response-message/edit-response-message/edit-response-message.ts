@@ -1,11 +1,13 @@
-import {EventAggregator, IEventAggregator, inject, IRouter, IRouteViewModel, Params, RouteNode} from "aurelia";
+import {inject} from "aurelia-framework";
 import {BaseDiscordCommand, DiscordCommandType} from "../../../../services/models/discord";
 import {DiscordService} from "../../../../services/discord-service";
 import {toast} from "lets-toast";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { Router } from "aurelia-router";
 
-@inject(IEventAggregator, DiscordService, IRouter)
-export class EditResponseMessage implements IRouteViewModel {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: IRouter) {
+@inject(EventAggregator, DiscordService, Router)
+export class EditResponseMessage {
+    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
     }
 
     guildId: string;
@@ -13,18 +15,14 @@ export class EditResponseMessage implements IRouteViewModel {
 
     command: BaseDiscordCommand;
 
-    async load(params: Params, next: RouteNode, current: RouteNode) {
+    async activate(params) {
         this.guildId = params.guildId;
         this.discordApplicationCommandId = params.discordApplicationCommandId;
         this.command = await this.discordService.getDiscordCommandDetails(this.discordApplicationCommandId)
     }
 
     deleteAction(action) {
-        console.log('delete action hit')
-        console.log('this.command?.discordCommandActions', this.command?.discordCommandActions)
-        console.log('action', action);
         const index = this.command?.discordCommandActions?.findIndex(action);
-        console.log('index', index)
         if (index >= 0) {
             this.command.discordCommandActions.slice(index);
         }

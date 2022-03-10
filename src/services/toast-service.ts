@@ -1,7 +1,7 @@
 import Toast from 'lets-toast';
 
 export class ToastService {
-    private _toast;
+    private readonly _toast;
     constructor() {
         this._toast = Toast({
             // Delay in miliseconds. Set to 0 for non disappearing toast notifications.

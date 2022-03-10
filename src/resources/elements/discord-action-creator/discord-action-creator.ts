@@ -1,4 +1,4 @@
-import {bindable} from "aurelia";
+import {bindable} from "aurelia-framework";
 import {DiscordCommandAction} from "../../../services/models/discord";
 
 export class DiscordActionCreator {

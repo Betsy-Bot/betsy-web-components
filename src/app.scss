@@ -1,9 +1,10 @@
+@use '~bootstrap/scss/bootstrap';
+@use '~@aurelia-mdc-web/all';
+@use '~lets-toast/build/lets-toast.min';
+@use 'styles/mdc-styles';
 @use 'styles/reset';
 @use 'styles/bootstrap-extras';
-@use '~@aurelia-mdc-web/all';
-@use 'styles/bootstrap';
 @use 'styles/md-overrides';
-@use '~lets-toast/build/lets-toast.min';
 
 body {
   background-color: #202225;
@@ -11,4 +12,22 @@ body {
 
 .message {
   background-color: lightblue;
+}
+
+#drawer {
+  .mdc-list-item--selected .mdc-list-item__primary-text, .mdc-list-item--activated .mdc-list-item__primary-text {
+    color: black !important;
+  }
+
+  .list-item-padding {
+    padding-left: 25px;
+  }
+
+  .mdc-select__anchor {
+    width: 300px !important;
+  }
+
+  .mdc-drawer__title {
+    text-align: center;
+  }
 }

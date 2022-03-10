@@ -1,4 +1,4 @@
-import { inject } from 'aurelia';
+import { inject } from 'aurelia-framework';
 import { ApiService } from './api-service';
 
 @inject(ApiService)

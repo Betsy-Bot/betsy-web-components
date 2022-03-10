@@ -1,12 +1,13 @@
-import { inject } from "aurelia";
-import { IRouter } from 'aurelia-direct-router';
+import { inject } from "aurelia-framework";
 import { SessionService } from "../../services/session-service";
 import { UserService } from "../../services/user-service";
 import { WebhookService } from "../../services/websocket-service";
+import { Router } from "aurelia-router";
+import './home.scss';
 
-@inject(SessionService, UserService, WebhookService, IRouter)
+@inject(SessionService, UserService, WebhookService, Router)
 export class Home {
-    constructor(private sessionService: SessionService, private userService: UserService, private webhookService: WebhookService, private router: IRouter) {
+    constructor(private sessionService: SessionService, private userService: UserService, private webhookService: WebhookService, private router: Router) {
     }
 
     private user;
@@ -18,7 +19,7 @@ export class Home {
     async attached() {
         this.user = await this.sessionService.getUser();
         if (!this.user) {
-            this.router.load('login');
+            this.router.navigate('login');
             return;
         }
 
@@ -43,7 +44,7 @@ export class Home {
         this.connection = this.webhookService.subscribeToGuildInvite();
         await this.connection.start();
         this.connection.on('BotInvited', async(id, name, description) => {
-            await this.router.load(`/guild/${id}`)
+            this.router.navigate(`/guild/${id}`)
         });
     }
 }

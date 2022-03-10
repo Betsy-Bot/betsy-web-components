@@ -1,17 +1,19 @@
-<section id="discord-message-preview">
+<template>
+  <section id="discord-message-preview">
     <div class="row">
-        <div class="col-2">
-            <img src="/cow.jpeg" alt="Discord message avatar" if.bind="first">
+      <div class="col-2">
+        <!-- <img src="/cow.jpg" alt="Discord message avatar" if.bind="first"> -->
+      </div>
+      <div class="col-10">
+        <div class="name" if.bind="first">
+          Betsy <span class="time ms-3">${currentTime}</span>
         </div>
-        <div class="col-10">
-            <div class="name" if.bind="first">
-                Betsy <span class="time ms-3">${currentTime}</span>
-            </div>
-            <div class="message-content" innerhtml.bind="getMarkup(message.content)" if.bind="message.content"></div>
+        <div class="message-content" innerhtml.bind="getMarkup(message.content)" if.bind="message.content"></div>
 
-            <div class="embed-area" repeat.for="embed of message.embeds">
-                <discord-embed-preview embed.bind="embed"></discord-embed-preview>
-            </div>
+        <div class="embed-area" repeat.for="embed of message.embeds">
+          <discord-embed-preview embed.bind="embed"></discord-embed-preview>
         </div>
+      </div>
     </div>
-</section>
+  </section>
+</template>

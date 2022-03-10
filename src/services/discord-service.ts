@@ -1,4 +1,4 @@
-import { inject } from 'aurelia';
+import { inject } from 'aurelia-framework';
 import { ApiService } from './api-service';
 
 import * as discordModels from "./models/discord";
@@ -39,7 +39,7 @@ export class DiscordService {
     }
 
     async getDiscordServerInformation(guildId: string): Promise<discordModels.BaseDiscordServer> {
-        if (!this.guild) {
+        if (!this.guild || guildId !== this.guild.id) {
             this.guild = this.api.doGet(`Discord/Guilds/${guildId}`);
         }
         return this.guild;

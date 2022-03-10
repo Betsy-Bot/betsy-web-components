@@ -1,17 +1,18 @@
-import { inject, IEventAggregator } from 'aurelia';
+import { inject } from 'aurelia-framework';
 import { ApiService } from "./api-service";
 import { DiscordService } from "./discord-service";
 import {ProfileResponse} from "./models/user";
 import {toast} from "lets-toast";
+import { EventAggregator } from 'aurelia-event-aggregator';
 
-@inject(ApiService, DiscordService, IEventAggregator)
+@inject(ApiService, DiscordService, EventAggregator)
 export class SessionService {
     static TOKEN_KEY = 'jwt_token';
     static SIDEBAR_STATUS_KEY = 'sidebar_open';
 
     public currentUser;
 
-    constructor(private apiService: ApiService, private discordService: DiscordService, private eventAggregator: IEventAggregator) {
+    constructor(private apiService: ApiService, private discordService: DiscordService, private eventAggregator: EventAggregator) {
     }
 
     saveStorageItem(key: string, value: string) {
@@ -88,6 +89,11 @@ export class SessionService {
         }
     }
 
+  hasValidSession() {
+    const token = this.getStorageItem(SessionService.TOKEN_KEY);
+    return token && token !== '' && token !== undefined && token !== 'undefined' && token !== 'null';
+  }
+
     async logout() {
         try {
             await this.apiService.doDelete('Logout');
@@ -97,7 +103,7 @@ export class SessionService {
     }
 
     clearSession() {
-        this.destroyStorageItem(SessionService.TOKEN_KEY);
+        //this.destroyStorageItem(SessionService.TOKEN_KEY);
         this.currentUser = null;
         this.eventAggregator.publish('user-updated', {});
     }

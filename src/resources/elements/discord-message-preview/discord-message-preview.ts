@@ -1,4 +1,4 @@
-import {bindable} from "aurelia";
+import {bindable} from "aurelia-framework";
 import * as moment from 'moment';
 import * as showdown from 'showdown';
 import sanitizeHtml from 'sanitize-html';

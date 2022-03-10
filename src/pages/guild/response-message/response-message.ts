@@ -1,18 +1,20 @@
-import { inject, Params, RouteNode, IEventAggregator } from "aurelia";
+import { inject } from "aurelia-framework";
 import { DiscordService } from "../../../services/discord-service";
 import { toast } from "lets-toast";
-import { IRouter, IRouteableComponent, Parameters, RoutingInstruction, Navigation } from 'aurelia-direct-router';
+import { EventAggregator } from "aurelia-event-aggregator";
+import { Router } from "aurelia-router";
+import './response-message.scss';
 
-@inject(IEventAggregator, DiscordService, IRouter)
-export class ResponseMessage implements IRouteableComponent {
-    constructor(private eventAggregator: IEventAggregator, private discordService: DiscordService, private router: IRouter) {
+@inject(EventAggregator, DiscordService, Router)
+export class ResponseMessage {
+    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
     }
 
     guildId: string;
     commands;
 
-    async load?(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation) {
-        this.guildId = parameters.guildId as string;
+    async activate(params) {
+        this.guildId = params.guildId as string;
         this.commands = await this.discordService.getResponseMessagesForGuild(this.guildId);
     }
 
@@ -27,7 +29,7 @@ export class ResponseMessage implements IRouteableComponent {
         }
     }
 
-    async goToCommand(command) {
-        await this.router.load(`/guild/${this.guildId}/response-message/${command.discordApplicationCommandId}`)
+    goToCommand(command) {
+        this.router.navigate(`/guild/${this.guildId}/response-message/${command.discordApplicationCommandId}`)
     }
 }

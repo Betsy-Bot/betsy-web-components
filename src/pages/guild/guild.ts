@@ -1,64 +1,81 @@
-import { routes } from 'aurelia-direct-router';
-import {inject, IRouteViewModel, IEventAggregator, RouteNode, Params} from "aurelia";
-
-
+import { Router } from 'aurelia-router';
+import {inject, PLATFORM} from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
 import {DiscordService} from "../../services/discord-service";
 
-@routes([
-    {
-        path: 'dashboard',
-        component: import('./dashboard/dashboard'),
-        title: 'Dashboard',
-        data: {
-            auth: true
-        }
-    },
-    {
-        path: 'response-message',
-        component: import('./response-message/response-message'),
-        title: 'Response Messages',
-        data: {
-            auth: true
-        }
-    },
-    {
-        path: 'response-message/create',
-        component: import('./response-message/create-response-message/create-response-message'),
-        title: 'Response Messages',
-        data: {
-            auth: true
-        }
-    },
-    {
-        path: 'response-message/:discordApplicationCommandId',
-        component: import('./response-message/edit-response-message/edit-response-message'),
-        title: 'Response Messages',
-        data: {
-            auth: true
-        }
-    },
-    {
-        path: 'invite-links',
-        component: import('./invite-links/invite-links'),
-        title: 'Hide/Delete Invite Links',
-        data: {
-            auth: true
-        }
-    },
-])
-
-@inject(IEventAggregator, DiscordService)
-export class Guild implements IRouteViewModel {
-    constructor(private eventAggregator: IEventAggregator, private discordServerService: DiscordService) {
+@inject(EventAggregator, DiscordService, Router)
+export class Guild {
+    constructor(private eventAggregator: EventAggregator, private discordServerService: DiscordService, private router: Router) {
     }
 
     guildId: string;
     guild;
+    params;
 
-    load(params: Params, next: RouteNode, current: RouteNode) {
-        this.guildId = params.guildId;
+    activate(params) {
+        this.params = params;
+        this.guildId = this.params.guildId;
         this.guild = this.discordServerService.getDiscordServerInformation(this.guildId);
-        console.log(this.guild);
-        this.eventAggregator.publish('guild-updated', params.guildId);
+    }
+
+    attached() {
+      this.eventAggregator.publish('guild-updated', this.params.guildId);
+    }
+
+    configureRouter(config, router) {
+      config.options.pushState = true;
+      this.router = router;
+
+      config.map([
+        {
+          name: 'guild-dashboard',
+          route: ['', ':guildId', 'dashboard'],
+          moduleId:  PLATFORM.moduleName('pages/guild/dashboard/dashboard'),
+          title: 'Dashboard',
+          settings: {
+            auth: true
+          }
+        },
+        {
+          name: 'guild-response-message',
+          route: 'response-message',
+          moduleId:  PLATFORM.moduleName('pages/guild/response-message/response-message'),
+          title: 'Response Messages',
+          settings: {
+            auth: true
+          }
+        },
+        {
+          name: 'guild-response-message-create',
+          route: 'response-message/create',
+          moduleId:  PLATFORM.moduleName('pages/guild/response-message/create-response-message/create-response-message'),
+          title: 'Response Messages',
+          settings: {
+            auth: true
+          }
+        },
+        {
+          name: 'guild-response-message-edit',
+          route: 'response-message/:discordApplicationCommandId',
+          moduleId:  PLATFORM.moduleName('pages/guild/response-message/edit-response-message/edit-response-message'),
+          title: 'Response Messages',
+          settings: {
+            auth: true
+          }
+        },
+        {
+          name: 'guild-manage-message-invite-links',
+          route: 'invite-links',
+          moduleId: PLATFORM.moduleName('pages/guild/invite-links/invite-links'),
+          title: 'Invite Links',
+          settings: {
+            auth: true
+          }
+        },
+      ]);
+
+      config.mapUnknownRoutes(() => {
+        return { redirect: 'guild-dashboard' };
+      });
     }
 }

@@ -1,19 +1,20 @@
-import { Params, RouteNode, inject} from "aurelia";
+import { inject} from "aurelia-framework";
 import { SessionService } from "../../services/session-service";
 import {toast} from "lets-toast";
-import { IRouteableComponent, Parameters, RoutingInstruction, Navigation } from 'aurelia-direct-router';
+import { Router } from "aurelia-router";
+import './login.scss';
 
-@inject(SessionService)
-export class Login implements IRouteableComponent {
-    constructor(private sessionService: SessionService) {
+@inject(SessionService, Router)
+export class Login {
+    constructor(private sessionService: SessionService, private router: Router) {
     }
 
-    async canLoad?(parameters: Parameters, instruction: RoutingInstruction, navigation: Navigation) {
-        const code = parameters.code as string;
+    async activate(params) {
+        const code = params.code as string;
         if (code) {
             try {
                 await this.sessionService.loginWithOAuthCode(code);
-                return 'home';
+                this.router.navigate('');
             } catch(e) {
                 toast("Failed to exchange code", {severity: 'error'});
             }

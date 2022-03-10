@@ -1,37 +1,33 @@
-# admin-panel
+# `app`
 
-This project is bootstrapped by [aurelia/new](https://github.com/aurelia/new).
+This project is bootstrapped by [aurelia-cli](https://github.com/aurelia/cli).
 
-## Start dev web server
+For more information, go to https://aurelia.io/docs/cli/webpack
 
-    npm start
+## Run dev app
 
-## Build the app in production mode
+Run `npm start`, then open `http://localhost:8080`
 
-    npm run build
+You can change the standard webpack configurations from CLI easily with something like this: `npm start -- --open --port 8888`. However, it is better to change the respective npm scripts or `webpack.config.js` with these options, as per your need.
 
-It builds all files to dist folder. To deploy to production server, copy all the `dist/*` files to production root folder.
+To enable Webpack Bundle Analyzer, do `npm run analyze` (production build).
 
-For example
-```
-dist/index.html
-dist/foo.12345.js
-```
-Copy to production root folder
-```
-root_folder/index.html
-root_folder/foo.12345.js
-```
+To enable hot module reload, do `npm start -- --hmr`.
 
-## Unit Tests
+To change dev server port, do `npm start -- --port 8888`.
 
-    npm run test
+To change dev server host, do `npm start -- --host 127.0.0.1`
 
-Run unit tests in watch mode.
+**PS:** You could mix all the flags as well, `npm start -- --host 127.0.0.1 --port 7070 --open --hmr`
 
-    npm run test:watch
+For long time aurelia-cli user, you can still use `au run` with those arguments like `au run --env prod --open --hmr`. But `au run` now simply executes `npm start` command.
 
+## Build for production
 
-## Analyze webpack bundle
+Run `npm run build`, or the old way `au build --env prod`.
 
-    npm run analyze
+## Unit tests
+
+Run `au test` (or `au jest`).
+
+To run in watch mode, `au test --watch` or `au jest --watch`.
