@@ -46,4 +46,8 @@ export class Navigation {
     get discordOauthUrl() {
         return `https://discord.com/api/oauth2/authorize?client_id=${botClientId()}&redirect_uri=${redirectUrl()}&response_type=code&scope=identify%20email%20guilds`;
     }
+
+    get avatarLink() {
+        return `https://cdn.discordapp.com/avatars/${this.user.discordId}/${this.user.avatar}.webp`
+    }
 }

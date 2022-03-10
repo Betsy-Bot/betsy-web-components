@@ -1,47 +1,56 @@
-import { inject } from 'aurelia-framework';
-import { ApiService } from './api-service';
+import {inject} from 'aurelia-framework';
+import {ApiService} from './api-service';
 
 import * as discordModels from "./models/discord";
 import {BaseDiscordCommand} from "./models/discord";
 
 @inject(ApiService)
 export class DiscordService {
-    guild;
-    constructor(private api: ApiService) {
-    }
+  guild;
 
-    async exchangeCode(code: string): Promise<discordModels.ExchangeCodeResponse> {
-        return this.api.doPost('Discord/OAuth/ExchangeCode', {code: code})
-    }
+  RESPONSE_MESSAGES = 'ResponseMessages';
+  BLOCK_INVITES = 'BlockInvites';
+  BLACKLISTED_WORDS = 'BlacklistedWords'
 
-    async createServer(guildId: string): Promise<discordModels.BaseDiscordServer> {
-        return this.api.doPost('Discord/Guilds', {guildId: guildId})
-    }
+  constructor(private api: ApiService) {
+  }
 
-    async createResponseMessageCommand(command: BaseDiscordCommand): Promise<discordModels.BaseDiscordCommand> {
-        return this.api.doPost('Discord/ApplicationCommand', command);
-    }
+  async exchangeCode(code: string): Promise<discordModels.ExchangeCodeResponse> {
+    return this.api.doPost('Discord/OAuth/ExchangeCode', {code: code})
+  }
 
-    async updateResponseMessageCommand(command: BaseDiscordCommand): Promise<discordModels.BaseDiscordCommand> {
-        return this.api.doPatch('Discord/ApplicationCommand', command);
-    }
+  async createServer(guildId: string): Promise<discordModels.BaseDiscordServer> {
+    return this.api.doPost('Discord/Guilds', {guildId: guildId})
+  }
 
-    async getResponseMessagesForGuild(guildId: string): Promise<discordModels.BaseDiscordCommand[]> {
-        return this.api.doGet(`Discord/Guilds/${guildId}/ResponseMessages`);
-    }
+  async createResponseMessageCommand(command: BaseDiscordCommand): Promise<discordModels.BaseDiscordCommand> {
+    return this.api.doPost('Discord/ApplicationCommand', command);
+  }
 
-    async toggleDiscordCommandActive(guildId: string, discordApplicationCommandId, active: boolean) {
-        return this.api.doPatch(`Discord/Guilds/${guildId}/DiscordCommand/${discordApplicationCommandId}/ToggleActive`, { active: active });
-    }
+  async updateResponseMessageCommand(command: BaseDiscordCommand): Promise<discordModels.BaseDiscordCommand> {
+    return this.api.doPatch('Discord/ApplicationCommand', command);
+  }
 
-    async getDiscordCommandDetails(discordApplicationCommandId: string): Promise<discordModels.BaseDiscordCommand> {
-        return this.api.doGet(`Discord/ApplicationCommand?discordApplicationCommandId=${discordApplicationCommandId}`);
-    }
+  async getResponseMessagesForGuild(guildId: string): Promise<discordModels.BaseDiscordCommand[]> {
+    return this.api.doGet(`Discord/Guilds/${guildId}/ResponseMessages`);
+  }
 
-    async getDiscordServerInformation(guildId: string): Promise<discordModels.BaseDiscordServer> {
-        if (!this.guild || guildId !== this.guild.id) {
-            this.guild = this.api.doGet(`Discord/Guilds/${guildId}`);
-        }
-        return this.guild;
+  async toggleDiscordCommandActive(guildId: string, discordApplicationCommandId, active: boolean) {
+    return this.api.doPatch(`Discord/Guilds/${guildId}/DiscordCommand/${discordApplicationCommandId}/ToggleActive`, {active: active});
+  }
+
+  async getDiscordCommandDetails(discordApplicationCommandId: string): Promise<discordModels.BaseDiscordCommand> {
+    return this.api.doGet(`Discord/ApplicationCommand?discordApplicationCommandId=${discordApplicationCommandId}`);
+  }
+
+  async getDiscordServerInformation(guildId: string): Promise<discordModels.BaseDiscordServer> {
+    if (!this.guild || guildId !== this.guild.id) {
+      this.guild = this.api.doGet(`Discord/Guilds/${guildId}`);
     }
+    return this.guild;
+  }
+
+  async setActiveFeaturesForDiscord(guildId: string, features: string[]): Promise<discordModels.BaseDiscordServer> {
+    return this.api.doPatch(`Discord/Guilds/${guildId}/SetFeatures`, {activeFeatures: features});
+  }
 }

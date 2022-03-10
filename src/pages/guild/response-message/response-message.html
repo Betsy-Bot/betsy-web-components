@@ -1,38 +1,55 @@
 <template>
-  <section id="response-message">
-    <h2>Response Messages</h2>
-    <div>
-      Response messages can be used to respond to any commands you create. The response can be done in several ways.
-      Each of the ways will be described in the options when creating a new response command.
-    </div>
+    <section id="response-message">
+        <div class="row">
+            <div class="col-8">
+                <h2>Response Messages</h2>
+            </div>
+            <div class="col-4 text-end">
+                <button
+                    mdc-switch
+                    selected.bind="featureActive"
+                    value.bind="featureActive"
+                    change.delegate="toggleFeature()"
+                ></button>
+                <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+            </div>
+        </div>
+        <div>
+            Response messages can be used to respond to any commands you create. The response can be done in several
+            ways.
+            Each of the ways will be described in the options when creating a new response command.
+        </div>
 
-    <div>
-      <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+        <div>
+            <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
         <span class="material-icons me-2">
             warning
         </span>
-        Servers have a limit of 200 command creation actions per day. Activating or creating a command count towards this limit.
-        Reaching this limit will prevent you from activating or creating for the day.
-      </div>
-    </div>
+                Servers have a limit of 200 command creation actions per day. Activating or creating a command count
+                towards this limit.
+                Reaching this limit will prevent you from activating or creating for the day.
+            </div>
+        </div>
 
-    <a href="/guild/${guildId}/response-message/create" if.bind="guildId">
-      <button mdc-button class="button-primary">
-        Create New Command
-      </button>
-    </a>
+        <a href="/guild/${guildId}/response-message/create" if.bind="guildId">
+            <button mdc-button class="button-primary">
+                Create New Command
+            </button>
+        </a>
 
-    <div class="existing-commands-area">
-      <mdc-list>
-        <mdc-list-item two-line repeat.for="command of commands" class="list-item-background mb-3" mdc-elevation="12" click.delegate="goToCommand(command)">
-          <mdc-icon mdc-list-item-leading>folder</mdc-icon>
-          <mdc-list-item-primary-text>/${command.name}</mdc-list-item-primary-text>
-          <mdc-list-item-secondary-text>${command.description}</mdc-list-item-secondary-text>
-          <mdc-form-field mdc-list-item-trailing>
-            <button mdc-switch selected.bind="command.active" value.bind="command.active" change.delegate="updateActive(command)"></button>
-          </mdc-form-field>
-        </mdc-list-item>
-      </mdc-list>
-    </div>
-  </section>
+        <div class="existing-commands-area">
+            <mdc-list>
+                <mdc-list-item two-line repeat.for="command of commands" class="list-item-background mb-3"
+                               mdc-elevation="12" click.delegate="goToCommand(command)">
+                    <mdc-icon mdc-list-item-leading>folder</mdc-icon>
+                    <mdc-list-item-primary-text>/${command.name}</mdc-list-item-primary-text>
+                    <mdc-list-item-secondary-text>${command.description}</mdc-list-item-secondary-text>
+                    <mdc-form-field mdc-list-item-trailing>
+                        <button mdc-switch selected.bind="command.active" value.bind="command.active"
+                                change.delegate="updateActive(command)"></button>
+                    </mdc-form-field>
+                </mdc-list-item>
+            </mdc-list>
+        </div>
+    </section>
 </template>

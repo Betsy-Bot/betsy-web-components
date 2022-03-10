@@ -49,6 +49,7 @@ export interface BaseDiscordServer {
     ownerId: string,
     roles: DiscordRole[],
     commands: BaseDiscordCommand[]
+    activeFeatures: string[]
 }
 
 export interface DiscordInvitedWebhookResponse {

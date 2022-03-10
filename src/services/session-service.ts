@@ -1,9 +1,9 @@
-import { inject } from 'aurelia-framework';
-import { ApiService } from "./api-service";
-import { DiscordService } from "./discord-service";
+import {inject} from 'aurelia-framework';
+import {ApiService} from "./api-service";
+import {DiscordService} from "./discord-service";
 import {ProfileResponse} from "./models/user";
 import {toast} from "lets-toast";
-import { EventAggregator } from 'aurelia-event-aggregator';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 @inject(ApiService, DiscordService, EventAggregator)
 export class SessionService {
@@ -23,7 +23,7 @@ export class SessionService {
         if (window.localStorage[key] !== undefined) {
             try {
                 return JSON.parse(window.localStorage.getItem(key));
-            } catch(e) {
+            } catch (e) {
                 return window.localStorage.getItem(key);
             }
         } else {
@@ -62,7 +62,7 @@ export class SessionService {
     async refreshProfile() {
         this.currentUser = await this.apiService.doGet('User/Profile');
         if (!this.currentUser) {
-            this.destroyStorageItem(SessionService.TOKEN_KEY);
+            //this.destroyStorageItem(SessionService.TOKEN_KEY);
             toast("Please re-login", {severity: "error"});
         }
         this.eventAggregator.publish('user-updated', this.currentUser);
@@ -71,28 +71,13 @@ export class SessionService {
 
     isTokenValid() {
         const token = <string>this.getStorageItem(SessionService.TOKEN_KEY);
-        if (token && token !== '' && token !== undefined && token !== 'undefined') {
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-
-            if(JSON.parse(jsonPayload).exp * 1000 <= Date.now()) {
-                this.clearSession();
-                return false
-            } else {
-                return true;
-            }
-        } else {
-            return false;
-        }
+        return token && token !== '' && token !== undefined && token !== 'undefined' && token !== 'null';
     }
 
-  hasValidSession() {
-    const token = this.getStorageItem(SessionService.TOKEN_KEY);
-    return token && token !== '' && token !== undefined && token !== 'undefined' && token !== 'null';
-  }
+    hasValidSession() {
+        const token = this.getStorageItem(SessionService.TOKEN_KEY);
+        return token && token !== '' && token !== undefined && token !== 'undefined' && token !== 'null';
+    }
 
     async logout() {
         try {

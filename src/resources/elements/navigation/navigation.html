@@ -32,7 +32,7 @@
           </a>
           <div else>
             <img class="avatar" click.delegate="profileMenu.open = !profileMenu.open"
-                 src="https://cdn.discordapp.com/avatars/${user.discordId}/${user.avatar}.webp" alt="avatar">
+                 src.bind="avatarLink" alt="avatar">
           </div>
 
           <div mdc-menu-surface-anchor href="menuAnchor">
