@@ -73,9 +73,9 @@ export class Guild {
                 }
             },
             {
-                name: 'guild-sned-message',
+                name: 'guild-send-message',
                 route: 'send-message',
-                moduleId: PLATFORM.moduleName('pages/guild/invite-links/invite-links'),
+                moduleId: PLATFORM.moduleName('pages/guild/send-message/send-message'),
                 title: 'Send Message',
                 settings: {
                     auth: true

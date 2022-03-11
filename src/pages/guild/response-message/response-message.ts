@@ -27,7 +27,8 @@ export class ResponseMessage {
         console.log(this.featureActive);
     }
 
-    async updateActive(command) {
+    async updateActive(event, command) {
+        event.stopPropagation();
         let foundCommandIndex = this.commands.findIndex(x => x.name === command.name);
         if (foundCommandIndex >= 0) {
             await this.discordService.toggleDiscordCommandActive(this.guildId, command.discordApplicationCommandId, this.commands[foundCommandIndex].active);

@@ -5,7 +5,7 @@ export class DiscordMessageCreator {
     @bindable message;
 
     attached() {
-        if (this.message.embeds?.length > 0) {
+        if (this.message?.embeds?.length > 0) {
             this.message.type = "embeds"
         } else {
             this.message.type = "message";

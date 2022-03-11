@@ -20,7 +20,11 @@ export class ApiService {
 
       let response;
       if (result) {
-        response = await result.json();
+          try {
+              response = await result.json();
+          } catch(e){
+              response = result;
+          }
       }
 
       if (status >= 200 && status < 400) {

@@ -5,7 +5,7 @@ import sanitizeHtml from 'sanitize-html';
 
 export class DiscordMessagePreview {
     @bindable message;
-    @bindable first;
+    @bindable first = true;
 
     get currentTime() {
         // @ts-ignore - No idea why TS is bitching but this works fine.

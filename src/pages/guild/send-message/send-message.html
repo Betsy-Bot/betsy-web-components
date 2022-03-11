@@ -1,5 +1,38 @@
 <template>
-    <section id="send-message">
-
+    <section id="send-message py-5">
+        <div class="row">
+            <div class="col-8">
+                <discord-feature-header
+                    title="Send Message / Announcement"
+                    subtitle="You can use this to send a one-time message to a channel or to all channels within a category."
+                ></discord-feature-header>
+                <div class="mt-4">
+                    <div class="mb-1">
+                        <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+                            <span class="material-icons me-2">
+                                warning
+                            </span>
+                            When a category is selected all channels in the category will receive the message. <br>
+                            If a channel is seleted only the channel will receive the message.
+                        </div>
+                    </div>
+                    <discord-channel-selector
+                        label="Select Channel or Category"
+                        if.bind="guildId"
+                        channel-id.two-way="channelId"
+                        guild-id.bind="guildId"
+                    ></discord-channel-selector>
+                </div>
+                <div class="mt-5">
+                    <discord-message-creator message.bind="request.message"></discord-message-creator>
+                </div>
+                <button mdc-button class="button-primary mt-2" click.delegate="sendMessage()">
+                    Send Message
+                </button>
+            </div>
+            <div class="col-4">
+                <discord-message-preview message.bind="request.message"></discord-message-preview>
+            </div>
+        </div>
     </section>
 </template>

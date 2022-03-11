@@ -20,9 +20,8 @@ export class InviteLinks {
 
     async attached() {
         this.guildId = this.params.guildId as string;
-        [this.guild, this.channels] = await Promise.all([
-             this.discordService.getDiscordServerInformation(this.guildId),
-            this.discordService.getDiscordChannels(this.guildId)
+        [this.guild] = await Promise.all([
+             this.discordService.getDiscordServerInformation(this.guildId)
         ])
         this.featureActive = this.guild.activeFeatures.includes(this.discordService.BLOCK_INVITES);
     }

@@ -8,6 +8,10 @@
       </a>
       <mdc-drawer-content>
         <mdc-list single-selection>
+            <a href="/guild/${guildId}/send-message" if.bind="guildId">
+                <mdc-list-item class="list-item-padding">Send Message</mdc-list-item>
+            </a>
+
           <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('customCommands')" no-list-action>
             <span>Custom Commands</span>
             <mdc-icon mdc-list-item-trailing>${expandOptions.customCommands ? 'expand_less' :'expand_more'}

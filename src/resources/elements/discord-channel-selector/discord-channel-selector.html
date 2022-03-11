@@ -1,0 +1,12 @@
+<template>
+    <section id="discord-channel-selector">
+        <mdc-select if.bind="channels" class="server-select" value.bind="channelId" label.bind="label">
+            <mdc-icon mdc-select-icon>dns</mdc-icon>
+            <mdc-list>
+                <mdc-list-item repeat.for="channel of channels" value.bind="channel.id" if.bind="matchesType(channel)">
+                   ${channel.name}
+                </mdc-list-item>
+            </mdc-list>
+        </mdc-select>
+    </section>
+</template>

@@ -44,6 +44,11 @@ export interface DiscordMessageImage {
     url: string;
 }
 
+export interface SendMessageToChannelRequest {
+    channelType: DiscordChannelType,
+    message: DiscordMessageContent
+}
+
 export interface BaseDiscordServer {
     guildId: string,
     ownerId: string,
@@ -86,5 +91,19 @@ export class DiscordEmbed {
     image?: DiscordEmbedImage;
     thumbnail?: DiscordEmbedImage;
     timestamp?: Date
+}
+
+export enum DiscordChannelType {
+    GuildText = 0,
+    Dm = 1,
+    GuildVoice = 2,
+    GroupDm = 3,
+    GuildCategory = 4,
+    GuildNews = 5,
+    GuildStore = 6,
+    GuildNewsThread = 10,
+    GuildPublicThread = 11,
+    GuildPrivateThread = 12,
+    GuildStageVoice = 13
 }
 

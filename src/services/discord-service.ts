@@ -2,7 +2,7 @@ import {inject} from 'aurelia-framework';
 import {ApiService} from './api-service';
 
 import * as discordModels from "./models/discord";
-import {BaseDiscordCommand} from "./models/discord";
+import {BaseDiscordCommand, SendMessageToChannelRequest} from "./models/discord";
 
 @inject(ApiService)
 export class DiscordService {
@@ -60,5 +60,9 @@ export class DiscordService {
 
     async setAuditLogChannelId(guildId: string, auditLogChannelId: string[]): Promise<discordModels.BaseDiscordServer> {
         return this.api.doPatch(`Discord/Guilds/${guildId}/SetAuditLogChannel`, {auditLogChannelId: auditLogChannelId});
+    }
+
+    async sendMessageToChannel(guildId: string, channelId: string[], message: SendMessageToChannelRequest): Promise<discordModels.BaseDiscordServer> {
+        return this.api.doPatch(`Discord/Guilds/${guildId}/Channel/${channelId}/SendMessage`, message);
     }
 }
