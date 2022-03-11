@@ -4,7 +4,6 @@ import {toast} from "lets-toast";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {Router} from "aurelia-router";
 import './response-message.scss';
-import {BaseDiscordServer} from "../../../services/models/discord";
 
 @inject(EventAggregator, DiscordService, Router)
 export class ResponseMessage {

@@ -1,5 +1,40 @@
 <template>
   <section id="invite-links">
-    Invite Links (In Progress)
+      <div class="row">
+          <div class="col-8">
+              <discord-feature-header
+                  title="Delete Invite Links"
+                  subtitle="Any invites sent in the server will immediately be deleted and if you have an audit channel selected a message will be posted in the channel with information regarding the message deleted."
+              ></discord-feature-header>
+          </div>
+          <div class="col-4 text-end">
+              <button
+                  mdc-switch
+                  selected.bind="featureActive"
+                  value.bind="featureActive"
+                  change.delegate="toggleFeature()"
+              ></button>
+              <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+          </div>
+      </div>
+
+      <div class="mt-5">
+          <h6> You may select an audit channel. All actions taken by this feature will be posted to the audit channel of your choosing </h6>
+          <div class="mt-3">
+              <mdc-select if.bind="channels" class="server-select" value.bind="guild.auditLogChannelId" label="Select Channel for Audits">
+                  <mdc-icon mdc-select-icon>dns</mdc-icon>
+                  <mdc-list>
+                      <mdc-list-item repeat.for="channel of channels" value.bind="channel.id" if.bind="channel.type === 0">
+                          #${channel.name}
+                      </mdc-list-item>
+                  </mdc-list>
+              </mdc-select>
+          </div>
+          <div class="mt-2">
+              <button mdc-button class="button-primary" click.delegate="save()">
+                  Save
+              </button>
+          </div>
+      </div>
   </section>
 </template>
