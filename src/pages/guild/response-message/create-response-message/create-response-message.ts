@@ -52,7 +52,7 @@ export class CreateResponseMessage {
     async createCommand() {
         try {
             this.command.discordGuildId = this.guildId;
-            const command = this.discordService.createResponseMessageCommand(this.command);
+            await this.discordService.createResponseMessageCommand(this.command);
             toast("Command Created!");
             this.router.navigate(`/guild/${this.guildId}/response-message`);
         } catch(e) {
