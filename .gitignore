@@ -32,6 +32,5 @@ node_modules
 
 # Compiled files
 /scripts
-/src/environment.ts
 /dist
 /test/coverage-jest
