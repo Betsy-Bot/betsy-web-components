@@ -4,13 +4,14 @@ import { DiscordService } from "../../../services/discord-service";
 import { toast } from "lets-toast";
 import { redirectUrl, botClientId } from "../../../environment";
 import './server-card.scss';
+import {Router} from "aurelia-router";
 
-@inject(WebhookService, DiscordService)
+@inject(WebhookService, DiscordService, Router)
 export class ServerCard {
-    constructor(private webhookService: WebhookService, private discordServer: DiscordService) {
+    constructor(private webhookService: WebhookService, private discordServerService: DiscordService, private router: Router) {
     }
-    @bindable() server;
-    @bindable() hideButton;
+    @bindable server;
+    @bindable hideButton;
     loading: boolean;
 
     getServerText() {
@@ -22,7 +23,13 @@ export class ServerCard {
     async handleServerInvite() {
         this.loading = true;
         try {
-            await this.discordServer.createServer(this.server.id);
+            if (await this.discordServerService.setupServer(this.server.id)) {
+                toast("It appears your server is already invited. Taking you there");
+                this.router.navigate(`/guild/${this.server.id}/dashboard`)
+                return;
+            }
+
+            await this.discordServerService.createServer(this.server.id);
 
             this.openServerInvitePopup();
         } catch(e) {

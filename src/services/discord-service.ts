@@ -27,6 +27,10 @@ export class DiscordService {
         return this.api.doPost('Discord/ApplicationCommand', command);
     }
 
+    async setupServer(guildId: string): Promise<discordModels.BaseDiscordCommand> {
+        return this.api.doPost(`Discord/Guilds/${guildId}/Setup`, {});
+    }
+
     async updateResponseMessageCommand(command: BaseDiscordCommand): Promise<discordModels.BaseDiscordCommand> {
         return this.api.doPatch('Discord/ApplicationCommand', command);
     }

@@ -17,6 +17,10 @@ export class App {
     moderation: true
   }
 
+  async activate() {
+      this.user = await this.sessionService.getUser();
+  }
+
   async attached() {
     this.ea.subscribe('user-updated', payload => {
       this.user = payload;
@@ -25,11 +29,12 @@ export class App {
       this.guildId = payload;
     });
     this.ea.subscribe('drawer-updated', payload => {
-      console.log(this.drawer);
       this.drawer.open = payload;
     });
 
-    this.user = await this.sessionService.getUser();
+    if (this.user) {
+        this.ea.publish('user-updated', this.user);
+    }
 
     //For some reason without this timeout it fails to bind properly. Race condition
     setTimeout(() => {
