@@ -1,81 +1,83 @@
-import { activationStrategy, Router } from 'aurelia-router';
-import { inject, PLATFORM } from 'aurelia-framework';
+import {activationStrategy, Router} from 'aurelia-router';
+import {inject, PLATFORM} from 'aurelia-framework';
 import {ScrollPageStep} from "./resources/pipelines/scroll-page-step";
 import {SessionService} from "./services/session-service";
 import {EventAggregator} from "aurelia-event-aggregator";
 
 @inject(Router, EventAggregator, SessionService)
 export class App {
-  constructor(private router: Router, private ea: EventAggregator, private sessionService: SessionService) {
-  }
-  user;
-  guildId;
-  drawer;
-
-  expandOptions = {
-    customCommands: true,
-    moderation: true
-  }
-
-  async activate() {
-      this.user = await this.sessionService.getUser();
-  }
-
-  async attached() {
-    this.ea.subscribe('user-updated', payload => {
-      this.user = payload;
-    });
-    this.ea.subscribe('guild-updated', payload => {
-      this.guildId = payload;
-    });
-    this.ea.subscribe('drawer-updated', payload => {
-      this.drawer.open = payload;
-    });
-
-    if (this.user) {
-        this.ea.publish('user-updated', this.user);
+    constructor(private router: Router, private ea: EventAggregator, private sessionService: SessionService) {
     }
 
-    //For some reason without this timeout it fails to bind properly. Race condition
-    setTimeout(() => {
-      this.drawer.open = this.sessionService.getStorageItem(SessionService.SIDEBAR_STATUS_KEY);
-    }, 100)
-  }
+    user;
+    guildId;
+    drawer;
 
-  openSection(sectionName){
-    this.expandOptions[sectionName] = !this.expandOptions[sectionName];
-  }
+    expandOptions = {
+        customCommands: true,
+        moderation: true,
+        resources: true
+    }
 
-  configureRouter(config, router) {
-    config.options.pushState = true;
-    config.title = 'Betsy Bot Panel';
-    config.titleSeparator = ' - ';
-    config.addPostRenderStep(ScrollPageStep);
-    config.map([
-      {
-        route: '',
-        name: 'home',
-        moduleId: PLATFORM.moduleName('pages/home/home'),
-        title: 'Betsy Bot'
-      },
-      {
-        route: 'login',
-        name: 'login',
-        moduleId: PLATFORM.moduleName('pages/login/login'),
-        title: 'Login'
-      },
-      {
-        route: 'guild/:guildId',
-        name: 'guild',
-        moduleId: PLATFORM.moduleName('pages/guild/guild'),
-        title: 'Guild Manage'
-      },
-   ]);
+    async activate() {
+        this.user = await this.sessionService.getUser();
+    }
 
-    config.mapUnknownRoutes(() => {
-      return { redirect: '404' };
-    });
+    async attached() {
+        this.ea.subscribe('user-updated', payload => {
+            this.user = payload;
+        });
+        this.ea.subscribe('guild-updated', payload => {
+            this.guildId = payload;
+        });
+        this.ea.subscribe('drawer-updated', payload => {
+            this.drawer.open = payload;
+        });
 
-    this.router = router;
-  }
+        if (this.user) {
+            this.ea.publish('user-updated', this.user);
+        }
+
+        //For some reason without this timeout it fails to bind properly. Race condition
+        setTimeout(() => {
+            this.drawer.open = this.sessionService.getStorageItem(SessionService.SIDEBAR_STATUS_KEY);
+        }, 100)
+    }
+
+    openSection(sectionName) {
+        this.expandOptions[sectionName] = !this.expandOptions[sectionName];
+    }
+
+    configureRouter(config, router) {
+        config.options.pushState = true;
+        config.title = 'Betsy Bot Panel';
+        config.titleSeparator = ' - ';
+        config.addPostRenderStep(ScrollPageStep);
+        config.map([
+            {
+                route: '',
+                name: 'home',
+                moduleId: PLATFORM.moduleName('pages/home/home'),
+                title: 'Betsy Bot'
+            },
+            {
+                route: 'login',
+                name: 'login',
+                moduleId: PLATFORM.moduleName('pages/login/login'),
+                title: 'Login'
+            },
+            {
+                route: 'guild/:guildId',
+                name: 'guild',
+                moduleId: PLATFORM.moduleName('pages/guild/guild'),
+                title: 'Guild Manage'
+            },
+        ]);
+
+        config.mapUnknownRoutes(() => {
+            return {redirect: '404'};
+        });
+
+        this.router = router;
+    }
 }

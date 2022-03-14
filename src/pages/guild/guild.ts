@@ -81,6 +81,15 @@ export class Guild {
                     auth: true
                 }
             },
+            {
+                name: 'guild-forms',
+                route: 'resources/forms',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/forms/forms'),
+                title: 'Manage Server Forms',
+                settings: {
+                    auth: true
+                }
+            },
         ]);
 
         config.mapUnknownRoutes(() => {

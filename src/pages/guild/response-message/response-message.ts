@@ -27,12 +27,10 @@ export class ResponseMessage {
         console.log(this.featureActive);
     }
 
-    async updateActive(event, command) {
-        event.stopPropagation();
+    async updateActive(command) {
         let foundCommandIndex = this.commands.findIndex(x => x.name === command.name);
         if (foundCommandIndex >= 0) {
             await this.discordService.toggleDiscordCommandActive(this.guildId, command.discordApplicationCommandId, this.commands[foundCommandIndex].active);
-            this.commands[foundCommandIndex].active = !command.active;
             toast(`Active status has been updated for /${command.name}`, {severity: "success"})
         } else {
             toast("Error", {severity: "error"})

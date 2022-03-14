@@ -1,43 +1,55 @@
 <template>
-  <navigation user.bind="user"></navigation>
+    <navigation user.bind="user"></navigation>
 
-  <div id="drawer">
-    <mdc-drawer type="dismissible" view-model.ref="drawer" show.bind="guildId" open.bind="drawerOpen">
-      <a href="/guild/${guildId}/dashboard" if.bind="guildId">
-        <mdc-drawer-header title="Dashboard"></mdc-drawer-header>
-      </a>
-      <mdc-drawer-content>
-        <mdc-list single-selection>
-            <a href="/guild/${guildId}/send-message" if.bind="guildId">
-                <mdc-list-item class="list-item-padding">Send Message</mdc-list-item>
+    <div id="drawer">
+        <mdc-drawer type="dismissible" view-model.ref="drawer" show.bind="guildId" open.bind="drawerOpen">
+            <a href="/guild/${guildId}/dashboard" if.bind="guildId">
+                <mdc-drawer-header title="Dashboard"></mdc-drawer-header>
             </a>
+            <mdc-drawer-content>
+                <mdc-list single-selection>
+                    <a href="/guild/${guildId}/send-message" if.bind="guildId">
+                        <mdc-list-item class="list-item-padding">Send Message</mdc-list-item>
+                    </a>
 
-          <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('customCommands')" no-list-action>
-            <span>Custom Commands</span>
-            <mdc-icon mdc-list-item-trailing>${expandOptions.customCommands ? 'expand_less' :'expand_more'}
-            </mdc-icon>
-          </mdc-list-item>
-          <div if.bind="expandOptions.customCommands">
-            <a href="/guild/${guildId}/response-message" if.bind="guildId">
-              <mdc-list-item class="list-item-padding">Response Messages</mdc-list-item>
-            </a>
-          </div>
+                    <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('customCommands')"
+                                   no-list-action>
+                        <span>Custom Commands</span>
+                        <mdc-icon mdc-list-item-trailing>${expandOptions.customCommands ? 'expand_less' : 'expand_more'}
+                        </mdc-icon>
+                    </mdc-list-item>
+                    <div if.bind="expandOptions.customCommands">
+                        <a href="/guild/${guildId}/response-message" if.bind="guildId">
+                            <mdc-list-item class="list-item-padding">Response Messages</mdc-list-item>
+                        </a>
+                    </div>
 
-          <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('moderation')" no-list-action>
-            <span>Moderation</span>
-            <mdc-icon mdc-list-item-trailing>${expandOptions.moderation ? 'expand_less' :'expand_more'}
-            </mdc-icon>
-          </mdc-list-item>
-          <div if.bind="expandOptions.moderation">
-            <a href="/guild/${guildId}/invite-links" if.bind="guildId">
-              <mdc-list-item class="list-item-padding">Delete Invite Links</mdc-list-item>
-            </a>
-          </div>
-        </mdc-list>
-      </mdc-drawer-content>
-    </mdc-drawer>
-    <mdc-drawer-app-content style="display: block; padding: 16px; height: 400px;">
-      <router-view swap-order="with"></router-view>
-    </mdc-drawer-app-content>
-  </div>
+                    <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('moderation')" no-list-action>
+                        <span>Moderation</span>
+                        <mdc-icon mdc-list-item-trailing>${expandOptions.moderation ? 'expand_less' : 'expand_more'}
+                        </mdc-icon>
+                    </mdc-list-item>
+                    <div if.bind="expandOptions.moderation">
+                        <a href="/guild/${guildId}/invite-links" if.bind="guildId">
+                            <mdc-list-item class="list-item-padding">Delete Invite Links</mdc-list-item>
+                        </a>
+                    </div>
+
+                    <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('resources')" no-list-action>
+                        <span>Server Resources</span>
+                        <mdc-icon mdc-list-item-trailing>${expandOptions.resources ? 'expand_less' : 'expand_more'}
+                        </mdc-icon>
+                    </mdc-list-item>
+                    <div if.bind="expandOptions.resources">
+                        <a href="/guild/${guildId}/resources/forms" if.bind="guildId">
+                            <mdc-list-item class="list-item-padding">Forms</mdc-list-item>
+                        </a>
+                    </div>
+                </mdc-list>
+            </mdc-drawer-content>
+        </mdc-drawer>
+        <mdc-drawer-app-content style="display: block; padding: 16px; height: 400px;">
+            <router-view swap-order="with"></router-view>
+        </mdc-drawer-app-content>
+    </div>
 </template>
