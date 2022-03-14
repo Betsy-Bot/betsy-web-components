@@ -15,7 +15,6 @@ export class Home {
     private otherGuilds;
     connection;
 
-
     async attached() {
         this.user = await this.sessionService.getUser();
         if (!this.user) {

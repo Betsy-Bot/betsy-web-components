@@ -1,0 +1,45 @@
+<template>
+    <section id="discord-form-creator">
+        <mdc-text-field
+            class="w-100 mt-2"
+            label="Title"
+            value.bind="form.title"
+            placeholder="Form Title"
+        ></mdc-text-field>
+        <mdc-text-field
+            class="w-100 mt-2"
+            label="Description"
+            value.bind="form.description"
+            placeholder="Form Description"
+        ></mdc-text-field>
+        <mdc-text-field
+            class="w-100 mt-2"
+            label="Custom Id"
+            value.bind="form.custom_id"
+            placeholder="Custom ID -> Used for API integrations"
+        ></mdc-text-field>
+
+        <button mdc-button class="button-primary mt-3" click.delegate="addField()">
+            Add New Field
+        </button>
+
+        <div class="field-container">
+            <div class="field" repeat.for="component of form.formData.components">
+                <div class="" repeat.for="field of component.components">
+                    <mdc-text-field
+                        class="w-100 mt-2"
+                        label="Label"
+                        value.bind="field.label"
+                        placeholder="Field Label"
+                    ></mdc-text-field>
+                    <mdc-text-field
+                        class="w-100 mt-2"
+                        label="Custom Id"
+                        value.bind="field.custom_id"
+                        placeholder="Custom ID -> Used for API integrations"
+                    ></mdc-text-field>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

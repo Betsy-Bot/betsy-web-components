@@ -14,6 +14,8 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./elements/discord-feature-header/discord-feature-header'),
         PLATFORM.moduleName('./elements/discord-message-creator/discord-message-creator'),
         PLATFORM.moduleName('./elements/discord-message-preview/discord-message-preview'),
+        PLATFORM.moduleName('./elements/discord-form-creator/discord-form-creator'),
+        PLATFORM.moduleName('./elements/discord-form-preview/discord-form-preview'),
         PLATFORM.moduleName('./elements/feature-item-list/feature-item-list'),
     ]);
 }

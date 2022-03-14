@@ -107,3 +107,50 @@ export enum DiscordChannelType {
     GuildStageVoice = 13
 }
 
+export class DiscordForm {
+    title?: string;
+    description?: string;
+    custom_id: string;
+    private?: boolean;
+    submissions: DiscordFormSubmission[]
+    formData: DiscordFormData
+}
+
+export class DiscordFormData {
+    components: DiscordComponentWrapper[]
+}
+
+export class DiscordFormSubmission {
+    discordUserId: string;
+    discordUsername: string;
+    answers: DiscordFormFieldAnswer[];
+}
+
+export class DiscordFormFieldAnswer {
+    label: string;
+    value: string;
+    custom_id: string;
+}
+
+export class DiscordComponentWrapper {
+    type: DiscordComponentType
+    components: DiscordComponent[]
+}
+
+export enum DiscordComponentType {
+    ActionRow = 1,
+    Button = 2,
+    MenuSelect = 3,
+    TextInput = 4,
+}
+
+export class DiscordComponent {
+    type: DiscordComponentType;
+    label: string;
+    custom_id: string;
+    style?: number;
+    min_length?: number;
+    max_length?: number;
+    placeholder?: string;
+    required?: boolean;
+}
