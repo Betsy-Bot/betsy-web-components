@@ -1,8 +1,23 @@
 <template>
     <section id="guild-forms">
         <discord-feature-header
-            title="Create and Manage Your Discord Server's Forms"
+            title="Create and Manage Your Discord Server Forms"
             subtitle="Forms can be used in a variety of places. This is the place to manage your forms as well as view any submissions that have come in."
         ></discord-feature-header>
+
+        <div class="mt-4">
+            <a href="/guild/${guildId}/resources/forms/create" if.bind="guildId">
+                <button mdc-button class="button-primary">
+                    Create New Form
+                </button>
+            </a>
+        </div>
+
+        <div class="existing-commands-area mt-4">
+            <feature-item-list
+                data.bind="forms"
+                item-click-handler.call="goToForm(item)"
+            ></feature-item-list>
+        </div>
     </section>
 </template>

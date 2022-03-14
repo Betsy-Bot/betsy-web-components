@@ -22,6 +22,9 @@
                         <a href="/guild/${guildId}/response-message" if.bind="guildId">
                             <mdc-list-item class="list-item-padding">Response Messages</mdc-list-item>
                         </a>
+                        <a href="/guild/${guildId}/data-commands" if.bind="guildId">
+                            <mdc-list-item class="list-item-padding">Data Commands</mdc-list-item>
+                        </a>
                     </div>
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('moderation')" no-list-action>

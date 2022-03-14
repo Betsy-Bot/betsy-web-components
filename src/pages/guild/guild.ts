@@ -90,6 +90,33 @@ export class Guild {
                     auth: true
                 }
             },
+            {
+                name: 'guild-forms-create',
+                route: 'resources/forms/create',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/forms/create-form/create-form'),
+                title: 'Create Server Form',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'guild-forms-edit',
+                route: 'resources/forms/:formId',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/forms/edit-form/edit-form'),
+                title: 'Edit Server Form',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'guild-data-commands',
+                route: 'data-commands',
+                moduleId: PLATFORM.moduleName('pages/guild/data-commands/data-commands'),
+                title: 'Manage Data Commands',
+                settings: {
+                    auth: true
+                }
+            },
         ]);
 
         config.mapUnknownRoutes(() => {
