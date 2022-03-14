@@ -18,13 +18,14 @@ export class ResponseMessage {
 
     async activate(params) {
         this.guildId = params.guildId as string;
+    }
+
+    async attached() {
         [this.commands, this.guild] = await Promise.all([
             await this.discordService.getResponseMessagesForGuild(this.guildId),
             await this.discordService.getDiscordServerInformation(this.guildId)
         ])
-
         this.featureActive = this.guild.activeFeatures.includes(this.discordService.RESPONSE_MESSAGES);
-        console.log(this.featureActive);
     }
 
     async updateActive(command) {
