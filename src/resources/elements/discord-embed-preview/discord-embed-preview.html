@@ -6,9 +6,7 @@
     <div class="body-title mb-2 fw-bold" if.bind="embed.title">
       ${embed.title}
     </div>
-    <div class="body-description mb-2" if.bind="embed.description">
-      ${embed.description}
-    </div>
+      <div class="body-description mb-2" if.bind="embed.description" innerhtml.bind="getMarkup(embed.description)"></div>
 
     <div class="body-fields" if.bind="embed.fields">
       <div class="row mb-1">
