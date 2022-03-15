@@ -1,8 +1,8 @@
+@use 'styles/reset';
 @use '~bootstrap/scss/bootstrap';
 @use '~@aurelia-mdc-web/all';
 @use '~lets-toast/build/lets-toast.min';
 @use 'styles/mdc-styles';
-@use 'styles/reset';
 @use 'styles/bootstrap-extras';
 @use 'styles/md-overrides';
 
