@@ -2,6 +2,7 @@ import {bindable} from "aurelia-framework";
 import * as moment from 'moment';
 import * as showdown from 'showdown';
 import sanitizeHtml from 'sanitize-html';
+import './discord-message-preview.scss';
 
 export class DiscordMessagePreview {
     @bindable message;
