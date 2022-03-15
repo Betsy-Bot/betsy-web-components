@@ -19,7 +19,6 @@ export class DiscordActionCreator {
     ]
 
     deleteAction() {
-        console.log('delete action asdf');
         this.deleteFunction({action: this.action});
     }
 
