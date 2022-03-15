@@ -1,5 +1,6 @@
 @use '~@material/button';
 @use '~@material/theme';
+@use '@material/select';
 @import 'bootstrap';
 
 body {
@@ -31,6 +32,21 @@ body {
   background-color: $card-color
 }
 
+.light-betsy-select:not(.mdc-select--disabled) .mdc-select__anchor {
+    background-color: #dcddde !important;
+}
+
+.mdc-select:not(.mdc-select--disabled) .mdc-select__selected-text,
+.mdc-select--filled.mdc-select--with-leading-icon .mdc-floating-label--float-above,
+.mdc-select:not(.mdc-select--disabled) .mdc-select__icon {
+    color: #dcddde !important;
+}
+
+.standard-betsy-select:not(.mdc-select--disabled) .mdc-select__anchor {
+    background-color: #36393f !important;
+    color: $body-color !important;
+}
+
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
   color: $body-color;
 }
@@ -41,4 +57,8 @@ body {
 
 .mdc-drawer .mdc-drawer__title {
   text-align: center;
+}
+
+.standard-betsy-select {
+    @include select.container-fill-color(('default': rgba(220, 221, 222, 1)))
 }

@@ -7,15 +7,23 @@
 
         <div class="row mt-4">
             <div class="col-8">
-                <discord-form-creator
-                    form.two-way="form"
-                ></discord-form-creator>
+                <form submit.delegate="save()">
+                    <discord-form-creator
+                        form.two-way="form"
+                    ></discord-form-creator>
+                    <div class="text-end mt-3">
+                        <button mdc-button class="button-primary" type="save" if.bind="form.formData.components.length > 0">
+                            Save
+                        </button>
+                    </div>
+                </form>
             </div>
             <div class="col-4">
                 <h4 class="text-center">
-                    Form Preview
+                    <discord-form-preview form.bind="form"></discord-form-preview>
                 </h4>
             </div>
         </div>
+
     </section>
 </template>

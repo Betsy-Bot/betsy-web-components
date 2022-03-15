@@ -13,7 +13,7 @@ export class DiscordActionCreator {
         },
         {
             label: 'Channel Message',
-            description: 'Sends a response to a selected channel ID',
+            description: 'Sends a response to a selected channel',
             value: 2
         }
     ]

@@ -1,34 +1,36 @@
 <template>
-  <section id="discord-command-creator">
-    <div>
-      <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+    <section id="discord-command-creator">
+        <div>
+            <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
                 <span class="material-icons me-2">
                     warning
                 </span>
-        Having more than 1 "Interaction Response" type will result in one action not being responded to. You may only have 1 "Interaction Response" action. Use "Channel Response" for more than 1 action.
-      </div>
-    </div>
-    <div class="mb-2">
-      <mdc-text-field
-        label="Command"
-        required.bind="required"
-        prefix="/"
-        value.bind="command.name"
-      ></mdc-text-field>
-    </div>
-    <div class="mb-2">
-      <mdc-text-field
-        label="Command Description"
-        required.bind="required"
-        value.bind="command.description"
-      ></mdc-text-field>
-    </div>
+                Having more than 1 "Interaction Response" type will result in one action not being responded to. You may
+                only have 1 "Interaction Response" action. Use "Channel Response" for more than 1 action.
+            </div>
+        </div>
+        <div class="mb-2">
+            <mdc-text-field
+                label="Command"
+                prefix="/"
+                value.bind="command.name"
+                required.bind="true"
+            ></mdc-text-field>
+        </div>
+        <div class="mb-2">
+            <mdc-text-field
+                label="Command Description"
+                value.bind="command.description"
+                required.bind="true"
+            ></mdc-text-field>
+        </div>
 
-    <div class="mb-2">
-      <mdc-form-field>
-        <button mdc-switch selected.bind="command.private"></button>
-        <label mdc-tooltip="The response to the interaction will be kept hidden from others (Only you can see this)">Private?</label>
-      </mdc-form-field>
-    </div>
-  </section>
+        <div class="mb-2">
+            <mdc-form-field>
+                <button mdc-switch selected.bind="command.private"></button>
+                <label
+                    mdc-tooltip="The response to the interaction will be kept hidden from others (Only you can see this)">Private?</label>
+            </mdc-form-field>
+        </div>
+    </section>
 </template>

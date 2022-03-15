@@ -9,7 +9,7 @@ export class DiscordEmbedPreview {
 
     getMarkup(content) {
         const converter = new showdown.Converter({ strikethrough: true });
-        content.replace(/(\r\n|\r|\n)/g, '<br>');
+        content = content.replace(/(\r\n|\r|\n|\\n)/g, '<br>');
         let html = converter.makeHtml(content);
         return sanitizeHtml(html);
     }

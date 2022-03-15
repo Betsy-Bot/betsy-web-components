@@ -22,6 +22,6 @@ export class GuildForms {
     }
 
     goToForm(item) {
-        this.router.navigate(`/guild/${this.guildId}/forms/${item.id}`)
+        this.router.navigate(`/guild/${this.guildId}/resources/forms/${item.id}`)
     }
 }

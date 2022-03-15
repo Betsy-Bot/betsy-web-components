@@ -2,7 +2,7 @@ import {inject} from 'aurelia-framework';
 import {ApiService} from './api-service';
 
 import * as discordModels from "./models/discord";
-import {BaseDiscordCommand, SendMessageToChannelRequest} from "./models/discord";
+import {BaseDiscordCommand, DiscordForm, SendMessageToChannelRequest} from "./models/discord";
 
 @inject(ApiService)
 export class DiscordService {
@@ -84,5 +84,17 @@ export class DiscordService {
 
     async getDiscordForms(guildId: string) {
         return this.api.doGet(`DiscordForm/Guild/${guildId}/Forms`);
+    }
+
+    async getDiscordForm(guildId: string, formId: string) {
+        return this.api.doGet(`DiscordForm/Guild/${guildId}/Forms/${formId}`);
+    }
+
+    async createDiscordForm(guildId: string, form: DiscordForm): Promise<discordModels.DiscordForm> {
+        return this.api.doPost(`DiscordForm/Guild/${guildId}/Forms`, form);
+    }
+
+    async updateDiscordForm(guildId: string, form: DiscordForm): Promise<discordModels.DiscordForm> {
+        return this.api.doPatch(`DiscordForm/Guild/${guildId}/Forms`, form);
     }
 }

@@ -110,7 +110,7 @@ export enum DiscordChannelType {
 export class DiscordForm {
     title?: string;
     description?: string;
-    custom_id: string;
+    customId: string;
     private?: boolean;
     submissions: DiscordFormSubmission[]
     formData: DiscordFormData
@@ -142,6 +142,11 @@ export enum DiscordComponentType {
     Button = 2,
     MenuSelect = 3,
     TextInput = 4,
+}
+
+export enum DiscordTextInputType {
+    Short = 1,
+    Paragraph = 2,
 }
 
 export class DiscordComponent {

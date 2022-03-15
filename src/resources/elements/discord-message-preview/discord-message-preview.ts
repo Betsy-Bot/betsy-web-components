@@ -15,7 +15,7 @@ export class DiscordMessagePreview {
 
     getMarkup(content) {
         const converter = new showdown.Converter({ strikethrough: true });
-        content.replace(/(\r\n|\r|\n)/g, '<br>');
+        content = content.replace(/(\r\n|\r|\n|\\n)/g, '<br>');
         let html = converter.makeHtml(content);
         html += '<script>console.log("injection")</script>' //Keep this in here and look for this in the output. Should be sanitized out.
         return sanitizeHtml(html);
