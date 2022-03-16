@@ -8,7 +8,7 @@
         <div class="name" if.bind="first">
           Betsy <span class="time ms-3">${currentTime}</span>
         </div>
-        <div class="message-content" innerhtml.bind="getMarkup(message.content)" if.bind="message.content"></div>
+        <div class="message-content" innerhtml.bind="message.content | discordMarkup" if.bind="message.content"></div>
 
         <div class="embed-area" repeat.for="embed of message.embeds">
           <discord-embed-preview embed.bind="embed"></discord-embed-preview>
