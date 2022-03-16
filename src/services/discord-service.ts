@@ -13,6 +13,7 @@ export class DiscordService {
     }
 
     RESPONSE_MESSAGES = 'ResponseMessages';
+    DATA_COMMANDS = 'DataCommands';
     BLOCK_INVITES = 'BlockInvites';
     BLACKLISTED_WORDS = 'BlacklistedWords'
 
@@ -20,40 +21,44 @@ export class DiscordService {
     }
 
     async exchangeCode(code: string): Promise<discordModels.ExchangeCodeResponse> {
-        return this.api.doPost('Discord/OAuth/ExchangeCode', {code: code})
+        return await this.api.doPost('Discord/OAuth/ExchangeCode', {code: code})
     }
 
     async createServer(guildId: string): Promise<discordModels.BaseDiscordServer> {
-        return this.api.doPost('DiscordGuild', {guildId: guildId})
+        return await this.api.doPost('DiscordGuild', {guildId: guildId})
     }
 
     async createResponseMessageCommand(command: BaseDiscordCommand): Promise<discordModels.BaseDiscordCommand> {
-        return this.api.doPost('Discord/ApplicationCommand', command);
+        return await this.api.doPost('Discord/ApplicationCommand', command);
     }
 
     async setupServer(guildId: string): Promise<discordModels.BaseDiscordCommand> {
-        return this.api.doPost(`DiscordGuild/${guildId}/Setup`, {});
+        return await this.api.doPost(`DiscordGuild/${guildId}/Setup`, {});
     }
 
     async updateResponseMessageCommand(command: BaseDiscordCommand): Promise<discordModels.BaseDiscordCommand> {
-        return this.api.doPatch('Discord/ApplicationCommand', command);
+        return await this.api.doPatch('Discord/ApplicationCommand', command);
     }
 
     async getResponseMessagesForGuild(guildId: string): Promise<discordModels.BaseDiscordCommand[]> {
-        return this.api.doGet(`DiscordGuild/${guildId}/ResponseMessages`);
+        return await this.api.doGet(`DiscordGuild/${guildId}/ResponseMessages`);
+    }
+
+    async getDataCommandsForGuild(guildId: string): Promise<discordModels.BaseDiscordCommand[]> {
+        return await this.api.doGet(`DiscordGuild/${guildId}/DataCommands`);
     }
 
     async toggleDiscordCommandActive(guildId: string, discordApplicationCommandId, active: boolean) {
-        return this.api.doPatch(`DiscordGuild/${guildId}/DiscordCommand/${discordApplicationCommandId}/ToggleActive`, {active: active});
+        return await this.api.doPatch(`DiscordGuild/${guildId}/DiscordCommand/${discordApplicationCommandId}/ToggleActive`, {active: active});
     }
 
     async getDiscordCommandDetails(discordApplicationCommandId: string): Promise<discordModels.BaseDiscordCommand> {
-        return this.api.doGet(`Discord/ApplicationCommand?discordApplicationCommandId=${discordApplicationCommandId}`);
+        return await this.api.doGet(`Discord/ApplicationCommand?discordApplicationCommandId=${discordApplicationCommandId}`);
     }
 
     async getDiscordServerInformation(guildId: string): Promise<discordModels.BaseDiscordServer> {
-        if (!this.guild || guildId !== this.guild.id) {
-            this.guild = this.api.doGet(`DiscordGuild/${guildId}`);
+        if (!this.guild || guildId !== this.guild.guildId) {
+            this.guild = await this.api.doGet(`DiscordGuild/${guildId}`);
         }
         return this.guild;
     }
@@ -62,7 +67,7 @@ export class DiscordService {
         if (this.guildChannelData.guildId == guildId && this.guildChannelData.data) {
             return this.guildChannelData.data;
         }
-        const channels = this.api.doGet(`DiscordGuild/${guildId}/Channels`);
+        const channels = await this.api.doGet(`DiscordGuild/${guildId}/Channels`);
         this.guildChannelData = {
             guildId: guildId,
             data: channels
@@ -71,15 +76,15 @@ export class DiscordService {
     }
 
     async setActiveFeaturesForDiscord(guildId: string, features: string[]): Promise<discordModels.BaseDiscordServer> {
-        return this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, {activeFeatures: features});
+        return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, {activeFeatures: features});
     }
 
     async setAuditLogChannelId(guildId: string, auditLogChannelId: string[]): Promise<discordModels.BaseDiscordServer> {
-        return this.api.doPatch(`DiscordGuild/${guildId}/SetAuditLogChannel`, {auditLogChannelId: auditLogChannelId});
+        return await this.api.doPatch(`DiscordGuild/${guildId}/SetAuditLogChannel`, {auditLogChannelId: auditLogChannelId});
     }
 
     async sendMessageToChannel(guildId: string, channelId: string[], message: SendMessageToChannelRequest): Promise<discordModels.BaseDiscordServer> {
-        return this.api.doPatch(`DiscordGuild/${guildId}/Channel/${channelId}/SendMessage`, message);
+        return await this.api.doPatch(`DiscordGuild/${guildId}/Channel/${channelId}/SendMessage`, message);
     }
 
     async getDiscordForms(guildId: string) {

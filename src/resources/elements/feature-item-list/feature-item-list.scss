@@ -1,7 +1,13 @@
 #feature-item-list {
-  .list-item-background {
-    min-width: 300px;
-    width: 50%;
-    max-width: 700px;
-  }
+    .list-item-background {
+        min-width: 300px;
+        width: 50%;
+        max-width: 700px;
+    }
+
+    @media (max-width: 1200px) {
+        .list-item-background {
+            width: 100% !important;
+        }
+    }
 }

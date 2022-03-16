@@ -1,4 +1,5 @@
 import {bindable, inject} from "aurelia-framework";
+import './feature-item-list.scss';
 
 export class FeatureItemList {
     @bindable data: any;

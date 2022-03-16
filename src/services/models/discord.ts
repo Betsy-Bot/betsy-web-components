@@ -18,6 +18,13 @@ export interface BaseDiscordCommand {
     discordCommandActions: DiscordCommandAction[]
 }
 
+export enum DiscordApplicationCommandType
+{
+    ChatInput = 1,
+    User = 2,
+    Message = 3
+}
+
 export interface DiscordCommandAction {
     id?: string,
     type: number,
@@ -105,6 +112,20 @@ export enum DiscordChannelType {
     GuildPublicThread = 11,
     GuildPrivateThread = 12,
     GuildStageVoice = 13
+}
+
+export enum DiscordApplicationCommandOptionType {
+    SubCommand = 1,
+    SubCommandGroup = 2,
+    String = 3,
+    Integer = 4,
+    Boolean = 5,
+    User = 6,
+    Channel = 7,
+    Role = 8,
+    Mentionable = 9,
+    Number = 10,
+    Attachment = 11
 }
 
 export class DiscordForm {

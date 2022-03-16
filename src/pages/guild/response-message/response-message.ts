@@ -3,7 +3,6 @@ import {DiscordService} from "../../../services/discord-service";
 import {toast} from "lets-toast";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {Router} from "aurelia-router";
-import './response-message.scss';
 
 @inject(EventAggregator, DiscordService, Router)
 export class ResponseMessage {
