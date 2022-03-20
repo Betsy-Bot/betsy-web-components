@@ -1,20 +1,20 @@
 <template>
-    <section id="data-commands">
+    <section id="edit-data-command">
         <div class="row">
             <div class="col-8">
                 <discord-feature-header
-                    title="Data Commands"
+                    title="Edit Data Command"
                     subtitle="Data commands are commands that gather information and relay that information to this admin panel or your own API integration. This can be captured in a form, a message embed, or just through command parameters."
                 ></discord-feature-header>
+
+                <div class="mt-5">
+                    <discord-data-command-creator command.bind="command"></discord-data-command-creator>
+                </div>
             </div>
             <div class="col-4 text-end">
-                <button
-                    mdc-switch
-                    selected.bind="featureActive"
-                    value.bind="featureActive"
-                    change.delegate="toggleFeature()"
-                ></button>
-                <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+                <h4>
+                    Discord Form Preview
+                </h4>
             </div>
         </div>
     </section>

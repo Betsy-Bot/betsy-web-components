@@ -1,5 +1,5 @@
 import {bindable} from "aurelia-framework";
-import {DiscordCommandAction} from "../../../services/models/discord";
+import {DiscordCommandAction, DiscordCommandActionType} from "../../../services/models/discord";
 
 export class DiscordActionCreator {
     @bindable action: DiscordCommandAction;
@@ -9,12 +9,12 @@ export class DiscordActionCreator {
         {
             label: 'Interaction Response',
             description: 'Sends response to the command itself',
-            value: 1
+            value: DiscordCommandActionType.MessageResponse
         },
         {
             label: 'Channel Message',
             description: 'Sends a response to a selected channel',
-            value: 2
+            value:  DiscordCommandActionType.MessageChannel
         }
     ]
 

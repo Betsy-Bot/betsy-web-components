@@ -70,7 +70,8 @@ export interface DiscordInvitedWebhookResponse {
 }
 
 export enum DiscordCommandType {
-    ResponseMessage = 1
+    ResponseMessage = 1,
+    Data = 2
 }
 
 export interface DiscordEmbedField {
@@ -179,4 +180,15 @@ export class DiscordComponent {
     max_length?: number;
     placeholder?: string;
     required?: boolean;
+}
+
+export enum DiscordCommandActionType {
+    MessageResponse = 1,
+    MessageChannel = 2,
+    RoleGive = 3,
+    RoleRemove = 4,
+    AnnounceMessage = 5,
+    AnnounceEmbed = 6,
+    OpenForm = 7,
+    SendSubmissionMessage = 8
 }
