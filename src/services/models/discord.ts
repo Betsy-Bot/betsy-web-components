@@ -190,5 +190,6 @@ export enum DiscordCommandActionType {
     AnnounceMessage = 5,
     AnnounceEmbed = 6,
     OpenForm = 7,
-    SendSubmissionMessage = 8
+    SendSubmissionMessage = 8,
+    SendSubmitData = 9
 }

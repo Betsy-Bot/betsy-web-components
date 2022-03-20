@@ -2,7 +2,7 @@
   <section id="discord-action-creator">
     <div class="row my-3">
       <div class="col-8">
-        <mdc-form-field repeat.for="act of actions">
+        <mdc-form-field repeat.for="act of actions" if.bind="!forcedType">
           <mdc-radio model.bind="act.value" checked.bind="action.type"></mdc-radio>
           <label>
             ${act.label}
@@ -13,7 +13,7 @@
         </mdc-form-field>
       </div>
       <div class="col-4 text-end">
-        <button mdc-button class="button-secondary" click.delegate="deleteAction()">
+        <button mdc-button class="button-secondary" click.delegate="deleteAction()" if.bind="!single">
           Delete Action
         </button>
       </div>

@@ -38,7 +38,7 @@ export class DataCommands {
     }
 
     goToCommand(command) {
-        this.router.navigate(`/guild/${this.guildId}/data-command/${command.discordApplicationCommandId}`)
+        this.router.navigate(`/guild/${this.guildId}/data-commands/${command.discordApplicationCommandId}`)
     }
 
     async toggleFeature() {

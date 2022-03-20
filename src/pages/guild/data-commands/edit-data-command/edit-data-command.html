@@ -7,9 +7,34 @@
                     subtitle="Data commands are commands that gather information and relay that information to this admin panel or your own API integration. This can be captured in a form, a message embed, or just through command parameters."
                 ></discord-feature-header>
 
-                <div class="mt-5">
-                    <discord-data-command-creator command.bind="command"></discord-data-command-creator>
+                <div>
+                    <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+                        <span class="material-icons me-2">
+                            warning
+                        </span>
+                        Only form data commands are currently available
+                    </div>
                 </div>
+
+                <form submit.delegate="save()">
+                    <div class="mt-4">
+                        <discord-command-creator command.two-way="command"></discord-command-creator>
+                    </div>
+
+                    <discord-form-selector
+                        label="Select form to open"
+                        guild-id.bind="guildId"
+                        form-id.two-way="command.discordCommandActions[0].discordFormId"
+                    ></discord-form-selector>
+
+                    <div class="mt-5">
+                        <div class="text-end mt-3">
+                            <button type="submit" mdc-button class="button-primary">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="col-4 text-end">
                 <h4>

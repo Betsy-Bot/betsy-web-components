@@ -43,7 +43,7 @@ export class EditResponseMessage {
     async updateCommand() {
         try {
             this.command.discordGuildId = this.guildId;
-            await this.discordService.updateResponseMessageCommand(this.command);
+            await this.discordService.updateApplicationCommand(this.command);
             toast("Command Updated!");
         } catch(e) {
             toast('Failed to create command', {severity: 'error'})

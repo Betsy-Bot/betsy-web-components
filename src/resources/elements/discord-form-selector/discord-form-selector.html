@@ -1,0 +1,15 @@
+<template>
+    <section id="discord-channel-selector">
+        <mdc-select if.bind="forms" class="standard-betsy-select" value.bind="formId" label.bind="label">
+            <mdc-icon mdc-select-icon>list</mdc-icon>
+            <mdc-list>
+                <mdc-list-item repeat.for="form of forms" value.bind="form.id">
+                   ${form.title}
+                </mdc-list-item>
+            </mdc-list>
+        </mdc-select>
+        <div else>
+            <mdc-circular-progress size="50" stroke-width="3"></mdc-circular-progress>
+        </div>
+    </section>
+</template>

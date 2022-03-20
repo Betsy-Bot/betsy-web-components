@@ -1,5 +1,5 @@
 import {inject} from "aurelia-framework";
-import {BaseDiscordCommand, DiscordCommandType} from "../../../../services/models/discord";
+import {BaseDiscordCommand, DiscordCommandActionType, DiscordCommandType} from "../../../../services/models/discord";
 import {DiscordService} from "../../../../services/discord-service";
 import {toast} from "lets-toast";
 import { EventAggregator } from "aurelia-event-aggregator";
@@ -23,7 +23,7 @@ export class CreateResponseMessage {
         type: DiscordCommandType.ResponseMessage,
         private: true,
         discordCommandActions: [{
-            type: 2,
+            type: DiscordCommandActionType.MessageChannel,
             discordMessage: {
                 message: {
                     content: 'Some Content',
@@ -52,7 +52,7 @@ export class CreateResponseMessage {
     async createCommand() {
         try {
             this.command.discordGuildId = this.guildId;
-            await this.discordService.createResponseMessageCommand(this.command);
+            await this.discordService.createApplicationCommand(this.command);
             toast("Command Created!");
             this.router.navigate(`/guild/${this.guildId}/response-message`);
         } catch(e) {

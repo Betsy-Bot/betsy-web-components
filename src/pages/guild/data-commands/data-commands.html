@@ -6,6 +6,24 @@
                     title="Data Commands"
                     subtitle="Data commands are commands that gather information and relay that information to this admin panel or your own API integration. This can be captured in a form, a message embed, or just through command parameters."
                 ></discord-feature-header>
+
+                <div class="my-3">
+                    <a href="/guild/${guildId}/data-commands/create" if.bind="guildId">
+                        <button mdc-button class="button-primary">
+                            Create New Command
+                        </button>
+                    </a>
+                </div>
+
+                <div class="existing-commands-area">
+                    <feature-item-list
+                        data.bind="commands"
+                        show-toggler.bind="true"
+                        name-prefix="/"
+                        toggle-handler.call="updateActive(item)"
+                        item-click-handler.call="goToCommand(item)"
+                    ></feature-item-list>
+                </div>
             </div>
             <div class="col-4 text-end">
                 <button

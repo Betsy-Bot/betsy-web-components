@@ -4,6 +4,8 @@ import {DiscordCommandAction, DiscordCommandActionType} from "../../../services/
 export class DiscordActionCreator {
     @bindable action: DiscordCommandAction;
     @bindable deleteFunction;
+    @bindable single;
+    @bindable forcedType: boolean;
 
     actions = [
         {
