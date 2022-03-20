@@ -27,6 +27,12 @@
                         form-id.two-way="command.discordCommandActions[0].discordFormId"
                     ></discord-form-selector>
 
+                    <discord-action-creator
+                        single.bind="true"
+                        action.bind="command.discordCommandActions[0]"
+                        forced-type.bind="true"
+                    ></discord-action-creator>
+
                     <div class="mt-5">
                         <div class="text-end mt-3">
                             <button type="submit" mdc-button class="button-primary">
@@ -37,9 +43,7 @@
                 </form>
             </div>
             <div class="col-4 text-end">
-                <h4>
-                    Discord Form Preview
-                </h4>
+
             </div>
         </div>
     </section>

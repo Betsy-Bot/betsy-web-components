@@ -27,6 +27,12 @@
                 <h4 class="text-center mt-3" if.bind="!showingSubmissions">
                     <discord-form-preview form.bind="form"></discord-form-preview>
                 </h4>
+                <div class="submissions" if.bind="showingSubmissions">
+                    <discord-form-submission-list
+                        form-data.bind="form.formData"
+                        submissions.bind="form.submissions"
+                    ></discord-form-submission-list>
+                </div>
             </div>
         </div>
     </section>
