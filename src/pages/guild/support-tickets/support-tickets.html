@@ -1,0 +1,73 @@
+<template>
+    <section id="support-tickets">
+        <div class="row">
+            <div class="col-8">
+                <form submit.delegate="setupSupportTicket()">
+                    <discord-feature-header
+                        title="Support Tickets"
+                        subtitle="Create a support ticket tracking system. Create your message with the 'Create Ticket' component. Open tickets to your selected category. When tickets are closed the entire channel transcript is saved."
+                    ></discord-feature-header>
+
+                    <div class="mt-3">
+                        <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+                <span class="material-icons me-2">
+                    info
+                </span>
+                            The category selected will be used to create the new channels.
+                        </div>
+                    </div>
+                    <discord-channel-selector
+                        label="Select Category"
+                        if.bind="guildId"
+                        channel-id.two-way="request.categoryId"
+                        guild-id.bind="guildId"
+                        type.bind="4"
+                        required.bind="true"
+                    ></discord-channel-selector>
+
+                    <div class="mt-3">
+                        <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+                <span class="material-icons me-2">
+                    info
+                </span>
+                            The channel selected will be used to house the create ticket message.
+                        </div>
+                    </div>
+
+                    <discord-channel-selector
+                        label="Select Channel for Message"
+                        if.bind="guildId"
+                        channel-id.two-way="request.channelId"
+                        guild-id.bind="guildId"
+                        type.bind="0"
+                        required.bind="true"
+                    ></discord-channel-selector>
+                    <div class="my-2">
+                        <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+                <span class="material-icons me-2">
+                    warning
+                </span>
+                            The "Create Ticket" button will be created for you. This will be configurable in the future.
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <discord-message-creator message.bind="request.message" single.bind="true"></discord-message-creator>
+                    </div>
+                    <button mdc-button class="button-primary mt-2" type="submit">
+                        Setup Message
+                    </button>
+                </form>
+            </div>
+            <div class="col-4 text-end">
+                <button
+                    mdc-switch
+                    selected.bind="featureActive"
+                    value.bind="featureActive"
+                    change.delegate="toggleFeature()"
+                ></button>
+                <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+            </div>
+        </div>
+    </section>
+</template>

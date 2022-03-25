@@ -15,7 +15,8 @@ export class DiscordService {
     RESPONSE_MESSAGES = 'ResponseMessages';
     DATA_COMMANDS = 'DataCommands';
     BLOCK_INVITES = 'BlockInvites';
-    BLACKLISTED_WORDS = 'BlacklistedWords'
+    BLACKLISTED_WORDS = 'BlacklistedWords';
+    SUPPORT_TICKETS = 'SupportTickets';
 
     constructor(private api: ApiService) {
     }
@@ -101,5 +102,9 @@ export class DiscordService {
 
     async updateDiscordForm(guildId: string, form: DiscordForm): Promise<discordModels.DiscordForm> {
         return this.api.doPatch(`DiscordForm/Guild/${guildId}/Forms`, form);
+    }
+
+    async setupSupportTicketMessage(guildId: string, request: any): Promise<any> {
+        return this.api.doPost(`DiscordGuild/${guildId}/SupportTickets`, request);
     }
 }

@@ -135,6 +135,15 @@ export class Guild {
                     auth: true
                 }
             },
+            {
+                name: 'guild-support-tickets',
+                route: 'support-tickets',
+                moduleId: PLATFORM.moduleName('pages/guild/support-tickets/support-tickets'),
+                title: 'Support Tickets',
+                settings: {
+                    auth: true
+                }
+            },
         ]);
 
         config.mapUnknownRoutes(() => {

@@ -10,6 +10,7 @@ export class DiscordChannelSelector {
     @bindable channelId: string;
     @bindable type: number;
     @bindable label;
+    @bindable required: boolean = false;
 
     channels;
 

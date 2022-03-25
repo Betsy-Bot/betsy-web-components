@@ -23,7 +23,7 @@
       ></mdc-text-field>
       <button mdc-button
               class="button-primary mb-2"
-              if.bind="!message.embeds || message.embeds.length < 10"
+              if.bind="canCreateEmbed"
               click.delegate="addEmbed()">
         Add Embed
       </button>
