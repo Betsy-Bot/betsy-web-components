@@ -12,9 +12,9 @@
                         <mdc-list-item class="list-item-padding">Send Message</mdc-list-item>
                     </a>
 
-                    <a href="/guild/${guildId}/support-tickets">
-                        <mdc-list-item class="list-item-padding">Support Tickets</mdc-list-item>
-                    </a>
+<!--                    <a href="/guild/${guildId}/support-tickets">-->
+<!--                        <mdc-list-item class="list-item-padding">Support Tickets</mdc-list-item>-->
+<!--                    </a>-->
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('customCommands')"
                                    no-list-action>
@@ -37,6 +37,9 @@
                         </mdc-icon>
                     </mdc-list-item>
                     <div if.bind="expandOptions.moderation">
+                        <a href="/guild/${guildId}/message-tracking">
+                            <mdc-list-item class="list-item-padding">Message Tracking</mdc-list-item>
+                        </a>
                         <a href="/guild/${guildId}/invite-links">
                             <mdc-list-item class="list-item-padding">Delete Invite Links</mdc-list-item>
                         </a>

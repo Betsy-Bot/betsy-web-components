@@ -17,6 +17,8 @@ export class DiscordService {
     BLOCK_INVITES = 'BlockInvites';
     BLACKLISTED_WORDS = 'BlacklistedWords';
     SUPPORT_TICKETS = 'SupportTickets';
+    MESSAGE_EDIT_LOGGING = 'MessageEditLogging';
+    MESSAGE_DELETE_LOGGING = 'MessageDeleteLogging';
 
     constructor(private api: ApiService) {
     }

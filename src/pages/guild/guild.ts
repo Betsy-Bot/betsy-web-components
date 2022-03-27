@@ -144,6 +144,15 @@ export class Guild {
                     auth: true
                 }
             },
+            {
+                name: 'message-tracking',
+                route: 'message-tracking',
+                moduleId: PLATFORM.moduleName('pages/guild/message-tracking/message-tracking'),
+                title: 'Message Tracking',
+                settings: {
+                    auth: true
+                }
+            },
         ]);
 
         config.mapUnknownRoutes(() => {
