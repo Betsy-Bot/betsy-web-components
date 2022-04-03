@@ -12,9 +12,9 @@
                         <mdc-list-item class="list-item-padding">Send Message</mdc-list-item>
                     </a>
 
-<!--                    <a href="/guild/${guildId}/support-tickets">-->
-<!--                        <mdc-list-item class="list-item-padding">Support Tickets</mdc-list-item>-->
-<!--                    </a>-->
+                    <a href="/guild/${guildId}/support-tickets">
+                        <mdc-list-item class="list-item-padding">Support Tickets</mdc-list-item>
+                    </a>
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('customCommands')"
                                    no-list-action>
@@ -53,6 +53,17 @@
                     <div if.bind="expandOptions.resources">
                         <a href="/guild/${guildId}/resources/forms">
                             <mdc-list-item class="list-item-padding">Forms</mdc-list-item>
+                        </a>
+                    </div>
+
+                    <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('socials')" no-list-action>
+                        <span>Social Connections</span>
+                        <mdc-icon mdc-list-item-trailing>${expandOptions.socials ? 'expand_less' : 'expand_more'}
+                        </mdc-icon>
+                    </mdc-list-item>
+                    <div if.bind="expandOptions.socials">
+                        <a href="/guild/${guildId}/social-connections/twitch">
+                            <mdc-list-item class="list-item-padding">Twitch</mdc-list-item>
                         </a>
                     </div>
                 </mdc-list>

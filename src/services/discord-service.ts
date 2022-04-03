@@ -19,6 +19,7 @@ export class DiscordService {
     SUPPORT_TICKETS = 'SupportTickets';
     MESSAGE_EDIT_LOGGING = 'MessageEditLogging';
     MESSAGE_DELETE_LOGGING = 'MessageDeleteLogging';
+    TWITCH_SUBSCRIPTIONS ='TwitchSubscriptions';
 
     constructor(private api: ApiService) {
     }
@@ -108,5 +109,17 @@ export class DiscordService {
 
     async setupSupportTicketMessage(guildId: string, request: any): Promise<any> {
         return this.api.doPost(`DiscordGuild/${guildId}/SupportTickets`, request);
+    }
+
+    async getDiscordSupportMessages(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/SupportMessages`);
+    }
+
+    async getDiscordMessage(guildId: string, discordMessageId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/DiscordMessages/${discordMessageId}`);
+    }
+
+    async updateTrackedDiscordMessage(data: any) {
+        return this.api.doPatch(`DiscordMessage/${data.id}`, data);
     }
 }

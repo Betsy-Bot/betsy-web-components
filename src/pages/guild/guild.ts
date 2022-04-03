@@ -12,10 +12,13 @@ export class Guild {
     guild;
     params;
 
-    activate(params) {
+    async activate(params) {
         this.params = params;
         this.guildId = this.params.guildId;
-        this.guild = this.discordService.getDiscordServerInformation(this.guildId);
+        await Promise.all([
+            await this.discordService.getDiscordServerInformation(this.guildId),
+            await this.discordService.getDiscordChannels(this.guildId)
+        ]);
     }
 
     attached() {
@@ -138,8 +141,26 @@ export class Guild {
             {
                 name: 'guild-support-tickets',
                 route: 'support-tickets',
-                moduleId: PLATFORM.moduleName('pages/guild/support-tickets/support-tickets'),
+                moduleId: PLATFORM.moduleName('pages/guild/support-ticket-message/support-ticket-message'),
                 title: 'Support Tickets',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'create-ticket-message',
+                route: 'support-tickets/create',
+                moduleId: PLATFORM.moduleName('pages/guild/support-ticket-message/create-ticket-message/create-ticket-message'),
+                title: 'Create Support Ticket Message',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'edit-ticket-message',
+                route: 'support-tickets/:discordMessageId',
+                moduleId: PLATFORM.moduleName('pages/guild/support-ticket-message/edit-ticket-message/edit-ticket-message'),
+                title: 'Edit Support Ticket Message',
                 settings: {
                     auth: true
                 }
@@ -149,6 +170,15 @@ export class Guild {
                 route: 'message-tracking',
                 moduleId: PLATFORM.moduleName('pages/guild/message-tracking/message-tracking'),
                 title: 'Message Tracking',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'twitch',
+                route: 'social-connections/twitch',
+                moduleId: PLATFORM.moduleName('pages/guild/social-connections/twitch/twitch'),
+                title: 'Twitch Connections',
                 settings: {
                     auth: true
                 }

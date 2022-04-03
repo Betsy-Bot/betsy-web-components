@@ -1,11 +1,11 @@
 import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "../../../services/discord-service";
+import {DiscordService} from "services/discord-service";
 import {Router} from "aurelia-router";
 import {inject} from "aurelia-framework";
 import {toast} from "lets-toast";
 
 @inject(EventAggregator, DiscordService, Router)
-export class SupportTickets {
+export class CreateTicketMessage {
     constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
     }
 
@@ -13,8 +13,6 @@ export class SupportTickets {
     guild;
 
     featureActive;
-    channelId;
-    categoryId;
 
     request = {
         channelId: '',
@@ -48,6 +46,7 @@ export class SupportTickets {
         try {
             await this.discordService.setupSupportTicketMessage(this.guildId, this.request);
             toast("Created support message!", {severity: "success"})
+            this.router.navigate(`guilds/${this.guildId}/support-tickets`)
         } catch(e) {
             toast("Failed to setup support ticket creation message", {severity: "error"});
             throw e;

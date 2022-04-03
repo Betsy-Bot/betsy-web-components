@@ -6,7 +6,7 @@
                 <mdc-icon mdc-list-item-leading>folder</mdc-icon>
                 <mdc-list-item-primary-text>${namePrefix}${item.name ? item.name : item.title}</mdc-list-item-primary-text>
                 <mdc-list-item-secondary-text>${item.description}</mdc-list-item-secondary-text>
-                <mdc-form-field mdc-list-item-trailing>
+                <mdc-form-field mdc-list-item-trailing if.bind="showToggler">
                     <button mdc-switch selected.bind="item.active" value.bind="item.active"
                             click.trigger="handleToggleClick($event, item)"></button>
                 </mdc-form-field>

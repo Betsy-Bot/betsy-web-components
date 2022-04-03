@@ -47,7 +47,6 @@
       </div>
     </div>
     <div class="col-4">
-      <h4 class="text-center">Message Preview</h4>
       <div class="my-2" repeat.for="action of command.discordCommandActions">
         <discord-message-preview message.bind="action.discordMessage.message" first.bind="$index === 0"></discord-message-preview>
       </div>

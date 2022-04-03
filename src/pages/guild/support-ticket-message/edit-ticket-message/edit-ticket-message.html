@@ -1,0 +1,26 @@
+<template>
+    <section id="support-tickets">
+        <div class="row">
+            <div class="col-8">
+                <discord-feature-header
+                    title="Edit Support Ticket Message"
+                    subtitle="Edit the message that is already on your server."
+                ></discord-feature-header>
+
+                <form submit.delegate="setupSupportTicket()" if.bind="message">
+                    <discord-message-creator
+                        message.bind="message.message"
+                        single.bind="true"
+                    ></discord-message-creator>
+
+                    <button mdc-button class="button-primary mt-2" type="submit">
+                        Edit Message
+                    </button>
+                </form>
+            </div>
+            <div class="col-4">
+                <discord-message-preview message.bind="message.message"></discord-message-preview>
+            </div>
+        </div>
+    </section>
+</template>

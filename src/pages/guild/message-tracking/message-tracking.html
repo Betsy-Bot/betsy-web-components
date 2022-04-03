@@ -4,7 +4,7 @@
             title="Message Tracking"
             subtitle="Watch for various message actions and log these to your desired audit log channel."
         ></discord-feature-header>
-        <form submit.delegate="updateAuditLogChannel()">
+        <form submit.delegate="updateAuditLogChannel()" class="mb-2">
             <h6> Select or edit your audit log channel for your server</h6>
             <div class="mt-3">
                 <discord-channel-selector

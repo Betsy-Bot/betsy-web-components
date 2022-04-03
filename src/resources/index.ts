@@ -19,6 +19,7 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./elements/discord-form-selector/discord-form-selector'),
         PLATFORM.moduleName('./elements/discord-form-submission-list/discord-form-submission-list'),
         PLATFORM.moduleName('./elements/feature-item-list/feature-item-list'),
+        PLATFORM.moduleName('./elements/tracked-message-creator/tracked-message-creator'),
 
         PLATFORM.moduleName('./value-converters/discord-markup'),
     ]);
