@@ -122,4 +122,8 @@ export class DiscordService {
     async updateTrackedDiscordMessage(data: any) {
         return this.api.doPatch(`DiscordMessage/${data.id}`, data);
     }
+
+    async toggleDiscordMessageActiveStatus(messageId, active) {
+        return this.api.doPatch(`DiscordMessage/${messageId}/ToggleActive`, {active: active});
+    }
 }

@@ -44,11 +44,12 @@ export class SupportTicketMessage {
         let foundCommandIndex = this.messages.findIndex(x => x.name === message.name);
         if (foundCommandIndex >= 0) {
             if (message.active && window.confirm("This will re-create the message for you. Proceed?")) {
-                //await this.discordService.toggleDiscordCommandActive(this.guildId, message.discordApplicationCommandId, this.messages[foundCommandIndex].active);
+                await this.discordService.toggleDiscordMessageActiveStatus(message.id, message.active);
+                toast(`Active status has been updated for support ticket message`, {severity: "success"})
             } else if (!message.active && window.confirm("This will attempt to delete the message for you. Proceed?")) {
-                //await this.discordService.toggleDiscordCommandActive(this.guildId, message.discordApplicationCommandId, this.messages[foundCommandIndex].active);
+                await this.discordService.toggleDiscordMessageActiveStatus(message.id, message.active);
+                toast(`Active status has been updated for support ticket message`, {severity: "success"})
             }
-            toast(`Active status has been updated for /${message.name}`, {severity: "success"})
         } else {
             toast("Error", {severity: "error"})
         }

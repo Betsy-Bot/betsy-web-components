@@ -11,7 +11,7 @@
         <discord-channel-selector
             label="Select Category"
             if.bind="guildId"
-            channel-id.two-way="request.categoryId"
+            channel-id.two-way="request.discordCategoryId"
             guild-id.bind="guildId"
             type.bind="4"
             required.bind="true"
@@ -29,7 +29,7 @@
         <discord-channel-selector
             label="Select Channel for Message"
             if.bind="guildId"
-            channel-id.two-way="request.channelId"
+            channel-id.two-way="request.discordChannelId"
             guild-id.bind="guildId"
             type.bind="0"
             required.bind="true"

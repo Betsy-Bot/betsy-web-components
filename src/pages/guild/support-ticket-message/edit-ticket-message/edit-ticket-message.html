@@ -8,13 +8,13 @@
                 ></discord-feature-header>
 
                 <form submit.delegate="setupSupportTicket()" if.bind="message">
-                    <discord-message-creator
-                        message.bind="message.message"
-                        single.bind="true"
-                    ></discord-message-creator>
+                    <tracked-message-creator
+                        guild-id.bind="guildId"
+                        request.two-way="message"
+                    ></tracked-message-creator>
 
                     <button mdc-button class="button-primary mt-2" type="submit">
-                        Edit Message
+                        Save
                     </button>
                 </form>
             </div>

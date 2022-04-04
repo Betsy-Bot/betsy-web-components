@@ -15,8 +15,8 @@ export class CreateTicketMessage {
     featureActive;
 
     request = {
-        channelId: '',
-        categoryId: '',
+        discordChannelId: '',
+        discordCategoryId: '',
         message: {},
     };
 
