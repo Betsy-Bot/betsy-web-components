@@ -1,30 +1,32 @@
 <template>
-  <section id="discord-embed-preview" class="px-2 py-3" style.bind="'border-left: 3px solid #' + embed.color.toString(16)">
-    <div class="author mb-3 mt-2 fw-bold" if.bind="embed.author.name">
-      ${embed.author.name}
-    </div>
-    <div class="body-title mb-2 fw-bold" if.bind="embed.title">
-      ${embed.title}
-    </div>
-      <div class="body-description mb-2" if.bind="embed.description" innerhtml.bind="embed.description | discordMarkup"></div>
+    <section id="discord-embed-preview" class="px-2 py-3"
+             style.bind="'border-left: 3px solid #' + embed.color.toString(16)">
+        <div class="author mb-3 mt-2 fw-bold" if.bind="embed.author.name">
+            ${embed.author.name}
+        </div>
+        <div class="body-title mb-2 fw-bold" if.bind="embed.title">
+            ${embed.title}
+        </div>
+        <div class="body-description mb-1" if.bind="embed.description"
+             innerhtml.bind="embed.description | discordMarkup"></div>
 
-    <div class="body-fields" if.bind="embed.fields">
-      <div class="row mb-1">
-        <section repeat.for="field of embed.fields" class="${field.inline ? 'col-6 mb-2' : 'col-12 mb-2'">
-          <div class="field-name fw-bold" if.bind="field.name">
-            ${field.name}
-          </div>
-          <div class="field-value" if.bind="field.value">
-            ${field.value}
-          </div>
-        </section>
-      </div>
-    </div>
+        <div class="body-fields" if.bind="embed.fields">
+            <div class="row">
+                <section repeat.for="field of embed.fields" class="${field.inline ? 'col-6' : 'col-12'">
+                    <div class="field-name fw-bold mt-2" if.bind="field.name">
+                        ${field.name}
+                    </div>
+                    <div class="field-value" if.bind="field.value">
+                        ${field.value}
+                    </div>
+                </section>
+            </div>
+        </div>
 
-    <div class="footer" if.bind="embed.footer">
-      <div class="footer-text">
-        ${embed.footer.text}
-      </div>
-    </div>
-  </section>
+        <div class="footer" if.bind="embed.footer">
+            <div class="footer-text">
+                ${embed.footer.text}
+            </div>
+        </div>
+    </section>
 </template>

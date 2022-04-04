@@ -2,6 +2,7 @@ import {Router} from 'aurelia-router';
 import {inject, PLATFORM} from "aurelia-framework";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {DiscordService} from "../../services/discord-service";
+import {toast} from "lets-toast";
 
 @inject(EventAggregator, DiscordService, Router)
 export class Guild {
@@ -15,14 +16,22 @@ export class Guild {
     async activate(params) {
         this.params = params;
         this.guildId = this.params.guildId;
-        await Promise.all([
+        [this.guild] = await Promise.all([
             await this.discordService.getDiscordServerInformation(this.guildId),
             await this.discordService.getDiscordChannels(this.guildId)
         ]);
+
+        if (!this.guild) {
+            this.router.navigateToRoute('home');
+        }
     }
 
     attached() {
-        this.eventAggregator.publish('guild-updated', this.params.guildId);
+        if (this.guild) {
+            this.eventAggregator.publish('guild-updated', this.params.guildId);
+        } else {
+            toast("You do not have access to this resource", {severity: 'error'});
+        }
     }
 
     configureRouter(config, router) {
