@@ -15,6 +15,7 @@
 
         <div class="existing-commands-area mt-4">
             <feature-item-list
+                show-toggler.bind="false"
                 data.bind="forms"
                 item-click-handler.call="goToForm(item)"
             ></feature-item-list>
