@@ -1,5 +1,5 @@
 <template>
-  <section id="discord-embed-preview" class="px-2 py-3">
+  <section id="discord-embed-preview" class="px-2 py-3" style.bind="'border-left: 3px solid #' + embed.color.toString(16)">
     <div class="author mb-3 mt-2 fw-bold" if.bind="embed.author.name">
       ${embed.author.name}
     </div>
