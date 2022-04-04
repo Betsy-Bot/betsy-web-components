@@ -12,9 +12,9 @@
                         form.two-way="form"
                     ></discord-form-creator>
                     <div class="text-end mt-3">
-                        <button mdc-button class="button-primary" type="save" if.bind="form.formData.components.length > 0">
-                            Save
+                        <button mdc-button class="button-primary" type="save" if.bind="form.formData.components.length > 0 && !loading" disabled.bind="true">
                         </button>
+                        <mdc-circular-progress size="50" stroke-width="3" if.bind="loading"></mdc-circular-progress>
                     </div>
                 </form>
             </div>

@@ -3,6 +3,7 @@ import {Router} from 'aurelia-router';
 import {inject} from "aurelia-framework";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {DiscordService} from 'services/discord-service';
+import {toast} from "lets-toast";
 
 @inject(EventAggregator, DiscordService, Router)
 export class CreateForm {
@@ -10,6 +11,7 @@ export class CreateForm {
     }
     params;
     guildId;
+    loading = false;
 
     form: DiscordForm = {
         customId: "",
@@ -27,7 +29,23 @@ export class CreateForm {
     }
 
     async save() {
-        console.log('saving');
-        await this.discordService.createDiscordForm(this.guildId, this.form);
+        try {
+            if (this.loading) {
+                return;
+            }
+            this.loading = true;
+            await this.discordService.createDiscordForm(this.guildId, this.form);
+            toast("Form Created!");
+            this.router.navigate(`resources/forms`)
+        } catch(e) {
+            toast(e, {severity: 'error'})
+            throw e;
+        } finally {
+            this.loading = false;
+        }
+    }
+
+    get loadingIndicator() {
+        return '<mdc-circular-progress size="50" stroke-width="3"></mdc-circular-progress>'
     }
 }
