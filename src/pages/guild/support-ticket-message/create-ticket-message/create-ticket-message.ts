@@ -46,7 +46,7 @@ export class CreateTicketMessage {
         try {
             await this.discordService.setupSupportTicketMessage(this.guildId, this.request);
             toast("Created support message!", {severity: "success"})
-            this.router.navigate(`guilds/${this.guildId}/support-tickets`)
+            this.router.navigate(`support-tickets`)
         } catch(e) {
             toast("Failed to setup support ticket creation message", {severity: "error"});
             throw e;
