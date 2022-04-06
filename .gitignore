@@ -34,3 +34,5 @@ node_modules
 /scripts
 /dist
 /test/coverage-jest
+config/environment.dev.json
+config/environment.json

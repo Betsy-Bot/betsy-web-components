@@ -1,7 +1,0 @@
-{
-  "debug": true,
-  "testing": true,
-  "apiEndpoint": "http://localhost:5000/",
-  "redirectUrl": "http://localhost:9500/login",
-  "botClientId": "943260131599220856"
-}
