@@ -28,6 +28,7 @@ export class Guild {
 
     attached() {
         if (this.guild) {
+            console.log('published');
             this.eventAggregator.publish('guild-updated', this.params.guildId);
         } else {
             toast("You do not have access to this resource", {severity: 'error'});
