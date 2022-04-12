@@ -4,7 +4,7 @@
             <mdc-list-item two-line repeat.for="item of data" class="list-item-background mb-3"
                            mdc-elevation="12" click.trigger="handleItemClick(item)">
                 <mdc-icon mdc-list-item-leading>folder</mdc-icon>
-                <mdc-list-item-primary-text>${namePrefix}${item.name ? item.name : item.title}</mdc-list-item-primary-text>
+                <mdc-list-item-primary-text>${namePrefix}${getName(item)}</mdc-list-item-primary-text>
                 <mdc-list-item-secondary-text>${item.description}</mdc-list-item-secondary-text>
                 <mdc-form-field mdc-list-item-trailing if.bind="showToggler">
                     <button mdc-switch selected.bind="item.active" value.bind="item.active"

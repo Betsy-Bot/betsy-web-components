@@ -176,6 +176,24 @@ export class Guild {
                 }
             },
             {
+                name: 'support-ticket-submissions',
+                route: 'support-tickets/:discordMessageId/submissions',
+                moduleId: PLATFORM.moduleName('pages/guild/support-ticket-message/edit-ticket-message/support-tickets/support-tickets'),
+                title: 'Support Tickets',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'support-ticket-submission',
+                route: 'support-tickets/:discordMessageId/submissions/:ticketId',
+                moduleId: PLATFORM.moduleName('pages/guild/support-ticket-message/edit-ticket-message/support-tickets/support-ticket/support-ticket'),
+                title: 'Support Ticket Submission',
+                settings: {
+                    auth: true
+                }
+            },
+            {
                 name: 'message-tracking',
                 route: 'message-tracking',
                 moduleId: PLATFORM.moduleName('pages/guild/message-tracking/message-tracking'),

@@ -7,6 +7,10 @@
                     subtitle="Edit the message that is already on your server."
                 ></discord-feature-header>
 
+                <a href="guild/${guildId}/support-tickets/${discordMessageId}/submissions" mdc-button class="button-primary">
+                    View Created Tickets
+                </a>
+
                 <form submit.delegate="setupSupportTicket()" if.bind="message">
                     <tracked-message-creator
                         guild-id.bind="guildId"

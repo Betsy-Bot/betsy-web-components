@@ -1,0 +1,17 @@
+<template>
+    <section id="support-ticket-submissions">
+        <discord-feature-header
+            title="Support Tickets"
+            subtitle="View the support tickets created for the support ticket message"
+        ></discord-feature-header>
+
+        <feature-item-list
+            if.bind="!loading"
+            show-toggler.bind="false"
+            data.bind="supportTickets"
+            name-prefix="Ticket for: "
+            name-override="createdBy"
+            item-click-handler.call="goToSubmission(item)"
+        ></feature-item-list>
+    </section>
+</template>

@@ -119,6 +119,14 @@ export class DiscordService {
         return this.api.doGet(`DiscordGuild/${guildId}/DiscordMessages/${discordMessageId}`);
     }
 
+    async getDiscordMessageSupportTickets(guildId: string, discordMessageId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/DiscordMessages/${discordMessageId}/SupportTickets`);
+    }
+
+    async getSupportTicket(guildId: string, discordMessageId: string, supportTicketId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/DiscordMessages/${discordMessageId}/SupportTickets/${supportTicketId}`);
+    }
+
     async updateTrackedDiscordMessage(data: any) {
         return this.api.doPatch(`DiscordMessage/${data.id}`, data);
     }

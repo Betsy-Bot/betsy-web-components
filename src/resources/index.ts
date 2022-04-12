@@ -22,5 +22,6 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./elements/tracked-message-creator/tracked-message-creator'),
 
         PLATFORM.moduleName('./value-converters/discord-markup'),
+        PLATFORM.moduleName('./value-converters/date-formatter'),
     ]);
 }

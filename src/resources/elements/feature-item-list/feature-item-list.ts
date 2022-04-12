@@ -7,6 +7,7 @@ export class FeatureItemList {
     @bindable namePrefix: string;
     @bindable toggleHandler;
     @bindable itemClickHandler;
+    @bindable nameOverride;
 
     handleToggleClick(event, item) {
         item.active = !item.active;
@@ -16,5 +17,12 @@ export class FeatureItemList {
 
     handleItemClick(item) {
         this.itemClickHandler({item: item});
+    }
+
+    getName(item) {
+        if (this.nameOverride) {
+            return item[this.nameOverride];
+        }
+        return item.name ? item.name : item.title;
     }
 }
