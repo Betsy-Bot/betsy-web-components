@@ -1,19 +1,26 @@
 #discord-embed-preview {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
 
-  //Replace with a JS function to apply based on color
-  border-left: 3px solid black;
+    //Replace with a JS function to apply based on color
+    border-left: 3px solid black;
 
-  .author, .field-name,.body-description {
-    font-size: 0.8rem;
-  }
+    .author, .field-name, .body-description {
+        font-size: 0.8rem;
+    }
 
-  .body-title {
-    font-size: 0.95rem;
-  }
+    .body-title {
+        font-size: 0.95rem;
+    }
 
-  .field-value, .footer-text {
-    font-size: 0.75rem;
-  }
+    .field-value, .footer-text {
+        font-size: 0.75rem;
+    }
+
+    .author-url {
+        height: 64px;
+        width: 64px;
+        max-width: 100%;
+        max-height: 100%;
+    }
 }
