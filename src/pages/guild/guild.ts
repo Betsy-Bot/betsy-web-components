@@ -193,10 +193,10 @@ export class Guild {
                 }
             },
             {
-                name: 'message-tracking',
-                route: 'message-tracking',
-                moduleId: PLATFORM.moduleName('pages/guild/message-tracking/message-tracking'),
-                title: 'Message Tracking',
+                name: 'action-log',
+                route: 'action-log',
+                moduleId: PLATFORM.moduleName('pages/guild/action-log/action-log'),
+                title: 'Action Log',
                 settings: {
                     auth: true
                 }

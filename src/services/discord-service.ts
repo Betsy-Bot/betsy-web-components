@@ -17,8 +17,7 @@ export class DiscordService {
     BLOCK_INVITES = 'BlockInvites';
     BLACKLISTED_WORDS = 'BlacklistedWords';
     SUPPORT_TICKETS = 'SupportTickets';
-    MESSAGE_EDIT_LOGGING = 'MessageEditLogging';
-    MESSAGE_DELETE_LOGGING = 'MessageDeleteLogging';
+    AUDIT_LOG = 'AuditLog';
     TWITCH_SUBSCRIPTIONS ='TwitchSubscriptions';
 
     constructor(private api: ApiService) {
@@ -85,6 +84,10 @@ export class DiscordService {
 
     async setActiveFeaturesForDiscord(guildId: string, features: string[]): Promise<discordModels.BaseDiscordServer> {
         return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, {activeFeatures: features});
+    }
+
+    async setActiveAuditFeaturesForDiscord(guildId: string, features: string[]): Promise<discordModels.BaseDiscordServer> {
+        return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, {activeAuditLogFeatures: features});
     }
 
     async setAuditLogChannelId(guildId: string, auditLogChannelId: string[]): Promise<discordModels.BaseDiscordServer> {

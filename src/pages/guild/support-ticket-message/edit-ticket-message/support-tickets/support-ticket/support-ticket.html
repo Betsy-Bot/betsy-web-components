@@ -5,16 +5,21 @@
             subtitle="View the transcript and any additional information for a support ticket."
         ></discord-feature-header>
 
-        <h3 class="mt-3">Transcript: </h3>
-        <div class="messages-area">
-            <div class="message-container py-3" repeat.for="message of supportTicket.transcript.messages">
-                <div class="author">
+        <div class="messages-area" if.bind="supportTicket.transcript.messages">
+            <h3 class="mt-3">Transcript: </h3>
+            <div class="message-container" repeat.for="message of supportTicket.transcript.messages">
+                <div class="author mt-3" if.bind="showAuthor(message, $index)">
                     ${message.discordUserName} <span class="time ms-3">${message.createdDate | dateFormat}</span>
                 </div>
                 <div class="message">
-                    ${message.message}
+                    <span mdc-tooltip.bind="message.createdDate | dateFormat">
+                        ${message.message}
+                    </span>
                 </div>
             </div>
         </div>
+        <h5 class="empty mt-4" else>
+            The ticket has not been closed yet. The transcript is generated when the ticket is closed.
+        </h5>
     </section>
 </template>

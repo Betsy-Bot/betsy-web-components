@@ -4,6 +4,7 @@ import {Router} from "aurelia-router";
 import {inject} from "aurelia-framework";
 import {toast} from "lets-toast";
 import './support-ticket.scss';
+import moment from "moment";
 
 @inject(EventAggregator, DiscordService, Router)
 export class SupportTicket {
@@ -25,6 +26,19 @@ export class SupportTicket {
     }
 
     attached() {
-        this.supportTicket.transcript.messages.reverse();
+        this.supportTicket?.transcript?.messages?.reverse();
     }
+
+    showAuthor(message, index) {
+        if (!index) {
+            return true;
+        }
+        if (this.supportTicket?.transcript?.messages[index - 1].discordUserName != message.discordUserName) {
+            return true;
+        }
+        const diff = moment(message.createdDate).diff(this.supportTicket?.transcript?.messages[index - 1].createdDate, 'minutes');
+        console.log(diff);
+        return false;
+    }
+
 }
