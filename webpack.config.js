@@ -95,7 +95,7 @@ module.exports = ({production}, {analyze, hmr, port, host}) => ({
                 // },
 
                 // This is the HTTP/1.1 optimized cacheGroup configuration.
-                vendors: { // picks up everything from node_modules as long as the sum of node modules is larger than minSize
+                /* vendors: { // picks up everything from node_modules as long as the sum of node modules is larger than minSize
                     test: /[\\/]node_modules[\\/]/,
                     name: 'vendors',
                     priority: 19,
@@ -117,9 +117,9 @@ module.exports = ({production}, {analyze, hmr, port, host}) => ({
                     priority: 0,
                     reuseExistingChunk: true,
                     minSize: 10000  // use smaller minSize to avoid too much potential bundle bloat due to module duplication.
-                }
+                } */
 
-                /* This is the HTTP/2 optimized cacheGroup configuration.
+                //This is the HTTP/2 optimized cacheGroup configuration.
                 // generic 'initial/sync' vendor node module splits: separates out larger modules
                 vendorSplit: { // each node module as separate chunk file if module is bigger than minSize
                   test: /[\\/]node_modules[\\/]/,
@@ -178,7 +178,7 @@ module.exports = ({production}, {analyze, hmr, port, host}) => ({
                   reuseExistingChunk: true,
                   enforce: true // create chunk regardless of the size of the chunk
                 }
-                */
+
             }
         }
     },
