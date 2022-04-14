@@ -4,6 +4,7 @@ import {DiscordEmbed} from "../../../services/models/discord";
 export class DiscordMessageCreator {
     @bindable message;
     @bindable single;
+    @bindable allowComponents: boolean;
 
     attached() {
         if (this.message?.embeds?.length > 0) {

@@ -22,7 +22,7 @@
                 <span class="material-icons me-2">
                     info
                 </span>
-                The channel selected will be used to house the create ticket message.
+                The channel selected will be used to house the created ticket message.
             </div>
         </div>
 
@@ -45,6 +45,7 @@
 
         <div class="mt-5">
             <discord-message-creator
+                allow-components.bind="allowComponents"
                 message.bind="request.message"
                 single.bind="true"
             ></discord-message-creator>

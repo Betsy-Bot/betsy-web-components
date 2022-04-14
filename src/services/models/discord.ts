@@ -175,11 +175,20 @@ export class DiscordComponent {
     type: DiscordComponentType;
     label: string;
     custom_id: string;
-    style?: number;
+    style?: DiscordButtonStyle;
     min_length?: number;
     max_length?: number;
     placeholder?: string;
     required?: boolean;
+}
+
+export enum DiscordButtonStyle
+{
+    Primary = 1,
+    Secondary = 2,
+    Success = 3,
+    Danger = 4,
+    Link = 5
 }
 
 export enum DiscordCommandActionType {

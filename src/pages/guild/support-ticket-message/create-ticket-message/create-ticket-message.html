@@ -9,6 +9,8 @@
 
                 <form submit.delegate="setupSupportTicket()">
                     <tracked-message-creator
+                        max-components.bind="1"
+                        allow-components.bind="true"
                         guild-id.bind="guildId"
                         request.two-way="request"
                     ></tracked-message-creator>
@@ -17,14 +19,8 @@
                     </button>
                 </form>
             </div>
-            <div class="col-4 text-end">
-                <button
-                    mdc-switch
-                    selected.bind="featureActive"
-                    value.bind="featureActive"
-                    change.delegate="toggleFeature()"
-                ></button>
-                <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+            <div class="col-4">
+                <discord-message-preview message.bind="request.message"></discord-message-preview>
             </div>
         </div>
     </section>

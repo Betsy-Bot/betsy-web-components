@@ -1,0 +1,11 @@
+<template>
+    <section id="discord-component-preview">
+        <div class="row">
+            <div class="col" repeat.for="componentWrapper of components">
+                <div class="components" repeat.for="component of componentWrapper.components">
+                    <discord-button button.bind="component" if.bind="component.type === 2"></discord-button>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

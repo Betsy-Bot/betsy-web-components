@@ -17,6 +17,10 @@
                 <div class="embed-area" repeat.for="embed of message.embeds">
                     <discord-embed-preview embed.bind="embed"></discord-embed-preview>
                 </div>
+
+                <div class="component-area mt-3" if.bind="message.components">
+                    <discord-component-preview components.bind="message.components"></discord-component-preview>
+                </div>
             </div>
         </div>
     </section>

@@ -13,6 +13,8 @@
 
                 <form submit.delegate="setupSupportTicket()" if.bind="message">
                     <tracked-message-creator
+                        max-components.bind="1"
+                        allow-components.bind="true"
                         guild-id.bind="guildId"
                         request.two-way="message"
                     ></tracked-message-creator>

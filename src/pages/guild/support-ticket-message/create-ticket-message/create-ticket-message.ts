@@ -3,6 +3,7 @@ import {DiscordService} from "services/discord-service";
 import {Router} from "aurelia-router";
 import {inject} from "aurelia-framework";
 import {toast} from "lets-toast";
+import {DiscordButtonStyle, DiscordComponentType} from "../../../../services/models/discord";
 
 @inject(EventAggregator, DiscordService, Router)
 export class CreateTicketMessage {
@@ -17,7 +18,16 @@ export class CreateTicketMessage {
     request = {
         discordChannelId: '',
         discordCategoryId: '',
-        message: {},
+        message: {
+            components: [ {
+                type: DiscordComponentType.ActionRow,
+                components: [{
+                    type: DiscordComponentType.Button,
+                    label: "Create Ticket",
+                    style: DiscordButtonStyle.Primary
+                }]
+            }]
+        },
     };
 
     async activate(params) {
@@ -29,17 +39,6 @@ export class CreateTicketMessage {
             await this.discordService.getDiscordServerInformation(this.guildId)
         ])
         this.featureActive = this.guild.activeFeatures.includes(this.discordService.SUPPORT_TICKETS);
-    }
-
-    async toggleFeature() {
-        if (this.featureActive) {
-            this.guild.activeFeatures.push(this.discordService.SUPPORT_TICKETS);
-            await this.discordService.setActiveFeaturesForDiscord(this.guildId, this.guild.activeFeatures);
-        } else {
-            this.guild.activeFeatures = this.guild.activeFeatures.filter(x => x !== this.discordService.SUPPORT_TICKETS);
-            await this.discordService.setActiveFeaturesForDiscord(this.guildId, this.guild.activeFeatures);
-        }
-        toast(this.featureActive ? "Toggled feature on" : "Toggled feature off");
     }
 
     async setupSupportTicket() {
