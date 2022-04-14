@@ -1,6 +1,11 @@
 <template>
     <section id="discord-feature-header">
-        <h2>${title}</h2>
+        <h2>
+            ${title}
+            <button mdc-button class="button-secondary" click.delegate="router.navigateBack()">
+                Back
+            </button>
+        </h2>
         <div>
             ${subtitle}
         </div>
