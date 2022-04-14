@@ -86,7 +86,15 @@ export interface DiscordEmbedFooter {
 }
 
 export interface DiscordEmbedImage {
+    url: URL,
+    height: number;
+    width: number;
+}
+
+export interface DiscordEmbedVideo {
     url: URL
+    height: number;
+    width: number;
 }
 
 export class DiscordEmbed {
@@ -98,6 +106,7 @@ export class DiscordEmbed {
     footer?: DiscordEmbedFooter;
     image?: DiscordEmbedImage;
     thumbnail?: DiscordEmbedImage;
+    video?: DiscordEmbedVideo;
     timestamp?: Date
 }
 

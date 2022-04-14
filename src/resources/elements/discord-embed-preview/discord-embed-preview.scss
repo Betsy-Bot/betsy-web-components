@@ -17,10 +17,17 @@
         font-size: 0.75rem;
     }
 
-    .author-url {
-        height: 64px;
-        width: 64px;
+    .embed-video  {
         max-width: 100%;
         max-height: 100%;
+    }
+
+    .thumbnail {
+        img {
+            height: 82px;
+            width: 82px;
+            max-width: 100%;
+            max-height: 100%;
+        }
     }
 }

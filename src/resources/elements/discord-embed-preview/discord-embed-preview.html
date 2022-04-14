@@ -25,14 +25,18 @@
                     </div>
                 </div>
 
+                <div class="embed-video" if.bind="embed.video.url">
+                    <img src="${embed.video.url}">
+                </div>
+
                 <div class="footer" if.bind="embed.footer">
                     <div class="footer-text">
                         ${embed.footer.text}
                     </div>
                 </div>
             </div>
-            <div class="col-3" if.bind="embed.thumbnail.url">
-                <img class="author-url" src.bind="embed.thumbnail.url">
+            <div class="col-3 thumbnail text-end" if.bind="embed.thumbnail.url">
+                <img src.bind="embed.thumbnail.url">
             </div>
         </div>
     </section>
