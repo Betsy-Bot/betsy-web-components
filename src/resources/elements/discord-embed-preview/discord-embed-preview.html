@@ -3,8 +3,15 @@
              style.bind="'border-left: 3px solid #' + embed.color.toString(16)">
         <div class="row">
             <div class.bind="embed.thumbnail.url ? 'col-9' : 'col-12'">
-                <div class="author mb-3 mt-2 fw-bold" if.bind="embed.author.name">
-                    ${embed.author.name}
+                <div class="row">
+                    <div class="col-2" if.bind="embed.author.icon_url">
+                        <img src="${embed.author.icon_url}" class="author-img">
+                    </div>
+                    <div class="${embed.author.icon_url ? 'col-10' : 'col-12'} ps-0">
+                        <div class="author mb-3 mt-2 fw-bold" if.bind="embed.author.name">
+                            ${embed.author.name}
+                        </div>
+                    </div>
                 </div>
                 <div class="body-title mb-2 fw-bold" if.bind="embed.title">
                     ${embed.title}
@@ -24,19 +31,18 @@
                         </section>
                     </div>
                 </div>
-
-                <div class="embed-video" if.bind="embed.video.url">
-                    <img src="${embed.video.url}">
-                </div>
-
-                <div class="footer" if.bind="embed.footer">
-                    <div class="footer-text">
-                        ${embed.footer.text}
-                    </div>
-                </div>
             </div>
             <div class="col-3 thumbnail text-end" if.bind="embed.thumbnail.url">
                 <img src.bind="embed.thumbnail.url">
+            </div>
+        </div>
+        <div class="embed-video" if.bind="embed.video.url">
+            <img src="${embed.video.url}">
+        </div>
+
+        <div class="footer mt-2" if.bind="embed.footer">
+            <div class="footer-text">
+                ${embed.footer.text}
             </div>
         </div>
     </section>
