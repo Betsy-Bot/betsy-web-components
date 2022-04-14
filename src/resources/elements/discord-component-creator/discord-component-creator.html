@@ -20,6 +20,13 @@
                                 required.bind="true"
                             ></mdc-text-field>
                         </div>
+                        <div class="mb-2">
+                            <discord-emoji-selector
+                                value.two-way="component.emoji"
+                                size.bind="50"
+                                label="Button Emoji"
+                            ></discord-emoji-selector>
+                        </div>
                     </div>
                     <div class="preview">
                         <discord-button button.bind="component" if.bind="component.type === 2"></discord-button>

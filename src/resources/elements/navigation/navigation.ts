@@ -29,7 +29,6 @@ export class Navigation {
         });
         this.ea.subscribe('guild-updated', payload => {
             this.guildId = payload;
-            console.log(this.guildId);
         });
     }
 

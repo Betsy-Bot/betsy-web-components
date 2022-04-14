@@ -4,8 +4,4 @@ import './discord-embed-preview.scss';
 
 export class DiscordEmbedPreview {
     @bindable embed;
-
-    attached() {
-        console.log(this.embed);
-    }
 }

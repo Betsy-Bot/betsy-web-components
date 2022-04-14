@@ -21,10 +21,6 @@ export class SupportTickets {
         this.supportTickets = await this.discordService.getDiscordMessageSupportTickets(this.guildId, this.discordMessageId);
     }
 
-    attached() {
-        console.log(this.supportTickets);
-    }
-
     goToSubmission(submission) {
         this.router.navigate(`/guild/${this.guildId}/support-tickets/${this.discordMessageId}/submissions/${submission.id}`)
     }

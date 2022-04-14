@@ -1,7 +1,7 @@
 <template>
     <section id="discord-button">
         <button class="${getButtonClass(button.style)}">
-            ${button.label}
+            <img src="https://cdn.discordapp.com/emojis/${button.emoji.id}.webp?size=24&quality=lossless" if.bind="button.emoji"> ${button.label}
         </button>
     </section>
 </template>

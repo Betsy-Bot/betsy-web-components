@@ -24,7 +24,6 @@ export class EditForm {
 
     async attached() {
         this.form = await this.discordService.getDiscordForm(this.guildId, this.formId);
-        console.log('this.form', this.form);
     }
 
     async save() {

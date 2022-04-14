@@ -24,6 +24,10 @@ export class DiscordService {
     constructor(private api: ApiService) {
     }
 
+    getLocalGuild() {
+        return this.guild;
+    }
+
     async exchangeCode(code: string): Promise<discordModels.ExchangeCodeResponse> {
         return await this.api.doPost('Discord/OAuth/ExchangeCode', {code: code})
     }
