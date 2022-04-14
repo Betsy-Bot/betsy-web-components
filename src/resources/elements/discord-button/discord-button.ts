@@ -15,8 +15,4 @@ export class DiscordButton {
                 return 'discord-button-danger'
         }
     }
-
-    attached() {
-        console.log(this.button);
-    }
 }

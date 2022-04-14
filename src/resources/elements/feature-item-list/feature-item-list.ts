@@ -8,6 +8,8 @@ export class FeatureItemList {
     @bindable toggleHandler;
     @bindable itemClickHandler;
     @bindable nameOverride;
+    @bindable nameSuffix;
+    @bindable suffixProperty;
 
     handleToggleClick(event, item) {
         item.active = !item.active;

@@ -7,6 +7,10 @@ export class DateFormatValueConverter {
         if (!format) {
             format = 'MMMM Do YYYY, h:mmA';
         }
-        return moment.utc(value).local().format(format);
+        const date = moment.utc(value);
+        if (!date.isValid()) {
+            return value;
+        }
+        return date.local().format(format);
     }
 }

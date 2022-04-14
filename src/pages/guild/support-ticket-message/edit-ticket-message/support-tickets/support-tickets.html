@@ -11,6 +11,8 @@
             data.bind="supportTickets"
             name-prefix="Ticket for: "
             name-override="createdBy"
+            suffix-property="createdDate"
+            name-suffix="- "
             item-click-handler.call="goToSubmission(item)"
         ></feature-item-list>
     </section>
