@@ -64,7 +64,7 @@
             </button>
 
             <div class="row" if.bind="embed.fields">
-                <div class="col-6" repeat.for="field of embed.fields">
+                <div class="col-12 col-lg-6" repeat.for="field of embed.fields">
                     <mdc-form-field class="mt-2">
                         <button mdc-switch selected.bind="field.inline"></button>
                         <label mdc-tooltip="Fields will be added in column form">Inline?</label>

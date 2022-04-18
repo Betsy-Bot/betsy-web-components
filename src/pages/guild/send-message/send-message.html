@@ -1,7 +1,7 @@
 <template>
     <section id="send-message py-5">
-        <div class="row">
-            <div class="col-8">
+        <div class="row g-4">
+            <div class="col-12 col-xl-8">
                 <discord-feature-header
                     title="Send Message / Announcement"
                     subtitle="You can use this to send a one-time message to a channel or to all channels within a category."
@@ -30,7 +30,7 @@
                     Send Message
                 </button>
             </div>
-            <div class="col-4">
+            <div class="col-12 col-xl-4">
                 <discord-message-preview message.bind="request.message"></discord-message-preview>
             </div>
         </div>
