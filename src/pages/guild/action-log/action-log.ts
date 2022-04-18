@@ -25,6 +25,9 @@ export class ActionLog {
 
     MESSAGE_EDIT_LOGGING = "MessageEdits";
     MESSAGE_DELETE_LOGGING = "MessageDeletes";
+    ROLE_CREATE = 'RoleCreate';
+    ROLE_UPDATE = 'RoleUpdate';
+    ROLE_DELETE = 'RoleDelete';
 
     actionLogItems = [
         {
@@ -37,6 +40,24 @@ export class ActionLog {
             value: this.MESSAGE_DELETE_LOGGING,
             label: 'Message Deletes',
             description: 'Anytime a message is deleted the deleted message content will be logged.',
+            active: false
+        },
+        {
+            value: this.ROLE_CREATE,
+            label: 'Role Creations',
+            description: 'Anytime a role is created it will be logged. We are not able to see who created the role however.',
+            active: false
+        },
+        {
+            value: this.ROLE_UPDATE,
+            label: 'Role Updates',
+            description: 'Anytime a role is updated it will be logged. We are not able to see who updated the role however.',
+            active: false
+        },
+        {
+            value: this.ROLE_DELETE,
+            label: 'Role Deletes',
+            description: 'Anytime a role is deleted it will be logged. We are not able to see who deleted the role however.',
             active: false
         }
     ]
