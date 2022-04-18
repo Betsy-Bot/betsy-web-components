@@ -46,7 +46,7 @@ export class CreateResponseMessage {
     }
 
     deleteAction(index) {
-        this.command.discordCommandActions.slice(index);
+        this.command.discordCommandActions.splice(index, 1);
     }
 
     async createCommand() {

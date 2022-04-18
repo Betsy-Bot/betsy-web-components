@@ -68,7 +68,7 @@ export class Guild {
             },
             {
                 name: 'guild-response-message-edit',
-                route: 'response-message/:discordApplicationCommandId',
+                route: 'response-message/:id',
                 moduleId: PLATFORM.moduleName('pages/guild/response-message/edit-response-message/edit-response-message'),
                 title: 'Response Messages',
                 settings: {

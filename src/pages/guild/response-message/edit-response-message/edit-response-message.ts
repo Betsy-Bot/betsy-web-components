@@ -11,21 +11,18 @@ export class EditResponseMessage {
     }
 
     guildId: string;
-    discordApplicationCommandId: string;
+    id: string;
 
     command: BaseDiscordCommand;
 
     async activate(params) {
         this.guildId = params.guildId;
-        this.discordApplicationCommandId = params.discordApplicationCommandId;
-        this.command = await this.discordService.getDiscordCommandDetails(this.discordApplicationCommandId)
+        this.id = params.id;
+        this.command = await this.discordService.getDiscordCommandDetails(this.id)
     }
 
-    deleteAction(action) {
-        const index = this.command?.discordCommandActions?.findIndex(action);
-        if (index >= 0) {
-            this.command.discordCommandActions.slice(index);
-        }
+    deleteAction(index) {
+        this.command.discordCommandActions.splice(index, 1);
     }
 
     createNewCommandAction() {

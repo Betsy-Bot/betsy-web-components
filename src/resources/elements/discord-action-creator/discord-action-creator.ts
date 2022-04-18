@@ -21,7 +21,7 @@ export class DiscordActionCreator {
     ]
 
     deleteAction() {
-        this.deleteFunction({action: this.action});
+        this.deleteFunction();
     }
 
 }

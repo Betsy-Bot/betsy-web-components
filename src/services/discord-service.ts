@@ -59,8 +59,8 @@ export class DiscordService {
         return await this.api.doPatch(`DiscordGuild/${guildId}/DiscordCommand/${discordApplicationCommandId}/ToggleActive`, {active: active});
     }
 
-    async getDiscordCommandDetails(discordApplicationCommandId: string): Promise<discordModels.BaseDiscordCommand> {
-        return await this.api.doGet(`Discord/ApplicationCommand?discordApplicationCommandId=${discordApplicationCommandId}`);
+    async getDiscordCommandDetails(id: string): Promise<discordModels.BaseDiscordCommand> {
+        return await this.api.doGet(`Discord/ApplicationCommand/${id}`);
     }
 
     async getDiscordServerInformation(guildId: string): Promise<discordModels.BaseDiscordServer> {
