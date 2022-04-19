@@ -1,7 +1,7 @@
 import {EventAggregator} from "aurelia-event-aggregator";
 import {DiscordService} from "services/discord-service";
 import {Router} from "aurelia-router";
-import {inject} from "aurelia-framework";
+import {inject, observable} from "aurelia-framework";
 import {toast} from "lets-toast";
 
 @inject(EventAggregator, DiscordService, Router)
@@ -16,6 +16,10 @@ export class EditTicketMessage {
 
     message;
 
+    tab = 'container';
+
+    @observable authorizedRole;
+
     async activate(params) {
         this.guildId = params.guildId as string;
         this.discordMessageId = params.discordMessageId as string;
@@ -25,6 +29,14 @@ export class EditTicketMessage {
         [this.message] = await Promise.all([
             await this.discordService.getDiscordMessage(this.guildId, this.discordMessageId)
         ])
+    }
+
+    authorizedRoleChanged(newValue, oldvalue) {
+        if (!this.message.settings.assignedRoles) {
+            this.message.settings.assignedRoles = [];
+        }
+        this.message.settings.assignedRoles.push(newValue.id);
+        console.log(this.message.settings.assignedRoles);
     }
 
     async setupSupportTicket() {

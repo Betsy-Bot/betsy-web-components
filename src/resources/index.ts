@@ -11,6 +11,7 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./elements/discord-button/discord-button'),
         PLATFORM.moduleName('./elements/discord-command-creator/discord-command-creator'),
         PLATFORM.moduleName('./elements/discord-channel-selector/discord-channel-selector'),
+        PLATFORM.moduleName('./elements/discord-role-selector/discord-role-selector'),
         PLATFORM.moduleName('./elements/discord-component-creator/discord-component-creator'),
         PLATFORM.moduleName('./elements/discord-component-preview/discord-component-preview'),
         PLATFORM.moduleName('./elements/discord-embed-preview/discord-embed-preview'),

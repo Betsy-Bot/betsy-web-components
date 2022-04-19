@@ -7,17 +7,42 @@
                     subtitle="Edit the message that is already on your server."
                 ></discord-feature-header>
 
-                <a href="guild/${guildId}/support-tickets/${discordMessageId}/submissions" mdc-button class="button-primary">
+                <a href="guild/${guildId}/support-tickets/${discordMessageId}/submissions" mdc-button class="button-primary mt-3 mb-4">
                     View Created Tickets
                 </a>
 
-                <form submit.delegate="setupSupportTicket()" if.bind="message">
-                    <tracked-message-creator
-                        max-components.bind="1"
-                        allow-components.bind="true"
-                        guild-id.bind="guildId"
-                        request.two-way="message"
-                    ></tracked-message-creator>
+                <mdc-tab-bar view-model.ref="tabBar">
+                    <mdc-tab
+                        label="Support Ticket Container"
+                        active.bind="tab === 'container'"
+                        click.delegate="tab = 'container'"></mdc-tab>
+                    <mdc-tab
+                        label="Ticket Created Message"
+                        active.bind="tab === 'initial'"
+                        click.delegate="tab = 'initial'"
+                    ></mdc-tab>
+                </mdc-tab-bar>
+
+                <form submit.delegate="setupSupportTicket()">
+                    <div if.bind="tab === 'container'">
+                        <div class="fs-6 py-3">Customize the Message Container which is to house the Create Ticket Button</div>
+                        <tracked-message-creator
+                            max-components.bind="1"
+                            allow-components.bind="true"
+                            guild-id.bind="guildId"
+                            request.two-way="message"
+                            authorized-role.two-way="authorizedRole"
+                        ></tracked-message-creator>
+                    </div>
+
+                    <div if.bind="tab === 'initial'">
+                        <div class="fs-6 py-3">Customize the Initial Message that is sent to the channel when the support ticket channel is created</div>
+                        <discord-message-creator
+                            allow-components.bind="false"
+                            message.two-way="message.settings.initialMessage"
+                            single.bind="true"
+                        ></discord-message-creator>
+                    </div>
 
                     <button mdc-button class="button-primary mt-2" type="submit">
                         Save

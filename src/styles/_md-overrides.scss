@@ -20,6 +20,14 @@ body {
     @include button.filled-accessible(theme.$primary);
 }
 
+.mdc-evolution-chip {
+    background-color: theme.$primary;
+
+    .mdc-evolution-chip__text-label {
+        color: #dcddde;
+    }
+}
+
 .list-item-background {
     background: rgba(76, 96, 133, 1) !important;
 }
@@ -44,6 +52,9 @@ body {
     .mdc-select__selected-text,
     .mdc-floating-label--float-above,
     .mdc-select__icon {
+        color: #dcddde !important;
+    }
+    .mdc-floating-label {
         color: #dcddde !important;
     }
 }

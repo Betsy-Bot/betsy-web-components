@@ -5,14 +5,7 @@ export class DiscordMessageCreator {
     @bindable message;
     @bindable single;
     @bindable allowComponents: boolean;
-
-    attached() {
-        if (this.message?.embeds?.length > 0) {
-            this.message.type = "embeds"
-        } else {
-            this.message.type = "message";
-        }
-    }
+    @bindable tab = 'message';
 
     addEmbed() {
         if (!this.message.embeds) {
@@ -23,10 +16,6 @@ export class DiscordMessageCreator {
 
     deleteEmbed(index) {
         this.message.embeds.splice(index, 1)
-    }
-
-    selectTab(tab) {
-        this.message.type = tab;
     }
 
     get canCreateEmbed() {

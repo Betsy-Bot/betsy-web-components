@@ -82,6 +82,10 @@ export class DiscordService {
         return this.guildChannelData.data;
     }
 
+    async getDiscordRoles(guildId: string) {
+        return this.guild.guild.roles;
+    }
+
     async setActiveFeaturesForDiscord(guildId: string, features: string[]): Promise<discordModels.BaseDiscordServer> {
         return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, {activeFeatures: features});
     }

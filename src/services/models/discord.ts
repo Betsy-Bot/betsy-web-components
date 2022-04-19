@@ -168,6 +168,14 @@ export class DiscordComponentWrapper {
     components: DiscordComponent[]
 }
 
+export class DiscordSupportTicketSettings {
+    categoryId?: string;
+    logChannelId?: string;
+    assignedRoles?: string[];
+    discordMessageId?: string;
+    discordMessage?: DiscordMessage
+}
+
 export enum DiscordComponentType {
     ActionRow = 1,
     Button = 2,
