@@ -63,6 +63,10 @@ export class DiscordService {
         return await this.api.doGet(`Discord/ApplicationCommand/${id}`);
     }
 
+    async deleteDiscordCommand(id: string): Promise<any> {
+        return await this.api.doDelete(`Discord/ApplicationCommand/${id}`);
+    }
+
     async getDiscordServerInformation(guildId: string): Promise<discordModels.BaseDiscordServer> {
         if (!this.guild || guildId !== this.guild.guildId) {
             this.guild = await this.api.doGet(`DiscordGuild/${guildId}`);

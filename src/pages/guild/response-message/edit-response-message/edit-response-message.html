@@ -1,9 +1,27 @@
 <template>
+    <confirmation-dialog
+        cancel-text="Cancel"
+        confirm-text="Delete"
+        dialog.two-way="confirmDeleteDialog"
+        handler.call="deleteCommand(event)"
+        title="Are you sure you would like to delete?"
+    >
+        This is a permanent action and cannot be undone
+    </confirmation-dialog>
     <div class="row">
         <div class="col-8">
-            <h3 class="mb-3">
-                Editing /${command.name}
-            </h3>
+            <div class="row">
+                <div class="col-9">
+                    <h3 class="mb-3">
+                        Editing /${command.name}
+                    </h3>
+                </div>
+                <div class="col-3 text-end">
+                    <button mdc-button class="button-secondary" click.delegate="confirmDeleteDialog.open()">
+                        Delete
+                    </button>
+                </div>
+            </div>
 
             <div>
                 <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">

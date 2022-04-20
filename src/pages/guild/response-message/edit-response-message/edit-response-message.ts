@@ -12,8 +12,8 @@ export class EditResponseMessage {
 
     guildId: string;
     id: string;
-
     command: BaseDiscordCommand;
+    confirmDeleteDialog;
 
     async activate(params) {
         this.guildId = params.guildId;
@@ -35,6 +35,14 @@ export class EditResponseMessage {
                 }
             }
         })
+    }
+
+    async deleteCommand(event) {
+        if (event.detail.action == 'ok') {
+            await this.discordService.deleteDiscordCommand(this.command.id);
+            toast('Response Message Deleted');
+            this.router.navigateBack()
+        }
     }
 
     async updateCommand() {
