@@ -19,6 +19,8 @@ export class CreateTicketMessage {
 
     featureActive;
 
+    tab = 'container';
+
     request = {
         discordChannelId: '',
         discordCategoryId: '',
@@ -34,9 +36,12 @@ export class CreateTicketMessage {
         },
         settings: {
             logChannelId: '',
-            assignedRoles: []
+            assignedRoles: [],
+            initialMessage: {}
         }
     };
+
+    loading = false;
 
     async activate(params) {
         this.guildId = params.guildId as string;
@@ -50,13 +55,19 @@ export class CreateTicketMessage {
     }
 
     async setupSupportTicket() {
+        if (this.loading) {
+            return;
+        }
         try {
+            this.loading = true;
             await this.discordService.setupSupportTicketMessage(this.guildId, this.request);
             toast("Created support message!", {severity: "success"})
             this.router.navigate(`support-tickets`)
         } catch(e) {
             toast("Failed to setup support ticket creation message", {severity: "error"});
             throw e;
+        } finally {
+            this.loading = false;
         }
     }
 }

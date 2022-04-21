@@ -7,14 +7,39 @@
                     subtitle="Create a support ticket tracking system. Create your message with the 'Create Ticket' component. Open tickets to your selected category. When tickets are closed the entire channel transcript is saved."
                 ></discord-feature-header>
 
-                <form submit.delegate="setupSupportTicket()">
-                    <tracked-message-creator
-                        max-components.bind="1"
-                        allow-components.bind="true"
-                        guild-id.bind="guildId"
-                        request.two-way="request"
-                    ></tracked-message-creator>
-                    <button mdc-button class="button-primary mt-2" type="submit">
+                <form submit.delegate="setupSupportTicket()" class="mt-3">
+                    <mdc-tab-bar view-model.ref="tabBar">
+                        <mdc-tab
+                            label="Support Ticket Container"
+                            active.bind="tab === 'container'"
+                            click.delegate="tab = 'container'"></mdc-tab>
+                        <mdc-tab
+                            label="Ticket Created Message"
+                            active.bind="tab === 'initial'"
+                            click.delegate="tab = 'initial'"
+                        ></mdc-tab>
+                    </mdc-tab-bar>
+
+                    <div if.bind="tab === 'container'">
+                        <div class="fs-6 py-3">Customize the Message Container which is to house the Create Ticket Button</div>
+                        <tracked-message-creator
+                            max-components.bind="1"
+                            allow-components.bind="true"
+                            guild-id.bind="guildId"
+                            request.two-way="request"
+                        ></tracked-message-creator>
+                    </div>
+
+                    <div if.bind="tab === 'initial'">
+                        <div class="fs-6 py-3">Customize the Initial Message that is sent to the channel when the support ticket channel is created</div>
+                        <discord-message-creator
+                            allow-components.bind="false"
+                            message.two-way="request.settings.initialMessage"
+                            single.bind="true"
+                        ></discord-message-creator>
+                    </div>
+
+                    <button mdc-button class="button-primary mt-2" type="submit" disabled.bind="loading">
                         Setup Message
                     </button>
                 </form>

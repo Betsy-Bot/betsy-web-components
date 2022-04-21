@@ -67,8 +67,10 @@
         </div>
         <div class="col-4">
             <div class="my-2" repeat.for="action of command.discordCommandActions">
-                <discord-message-preview message.bind="action.discordMessage.message"
-                                         first.bind="$index === 0"></discord-message-preview>
+                <discord-message-preview
+                    message.bind="action.discordMessage.message"
+                    first.bind="$index === 0"
+                ></discord-message-preview>
             </div>
         </div>
     </div>
