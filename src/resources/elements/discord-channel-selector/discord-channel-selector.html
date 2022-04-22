@@ -1,5 +1,5 @@
 <template>
-    <section id="discord-channel-selector">
+    <section id="discord-channel-selector" class.bind="class">
         <mdc-select if.bind="channels" class="standard-betsy-select w-100" value.bind="channelId" label.bind="label" required.bind="required">
             <mdc-icon mdc-select-icon>dns</mdc-icon>
             <mdc-list>

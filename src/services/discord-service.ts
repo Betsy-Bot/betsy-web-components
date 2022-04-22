@@ -149,4 +149,16 @@ export class DiscordService {
     async toggleDiscordMessageActiveStatus(messageId, active) {
         return this.api.doPatch(`DiscordMessage/${messageId}/ToggleActive`, {active: active});
     }
+
+    async createTwitchSubscription(request, guildId) {
+        return this.api.doPost(`DiscordGuild/${guildId}/TwitchEventSubscriptions`, request);
+    }
+
+    async getTwitchSubscriptions(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/TwitchEventSubscriptions`);
+    }
+
+    async deleteTwitchSubscription(subscriptionId: string, guildId: string) {
+        return this.api.doDelete(`DiscordGuild/${guildId}/TwitchEventSubscriptions/${subscriptionId}`);
+    }
 }

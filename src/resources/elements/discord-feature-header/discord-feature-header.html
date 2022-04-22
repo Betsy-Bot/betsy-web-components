@@ -2,7 +2,7 @@
     <section id="discord-feature-header">
         <h2>
             ${title}
-            <button mdc-button class="button-secondary" click.delegate="router.navigateBack()">
+            <button mdc-button class="button-secondary" click.delegate="router.navigateBack()" if.bind="!hideBack">
                 Back
             </button>
         </h2>

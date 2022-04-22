@@ -6,13 +6,13 @@
             hide-back.bind="true"
         ></discord-feature-header>
 
-        <div class="server-header mt-4 mb-2">
+        <div class="server-header mt-4 mb-2" if.bind="guild">
             <div class="fs-4">
                 <img class="guild-icon me-3" src="https://cdn.discordapp.com/icons/${guildId}/${guild.guild.icon}.png"> ${guild.name}
             </div>
 
-            <div class="row" if.bind="guild">
-                <div class="col-6 col-lg-3" repeat.for="stat of stats">
+            <div class="row">
+                <div class="col-12 col-md-6 col-xl-4 col-xxl-3" repeat.for="stat of stats">
                     <mdc-card class="stat-card stat-card__square">
                         <mdc-card-primary-action>
                             <div class="stat-card__square-row">
@@ -33,7 +33,7 @@
         </div>
 
 
-        <div class="features">
+        <div class="features" if.bind="guild">
             <div class="fs-5">
                 Active Features
             </div>

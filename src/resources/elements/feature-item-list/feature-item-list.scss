@@ -10,4 +10,11 @@
             width: 100% !important;
         }
     }
+
+    .delete-icon {
+        position: absolute;
+        top: -8px;
+        right: -50px;
+        z-index: 99999;
+    }
 }

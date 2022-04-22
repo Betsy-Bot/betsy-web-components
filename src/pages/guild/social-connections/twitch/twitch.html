@@ -1,5 +1,40 @@
 <template>
     <section id="twitch">
+        <confirmation-dialog
+            cancel-text="Cancel"
+            confirm-text="Create"
+            dialog.two-way="createDialog"
+            handler.call="handleCreateModal(event)"
+            title="Create Twitch Subscription"
+        >
+            <mdc-text-field
+                class="w-100 my-3"
+                label="Twitch Username"
+                value.bind="request.twitchLogin"
+                placeholder="Twitch Username"
+                required.bind="true"
+            ></mdc-text-field>
+            <discord-channel-selector
+                class="my-3"
+                label="Select Channel for Message"
+                if.bind="guildId"
+                channel-id.two-way="request.discordChannelId"
+                guild-id.bind="guildId"
+                type.bind="0"
+                required.bind="true"
+            ></discord-channel-selector>
+        </confirmation-dialog>
+
+        <confirmation-dialog
+            cancel-text="Cancel"
+            confirm-text="Yes, Delete"
+            dialog.two-way="deleteDialog"
+            handler.call="handleDeleteModal(event)"
+            title="Delete Twitch Subscription"
+        >
+            This action is permanent and cannot be undone
+        </confirmation-dialog>
+
         <div class="row">
             <div class="col-8">
                 <discord-feature-header
@@ -18,24 +53,27 @@
             </div>
         </div>
 
-<!--        <a href="/guild/${guildId}/social/twitch/create" if.bind="guildId">-->
-<!--            <button mdc-button class="button-primary">-->
-<!--                Create New Twitch Subscription-->
-<!--            </button>-->
-<!--        </a>-->
+        <div>
+            <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+                <span class="material-icons me-2">
+                    warning
+                </span>
+                The Twitch Webhook can take several minutes after going live before it is sent. This is not something we
+                can change.
+            </div>
+        </div>
 
-        <h3 class="my-2 text-warning">
-            IN CONSTRUCTION
-        </h3>
+        <button mdc-button class="button-primary" click.delegate="createDialog.open()">
+            Create New Twitch Subscription
+        </button>
 
-<!--        <div class="existing-commands-area">-->
-<!--            <feature-item-list-->
-<!--                data.bind="commands"-->
-<!--                show-toggler.bind="true"-->
-<!--                name-prefix="/"-->
-<!--                toggle-handler.call="updateActive(item)"-->
-<!--                item-click-handler.call="goToCommand(item)"-->
-<!--            ></feature-item-list>-->
-<!--        </div>-->
+        <div class="existing-commands-area">
+            <feature-item-list
+                data.bind="subscriptions"
+                name-override="username"
+                show-toggler.bind="false"
+                item-click-handler.call="openDeleteDialog(item)"
+            ></feature-item-list>
+        </div>
     </section>
 </template>

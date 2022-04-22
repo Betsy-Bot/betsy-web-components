@@ -29,5 +29,6 @@ export function configure(config: FrameworkConfiguration): void {
 
         PLATFORM.moduleName('./value-converters/discord-markup'),
         PLATFORM.moduleName('./value-converters/date-formatter'),
+        PLATFORM.moduleName('./value-converters/pascal-spacing'),
     ]);
 }

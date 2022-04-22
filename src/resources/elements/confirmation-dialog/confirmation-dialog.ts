@@ -1,4 +1,5 @@
 import {bindable} from "aurelia-framework";
+import './confirmation-dialog.scss'
 
 export class ConfirmationDialog {
     @bindable handler;

@@ -5,8 +5,10 @@ import {Router} from "aurelia-router";
 export class DiscordFeatureHeader {
     constructor(private router: Router) {
     }
+
     @bindable title;
     @bindable subtitle;
+    @bindable hideBack;
 
 
     navigateBack() {

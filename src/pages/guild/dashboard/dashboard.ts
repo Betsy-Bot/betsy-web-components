@@ -24,7 +24,7 @@ export class Dashboard {
         },
         {
             title: 'Channel Count',
-            function: 'getEmojiCount'
+            function: 'getChannelCount'
         }
     ]
 

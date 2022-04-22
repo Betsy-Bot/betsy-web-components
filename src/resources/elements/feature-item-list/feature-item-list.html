@@ -1,10 +1,12 @@
 <template>
     <section id="feature-item-list">
         <mdc-list>
-            <mdc-list-item two-line repeat.for="item of data" class="list-item-background mb-3"
+            <mdc-list-item two-line repeat.for="item of data" class="list-item-background mb-3 position-relative"
                            mdc-elevation="12" click.trigger="handleItemClick(item)">
                 <mdc-icon mdc-list-item-leading>folder</mdc-icon>
-                <mdc-list-item-primary-text>${namePrefix}${getName(item)} ${nameSuffix} ${item[suffixProperty] | dateFormat}</mdc-list-item-primary-text>
+                <mdc-list-item-primary-text>
+                    ${namePrefix}${getName(item)} ${nameSuffix} ${item[suffixProperty] | dateFormat}
+                </mdc-list-item-primary-text>
                 <mdc-list-item-secondary-text>${item.description}</mdc-list-item-secondary-text>
                 <mdc-form-field mdc-list-item-trailing if.bind="showToggler">
                     <button mdc-switch selected.bind="item.active" value.bind="item.active"

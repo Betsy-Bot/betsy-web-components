@@ -3,11 +3,7 @@ import {DiscordService} from "services/discord-service";
 import {Router} from "aurelia-router";
 import {inject} from "aurelia-framework";
 import {toast} from "lets-toast";
-import {
-    DiscordButtonStyle,
-    DiscordComponentType,
-    DiscordSupportTicketSettings
-} from "../../../../services/models/discord";
+import {DiscordButtonStyle, DiscordComponentType} from "services/models/discord";
 
 @inject(EventAggregator, DiscordService, Router)
 export class CreateTicketMessage {
