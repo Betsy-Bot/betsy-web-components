@@ -1,55 +1,73 @@
 <template>
-  <section id="navigation">
-    <mdc-top-app-bar style="position: relative">
-      <mdc-top-app-bar-row>
-        <mdc-top-app-bar-section>
-          <button mdc-top-app-bar-nav-icon show.bind="guildId"
-                  click.delegate="toggleSidebar()">
-            <mdc-icon>menu</mdc-icon>
-          </button>
-          <a href="/" class="me-5">
-            <mdc-top-app-bar-title>Betsy Bot</mdc-top-app-bar-title>
-          </a>
-          <mdc-select if.bind="user"
-                      ref="guildSelect"
-                      change.delegate="handleServerChange($event)"
-                      class="light-betsy-select ms-5 d-none d-lg-block"
-                      value.bind="guildId"
-                      label="Select Server to Manage">
-            <mdc-icon mdc-select-icon>dns</mdc-icon>
-            <mdc-list>
-              <mdc-list-item repeat.for="server of user.activeServers" value.bind="server.guildId">
-                ${server.name}
-              </mdc-list-item>
-            </mdc-list>
-          </mdc-select>
-        </mdc-top-app-bar-section>
-        <mdc-top-app-bar-section end>
-          <a if.bind="!user" external
-             href="${discordOauthUrl}">
-            <button mdc-button class="button-secondary">
-              <mdc-icon>login</mdc-icon>
-              Login with Discord
-            </button>
-          </a>
-          <div else>
-            <img class="avatar" click.delegate="profileMenu.open = !profileMenu.open"
-                 src.bind="avatarLink" alt="avatar">
-          </div>
+    <section id="navigation">
+        <mdc-top-app-bar style="position: relative">
+            <mdc-top-app-bar-row>
+                <mdc-top-app-bar-section>
+                    <button mdc-top-app-bar-nav-icon show.bind="guildId"
+                            click.delegate="toggleSidebar()">
+                        <mdc-icon>menu</mdc-icon>
+                    </button>
+                    <a href="/" class="me-5">
+                        <mdc-top-app-bar-title>Betsy Bot</mdc-top-app-bar-title>
+                    </a>
+                    <mdc-select if.bind="user"
+                                ref="guildSelect"
+                                change.delegate="handleServerChange($event)"
+                                class="light-betsy-select ms-5 d-none d-lg-block"
+                                value.bind="guildId"
+                                label="Select Server to Manage">
+                        <mdc-icon mdc-select-icon>dns</mdc-icon>
+                        <mdc-list>
+                            <mdc-list-item repeat.for="server of user.activeServers" value.bind="server.guildId">
+                                ${server.name}
+                            </mdc-list-item>
+                        </mdc-list>
+                    </mdc-select>
+                </mdc-top-app-bar-section>
+                <mdc-top-app-bar-section end>
+                    <a href="https://ko-fi.com/betsybot" target="_blank">
+                        <button mdc-button show.bind="guildId" class="button-primary me-2 me-lg-3">
+                            Buy me a Coffee
+                            <mdc-icon>favorite</mdc-icon>
+                        </button>
+                    </a>
+                    <a href="https://top.gg/bot/946433944390340688" target="_blank">
+                        <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-3">
+                            Review Bot
+                            <mdc-icon>favorite</mdc-icon>
+                        </button>
+                    </a>
+                    <a href="https://top.gg/bot/946433944390340688/vote" target="_blank">
+                        <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-5">
+                            Upvote Bot
+                            <mdc-icon>favorite</mdc-icon>
+                        </button>
+                    </a>
+                    <a if.bind="!user" external
+                       href="${discordOauthUrl}">
+                        <button mdc-button class="button-secondary">
+                            <mdc-icon>login</mdc-icon>
+                            Login with Discord
+                        </button>
+                    </a>
+                    <div else>
+                        <img class="avatar" click.delegate="profileMenu.open = !profileMenu.open"
+                             src.bind="avatarLink" alt="avatar">
+                    </div>
 
-          <div mdc-menu-surface-anchor href="menuAnchor">
-            <mdc-menu view-model.ref="profileMenu" anchor.bind="menuAnchor">
-              <mdc-list>
-                <a href="/">
-                  <mdc-list-item>Dashboard</mdc-list-item>
-                </a>
-                <mdc-list-divider></mdc-list-divider>
-                <mdc-list-item click.delegate="logout()">Sign out</mdc-list-item>
-              </mdc-list>
-            </mdc-menu>
-          </div>
-        </mdc-top-app-bar-section>
-      </mdc-top-app-bar-row>
-    </mdc-top-app-bar>
-  </section>
+                    <div mdc-menu-surface-anchor href="menuAnchor">
+                        <mdc-menu view-model.ref="profileMenu" anchor.bind="menuAnchor">
+                            <mdc-list>
+                                <a href="/">
+                                    <mdc-list-item>Dashboard</mdc-list-item>
+                                </a>
+                                <mdc-list-divider></mdc-list-divider>
+                                <mdc-list-item click.delegate="logout()">Sign out</mdc-list-item>
+                            </mdc-list>
+                        </mdc-menu>
+                    </div>
+                </mdc-top-app-bar-section>
+            </mdc-top-app-bar-row>
+        </mdc-top-app-bar>
+    </section>
 </template>
