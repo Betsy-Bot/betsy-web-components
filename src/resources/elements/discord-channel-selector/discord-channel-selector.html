@@ -3,6 +3,9 @@
         <mdc-select if.bind="channels" class="standard-betsy-select w-100" value.bind="channelId" label.bind="label" required.bind="required">
             <mdc-icon mdc-select-icon>dns</mdc-icon>
             <mdc-list>
+                <mdc-list-item value.bind="null" if.bind="includeNull">
+                    - None -
+                </mdc-list-item>
                 <mdc-list-item repeat.for="channel of channels" value.bind="channel.id" if.bind="matchesType(channel)">
                    ${channel.name}
                 </mdc-list-item>

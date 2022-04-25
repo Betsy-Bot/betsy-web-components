@@ -1,5 +1,5 @@
 <template>
-    <section id="discord-embed-preview" class="px-2 py-3"
+    <section id="discord-embed-preview" class="px-3 py-3"
              style.bind="'border-left: 3px solid #' + embed.color.toString(16)">
         <div class="row">
             <div class.bind="embed.thumbnail.url ? 'col-9' : 'col-12'">
@@ -7,7 +7,7 @@
                     <div class="col-2" if.bind="embed.author.icon_url">
                         <img src="${embed.author.icon_url}" class="author-img">
                     </div>
-                    <div class="${embed.author.icon_url ? 'col-10' : 'col-12'} ps-0">
+                    <div class="${embed.author.icon_url ? 'col-10 ps-0' : 'col-12'}">
                         <div class="author mb-3 mt-2 fw-bold" if.bind="embed.author.name">
                             ${embed.author.name}
                         </div>
@@ -36,13 +36,20 @@
                 <img src.bind="embed.thumbnail.url">
             </div>
         </div>
-        <div class="embed-video" if.bind="embed.video.url">
-            <img src="${embed.video.url}">
+        <div class="embed-video" if.bind="embed.image.url">
+            <img src="${embed.image.url}">
         </div>
 
         <div class="footer mt-2" if.bind="embed.footer">
-            <div class="footer-text">
-                ${embed.footer.text}
+            <div class="row">
+                <div class="col-1 px-2" if.bind="embed.footer.icon_url">
+                    <img src="${embed.footer.icon_url}" class="footer-img">
+                </div>
+                <div class="${embed.footer.icon_url ? 'col-11 ps-0' : 'col-12'}">
+                    <div class="author mb-3 mt-1 fw-bold" if.bind="embed.footer.text">
+                        ${embed.footer.text}
+                    </div>
+                </div>
             </div>
         </div>
     </section>

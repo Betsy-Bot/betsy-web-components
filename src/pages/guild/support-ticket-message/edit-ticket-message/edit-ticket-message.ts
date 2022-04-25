@@ -3,6 +3,7 @@ import {DiscordService} from "services/discord-service";
 import {Router} from "aurelia-router";
 import {inject, observable} from "aurelia-framework";
 import {toast} from "lets-toast";
+import {request} from "https";
 
 @inject(EventAggregator, DiscordService, Router)
 export class EditTicketMessage {
@@ -48,5 +49,9 @@ export class EditTicketMessage {
             toast("Failed to setup support ticket creation message", {severity: "error"});
             throw e;
         }
+    }
+
+    handleClone() {
+        this.router.navigateToRoute(`create-ticket-message`, {data: JSON.stringify(this.message)});
     }
 }

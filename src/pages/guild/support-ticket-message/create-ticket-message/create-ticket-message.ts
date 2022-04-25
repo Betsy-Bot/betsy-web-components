@@ -1,7 +1,7 @@
 import {EventAggregator} from "aurelia-event-aggregator";
 import {DiscordService} from "services/discord-service";
 import {Router} from "aurelia-router";
-import {inject} from "aurelia-framework";
+import {inject, observable} from "aurelia-framework";
 import {toast} from "lets-toast";
 import {DiscordButtonStyle, DiscordComponentType} from "services/models/discord";
 
@@ -16,6 +16,7 @@ export class CreateTicketMessage {
     featureActive;
 
     tab = 'container';
+    @observable authorizedRole;
 
     request = {
         discordChannelId: '',
@@ -31,6 +32,7 @@ export class CreateTicketMessage {
             }]
         },
         settings: {
+            id: undefined,
             logChannelId: '',
             assignedRoles: [],
             initialMessage: {}
@@ -38,9 +40,12 @@ export class CreateTicketMessage {
     };
 
     loading = false;
+    params;
+    bound = false;
 
     async activate(params) {
         this.guildId = params.guildId as string;
+        this.params = params;
     }
 
     async attached() {
@@ -48,6 +53,19 @@ export class CreateTicketMessage {
             await this.discordService.getDiscordServerInformation(this.guildId)
         ])
         this.featureActive = this.guild.activeFeatures.includes(this.discordService.SUPPORT_TICKETS);
+        if (this.params.data) {
+            this.request = JSON.parse(this.params.data);
+            this.request.settings.id = undefined;
+        }
+        this.bound = true;
+        console.log(this.request);
+    }
+
+    authorizedRoleChanged(newValue, oldvalue) {
+        if (!this.request.settings.assignedRoles) {
+            this.request.settings.assignedRoles = [];
+        }
+        this.request.settings.assignedRoles.push(newValue.id);
     }
 
     async setupSupportTicket() {

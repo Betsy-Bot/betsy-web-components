@@ -1,17 +1,16 @@
-import {bindable, inject} from "aurelia-framework";
 import {DiscordService} from "../../../services/discord-service";
+import {bindable, inject} from "aurelia-framework";
 
 @inject(DiscordService)
-export class TrackedMessageCreator {
+export class SupportTicketSettings {
     constructor(private discordService: DiscordService) {
     }
     @bindable request;
     @bindable guildId;
-    @bindable allowComponents;
-    @bindable maxComponents;
     @bindable authorizedRole;
 
     roles;
+    tab = 'container';
 
     async created() {
         this.roles = await this.discordService.getDiscordRoles(this.guildId);

@@ -20,6 +20,10 @@ body {
     @include button.filled-accessible(theme.$primary);
 }
 
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field-character-counter, .mdc-text-field:not(.mdc-text-field--disabled) + .mdc-text-field-helper-line .mdc-text-field-character-counter {
+    color: #dcddde
+}
+
 .mdc-evolution-chip {
     background-color: theme.$primary;
 

@@ -7,9 +7,18 @@
                     subtitle="Edit the message that is already on your server."
                 ></discord-feature-header>
 
-                <a href="guild/${guildId}/support-tickets/${discordMessageId}/submissions" mdc-button class="button-primary mt-3 mb-4">
-                    View Created Tickets
-                </a>
+                <div class="row">
+                    <div class="col-6">
+                        <a href="guild/${guildId}/support-tickets/${discordMessageId}/submissions" mdc-button class="button-primary mt-3 mb-4">
+                            View Created Tickets
+                        </a>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button mdc-button class="button-secondary" click.delegate="handleClone()">
+                            Clone Support Ticket
+                        </button>
+                    </div>
+                </div>
 
                 <mdc-tab-bar view-model.ref="tabBar">
                     <mdc-tab
@@ -26,13 +35,20 @@
                 <form submit.delegate="setupSupportTicket()">
                     <div if.bind="tab === 'container'">
                         <div class="fs-6 py-3">Customize the Message Container which is to house the Create Ticket Button</div>
-                        <tracked-message-creator
-                            max-components.bind="1"
-                            allow-components.bind="true"
+                        <support-ticket-settings
                             guild-id.bind="guildId"
                             request.two-way="message"
                             authorized-role.two-way="authorizedRole"
-                        ></tracked-message-creator>
+                        ></support-ticket-settings>
+
+                        <div class="my-3"></div>
+
+                        <discord-message-creator
+                            max-components.bind="1"
+                            allow-components.bind="true"
+                            message.bind="message.message"
+                            single.bind="true"
+                        ></discord-message-creator>
                     </div>
 
                     <div if.bind="tab === 'initial'">

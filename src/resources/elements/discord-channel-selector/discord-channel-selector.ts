@@ -12,6 +12,7 @@ export class DiscordChannelSelector {
     @bindable label;
     @bindable required: boolean = false;
     @bindable class;
+    @bindable includeNull;
 
     channels;
 
