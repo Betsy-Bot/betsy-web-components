@@ -50,7 +50,8 @@
                 </form>
             </div>
             <div class="col-4">
-                <discord-message-preview message.bind="message.message"></discord-message-preview>
+                <discord-message-preview message.bind="message.message" if.bind="tab === 'container'"></discord-message-preview>
+                <discord-message-preview message.bind="message.settings.initialMessage" if.bind="tab === 'initial'"></discord-message-preview>
             </div>
         </div>
     </section>
