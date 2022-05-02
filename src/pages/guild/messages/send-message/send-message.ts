@@ -1,7 +1,7 @@
 import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "../../../services/discord-service";
+import {DiscordService} from "services/discord-service";
 import {inject} from "aurelia-framework";
-import {DiscordChannelType, SendMessageToChannelRequest} from "../../../services/models/discord";
+import {SendMessageToChannelRequest} from "services/models/discord";
 import {toast} from "lets-toast";
 
 @inject(EventAggregator, DiscordService)

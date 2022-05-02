@@ -86,9 +86,36 @@ export class Guild {
             },
             {
                 name: 'guild-send-message',
-                route: 'send-message',
-                moduleId: PLATFORM.moduleName('pages/guild/send-message/send-message'),
+                route: 'messages/send-message',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/send-message/send-message'),
                 title: 'Send Message',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'guild-tracked-messages',
+                route: 'messages/tracked-messages',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/tracked-message/tracked-message'),
+                title: 'Tracked Messages',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'create-tracked-message',
+                route: 'messages/tracked-messages/create',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/tracked-message/create-tracked-message/create-tracked-message'),
+                title: 'Create Tracked Message',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'edit-tracked-message',
+                route: 'messages/tracked-messages/:messageId',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/tracked-message/edit-tracked-message/edit-tracked-message'),
+                title: 'Edit Tracked Message',
                 settings: {
                     auth: true
                 }

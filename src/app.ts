@@ -14,9 +14,11 @@ export class App {
     drawer;
 
     expandOptions = {
+        messaging: true,
         customCommands: true,
         moderation: true,
-        resources: true
+        resources: true,
+        socials: true
     }
 
     async activate() {

@@ -161,4 +161,20 @@ export class DiscordService {
     async deleteTwitchSubscription(subscriptionId: string, guildId: string) {
         return this.api.doDelete(`DiscordGuild/${guildId}/TwitchEventSubscriptions/${subscriptionId}`);
     }
+
+    async getTrackedMessage(guildId: string, messageId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/TrackedMessages/${messageId}`);
+    }
+
+    async getTrackedMessages(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/TrackedMessages`);
+    }
+
+    async createTrackedMessage(guildId: string, request: any) {
+        return this.api.doPost(`DiscordGuild/${guildId}/TrackedMessages`, request);
+    }
+
+    async updateTrackedMessage(request: any) {
+        return this.api.doPatch(`DiscordTrackedMessage/${request.id}`, request);
+    }
 }

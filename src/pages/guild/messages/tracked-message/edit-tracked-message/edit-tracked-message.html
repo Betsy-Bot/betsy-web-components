@@ -1,0 +1,33 @@
+<template>
+    <section id="create-data-command">
+        <div class="row">
+            <div class="col-8">
+                <discord-feature-header
+                    title="Edit Tracked Message"
+                    subtitle="Tracked Messages are just normal messages that you keep track of. This allows you to edit them without resending/using a command/etc."
+                ></discord-feature-header>
+
+                <form submit.delegate="update()">
+
+                    <discord-tracked-message-settings
+                        message.two-way="message"
+                        guild-id.bind="guildId"
+                    ></discord-tracked-message-settings>
+
+                    <discord-message-creator message.two-way="message.discordMessage.message"></discord-message-creator>
+
+                    <div>
+                        <div class="text-end mt-3">
+                            <button type="submit" mdc-button class="button-primary">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-4">
+                <discord-message-preview message.bind="message.discordMessage.message"></discord-message-preview>
+            </div>
+        </div>
+    </section>
+</template>

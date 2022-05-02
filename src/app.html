@@ -8,13 +8,26 @@
             </a>
             <mdc-drawer-content>
                 <mdc-list single-selection if.bind="guildId">
-                    <a href="/guild/${guildId}/send-message">
-                        <mdc-list-item class="list-item-padding">Send Message</mdc-list-item>
-                    </a>
 
                     <a href="/guild/${guildId}/support-tickets">
                         <mdc-list-item class="list-item-padding">Support Tickets</mdc-list-item>
                     </a>
+
+                    <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('messaging')"
+                                   no-list-action>
+                        <span>Messaging</span>
+                        <mdc-icon mdc-list-item-trailing>${expandOptions.messaging ? 'expand_less' : 'expand_more'}
+                        </mdc-icon>
+                    </mdc-list-item>
+
+                    <div if.bind="expandOptions.messaging">
+                        <a href="/guild/${guildId}/messages/send-message">
+                            <mdc-list-item class="list-item-padding">Send Message</mdc-list-item>
+                        </a>
+                        <a href="/guild/${guildId}/messages/tracked-messages">
+                            <mdc-list-item class="list-item-padding">Tracked Messages</mdc-list-item>
+                        </a>
+                    </div>
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('customCommands')"
                                    no-list-action>

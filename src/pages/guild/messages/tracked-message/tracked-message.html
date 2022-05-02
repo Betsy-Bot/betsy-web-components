@@ -1,0 +1,25 @@
+<template>
+    <section id="send-message py-5">
+        <discord-feature-header
+            title="Tracked Messages"
+            subtitle="Tracked Messages are just normal messages that you keep track of. This allows you to edit them without resending/using a command/etc."
+        ></discord-feature-header>
+
+        <div class="my-3">
+            <a href="/guild/${guildId}/messages/tracked-messages/create" if.bind="guildId">
+                <button mdc-button class="button-primary">
+                    Create New Tracked Message
+                </button>
+            </a>
+        </div>
+
+        <div class="existing-commands-area">
+            <feature-item-list
+                data.bind="messages"
+                show-toggler.bind="true"
+                toggle-handler.call="updateActive(item)"
+                item-click-handler.call="goTo(item)"
+            ></feature-item-list>
+        </div>
+    </section>
+</template>
