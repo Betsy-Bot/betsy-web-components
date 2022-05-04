@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-8">
+        <div class="col-12 col-lg-8">
             <form submit.delegate="createCommand()">
                 <h3>Create a new Response Message Command</h3>
 
@@ -46,7 +46,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-lg-4">
             <div class="my-2" repeat.for="action of command.discordCommandActions">
                 <discord-message-preview
                     message.bind="action.discordMessage.message"

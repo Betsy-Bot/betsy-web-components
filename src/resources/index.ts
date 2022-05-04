@@ -27,9 +27,11 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./elements/discord-tracked-message-settings/discord-tracked-message-settings'),
         PLATFORM.moduleName('./elements/feature-item-list/feature-item-list'),
         PLATFORM.moduleName('./elements/support-ticket-settings/support-ticket-settings'),
+        PLATFORM.moduleName('./elements/validation-error/validation-error'),
 
         PLATFORM.moduleName('./value-converters/discord-markup'),
         PLATFORM.moduleName('./value-converters/date-formatter'),
+        PLATFORM.moduleName('./value-converters/object-keys'),
         PLATFORM.moduleName('./value-converters/pascal-spacing'),
     ]);
 }

@@ -1,0 +1,16 @@
+<template>
+    <section id="validation-error">
+        <mdc-banner
+            secondary-action="Close"
+            view-model.ref="banner"
+            centered
+        >
+            <div class="pb-3">
+                <h5>Validation Error</h5>
+                <div class="error" repeat.for="error of errors | objectKeys">
+                    ${error}
+                </div>
+            </div>
+        </mdc-banner>
+    </section>
+</template>

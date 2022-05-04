@@ -42,7 +42,9 @@ export class App {
 
         //For some reason without this timeout it fails to bind properly. Race condition
         setTimeout(() => {
-            this.drawer.open = this.sessionService.getStorageItem(SessionService.SIDEBAR_STATUS_KEY);
+            if (this.guildId && this.user) {
+                this.drawer.open = this.sessionService.getStorageItem(SessionService.SIDEBAR_STATUS_KEY);
+            }
         }, 100)
     }
 

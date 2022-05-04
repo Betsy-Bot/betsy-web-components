@@ -80,15 +80,11 @@ export class SessionService {
     }
 
     async logout() {
-        try {
-            await this.apiService.doDelete('Logout');
-        } finally {
-            this.clearSession();
-        }
+        this.clearSession();
     }
 
     clearSession() {
-        //this.destroyStorageItem(SessionService.TOKEN_KEY);
+        this.destroyStorageItem(SessionService.TOKEN_KEY);
         this.currentUser = null;
         this.eventAggregator.publish('user-updated', {});
     }

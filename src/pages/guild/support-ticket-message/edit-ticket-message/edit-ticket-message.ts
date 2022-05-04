@@ -37,7 +37,6 @@ export class EditTicketMessage {
             this.message.settings.assignedRoles = [];
         }
         this.message.settings.assignedRoles.push(newValue.id);
-        console.log(this.message.settings.assignedRoles);
     }
 
     async setupSupportTicket() {

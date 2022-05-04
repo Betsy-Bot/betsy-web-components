@@ -41,7 +41,7 @@ export class Navigation {
 
     async logout() {
         await this.sessionService.logout();
-        this.router.navigate('login');
+        this.router.refreshNavigation();
     }
 
     get discordOauthUrl() {

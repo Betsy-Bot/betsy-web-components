@@ -15,7 +15,7 @@ export class ApiService {
       }
 
       if (status >= 400) {
-        return null;
+        throw "Error";
       }
 
       let response;

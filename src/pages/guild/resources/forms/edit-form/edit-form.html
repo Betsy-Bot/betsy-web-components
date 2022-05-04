@@ -1,7 +1,7 @@
 <template>
     <section id="edit-form">
         <div class="row mt-4">
-            <div class="col-8">
+            <div class="col-12 col-lg-8">
                 <discord-feature-header
                     title="Edit Your Discord Server Form"
                     subtitle="Once the form has been saved anywhere it is currently being used will also be updated to use the updated form"
@@ -18,7 +18,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-4">
+            <div class="col-12 col-lg-4">
                 <div class="text-end">
                     <button mdc-button class="button-primary" click.delegate="showingSubmissions = !showingSubmissions">
                         ${showingSubmissions ? 'Hide' : 'Show'} Submissions
