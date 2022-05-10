@@ -28,6 +28,9 @@ export class ActionLog {
     ROLE_CREATE = 'RoleCreate';
     ROLE_UPDATE = 'RoleUpdate';
     ROLE_DELETE = 'RoleDelete';
+    MEMBER_BANNED = 'MemberBanned';
+    MEMBER_TIMED_OUT = 'MemberTimedOut';
+    MEMBER_NICKNAME_CHANGED = 'MemberNicknameChange'
 
     actionLogItems = [
         {
@@ -58,6 +61,24 @@ export class ActionLog {
             value: this.ROLE_DELETE,
             label: 'Role Deletes',
             description: 'Anytime a role is deleted it will be logged. We are not able to see who deleted the role however.',
+            active: false
+        },
+        {
+            value: this.MEMBER_BANNED,
+            label: 'Member Banned',
+            description: 'Anytime a member on your server is banned it will be logged. We are not able to see who banned however - Check the audit log',
+            active: false
+        },
+        {
+            value: this.MEMBER_TIMED_OUT,
+            label: 'Member Timed Out',
+            description: 'Anytime a member on your server is timed out it will be logged. We are not able to see who banned however - Check the audit log',
+            active: false
+        },
+        {
+            value: this.MEMBER_NICKNAME_CHANGED,
+            label: 'Member Nickname Changed',
+            description: 'Anytime a member on your server has their nickname changed it will be logged. We are not able to see who banned however - Check the audit log',
             active: false
         }
     ]
