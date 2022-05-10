@@ -177,4 +177,8 @@ export class DiscordService {
     async updateTrackedMessage(request: any) {
         return this.api.doPatch(`DiscordTrackedMessage/${request.id}`, request);
     }
+
+    async getSupportTicketById(ticketId: string) {
+        return this.api.doGet(`DiscordSupportTicket/${ticketId}`);
+    }
 }

@@ -76,6 +76,12 @@ export class App {
                 moduleId: PLATFORM.moduleName('pages/guild/guild'),
                 title: 'Guild Manage'
             },
+            {
+                route: 'transcript/:ticketId',
+                name: 'support-ticket-transcript',
+                moduleId: PLATFORM.moduleName('pages/transcript/transcript'),
+                title: 'Support Ticket Transcript'
+            },
         ]);
 
         config.mapUnknownRoutes(() => {

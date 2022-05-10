@@ -1,0 +1,18 @@
+<template>
+    <section id="transcript">
+        <div class="logged-out" if.bind="!user">
+            You are not logged in. Click login in the top right.
+        </div>
+        <div else>
+            <div if.bind="ticket">
+                <h4>Transcript:</h4>
+                <div if.bind="ticket">
+                    <discord-messages-renderer messages.bind="ticket.transcript.messages"></discord-messages-renderer>
+                </div>
+            </div>
+            <div else>
+                Failed to retrieve the transcript. Do you have access?
+            </div>
+        </div>
+    </section>
+</template>
