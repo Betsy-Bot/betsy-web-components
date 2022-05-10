@@ -1,0 +1,12 @@
+<template>
+    <section id="support-ticket-transcript">
+        <div class="participants">
+            <h4>Participants (${participants.length})</h4>
+            <div repeat.for="participant of participants">
+                ${$index + 1}. ${participant}
+            </div>
+        </div>
+        <h4 class="mt-5">Transcript</h4>
+        <discord-messages-renderer messages.bind="supportTicket.transcript.messages"></discord-messages-renderer>
+    </section>
+</template>

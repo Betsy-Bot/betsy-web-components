@@ -5,10 +5,7 @@
         </div>
         <div else>
             <div if.bind="ticket">
-                <h4>Transcript:</h4>
-                <div if.bind="ticket">
-                    <discord-messages-renderer messages.bind="ticket.transcript.messages"></discord-messages-renderer>
-                </div>
+                <support-ticket-transcript support-ticket.bind="ticket"></support-ticket-transcript>
             </div>
             <div else>
                 Failed to retrieve the transcript. Do you have access?

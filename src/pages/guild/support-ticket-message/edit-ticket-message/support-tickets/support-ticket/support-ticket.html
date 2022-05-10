@@ -6,13 +6,13 @@
         ></discord-feature-header>
 
         <div if.bind="supportTicket.transcript">
-            <h4>Transcript</h4>
             <a href="transcript/${supportTicket.id}">
                 <button mdc-button class="button-primary">
                     Direct Transcript Link
                 </button>
             </a>
-            <discord-messages-renderer messages.bind="supportTicket.transcript.messages"></discord-messages-renderer>
+
+            <support-ticket-transcript support-ticket.bind="supportTicket"></support-ticket-transcript>
         </div>
 
         <h5 class="empty mt-4" else>
