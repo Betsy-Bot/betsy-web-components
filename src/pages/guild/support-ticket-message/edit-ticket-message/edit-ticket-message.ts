@@ -3,7 +3,7 @@ import {DiscordService} from "services/discord-service";
 import {Router} from "aurelia-router";
 import {inject, observable} from "aurelia-framework";
 import {toast} from "lets-toast";
-import {request} from "https";
+
 
 @inject(EventAggregator, DiscordService, Router)
 export class EditTicketMessage {
@@ -12,6 +12,7 @@ export class EditTicketMessage {
 
     guildId: string;
     discordMessageId: string;
+    confirmDeleteDialog;
 
     featureActive;
 
@@ -45,8 +46,21 @@ export class EditTicketMessage {
             await this.discordService.updateTrackedDiscordMessage(this.message);
             toast("Updated support message!", {severity: "success"})
         } catch(e) {
-            toast("Failed to setup support ticket creation message", {severity: "error"});
+            toast("Failed to update support ticket creation message", {severity: "error"});
             throw e;
+        }
+    }
+
+    async deleteSupportTicket(event) {
+        if (event.detail.action == 'ok') {
+            try {
+                await this.discordService.deleteSupportTicketBySettingsId(this.guildId, this.message.settings.id);
+                toast("Deleted support message!", {severity: "success"})
+                this.router.navigateBack();
+            } catch(e) {
+                toast("Failed to delete support ticket creation message", {severity: "error"});
+                throw e;
+            }
         }
     }
 
