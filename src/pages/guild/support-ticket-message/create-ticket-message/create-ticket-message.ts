@@ -21,6 +21,7 @@ export class CreateTicketMessage {
     request = {
         discordChannelId: '',
         discordCategoryId: '',
+        name: '',
         message: {
             components: [ {
                 type: DiscordComponentType.ActionRow,

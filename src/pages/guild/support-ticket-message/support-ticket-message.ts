@@ -29,8 +29,9 @@ export class SupportTicketMessage {
                 await this.discordService.getDiscordChannels(this.guildId)
             ])
             for (let message of this.messages) {
+                if (message.name ) continue
                 const channel = this.channels.find(x => x.id == message.discordChannelId);
-                message.name = channel.name;
+                message.name = 'Message In Channel - #' + channel.name;
             }
             this.featureActive = this.guild.activeFeatures.includes(this.discordService.SUPPORT_TICKETS);
         } catch(e) {

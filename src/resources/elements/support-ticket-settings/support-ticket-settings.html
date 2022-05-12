@@ -1,13 +1,26 @@
 <template>
     <div class="row g-4">
         <div class="col-12 col-lg-6">
-            <div class="mt-2">
-                <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
+            <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
+                    <span class="material-icons me-2">
+                        info
+                    </span>
+                Used to identify your support ticket. Not visible to customer
+            </div>
+            <mdc-text-field
+                class="w-100"
+                label="Support Ticket Identifier"
+                value.bind="request.settings.identifier"
+                placeholder="Used to identify your support ticket. Not visible to customer"
+                required.bind="true"
+            ></mdc-text-field>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
                 <span class="material-icons me-2">
                     info
                 </span>
-                    The category selected will be used to create the new channels.
-                </div>
+                The category selected will be used to create the new channels.
             </div>
             <discord-channel-selector
                 label="Select Category"
@@ -20,13 +33,11 @@
 
         </div>
         <div class="col-12 col-lg-6">
-            <div class="mt-2">
-                <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
+            <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
                     <span class="material-icons me-2">
                         info
                     </span>
-                    The channel selected will be used to house the created ticket message.
-                </div>
+                The channel selected will be used to house the created ticket message.
             </div>
             <discord-channel-selector
                 label="Select Channel for Message"
