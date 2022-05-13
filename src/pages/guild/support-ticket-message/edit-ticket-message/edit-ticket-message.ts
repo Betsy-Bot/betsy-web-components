@@ -11,12 +11,12 @@ export class EditTicketMessage {
     }
 
     guildId: string;
-    discordMessageId: string;
+    supportTicketSettingsId: string;
     confirmDeleteDialog;
 
     featureActive;
 
-    message;
+    ticket;
 
     tab = 'container';
 
@@ -24,26 +24,26 @@ export class EditTicketMessage {
 
     async activate(params) {
         this.guildId = params.guildId as string;
-        this.discordMessageId = params.discordMessageId as string;
+        this.supportTicketSettingsId = params.supportTicketSettingsId as string;
     }
 
     async attached() {
-        [this.message] = await Promise.all([
-            await this.discordService.getDiscordMessage(this.guildId, this.discordMessageId)
+        [this.ticket] = await Promise.all([
+            await this.discordService.getSupportTicketSettingsById(this.supportTicketSettingsId)
         ])
     }
 
     authorizedRoleChanged(newValue, oldvalue) {
-        if (!this.message.settings.assignedRoles) {
-            this.message.settings.assignedRoles = [];
+        if (!this.ticket.assignedRoles) {
+            this.ticket.assignedRoles = [];
         }
-        this.message.settings.assignedRoles.push(newValue.id);
+        this.ticket.assignedRoles.push(newValue.id);
     }
 
-    async setupSupportTicket() {
+    async editSupportTicketSettings() {
         try {
-            this.message.discordGuildId = this.guildId;
-            await this.discordService.updateTrackedDiscordMessage(this.message);
+            this.ticket.discordGuildId = this.guildId;
+            await this.discordService.updateSupportTicketSettings(this.guildId, this.ticket);
             toast("Updated support message!", {severity: "success"})
         } catch(e) {
             toast("Failed to update support ticket creation message", {severity: "error"});
@@ -54,7 +54,7 @@ export class EditTicketMessage {
     async deleteSupportTicket(event) {
         if (event.detail.action == 'ok') {
             try {
-                await this.discordService.deleteSupportTicketBySettingsId(this.guildId, this.message.settings.id);
+                await this.discordService.deleteSupportTicketBySettingsId(this.guildId, this.ticket.id);
                 toast("Deleted support message!", {severity: "success"})
                 this.router.navigateBack();
             } catch(e) {
@@ -65,6 +65,6 @@ export class EditTicketMessage {
     }
 
     handleClone() {
-        this.router.navigateToRoute(`create-ticket-message`, {data: JSON.stringify(this.message)});
+        this.router.navigateToRoute(`create-ticket-message`, {data: JSON.stringify(this.ticket)});
     }
 }

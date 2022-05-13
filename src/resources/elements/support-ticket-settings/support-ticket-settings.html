@@ -10,9 +10,8 @@
             <mdc-text-field
                 class="w-100"
                 label="Support Ticket Identifier"
-                value.bind="request.settings.identifier"
+                value.bind="request.identifier"
                 placeholder="Used to identify your support ticket. Not visible to customer"
-                required.bind="true"
             ></mdc-text-field>
         </div>
         <div class="col-12 col-lg-6">
@@ -25,7 +24,7 @@
             <discord-channel-selector
                 label="Select Category"
                 if.bind="guildId"
-                channel-id.two-way="request.discordCategoryId"
+                channel-id.two-way="request.categoryId"
                 guild-id.bind="guildId"
                 type.bind="4"
                 required.bind="true"
@@ -42,7 +41,7 @@
             <discord-channel-selector
                 label="Select Channel for Message"
                 if.bind="guildId"
-                channel-id.two-way="request.discordChannelId"
+                channel-id.two-way="request.discordMessage.discordChannelId"
                 guild-id.bind="guildId"
                 type.bind="0"
                 required.bind="true"
@@ -60,7 +59,7 @@
             <discord-channel-selector
                 label="Select Channel for Audits"
                 if.bind="guildId"
-                channel-id.two-way="request.settings.logChannelId"
+                channel-id.two-way="request.logChannelId"
                 guild-id.bind="guildId"
                 type.bind="0"
                 required.bind="false"
@@ -83,7 +82,7 @@
             ></discord-role-selector>
             <mdc-chip-set input if.bind="roles">
                 <!-- Compact notation -->
-                <mdc-chip repeat.for="role of request.settings.assignedRoles">
+                <mdc-chip repeat.for="role of request.assignedRoles">
                     ${getRoleName(role)}
                     <span click.delegate="removeRole($index)" trailing>X</span>
                 </mdc-chip>
@@ -101,7 +100,7 @@
             <discord-channel-selector
                 label="Select Channel for Closed Tickets"
                 if.bind="guildId"
-                channel-id.two-way="request.settings.closedCategoryId"
+                channel-id.two-way="request.closedCategoryId"
                 guild-id.bind="guildId"
                 type.bind="4"
                 include-null.bind="true"
@@ -120,7 +119,7 @@
                 class="w-100"
                 label="Created Channel Name Prefix"
                 maxlength="6"
-                value.bind="request.settings.channelPrefix">
+                value.bind="request.channelPrefix">
             </mdc-text-field>
             <mdc-text-field-helper-line>
                 <mdc-text-field-character-counter></mdc-text-field-character-counter>
@@ -138,8 +137,8 @@
             <label class="me-3">Send Transcript On Close?</label>
             <button
                 mdc-switch
-                selected.bind="request.settings.sendTranscriptOnClose"
-                click.delegate="request.settings.sendTranscriptOnClose = !request.settings.sendTranscriptOnClose"
+                selected.bind="request.sendTranscriptOnClose"
+                click.delegate="request.sendTranscriptOnClose = !request.sendTranscriptOnClose"
             ></button>
         </div>
     </div>

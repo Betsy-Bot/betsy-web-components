@@ -194,7 +194,7 @@ export class Guild {
             },
             {
                 name: 'edit-ticket-message',
-                route: 'support-tickets/:discordMessageId',
+                route: 'support-tickets/:supportTicketSettingsId',
                 moduleId: PLATFORM.moduleName('pages/guild/support-ticket-message/edit-ticket-message/edit-ticket-message'),
                 title: 'Edit Support Ticket Message',
                 settings: {

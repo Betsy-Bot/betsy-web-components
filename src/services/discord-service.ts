@@ -126,12 +126,8 @@ export class DiscordService {
         return this.api.doPost(`DiscordGuild/${guildId}/SupportTickets`, request);
     }
 
-    async getDiscordSupportMessages(guildId: string) {
-        return this.api.doGet(`DiscordGuild/${guildId}/SupportMessages`);
-    }
-
-    async getDiscordMessage(guildId: string, discordMessageId: string) {
-        return this.api.doGet(`DiscordGuild/${guildId}/DiscordMessages/${discordMessageId}`);
+    async getDiscordSupportTicketSettings(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/SupportTickets`);
     }
 
     async getDiscordMessageSupportTickets(guildId: string, discordMessageId: string) {
@@ -178,11 +174,19 @@ export class DiscordService {
         return this.api.doPatch(`DiscordTrackedMessage/${request.id}`, request);
     }
 
+    async getSupportTicketSettingsById(ticketId: string) {
+        return this.api.doGet(`DiscordSupportTicketSettings/${ticketId}`);
+    }
+
     async getSupportTicketById(ticketId: string) {
         return this.api.doGet(`DiscordSupportTicket/${ticketId}`);
     }
 
     async deleteSupportTicketBySettingsId(guildId: string, settingsId: string) {
         return this.api.doDelete(`DiscordGuild/${guildId}/SupportTickets/${settingsId}`);
+    }
+
+    async updateSupportTicketSettings(guildId: string, settings: any) {
+        return this.api.doPatch(`DiscordGuild/${guildId}/SupportTickets/${settings.id}`, settings);
     }
 }

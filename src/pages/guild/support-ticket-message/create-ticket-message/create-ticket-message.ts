@@ -15,28 +15,28 @@ export class CreateTicketMessage {
 
     featureActive;
 
-    tab = 'container';
+    tab = 'settings';
     @observable authorizedRole;
 
     request = {
-        discordChannelId: '',
-        discordCategoryId: '',
-        name: '',
-        message: {
-            components: [ {
-                type: DiscordComponentType.ActionRow,
-                components: [{
-                    type: DiscordComponentType.Button,
-                    label: "Create Ticket",
-                    style: DiscordButtonStyle.Primary
+        identifier: '',
+        id: undefined,
+        logChannelId: '',
+        assignedRoles: [],
+        initialMessage: {},
+        discordMessage: {
+            discordChannelId: '',
+            discordCategoryId: '',
+            message: {
+                components: [ {
+                    type: DiscordComponentType.ActionRow,
+                    components: [{
+                        type: DiscordComponentType.Button,
+                        label: "Create Ticket",
+                        style: DiscordButtonStyle.Primary
+                    }]
                 }]
-            }]
-        },
-        settings: {
-            id: undefined,
-            logChannelId: '',
-            assignedRoles: [],
-            initialMessage: {}
+            },
         }
     };
 
@@ -56,17 +56,15 @@ export class CreateTicketMessage {
         this.featureActive = this.guild.activeFeatures.includes(this.discordService.SUPPORT_TICKETS);
         if (this.params.data) {
             this.request = JSON.parse(this.params.data);
-            this.request.settings.id = undefined;
         }
         this.bound = true;
-        console.log(this.request);
     }
 
     authorizedRoleChanged(newValue, oldvalue) {
-        if (!this.request.settings.assignedRoles) {
-            this.request.settings.assignedRoles = [];
+        if (!this.request.assignedRoles) {
+            this.request.assignedRoles = [];
         }
-        this.request.settings.assignedRoles.push(newValue.id);
+        this.request.assignedRoles.push(newValue.id);
     }
 
     async setupSupportTicket() {

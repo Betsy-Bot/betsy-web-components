@@ -14,13 +14,21 @@
                 </a>
 
                 <div class="existing-commands-area mt-4">
-                    <feature-item-list
-                        if.bind="!loading"
-                        show-toggler.bind="true"
-                        data.bind="messages"
-                        item-click-handler.call="goToMessage(item)"
-                        toggle-handler.call="updateActive(item)"
-                    ></feature-item-list>
+                    <section id="feature-item-list" if.bind="!loading">
+                        <mdc-list>
+                            <mdc-list-item two-line repeat.for="item of supportTickets" class="list-item-background mb-3 position-relative"
+                                           mdc-elevation="12" click.trigger="goToMessage(item)">
+                                <mdc-icon mdc-list-item-leading>folder</mdc-icon>
+                                <mdc-list-item-primary-text>
+                                    ${item.identifier}
+                                </mdc-list-item-primary-text>
+                                <mdc-form-field mdc-list-item-trailing>
+                                    <button mdc-switch selected.bind="item.discordMessage.active" value.bind="item.discordMessage.active"
+                                            click.trigger="updateActive($event, item)"></button>
+                                </mdc-form-field>
+                            </mdc-list-item>
+                        </mdc-list>
+                    </section>
                     <div else>
                         <mdc-circular-progress size="50" stroke-width="3"></mdc-circular-progress>
                     </div>

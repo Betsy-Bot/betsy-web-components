@@ -13,7 +13,7 @@ export class SupportTicketMessage {
     guild;
 
     featureActive;
-    messages;
+    supportTickets;
     channels;
     loading = true;
 
@@ -23,15 +23,15 @@ export class SupportTicketMessage {
 
     async attached() {
         try {
-            [this.guild, this.messages, this.channels] = await Promise.all([
+            [this.guild, this.supportTickets, this.channels] = await Promise.all([
                 await this.discordService.getDiscordServerInformation(this.guildId),
-                await this.discordService.getDiscordSupportMessages(this.guildId),
+                await this.discordService.getDiscordSupportTicketSettings(this.guildId),
                 await this.discordService.getDiscordChannels(this.guildId)
             ])
-            for (let message of this.messages) {
-                if (message.name ) continue
-                const channel = this.channels.find(x => x.id == message.discordChannelId);
-                message.name = 'Message In Channel - #' + channel.name;
+            for (let ticket of this.supportTickets) {
+                if (ticket.identifier ) continue
+                const channel = this.channels.find(x => x.id == ticket.discordMessage.discordChannelId);
+                ticket.identifier = 'Message In Channel - #' + channel.name;
             }
             this.featureActive = this.guild.activeFeatures.includes(this.discordService.SUPPORT_TICKETS);
         } catch(e) {
@@ -41,23 +41,20 @@ export class SupportTicketMessage {
         }
     }
 
-    async updateActive(message) {
-        let foundCommandIndex = this.messages.findIndex(x => x.name === message.name);
-        if (foundCommandIndex >= 0) {
-            if (message.active && window.confirm("This will re-create the message for you. Proceed?")) {
-                await this.discordService.toggleDiscordMessageActiveStatus(message.id, message.active);
-                toast(`Active status has been updated for support ticket message`, {severity: "success"})
-            } else if (!message.active && window.confirm("This will attempt to delete the message for you. Proceed?")) {
-                await this.discordService.toggleDiscordMessageActiveStatus(message.id, message.active);
-                toast(`Active status has been updated for support ticket message`, {severity: "success"})
-            }
-        } else {
-            toast("Error", {severity: "error"})
+    async updateActive(event, ticket) {
+        event.stopPropagation();
+        ticket.discordMessage.active = !ticket.discordMessage.active;
+        if (ticket.discordMessage.active && window.confirm("This will re-create the message for you. Proceed?")) {
+            await this.discordService.toggleDiscordMessageActiveStatus(ticket.discordMessage.id, ticket.discordMessage.active);
+            toast(`Active status has been updated for support ticket message`, {severity: "success"})
+        } else if (!ticket.discordMessage.active && window.confirm("This will attempt to delete the message for you. Proceed?")) {
+            await this.discordService.toggleDiscordMessageActiveStatus(ticket.discordMessage.id, ticket.discordMessage.active);
+            toast(`Active status has been updated for support ticket message`, {severity: "success"})
         }
     }
 
-    goToMessage(message) {
-        this.router.navigate(`/guild/${this.guildId}/support-tickets/${message.discordMessageId}`)
+    goToMessage(ticket) {
+        this.router.navigate(`/guild/${this.guildId}/support-tickets/${ticket.id}`)
     }
 
     async toggleFeature() {

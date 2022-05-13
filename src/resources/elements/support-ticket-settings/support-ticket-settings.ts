@@ -10,14 +10,14 @@ export class SupportTicketSettings {
     @bindable authorizedRole;
 
     roles;
-    tab = 'container';
+    tab = 'settings';
 
     async created() {
         this.roles = await this.discordService.getDiscordRoles(this.guildId);
     }
 
     removeRole(index) {
-        this.request.settings.assignedRoles.splice(index, 1)
+        this.request.assignedRoles.splice(index, 1)
     }
 
     getRoleName(roleId) {
