@@ -141,5 +141,15 @@
                 click.delegate="request.sendTranscriptOnClose = !request.sendTranscriptOnClose"
             ></button>
         </div>
+        <div class="col-12 col-lg-6">
+            <mdc-text-field
+                class="w-100"
+                label="Max Open Per Person"
+                max="10"
+                type="number"
+                value.bind="request.maxOpenPerPerson"
+                placeholder="The maximum amount of tickets a single person can have for this ticket container."
+            ></mdc-text-field>
+        </div>
     </div>
 </template>
