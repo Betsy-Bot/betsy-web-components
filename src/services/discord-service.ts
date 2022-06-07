@@ -130,12 +130,12 @@ export class DiscordService {
         return this.api.doGet(`DiscordGuild/${guildId}/SupportTickets`);
     }
 
-    async getDiscordMessageSupportTickets(guildId: string, discordMessageId: string) {
-        return this.api.doGet(`DiscordGuild/${guildId}/DiscordMessages/${discordMessageId}/SupportTickets`);
+    async getDiscordMessageSupportTickets(guildId: string, settingsId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/SupportTickets/${settingsId}/Submissions`);
     }
 
-    async getSupportTicket(guildId: string, discordMessageId: string, supportTicketId: string) {
-        return this.api.doGet(`DiscordGuild/${guildId}/DiscordMessages/${discordMessageId}/SupportTickets/${supportTicketId}`);
+    async getSupportTicket(guildId: string, settingsId: string, supportTicketId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/SupportTickets/${settingsId}/Submissions/${supportTicketId}`);
     }
 
     async updateTrackedDiscordMessage(data: any) {

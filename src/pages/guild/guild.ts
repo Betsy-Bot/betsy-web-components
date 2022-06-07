@@ -205,7 +205,7 @@ export class Guild {
             },
             {
                 name: 'support-ticket-submissions',
-                route: 'support-tickets/:discordMessageId/submissions',
+                route: 'support-tickets/:settingsId/submissions',
                 moduleId: PLATFORM.moduleName('pages/guild/support-ticket-message/edit-ticket-message/support-tickets/support-tickets'),
                 title: 'Support Tickets',
                 settings: {
@@ -214,7 +214,7 @@ export class Guild {
             },
             {
                 name: 'support-ticket-submission',
-                route: 'support-tickets/:discordMessageId/submissions/:ticketId',
+                route: 'support-tickets/:settingsId/submissions/:ticketId',
                 moduleId: PLATFORM.moduleName('pages/guild/support-ticket-message/edit-ticket-message/support-tickets/support-ticket/support-ticket'),
                 title: 'Support Ticket Submission',
                 settings: {

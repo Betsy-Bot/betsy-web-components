@@ -10,18 +10,21 @@ export class SupportTickets {
     }
 
     guildId: string;
-    discordMessageId: string;
+    settingsId: string;
 
     featureActive;
     supportTickets;
 
     async activate(params) {
         this.guildId = params.guildId as string;
-        this.discordMessageId = params.discordMessageId as string;
-        this.supportTickets = await this.discordService.getDiscordMessageSupportTickets(this.guildId, this.discordMessageId);
+        this.settingsId = params.settingsId as string;
+    }
+
+    async attached() {
+        this.supportTickets = await this.discordService.getDiscordMessageSupportTickets(this.guildId, this.settingsId);
     }
 
     goToSubmission(submission) {
-        this.router.navigate(`/guild/${this.guildId}/support-tickets/${this.discordMessageId}/submissions/${submission.id}`)
+        this.router.navigate(`/guild/${this.guildId}/support-tickets/${this.settingsId}/submissions/${submission.id}`)
     }
 }

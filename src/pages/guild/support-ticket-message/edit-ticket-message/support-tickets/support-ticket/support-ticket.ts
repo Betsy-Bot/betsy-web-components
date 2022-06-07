@@ -10,7 +10,7 @@ export class SupportTicket {
     }
 
     guildId: string;
-    discordMessageId: string;
+    settingsId: string;
     supportTicketId: string;
 
     featureActive;
@@ -18,8 +18,11 @@ export class SupportTicket {
 
     async activate(params) {
         this.guildId = params.guildId as string;
-        this.discordMessageId = params.discordMessageId as string;
+        this.settingsId = params.settingsId as string;
         this.supportTicketId = params.ticketId as string;
-        this.supportTicket = await this.discordService.getSupportTicket(this.guildId, this.discordMessageId, this.supportTicketId);
+    }
+
+    async attached() {
+        this.supportTicket = await this.discordService.getSupportTicket(this.guildId, this.settingsId, this.supportTicketId);
     }
 }
