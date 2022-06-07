@@ -3,10 +3,11 @@ import {inject, PLATFORM} from "aurelia-framework";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {DiscordService} from "../../services/discord-service";
 import {toast} from "lets-toast";
+import {SessionService} from "../../services/session-service";
 
-@inject(EventAggregator, DiscordService, Router)
+@inject(EventAggregator, DiscordService, Router, SessionService)
 export class Guild {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
+    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router, private sessionService: SessionService) {
     }
 
     guildId: string;
@@ -29,6 +30,7 @@ export class Guild {
     attached() {
         if (this.guild) {
             this.eventAggregator.publish('guild-updated', this.params.guildId);
+            this.eventAggregator.publish('drawer-updated', this.sessionService.getStorageItem(SessionService.SIDEBAR_STATUS_KEY));
         } else {
             toast("You do not have access to this resource", {severity: 'error'});
         }
