@@ -34,7 +34,7 @@
 
 
         <div class="features" if.bind="guild">
-            <div class="fs-5">
+            <div class="fs-5" if.bind="guild.activeFeatures.length > 0">
                 Active Features
             </div>
             <div class="feature" repeat.for="feature of guild.activeFeatures">
@@ -44,7 +44,7 @@
                 ${feature | pascalSpacing}
             </div>
 
-            <div class="fs-5 mt-5">
+            <div class="fs-5 mt-5" if.bind="guild.activeAuditLogFeatures > 0">
                 Active Auditing Features
             </div>
             <div class="feature" repeat.for="feature of guild.activeAuditLogFeatures">
