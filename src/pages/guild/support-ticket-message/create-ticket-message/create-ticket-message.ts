@@ -4,10 +4,15 @@ import {Router} from "aurelia-router";
 import {inject, observable} from "aurelia-framework";
 import {toast} from "lets-toast";
 import {DiscordButtonStyle, DiscordComponentType} from "services/models/discord";
+import { ValidationControllerFactory, ValidationRules, ValidationController, Rule } from 'aurelia-validation';
 
-@inject(EventAggregator, DiscordService, Router)
+@inject(EventAggregator, DiscordService, Router, ValidationControllerFactory)
 export class CreateTicketMessage {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
+    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router, private validationControllerFactory: ValidationControllerFactory) {
+        this.validationController = this.validationControllerFactory.createForCurrentScope();
+        this.rules = ValidationRules
+            .ensure('channelId').required().withMessage('Required').then()
+            .rules;
     }
 
     guildId: string;
@@ -24,6 +29,7 @@ export class CreateTicketMessage {
         logChannelId: '',
         assignedRoles: [],
         initialMessage: {},
+        closeButtonText: 'Close',
         discordMessage: {
             discordChannelId: '',
             discordCategoryId: '',
@@ -40,6 +46,9 @@ export class CreateTicketMessage {
         }
     };
 
+    validationController: ValidationController;
+    rules: Rule<CreateTicketMessage, unknown>[][];
+
     loading = false;
     params;
     bound = false;
@@ -47,6 +56,10 @@ export class CreateTicketMessage {
     async activate(params) {
         this.guildId = params.guildId as string;
         this.params = params;
+    }
+
+    test() {
+        console.log('test');
     }
 
     async attached() {

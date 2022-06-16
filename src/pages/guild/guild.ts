@@ -239,6 +239,15 @@ export class Guild {
                     auth: true
                 }
             },
+            {
+                name: 'auto-role',
+                route: 'auto-role',
+                moduleId: PLATFORM.moduleName('pages/guild/auto-role/auto-role'),
+                title: 'Auto Role',
+                settings: {
+                    auth: true
+                }
+            },
         ]);
 
         config.mapUnknownRoutes(() => {

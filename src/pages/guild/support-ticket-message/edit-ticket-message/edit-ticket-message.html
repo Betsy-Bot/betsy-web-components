@@ -74,6 +74,15 @@
 
                     <div if.bind="tab === 'initial'">
                         <div class="fs-6 py-3">Customize the Initial Message that is sent to the channel when the support ticket channel is created</div>
+                        <mdc-text-field
+                            class="w-100"
+                            label="Close Button Text"
+                            maxlength="15"
+                            value.bind="ticket.closeButtonText">
+                        </mdc-text-field>
+                        <mdc-text-field-helper-line>
+                            <mdc-text-field-character-counter></mdc-text-field-character-counter>
+                        </mdc-text-field-helper-line>
                         <discord-message-creator
                             allow-components.bind="false"
                             message.two-way="ticket.initialMessage"
