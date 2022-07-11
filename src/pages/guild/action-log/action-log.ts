@@ -74,12 +74,6 @@ export class ActionLog {
             label: 'Member Timed Out',
             description: 'Anytime a member on your server is timed out it will be logged. We are not able to see who banned however - Check the audit log',
             active: false
-        },
-        {
-            value: this.MEMBER_NICKNAME_CHANGED,
-            label: 'Member Nickname Changed',
-            description: 'Anytime a member on your server has their nickname changed it will be logged. We are not able to see who banned however - Check the audit log',
-            active: false
         }
     ]
 
