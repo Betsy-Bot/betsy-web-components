@@ -1,0 +1,51 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+    - master
+
+resources:
+    - repo: self
+
+variables:
+    # Container registry service connection established during pipeline creation
+    dockerRegistryServiceConnection: '4d99b72f-99af-4aa6-9be8-c6f43af4d429'
+    imageRepository: 'betsypanelqa'
+    containerRegistry: 'betsycontainerregistry.azurecr.io'
+    dockerfilePath: '**/Dockerfile'
+    tag: '$(Build.BuildId)'
+
+    # Agent VM image name
+    vmImageName: 'ubuntu-latest'
+
+stages:
+    - stage: Build_Web_Application
+      displayName: Build staging web application
+      jobs:
+          - job: Build_Web_Application
+            displayName: Build Web Application
+            pool:
+                vmImage: $(vmImageName)
+            steps:
+                - task: Bash@3
+                  displayName: Run npm run build:staging
+                  inputs:
+                      targetType: 'inline'
+                      script: 'npm run build:staging'
+    - stage: Build_Docker
+      displayName: Build and push staging docker image
+      jobs:
+          - job: Build_Then_Push_Docker_Image
+            displayName: Build Docker Image
+            pool:
+                vmImage: $(vmImageName)
+            steps:
+                - task: Docker@2
+                  displayName: Build and push an image to container registry
+                  inputs:
+                      command: buildAndPush
+                      repository: $(imageRepository)
+                      dockerfile: $(dockerfilePath)
+                      containerRegistry: $(dockerRegistryServiceConnection)
+                      tags: |
