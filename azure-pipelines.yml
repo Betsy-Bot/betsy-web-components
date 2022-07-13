@@ -29,10 +29,10 @@ stages:
                 vmImage: $(vmImageName)
             steps:
                 - task: Bash@3
-                  displayName: Run npm run i
+                  displayName: Run npm i
                   inputs:
                       targetType: 'inline'
-                      script: 'npm run i'
+                      script: 'npm i'
     - stage: Build_Web_Application
       displayName: Build staging web application
       jobs:
