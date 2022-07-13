@@ -20,6 +20,19 @@ variables:
     vmImageName: 'ubuntu-latest'
 
 stages:
+    - stage: Npm_Install
+      displayName: Run NPM Install
+      jobs:
+          - job: Npm_Install
+            displayName: Run NPM Install
+            pool:
+                vmImage: $(vmImageName)
+            steps:
+                - task: Bash@3
+                  displayName: Run npm run i
+                  inputs:
+                      targetType: 'inline'
+                      script: 'npm run i'
     - stage: Build_Web_Application
       displayName: Build staging web application
       jobs:
