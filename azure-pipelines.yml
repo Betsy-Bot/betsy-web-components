@@ -33,21 +33,11 @@ stages:
                   inputs:
                       targetType: 'inline'
                       script: 'npm i'
-          - job: Build_Web_Application
-            displayName: Build Web Application
-            pool:
-                vmImage: $(vmImageName)
-            steps:
                 - task: Bash@3
                   displayName: Run npm run build:staging
                   inputs:
                       targetType: 'inline'
                       script: 'npm run build:staging'
-          - job: Build_Then_Push_Docker_Image
-            displayName: Build Docker Image
-            pool:
-                vmImage: $(vmImageName)
-            steps:
                 - task: Docker@2
                   displayName: Build and push an image to container registry
                   inputs:
