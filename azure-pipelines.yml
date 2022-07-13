@@ -20,8 +20,8 @@ variables:
     vmImageName: 'ubuntu-latest'
 
 stages:
-    - stage: Npm_Install
-      displayName: Run NPM Install
+    - stage: Build_And_Deploy
+      displayName: Build and Push Docker Image
       jobs:
           - job: Npm_Install
             displayName: Run NPM Install
@@ -33,9 +33,6 @@ stages:
                   inputs:
                       targetType: 'inline'
                       script: 'npm i'
-    - stage: Build_Web_Application
-      displayName: Build staging web application
-      jobs:
           - job: Build_Web_Application
             displayName: Build Web Application
             pool:
@@ -46,9 +43,6 @@ stages:
                   inputs:
                       targetType: 'inline'
                       script: 'npm run build:staging'
-    - stage: Build_Docker
-      displayName: Build and push staging docker image
-      jobs:
           - job: Build_Then_Push_Docker_Image
             displayName: Build Docker Image
             pool:
