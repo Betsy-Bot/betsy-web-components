@@ -22,6 +22,10 @@ export class Home {
             return;
         }
 
+        for (let server of this.user.adminedServers) {
+            server.id = server.guildId;
+        }
+
         const userGuilds = await this.userService.getGuilds();
         for (const guild of userGuilds) {
             guild.icon_extension = guild.icon?.startsWith("a_") ? "gif" : "webp";

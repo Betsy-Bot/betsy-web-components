@@ -28,11 +28,11 @@
       <div class="col-12 col-lg-4 text-lg-end my-auto" if.bind="!hideButton">
         <button mdc-button
                 class="button-secondary"
-                if.bind="(!server.invited && !loading) || !server.exists"
+                if.bind="((!server.invited && !loading) || !server.exists) && !forceGo"
                 click.delegate="handleServerInvite()">
           Setup
         </button>
-        <a route-href="route: guild; params.bind: { guildId: server.id }" if.bind="server.exists && server.invited">
+        <a route-href="route: guild; params.bind: { guildId: server.id }" if.bind="forceGo || (server.exists && server.invited)">
           <button mdc-button class="button-primary">
             Go
           </button>
