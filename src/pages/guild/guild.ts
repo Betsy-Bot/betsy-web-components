@@ -248,6 +248,15 @@ export class Guild {
                     auth: true
                 }
             },
+            {
+                name: 'settings',
+                route: 'settings',
+                moduleId: PLATFORM.moduleName('pages/guild/settings/settings'),
+                title: 'Guild Settings',
+                settings: {
+                    auth: true
+                }
+            },
         ]);
 
         config.mapUnknownRoutes(() => {
