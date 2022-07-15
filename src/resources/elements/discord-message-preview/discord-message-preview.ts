@@ -1,5 +1,4 @@
 import {bindable} from "aurelia-framework";
-import * as moment from 'moment';
 import './discord-message-preview.scss';
 
 export class DiscordMessagePreview {
@@ -7,7 +6,6 @@ export class DiscordMessagePreview {
     @bindable first = true;
 
     get currentTime() {
-        // @ts-ignore - No idea why TS is bitching but this works fine.
-        return moment().calendar();
+        return new Intl.DateTimeFormat('en', { dateStyle: 'long', timeStyle: 'short' }).format(new Date());
     }
 }

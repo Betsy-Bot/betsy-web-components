@@ -1,6 +1,4 @@
 import {bindable, inject} from "aurelia-framework";
-import moment from 'moment';
-
 export class DiscordMessagesRenderer {
     @bindable messages;
 
@@ -15,8 +13,11 @@ export class DiscordMessagesRenderer {
         if (this.messages[index - 1].discordUserName != message.discordUserName) {
             return true;
         }
-        const diff = moment(message.createdDate).diff(this.messages[index - 1].createdDate, 'minutes');
-        console.log(diff);
+        let dt1 = new Date(message.createdDate);
+        let dt2 = new Date(this.messages[index - 1].createdDate);
+        let timeDifference  =(dt2.getTime() - dt1.getTime()) / 1000;
+        timeDifference /= 60;
+        let diff = Math.abs(Math.round(timeDifference));
         return false;
     }
 }

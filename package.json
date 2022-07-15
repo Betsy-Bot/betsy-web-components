@@ -17,11 +17,10 @@
         "aurelia-animator-css": "^1.0.4",
         "aurelia-validation": "^2.0.0-rc2",
         "@aurelia-mdc-web/all": "^8.0.5",
-        "@microsoft/signalr": "^6.0.5",
+        "@microsoft/signalr": "^6.0.7",
         "@popperjs/core": "^2.11.5",
         "bootstrap": "^5.1.3",
         "lets-toast": "^1.0.1",
-        "moment": "^2.29.3",
         "sanitize-html": "^2.7.0",
         "showdown": "^2.1.0"
     },
