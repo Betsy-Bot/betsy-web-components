@@ -29,7 +29,8 @@ export class Settings {
     permissionUserId;
 
     async addAuthorizedUser() {
-        if (this.guild.authorizedUsers.findIndex( x => this.permissionUserId) >= 0) {
+        console.log(this.guild.authorizedUsers.findIndex( x => this.permissionUserId));
+        if (this.guild.authorizedUsers.findIndex( x => x == this.permissionUserId) == -1) {
             this.guild.authorizedUsers.push(this.permissionUserId);
         }
         await this.discordService.updateAuthorizedUsersForGuild(this.guild, this.guildId);

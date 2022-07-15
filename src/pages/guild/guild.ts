@@ -150,6 +150,24 @@ export class Guild {
                 }
             },
             {
+                name: 'guild-messages',
+                route: 'resources/messages',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/messages/messages'),
+                title: 'Manage Server Messages',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'guild-messages-create',
+                route: 'resources/messages/create',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/messages/create-message/create-message'),
+                title: 'Create Server Message',
+                settings: {
+                    auth: true
+                }
+            },
+            {
                 name: 'guild-data-commands',
                 route: 'data-commands',
                 moduleId: PLATFORM.moduleName('pages/guild/data-commands/data-commands'),

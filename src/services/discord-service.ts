@@ -193,4 +193,16 @@ export class DiscordService {
     async updateAuthorizedUsersForGuild(guild: any, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/AuthorizedUsers`, guild);
     }
+
+    async updateGlobalSettingsForGuild(guild: any, guildId: string) {
+        return this.api.doPatch(`DiscordGuild/${guildId}/GlobalSettings`, guild);
+    }
+
+    async getResourceMessagesForGuild(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/Resources/Messages`);
+    }
+
+    async createDiscordMessage(message: any) {
+        return this.api.doPost(`DiscordMessage`, message);
+    }
 }
