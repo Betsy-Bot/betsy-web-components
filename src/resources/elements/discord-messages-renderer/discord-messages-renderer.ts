@@ -18,6 +18,7 @@ export class DiscordMessagesRenderer {
         let timeDifference  =(dt2.getTime() - dt1.getTime()) / 1000;
         timeDifference /= 60;
         let diff = Math.abs(Math.round(timeDifference));
+        //TODO Check diff and show author if message between longer than 30 minutes
         return false;
     }
 }

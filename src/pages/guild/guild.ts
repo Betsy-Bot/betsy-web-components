@@ -159,6 +159,15 @@ export class Guild {
                 }
             },
             {
+                name: 'guild-create-messages',
+                route: 'resources/messages/edit/:messageId',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/messages/edit-message/edit-message'),
+                title: 'Edit Server Message',
+                settings: {
+                    auth: true
+                }
+            },
+            {
                 name: 'guild-messages-create',
                 route: 'resources/messages/create',
                 moduleId: PLATFORM.moduleName('pages/guild/resources/messages/create-message/create-message'),

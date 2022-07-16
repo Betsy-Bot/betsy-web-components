@@ -1,0 +1,28 @@
+<template>
+    <div class="row g-4">
+        <div class="col-12 col-xl-8">
+            <form submit.delegate="saveMessage()">
+                <discord-feature-header
+                    title="Edit Message Template"
+                    subtitle="Edit the prebuilt message that can be used in a variety of features throughout the bot's functionality"
+                ></discord-feature-header>
+                <div class="mt-5">
+                    <mdc-text-field
+                        label="Identifier"
+                        class="w-100"
+                        placeholder="Message Identifier"
+                        value.bind="message.name"
+                        required
+                    ></mdc-text-field>
+                    <discord-message-creator message.two-way="message.message"></discord-message-creator>
+                </div>
+                <button mdc-button class="button-primary mt-2" type="submit">
+                    Save Message
+                </button>
+            </form>
+        </div>
+        <div class="col-12 col-xl-4">
+            <discord-message-preview message.bind="message.message"></discord-message-preview>
+        </div>
+    </div>
+</template>

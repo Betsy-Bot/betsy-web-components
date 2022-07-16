@@ -21,4 +21,8 @@ export class Messages {
     async attached() {
         this.messages = await this.discordService.getResourceMessagesForGuild(this.guildId);
     }
+
+    goToEdit(message) {
+        this.router.navigate(`/guild/${this.guildId}/resources/messages/edit/${message.id}`)
+    }
 }

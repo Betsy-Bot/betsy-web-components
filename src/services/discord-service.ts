@@ -205,4 +205,12 @@ export class DiscordService {
     async createDiscordMessage(message: any) {
         return this.api.doPost(`DiscordMessage`, message);
     }
+
+    async getDiscordMessageById(id: string) {
+        return this.api.doGet(`DiscordMessage/${id}`);
+    }
+
+    async updateDiscordMessage(message: any) {
+        return this.api.doPatch(`DiscordMessage/${message.id}`, message);
+    }
 }
