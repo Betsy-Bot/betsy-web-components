@@ -9,7 +9,7 @@
                 <div class="mt-5">
                     <mdc-text-field
                         label="Identifier"
-                        class="w-100"
+                        class="w-100 mb-3"
                         placeholder="Message Identifier"
                         value.bind="message.name"
                         required
@@ -22,7 +22,7 @@
             </form>
         </div>
         <div class="col-12 col-xl-4">
-            <discord-message-preview message.bind="message.message"></discord-message-preview>
+            <discord-message-preview message.two-way="message.message"></discord-message-preview>
         </div>
     </div>
 </template>

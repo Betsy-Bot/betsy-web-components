@@ -1,5 +1,10 @@
 <template>
     <section id="discord-message-creator">
+        <message-resource-selector
+            if.bind="!hideTemplate"
+            label="Load Template"
+            selected-message.two-way="selectedMessage"
+        ></message-resource-selector>
         <mdc-tab-bar view-model.ref="tabBar"
                      use-automatic-activation.bind="useAutomaticActivation" focus-on-activate.bind="false">
             <mdc-tab label="Message" active.bind="tab === 'message'"

@@ -27,6 +27,14 @@ export class DiscordService {
         return this.guild;
     }
 
+    getLocalServerId() {
+        return this.guild.id;
+    }
+
+    getLocalDiscordGuildId() {
+        return this.guild.guildId;
+    }
+
     async exchangeCode(code: string): Promise<discordModels.ExchangeCodeResponse> {
         return await this.api.doPost('Discord/OAuth/ExchangeCode', {code: code})
     }
@@ -212,5 +220,25 @@ export class DiscordService {
 
     async updateDiscordMessage(message: any) {
         return this.api.doPatch(`DiscordMessage/${message.id}`, message);
+    }
+
+    async createChannelCleaner(cleaner: any) {
+        return this.api.doPost(`DiscordChannelCleaner`, cleaner);
+    }
+
+    async updateChannelCleaner(cleaner: any) {
+        return this.api.doPatch(`DiscordChannelCleaner/${cleaner.id}`, cleaner);
+    }
+
+    async testCleanChannelCleaner(cleanerId: string) {
+        return this.api.doPost(`DiscordChannelCleaner/${cleanerId}/Clean`, { });
+    }
+
+    async deleteChannelCleaner(cleanerId: string) {
+        return this.api.doDelete(`DiscordChannelCleaner/${cleanerId}`);
+    }
+
+    async getChannelCleaners(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/DiscordChannelCleaners`);
     }
 }

@@ -59,10 +59,6 @@ export class CreateTicketMessage {
         this.params = params;
     }
 
-    test() {
-        console.log('test');
-    }
-
     async attached() {
         [this.guild] = await Promise.all([
             await this.discordService.getDiscordServerInformation(this.guildId)

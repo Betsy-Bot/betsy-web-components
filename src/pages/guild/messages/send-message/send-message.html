@@ -24,14 +24,14 @@
                     ></discord-channel-selector>
                 </div>
                 <div class="mt-5">
-                    <discord-message-creator message.bind="request.message"></discord-message-creator>
+                    <discord-message-creator message.two-way="request.message"></discord-message-creator>
                 </div>
                 <button mdc-button class="button-primary mt-2" click.delegate="sendMessage()">
                     Send Message
                 </button>
             </div>
             <div class="col-12 col-xl-4">
-                <discord-message-preview message.bind="request.message"></discord-message-preview>
+                <discord-message-preview message.two-way="request.message"></discord-message-preview>
             </div>
         </div>
     </section>

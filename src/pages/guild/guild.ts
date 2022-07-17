@@ -284,6 +284,15 @@ export class Guild {
                     auth: true
                 }
             },
+            {
+                name: 'channel-cleaners',
+                route: 'channel-cleaners',
+                moduleId: PLATFORM.moduleName('pages/guild/channel-cleaners/channel-cleaners'),
+                title: 'Channel Cleaners',
+                settings: {
+                    auth: true
+                }
+            },
         ]);
 
         config.mapUnknownRoutes(() => {

@@ -27,6 +27,7 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./elements/discord-form-submission-list/discord-form-submission-list'),
         PLATFORM.moduleName('./elements/discord-tracked-message-settings/discord-tracked-message-settings'),
         PLATFORM.moduleName('./elements/feature-item-list/feature-item-list'),
+        PLATFORM.moduleName('./elements/message-resource-selector/message-resource-selector'),
         PLATFORM.moduleName('./elements/support-ticket-settings/support-ticket-settings'),
         PLATFORM.moduleName('./elements/support-ticket-transcript/support-ticket-transcript'),
         PLATFORM.moduleName('./elements/validation-error/validation-error'),
