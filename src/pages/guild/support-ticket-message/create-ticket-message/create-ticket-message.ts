@@ -33,6 +33,7 @@ export class CreateTicketMessage {
         discordMessage: {
             discordChannelId: '',
             discordCategoryId: '',
+            type: 1,
             message: {
                 components: [ {
                     type: DiscordComponentType.ActionRow,
