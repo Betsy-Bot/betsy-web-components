@@ -9,11 +9,15 @@ export class DiscordRoleSelector {
     @bindable selectedRole: string;
     @bindable label;
     @bindable required: boolean = false;
+    @bindable removeEveryone: boolean = false;
 
     roles;
 
     async attached() {
         this.roles = await this.discordService.getDiscordRoles(this.guildId);
+        if (this.removeEveryone) {
+            this.roles.splice(0, 1)
+        }
     }
 
     getColorStyle(color) {

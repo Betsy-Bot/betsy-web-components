@@ -270,7 +270,16 @@ export class Guild {
                 name: 'auto-role',
                 route: 'auto-role',
                 moduleId: PLATFORM.moduleName('pages/guild/auto-role/auto-role'),
-                title: 'Auto Role',
+                title: 'Auto Role Containers',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'auto-role-manage',
+                route: 'auto-role/:containerId',
+                moduleId: PLATFORM.moduleName('pages/guild/auto-role/manage-autorole-container/manage-autorole-container'),
+                title: 'Auto Role Container',
                 settings: {
                     auth: true
                 }
@@ -292,7 +301,7 @@ export class Guild {
                 settings: {
                     auth: true
                 }
-            },
+            }
         ]);
 
         config.mapUnknownRoutes(() => {

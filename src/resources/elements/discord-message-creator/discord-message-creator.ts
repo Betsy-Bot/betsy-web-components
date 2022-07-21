@@ -1,22 +1,16 @@
 import { bindable, inject } from 'aurelia-framework';
 import {DiscordEmbed} from "../../../services/models/discord";
-import { DiscordService } from "../../../services/discord-service";
 
-@inject(DiscordService)
 export class DiscordMessageCreator {
-    constructor(private discordService: DiscordService) {
-    }
-    @bindable message;
+    @bindable message = {
+        embeds: [],
+        components: []
+    };
     @bindable single;
     @bindable allowComponents: boolean;
     @bindable tab = 'message';
     @bindable selectedMessage;
     @bindable hideTemplate: boolean = false
-    messages;
-
-    async created() {
-        this.messages = await this.discordService.getResourceMessagesForGuild(this.discordService.getLocalDiscordGuildId());
-    }
 
     selectedMessageChanged() {
         if (this.selectedMessage?.message) {
@@ -40,7 +34,7 @@ export class DiscordMessageCreator {
         if (!this.single) {
             return !this.message.embeds || this.message.embeds.length < 10
         } else {
-            return !this.message.embeds || this.message.embeds.length < 1
+            return !this.message?.embeds || this.message?.embeds?.length < 1
         }
     }
 }

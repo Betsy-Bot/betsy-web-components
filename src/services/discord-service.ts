@@ -11,6 +11,7 @@ export class DiscordService {
         guildId: null,
         data: null,
     }
+    messages;
 
     RESPONSE_MESSAGES = 'ResponseMessages';
     DATA_COMMANDS = 'DataCommands';
@@ -78,6 +79,7 @@ export class DiscordService {
     async getDiscordServerInformation(guildId: string): Promise<discordModels.BaseDiscordServer> {
         if (!this.guild || guildId !== this.guild.guildId) {
             this.guild = await this.api.doGet(`DiscordGuild/${guildId}`);
+            this.messages = null;
         }
         return this.guild;
     }
@@ -207,7 +209,10 @@ export class DiscordService {
     }
 
     async getResourceMessagesForGuild(guildId: string) {
-        return this.api.doGet(`DiscordGuild/${guildId}/Resources/Messages`);
+        if (!this.messages) {
+            this.messages = this.api.doGet(`DiscordGuild/${guildId}/Resources/Messages`);
+        }
+        return this.messages;
     }
 
     async createDiscordMessage(message: any) {
@@ -240,5 +245,25 @@ export class DiscordService {
 
     async getChannelCleaners(guildId: string) {
         return this.api.doGet(`DiscordGuild/${guildId}/DiscordChannelCleaners`);
+    }
+
+    async getAutoroleContainers(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/AutoRoleContainers`);
+    }
+
+    async getAutoroleContainer(containerId: string) {
+        return this.api.doGet(`DiscordAutoroleContainer/${containerId}`);
+    }
+
+    async createAutoroleContainer(container: any) {
+        return this.api.doPost(`DiscordAutoroleContainer`, container);
+    }
+
+    async updateAutoroleContainer(container: any) {
+        return this.api.doPatch(`DiscordAutoroleContainer/${container.id}`, container);
+    }
+
+    async toggleAutoroleContainer(containerId: string) {
+        return this.api.doPatch(`DiscordAutoroleContainer/${containerId}/ToggleActive`, { });
     }
 }

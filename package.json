@@ -4,12 +4,13 @@
     "version": "0.1.1",
     "license": "MIT",
     "scripts": {
-        "build": "webpack --env production",
-        "build:staging": "webpack --env staging",
-        "start": "webpack-dev-server",
-        "build:dev": "webpack",
         "analyze": "webpack --env production --analyze",
-        "lintcheck": "eslint --rulesdir \".\" \"src/**/*.js\""
+        "build": "webpack --env production",
+        "build:dev": "webpack",
+        "build:staging": "webpack --env staging",
+        "update-services": "npx orval",
+        "lintcheck": "eslint --rulesdir \".\" \"src/**/*.js\"",
+        "start": "webpack-dev-server"
     },
     "dependencies": {
         "aurelia-bootstrapper": "^2.4.0",
