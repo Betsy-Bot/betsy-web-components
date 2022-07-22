@@ -49,6 +49,9 @@ export class ManageAutoroleContainer {
     }
 
     selectedRoleChanged() {
+        if (this.container.discordRoles.length >= 25) {
+            return toast("A max of 25 roles are allowed for select menus", {severity: "error"});
+        }
         if (!this.container?.discordRoles?.find(x => x.discordRoleId === this.selectedRole.id)) {
             this.container.discordRoles.push({
                 discordRoleId: this.selectedRole.id,

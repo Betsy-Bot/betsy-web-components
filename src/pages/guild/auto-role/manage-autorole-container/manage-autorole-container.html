@@ -5,6 +5,14 @@
                 title="Auto Role Containers"
                 subtitle="Create a message with a select menu allowing users to select roles they want to be added to for your server."
             ></discord-feature-header>
+            <div class="my-1">
+                <div class="mt-1 mb-3 text-danger fs-7 d-inline-flex align-content-center">
+                            <span class="material-icons me-2">
+                                warning
+                            </span>
+                    In order for the bot to add or remove a specific role it MUST be above it in the role list. If you do not have the Betsy role above the roles selected it will NOT remove/add those roles.
+                </div>
+            </div>
             <div class="mt-4">
                 <form submit.delegate="putContainer()">
                     <div class="mb-3">
