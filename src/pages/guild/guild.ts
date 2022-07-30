@@ -187,15 +187,6 @@ export class Guild {
             },
             {
                 name: 'guild-data-commands',
-                route: 'data-commands/create',
-                moduleId: PLATFORM.moduleName('pages/guild/data-commands/create-data-command/create-data-command'),
-                title: 'Create Data Command',
-                settings: {
-                    auth: true
-                }
-            },
-            {
-                name: 'guild-data-commands',
                 route: 'data-commands/:discordApplicationCommandId',
                 moduleId: PLATFORM.moduleName('pages/guild/data-commands/edit-data-command/edit-data-command'),
                 title: 'Edit Data Command',
