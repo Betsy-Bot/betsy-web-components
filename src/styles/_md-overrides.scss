@@ -88,3 +88,7 @@ body {
 .mdc-text-field {
     @include textfield.placeholder-color(theme.$grey-500)
 }
+
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__affix--prefix {
+    color: darkgray;
+}

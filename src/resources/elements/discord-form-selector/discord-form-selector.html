@@ -1,6 +1,6 @@
 <template>
     <section id="discord-channel-selector">
-        <mdc-select if.bind="forms" class="standard-betsy-select" value.bind="formId" label.bind="label">
+        <mdc-select if.bind="forms" class="standard-betsy-select w-100" value.bind="formId" label.bind="label">
             <mdc-icon mdc-select-icon>list</mdc-icon>
             <mdc-list>
                 <mdc-list-item repeat.for="form of forms" value.bind="form.id">

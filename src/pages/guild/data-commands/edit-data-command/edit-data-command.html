@@ -21,29 +21,135 @@
                         <discord-command-creator command.two-way="command"></discord-command-creator>
                     </div>
 
-                    <discord-form-selector
-                        label="Select form to open"
-                        guild-id.bind="guildId"
-                        form-id.two-way="command.discordCommandActions[0].discordFormId"
-                    ></discord-form-selector>
+                    <mdc-tab-bar view-model.ref="tabBar">
+                        <mdc-tab
+                            label="Form Command"
+                            active.bind="tab === 'form'"
+                            click.delegate="tab = 'form'"
+                        ></mdc-tab>
+                        <mdc-tab
+                            label="REST Request Command"
+                            active.bind="tab === 'rest'"
+                            click.delegate="tab = 'rest'"
+                        ></mdc-tab>
+                    </mdc-tab-bar>
 
-                    <discord-action-creator
-                        single.bind="true"
-                        action.bind="command.discordCommandActions[0]"
-                        forced-type.bind="true"
-                    ></discord-action-creator>
+                    <template if.bind="tab === 'form'">
+                        <div class="my-2 fs-6 fw-bolder">
+                            Form commands will open a created form once executed
+                        </div>
+                        <discord-form-selector
+                            label="Select form to open"
+                            guild-id.bind="guildId"
+                            form-id.two-way="command.discordCommandActions[0].discordFormId"
+                        ></discord-form-selector>
+                    </template>
 
-                    <div class="mt-5">
-                        <div class="text-end mt-3">
-                            <button type="submit" mdc-button class="button-primary">
-                                Save
-                            </button>
+                    <template if.bind="tab === 'rest'">
+                        <div class="my-2 fs-6 fw-bolder">
+                            REST Requests commands send a POST/PUT/PATCH to your entered API.
+                        </div>
+                        <mdc-text-field
+                            class="w-100"
+                            label="APU Url"
+                            value.bind="command.discordCommandActions[0].restRequestMetadata.apiUrl"
+                            placeholder="https://example.com/api/someEndpoint"
+                            required.bind="true"
+                        ></mdc-text-field>
+                        <mdc-form-field repeat.for="type of restTypes">
+                            <mdc-radio model.bind="type" checked.bind="command.discordCommandActions[0].type"></mdc-radio>
+                            <label>${getDisplayTextForCommandActionType(type)}</label>
+                        </mdc-form-field>
+                        <div class="my-2" style="min-height: 45px;">
+                            <button mdc-button class="button-primary" click.delegate="addHeader()" type="button">Add Header</button>
+                            <div class="row g-4">
+                                <div class="col-12 col-md-6" repeat.for="header of command.discordCommandActions[0].restRequestMetadata.requestHeaders">
+                                    <div mdc-elevation="9" class="p-2">
+                                        <div class="text-end">
+                                            <span class="cursor-pointer" click.delegate="removeHeader($index)">X</span>
+                                        </div>
+                                        <request-header-creator header.two-way="header"></request-header-creator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-2" style="min-height: 45px;">
+                            <div class="my-2 fs-6 fw-bolder">
+                                Parameters can be mapped using dot notation.
+                            </div>
+                            <span>someObject.someProperty will end up with JSON that looks like
+                                <br> { "someObject": { "someProperty": "" } }
+                                <br> This can be as deep as you'd like.
+                                <br> <span class="fw-bolder">Reach out in Discord if you need assistance</span>
+                            </span>
+                            <div class="my-2">
+                                <button mdc-button class="button-primary" click.delegate="addParameter()" type="button">Add Parameter</button>
+                            </div>
+                            <div class="row g-4">
+                                <div class="col-12 col-md-6" repeat.for="parameter of command.commandInformation.options">
+                                    <div mdc-elevation="9" class="p-2">
+                                        <div class="text-end">
+                                            <span class="cursor-pointer" click.delegate="removeParameter($index)">X</span>
+                                        </div>
+                                        <discord-command-parameter-creator parameter.two-way="parameter"></discord-command-parameter-creator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-2" style="min-height: 45px;">
+                            <div class="my-2 fs-6 fw-bolder">
+                                Default Data
+                            </div>
+                            <span>
+                                This also uses dot notation and will fill in any data you need for your API
+                                <br>Which are not required to be entered in with the command
+                            </span>
+                            <div class="my-2">
+                                <button mdc-button class="button-primary" click.delegate="addDefaultData()" type="button">
+                                    Add Default Data
+                                </button>
+                            </div>
+                            <div class="row g-4">
+                                <div class="col-12 col-md-6" repeat.for="parameter of command.discordCommandActions[0].restRequestMetadata.defaultRequestData">
+                                    <div mdc-elevation="9" class="p-2">
+                                        <div class="text-end">
+                                            <span class="cursor-pointer" click.delegate="removeDefaultData($index)">X</span>
+                                        </div>
+                                        <discord-command-parameter-creator
+                                            parameter.two-way="parameter"
+                                            hide-description.bind="true"
+                                            hide-switch.bind="true"
+                                            show-value.bind="true"
+                                        ></discord-command-parameter-creator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+
+                    <div mdc-elevation="12" class="mt-4 p-3">
+                        <div>
+                            Command Response Message
+                        </div>
+                        <discord-action-creator
+                            single.bind="true"
+                            action.bind="command.discordCommandActions[0]"
+                            forced-type.bind="true"
+                        ></discord-action-creator>
+
+                        <div class="mt-5">
+                            <div class="text-end mt-3">
+                                <button type="submit" mdc-button class="button-primary">
+                                    Save
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="col-4 text-end">
-
+            <div class="col-4">
+                <discord-message-preview message.two-way="command.discordCommandActions[0].discordMessage.message"></discord-message-preview>
             </div>
         </div>
     </section>
