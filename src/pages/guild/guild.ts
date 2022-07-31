@@ -292,6 +292,15 @@ export class Guild {
                 settings: {
                     auth: true
                 }
+            },
+            {
+                name: 'payments',
+                route: 'payments',
+                moduleId: PLATFORM.moduleName('pages/guild/payments/payments'),
+                title: 'Payments',
+                settings: {
+                    auth: true
+                }
             }
         ]);
 

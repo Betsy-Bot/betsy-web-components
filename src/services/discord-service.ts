@@ -19,7 +19,8 @@ export class DiscordService {
     BLACKLISTED_WORDS = 'BlacklistedWords';
     SUPPORT_TICKETS = 'SupportTickets';
     AUDIT_LOG = 'AuditLog';
-    TWITCH_SUBSCRIPTIONS ='TwitchSubscriptions';
+    TWITCH_SUBSCRIPTIONS = 'TwitchSubscriptions';
+    PAYMENTS = 'Payments';
 
     constructor(private api: ApiService) {
     }
@@ -206,6 +207,10 @@ export class DiscordService {
 
     async updateGlobalSettingsForGuild(guild: any, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/GlobalSettings`, guild);
+    }
+
+    async updateApiKyesForGuild(guild: any, guildId: string) {
+        return this.api.doPatch(`DiscordGuild/${guildId}/ApiKeys`, guild);
     }
 
     async getResourceMessagesForGuild(guildId: string) {

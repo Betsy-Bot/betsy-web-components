@@ -1,0 +1,30 @@
+<template>
+    <section id="response-message">
+        <div class="row">
+            <div class="col-8">
+                <discord-feature-header
+                    title="Payments"
+                    subtitle="Create and manage the way your discord users can complete payments through your server"
+                ></discord-feature-header>
+            </div>
+            <div class="col-4 text-end">
+                <button
+                    mdc-switch
+                    selected.bind="featureActive"
+                    value.bind="featureActive"
+                    change.delegate="toggleFeature()"
+                ></button>
+                <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+            </div>
+        </div>
+
+        <form submit.delegate="updateKeys()">
+            <mdc-text-field
+                class="w-100"
+                label="Coinbase Commerce Api Key"
+                value.bind="guild.coinbaseCommerceApiKey"
+            ></mdc-text-field>
+            <button mdc-button class="button-primary">Save</button>
+        </form>
+    </section>
+</template>
