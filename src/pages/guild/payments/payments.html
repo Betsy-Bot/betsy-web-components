@@ -18,13 +18,24 @@
             </div>
         </div>
 
-        <form submit.delegate="updateKeys()">
-            <mdc-text-field
-                class="w-100"
-                label="Coinbase Commerce Api Key"
-                value.bind="guild.coinbaseCommerceApiKey"
-            ></mdc-text-field>
-            <button mdc-button class="button-primary">Save</button>
-        </form>
+        <mdc-expandable accordion="acc1" class="mt-3">
+            <div slot="caption">Coinbase Commerce</div>
+            <div class="py-3">
+                <div>
+                    Coinbase Commerce is a very easy to set up and use cryptocurrency platform.
+                    <br> Get started on <a href="https://commerce.coinbase.com/" target="_blank" class="text-blue">Coinbase Commerce</a>
+                    <br> Coinbase commerce takes a 1% fee.
+                    <br> Simply provide your coinbase API key which can be found in your settings to start accepting cryptocurrency.
+                </div>
+                <form submit.delegate="updateKeys()">
+                    <mdc-text-field
+                        class="w-100"
+                        label="Coinbase Commerce Api Key"
+                        value.bind="guild.coinbaseCommerceApiKey"
+                    ></mdc-text-field>
+                    <button mdc-button class="button-primary">Save</button>
+                </form>
+            </div>
+        </mdc-expandable>
     </section>
 </template>

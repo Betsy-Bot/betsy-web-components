@@ -15,6 +15,10 @@ body {
     color: green;
 }
 
+.text-blue {
+    color: dodgerblue !important;
+}
+
 #drawer {
     .mdc-list-item--selected .mdc-list-item__primary-text, .mdc-list-item--activated .mdc-list-item__primary-text {
         color: black !important;
@@ -35,4 +39,14 @@ body {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+a {
+    color: unset;
+    text-decoration: none;
+}
+
+a:hover {
+    font-weight: bolder;
+    color: unset;
 }
