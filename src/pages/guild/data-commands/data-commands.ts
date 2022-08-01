@@ -30,7 +30,7 @@ export class DataCommands {
     async updateActive(command) {
         let foundCommandIndex = this.commands.findIndex(x => x.name === command.name);
         if (foundCommandIndex >= 0) {
-            await this.discordService.toggleDiscordCommandActive(this.guildId, command.discordApplicationCommandId, this.commands[foundCommandIndex].active);
+            await this.discordService.toggleDiscordCommandActive(this.guildId, command.id, this.commands[foundCommandIndex].active);
             toast(`Active status has been updated for /${command.name}`, {severity: "success"})
         } else {
             toast("Error", {severity: "error"})
@@ -38,7 +38,7 @@ export class DataCommands {
     }
 
     goToCommand(command) {
-        this.router.navigate(`/guild/${this.guildId}/data-commands/${command.discordApplicationCommandId}`)
+        this.router.navigate(`/guild/${this.guildId}/data-commands/${command.id}`)
     }
 
     async toggleFeature() {

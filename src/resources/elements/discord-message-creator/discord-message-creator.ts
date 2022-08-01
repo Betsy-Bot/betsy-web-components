@@ -1,11 +1,23 @@
-import {bindable} from 'aurelia-framework';
+import { bindable, inject } from 'aurelia-framework';
 import {DiscordEmbed} from "../../../services/models/discord";
 
 export class DiscordMessageCreator {
-    @bindable message;
+    @bindable message = {
+        embeds: [],
+        components: []
+    };
     @bindable single;
     @bindable allowComponents: boolean;
     @bindable tab = 'message';
+    @bindable selectedMessage;
+    @bindable hideTemplate: boolean = false
+
+    selectedMessageChanged() {
+        if (this.selectedMessage?.message) {
+            this.message = this.selectedMessage.message;
+            this.selectedMessage = null;
+        }
+    }
 
     addEmbed() {
         if (!this.message.embeds) {
@@ -22,7 +34,7 @@ export class DiscordMessageCreator {
         if (!this.single) {
             return !this.message.embeds || this.message.embeds.length < 10
         } else {
-            return !this.message.embeds || this.message.embeds.length < 1
+            return !this.message?.embeds || this.message?.embeds?.length < 1
         }
     }
 }

@@ -33,6 +33,7 @@ export class CreateTicketMessage {
         discordMessage: {
             discordChannelId: '',
             discordCategoryId: '',
+            type: 1,
             message: {
                 components: [ {
                     type: DiscordComponentType.ActionRow,
@@ -56,10 +57,6 @@ export class CreateTicketMessage {
     async activate(params) {
         this.guildId = params.guildId as string;
         this.params = params;
-    }
-
-    test() {
-        console.log('test');
     }
 
     async attached() {

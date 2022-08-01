@@ -42,6 +42,9 @@
                         <a href="/guild/${guildId}/data-commands">
                             <mdc-list-item class="list-item-padding">Data Commands</mdc-list-item>
                         </a>
+                        <a href="/guild/${guildId}/payments">
+                            <mdc-list-item class="list-item-padding">Payments</mdc-list-item>
+                        </a>
                     </div>
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('moderation')" no-list-action>
@@ -59,6 +62,9 @@
                         <a href="/guild/${guildId}/auto-role">
                             <mdc-list-item class="list-item-padding">Auto Role</mdc-list-item>
                         </a>
+                        <a href="/guild/${guildId}/channel-cleaners">
+                            <mdc-list-item class="list-item-padding">Channel Cleaners</mdc-list-item>
+                        </a>
                     </div>
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('resources')" no-list-action>
@@ -67,6 +73,12 @@
                         </mdc-icon>
                     </mdc-list-item>
                     <div if.bind="expandOptions.resources">
+                        <a href="/guild/${guildId}/settings">
+                            <mdc-list-item class="list-item-padding">Settings</mdc-list-item>
+                        </a>
+                        <a href="/guild/${guildId}/resources/messages">
+                            <mdc-list-item class="list-item-padding">Messages</mdc-list-item>
+                        </a>
                         <a href="/guild/${guildId}/resources/forms">
                             <mdc-list-item class="list-item-padding">Forms</mdc-list-item>
                         </a>

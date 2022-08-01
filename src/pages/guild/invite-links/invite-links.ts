@@ -13,6 +13,8 @@ export class InviteLinks {
     guild;
     params;
     featureActive;
+    roleId;
+    userId;
 
     activate(params) {
         this.params = params;
@@ -40,5 +42,49 @@ export class InviteLinks {
             await this.discordService.setActiveFeaturesForDiscord(this.guildId, this.guild.activeFeatures);
         }
         toast(this.featureActive ? "Toggled feature on" : "Toggled feature off");
+    }
+
+    async addAuthorizedUser() {
+        if (!this.guild.globalSettings) {
+            this.guild.globalSettings = {};
+        }
+        if (!this.guild.globalSettings?.authorizedInviteSenders) {
+            this.guild.globalSettings.authorizedInviteSenders = [];
+        }
+        if (this.guild.globalSettings.authorizedInviteSenders.findIndex( x => x == this.userId) === -1) {
+            this.guild.globalSettings.authorizedInviteSenders.push({
+                discordUserId: this.userId
+            });
+        }
+        await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
+        toast('Updated Authorized Users', {severity: 'success'});
+    }
+
+    async removeUser(index) {
+        this.guild.globalSettings.authorizedInviteSenders.splice(index, 1);
+        await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
+        toast('Updated Authorized Users', {severity: 'success'});
+    }
+
+    async addAuthorizedRole() {
+        if (!this.guild.globalSettings) {
+            this.guild.globalSettings = {};
+        }
+        if (!this.guild.globalSettings?.authorizedInviteSenderRoles) {
+            this.guild.globalSettings.authorizedInviteSenderRoles = [];
+        }
+        if (this.guild.globalSettings.authorizedInviteSenderRoles.findIndex( x => x == this.roleId) === -1) {
+            this.guild.globalSettings.authorizedInviteSenderRoles.push({
+                discordRoleId: this.roleId
+            });
+        }
+        await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
+        toast('Updated Authorized Roles', {severity: 'success'});
+    }
+
+    async removeRole(index) {
+        this.guild.globalSettings.authorizedInviteSenderRoles.splice(index, 1);
+        await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
+        toast('Updated Authorized Roles', {severity: 'success'});
     }
 }

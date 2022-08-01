@@ -9,14 +9,13 @@ export class DiscordEmojiSelector {
     @bindable label;
     @bindable size;
 
-    constructor(private discordService: DiscordService) {
-
-    }
-
+    constructor(private discordService: DiscordService) {}
 
     async attached() {
+        let emojis;
         if (!this.emojis) {
-            this.emojis = await this.discordService.getLocalGuild().guild.emojis;
+            emojis = await this.discordService.getLocalGuild().guild.emojis;
         }
+        this.emojis = emojis;
     }
 }

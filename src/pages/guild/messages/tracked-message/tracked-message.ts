@@ -37,5 +37,4 @@ export class TrackedMessage {
     goTo(message) {
         this.router.navigate(`/guild/${this.guildId}/messages/tracked-messages/${message.id}`)
     }
-
 }

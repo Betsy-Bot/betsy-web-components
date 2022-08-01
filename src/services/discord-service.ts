@@ -11,6 +11,7 @@ export class DiscordService {
         guildId: null,
         data: null,
     }
+    messages;
 
     RESPONSE_MESSAGES = 'ResponseMessages';
     DATA_COMMANDS = 'DataCommands';
@@ -18,13 +19,22 @@ export class DiscordService {
     BLACKLISTED_WORDS = 'BlacklistedWords';
     SUPPORT_TICKETS = 'SupportTickets';
     AUDIT_LOG = 'AuditLog';
-    TWITCH_SUBSCRIPTIONS ='TwitchSubscriptions';
+    TWITCH_SUBSCRIPTIONS = 'TwitchSubscriptions';
+    PAYMENTS = 'Payments';
 
     constructor(private api: ApiService) {
     }
 
     getLocalGuild() {
         return this.guild;
+    }
+
+    getLocalServerId() {
+        return this.guild.id;
+    }
+
+    getLocalDiscordGuildId() {
+        return this.guild.guildId;
     }
 
     async exchangeCode(code: string): Promise<discordModels.ExchangeCodeResponse> {
@@ -70,6 +80,7 @@ export class DiscordService {
     async getDiscordServerInformation(guildId: string): Promise<discordModels.BaseDiscordServer> {
         if (!this.guild || guildId !== this.guild.guildId) {
             this.guild = await this.api.doGet(`DiscordGuild/${guildId}`);
+            this.messages = null;
         }
         return this.guild;
     }
@@ -188,5 +199,76 @@ export class DiscordService {
 
     async updateSupportTicketSettings(guildId: string, settings: any) {
         return this.api.doPatch(`DiscordGuild/${guildId}/SupportTickets/${settings.id}`, settings);
+    }
+
+    async updateAuthorizedUsersForGuild(guild: any, guildId: string) {
+        return this.api.doPatch(`DiscordGuild/${guildId}/AuthorizedUsers`, guild);
+    }
+
+    async updateGlobalSettingsForGuild(guild: any, guildId: string) {
+        return this.api.doPatch(`DiscordGuild/${guildId}/GlobalSettings`, guild);
+    }
+
+    async updateApiKyesForGuild(guild: any, guildId: string) {
+        return this.api.doPatch(`DiscordGuild/${guildId}/ApiKeys`, guild);
+    }
+
+    async getResourceMessagesForGuild(guildId: string) {
+        if (!this.messages) {
+            this.messages = this.api.doGet(`DiscordGuild/${guildId}/Resources/Messages`);
+        }
+        return this.messages;
+    }
+
+    async createDiscordMessage(message: any) {
+        return this.api.doPost(`DiscordMessage`, message);
+    }
+
+    async getDiscordMessageById(id: string) {
+        return this.api.doGet(`DiscordMessage/${id}`);
+    }
+
+    async updateDiscordMessage(message: any) {
+        return this.api.doPatch(`DiscordMessage/${message.id}`, message);
+    }
+
+    async createChannelCleaner(cleaner: any) {
+        return this.api.doPost(`DiscordChannelCleaner`, cleaner);
+    }
+
+    async updateChannelCleaner(cleaner: any) {
+        return this.api.doPatch(`DiscordChannelCleaner/${cleaner.id}`, cleaner);
+    }
+
+    async testCleanChannelCleaner(cleanerId: string) {
+        return this.api.doPost(`DiscordChannelCleaner/${cleanerId}/Clean`, { });
+    }
+
+    async deleteChannelCleaner(cleanerId: string) {
+        return this.api.doDelete(`DiscordChannelCleaner/${cleanerId}`);
+    }
+
+    async getChannelCleaners(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/DiscordChannelCleaners`);
+    }
+
+    async getAutoroleContainers(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/AutoRoleContainers`);
+    }
+
+    async getAutoroleContainer(containerId: string) {
+        return this.api.doGet(`DiscordAutoroleContainer/${containerId}`);
+    }
+
+    async createAutoroleContainer(container: any) {
+        return this.api.doPost(`DiscordAutoroleContainer`, container);
+    }
+
+    async updateAutoroleContainer(container: any) {
+        return this.api.doPatch(`DiscordAutoroleContainer/${container.id}`, container);
+    }
+
+    async toggleAutoroleContainer(containerId: string) {
+        return this.api.doPatch(`DiscordAutoroleContainer/${containerId}/ToggleActive`, { });
     }
 }

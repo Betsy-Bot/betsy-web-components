@@ -23,6 +23,12 @@ export class DiscordChannelSelector {
 
     channels;
 
+    async created() {
+        if (!this.guildId) {
+            this.guildId = this.discordService.getLocalDiscordGuildId();
+        }
+    }
+
     async attached() {
         this.channels = await this.discordService.getDiscordChannels(this.guildId);
         if (this.required) {

@@ -96,8 +96,8 @@
                 </form>
             </div>
             <div class="col-12 col-lg-4">
-                <discord-message-preview message.bind="ticket.discordMessage.message" if.bind="tab === 'container'"></discord-message-preview>
-                <discord-message-preview message.bind="ticket.initialMessage" if.bind="tab === 'initial'"></discord-message-preview>
+                <discord-message-preview message.two-way="ticket.discordMessage.message" if.bind="tab === 'container'"></discord-message-preview>
+                <discord-message-preview message.two-way="ticket.initialMessage" if.bind="tab === 'initial'"></discord-message-preview>
             </div>
         </div>
     </section>

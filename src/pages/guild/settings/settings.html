@@ -1,0 +1,42 @@
+<template>
+    <discord-feature-header
+        title="Settings"
+        subtitle="Manage various global settings for your server"
+    ></discord-feature-header>
+
+    <div class="row mt-4">
+        <div class="col-6">
+            <div class="permission-area p-4" mdc-elevation="12">
+                <h4>Authorized Panel Users</h4>
+                <span>Add administrators to help manage your server</span>
+                <form submit.delegate="addAuthorizedUser()">
+                    <div class="row my-2">
+                        <div class="col-10">
+                            <mdc-text-field
+                                min="100000000000000000"
+                                max="9999999999999999999"
+                                type="number"
+                                class="w-100"
+                                placeholder="Enter Discord User ID"
+                                value.bind="permissionUserId"
+                            ></mdc-text-field>
+                        </div>
+                        <div class="col-2">
+                            <button mdc-button class="button-primary w-100 h-100" type="submit">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                    <mdc-chip-set input if.bind="guild.authorizedUsers">
+                        <!-- Compact notation -->
+                        <mdc-chip repeat.for="user of guild.authorizedUsers">
+                            ${user}
+                            <span click.delegate="removeUser($index)" trailing>X</span>
+                        </mdc-chip>
+                    </mdc-chip-set>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</template>

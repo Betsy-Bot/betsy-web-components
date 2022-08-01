@@ -1,0 +1,13 @@
+<template>
+    <mdc-select if.bind="messages" class="standard-betsy-select w-100" value.bind="selectedMessage" label.bind="label" required.bind="required">
+        <mdc-icon mdc-select-icon>folder</mdc-icon>
+        <mdc-list>
+            <mdc-list-item repeat.for="message of messages" value.bind="message">
+                ${message.name}
+            </mdc-list-item>
+        </mdc-list>
+    </mdc-select>
+    <div else>
+        <mdc-circular-progress size="50" stroke-width="3"></mdc-circular-progress>
+    </div>
+</template>

@@ -1,0 +1,111 @@
+<template>
+    <discord-feature-header
+        title="Discord Channel Cleaners"
+        subtitle="Channel cleaners are an easy way to keep your channel history clean. Channel cleaners are run on every server at the top of the hour and will remove all messages older than your specified time in hours."
+    ></discord-feature-header>
+    <div class="mt-1">
+        <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+                            <span class="material-icons me-2">
+                                warning
+                            </span>
+            The discord api does not allow the bulk deletion of messages older than 14 days. Any messages older than 14 days will be ignored.
+        </div>
+    </div>
+    <div class="mt-1">
+        <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+                            <span class="material-icons me-2">
+                                warning
+                            </span>
+            Due to the inefficiency of how the discord api is able to handle this we will only search the most
+            recently 500 messages each run. <br>
+            Everytime this runs as well it will search remaining messages, so if little messages are sent in that
+            hour it could delete messages older than the previous run if you hit the 500 max in the previous run.
+        </div>
+    </div>
+    <div class="my-1">
+        <div class="mt-1 mb-3 text-danger fs-7 d-inline-flex align-content-center">
+                            <span class="material-icons me-2">
+                                warning
+                            </span>
+            This is a very taxing operation for both Betsy API and the rate limits of the Discord API.
+            This is an experimental feature and will be evaluated often. It could be removed in the future if it poses risk to Betsy.<br>
+        </div>
+    </div>
+    <div class="my-1">
+        <div class="mt-1 mb-3 text-danger fs-7 d-inline-flex align-content-center">
+                            <span class="material-icons me-2">
+                                warning
+                            </span>
+            You do <b class="mx-1">NOT</b> get Message Delete events for this operation. Discord does not support message delete events for bulk deletions.<br>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row g-5">
+            <div class="col-12 col-lg-6 col-xl-4">
+                <form submit.delegate="addChannelCleaner()" mdc-elevation="10" class="p-4">
+                    <h5>Create New Cleaner</h5>
+                    <discord-channel-selector
+                        required.bind="true"
+                        label="Select Channel or Category"
+                        channel-id.two-way="request.discordChannelId"
+                    ></discord-channel-selector>
+                    <mdc-text-field
+                        required
+                        type="number"
+                        max="322"
+                        min="1"
+                        mdc-tooltip="Any messages older than the time set will be deleted"
+                        class="w-100 mt-2"
+                        label="Max age (in hours) allowed"
+                        placeholder="Enter time in hours"
+                        value.bind="request.ageInHours"
+                    ></mdc-text-field>
+                    <div class="text-end">
+                        <button mdc-button class="button-primary mt-2">
+                            Add
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-4" repeat.for="cleaner of cleaners">
+                <div mdc-elevation="10" class="p-4 h-100">
+                    <h5>Cleaner in #${getChannelName(cleaner.discordChannelId)}</h5>
+                    <div>
+                        Messages older than ${cleaner.ageInHours} hours old are deleted hourly at the top of the hour.
+                    </div>
+                    <form submit.delegate="updateCleaner(cleaner)">
+                        <mdc-text-field
+                            required
+                            type="number"
+                            max="322"
+                            min="1"
+                            mdc-tooltip="Any messages older than the time set will be deleted"
+                            class="w-100 mt-2 mb-2"
+                            label="Max age (in hours) allowed"
+                            placeholder="Enter time in hours"
+                            value.bind="cleaner.ageInHours"
+                        ></mdc-text-field>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <button mdc-button class="button-secondary" type="button" click.delegate="deleteChannelCleaner(cleaner.id)">
+                                    Delete
+                                </button>
+                            </div>
+                            <div class="col text-center">
+                                <button mdc-button class="button-secondary" type="button" click.delegate="manuallyClean(cleaner.id)">
+                                    TEST
+                                </button>
+                            </div>
+                            <div class="col text-end">
+                                <button mdc-button class="button-primary" type="submit">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

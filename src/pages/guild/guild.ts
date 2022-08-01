@@ -150,19 +150,37 @@ export class Guild {
                 }
             },
             {
-                name: 'guild-data-commands',
-                route: 'data-commands',
-                moduleId: PLATFORM.moduleName('pages/guild/data-commands/data-commands'),
-                title: 'Manage Data Commands',
+                name: 'guild-messages',
+                route: 'resources/messages',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/messages/messages'),
+                title: 'Manage Server Messages',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'guild-create-messages',
+                route: 'resources/messages/edit/:messageId',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/messages/edit-message/edit-message'),
+                title: 'Edit Server Message',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'guild-messages-create',
+                route: 'resources/messages/create',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/messages/create-message/create-message'),
+                title: 'Create Server Message',
                 settings: {
                     auth: true
                 }
             },
             {
                 name: 'guild-data-commands',
-                route: 'data-commands/create',
-                moduleId: PLATFORM.moduleName('pages/guild/data-commands/create-data-command/create-data-command'),
-                title: 'Create Data Command',
+                route: 'data-commands',
+                moduleId: PLATFORM.moduleName('pages/guild/data-commands/data-commands'),
+                title: 'Manage Data Commands',
                 settings: {
                     auth: true
                 }
@@ -243,11 +261,47 @@ export class Guild {
                 name: 'auto-role',
                 route: 'auto-role',
                 moduleId: PLATFORM.moduleName('pages/guild/auto-role/auto-role'),
-                title: 'Auto Role',
+                title: 'Auto Role Containers',
                 settings: {
                     auth: true
                 }
             },
+            {
+                name: 'auto-role-manage',
+                route: 'auto-role/:containerId',
+                moduleId: PLATFORM.moduleName('pages/guild/auto-role/manage-autorole-container/manage-autorole-container'),
+                title: 'Auto Role Container',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'settings',
+                route: 'settings',
+                moduleId: PLATFORM.moduleName('pages/guild/settings/settings'),
+                title: 'Guild Settings',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'channel-cleaners',
+                route: 'channel-cleaners',
+                moduleId: PLATFORM.moduleName('pages/guild/channel-cleaners/channel-cleaners'),
+                title: 'Channel Cleaners',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'payments',
+                route: 'payments',
+                moduleId: PLATFORM.moduleName('pages/guild/payments/payments'),
+                title: 'Payments',
+                settings: {
+                    auth: true
+                }
+            }
         ]);
 
         config.mapUnknownRoutes(() => {

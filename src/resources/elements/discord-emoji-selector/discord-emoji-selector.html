@@ -1,6 +1,8 @@
 <template>
     <mdc-select if.bind="emojis" class="standard-betsy-select w-${size}" value.bind="value" label.bind="label" required.bind="required">
-        <mdc-icon mdc-select-icon>dns</mdc-icon>
+        <mdc-icon mdc-select-icon if.bind="value">
+            <img src="https://cdn.discordapp.com/emojis/${value.id}.webp?size=24&quality=lossless">
+        </mdc-icon>
         <mdc-list>
             <mdc-list-item repeat.for="emoji of emojis" value.bind="emoji">
                 <img src="https://cdn.discordapp.com/emojis/${emoji.id}.webp?size=24&quality=lossless"> ${emoji.name}
