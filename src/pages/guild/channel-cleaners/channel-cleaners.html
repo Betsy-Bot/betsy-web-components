@@ -1,21 +1,22 @@
 <template>
     <discord-feature-header
+        doc-url="https://docs.betsybot.xyz/features/channel-cleaners"
         title="Discord Channel Cleaners"
         subtitle="Channel cleaners are an easy way to keep your channel history clean. Channel cleaners are run on every server at the top of the hour and will remove all messages older than your specified time in hours."
     ></discord-feature-header>
     <div class="mt-1">
         <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                            <span class="material-icons me-2">
-                                warning
-                            </span>
+            <span class="material-icons me-2">
+                warning
+            </span>
             The discord api does not allow the bulk deletion of messages older than 14 days. Any messages older than 14 days will be ignored.
         </div>
     </div>
     <div class="mt-1">
         <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                            <span class="material-icons me-2">
-                                warning
-                            </span>
+            <span class="material-icons me-2">
+                warning
+            </span>
             Due to the inefficiency of how the discord api is able to handle this we will only search the most
             recently 500 messages each run. <br>
             Everytime this runs as well it will search remaining messages, so if little messages are sent in that
@@ -24,18 +25,18 @@
     </div>
     <div class="my-1">
         <div class="mt-1 mb-3 text-danger fs-7 d-inline-flex align-content-center">
-                            <span class="material-icons me-2">
-                                warning
-                            </span>
+            <span class="material-icons me-2">
+                warning
+            </span>
             This is a very taxing operation for both Betsy API and the rate limits of the Discord API.
             This is an experimental feature and will be evaluated often. It could be removed in the future if it poses risk to Betsy.<br>
         </div>
     </div>
     <div class="my-1">
         <div class="mt-1 mb-3 text-danger fs-7 d-inline-flex align-content-center">
-                            <span class="material-icons me-2">
-                                warning
-                            </span>
+            <span class="material-icons me-2">
+                warning
+            </span>
             You do <b class="mx-1">NOT</b> get Message Delete events for this operation. Discord does not support message delete events for bulk deletions.<br>
         </div>
     </div>

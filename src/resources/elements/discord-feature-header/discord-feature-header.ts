@@ -9,7 +9,7 @@ export class DiscordFeatureHeader {
     @bindable title;
     @bindable subtitle;
     @bindable hideBack;
-
+    @bindable docUrl;
 
     navigateBack() {
         this.router.navigateBack();
