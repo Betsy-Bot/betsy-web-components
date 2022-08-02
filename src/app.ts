@@ -71,6 +71,12 @@ export class App {
                 title: 'Login'
             },
             {
+                route: 'validate',
+                name: 'validate',
+                moduleId: PLATFORM.moduleName('pages/validate/validate'),
+                title: 'Validate'
+            },
+            {
                 route: 'guild/:guildId',
                 name: 'guild',
                 moduleId: PLATFORM.moduleName('pages/guild/guild'),

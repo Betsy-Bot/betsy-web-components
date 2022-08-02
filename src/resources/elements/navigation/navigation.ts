@@ -15,6 +15,7 @@ export class Navigation {
     drawer = {
         open: null
     };
+    currentRoute;
 
     handleServerChange(event: CustomEvent) {
         this.guildId = event?.detail?.value;
@@ -30,6 +31,7 @@ export class Navigation {
         this.ea.subscribe('guild-updated', payload => {
             this.guildId = payload;
         });
+        this.currentRoute = this.router.currentInstruction.config.name;
     }
 
     async toggleSidebar() {
