@@ -16,12 +16,13 @@ export class Twitch {
 
     request = {
         twitchLogin: '',
-        discordChannelId: ''
+        discordChannelId: '',
+        type: ''
     };
     createDialog;
     deleteDialog;
     lastSelected;
-    subscriptionTypes = [
+    subscriptionTypes: string[] = [
         "stream.online",
         "stream.offline",
         "channel.follow",
@@ -31,7 +32,14 @@ export class Twitch {
         "channel.subscription.gift",
         "channel.subscription.message",
         "channel.hype_train.begin",
-        "channel.hype_train.end"
+        "channel.hype_train.end",
+        "channel.poll.begin",
+        "channel.poll.progress",
+        "channel.poll.end",
+        "channel.prediction.begin",
+        "channel.prediction.progress",
+        "channel.prediction.lock",
+        "channel.prediction.end",
     ]
 
     async activate(params) {
@@ -72,22 +80,21 @@ export class Twitch {
     }
 
     handleCreateModal(event) {
-        if (event.detail.action == 'ok') {
-            if (!this.request.twitchLogin || !this.request.discordChannelId) {
-                toast("Both the Twitch Username and Channel are required.");
-                return;
-            }
-            try {
-                const subscription = this.discordService.createTwitchSubscription(this.request, this.guildId)
-                if (subscription) {
-                    this.subscriptions.push(subscription);
-                    toast("Twitch Go-Live Event Subscription Created.");
-                } else {
-                    toast("Failed to create twitch subscription. Contact Betsy Support");
-                }
-            } catch(e) {
+        if (!this.request.twitchLogin || !this.request.discordChannelId || !this.request.type) {
+            toast("Both the Twitch Username and Channel are required.");
+            return;
+        }
+        try {
+            const subscription = this.discordService.createTwitchSubscription(this.request, this.guildId)
+            if (subscription) {
+                this.subscriptions.push(subscription);
+                toast("Twitch Go-Live Event Subscription Created.");
+                this.createDialog.close('cancel');
+            } else {
                 toast("Failed to create twitch subscription. Contact Betsy Support");
             }
+        } catch(e) {
+            toast("Failed to create twitch subscription. Contact Betsy Support");
         }
     }
 

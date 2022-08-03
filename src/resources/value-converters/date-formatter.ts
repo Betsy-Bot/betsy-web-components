@@ -6,6 +6,10 @@ export class DateFormatValueConverter {
         if (!format) {
             format = 'MMMM Do YYYY, h:mmA';
         }
-        return new Intl.DateTimeFormat('en', { dateStyle: 'long', timeStyle: 'short' }).format(new Date(value));
+        try {
+           return new Intl.DateTimeFormat('en', { dateStyle: 'long', timeStyle: 'short' }).format(new Date(value));
+        } catch(e) {
+            return value;
+        }
     }
 }

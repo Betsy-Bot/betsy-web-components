@@ -8,9 +8,16 @@
                     ${namePrefix}${getName(item)} ${nameSuffix} ${item[suffixProperty] | dateFormat}
                 </mdc-list-item-primary-text>
                 <mdc-list-item-secondary-text>${item.description}</mdc-list-item-secondary-text>
-                <mdc-form-field mdc-list-item-trailing if.bind="showToggler">
-                    <button mdc-switch selected.bind="item.active" value.bind="item.active"
-                            click.trigger="handleToggleClick($event, item)"></button>
+                <mdc-form-field mdc-list-item-trailing>
+                    <button
+                        if.bind="showToggler"
+                        mdc-switch
+                        selected.bind="item.active"
+                        value.bind="item.active"
+                        if.bind="showToggler"
+                        click.trigger="handleToggleClick($event, item)"
+                    ></button>
+                    <mdc-icon if.bind="trailingIcon" mdc-list-item-leading>${trailingIcon}</mdc-icon>
                 </mdc-form-field>
             </mdc-list-item>
         </mdc-list>

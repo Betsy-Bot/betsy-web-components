@@ -1,36 +1,38 @@
 <template>
     <section id="twitch">
         <confirmation-dialog
-            cancel-text="Cancel"
-            confirm-text="Create"
             dialog.two-way="createDialog"
-            handler.call="handleCreateModal(event)"
-            title="Create Twitch Subscription"
+            title="Create Subscription"
         >
-            <mdc-select class="standard-betsy-select w-100" value.bind="request.type" label="Subscription Type" required>
-                <mdc-icon mdc-select-icon>dns</mdc-icon>
-                <mdc-list>
-                    <mdc-list-item repeat.for="type of subscriptionTypes" value.bind="type">
-                        ${type}
-                    </mdc-list-item>
-                </mdc-list>
-            </mdc-select>
-            <mdc-text-field
-                class="w-100 my-3"
-                label="Twitch Username"
-                value.bind="request.twitchLogin"
-                placeholder="Twitch Username"
-                required.bind="true"
-            ></mdc-text-field>
-            <discord-channel-selector
-                class="my-3"
-                label="Select Channel for Message"
-                if.bind="guildId"
-                channel-id.two-way="request.discordChannelId"
-                guild-id.bind="guildId"
-                type.bind="0"
-                required.bind="true"
-            ></discord-channel-selector>
+            <form submit.delegate="handleCreateModal()">
+                <mdc-select class="standard-betsy-select w-100" value.bind="request.type" label="Subscription Type" required>
+                    <mdc-icon mdc-select-icon>dns</mdc-icon>
+                    <mdc-list>
+                        <mdc-list-item repeat.for="type of subscriptionTypes" value.bind="type">
+                            ${type}
+                        </mdc-list-item>
+                    </mdc-list>
+                </mdc-select>
+                <mdc-text-field
+                    class="w-100 my-3"
+                    label="Twitch Username"
+                    value.bind="request.twitchLogin"
+                    placeholder="Twitch Username"
+                    required.bind="true"
+                ></mdc-text-field>
+                <discord-channel-selector
+                    class="my-3"
+                    label="Select Channel for Message"
+                    if.bind="guildId"
+                    channel-id.two-way="request.discordChannelId"
+                    guild-id.bind="guildId"
+                    type.bind="0"
+                    required.bind="true"
+                ></discord-channel-selector>
+                <div class="text-end">
+                    <button mdc-button type="submit" class="button-primary">Create Subscription</button>
+                </div>
+            </form>
         </confirmation-dialog>
 
         <confirmation-dialog
@@ -47,8 +49,8 @@
             <div class="col-8">
                 <discord-feature-header
                     doc-url="https://docs.betsybot.xyz/features/twitch-go-live-messages"
-                    title="Twitch Live Subscriptions"
-                    subtitle="Create a Twitch live subscription to post on your server when a twitch streamer goes live. Create custom messages for each user."
+                    title="Twitch Subscriptions"
+                    subtitle="Create a Twitch Subscription to post on your server when certain things happen with a given streamer."
                 ></discord-feature-header>
             </div>
             <div class="col-4 text-end">
@@ -78,10 +80,13 @@
 
         <div class="existing-commands-area">
             <feature-item-list
+                name-suffix=" - "
                 data.bind="subscriptions"
                 name-override="username"
                 show-toggler.bind="false"
                 item-click-handler.call="openDeleteDialog(item)"
+                trailing-icon="delete"
+                suffix-property="type"
             ></feature-item-list>
         </div>
     </section>
