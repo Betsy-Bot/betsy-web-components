@@ -26,20 +26,20 @@ export class Twitch {
         "stream.online",
         "stream.offline",
         "channel.follow",
-        "channel.update",
+        //"channel.update",
         "channel.subscribe",
-        "channel.subscription.end",
-        "channel.subscription.gift",
-        "channel.subscription.message",
-        "channel.hype_train.begin",
-        "channel.hype_train.end",
-        "channel.poll.begin",
-        "channel.poll.progress",
-        "channel.poll.end",
-        "channel.prediction.begin",
-        "channel.prediction.progress",
-        "channel.prediction.lock",
-        "channel.prediction.end",
+        //"channel.subscription.end",
+        //"channel.subscription.gift",
+        //"channel.subscription.message",
+        //"channel.hype_train.begin",
+        //"channel.hype_train.end",
+        //"channel.poll.begin",
+        //"channel.poll.progress",
+        //"channel.poll.end",
+        //"channel.prediction.begin",
+        //"channel.prediction.progress",
+        //"channel.prediction.lock",
+        //"channel.prediction.end",
     ]
 
     async activate(params) {
@@ -79,22 +79,21 @@ export class Twitch {
         toast(this.featureActive ? "Toggled feature on" : "Toggled feature off");
     }
 
-    handleCreateModal(event) {
+    async handleCreateModal(event) {
         if (!this.request.twitchLogin || !this.request.discordChannelId || !this.request.type) {
             toast("Both the Twitch Username and Channel are required.");
             return;
         }
+        let subscription;
         try {
-            const subscription = this.discordService.createTwitchSubscription(this.request, this.guildId)
+            subscription = await this.discordService.createTwitchSubscription(this.request, this.guildId)
             if (subscription) {
                 this.subscriptions.push(subscription);
                 toast("Twitch Go-Live Event Subscription Created.");
                 this.createDialog.close('cancel');
-            } else {
-                toast("Failed to create twitch subscription. Contact Betsy Support");
             }
         } catch(e) {
-            toast("Failed to create twitch subscription. Contact Betsy Support");
+            console.log(e);
         }
     }
 

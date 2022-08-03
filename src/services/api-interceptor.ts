@@ -43,15 +43,16 @@ export class ApiInterceptor {
                 case 404:
                     return null;
                 case 400:
+                    data = await response.json();
+                    toast(data?.message, {severity: "error"});
+                    break;
                 case 422:
                     data = await response.json();
                     this.ea.publish('validation-error', data.validationErrors);
                     toast("Validation Error!", {severity: "error"});
-                    new Error(data);
                     break;
                 case 500:
                     data = await response.json();
-                    new Error(data);
                     break;
             }
             return response;
