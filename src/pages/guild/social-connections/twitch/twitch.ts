@@ -21,6 +21,18 @@ export class Twitch {
     createDialog;
     deleteDialog;
     lastSelected;
+    subscriptionTypes = [
+        "stream.online",
+        "stream.offline",
+        "channel.follow",
+        "channel.update",
+        "channel.subscribe",
+        "channel.subscription.end",
+        "channel.subscription.gift",
+        "channel.subscription.message",
+        "channel.hype_train.begin",
+        "channel.hype_train.end"
+    ]
 
     async activate(params) {
         this.guildId = params.guildId as string;
@@ -88,7 +100,7 @@ export class Twitch {
         if (this.lastSelected && event.detail.action == 'ok') {
             await this.discordService.deleteTwitchSubscription(this.lastSelected.id, this.guildId);
             const index = this.subscriptions.findIndex(x => x.id === this.lastSelected.id);
-            this.subscriptions.splice(index, 1)
+            this.subscriptions.splice(index, 1);
         }
     }
 }
