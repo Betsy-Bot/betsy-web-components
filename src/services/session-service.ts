@@ -86,6 +86,6 @@ export class SessionService {
     clearSession() {
         this.destroyStorageItem(SessionService.TOKEN_KEY);
         this.currentUser = null;
-        this.eventAggregator.publish('user-updated', {});
+        this.eventAggregator.publish('user-updated', null);
     }
 }

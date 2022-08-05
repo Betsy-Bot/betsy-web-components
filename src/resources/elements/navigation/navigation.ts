@@ -27,6 +27,9 @@ export class Navigation {
         this.drawer.open = this.sessionService.getStorageItem(SessionService.SIDEBAR_STATUS_KEY, true);
         this.ea.subscribe('user-updated', payload => {
             this.user = payload;
+            if (!this.user) {
+                this.guildId = null;
+            }
         });
         this.ea.subscribe('guild-updated', payload => {
             this.guildId = payload;
@@ -42,8 +45,8 @@ export class Navigation {
     }
 
     async logout() {
-        await this.sessionService.logout();
-        this.router.refreshNavigation();
+        await this.sessionService.clearSession();
+        location.reload();
     }
 
     get discordOauthUrl() {

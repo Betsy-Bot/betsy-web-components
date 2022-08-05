@@ -9,17 +9,20 @@ export class Login {
     constructor(private sessionService: SessionService, private router: Router) {
     }
 
+    code;
     async activate(params) {
-        const code = params.code as string;
-        if (code) {
+        this.code = params.code as string;
+    }
+
+    async attached() {
+        if (this.code) {
             try {
-                await this.sessionService.loginWithOAuthCode(code);
+                await this.sessionService.loginWithOAuthCode(this.code);
                 this.router.navigate('');
             } catch(e) {
                 toast("Failed to exchange code", {severity: 'error'});
             }
         }
-        return true;
     }
 
     detaching(): void | Promise<void> {

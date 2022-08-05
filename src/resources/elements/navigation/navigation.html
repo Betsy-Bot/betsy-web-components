@@ -67,8 +67,8 @@
                              src.bind="avatarLink" alt="avatar">
                     </div>
 
-                    <div mdc-menu-surface-anchor href="menuAnchor">
-                        <mdc-menu view-model.ref="profileMenu" anchor.bind="menuAnchor">
+                    <div mdc-menu-surface-anchor ref="menuAnchor">
+                        <mdc-menu view-model.ref="profileMenu" anchor.bind="menuAnchor" anchor-corner="BOTTOM_START">
                             <mdc-list>
                                 <a href="/">
                                     <mdc-list-item>Dashboard</mdc-list-item>

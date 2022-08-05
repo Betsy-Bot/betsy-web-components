@@ -38,7 +38,15 @@ export class ApiInterceptor {
                     await this.sessionService.clearSession();
                     break;
                 case 403:
-                    //this.notification.error('You do not have access to this section.', 'Unauthorized');
+                    try {
+                        data = await response.json();
+                        if (data.message == "Expired Token? Please relog") {
+                            toast("Discord Token Expired. Please Login Again", {severity: "error"});
+                            await this.sessionService.clearSession();
+                        }
+                    } catch(e) {
+                        console.log(e);
+                    }
                     break;
                 case 404:
                     return null;

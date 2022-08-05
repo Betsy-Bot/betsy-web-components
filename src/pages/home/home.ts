@@ -22,8 +22,10 @@ export class Home {
             return;
         }
 
-        for (let server of this.user.adminedServers) {
-            server.id = server.guildId;
+        if (this.user?.adminedServers) {
+            for (let server of this.user?.adminedServers) {
+                server.id = server.guildId;
+            }
         }
 
         const userGuilds = await this.userService.getGuilds();
