@@ -1,7 +1,6 @@
 import {DiscordService} from "services/discord-service";
 import './dashboard.scss';
 import {inject} from "aurelia-framework";
-import {get} from "https";
 
 @inject(DiscordService)
 export class Dashboard {

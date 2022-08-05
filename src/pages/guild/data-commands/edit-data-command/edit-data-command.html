@@ -52,7 +52,7 @@
                         </div>
                         <mdc-text-field
                             class="w-100"
-                            label="APU Url"
+                            label="API Url"
                             value.bind="command.discordCommandActions[0].restRequestMetadata.apiUrl"
                             placeholder="https://example.com/api/someEndpoint"
                             required.bind="true"
@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="my-2" style="min-height: 45px;">
+                        <div class="my-2">
                             <div class="my-2 fs-6 fw-bolder">
                                 Default Data
                             </div>
@@ -105,7 +105,7 @@
                                 This also uses dot notation and will fill in any data you need for your API
                                 <br>Which are not required to be entered in with the command
                             </span>
-                            <div class="my-2">
+                            <div class="my-2" style="min-height: 50px;">
                                 <button mdc-button class="button-primary" click.delegate="addDefaultData()" type="button">
                                     Add Default Data
                                 </button>
@@ -121,6 +121,35 @@
                                             hide-description.bind="true"
                                             hide-switch.bind="true"
                                             show-value.bind="true"
+                                        ></discord-command-parameter-creator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-2">
+                            <div class="my-2 fs-6 fw-bolder">
+                                Response Mapping
+                            </div>
+                            <span>
+                                This is optional. If you leave this alone you will receive the entire JSON response in the message.
+                                <br> If you add response mapping parameters ONLY those included in these mappings will be shown.
+                                <br> This also uses dot notation and will fill in any data you need for your API
+                            </span>
+                            <div class="my-2" style="min-height: 50px;">
+                                <button mdc-button class="button-primary" click.delegate="addResponseMapping()" type="button">
+                                    Add Response Mapping
+                                </button>
+                            </div>
+                            <div class="row g-4">
+                                <div class="col-12 col-md-6" repeat.for="parameter of command.discordCommandActions[0].restRequestMetadata.requestResponseMappings">
+                                    <div mdc-elevation="9" class="p-2">
+                                        <div class="text-end">
+                                            <span class="cursor-pointer" click.delegate="removeResponseMapping($index)">X</span>
+                                        </div>
+                                        <discord-command-parameter-creator
+                                            parameter.two-way="parameter"
+                                            hide-description.bind="true"
+                                            hide-switch.bind="true"
                                         ></discord-command-parameter-creator>
                                     </div>
                                 </div>

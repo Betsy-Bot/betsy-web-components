@@ -34,6 +34,8 @@ export class EditDataCommand {
         DiscordCommandActionType.SendPostRequest,
         DiscordCommandActionType.SendPutRequest,
         DiscordCommandActionType.SendPatchRequest,
+        DiscordCommandActionType.SendGetRequest,
+        DiscordCommandActionType.SendDeleteRequest
     ];
 
     async activate(params) {
@@ -95,6 +97,10 @@ export class EditDataCommand {
                 return 'PUT';
             case DiscordCommandActionType.SendPostRequest:
                 return 'POST';
+            case DiscordCommandActionType.SendGetRequest:
+                return 'GET';
+            case DiscordCommandActionType.SendDeleteRequest:
+                return 'DELETE';
         }
     }
 
@@ -138,5 +144,19 @@ export class EditDataCommand {
 
     removeDefaultData(index) {
         this.command.discordCommandActions[0].restRequestMetadata.defaultRequestData.splice(index, 1)
+    }
+
+    addResponseMapping() {
+        if (!this.command.discordCommandActions[0].restRequestMetadata) {
+            this.command.discordCommandActions[0].restRequestMetadata = {};
+        }
+        if (!this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings) {
+            this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings = [];
+        }
+        this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings.push({})
+    }
+
+    removeResponseMapping(index) {
+        this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings.splice(index, 1)
     }
 }
