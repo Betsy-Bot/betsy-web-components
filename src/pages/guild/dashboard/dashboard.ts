@@ -40,17 +40,16 @@ export class Dashboard {
     }
 
     getStat(stat) {
-        if (stat.property) {
+        if (this.guild?.guild && stat.property) {
             return this.guild.guild[stat.property];
         }
-        return this[stat.function]();
     }
 
     getEmojiCount() {
-        return this.guild.guild.emojis.length
+        return this.guild?.guild?.emojis?.length
     }
 
     getChannelCount() {
-        return this.channels.length
+        return this.channels?.length
     }
 }
