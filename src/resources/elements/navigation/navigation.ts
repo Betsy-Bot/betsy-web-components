@@ -19,8 +19,9 @@ export class Navigation {
 
     handleServerChange(event: CustomEvent) {
         this.guildId = event?.detail?.value;
-        this.router.navigate(`guild/${this.guildId}`);
-        this.ea.publish('guild-updated', this.guildId);
+        const childRoute = this.router.currentInstruction.params.childRoute ? `/${this.router.currentInstruction.params.childRoute}` : null
+        this.router.navigate(`guild/${this.guildId}${childRoute}`);
+        location.reload();
     }
 
     attached() {
