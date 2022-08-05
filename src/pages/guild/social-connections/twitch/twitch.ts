@@ -33,13 +33,13 @@ export class Twitch {
         //"channel.subscription.message",
         "channel.hype_train.begin",
         "channel.hype_train.end",
-        //"channel.poll.begin",
+        "channel.poll.begin",
         //"channel.poll.progress",
-        //"channel.poll.end",
-        //"channel.prediction.begin",
+        "channel.poll.end",
+        "channel.prediction.begin",
         //"channel.prediction.progress",
-        //"channel.prediction.lock",
-        //"channel.prediction.end",
+        "channel.prediction.lock",
+        "channel.prediction.end",
     ]
 
     async activate(params) {
