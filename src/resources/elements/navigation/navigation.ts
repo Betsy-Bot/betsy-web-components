@@ -18,6 +18,7 @@ export class Navigation {
     currentRoute;
 
     handleServerChange(event: CustomEvent) {
+        if (this.guildId == event?.detail?.value) return;
         this.guildId = event?.detail?.value;
         const childRoute = this.router.currentInstruction.params.childRoute ? `/${this.router.currentInstruction.params.childRoute}` : null
         this.router.navigate(`guild/${this.guildId}${childRoute}`);
