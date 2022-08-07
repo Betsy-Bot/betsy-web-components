@@ -301,6 +301,24 @@ export class Guild {
                 settings: {
                     auth: true
                 }
+            },
+            {
+                name: 'welcome-messages',
+                route: 'messages/welcome-messages',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/welcome-messages/welcome-messages'),
+                title: 'Welcome Messages',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'manage-welcome-messages',
+                route: 'messages/welcome-messages/:messageId',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/welcome-messages/manage-welcome-message/manage-welcome-message'),
+                title: 'Manage Welcome Messages',
+                settings: {
+                    auth: true
+                }
             }
         ]);
 

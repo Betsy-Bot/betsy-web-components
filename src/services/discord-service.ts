@@ -16,11 +16,11 @@ export class DiscordService {
     RESPONSE_MESSAGES = 'ResponseMessages';
     DATA_COMMANDS = 'DataCommands';
     BLOCK_INVITES = 'BlockInvites';
-    BLACKLISTED_WORDS = 'BlacklistedWords';
     SUPPORT_TICKETS = 'SupportTickets';
     AUDIT_LOG = 'AuditLog';
     TWITCH_SUBSCRIPTIONS = 'TwitchSubscriptions';
     PAYMENTS = 'Payments';
+    WELCOME_MESSAGES = 'WelcomeMessages';
 
     constructor(private api: ApiService) {
     }
@@ -137,8 +137,12 @@ export class DiscordService {
         return this.api.doPost(`DiscordGuild/${guildId}/SupportTickets`, request);
     }
 
-    async getDiscordSupportTicketSettings(guildId: string) {
-        return this.api.doGet(`DiscordGuild/${guildId}/SupportTickets`);
+    async getDiscordSupportTicketSettings() {
+        return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/SupportTickets`);
+    }
+
+    async getDiscordWelcomeMessages() {
+        return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/WelcomeMessages`);
     }
 
     async getDiscordMessageSupportTickets(guildId: string, settingsId: string) {

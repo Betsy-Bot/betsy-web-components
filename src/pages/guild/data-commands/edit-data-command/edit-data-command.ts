@@ -55,7 +55,6 @@ export class EditDataCommand {
     }
 
     async save() {
-        console.log(this.command);
         try {
             if (this.isNew) {
                 this.command.discordGuildId = this.guildId;
