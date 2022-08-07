@@ -16,6 +16,7 @@ export class Navigation {
         open: null
     };
     currentRoute;
+    donateDialog;
 
     handleServerChange(event: CustomEvent) {
         if (this.guildId == event?.detail?.value) return;
