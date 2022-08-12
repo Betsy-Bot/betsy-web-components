@@ -1,30 +1,14 @@
 <template>
     <div class="row g-4">
-        <div class="col-6 col-lg-4">
-            <div class="mt-2">
-                <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                    <span class="material-icons me-2">
-                        info
-                    </span>
-                    When on anytime the ticket is closed the transcript will automatically be sent to the user that opened the ticket.
-                </div>
-            </div>
-            <label class="me-3">Send Transcript On Close?</label>
+        <div class="col-6 col-lg-6">
+            <label class="me-3">DM Transcript On Close</label>
             <button
                 mdc-switch
                 selected.bind="request.sendTranscriptOnClose"
                 click.delegate="request.sendTranscriptOnClose = !request.sendTranscriptOnClose"
             ></button>
         </div>
-        <div class="col-6 col-lg-4">
-            <div class="mt-2">
-                <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                    <span class="material-icons me-2">
-                        info
-                    </span>
-                    If this setting is turned on the channel name created will include a number for the ticket
-                </div>
-            </div>
+        <div class="col-6 col-lg-6">
             <label class="me-3">Auto Increment Number</label>
             <button
                 mdc-switch
@@ -32,15 +16,7 @@
                 click.delegate="request.useAutoIncrement = !request.useAutoIncrement"
             ></button>
         </div>
-        <div class="col-6 col-lg-4">
-            <div class="mt-2">
-                <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                    <span class="material-icons me-2">
-                        info
-                    </span>
-                    This allows the claiming of a ticket, which will remove all other users from the ticket.
-                </div>
-            </div>
+        <div class="col-6 col-lg-6">
             <label class="me-3">Allowing Claiming</label>
             <button
                 mdc-switch
@@ -48,13 +24,15 @@
                 click.delegate="request.allowClaiming = !request.allowClaiming"
             ></button>
         </div>
+        <div class="col-6 col-lg-6">
+            <label class="me-3">Hide Name</label>
+            <button
+                mdc-switch
+                selected.bind="request.hideName"
+                click.delegate="request.hideName = !request.hideName"
+            ></button>
+        </div>
         <div class="col-12 col-lg-6">
-            <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                    <span class="material-icons me-2">
-                        info
-                    </span>
-                Used to identify your support ticket. Not visible to customer
-            </div>
             <mdc-text-field
                 class="w-100"
                 label="Support Ticket Identifier"
@@ -63,12 +41,6 @@
             ></mdc-text-field>
         </div>
         <div class="col-12 col-lg-6">
-            <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                <span class="material-icons me-2">
-                    info
-                </span>
-                The category selected will be used to create the new channels.
-            </div>
             <discord-channel-selector
                 label="Select Category"
                 if.bind="guildId"
@@ -80,12 +52,6 @@
 
         </div>
         <div class="col-12 col-lg-6">
-            <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                    <span class="material-icons me-2">
-                        info
-                    </span>
-                The channel selected will be used to house the created ticket message.
-            </div>
             <discord-channel-selector
                 label="Select Channel for Message"
                 if.bind="guildId"
@@ -96,14 +62,6 @@
             ></discord-channel-selector>
         </div>
         <div class="col-12 col-lg-6">
-            <div class="mt-2">
-                <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                    <span class="material-icons me-2">
-                        info
-                    </span>
-                    Any relevant logging information will be sent to this channel.
-                </div>
-            </div>
             <discord-channel-selector
                 label="Select Channel for Audits"
                 if.bind="guildId"
@@ -115,14 +73,6 @@
             ></discord-channel-selector>
         </div>
         <div class="col-12 col-lg-6">
-            <div class="mt-2">
-                <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                    <span class="material-icons me-2">
-                        info
-                    </span>
-                    If no roles are selected only users with administrator permission will be able to see the created messages
-                </div>
-            </div>
             <discord-role-selector
                 label="Select Authorized Roles"
                 selected-role.two-way="authorizedRole"
@@ -137,14 +87,6 @@
             </mdc-chip-set>
         </div>
         <div class="col-12 col-lg-6">
-            <div class="mt-2">
-                <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                    <span class="material-icons me-2">
-                        info
-                    </span>
-                    When any ticket created is closed the channel will be moved to this category. If no channel is selected the channel will just be deleted.
-                </div>
-            </div>
             <discord-channel-selector
                 label="Select Channel for Closed Tickets"
                 if.bind="guildId"
@@ -155,14 +97,6 @@
             ></discord-channel-selector>
         </div>
         <div class="col-12 col-lg-6">
-            <div class="mt-2">
-                <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                    <span class="material-icons me-2">
-                        info
-                    </span>
-                    If a prefix is entered it will use this to prefix the channel name instead of the user's name.
-                </div>
-            </div>
             <mdc-text-field
                 class="w-100"
                 label="Created Channel Name Prefix"
@@ -174,14 +108,6 @@
             </mdc-text-field-helper-line>
         </div>
         <div class="col-12 col-lg-6">
-            <div class="mt-2">
-                <div class="mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                    <span class="material-icons me-2">
-                        info
-                    </span>
-                    Controls the amount of tickets a single user can have open of this type
-                </div>
-            </div>
             <mdc-text-field
                 class="w-100"
                 label="Max Open Per Person"
