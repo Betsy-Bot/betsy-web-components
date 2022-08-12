@@ -1,5 +1,6 @@
 <template>
     <section id="guild-dashboard">
+
         <discord-feature-header
             title="Server Dashboard"
             subtitle="View Information About Your Server"
@@ -8,7 +9,7 @@
 
         <div class="server-header mt-4 mb-2" if.bind="guild">
             <div class="fs-4">
-                <img if.bind="guild.guild.icon" class="guild-icon me-3" src="https://cdn.discordapp.com/icons/${guildId}/${guild.guild.icon}.png"> ${guild.name}
+                <img if.bind="guild.guild.icon" class="guild-icon me-3" src="https://cdn.discordapp.com/icons/${guildId}/${guild.guild.icon}.png" alt="guild icon"> ${guild.name}
             </div>
 
             <div class="row">
