@@ -88,7 +88,8 @@
                     </div>
             </div>
             <div class="col-12 col-lg-4">
-                <discord-message-preview message.two-way="request.discordMessage.message"></discord-message-preview>
+                <discord-message-preview message.two-way="request.discordMessage.message" if.bind="tab === 'container'"></discord-message-preview>
+                <discord-message-preview message.two-way="request.initialMessage" if.bind="tab === 'initial'"></discord-message-preview>
             </div>
         </div>
     </section>
