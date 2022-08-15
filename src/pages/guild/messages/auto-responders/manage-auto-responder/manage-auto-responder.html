@@ -64,6 +64,9 @@
                                     </div>
                                 <div repeat.for="phrase of responder.phrases">
                                     ${phrase.value}
+                                    <span class="text-danger me-2 cursor-pointer" click.delegate="removePhrase($index)">
+                                        ( X )
+                                    </span>
                                 </div>
                             </div>
                         </div>

@@ -76,4 +76,8 @@ export class ManageAutoResponder {
         this.responder.phrases.push({value: this.phrase});
         this.phrase = "";
     }
+
+    removePhrase(index) {
+        this.responder.phrases.splice(index, 1)
+    }
 }
