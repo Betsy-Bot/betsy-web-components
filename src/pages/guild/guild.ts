@@ -319,7 +319,25 @@ export class Guild {
                 settings: {
                     auth: true
                 }
-            }
+            },
+            {
+                name: 'auto-responders',
+                route: 'messages/auto-responders',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/auto-responders/auto-responders'),
+                title: 'Auto Responders',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'manage-auto-responders',
+                route: 'messages/auto-responders/:responderId',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/auto-responders/manage-auto-responder/manage-auto-responder'),
+                title: 'Manage Auto Responder',
+                settings: {
+                    auth: true
+                }
+            },
         ]);
 
         config.mapUnknownRoutes(() => {

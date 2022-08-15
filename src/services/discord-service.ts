@@ -21,6 +21,7 @@ export class DiscordService {
     TWITCH_SUBSCRIPTIONS = 'TwitchSubscriptions';
     PAYMENTS = 'Payments';
     WELCOME_MESSAGES = 'WelcomeMessages';
+    AUTO_RESPONDERS = 'AutoResponders';
 
     constructor(private api: ApiService) {
     }
@@ -274,5 +275,21 @@ export class DiscordService {
 
     async toggleAutoroleContainer(containerId: string) {
         return this.api.doPatch(`DiscordAutoroleContainer/${containerId}/ToggleActive`, { });
+    }
+
+    async getAutoResponders(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/AutoResponders`);
+    }
+
+    async createAutoResponder(responder: any) {
+        return this.api.doPost(`DiscordAutoResponder`, responder);
+    }
+
+    async updateAutoResponder(responder: any) {
+        return this.api.doPatch(`DiscordAutoResponder/${responder.id}`, responder);
+    }
+
+    async getResponderById(responderId: string) {
+        return this.api.doGet(`DiscordAutoResponder/${responderId}`);
     }
 }

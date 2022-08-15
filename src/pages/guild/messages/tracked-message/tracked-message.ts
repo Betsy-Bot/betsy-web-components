@@ -25,7 +25,7 @@ export class TrackedMessage {
     }
 
     async updateActive(message) {
-        let foundCommandIndex = this.messages.findIndex(x => x.name === message.name);
+        const foundCommandIndex = this.messages.findIndex(x => x.name === message.name);
         this.messages[foundCommandIndex].active = !!this.messages[foundCommandIndex].active;
         if (foundCommandIndex >= 0) {
             await this.discordService.updateDiscordMessage(this.messages[foundCommandIndex]);

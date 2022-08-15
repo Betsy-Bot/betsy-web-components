@@ -1,0 +1,92 @@
+<template>
+    <section id="create-data-command">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <discord-feature-header
+                    doc-url="https://docs.betsybot.xyz/features/auto-responders"
+                    title="${isNew ? 'Create' : 'Edit'} Auto Responders"
+                    subtitle="Respond to commonly asked questions, comments, and more."
+                ></discord-feature-header>
+
+                <mdc-tab-bar view-model.ref="tabBar">
+                    <mdc-tab
+                        label="Settings"
+                        active.bind="tab === 'settings'"
+                        click.delegate="tab = 'settings'"
+                    ></mdc-tab>
+                    <mdc-tab
+                        label="Message"
+                        active.bind="tab === 'message'"
+                        click.delegate="tab = 'message'"
+                    ></mdc-tab>
+                </mdc-tab-bar>
+
+                <form submit.delegate="save()">
+                    <div class="col-12">
+                        <button
+                            mdc-switch
+                            selected.bind="responder.active"
+                            value.bind="responder.active"
+                            change.delegate="responder.active = !!responder.active"
+                        ></button>
+                        <label class="me-5">Active?</label>
+                    </div>
+                    <div if.bind="tab === 'settings'">
+                        <mdc-text-field
+                            label="Identifier"
+                            type="text"
+                            class="w-100"
+                            value.bind="responder.name"
+                        ></mdc-text-field>
+                        <div class="row">
+                            <div class="col-12">
+                                <mdc-form-field repeat.for="type of types">
+                                    <div></div>
+                                    <mdc-radio model.bind="type.value" checked.bind="responder.type"></mdc-radio>
+                                    <label>${type.displayName}</label>
+                                </mdc-form-field>
+                            </div>
+                            <div class="col-12">
+                                    <div class="row my-2">
+                                        <div class="col-10">
+                                            <mdc-text-field
+                                                label="Words / Phrases"
+                                                type="text"
+                                                class="w-100"
+                                                value.bind="phrase"
+                                            ></mdc-text-field>
+                                        </div>
+                                        <div class="col-2">
+                                            <button mdc-button class="button-primary w-100 h-100" type="button" click.delegate="addPhrase()">
+                                                Add
+                                            </button>
+                                        </div>
+                                    </div>
+                                <div repeat.for="phrase of responder.phrases">
+                                    ${phrase.value}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button mdc-button class="button-primary" click.delegate="tab = 'message'" type="button">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                    <div class="" if.bind="tab === 'message'">
+                        <discord-message-creator message.two-way="responder.discordMessage.message"></discord-message-creator>
+
+                        <div class="text-end mt-3">
+                            <button type="submit" mdc-button class="button-primary">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12 col-lg-4">
+                <discord-message-preview message.two-way="responder.discordMessage.message"></discord-message-preview>
+            </div>
+        </div>
+    </section>
+</template>

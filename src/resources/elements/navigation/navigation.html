@@ -5,12 +5,13 @@
             dialog.two-way="donateDialog"
             title="Donate"
         >
-            <a href="https://commerce.coinbase.com/checkout/78ca3bfd-9661-42d0-aee2-74a33619014f" target="_blank">
-                <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-3 mb-2">
-                    Donate With Crypto
-                    <mdc-icon>favorite</mdc-icon>
-                </button>
-            </a>
+            <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-3 mb-2" click.delegate="showCrypto = true">
+                Donate With Crypto
+                <mdc-icon>favorite</mdc-icon>
+            </button>
+            <div if.bind="showCrypto">
+                38PTfVsevXXFQ1B2kan7RVCFZkeGK24Cnt
+            </div>
             <a href="https://buy.stripe.com/eVacOKdUaatdgFydQQ" target="_blank">
                 <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-3 my-2">
                     Donate With Credit / Debit
