@@ -78,6 +78,18 @@
                             class="w-100 my-3"
                             value.bind="responder.deleteAfterMinutes"
                         ></mdc-text-field>
+                        <discord-channel-selector
+                            required.bind="true"
+                            label="Add Ignored Channels"
+                            type.bind="0"
+                            channel-id.two-way="selectedChannelId"
+                        ></discord-channel-selector>
+                        <div repeat.for="channelId of responder.ignoredChannels">
+                            ${channelId}
+                            <span class="text-danger me-2 cursor-pointer" click.delegate="removeIgnoredChannel($index)">
+                                ( X )
+                            </span>
+                        </div>
                         <div class="text-end">
                             <button mdc-button class="button-primary" click.delegate="tab = 'message'" type="button">
                                 Next

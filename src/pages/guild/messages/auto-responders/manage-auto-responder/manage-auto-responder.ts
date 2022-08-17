@@ -26,6 +26,7 @@ export class ManageAutoResponder {
         discordServerId: '',
         phrases: [],
         type: 0,
+        ignoredChannels: [],
         discordMessage: {
             message: {
 
@@ -46,6 +47,7 @@ export class ManageAutoResponder {
             value: 2
         }
     ]
+    @bindable selectedChannelId;
 
     async attached() {
         if (!this.responderId || this.responderId == 0) {
@@ -78,6 +80,21 @@ export class ManageAutoResponder {
     }
 
     removePhrase(index) {
-        this.responder.phrases.splice(index, 1)
+        this.responder.phrases.splice(index, 1);
+    }
+
+    selectedChannelIdChanged() {
+        if (this.selectedChannelId) {
+            if (!this.responder.ignoredChannels) {
+                this.responder.ignoredChannels = [];
+            }
+            if (!this.responder.ignoredChannels.includes(this.selectedChannelId)) {
+                this.responder.ignoredChannels.push(this.selectedChannelId)
+            }
+        }
+    }
+
+    removeIgnoredChannel(index) {
+        this.responder.ignoredChannels.splice(index, 1);
     }
 }
