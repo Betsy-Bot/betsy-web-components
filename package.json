@@ -13,14 +13,15 @@
         "start": "webpack-dev-server"
     },
     "dependencies": {
-        "aurelia-bootstrapper": "^2.4.0",
-        "aurelia-fetch-client": "^1.8.2",
-        "aurelia-animator-css": "^1.0.4",
-        "aurelia-validation": "^2.0.0-rc2",
         "@aurelia-mdc-web/all": "^9.0.2",
         "@microsoft/signalr": "^6.0.7",
         "@popperjs/core": "^2.11.5",
+        "aurelia-animator-css": "^1.0.4",
+        "aurelia-bootstrapper": "^2.4.0",
+        "aurelia-fetch-client": "^1.8.2",
+        "aurelia-validation": "^2.0.0-rc2",
         "bootstrap": "^5.2.0",
+        "flatpickr": "^4.6.13",
         "lets-toast": "^1.0.1",
         "sanitize-html": "^2.7.1",
         "showdown": "^2.1.0"

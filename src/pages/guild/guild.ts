@@ -338,6 +338,24 @@ export class Guild {
                     auth: true
                 }
             },
+            {
+                name: 'giveaways',
+                route: 'giveaways',
+                moduleId: PLATFORM.moduleName('pages/guild/giveaways/giveaways'),
+                title: 'Giveaways',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'manage-giveaway',
+                route: 'giveaways/:giveawayId',
+                moduleId: PLATFORM.moduleName('pages/guild/giveaways/manage-giveaways/manage-giveaways'),
+                title: 'Manage Giveaways',
+                settings: {
+                    auth: true
+                }
+            },
         ]);
 
         config.mapUnknownRoutes(() => {

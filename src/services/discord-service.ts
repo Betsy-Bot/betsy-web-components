@@ -292,4 +292,20 @@ export class DiscordService {
     async getResponderById(responderId: string) {
         return this.api.doGet(`DiscordAutoResponder/${responderId}`);
     }
+
+    async getGiveaways(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/Giveaways`);
+    }
+
+    async createGiveaway(giveaway: any) {
+        return this.api.doPost(`DiscordGiveaway`, giveaway);
+    }
+
+    async updateGiveaway(giveaway: any) {
+        return this.api.doPatch(`DiscordGiveaway/${giveaway.id}`, giveaway);
+    }
+
+    async getGiveawayById(giveawayId: string) {
+        return this.api.doGet(`DiscordGiveaway/${giveawayId}`);
+    }
 }

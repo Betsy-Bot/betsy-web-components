@@ -13,9 +13,13 @@
                         <mdc-list-item class="list-item-padding">Support Tickets</mdc-list-item>
                     </a>
 
+                    <a href="/guild/${guildId}/giveaways">
+                        <mdc-list-item class="list-item-padding">Giveaways</mdc-list-item>
+                    </a>
+
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('messaging')"
                                    no-list-action>
-                        <span>Messaging</span>
+                        <span class="fw-bolder">Messaging</span>
                         <mdc-icon mdc-list-item-trailing>${expandOptions.messaging ? 'expand_less' : 'expand_more'}
                         </mdc-icon>
                     </mdc-list-item>
@@ -37,7 +41,7 @@
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('customCommands')"
                                    no-list-action>
-                        <span>Custom Commands</span>
+                        <span class="fw-bolder">Custom Commands</span>
                         <mdc-icon mdc-list-item-trailing>${expandOptions.customCommands ? 'expand_less' : 'expand_more'}
                         </mdc-icon>
                     </mdc-list-item>
@@ -54,7 +58,7 @@
                     </div>
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('moderation')" no-list-action>
-                        <span>Moderation</span>
+                        <span class="fw-bolder">Moderation</span>
                         <mdc-icon mdc-list-item-trailing>${expandOptions.moderation ? 'expand_less' : 'expand_more'}
                         </mdc-icon>
                     </mdc-list-item>
@@ -74,7 +78,7 @@
                     </div>
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('resources')" no-list-action>
-                        <span>Server Resources</span>
+                        <span class="fw-bolder">Server Resources</span>
                         <mdc-icon mdc-list-item-trailing>${expandOptions.resources ? 'expand_less' : 'expand_more'}
                         </mdc-icon>
                     </mdc-list-item>
@@ -91,7 +95,7 @@
                     </div>
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('socials')" no-list-action>
-                        <span>Social Connections</span>
+                        <span class="fw-bolder">Social Connections</span>
                         <mdc-icon mdc-list-item-trailing>${expandOptions.socials ? 'expand_less' : 'expand_more'}
                         </mdc-icon>
                     </mdc-list-item>

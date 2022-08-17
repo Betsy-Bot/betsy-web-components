@@ -33,21 +33,6 @@ export class ManageAutoResponder {
             }
         }
     }
-    types = [
-        {
-            displayName: "Reply Message",
-            value: 0
-        },
-        {
-            displayName: "Direct Message",
-            value: 1
-        },
-        {
-            displayName: "Channel Message",
-            value: 2
-        }
-    ]
-    @bindable selectedChannelId;
 
     async attached() {
         if (!this.responderId || this.responderId == 0) {
@@ -68,33 +53,9 @@ export class ManageAutoResponder {
             }
             toast(`Responder ${this.isNew ? 'Created' : 'Updated'}!`);
             this.router.navigateBack();
-        } catch(e) {
+        } catch (e) {
             console.log(e);
             toast('Failed to create message', {severity: 'error'})
         }
-    }
-
-    addPhrase() {
-        this.responder.phrases.push({value: this.phrase});
-        this.phrase = "";
-    }
-
-    removePhrase(index) {
-        this.responder.phrases.splice(index, 1);
-    }
-
-    selectedChannelIdChanged() {
-        if (this.selectedChannelId) {
-            if (!this.responder.ignoredChannels) {
-                this.responder.ignoredChannels = [];
-            }
-            if (!this.responder.ignoredChannels.includes(this.selectedChannelId)) {
-                this.responder.ignoredChannels.push(this.selectedChannelId)
-            }
-        }
-    }
-
-    removeIgnoredChannel(index) {
-        this.responder.ignoredChannels.splice(index, 1);
     }
 }

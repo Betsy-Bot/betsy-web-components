@@ -1,0 +1,12 @@
+<template>
+    <mdc-text-field
+        label.bind="label"
+        ref="pickerElement"
+        class="w-100"
+        required.bind="required"
+        value.bind="pickerValue"
+    ></mdc-text-field>
+    <div>
+        ${value | dateFormat}
+    </div>
+</template>

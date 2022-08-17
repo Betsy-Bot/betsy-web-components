@@ -7,6 +7,7 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./elements/embed-editor/embed-editor'),
         PLATFORM.moduleName('./elements/color-picker/color-picker'),
         PLATFORM.moduleName('./elements/confirmation-dialog/confirmation-dialog'),
+        PLATFORM.moduleName('./elements/date-time-picker/date-time-picker'),
         PLATFORM.moduleName('./elements/server-card/server-card'),
         PLATFORM.moduleName('./elements/discord-messages-renderer/discord-messages-renderer'),
         PLATFORM.moduleName('./elements/discord-action-creator/discord-action-creator'),

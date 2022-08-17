@@ -1,0 +1,86 @@
+<template>
+    <section id="create-data-command">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <discord-feature-header
+                    doc-url="https://docs.betsybot.xyz/features/welcome-messages"
+                    title="${isNew ? 'Create' : 'Edit'} Giveaway"
+                    subtitle="Giveaways automatically select a winner and post that winner at the end of the giveaway."
+                ></discord-feature-header>
+
+                <mdc-tab-bar view-model.ref="tabBar">
+                    <mdc-tab
+                        label="Settings"
+                        active.bind="tab === 'settings'"
+                        click.delegate="tab = 'settings'"
+                    ></mdc-tab>
+                    <mdc-tab
+                        label="Giveaway Container"
+                        active.bind="tab === 'container'"
+                        click.delegate="tab = 'container'"
+                    ></mdc-tab>
+                    <mdc-tab
+                        label="Winning Message"
+                        active.bind="tab === 'winning'"
+                        click.delegate="tab = 'winning'"
+                    ></mdc-tab>
+                </mdc-tab-bar>
+
+                <form submit.delegate="save()">
+                    <div if.bind="tab === 'settings'">
+                        <mdc-text-field
+                            label="Identifier"
+                            type="text"
+                            class="w-100 my-2"
+                            value.bind="giveaway.name"
+                        ></mdc-text-field>
+                        <mdc-text-field
+                            label="Amount of Winners"
+                            type="number"
+                            min="1"
+                            max="25"
+                            class="w-100 my-2"
+                            value.bind="giveaway.amountOfWinners"
+                        ></mdc-text-field>
+                        <mdc-text-field
+                            label="Description of Prize"
+                            type="text"
+                            class="w-100 my-2"
+                            value.bind="giveaway.descriptionOfPrize"
+                        ></mdc-text-field>
+                        <div class="my-2">
+                            <date-time-picker label="End Date Time" value.two-way="giveaway.ends"></date-time-picker>
+                        </div>
+                        <div class="text-end">
+                            <button mdc-button class="button-primary" click.delegate="tab = 'container'" type="button">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                    <div class="" if.bind="tab === 'container'">
+                        <discord-message-creator message.two-way="giveaway.containerMessage.message"></discord-message-creator>
+
+                        <div class="text-end mt-3">
+                            <button type="button" mdc-button class="button-primary" click.delegate="tab = 'winning'"">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                    <div class="" if.bind="tab === 'winning'">
+                        <discord-message-creator message.two-way="giveaway.winningMessage.message"></discord-message-creator>
+
+                        <div class="text-end mt-3">
+                            <button type="submit" mdc-button class="button-primary">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12 col-lg-4">
+                <discord-message-preview message.two-way="giveaway.containerMessage.message" if.bind="tab === 'container'"></discord-message-preview>
+                <discord-message-preview message.two-way="giveaway.winningMessage.message" if.bind="tab === 'winning'"></discord-message-preview>
+            </div>
+        </div>
+    </section>
+</template>
