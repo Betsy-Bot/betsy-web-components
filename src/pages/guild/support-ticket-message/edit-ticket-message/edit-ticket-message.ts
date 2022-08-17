@@ -54,7 +54,7 @@ export class EditTicketMessage {
     async deleteSupportTicket(event) {
         if (event.detail.action == 'ok') {
             try {
-                await this.discordService.deleteSupportTicketBySettingsId(this.guildId, this.ticket.id);
+                await this.discordService.deleteSupportTicketBySettingsId(this.ticket.id);
                 toast("Deleted support message!", {severity: "success"})
                 this.router.navigateBack();
             } catch(e) {

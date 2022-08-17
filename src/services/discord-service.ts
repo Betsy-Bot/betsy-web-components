@@ -198,8 +198,8 @@ export class DiscordService {
         return this.api.doGet(`DiscordSupportTicket/${ticketId}`);
     }
 
-    async deleteSupportTicketBySettingsId(guildId: string, settingsId: string) {
-        return this.api.doDelete(`DiscordGuild/${guildId}/SupportTickets/${settingsId}`);
+    async deleteSupportTicketBySettingsId(settingsId: string) {
+        return this.api.doDelete(`DiscordSupportTicketSettings/${settingsId}`);
     }
 
     async updateSupportTicketSettings(guildId: string, settings: any) {
