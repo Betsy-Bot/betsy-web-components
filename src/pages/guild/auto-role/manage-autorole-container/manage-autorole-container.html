@@ -16,6 +16,16 @@
             </div>
             <div class="mt-4">
                 <form submit.delegate="putContainer()">
+                    <div class="col-12 my-3">
+                        <button
+                            mdc-switch
+                            selected.bind="container.active"
+                            value.bind="container.active"
+                            change.delegate="container.active = !!responder.active"
+                        ></button>
+                        <label class="me-5">Active?</label>
+                    </div>
+
                     <div class="mb-3">
                         <mdc-tab-bar
                             view-model.ref="tabBar"
