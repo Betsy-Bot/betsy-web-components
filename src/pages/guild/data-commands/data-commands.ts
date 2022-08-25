@@ -28,7 +28,7 @@ export class DataCommands {
     }
 
     async updateActive(command) {
-        let foundCommandIndex = this.commands.findIndex(x => x.name === command.name);
+        const foundCommandIndex = this.commands.findIndex(x => x.name === command.name);
         if (foundCommandIndex >= 0) {
             await this.discordService.toggleDiscordCommandActive(this.guildId, command.id, this.commands[foundCommandIndex].active);
             toast(`Active status has been updated for /${command.name}`, {severity: "success"})

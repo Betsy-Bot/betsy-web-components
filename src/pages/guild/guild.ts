@@ -1,9 +1,9 @@
 import {Router} from 'aurelia-router';
 import {inject, PLATFORM} from "aurelia-framework";
 import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "../../services/discord-service";
+import {DiscordService} from "services/discord-service";
 import {toast} from "lets-toast";
-import {SessionService} from "../../services/session-service";
+import {SessionService} from "services/session-service";
 
 @inject(EventAggregator, DiscordService, Router, SessionService)
 export class Guild {
@@ -356,6 +356,21 @@ export class Guild {
                     auth: true
                 }
             },
+            {
+                name: 'verification',
+                route: 'verification',
+                moduleId: PLATFORM.moduleName('pages/guild/verification/verification'),
+                title: 'Verification',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'verify',
+                route: 'verify/:userId',
+                moduleId: PLATFORM.moduleName('pages/guild/verification/verify/verify'),
+                title: 'Verify User',
+            }
         ]);
 
         config.mapUnknownRoutes(() => {

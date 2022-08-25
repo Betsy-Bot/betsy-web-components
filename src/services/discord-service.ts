@@ -22,6 +22,7 @@ export class DiscordService {
     PAYMENTS = 'Payments';
     WELCOME_MESSAGES = 'WelcomeMessages';
     AUTO_RESPONDERS = 'AutoResponders';
+    VERIFICATION = 'Verification';
 
     constructor(private api: ApiService) {
     }
@@ -84,6 +85,10 @@ export class DiscordService {
             this.messages = null;
         }
         return this.guild;
+    }
+
+    async getRequiresLogin(guildId: string): Promise<any> {
+        return await this.api.doGet(`DiscordGuild/${guildId}/RequiresLogin`);
     }
 
     async getDiscordChannels(guildId: string) {

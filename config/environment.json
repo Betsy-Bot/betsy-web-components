@@ -2,5 +2,6 @@
     "debug": true,
     "apiEndpoint": "http://localhost:5000/",
     "redirectUrl": "http://localhost:9500/login",
+    "verifyRedirectUrl": "http://localhost:9500/verify",
     "botClientId": "943260131599220856"
 }

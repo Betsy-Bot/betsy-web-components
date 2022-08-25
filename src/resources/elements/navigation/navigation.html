@@ -1,5 +1,5 @@
 <template>
-    <section id="navigation" if.bind="currentRoute !== 'validate'">
+    <section id="navigation" if.bind="currentRoute !== 'validate' && currentRoute !== 'verify'">
         <confirmation-dialog
             cancel-text="Cancel"
             dialog.two-way="donateDialog"

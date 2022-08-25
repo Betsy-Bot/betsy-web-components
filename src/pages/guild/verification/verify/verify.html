@@ -1,0 +1,14 @@
+<template>
+    <div if.bind="response.requireLogin">
+        This server requires you to login for further validation. Please click the button below to login.
+        <div>
+            <a if.bind="!user" external
+               href="${discordOauthUrl}">
+                <button mdc-button class="button-secondary">
+                    <mdc-icon>login</mdc-icon>
+                    Login with Discord
+                </button>
+            </a>
+        </div>
+    </div>
+</template>
