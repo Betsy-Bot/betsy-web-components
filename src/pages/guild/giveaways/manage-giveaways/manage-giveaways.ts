@@ -3,6 +3,7 @@ import {DiscordService} from "services/discord-service";
 import {Router} from "aurelia-router";
 import {toast} from "lets-toast";
 import {bindable, inject} from "aurelia-framework";
+import {DiscordButtonStyle, DiscordComponentType} from "../../../../services/models/discord";
 
 @inject(EventAggregator, DiscordService, Router)
 export class ManageGiveaways {
@@ -22,6 +23,43 @@ export class ManageGiveaways {
         name: '',
         discordServerId: '',
         type: 3,
+        winningMessage: {
+            message: {
+                embeds: [
+                    {
+                        title: "Congrats!",
+                        color: 5726933
+                    }
+                ]
+            }
+        },
+        containerMessage: {
+            message: {
+                embeds: [
+                    {
+                        title: "A new Giveaway has started!",
+                        color: 5726933,
+                        fields: [
+                            {
+                                name: "Prize",
+                                value: ""
+                            }
+                        ]
+                    }
+                ],
+                components: [
+                    {
+                        type: DiscordComponentType.ActionRow,
+                        components: [{
+                            type: DiscordComponentType.Button,
+                            style: DiscordButtonStyle.Success,
+                            customId: "GiveawayEnter:",
+                            label: "Enter"
+                        }]
+                    }
+                ]
+            }
+        }
     }
     tab = "settings";
 
