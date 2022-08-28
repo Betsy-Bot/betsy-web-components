@@ -23,6 +23,7 @@ export class ManageGiveaways {
         name: '',
         discordServerId: '',
         type: 3,
+        active: true,
         winningMessage: {
             message: {
                 embeds: [
@@ -85,6 +86,19 @@ export class ManageGiveaways {
         } catch(e) {
             console.log(e);
             toast('Failed to create giveaway', {severity: 'error'})
+        }
+    }
+
+    async deleteSupportTicket(event) {
+        if (event.detail.action == 'ok') {
+            try {
+                await this.discordService.deleteGiveawayById(this.giveaway.id);
+                toast("Deleted giveaway message!", {severity: "success"})
+                this.router.navigateBack();
+            } catch(e) {
+                toast("Failed to delete giveaway", {severity: "error"});
+                throw e;
+            }
         }
     }
 }

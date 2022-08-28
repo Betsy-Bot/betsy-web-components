@@ -313,4 +313,8 @@ export class DiscordService {
     async getGiveawayById(giveawayId: string) {
         return this.api.doGet(`DiscordGiveaway/${giveawayId}`);
     }
+
+    async deleteGiveawayById(settingsId: string) {
+        return this.api.doDelete(`DiscordGiveaway/${settingsId}`);
+    }
 }

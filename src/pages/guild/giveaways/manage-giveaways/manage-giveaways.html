@@ -1,4 +1,14 @@
 <template>
+    <confirmation-dialog
+        cancel-text="Cancel"
+        confirm-text="Delete"
+        dialog.two-way="confirmDeleteDialog"
+        handler.call="deleteSupportTicket(event)"
+        title="Are you sure you would like to delete?"
+    >
+        This is a permanent action and cannot be undone
+    </confirmation-dialog>
+
     <section id="create-data-command">
         <div class="row">
             <div class="col-12 col-lg-8">
@@ -7,7 +17,11 @@
                     title="${isNew ? 'Create' : 'Edit'} Giveaway"
                     subtitle="Giveaways automatically select a winner and post that winner at the end of the giveaway."
                 ></discord-feature-header>
-
+                <div class="text-end my-4">
+                    <button mdc-button class="button-secondary" click.delegate="confirmDeleteDialog.open()">
+                        Delete Giveaway
+                    </button>
+                </div>
                 <button
                     class="mt-3"
                     mdc-switch
@@ -38,7 +52,7 @@
                 <form submit.delegate="save()">
                     <div if.bind="tab === 'settings'">
                         <mdc-text-field
-                            label="Identifier"
+                            label="Name"
                             type="text"
                             class="w-100 my-2"
                             value.bind="giveaway.name"

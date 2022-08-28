@@ -19,12 +19,11 @@ export class Navigation {
     donateDialog;
 
     handleServerChange(event: CustomEvent) {
-        if (this.guildId == event?.detail?.value) return;
         this.guildId = event?.detail?.value;
         const childRoute = this.router.currentInstruction.params.childRoute ? `/${this.router.currentInstruction.params.childRoute}` : null
-        this.router.navigate(`guild/${this.guildId}${childRoute}`);
+        this.router.navigate(`guild/${this.guildId}${childRoute ?? ''}`);
         location.reload();
-    }
+    }d
 
     attached() {
         this.drawer.open = this.sessionService.getStorageItem(SessionService.SIDEBAR_STATUS_KEY, true);
