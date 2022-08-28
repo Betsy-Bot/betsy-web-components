@@ -365,12 +365,6 @@ export class Guild {
                     auth: true
                 }
             },
-            {
-                name: 'verify',
-                route: 'verify/:userId',
-                moduleId: PLATFORM.moduleName('pages/guild/verification/verify/verify'),
-                title: 'Verify User',
-            }
         ]);
 
         config.mapUnknownRoutes(() => {

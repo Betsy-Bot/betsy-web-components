@@ -1,7 +1,7 @@
 import {EventAggregator} from "aurelia-event-aggregator";
 import {DiscordService} from "services/discord-service";
 import {inject} from "aurelia-framework";
-import {botClientId, verifyRedirectUrl} from "../../../../environment";
+import {botClientId, verifyRedirectUrl} from "../../environment";
 
 @inject(EventAggregator, DiscordService)
 export class Verify {
