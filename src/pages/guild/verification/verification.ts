@@ -17,6 +17,7 @@ export class Verification {
     guildId: string;
     featureActive;
     guild;
+    selectedRole;
 
     async attached() {
         [this.guild] = await Promise.all([
@@ -41,6 +42,6 @@ export class Verification {
     }
 
     async save() {
-        //this.discordService.update
+        await this.discordService.updateVerifiedRole(this.guildId, this.selectedRole.id);
     }
 }

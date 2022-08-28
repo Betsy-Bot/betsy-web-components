@@ -91,6 +91,14 @@ export class DiscordService {
         return await this.api.doGet(`DiscordGuild/${guildId}/RequiresLogin`);
     }
 
+    async verifyUser(guildId: string, userId: string): Promise<any> {
+        return await this.api.doPost(`DiscordGuild/${guildId}/Verify/${userId}`, {});
+    }
+
+    async updateVerifiedRole(guildId: string, roleId: string): Promise<any> {
+        return await this.api.doPost(`DiscordGuild/${guildId}/VerifiedRole`, {verifiedRoleId: roleId});
+    }
+
     async getDiscordChannels(guildId: string) {
         if (this.guildChannelData.guildId == guildId && this.guildChannelData.data) {
             return this.guildChannelData.data;

@@ -10,11 +10,17 @@ export class Verify {
 
     async activate(params) {
         this.guildId = params.guildId;
+        this.userId = params.userId;
         this.response = await this.discordService.getRequiresLogin(this.guildId);
+    }
+
+    async attached() {
+        await this.discordService.verifyUser(this.guildId, this.userId);
     }
 
     params;
     guildId: string;
+    userId: string;
     response;
 
     get discordOauthUrl() {
