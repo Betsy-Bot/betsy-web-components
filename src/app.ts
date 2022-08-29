@@ -88,6 +88,18 @@ export class App {
                 moduleId: PLATFORM.moduleName('pages/transcript/transcript'),
                 title: 'Support Ticket Transcript'
             },
+            {
+                name: 'verify-login',
+                route: 'verify',
+                moduleId: PLATFORM.moduleName('pages/verify/verify'),
+                title: 'Verify Login',
+            },
+            {
+                name: 'verify',
+                route: 'verify/:userId',
+                moduleId: PLATFORM.moduleName('pages/verify/verify'),
+                title: 'Verify User',
+            }
         ]);
 
         config.mapUnknownRoutes(() => {

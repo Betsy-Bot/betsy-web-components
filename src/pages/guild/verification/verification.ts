@@ -17,12 +17,19 @@ export class Verification {
     guildId: string;
     featureActive;
     guild;
+    selectedRole;
 
     async attached() {
         [this.guild] = await Promise.all([
             await this.discordService.getDiscordServerInformation(this.guildId)
         ])
-        this.featureActive = this.guild.activeFeatures.includes(this.discordService.VERIFICATION);
+        this.featureActive = this.guild.activeFeatures.includes(this.discordService.VERIFICATION)
+        if (!this.guild.globalSettings) {
+            this.guild.globalSettings = {};
+            if (!this.guild.globalSettings.verificationSettings) {
+                this.guild.globalSettings.verificationSettings = {}
+            }
+        }
     }
 
     async updateKeys() {
@@ -41,6 +48,7 @@ export class Verification {
     }
 
     async save() {
-        //this.discordService.update
+        this.guild.globalSettings.verificationSettings.verifiedRoleId = this.selectedRole.id;
+        await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
     }
 }
