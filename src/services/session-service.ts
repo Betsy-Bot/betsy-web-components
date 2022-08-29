@@ -36,8 +36,8 @@ export class SessionService {
         window.localStorage.removeItem(key);
     }
 
-    async loginWithOAuthCode(code: string) {
-        const response = await this.discordService.exchangeCode(code);
+    async loginWithOAuthCode(code: string, redirectUrl?: string) {
+        const response = await this.discordService.exchangeCode(code, redirectUrl);
 
         if (response.token) {
             this.saveStorageItem(SessionService.TOKEN_KEY, response.token);

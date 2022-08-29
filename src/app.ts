@@ -89,6 +89,12 @@ export class App {
                 title: 'Support Ticket Transcript'
             },
             {
+                name: 'verify-login',
+                route: 'verify',
+                moduleId: PLATFORM.moduleName('pages/verify/verify'),
+                title: 'Verify Login',
+            },
+            {
                 name: 'verify',
                 route: 'verify/:userId',
                 moduleId: PLATFORM.moduleName('pages/verify/verify'),

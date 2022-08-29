@@ -39,8 +39,12 @@ export class DiscordService {
         return this.guild.guildId;
     }
 
-    async exchangeCode(code: string): Promise<discordModels.ExchangeCodeResponse> {
-        return await this.api.doPost('Discord/OAuth/ExchangeCode', {code: code})
+    async exchangeCode(code: string, redirectUrl?: string): Promise<discordModels.ExchangeCodeResponse> {
+        let path = 'Discord/OAuth/ExchangeCode';
+        if (redirectUrl) {
+            path += '?redirectUrl=' + redirectUrl
+        }
+        return await this.api.doPost(path, {code: code})
     }
 
     async createServer(guildId: string): Promise<discordModels.BaseDiscordServer> {
@@ -93,6 +97,10 @@ export class DiscordService {
 
     async verifyUser(guildId: string, userId: string): Promise<any> {
         return await this.api.doPost(`DiscordGuild/${guildId}/Verify/${userId}`, {});
+    }
+
+    async verifyLogin(): Promise<any> {
+        return await this.api.doPost(`User/Verify`, {});
     }
 
     async updateVerifiedRole(guildId: string, roleId: string): Promise<any> {

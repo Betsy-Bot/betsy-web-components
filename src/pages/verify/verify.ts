@@ -1,21 +1,42 @@
 import {EventAggregator} from "aurelia-event-aggregator";
 import {DiscordService} from "services/discord-service";
 import {inject} from "aurelia-framework";
-import {botClientId, verifyRedirectUrl} from "../../environment";
+import {botClientId, verifyRedirectUrl} from "environment";
+import {toast} from "lets-toast";
+import {SessionService} from "services/session-service";
 
-@inject(EventAggregator, DiscordService)
+@inject(EventAggregator, DiscordService, SessionService)
 export class Verify {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService) {
+    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private sessionService: SessionService) {
     }
 
+    loading = true;
+    code;
+
     async activate(params) {
-        this.guildId = params.guildId;
-        this.userId = params.userId;
-        this.response = await this.discordService.getRequiresLogin(this.guildId);
+        if (params.code) {
+            this.code = params.code as string;
+        } else {
+            this.guildId = params.guildId;
+            this.userId = params.userId;
+            this.response = await this.discordService.getRequiresLogin(this.guildId);
+        }
     }
 
     async attached() {
-        await this.discordService.verifyUser(this.guildId, this.userId);
+        if (this.code) {
+            try {
+                await this.sessionService.loginWithOAuthCode(this.code, verifyRedirectUrl());
+                await this.discordService.verifyLogin();
+            } catch(e) {
+                toast("Failed to exchange code", {severity: 'error'});
+            }
+        } else {
+            await this.discordService.verifyUser(this.guildId, this.userId);
+        }
+        setTimeout(() => {
+            this.loading = false;
+        }, 200)
     }
 
     params;
