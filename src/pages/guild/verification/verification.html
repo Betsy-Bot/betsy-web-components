@@ -49,12 +49,21 @@
                 role-id.bind="guild.globalSettings.verificationSettings.verifiedRoleId"
             ></discord-role-selector>
         </div>
-        <div class="my-3">
+        <div class="mt-3">
             <discord-channel-selector
                 label="Select Channel for Audits"
                 if.bind="guildId"
                 type.bind="0"
                 channel-id.two-way="guild.globalSettings.verificationSettings.logChannel"
+                guild-id.bind="guildId"
+            ></discord-channel-selector>
+        </div>
+        <div class="mb-3">
+            <discord-channel-selector
+                label="Select Channel for Verify Button"
+                if.bind="guildId"
+                type.bind="0"
+                channel-id.two-way="guild.globalSettings.verificationSettings.verifyChannelId"
                 guild-id.bind="guildId"
             ></discord-channel-selector>
         </div>
