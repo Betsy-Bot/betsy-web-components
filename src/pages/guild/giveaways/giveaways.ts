@@ -1,4 +1,3 @@
-import {toast} from "lets-toast";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {DiscordService} from "services/discord-service";
 import {inject} from "aurelia-framework";

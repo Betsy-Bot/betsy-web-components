@@ -365,6 +365,15 @@ export class Guild {
                     auth: true
                 }
             },
+            {
+                name: 'guild-users',
+                route: 'resources/users',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/users/users'),
+                title: 'Guild Users',
+                settings: {
+                    auth: true
+                }
+            },
         ]);
 
         config.mapUnknownRoutes(() => {
