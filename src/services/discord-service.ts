@@ -67,6 +67,10 @@ export class DiscordService {
         return await this.api.doGet(`DiscordGuild/${guildId}/ResponseMessages`);
     }
 
+    async getUsersForGuild(guildId: string): Promise<any> {
+        return await this.api.doGet(`DiscordGuild/${guildId}/Users`);
+    }
+
     async getDataCommandsForGuild(guildId: string): Promise<discordModels.BaseDiscordCommand[]> {
         return await this.api.doGet(`DiscordGuild/${guildId}/DataCommands`);
     }
