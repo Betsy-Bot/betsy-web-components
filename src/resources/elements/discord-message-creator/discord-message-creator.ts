@@ -8,9 +8,11 @@ export class DiscordMessageCreator {
     };
     @bindable single;
     @bindable allowComponents: boolean;
+    @bindable maxComponents: number = 1;
     @bindable tab = 'message';
     @bindable selectedMessage;
     @bindable hideTemplate: boolean = false
+    @bindable customBuilder;
 
     selectedMessageChanged() {
         if (this.selectedMessage?.message) {
