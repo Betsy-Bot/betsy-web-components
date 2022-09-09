@@ -12,6 +12,7 @@ export class Verify {
 
     loading = true;
     code;
+    success;
 
     async activate(params) {
         if (params.code) {
@@ -32,7 +33,10 @@ export class Verify {
                 toast("Failed to exchange code", {severity: 'error'});
             }
         } else {
-            await this.discordService.verifyUser(this.guildId, this.userId);
+            this.success = await this.discordService.verifyUser(this.guildId, this.userId);
+            if (this.success == null) {
+                toast("Failed to attempt verification.", {severity: 'error'});
+            }
         }
         setTimeout(() => {
             this.loading = false;
