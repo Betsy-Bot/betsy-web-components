@@ -27,7 +27,10 @@ export class Verification {
         if (!this.guild.globalSettings) {
             this.guild.globalSettings = {};
             if (!this.guild.globalSettings.verificationSettings) {
-                this.guild.globalSettings.verificationSettings = {}
+                this.guild.globalSettings.verificationSettings = {
+                    blockAlts: false,
+                    requireLogin: false
+                }
             }
         }
     }
