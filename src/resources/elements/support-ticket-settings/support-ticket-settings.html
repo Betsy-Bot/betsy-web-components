@@ -117,5 +117,16 @@
                 placeholder="The maximum amount of tickets a single person can have for this ticket container."
             ></mdc-text-field>
         </div>
+        <div class="col-12 col-lg-6">
+            <mdc-text-field
+                class="w-100"
+                label="Auto Close After (Minutes)"
+                min="5"
+                max="20160"
+                type="number"
+                value.bind="request.autoCloseMinutes"
+                placeholder="When closed the ticket will begin auto closing instead of immediately closing"
+            ></mdc-text-field>
+        </div>
     </div>
 </template>
