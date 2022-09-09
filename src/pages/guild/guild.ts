@@ -105,19 +105,10 @@ export class Guild {
                 }
             },
             {
-                name: 'create-tracked-message',
-                route: 'messages/tracked-messages/create',
-                moduleId: PLATFORM.moduleName('pages/guild/messages/tracked-message/create-tracked-message/create-tracked-message'),
-                title: 'Create Tracked Message',
-                settings: {
-                    auth: true
-                }
-            },
-            {
-                name: 'edit-tracked-message',
+                name: 'managed-tracked-message',
                 route: 'messages/tracked-messages/:messageId',
-                moduleId: PLATFORM.moduleName('pages/guild/messages/tracked-message/edit-tracked-message/edit-tracked-message'),
-                title: 'Edit Tracked Message',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/tracked-message/manage-tracked-message/manage-tracked-message'),
+                title: 'Manage Tracked Message',
                 settings: {
                     auth: true
                 }

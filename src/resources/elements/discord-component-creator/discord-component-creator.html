@@ -1,10 +1,15 @@
 <template>
     <section id="discord-component-creator">
+        <div if.bind="components.length < maxComponents" class="my-3">
+            <button mdc-button class="button-primary" click.delegate="addNewComponent()" type="button">
+                Add Component
+            </button>
+        </div>
         <div class="row">
-            <div class="col" repeat.for="componentWrapper of components">
+            <div class="col-12 col-lg-6 my-3" repeat.for="componentWrapper of components">
                 <div class="components" repeat.for="component of componentWrapper.components">
                     <div class="inputs">
-                        <mdc-select class="standard-betsy-select w-50 mb-2" value.bind="component.style" label="Select Style">
+                        <mdc-select class="standard-betsy-select w-100 mb-2" value.bind="component.style" label="Select Style">
                             <mdc-icon mdc-select-icon>dns</mdc-icon>
                             <mdc-list>
                                 <mdc-list-item repeat.for="style of styles" value.bind="style.value">
@@ -12,18 +17,26 @@
                                 </mdc-list-item>
                             </mdc-list>
                         </mdc-select>
-                        <div class="mb-2">
+                        <div class="my-2">
                             <mdc-text-field
-                                class="w-50"
+                                class="w-100"
                                 label="Label"
                                 value.bind="component.label"
                                 required.bind="true"
                             ></mdc-text-field>
                         </div>
-                        <div class="mb-2">
+                        <div class="my-2" if.bind="customBuilder">
+                            <mdc-text-field
+                                class="w-100"
+                                label="Custom ID"
+                                value.bind="component.custom_id"
+                                required.bind="true"
+                            ></mdc-text-field>
+                        </div>
+                        <div class="my-2">
                             <discord-emoji-selector
                                 value.two-way="component.emoji"
-                                size.bind="50"
+                                size.bind="100"
                                 label="Button Emoji"
                             ></discord-emoji-selector>
                         </div>
