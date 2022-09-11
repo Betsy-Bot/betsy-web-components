@@ -1,6 +1,6 @@
 <template>
     <section id="feature-item-list">
-        <mdc-list>
+        <mdc-list if.bind="data">
             <mdc-list-item two-line repeat.for="item of data" class="list-item-background mb-3 position-relative"
                            mdc-elevation="12" click.trigger="handleItemClick(item)">
                 <mdc-icon mdc-list-item-leading>folder</mdc-icon>
@@ -21,5 +21,9 @@
                 </mdc-form-field>
             </mdc-list-item>
         </mdc-list>
+        <div class="text-center m-5" else>
+            <h5>Fetching Data...</h5>
+            <mdc-circular-progress size="100" stroke-width="5"></mdc-circular-progress>
+        </div>
     </section>
 </template>
