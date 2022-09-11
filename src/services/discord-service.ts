@@ -179,6 +179,10 @@ export class DiscordService {
         return this.api.doGet(`DiscordGuild/${guildId}/SupportTickets/${settingsId}/Submissions/${supportTicketId}`);
     }
 
+    async closeSupportTicket(supportTicketId: string) {
+        return this.api.doPatch(`DiscordSupportTicket/${supportTicketId}/Close`, {});
+    }
+
     async updateTrackedDiscordMessage(data: any) {
         return this.api.doPatch(`DiscordMessage/${data.id}`, data);
     }

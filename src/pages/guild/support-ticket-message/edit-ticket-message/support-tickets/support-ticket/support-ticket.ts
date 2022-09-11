@@ -25,4 +25,8 @@ export class SupportTicket {
     async attached() {
         this.supportTicket = await this.discordService.getSupportTicket(this.guildId, this.settingsId, this.supportTicketId);
     }
+
+    async closeTicket() {
+        this.supportTicket = await this.discordService.closeSupportTicket(this.supportTicketId);
+    }
 }

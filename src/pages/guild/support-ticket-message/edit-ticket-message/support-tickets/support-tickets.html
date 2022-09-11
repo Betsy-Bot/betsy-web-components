@@ -4,16 +4,8 @@
             title="Support Tickets"
             subtitle="View the support tickets created for the support ticket message"
         ></discord-feature-header>
-
-        <feature-item-list
-            if.bind="!loading"
-            show-toggler.bind="false"
-            data.bind="supportTickets"
-            name-prefix="Ticket for: "
-            name-override="createdBy"
-            suffix-property="createdDate"
-            name-suffix="- "
-            item-click-handler.call="goToSubmission(item)"
-        ></feature-item-list>
+        <div class="my-3">
+            <dx-data-grid items.bind="supportTickets" columns.bind="columns" if.bind="supportTickets"></dx-data-grid>
+        </div>
     </section>
 </template>

@@ -14,6 +14,7 @@ export class SupportTickets {
 
     featureActive;
     supportTickets;
+    columns;
 
     async activate(params) {
         this.guildId = params.guildId as string;
@@ -21,10 +22,36 @@ export class SupportTickets {
     }
 
     async attached() {
+        this.columns = [
+            {
+                dataField: "createdBy"
+            },
+            {
+                dataField: "discordUserId"
+            },
+            {
+                dataField: "closed"
+            },
+            {
+                dataField: "closedBy"
+            },
+            {
+                dataField: "createdDate",
+                dataType: 'date',
+            },
+            {
+                caption: '',
+                cellTemplate: this.linkTemplate,
+                alignment: 'center'
+            },
+        ]
+
         this.supportTickets = await this.discordService.getDiscordMessageSupportTickets(this.guildId, this.settingsId);
     }
 
-    goToSubmission(submission) {
-        this.router.navigate(`/guild/${this.guildId}/support-tickets/${this.settingsId}/submissions/${submission.id}`)
-    }
+    linkTemplate = (container, options) => {
+        let el = document.createElement('span');
+        el.innerHTML = `<a class="button-primary py-2 px-3" href="/guild/${this.guildId}/support-tickets/${this.settingsId}/submissions/${options.data.id}">View</a>`;
+        container.append(el);
+    };
 }

@@ -31,7 +31,7 @@ export class DxDataGrid {
     @bindable columnResizingMode;
     @bindable confirmDeleteMessage;
     @bindable editingMode = 'batch';
-    @bindable allowedPageSizes = [10, 25, 50, 100];
+    @bindable allowedPageSizes = [1, 10, 25, 50, 100];
     @bindable popupTitle;
     @bindable formItemOptions;
     @bindable onOptionChangedFunction;
@@ -102,8 +102,8 @@ export class DxDataGrid {
                 showScrollbar: 'always'
             },
             paging: {
-                enabled: this.items === null,
-                pageSize: 50
+                enabled: true,
+                pageSize: 25
             },
             stateStoring: {
                 enabled: !this.searchPanelText,
