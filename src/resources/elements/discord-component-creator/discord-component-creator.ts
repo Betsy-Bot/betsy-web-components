@@ -40,6 +40,10 @@ export class DiscordComponentCreator {
         {
             label: 'Danger',
             value: 4,
+        },
+        {
+            label: 'Link',
+            value: 5,
         }
     ]
 }

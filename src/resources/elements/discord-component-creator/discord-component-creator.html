@@ -25,7 +25,15 @@
                                 required.bind="true"
                             ></mdc-text-field>
                         </div>
-                        <div class="my-2" if.bind="customBuilder">
+                        <div class="my-2" if.bind="component.style === 5">
+                            <mdc-text-field
+                                class="w-100"
+                                label="URL"
+                                value.bind="component.url"
+                                required.bind="true"
+                            ></mdc-text-field>
+                        </div>
+                        <div class="my-2" if.bind="customBuilder && component.style !== 5">
                             <mdc-text-field
                                 class="w-100"
                                 label="Custom ID"
