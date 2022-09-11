@@ -1,4 +1,5 @@
 import {bindable, inject} from "aurelia-framework";
+import './discord-messages-renderer.scss';
 export class DiscordMessagesRenderer {
     @bindable messages;
 
@@ -20,5 +21,11 @@ export class DiscordMessagesRenderer {
         let diff = Math.abs(Math.round(timeDifference));
         //TODO Check diff and show author if message between longer than 30 minutes
         return false;
+    }
+
+    isImage(url: string) {
+        let result = /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+        if (result) return true
+        return url.includes('s3.amazonaws.com');
     }
 }
