@@ -5,25 +5,6 @@ export class DiscordComponentCreator {
     @bindable components = [];
     @bindable maxComponents = 1;
     @bindable customBuilder = false;
-
-    attached() {
-        if (!this.components) {
-            this.components = [];
-        }
-    }
-
-    addNewComponent() {
-        this.components.push({
-            type: DiscordComponentType.ActionRow,
-            components: [{
-                type: DiscordComponentType.Button,
-                style: DiscordButtonStyle.Success,
-                custom_id: "",
-                label: "Text"
-            }]
-        })
-    }
-
     styles = [
         {
             label: 'Primary',
@@ -40,10 +21,30 @@ export class DiscordComponentCreator {
         {
             label: 'Danger',
             value: 4,
-        },
-        {
-            label: 'Link',
-            value: 5,
         }
     ]
+
+    attached() {
+        if (!this.components) {
+            this.components = [];
+        }
+        if (this.customBuilder) {
+            this.styles.push({
+                label: 'Link',
+                value: 5,
+            })
+        }
+    }
+
+    addNewComponent() {
+        this.components.push({
+            type: DiscordComponentType.ActionRow,
+            components: [{
+                type: DiscordComponentType.Button,
+                style: DiscordButtonStyle.Success,
+                custom_id: "",
+                label: "Text"
+            }]
+        })
+    }
 }
