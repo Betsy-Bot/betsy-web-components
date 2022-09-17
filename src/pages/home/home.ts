@@ -23,7 +23,8 @@ export class Home {
         }
 
         if (this.user?.adminedServers) {
-            for (let server of this.user?.adminedServers) {
+            // eslint-disable-next-line no-unsafe-optional-chaining
+            for (const server of this.user?.adminedServers) {
                 server.id = server.guildId;
             }
         }

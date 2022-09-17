@@ -1,12 +1,12 @@
 import {toast} from "lets-toast";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {DiscordService} from "services/discord-service";
-import {Router} from "aurelia-router";
 import {inject} from "aurelia-framework";
+import {SessionService} from "../../../services/session-service";
 
-@inject(EventAggregator, DiscordService, Router)
+@inject(EventAggregator, DiscordService, SessionService)
 export class Verification {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
+    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private sessionService: SessionService) {
     }
 
     activate(params) {
@@ -18,10 +18,12 @@ export class Verification {
     featureActive;
     guild;
     selectedRole;
+    isAdmin: boolean;
 
     async attached() {
-        [this.guild] = await Promise.all([
-            await this.discordService.getDiscordServerInformation(this.guildId)
+        [this.guild, this.isAdmin] = await Promise.all([
+            await this.discordService.getDiscordServerInformation(this.guildId),
+            await this.sessionService.isAdmin(this.guildId)
         ])
         this.featureActive = this.guild.activeFeatures.includes(this.discordService.VERIFICATION)
         if (!this.guild.globalSettings) {

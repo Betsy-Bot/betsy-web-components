@@ -11,7 +11,7 @@ export class Navigation {
     }
 
     @bindable() user: any;
-    guildId: any;
+    guildId: number;
     drawer = {
         open: null
     };

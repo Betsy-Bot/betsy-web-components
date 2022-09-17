@@ -1,5 +1,6 @@
 @use 'styles/reset';
 @use '~bootstrap/scss/bootstrap';
+@use '~@material/theme';
 @use '~@aurelia-mdc-web/all';
 @use '~lets-toast/build/lets-toast.min';
 @use 'styles/mdc-styles';
@@ -49,4 +50,16 @@ a {
 a:hover {
     font-weight: bolder;
     color: unset;
+}
+
+.mdc-select--filled.mdc-select--disabled .mdc-select__anchor {
+    background: #36393f;
+}
+
+.mdc-select--disabled .mdc-select__selected-text-container{
+    color: rgba(0,0,0,0.3);
+}
+
+.mdc-select.mdc-select--disabled .mdc-select__selected-text {
+    color: rgba(255, 255, 255, 0.5) !important
 }

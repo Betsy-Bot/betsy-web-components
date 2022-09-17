@@ -11,6 +11,7 @@ export class DiscordRoleSelector {
     @bindable required = false;
     @bindable removeEveryone = false;
     @bindable roleId;
+    @bindable disabled;
 
     roles;
 

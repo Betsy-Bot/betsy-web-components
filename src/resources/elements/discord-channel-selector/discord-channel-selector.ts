@@ -18,6 +18,7 @@ export class DiscordChannelSelector {
     @bindable required: boolean = false;
     @bindable class;
     @bindable includeNull;
+    @bindable disabled;
     validationController: ValidationController;
     rules: Rule<DiscordChannelSelector, unknown>[][];
 

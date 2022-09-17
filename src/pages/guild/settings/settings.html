@@ -13,6 +13,7 @@
                     <div class="row my-2">
                         <div class="col-10">
                             <mdc-text-field
+                                disabled.bind="!isAdmin"
                                 min="100000000000000000"
                                 max="9999999999999999999"
                                 type="number"
@@ -22,7 +23,7 @@
                             ></mdc-text-field>
                         </div>
                         <div class="col-2">
-                            <button mdc-button class="button-primary w-100 h-100" type="submit">
+                            <button mdc-button class="button-primary w-100 h-100" type="submit" disabled.bind="!isAdmin">
                                 Add
                             </button>
                         </div>

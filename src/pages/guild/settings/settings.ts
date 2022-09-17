@@ -17,13 +17,14 @@ export class Settings {
     guildId: string;
     guild;
     params;
+    isAdmin;
 
     async attached() {
         this.guildId = this.params.guildId;
-        [this.guild] = await Promise.all([
-            await this.discordService.getDiscordServerInformation(this.guildId)
+        [this.guild, this.isAdmin] = await Promise.all([
+            await this.discordService.getDiscordServerInformation(this.guildId),
+            await this.sessionService.isAdmin(this.guildId)
         ]);
-        console.log(this.guild);
     }
 
     permissionUserId;

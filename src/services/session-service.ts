@@ -88,4 +88,20 @@ export class SessionService {
         this.currentUser = null;
         this.eventAggregator.publish('user-updated', null);
     }
+
+    async isAdmin(guildId): Promise<boolean> {
+        const user = await this.getUser();
+        if (!user) return;
+        //@ts-ignore
+        for (const server of user.activeServers) {
+           if (server.guildId == guildId) return true;
+           //@ts-ignore
+           if (server.ownerId == user.id) return true;
+        }
+        //@ts-ignore
+        for (const server of user.adminedServers) {
+           if (server.guildId == guildId) return true;
+        }
+        return false
+    }
 }
