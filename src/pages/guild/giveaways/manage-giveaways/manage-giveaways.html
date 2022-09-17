@@ -124,7 +124,7 @@
                 <discord-message-preview message.two-way="giveaway.winningMessage.message" if.bind="tab === 'winning'"></discord-message-preview>
             </div>
         </div>
-        <div class="my-5 py-5" if.bind="giveaway.participants">
+        <div class="py-5" if.bind="giveaway.participants">
             <h4>Participants</h4>
             <dx-data-grid items.bind="giveaway.participants"></dx-data-grid>
         </div>
