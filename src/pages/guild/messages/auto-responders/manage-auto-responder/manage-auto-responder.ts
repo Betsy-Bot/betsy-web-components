@@ -2,7 +2,7 @@ import {EventAggregator} from "aurelia-event-aggregator";
 import {DiscordService} from "services/discord-service";
 import {Router} from "aurelia-router";
 import {toast} from "lets-toast";
-import {bindable, inject} from "aurelia-framework";
+import { bindable, inject, observable } from "aurelia-framework";
 
 @inject(EventAggregator, DiscordService, Router)
 export class ManageAutoResponder {
@@ -21,6 +21,7 @@ export class ManageAutoResponder {
     responderId;
     isNew: boolean;
     tab = "settings";
+    @observable selectedChannelId;
     responderTemplate = {
         name: '',
         discordServerId: '',
@@ -33,6 +34,20 @@ export class ManageAutoResponder {
             }
         }
     }
+    types = [
+        {
+            value: 0,
+            label: "Reply Message"
+        },
+        {
+            value: 1,
+            label: "DM Message"
+        },
+        {
+            value: 2,
+            label: "Channel Message"
+        }
+    ]
 
     async attached() {
         if (!this.responderId || this.responderId == 0) {
@@ -57,5 +72,28 @@ export class ManageAutoResponder {
             console.log(e);
             toast('Failed to create message', {severity: 'error'})
         }
+    }
+
+    async addPhrase() {
+        if (!this.responder.phrases) {
+            this.responder.phrases = [];
+        }
+        this.responder.phrases.push({value: this.phrase});
+    }
+
+    async removePhrase(index) {
+        this.responder.phrases.splice(index, 1)
+    }
+
+
+    async selectedChannelIdChanged() {
+        if (!this.responder.ignoredChannels) {
+            this.responder.ignoredChannels = [];
+        }
+        this.responder.ignoredChannels.push(this.selectedChannelId);
+    }
+
+    async removeIgnoredChannel(index) {
+        this.responder.ignoredChannels.splice(index, 1)
     }
 }
