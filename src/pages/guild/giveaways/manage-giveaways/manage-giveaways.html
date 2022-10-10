@@ -3,7 +3,7 @@
         cancel-text="Cancel"
         confirm-text="Delete"
         dialog.two-way="confirmDeleteDialog"
-        handler.call="deleteSupportTicket(event)"
+        handler.call="deleteGiveaway(event)"
         title="Are you sure you would like to delete?"
     >
         This is a permanent action and cannot be undone
@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-12 col-lg-8">
                 <discord-feature-header
-                    doc-url="https://docs.betsybot.xyz/features/welcome-messages"
+                    doc-url="https://docs.betsybot.xyz/features/giveaways"
                     title="${isNew ? 'Create' : 'Edit'} Giveaway"
                     subtitle="Giveaways automatically select a winner and post that winner at the end of the giveaway."
                 ></discord-feature-header>

@@ -1,0 +1,16 @@
+.discord-menu-select {
+    .mdc-select__selected-text,
+    .mdc-floating-label--float-above,
+    .mdc-select__icon {
+        color: gray !important;
+    }
+    .mdc-floating-label {
+        color: gray !important;
+    }
+}
+
+.discord-menu-select:not(.mdc-select--disabled) .mdc-select__anchor {
+    background-color: rgb(32, 34, 35) !important;
+    border: 1px solid rgba(0,0,0,0.2);
+    color: gray !important;
+}

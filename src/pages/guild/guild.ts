@@ -348,6 +348,24 @@ export class Guild {
                 }
             },
             {
+                name: 'manage-poll',
+                route: 'polls/:pollId',
+                moduleId: PLATFORM.moduleName('pages/guild/polls/manage-polls/manage-polls'),
+                title: 'Manage Poll',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'polls',
+                route: 'polls',
+                moduleId: PLATFORM.moduleName('pages/guild/polls/polls'),
+                title: 'Polls',
+                settings: {
+                    auth: true
+                }
+            },
+            {
                 name: 'verification',
                 route: 'verification',
                 moduleId: PLATFORM.moduleName('pages/guild/verification/verification'),

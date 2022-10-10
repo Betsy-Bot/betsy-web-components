@@ -341,4 +341,24 @@ export class DiscordService {
     async deleteGiveawayById(settingsId: string) {
         return this.api.doDelete(`DiscordGiveaway/${settingsId}`);
     }
+
+    async getPolls(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/DiscordPolls`);
+    }
+
+    async createPoll(giveaway: any) {
+        return this.api.doPost(`DiscordPoll`, giveaway);
+    }
+
+    async updatePoll(giveaway: any) {
+        return this.api.doPatch(`DiscordPoll/${giveaway.id}`, giveaway);
+    }
+
+    async getPollById(giveawayId: string) {
+        return this.api.doGet(`DiscordPoll/${giveawayId}`);
+    }
+
+    async deletePollById(settingsId: string) {
+        return this.api.doDelete(`DiscordPoll/${settingsId}`);
+    }
 }
