@@ -19,10 +19,6 @@ export class DateTimePicker {
         flatpickr(this.pickerElement, this.config);
     }
 
-    valueChanged() {
-        console.log(this.value);
-    }
-
     get displayValue() {
         if (!this.value) return;
         return new Date(this.value).toUTCString()

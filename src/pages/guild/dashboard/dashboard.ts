@@ -39,8 +39,8 @@ export class Dashboard {
     }
 
     getStat(stat) {
-        if (this.guild?.guild && stat.property) {
-            return this.guild.guild[stat.property];
+        if (stat.property) {
+            return this.guild?.guild[stat.property];
         }
         return this[stat.function]();
     }
