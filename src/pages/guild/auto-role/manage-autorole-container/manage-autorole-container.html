@@ -80,7 +80,7 @@
 
                         <div class="row g-4 mt-2" if.bind="container.discordRoles">
                             <div class="col-12 col-lg-6" repeat.for="role of container.discordRoles">
-                                <discord-menu-item item.bind="role" remove-function.call="removeRole($index)">
+                                <discord-menu-item item.two-way="role" remove-function.call="removeRole($index)"></discord-menu-item>
                             </div>
                         </div>
 

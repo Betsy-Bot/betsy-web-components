@@ -1,10 +1,21 @@
-import {bindable} from "aurelia-framework";
-import {DiscordButtonStyle, DiscordComponentType} from "services/models/discord";
+import { bindable } from "aurelia-framework";
+import { DiscordButtonStyle, DiscordComponentType } from "services/models/discord";
 
 export class DiscordComponentCreator {
     @bindable components = [];
     @bindable maxComponents = 1;
     @bindable customBuilder = false;
+
+    componentTypes = [
+        {
+            label: "Menu",
+            type: DiscordComponentType.MenuSelect
+        },
+        {
+            label: "Button",
+            type: DiscordComponentType.Button
+        }
+    ]
     styles = [
         {
             label: 'Primary',
@@ -46,5 +57,24 @@ export class DiscordComponentCreator {
                 label: "Text"
             }]
         })
+    }
+
+    addMenuOption(index) {
+        if (!this.components[index].components[0]) {
+            this.components[index].components[0] = [];
+        }
+        if (!this.components[index].components[0].options) {
+            this.components[index].components[0].options = [];
+        }
+        this.components[index].components[0].options.push({
+            description: '',
+            name: '',
+            custom_id: '',
+            label: '',
+        });
+    }
+
+    removeMenuOption(index) {
+        this.components[0].components[0].options.splice(index, 1);
     }
 }
