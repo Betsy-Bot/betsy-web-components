@@ -79,14 +79,26 @@
                             value.bind="responder.deleteAfterMinutes"
                         ></mdc-text-field>
                         <discord-channel-selector
-                            required.bind="true"
                             label="Add Ignored Channels"
                             type.bind="0"
-                            channel-id.two-way="selectedChannelId"
+                            channel-id.two-way="selectedIgnoreChannelId"
                         ></discord-channel-selector>
-                        <div repeat.for="channelId of responder.ignoredChannels">
+                        <div class="mb-3">
+                            <div repeat.for="channelId of responder.ignoredChannels">
+                                ${channelId}
+                                <span class="text-danger me-2 cursor-pointer" click.delegate="removeIgnoredChannel($index)">
+                                    ( X )
+                                </span>
+                            </div>
+                        </div>
+                        <discord-channel-selector
+                            label="Add Whitelisted Channels"
+                            type.bind="0"
+                            channel-id.two-way="selectedWhitelistChannelId"
+                        ></discord-channel-selector>
+                        <div repeat.for="channelId of responder.whitelistedChannels">
                             ${channelId}
-                            <span class="text-danger me-2 cursor-pointer" click.delegate="removeIgnoredChannel($index)">
+                            <span class="text-danger me-2 cursor-pointer" click.delegate="removeWhitelistedChannel($index)">
                                 ( X )
                             </span>
                         </div>

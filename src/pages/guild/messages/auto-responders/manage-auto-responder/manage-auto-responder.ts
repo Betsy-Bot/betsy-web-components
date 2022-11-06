@@ -21,7 +21,8 @@ export class ManageAutoResponder {
     responderId;
     isNew: boolean;
     tab = "settings";
-    @observable selectedChannelId;
+    @observable selectedIgnoreChannelId;
+    @observable selectedWhitelistChannelId;
     responderTemplate = {
         name: '',
         discordServerId: '',
@@ -86,14 +87,25 @@ export class ManageAutoResponder {
     }
 
 
-    async selectedChannelIdChanged() {
+    async selectedIgnoreChannelIdChanged() {
         if (!this.responder.ignoredChannels) {
             this.responder.ignoredChannels = [];
         }
-        this.responder.ignoredChannels.push(this.selectedChannelId);
+        this.responder.ignoredChannels.push(this.selectedIgnoreChannelId);
     }
 
     async removeIgnoredChannel(index) {
         this.responder.ignoredChannels.splice(index, 1)
+    }
+
+    async selectedWhitelistChannelIdChanged() {
+        if (!this.responder.whitelistedChannels) {
+            this.responder.whitelistedChannels = [];
+        }
+        this.responder.whitelistedChannels.push(this.selectedWhitelistChannelId);
+    }
+
+    async removeWhitelistedChannel(index) {
+        this.responder.whitelistedChannels.splice(index, 1)
     }
 }
