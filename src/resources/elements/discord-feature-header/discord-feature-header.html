@@ -14,5 +14,19 @@
         <div>
             ${subtitle}
         </div>
+
+        <mdc-banner
+            class="my-3"
+            secondary-action="Close"
+            view-model.ref="banner"
+            centered
+        >
+            <div class="pb-3">
+                <h5>Warning</h5>
+                <div class="alert-warning">
+                    This feature is currently inactive. Use the toggler on the top right to activate this feature.
+                </div>
+            </div>
+        </mdc-banner>
     </section>
 </template>

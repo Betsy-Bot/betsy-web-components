@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="row" if.bind="featureActive !== undefined">
         <div class="col-8">
             <discord-feature-header
                 doc-url="https://docs.betsybot.xyz/features/user-verification"
@@ -7,6 +7,7 @@
                 subtitle="Require Verification from your new users before they are able to talk on your server.
                 When the feature is activated, new users will be sent a PM to verify themselves.
                 They will automatically receive the chosen role once verified."
+                display-warning.bind="!featureActive"
             ></discord-feature-header>
         </div>
         <div class="col-4 text-end">
