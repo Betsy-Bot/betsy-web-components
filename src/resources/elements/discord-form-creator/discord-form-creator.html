@@ -32,6 +32,9 @@
         <div class="field-container row g-4 mb-3">
             <div class="col-12 col-lg-6" repeat.for="component of form.formData.components">
                 <div mdc-elevation="12" repeat.for="field of component.components">
+                    <div class="text-end text-danger me-1 mt-1">
+                        <span class="cursor-pointer" click.delegate="deleteField($parent.$index)">X</span>
+                    </div>
                     <mdc-select class="standard-betsy-select w-100" value.bind="field.type" label="Field Type" required.bind="true">
                         <mdc-icon mdc-select-icon>text_format</mdc-icon>
                         <mdc-list>
