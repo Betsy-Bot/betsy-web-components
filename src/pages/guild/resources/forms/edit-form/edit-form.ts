@@ -29,6 +29,6 @@ export class EditForm {
 
     async save() {
         await this.discordService.updateDiscordForm(this.guildId, this.form);
-        toast("Saved Form", {severity: "success"})
+        toast("Saved Form", {severity: "success"});
     }
 }
