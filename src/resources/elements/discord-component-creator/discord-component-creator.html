@@ -10,6 +10,9 @@
                 <div class="components" repeat.for="component of componentWrapper.components">
                     <div class="inputs">
                         <div mdc-elevation="9">
+                            <div class="text-end">
+                                <span class="cursor-pointer text-danger" click.delegate="removeComponent($parent.$index)">X</span>
+                            </div>
                             <mdc-select class="standard-betsy-select w-100 mb-2" value.bind="component.type" label="Select Component Type">
                                 <mdc-icon mdc-select-icon>dns</mdc-icon>
                                 <mdc-list>
