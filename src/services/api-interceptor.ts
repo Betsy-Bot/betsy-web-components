@@ -38,20 +38,29 @@ export class ApiInterceptor {
                     await this.sessionService.clearSession();
                     break;
                 case 403:
-                    //this.notification.error('You do not have access to this section.', 'Unauthorized');
+                    try {
+                        data = await response.json();
+                        if (data.message == "Expired Token? Please relog") {
+                            toast("Discord Token Expired. Please Login Again", {severity: "error"});
+                            await this.sessionService.clearSession();
+                        }
+                    } catch(e) {
+                        console.log(e);
+                    }
                     break;
                 case 404:
                     return null;
                 case 400:
+                    data = await response.json();
+                    toast(data?.message, {severity: "error"});
+                    break;
                 case 422:
                     data = await response.json();
                     this.ea.publish('validation-error', data.validationErrors);
                     toast("Validation Error!", {severity: "error"});
-                    new Error(data);
                     break;
                 case 500:
                     data = await response.json();
-                    new Error(data);
                     break;
             }
             return response;

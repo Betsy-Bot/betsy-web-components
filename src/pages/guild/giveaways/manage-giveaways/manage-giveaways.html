@@ -1,0 +1,132 @@
+<template>
+    <confirmation-dialog
+        cancel-text="Cancel"
+        confirm-text="Delete"
+        dialog.two-way="confirmDeleteDialog"
+        handler.call="deleteGiveaway(event)"
+        title="Are you sure you would like to delete?"
+    >
+        This is a permanent action and cannot be undone
+    </confirmation-dialog>
+
+    <section id="create-data-command">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <discord-feature-header
+                    doc-url="https://docs.betsybot.xyz/features/giveaways"
+                    title="${isNew ? 'Create' : 'Edit'} Giveaway"
+                    subtitle="Giveaways automatically select a winner and post that winner at the end of the giveaway."
+                ></discord-feature-header>
+                <div class="text-end my-4">
+                    <button mdc-button class="button-secondary" click.delegate="confirmDeleteDialog.open()">
+                        Delete Giveaway
+                    </button>
+                </div>
+                <button
+                    class="mt-3"
+                    mdc-switch
+                    selected.bind="giveaway.active"
+                    value.bind="giveaway.active"
+                    change.delegate="giveaway.active = !!giveaway.active"
+                ></button>
+                <label class="me-5 mb-3">Active?</label>
+
+                <mdc-tab-bar view-model.ref="tabBar">
+                    <mdc-tab
+                        label="Settings"
+                        active.bind="tab === 'settings'"
+                        click.delegate="tab = 'settings'"
+                    ></mdc-tab>
+                    <mdc-tab
+                        label="Giveaway Container"
+                        active.bind="tab === 'container'"
+                        click.delegate="tab = 'container'"
+                    ></mdc-tab>
+                    <mdc-tab
+                        label="Winning Message"
+                        active.bind="tab === 'winning'"
+                        click.delegate="tab = 'winning'"
+                    ></mdc-tab>
+                </mdc-tab-bar>
+
+                <form submit.delegate="save()">
+                    <div if.bind="tab === 'settings'">
+                        <mdc-text-field
+                            label="Name"
+                            type="text"
+                            class="w-100 my-2"
+                            value.bind="giveaway.name"
+                            required
+                        ></mdc-text-field>
+                        <mdc-text-field
+                            label="Amount of Winners"
+                            type="number"
+                            min="1"
+                            max="25"
+                            class="w-100 my-2"
+                            value.bind="giveaway.amountOfWinners"
+                            required
+                        ></mdc-text-field>
+                        <mdc-text-field
+                            label="Description of Prize"
+                            type="text"
+                            class="w-100 my-2"
+                            value.bind="giveaway.descriptionOfPrize"
+                            change.delegate="giveaway.containerMessage.message.embeds[0].fields[0].value = giveaway.descriptionOfPrize"
+                            required
+                        ></mdc-text-field>
+                        <div class="my-2">
+                            <date-time-picker
+                                label="End Date Time"
+                                value.two-way="giveaway.ends"
+                            ></date-time-picker>
+                        </div>
+                        <div class="mt-3 mb-2">
+                            <discord-channel-selector
+                                required.bind="true"
+                                label="Channel"
+                                channel-id.two-way="giveaway.discordChannelId"
+                            ></discord-channel-selector>
+                        </div>
+                        <div class="text-end">
+                            <button mdc-button class="button-primary" click.delegate="tab = 'container'" type="button">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                    <div class="" if.bind="tab === 'container'">
+                        <discord-message-creator
+                            allow-components="true"
+                            message.two-way="giveaway.containerMessage.message"
+                        ></discord-message-creator>
+
+                        <div class="text-end mt-3">
+                            <button type="button" mdc-button class="button-primary" click.delegate="tab = 'winning'">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                    <div class="" if.bind="tab === 'winning'">
+                        <discord-message-creator
+                            message.two-way="giveaway.winningMessage.message"
+                        ></discord-message-creator>
+
+                        <div class="text-end mt-3">
+                            <button type="submit" mdc-button class="button-primary">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12 col-lg-4">
+                <discord-message-preview message.two-way="giveaway.containerMessage.message" if.bind="tab === 'container'"></discord-message-preview>
+                <discord-message-preview message.two-way="giveaway.winningMessage.message" if.bind="tab === 'winning'"></discord-message-preview>
+            </div>
+        </div>
+        <div class="py-5" if.bind="giveaway.participants">
+            <h4>Participants</h4>
+            <dx-data-grid items.bind="giveaway.participants"></dx-data-grid>
+        </div>
+    </section>
+</template>

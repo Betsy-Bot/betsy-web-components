@@ -71,6 +71,12 @@ export class App {
                 title: 'Login'
             },
             {
+                route: 'validate',
+                name: 'validate',
+                moduleId: PLATFORM.moduleName('pages/validate/validate'),
+                title: 'Validate'
+            },
+            {
                 route: 'guild/:guildId',
                 name: 'guild',
                 moduleId: PLATFORM.moduleName('pages/guild/guild'),
@@ -82,6 +88,18 @@ export class App {
                 moduleId: PLATFORM.moduleName('pages/transcript/transcript'),
                 title: 'Support Ticket Transcript'
             },
+            {
+                name: 'verify-login',
+                route: 'verify',
+                moduleId: PLATFORM.moduleName('pages/verify/verify'),
+                title: 'Verify Login',
+            },
+            {
+                name: 'verify',
+                route: 'verify/:userId',
+                moduleId: PLATFORM.moduleName('pages/verify/verify'),
+                title: 'Verify User',
+            }
         ]);
 
         config.mapUnknownRoutes(() => {

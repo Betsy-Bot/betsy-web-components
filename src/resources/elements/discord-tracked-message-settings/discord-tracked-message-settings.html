@@ -19,6 +19,14 @@
                 ></mdc-text-field>
             </div>
             <div class="col-12 col-lg-6 h-100">
+                <mdc-text-field
+                    class="w-100"
+                    label="Time to Resend (Minutes)"
+                    value.bind="message.timeToResend"
+                    placeholder="Time, in minutes, to resend message after"
+                ></mdc-text-field>
+            </div>
+            <div class="col-12 h-100">
                 <discord-channel-selector
                     label="Select Channel"
                     if.bind="guildId"

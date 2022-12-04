@@ -1,4 +1,3 @@
-import moment from 'moment';
 export class DateFormatValueConverter {
     toView(value, format) {
         if (!value) {
@@ -7,10 +6,11 @@ export class DateFormatValueConverter {
         if (!format) {
             format = 'MMMM Do YYYY, h:mmA';
         }
-        const date = moment.utc(value);
-        if (!date.isValid()) {
+        try {
+           return new Intl.DateTimeFormat('en', { dateStyle: 'long', timeStyle: 'short' }).format(new Date(value));
+        } catch(e) {
+            console.log(e);
             return value;
         }
-        return date.local().format(format);
     }
 }

@@ -7,11 +7,12 @@
             <mdc-dialog-content>
                 <slot>Body</slot>
             </mdc-dialog-content>
-            <mdc-dialog-actions>
-                <button mdc-button data-mdc-dialog-action="cancel" class="button-secondary">
+            <mdc-dialog-actions if.bind="!(!cancelText && !confirmText)">
+                <button mdc-button data-mdc-dialog-action="cancel" class="button-secondary" if.bind="cancelText">
                     ${cancelText}
                 </button>
                 <button
+                    if.bind="confirmText"
                     mdc-button
                     data-mdc-dialog-action="ok"
                     data-mdc-dialog-button-default

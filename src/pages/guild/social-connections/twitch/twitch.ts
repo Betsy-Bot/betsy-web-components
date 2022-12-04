@@ -16,11 +16,31 @@ export class Twitch {
 
     request = {
         twitchLogin: '',
-        discordChannelId: ''
+        discordChannelId: '',
+        type: ''
     };
     createDialog;
     deleteDialog;
     lastSelected;
+    subscriptionTypes: string[] = [
+        "stream.online",
+        "stream.offline",
+        "channel.follow",
+        //"channel.update",
+        //"channel.subscribe",
+        //"channel.subscription.end",
+        //"channel.subscription.gift",
+        //"channel.subscription.message",
+        ///"channel.hype_train.begin",
+        ///"channel.hype_train.end",
+        //"channel.poll.begin",
+        //"channel.poll.progress",
+        //"channel.poll.end",
+        //"channel.prediction.begin",
+        //"channel.prediction.progress",
+        //"channel.prediction.lock",
+        //"channel.prediction.end",
+    ]
 
     async activate(params) {
         this.guildId = params.guildId as string;
@@ -59,23 +79,21 @@ export class Twitch {
         toast(this.featureActive ? "Toggled feature on" : "Toggled feature off");
     }
 
-    handleCreateModal(event) {
-        if (event.detail.action == 'ok') {
-            if (!this.request.twitchLogin || !this.request.discordChannelId) {
-                toast("Both the Twitch Username and Channel are required.");
-                return;
+    async handleCreateModal(event) {
+        if (!this.request.twitchLogin || !this.request.discordChannelId || !this.request.type) {
+            toast("Both the Twitch Username and Channel are required.");
+            return;
+        }
+        let subscription;
+        try {
+            subscription = await this.discordService.createTwitchSubscription(this.request, this.guildId)
+            if (subscription) {
+                this.subscriptions.push(subscription);
+                toast("Twitch Go-Live Event Subscription Created.");
+                this.createDialog.close('cancel');
             }
-            try {
-                const subscription = this.discordService.createTwitchSubscription(this.request, this.guildId)
-                if (subscription) {
-                    this.subscriptions.push(subscription);
-                    toast("Twitch Go-Live Event Subscription Created.");
-                } else {
-                    toast("Failed to create twitch subscription. Contact Betsy Support");
-                }
-            } catch(e) {
-                toast("Failed to create twitch subscription. Contact Betsy Support");
-            }
+        } catch(e) {
+            console.log(e);
         }
     }
 
@@ -88,7 +106,7 @@ export class Twitch {
         if (this.lastSelected && event.detail.action == 'ok') {
             await this.discordService.deleteTwitchSubscription(this.lastSelected.id, this.guildId);
             const index = this.subscriptions.findIndex(x => x.id === this.lastSelected.id);
-            this.subscriptions.splice(index, 1)
+            this.subscriptions.splice(index, 1);
         }
     }
 }

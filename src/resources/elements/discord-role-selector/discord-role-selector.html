@@ -1,6 +1,13 @@
 <template>
     <section id="discord-role-selector">
-        <mdc-select if.bind="roles" class="standard-betsy-select w-100" value.bind="selectedRole" label.bind="label" required.bind="required">
+        <mdc-select
+            disabled.bind="disabled"
+            if.bind="roles"
+            class="standard-betsy-select w-100"
+            value.bind="selectedRole"
+            label.bind="label"
+            required.bind="required"
+        >
             <mdc-icon mdc-select-icon>dns</mdc-icon>
             <mdc-list>
                 <mdc-list-item repeat.for="role of roles" value.bind="role">

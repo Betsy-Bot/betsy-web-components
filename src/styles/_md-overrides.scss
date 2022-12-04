@@ -1,6 +1,7 @@
 @use '~@material/button';
 @use '~@material/theme';
 @use '@material/select';
+@use '@material/textfield';
 @import 'bootstrap';
 
 body {
@@ -82,4 +83,12 @@ body {
 
 .standard-betsy-select {
     @include select.container-fill-color(('default': rgba(220, 221, 222, 1)))
+}
+
+.mdc-text-field {
+    @include textfield.placeholder-color(theme.$grey-500)
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__affix--prefix {
+    color: darkgray;
 }

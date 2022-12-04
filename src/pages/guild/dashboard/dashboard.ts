@@ -1,7 +1,6 @@
 import {DiscordService} from "services/discord-service";
 import './dashboard.scss';
 import {inject} from "aurelia-framework";
-import {get} from "https";
 
 @inject(DiscordService)
 export class Dashboard {
@@ -40,17 +39,18 @@ export class Dashboard {
     }
 
     getStat(stat) {
-        if (stat.property) {
+        if (this.guild?.guild && stat.property) {
             return this.guild.guild[stat.property];
         }
+        if (!this[stat.function]) return;
         return this[stat.function]();
     }
 
     getEmojiCount() {
-        return this.guild.guild.emojis.length
+        return this.guild?.guild?.emojis?.length
     }
 
     getChannelCount() {
-        return this.channels.length
+        return this.channels?.length
     }
 }

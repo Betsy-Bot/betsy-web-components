@@ -15,7 +15,8 @@ export interface BaseDiscordCommand {
     description: string,
     discordGuildId: string,
     type: DiscordCommandType,
-    discordCommandActions: DiscordCommandAction[]
+    discordCommandActions: DiscordCommandAction[],
+    commandInformation?: any,
 }
 
 export enum DiscordApplicationCommandType
@@ -28,6 +29,9 @@ export enum DiscordApplicationCommandType
 export interface DiscordCommandAction {
     id?: string,
     type: number,
+    discordChannelId?: number,
+    discordCategoryId?: number,
+    restRequestMetadata?: any,
     discordMessage: DiscordMessage
 }
 
@@ -216,6 +220,9 @@ export enum DiscordCommandActionType {
     AnnounceMessage = 5,
     AnnounceEmbed = 6,
     OpenForm = 7,
-    SendSubmissionMessage = 8,
-    SendSubmitData = 9
+    SendGetRequest = 8,
+    SendPostRequest = 9,
+    SendPutRequest = 10,
+    SendPatchRequest = 11,
+    SendDeleteRequest = 12,
 }

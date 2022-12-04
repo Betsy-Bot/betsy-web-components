@@ -25,7 +25,7 @@ export class SupportTicketMessage {
         try {
             [this.guild, this.supportTickets, this.channels] = await Promise.all([
                 await this.discordService.getDiscordServerInformation(this.guildId),
-                await this.discordService.getDiscordSupportTicketSettings(this.guildId),
+                await this.discordService.getDiscordSupportTicketSettings(),
                 await this.discordService.getDiscordChannels(this.guildId)
             ])
             for (let ticket of this.supportTickets) {

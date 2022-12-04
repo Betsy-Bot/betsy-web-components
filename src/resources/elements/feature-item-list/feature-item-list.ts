@@ -10,6 +10,7 @@ export class FeatureItemList {
     @bindable nameOverride;
     @bindable nameSuffix;
     @bindable suffixProperty;
+    @bindable trailingIcon
 
     handleToggleClick(event, item) {
         item.active = !item.active;

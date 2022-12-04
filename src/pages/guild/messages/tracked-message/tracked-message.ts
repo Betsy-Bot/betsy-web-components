@@ -25,9 +25,10 @@ export class TrackedMessage {
     }
 
     async updateActive(message) {
-        let foundCommandIndex = this.messages.findIndex(x => x.name === message.name);
+        const foundCommandIndex = this.messages.findIndex(x => x.name === message.name);
+        this.messages[foundCommandIndex].active = !!this.messages[foundCommandIndex].active;
         if (foundCommandIndex >= 0) {
-            await this.discordService.toggleDiscordCommandActive(this.guildId, message.discordApplicationCommandId, this.messages[foundCommandIndex].active);
+            await this.discordService.updateDiscordMessage(this.messages[foundCommandIndex]);
             toast(`Active status has been updated for /${message.name}`, {severity: "success"})
         } else {
             toast("Error", {severity: "error"})
@@ -37,5 +38,4 @@ export class TrackedMessage {
     goTo(message) {
         this.router.navigate(`/guild/${this.guildId}/messages/tracked-messages/${message.id}`)
     }
-
 }

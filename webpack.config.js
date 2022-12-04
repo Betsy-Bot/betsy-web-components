@@ -121,15 +121,15 @@ module.exports = ({production}, {analyze, hmr, port, host}) => ({
 
                 //This is the HTTP/2 optimized cacheGroup configuration.
                 // generic 'initial/sync' vendor node module splits: separates out larger modules
-                vendorSplit: { // each node module as separate chunk file if module is bigger than minSize
-                  test: /[\\/]node_modules[\\/]/,
-                  name(module) {
-                    // Extract the name of the package from the path segment after node_modules
-                    const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-                    return `vendor.${packageName.replace('@', '')}`;
-                  },
-                  priority: 20
-                },
+                // vendorSplit: { // each node module as separate chunk file if module is bigger than minSize
+                //   test: /[\\/]node_modules[\\/]/,
+                //   name(module) {
+                //     // Extract the name of the package from the path segment after node_modules
+                //     const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+                //     return `vendor.${packageName.replace('@', '')}`;
+                //   },
+                //   priority: 20
+                // },
                 vendors: { // picks up everything else being used from node_modules that is less than minSize
                   test: /[\\/]node_modules[\\/]/,
                   name: "vendors",

@@ -13,9 +13,17 @@
                         <mdc-list-item class="list-item-padding">Support Tickets</mdc-list-item>
                     </a>
 
+                    <a href="/guild/${guildId}/giveaways">
+                        <mdc-list-item class="list-item-padding">Giveaways</mdc-list-item>
+                    </a>
+
+                    <a href="/guild/${guildId}/polls">
+                        <mdc-list-item class="list-item-padding">Polls</mdc-list-item>
+                    </a>
+
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('messaging')"
                                    no-list-action>
-                        <span>Messaging</span>
+                        <span class="fw-bolder">Messaging</span>
                         <mdc-icon mdc-list-item-trailing>${expandOptions.messaging ? 'expand_less' : 'expand_more'}
                         </mdc-icon>
                     </mdc-list-item>
@@ -27,11 +35,17 @@
                         <a href="/guild/${guildId}/messages/tracked-messages">
                             <mdc-list-item class="list-item-padding">Tracked Messages</mdc-list-item>
                         </a>
+                        <a href="/guild/${guildId}/messages/welcome-messages">
+                            <mdc-list-item class="list-item-padding">Welcome Messages</mdc-list-item>
+                        </a>
+                        <a href="/guild/${guildId}/messages/auto-responders">
+                            <mdc-list-item class="list-item-padding">Auto Responders</mdc-list-item>
+                        </a>
                     </div>
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('customCommands')"
                                    no-list-action>
-                        <span>Custom Commands</span>
+                        <span class="fw-bolder">Custom Commands</span>
                         <mdc-icon mdc-list-item-trailing>${expandOptions.customCommands ? 'expand_less' : 'expand_more'}
                         </mdc-icon>
                     </mdc-list-item>
@@ -42,10 +56,13 @@
                         <a href="/guild/${guildId}/data-commands">
                             <mdc-list-item class="list-item-padding">Data Commands</mdc-list-item>
                         </a>
+                        <a href="/guild/${guildId}/payments">
+                            <mdc-list-item class="list-item-padding">Payments</mdc-list-item>
+                        </a>
                     </div>
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('moderation')" no-list-action>
-                        <span>Moderation</span>
+                        <span class="fw-bolder">Moderation</span>
                         <mdc-icon mdc-list-item-trailing>${expandOptions.moderation ? 'expand_less' : 'expand_more'}
                         </mdc-icon>
                     </mdc-list-item>
@@ -59,21 +76,36 @@
                         <a href="/guild/${guildId}/auto-role">
                             <mdc-list-item class="list-item-padding">Auto Role</mdc-list-item>
                         </a>
+                        <a href="/guild/${guildId}/channel-cleaners">
+                            <mdc-list-item class="list-item-padding">Channel Cleaners</mdc-list-item>
+                        </a>
+                        <a href="/guild/${guildId}/verification">
+                            <mdc-list-item class="list-item-padding">Verification</mdc-list-item>
+                        </a>
                     </div>
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('resources')" no-list-action>
-                        <span>Server Resources</span>
+                        <span class="fw-bolder">Server Resources</span>
                         <mdc-icon mdc-list-item-trailing>${expandOptions.resources ? 'expand_less' : 'expand_more'}
                         </mdc-icon>
                     </mdc-list-item>
                     <div if.bind="expandOptions.resources">
+                        <a href="/guild/${guildId}/settings">
+                            <mdc-list-item class="list-item-padding">Settings</mdc-list-item>
+                        </a>
+                        <a href="/guild/${guildId}/resources/users">
+                            <mdc-list-item class="list-item-padding">Users</mdc-list-item>
+                        </a>
+                        <a href="/guild/${guildId}/resources/messages">
+                            <mdc-list-item class="list-item-padding">Messages</mdc-list-item>
+                        </a>
                         <a href="/guild/${guildId}/resources/forms">
                             <mdc-list-item class="list-item-padding">Forms</mdc-list-item>
                         </a>
                     </div>
 
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('socials')" no-list-action>
-                        <span>Social Connections</span>
+                        <span class="fw-bolder">Social Connections</span>
                         <mdc-icon mdc-list-item-trailing>${expandOptions.socials ? 'expand_less' : 'expand_more'}
                         </mdc-icon>
                     </mdc-list-item>

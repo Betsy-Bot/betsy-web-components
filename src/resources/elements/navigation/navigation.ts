@@ -11,25 +11,32 @@ export class Navigation {
     }
 
     @bindable() user: any;
-    guildId: any;
+    guildId: number;
     drawer = {
         open: null
     };
+    currentRoute;
+    donateDialog;
 
     handleServerChange(event: CustomEvent) {
         this.guildId = event?.detail?.value;
-        this.router.navigate(`guild/${this.guildId}`);
-        this.ea.publish('guild-updated', this.guildId);
-    }
+        const childRoute = this.router.currentInstruction.params.childRoute ? `/${this.router.currentInstruction.params.childRoute}` : null
+        this.router.navigate(`guild/${this.guildId}${childRoute ?? ''}`);
+        location.reload();
+    }d
 
     attached() {
         this.drawer.open = this.sessionService.getStorageItem(SessionService.SIDEBAR_STATUS_KEY, true);
         this.ea.subscribe('user-updated', payload => {
             this.user = payload;
+            if (!this.user) {
+                this.guildId = null;
+            }
         });
         this.ea.subscribe('guild-updated', payload => {
             this.guildId = payload;
         });
+        this.currentRoute = this.router.currentInstruction.config.name;
     }
 
     async toggleSidebar() {
@@ -40,8 +47,8 @@ export class Navigation {
     }
 
     async logout() {
-        await this.sessionService.logout();
-        this.router.refreshNavigation();
+        await this.sessionService.clearSession();
+        location.reload();
     }
 
     get discordOauthUrl() {

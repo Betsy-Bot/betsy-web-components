@@ -13,6 +13,8 @@ export class DiscordButton {
                 return 'discord-button-secondary'
             case 4:
                 return 'discord-button-danger'
+            case 5:
+                return 'discord-button-link'
         }
     }
 }

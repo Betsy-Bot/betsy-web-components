@@ -12,6 +12,7 @@ export class ServerCard {
     }
     @bindable server;
     @bindable hideButton;
+    @bindable forceGo;
     loading: boolean;
 
     getServerText() {

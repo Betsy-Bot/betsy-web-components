@@ -3,6 +3,7 @@
       <div class="row">
           <div class="col-8">
               <discord-feature-header
+                  doc-url="https://docs.betsybot.xyz/features/invite-link-blocker"
                   title="Delete Invite Links"
                   subtitle="Any invites sent in the server will immediately be deleted and if you have an audit channel selected a message will be posted in the channel with information regarding the message deleted."
               ></discord-feature-header>
@@ -28,6 +29,60 @@
                   channel-id.two-way="guild.auditLogChannelId"
                   guild-id.bind="guildId"
               ></discord-channel-selector>
+          </div>
+          <div class="mt-2">
+              <form submit.delegate="addAuthorizedUser()">
+                  <div class="row my-2">
+                      <div class="col-10">
+                          <mdc-text-field
+                              label="Whitelisted Users"
+                              type="number"
+                              class="w-100"
+                              placeholder="Add Authorized Users"
+                              value.bind="userId"
+                          ></mdc-text-field>
+                      </div>
+                      <div class="col-2">
+                          <button mdc-button class="button-primary w-100 h-100" type="submit">
+                              Add
+                          </button>
+                      </div>
+                  </div>
+                  <mdc-chip-set input if.bind="guild.globalSettings.authorizedInviteSenders">
+                      <!-- Compact notation -->
+                      <mdc-chip repeat.for="user of guild.globalSettings.authorizedInviteSenders">
+                          ${user.discordUserId}
+                          <span click.delegate="removeUser($index)" trailing>X</span>
+                      </mdc-chip>
+                  </mdc-chip-set>
+              </form>
+          </div>
+          <div class="mt-2">
+              <form submit.delegate="addAuthorizedRole()">
+                  <div class="row my-2">
+                      <div class="col-10">
+                          <mdc-text-field
+                              label="Whitelisted Roles"
+                              type="number"
+                              class="w-100"
+                              placeholder="Add Authorized Roles"
+                              value.bind="roleId"
+                          ></mdc-text-field>
+                      </div>
+                      <div class="col-2">
+                          <button mdc-button class="button-primary w-100 h-100" type="submit">
+                              Add
+                          </button>
+                      </div>
+                  </div>
+                  <mdc-chip-set input if.bind="guild.globalSettings.authorizedInviteSenderRoles">
+                      <!-- Compact notation -->
+                      <mdc-chip repeat.for="user of guild.globalSettings.authorizedInviteSenderRoles">
+                          ${user.discordRoleId}
+                          <span click.delegate="removeRole($index)" trailing>X</span>
+                      </mdc-chip>
+                  </mdc-chip-set>
+              </form>
           </div>
           <div class="mt-2">
               <button mdc-button class="button-primary" click.delegate="save()">

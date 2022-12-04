@@ -22,6 +22,13 @@ export class Home {
             return;
         }
 
+        if (this.user?.adminedServers) {
+            // eslint-disable-next-line no-unsafe-optional-chaining
+            for (const server of this.user?.adminedServers) {
+                server.id = server.guildId;
+            }
+        }
+
         const userGuilds = await this.userService.getGuilds();
         for (const guild of userGuilds) {
             guild.icon_extension = guild.icon?.startsWith("a_") ? "gif" : "webp";

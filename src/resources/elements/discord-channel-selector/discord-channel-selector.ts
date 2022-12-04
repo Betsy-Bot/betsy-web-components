@@ -18,10 +18,17 @@ export class DiscordChannelSelector {
     @bindable required: boolean = false;
     @bindable class;
     @bindable includeNull;
+    @bindable disabled;
     validationController: ValidationController;
     rules: Rule<DiscordChannelSelector, unknown>[][];
 
     channels;
+
+    async created() {
+        if (!this.guildId) {
+            this.guildId = this.discordService.getLocalDiscordGuildId();
+        }
+    }
 
     async attached() {
         this.channels = await this.discordService.getDiscordChannels(this.guildId);

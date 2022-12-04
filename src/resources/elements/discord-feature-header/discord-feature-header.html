@@ -2,12 +2,31 @@
     <section id="discord-feature-header">
         <h2>
             ${title}
-            <button mdc-button class="button-secondary" click.delegate="router.navigateBack()" if.bind="!hideBack">
+            <button mdc-button class="button-secondary" click.delegate="navigateBack()" if.bind="!hideBack">
                 Back
             </button>
+            <a href="${docUrl}" if.bind="docUrl" target="_blank">
+                <button mdc-button class="button-primary" type="button">
+                    Read the Docs <mdc-icon>arrow_outward</mdc-icon>
+                </button>
+            </a>
         </h2>
         <div>
             ${subtitle}
         </div>
+
+        <mdc-banner
+            class="my-3"
+            secondary-action="Close"
+            view-model.ref="banner"
+            centered
+        >
+            <div class="pb-3">
+                <h5>Warning</h5>
+                <div class="alert-warning">
+                    This feature is currently inactive. Use the toggler on the top right to activate this feature.
+                </div>
+            </div>
+        </mdc-banner>
     </section>
 </template>

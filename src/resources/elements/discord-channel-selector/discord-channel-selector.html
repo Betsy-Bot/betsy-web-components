@@ -1,7 +1,13 @@
 <template>
     <section id="discord-channel-selector" class.bind="class">
         <div class="au-select" if.bind="channels">
-            <mdc-select class="standard-betsy-select w-100" value.bind="channelId & validate" label.bind="label" required.bind="required">
+            <mdc-select
+                disabled.bind="disabled"
+                class="standard-betsy-select w-100"
+                value.bind="channelId & validate"
+                label.bind="label"
+                required.bind="required"
+            >
                 <mdc-icon mdc-select-icon>dns</mdc-icon>
                 <mdc-list>
                     <mdc-list-item value.bind="null" if.bind="includeNull">

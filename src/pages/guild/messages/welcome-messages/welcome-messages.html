@@ -1,0 +1,34 @@
+<template>
+    <div class="row" if.bind="featureActive !== undefined">
+        <div class="col-8">
+            <discord-feature-header
+                doc-url="https://docs.betsybot.xyz/features/welcome-messages"
+                title="Welcome Messages"
+                subtitle="Create either custom channel welcome messages or direct DM welcome messages."
+                display-warning.bind="!featureActive && messages.length > 0"
+            ></discord-feature-header>
+
+            <div class="my-3">
+                <button mdc-button class="button-primary" click.delegate="goTo({id: 0})">
+                    Create New Welcome Message
+                </button>
+            </div>
+
+            <feature-item-list
+                data.bind="messages"
+                show-toggler.bind="true"
+                toggle-handler.call="updateActive(item)"
+                item-click-handler.call="goTo(item)"
+            ></feature-item-list>
+        </div>
+        <div class="col-4 text-end">
+            <button
+                mdc-switch
+                selected.bind="featureActive"
+                value.bind="featureActive"
+                change.delegate="toggleFeature()"
+            ></button>
+            <label mdc-tooltip="When de-activated all welcome will no longer be active" class="me-5">Active?</label>
+        </div>
+    </div>
+</template>

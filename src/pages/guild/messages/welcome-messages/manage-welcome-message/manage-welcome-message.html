@@ -3,18 +3,22 @@
         <div class="row">
             <div class="col-12 col-lg-8">
                 <discord-feature-header
-                    title="Edit Tracked Message"
-                    subtitle="Tracked Messages are just normal messages that you keep track of. This allows you to edit them without resending/using a command/etc."
+                    doc-url="https://docs.betsybot.xyz/features/welcome-messages"
+                    title="${isNew ? 'Create' : 'Edit'} Welcome Message"
+                    subtitle="Create either custom channel welcome messages or direct DM welcome messages."
                 ></discord-feature-header>
 
-                <form submit.delegate="update()">
+                <form submit.delegate="save()">
 
-                    <discord-tracked-message-settings
+                    <discord-welcome-message-settings
                         message.two-way="message"
                         guild-id.bind="guildId"
-                    ></discord-tracked-message-settings>
+                    ></discord-welcome-message-settings>
 
-                    <discord-message-creator message.two-way="message.discordMessage.message"></discord-message-creator>
+                    <discord-message-creator
+                        message.two-way="message.message"
+                        allow-components.bind="true"
+                    ></discord-message-creator>
 
                     <div>
                         <div class="text-end mt-3">
@@ -26,7 +30,7 @@
                 </form>
             </div>
             <div class="col-12 col-lg-4">
-                <discord-message-preview message.bind="message.discordMessage.message"></discord-message-preview>
+                <discord-message-preview message.two-way="message.message"></discord-message-preview>
             </div>
         </div>
     </section>

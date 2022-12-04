@@ -11,14 +11,18 @@ export class DiscordService {
         guildId: null,
         data: null,
     }
+    messages;
 
     RESPONSE_MESSAGES = 'ResponseMessages';
     DATA_COMMANDS = 'DataCommands';
     BLOCK_INVITES = 'BlockInvites';
-    BLACKLISTED_WORDS = 'BlacklistedWords';
     SUPPORT_TICKETS = 'SupportTickets';
     AUDIT_LOG = 'AuditLog';
-    TWITCH_SUBSCRIPTIONS ='TwitchSubscriptions';
+    TWITCH_SUBSCRIPTIONS = 'TwitchSubscriptions';
+    PAYMENTS = 'Payments';
+    WELCOME_MESSAGES = 'WelcomeMessages';
+    AUTO_RESPONDERS = 'AutoResponders';
+    VERIFICATION = 'Verification';
 
     constructor(private api: ApiService) {
     }
@@ -27,8 +31,20 @@ export class DiscordService {
         return this.guild;
     }
 
-    async exchangeCode(code: string): Promise<discordModels.ExchangeCodeResponse> {
-        return await this.api.doPost('Discord/OAuth/ExchangeCode', {code: code})
+    getLocalServerId() {
+        return this.guild.id;
+    }
+
+    getLocalDiscordGuildId() {
+        return this.guild.guildId;
+    }
+
+    async exchangeCode(code: string, redirectUrl?: string): Promise<discordModels.ExchangeCodeResponse> {
+        let path = 'Discord/OAuth/ExchangeCode';
+        if (redirectUrl) {
+            path += '?redirectUrl=' + redirectUrl
+        }
+        return await this.api.doPost(path, {code: code})
     }
 
     async createServer(guildId: string): Promise<discordModels.BaseDiscordServer> {
@@ -51,6 +67,10 @@ export class DiscordService {
         return await this.api.doGet(`DiscordGuild/${guildId}/ResponseMessages`);
     }
 
+    async getUsersForGuild(guildId: string): Promise<any> {
+        return await this.api.doGet(`DiscordGuild/${guildId}/Users`);
+    }
+
     async getDataCommandsForGuild(guildId: string): Promise<discordModels.BaseDiscordCommand[]> {
         return await this.api.doGet(`DiscordGuild/${guildId}/DataCommands`);
     }
@@ -70,8 +90,25 @@ export class DiscordService {
     async getDiscordServerInformation(guildId: string): Promise<discordModels.BaseDiscordServer> {
         if (!this.guild || guildId !== this.guild.guildId) {
             this.guild = await this.api.doGet(`DiscordGuild/${guildId}`);
+            this.messages = null;
         }
         return this.guild;
+    }
+
+    async getRequiresLogin(guildId: string): Promise<any> {
+        return await this.api.doGet(`DiscordGuild/${guildId}/RequiresLogin`);
+    }
+
+    async verifyUser(guildId: string, userId: string): Promise<any> {
+        return await this.api.doPost(`DiscordGuild/${guildId}/Verify/${userId}`, {});
+    }
+
+    async verifyLogin(): Promise<any> {
+        return await this.api.doPost(`User/Verify`, {});
+    }
+
+    async updateVerifiedRole(guildId: string, roleId: string): Promise<any> {
+        return await this.api.doPost(`DiscordGuild/${guildId}/VerifiedRole`, {verifiedRoleId: roleId});
     }
 
     async getDiscordChannels(guildId: string) {
@@ -126,8 +163,12 @@ export class DiscordService {
         return this.api.doPost(`DiscordGuild/${guildId}/SupportTickets`, request);
     }
 
-    async getDiscordSupportTicketSettings(guildId: string) {
-        return this.api.doGet(`DiscordGuild/${guildId}/SupportTickets`);
+    async getDiscordSupportTicketSettings() {
+        return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/SupportTickets`);
+    }
+
+    async getDiscordWelcomeMessages() {
+        return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/WelcomeMessages`);
     }
 
     async getDiscordMessageSupportTickets(guildId: string, settingsId: string) {
@@ -136,6 +177,10 @@ export class DiscordService {
 
     async getSupportTicket(guildId: string, settingsId: string, supportTicketId: string) {
         return this.api.doGet(`DiscordGuild/${guildId}/SupportTickets/${settingsId}/Submissions/${supportTicketId}`);
+    }
+
+    async closeSupportTicket(supportTicketId: string) {
+        return this.api.doPatch(`DiscordSupportTicket/${supportTicketId}/Close`, {});
     }
 
     async updateTrackedDiscordMessage(data: any) {
@@ -182,11 +227,138 @@ export class DiscordService {
         return this.api.doGet(`DiscordSupportTicket/${ticketId}`);
     }
 
-    async deleteSupportTicketBySettingsId(guildId: string, settingsId: string) {
-        return this.api.doDelete(`DiscordGuild/${guildId}/SupportTickets/${settingsId}`);
+    async deleteSupportTicketBySettingsId(settingsId: string) {
+        return this.api.doDelete(`DiscordSupportTicketSettings/${settingsId}`);
     }
 
     async updateSupportTicketSettings(guildId: string, settings: any) {
         return this.api.doPatch(`DiscordGuild/${guildId}/SupportTickets/${settings.id}`, settings);
+    }
+
+    async updateAuthorizedUsersForGuild(guild: any, guildId: string) {
+        return this.api.doPatch(`DiscordGuild/${guildId}/AuthorizedUsers`, guild);
+    }
+
+    async updateGlobalSettingsForGuild(guild: any, guildId: string) {
+        return this.api.doPatch(`DiscordGuild/${guildId}/GlobalSettings`, guild);
+    }
+
+    async updateApiKyesForGuild(guild: any, guildId: string) {
+        return this.api.doPatch(`DiscordGuild/${guildId}/ApiKeys`, guild);
+    }
+
+    async getResourceMessagesForGuild(guildId: string) {
+        if (!this.messages) {
+            this.messages = this.api.doGet(`DiscordGuild/${guildId}/Resources/Messages`);
+        }
+        return this.messages;
+    }
+
+    async createDiscordMessage(message: any) {
+        return this.api.doPost(`DiscordMessage`, message);
+    }
+
+    async getDiscordMessageById(id: string) {
+        return this.api.doGet(`DiscordMessage/${id}`);
+    }
+
+    async updateDiscordMessage(message: any) {
+        return this.api.doPatch(`DiscordMessage/${message.id}`, message);
+    }
+
+    async createChannelCleaner(cleaner: any) {
+        return this.api.doPost(`DiscordChannelCleaner`, cleaner);
+    }
+
+    async updateChannelCleaner(cleaner: any) {
+        return this.api.doPatch(`DiscordChannelCleaner/${cleaner.id}`, cleaner);
+    }
+
+    async testCleanChannelCleaner(cleanerId: string) {
+        return this.api.doPost(`DiscordChannelCleaner/${cleanerId}/Clean`, { });
+    }
+
+    async deleteChannelCleaner(cleanerId: string) {
+        return this.api.doDelete(`DiscordChannelCleaner/${cleanerId}`);
+    }
+
+    async getChannelCleaners(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/DiscordChannelCleaners`);
+    }
+
+    async getAutoroleContainers(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/AutoRoleContainers`);
+    }
+
+    async getAutoroleContainer(containerId: string) {
+        return this.api.doGet(`DiscordAutoroleContainer/${containerId}`);
+    }
+
+    async createAutoroleContainer(container: any) {
+        return this.api.doPost(`DiscordAutoroleContainer`, container);
+    }
+
+    async updateAutoroleContainer(container: any) {
+        return this.api.doPatch(`DiscordAutoroleContainer/${container.id}`, container);
+    }
+
+    async toggleAutoroleContainer(containerId: string) {
+        return this.api.doPatch(`DiscordAutoroleContainer/${containerId}/ToggleActive`, { });
+    }
+
+    async getAutoResponders(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/AutoResponders`);
+    }
+
+    async createAutoResponder(responder: any) {
+        return this.api.doPost(`DiscordAutoResponder`, responder);
+    }
+
+    async updateAutoResponder(responder: any) {
+        return this.api.doPatch(`DiscordAutoResponder/${responder.id}`, responder);
+    }
+
+    async getResponderById(responderId: string) {
+        return this.api.doGet(`DiscordAutoResponder/${responderId}`);
+    }
+
+    async getGiveaways(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/Giveaways`);
+    }
+
+    async createGiveaway(giveaway: any) {
+        return this.api.doPost(`DiscordGiveaway`, giveaway);
+    }
+
+    async updateGiveaway(giveaway: any) {
+        return this.api.doPatch(`DiscordGiveaway/${giveaway.id}`, giveaway);
+    }
+
+    async getGiveawayById(giveawayId: string) {
+        return this.api.doGet(`DiscordGiveaway/${giveawayId}`);
+    }
+
+    async deleteGiveawayById(settingsId: string) {
+        return this.api.doDelete(`DiscordGiveaway/${settingsId}`);
+    }
+
+    async getPolls(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/DiscordPolls`);
+    }
+
+    async createPoll(giveaway: any) {
+        return this.api.doPost(`DiscordPoll`, giveaway);
+    }
+
+    async updatePoll(giveaway: any) {
+        return this.api.doPatch(`DiscordPoll/${giveaway.id}`, giveaway);
+    }
+
+    async getPollById(giveawayId: string) {
+        return this.api.doGet(`DiscordPoll/${giveawayId}`);
+    }
+
+    async deletePollById(settingsId: string) {
+        return this.api.doDelete(`DiscordPoll/${settingsId}`);
     }
 }

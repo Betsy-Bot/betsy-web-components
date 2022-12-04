@@ -21,35 +21,25 @@
             label="Custom Id"
             value.bind="form.customId"
             placeholder="Custom ID -> Used for API integrations"
-            required.bind="true">
+            required.bind="true"
+            maxlength="100"
+        >
             <mdc-icon mdc-text-field-icon trailing class="text-white">info</mdc-icon>
         </mdc-text-field>
+        <mdc-text-field-helper-line>
+            <mdc-text-field-character-counter></mdc-text-field-character-counter>
+        </mdc-text-field-helper-line>
 
         <button mdc-button class="button-primary mt-4" click.delegate="addField()" if.bind="form.formData.components.length < 5">
             Add New Field
         </button>
 
-        <div>
-            <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                        <span class="material-icons me-2">
-                            warning
-                        </span>
-                Discord only supports up to 5 fields at this time.
-            </div>
-        </div>
-
-        <div>
-            <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
-                        <span class="material-icons me-2">
-                            warning
-                        </span>
-                Discord modal forms do not support menu select options yet.
-            </div>
-        </div>
-
         <div class="field-container row g-4 mb-3">
-            <div class="col-12 col-lg-6" repeat.for="component of form.formData.components">
-                <div mdc-elevation="12" repeat.for="field of component.components">
+            <div class="col-12 col-xl-6" repeat.for="component of form.formData.components">
+                <div mdc-elevation="12" class="px-3 pb-3" repeat.for="field of component.components">
+                    <div class="text-end text-danger me-1 mt-3 mb-1">
+                        <span class="cursor-pointer" click.delegate="deleteField($parent.$index)">X</span>
+                    </div>
                     <mdc-select class="standard-betsy-select w-100" value.bind="field.type" label="Field Type" required.bind="true">
                         <mdc-icon mdc-select-icon>text_format</mdc-icon>
                         <mdc-list>
@@ -73,13 +63,28 @@
                         value.bind="field.label"
                         placeholder="Field Label"
                         required.bind="true"
+                        maxlength="45"
                     ></mdc-text-field>
+                    <mdc-text-field-helper-line>
+                        <mdc-text-field-character-counter></mdc-text-field-character-counter>
+                    </mdc-text-field-helper-line>
+                    <mdc-text-field
+                        class="w-100 mt-2"
+                        label="Placeholder"
+                        value.bind="field.placeholder"
+                        placeholder="Field Placeholder"
+                        required.bind="true"
+                        maxlength="100"
+                    ></mdc-text-field>
+                    <mdc-text-field-helper-line>
+                        <mdc-text-field-character-counter></mdc-text-field-character-counter>
+                    </mdc-text-field-helper-line>
                     <mdc-text-field
                         class="w-100 mt-2"
                         label="Description"
                         value.bind="field.description"
                         placeholder="Field Description"
-                        required.bind="true"
+                        maxlength="100"
                     ></mdc-text-field>
                     <mdc-text-field
                         mdc-tooltip="Used for API Integrations - Not actually visible"
@@ -87,9 +92,14 @@
                         label="Custom Id"
                         value.bind="field.custom_id"
                         placeholder="Custom ID -> Used for API integrations"
-                        required.bind="true">
+                        required.bind="true"
+                        maxlength="100"
+                    >
                         <mdc-icon mdc-text-field-icon trailing class="text-white">info</mdc-icon>
                     </mdc-text-field>
+                    <mdc-text-field-helper-line>
+                        <mdc-text-field-character-counter></mdc-text-field-character-counter>
+                    </mdc-text-field-helper-line>
                     <div class="row" if.bind="field.type === 4">
                         <div class="col-12 col-lg-6">
 

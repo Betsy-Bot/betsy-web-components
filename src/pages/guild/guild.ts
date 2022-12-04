@@ -1,9 +1,9 @@
 import {Router} from 'aurelia-router';
 import {inject, PLATFORM} from "aurelia-framework";
 import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "../../services/discord-service";
+import {DiscordService} from "services/discord-service";
 import {toast} from "lets-toast";
-import {SessionService} from "../../services/session-service";
+import {SessionService} from "services/session-service";
 
 @inject(EventAggregator, DiscordService, Router, SessionService)
 export class Guild {
@@ -105,19 +105,10 @@ export class Guild {
                 }
             },
             {
-                name: 'create-tracked-message',
-                route: 'messages/tracked-messages/create',
-                moduleId: PLATFORM.moduleName('pages/guild/messages/tracked-message/create-tracked-message/create-tracked-message'),
-                title: 'Create Tracked Message',
-                settings: {
-                    auth: true
-                }
-            },
-            {
-                name: 'edit-tracked-message',
+                name: 'managed-tracked-message',
                 route: 'messages/tracked-messages/:messageId',
-                moduleId: PLATFORM.moduleName('pages/guild/messages/tracked-message/edit-tracked-message/edit-tracked-message'),
-                title: 'Edit Tracked Message',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/tracked-message/manage-tracked-message/manage-tracked-message'),
+                title: 'Manage Tracked Message',
                 settings: {
                     auth: true
                 }
@@ -150,19 +141,37 @@ export class Guild {
                 }
             },
             {
-                name: 'guild-data-commands',
-                route: 'data-commands',
-                moduleId: PLATFORM.moduleName('pages/guild/data-commands/data-commands'),
-                title: 'Manage Data Commands',
+                name: 'guild-messages',
+                route: 'resources/messages',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/messages/messages'),
+                title: 'Manage Server Messages',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'guild-create-messages',
+                route: 'resources/messages/edit/:messageId',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/messages/edit-message/edit-message'),
+                title: 'Edit Server Message',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'guild-messages-create',
+                route: 'resources/messages/create',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/messages/create-message/create-message'),
+                title: 'Create Server Message',
                 settings: {
                     auth: true
                 }
             },
             {
                 name: 'guild-data-commands',
-                route: 'data-commands/create',
-                moduleId: PLATFORM.moduleName('pages/guild/data-commands/create-data-command/create-data-command'),
-                title: 'Create Data Command',
+                route: 'data-commands',
+                moduleId: PLATFORM.moduleName('pages/guild/data-commands/data-commands'),
+                title: 'Manage Data Commands',
                 settings: {
                     auth: true
                 }
@@ -243,7 +252,133 @@ export class Guild {
                 name: 'auto-role',
                 route: 'auto-role',
                 moduleId: PLATFORM.moduleName('pages/guild/auto-role/auto-role'),
-                title: 'Auto Role',
+                title: 'Auto Role Containers',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'auto-role-manage',
+                route: 'auto-role/:containerId',
+                moduleId: PLATFORM.moduleName('pages/guild/auto-role/manage-autorole-container/manage-autorole-container'),
+                title: 'Auto Role Container',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'settings',
+                route: 'settings',
+                moduleId: PLATFORM.moduleName('pages/guild/settings/settings'),
+                title: 'Guild Settings',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'channel-cleaners',
+                route: 'channel-cleaners',
+                moduleId: PLATFORM.moduleName('pages/guild/channel-cleaners/channel-cleaners'),
+                title: 'Channel Cleaners',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'payments',
+                route: 'payments',
+                moduleId: PLATFORM.moduleName('pages/guild/payments/payments'),
+                title: 'Payments',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'welcome-messages',
+                route: 'messages/welcome-messages',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/welcome-messages/welcome-messages'),
+                title: 'Welcome Messages',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'manage-welcome-messages',
+                route: 'messages/welcome-messages/:messageId',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/welcome-messages/manage-welcome-message/manage-welcome-message'),
+                title: 'Manage Welcome Messages',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'auto-responders',
+                route: 'messages/auto-responders',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/auto-responders/auto-responders'),
+                title: 'Auto Responders',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'manage-auto-responders',
+                route: 'messages/auto-responders/:responderId',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/auto-responders/manage-auto-responder/manage-auto-responder'),
+                title: 'Manage Auto Responder',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'giveaways',
+                route: 'giveaways',
+                moduleId: PLATFORM.moduleName('pages/guild/giveaways/giveaways'),
+                title: 'Giveaways',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'manage-giveaway',
+                route: 'giveaways/:giveawayId',
+                moduleId: PLATFORM.moduleName('pages/guild/giveaways/manage-giveaways/manage-giveaways'),
+                title: 'Manage Giveaways',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'manage-poll',
+                route: 'polls/:pollId',
+                moduleId: PLATFORM.moduleName('pages/guild/polls/manage-polls/manage-polls'),
+                title: 'Manage Poll',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'polls',
+                route: 'polls',
+                moduleId: PLATFORM.moduleName('pages/guild/polls/polls'),
+                title: 'Polls',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'verification',
+                route: 'verification',
+                moduleId: PLATFORM.moduleName('pages/guild/verification/verification'),
+                title: 'Verification',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'guild-users',
+                route: 'resources/users',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/users/users'),
+                title: 'Guild Users',
                 settings: {
                     auth: true
                 }

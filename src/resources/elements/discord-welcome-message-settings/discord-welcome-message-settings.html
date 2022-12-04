@@ -1,0 +1,39 @@
+<template>
+    <section id="discord-tracked-message-settings">
+        <div class="row my-2 g-4">
+            <div class="col-6 h-100">
+                <label class="me-3">Active?</label>
+                <button
+                    mdc-switch
+                    selected.bind="message.active"
+                    click.delegate="message.active = !message.discordMessage.active"
+                ></button>
+            </div>
+            <div class="col-6">
+                <mdc-form-field repeat.for="type of types">
+                    <mdc-radio model.bind="type.value" checked.bind="message.type"></mdc-radio>
+                    <label>${type.displayName}</label>
+                </mdc-form-field>
+            </div>
+            <div class="col-12 col-lg-6 h-100">
+                <mdc-text-field
+                    class="w-100"
+                    label="Name"
+                    value.bind="message.name"
+                    placeholder="Internal Identifier - Not used in message"
+                    required.bind="true"
+                ></mdc-text-field>
+            </div>
+            <div class="col-12 col-lg-6 h-100">
+                <discord-channel-selector
+                    label="Select Channel"
+                    if.bind="guildId"
+                    channel-id.two-way="message.discordChannelId"
+                    guild-id.bind="guildId"
+                    type.bind="0"
+                    required.bind="message.type === 3"
+                ></discord-channel-selector>
+            </div>
+        </div>
+    </section>
+</template>

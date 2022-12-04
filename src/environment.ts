@@ -4,6 +4,10 @@ function redirectUrl() {
     return env.redirectUrl;
 }
 
+function verifyRedirectUrl() {
+    return env.verifyRedirectUrl;
+}
+
 function botClientId() {
     return env.botClientId;
 }
@@ -17,5 +21,6 @@ export default this;
 export {
     redirectUrl,
     botClientId,
-    apiEndpoint
+    apiEndpoint,
+    verifyRedirectUrl
 };

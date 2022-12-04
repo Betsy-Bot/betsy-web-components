@@ -4,6 +4,7 @@
             <div class="col" repeat.for="componentWrapper of components">
                 <div class="components" repeat.for="component of componentWrapper.components">
                     <discord-button button.bind="component" if.bind="component.type === 2"></discord-button>
+                    <discord-menu menu.bind="component" if.bind="component.type === 3"></discord-menu>
                 </div>
             </div>
         </div>
