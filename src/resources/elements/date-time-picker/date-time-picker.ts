@@ -8,7 +8,7 @@ export class DateTimePicker {
     @bindable required;
     pickerElement;
     config = {
-        enableTime: true ,
+        enableTime: true,
         onChange: (selectedDates, dateStr, instance) => this.value = new Date(dateStr).toISOString()
     };
 
@@ -17,10 +17,6 @@ export class DateTimePicker {
             this.pickerValue = this.value;
         }
         flatpickr(this.pickerElement, this.config);
-    }
-
-    valueChanged() {
-        console.log(this.value);
     }
 
     get displayValue() {
