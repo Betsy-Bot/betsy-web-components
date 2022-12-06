@@ -2,7 +2,7 @@ import {EventAggregator} from "aurelia-event-aggregator";
 import {DiscordService} from "services/discord-service";
 import {Router} from "aurelia-router";
 import {toast} from "lets-toast";
-import {bindable, inject} from "aurelia-framework";
+import {bindable, inject, observable} from "aurelia-framework";
 import {DiscordButtonStyle, DiscordComponentType} from "../../../../services/models/discord";
 
 @inject(EventAggregator, DiscordService, Router)
@@ -19,11 +19,13 @@ export class ManageGiveaways {
     @bindable giveaway;
     giveawayId;
     isNew: boolean;
+    @observable role;
     giveawayTemplate = {
         name: '',
         discordServerId: '',
         type: 3,
         active: true,
+        roles: [],
         winningMessage: {
             message: {
                 embeds: [
@@ -100,5 +102,35 @@ export class ManageGiveaways {
                 throw e;
             }
         }
+    }
+
+    roleChanged() {
+        if (!this.giveaway.roles) {
+            this.giveaway.roles = [];
+        }
+        this.giveaway.roles.push({
+            name: this.role.name,
+            discordRoleId: this.role.id,
+            numberOfEntries: 1
+        })
+    }
+
+    deleteRole(index) {
+        this.giveaway.roles.splice(index, 1);
+    }
+
+    cloneGiveaway() {
+        this.giveaway.name = "";
+        this.giveaway.participants = [];
+        this.giveaway.id = undefined;
+        this.giveaway.discordServer = undefined;
+        this.giveaway.winningMessageId = undefined;
+        this.giveaway.winningMessage.id = undefined
+        this.giveaway.containerMessageId = undefined;
+        this.giveaway.containerMessage.id = undefined;
+        this.giveaway.ended = undefined;
+        this.isNew = true;
+        toast("Cloned Giveaway");
+        this.router.navigate(`/guild/${this.guildId}/giveaways/0`)
     }
 }

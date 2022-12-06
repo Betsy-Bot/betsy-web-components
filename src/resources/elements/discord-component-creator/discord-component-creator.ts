@@ -77,4 +77,8 @@ export class DiscordComponentCreator {
     removeMenuOption(index) {
         this.components[0].components[0].options.splice(index, 1);
     }
+
+    removeComponent(index) {
+        this.components.splice(index, 1);
+    }
 }

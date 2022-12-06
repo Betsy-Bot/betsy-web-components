@@ -19,7 +19,6 @@ export class DiscordFeatureHeader {
     }
 
     attached() {
-        console.log(this.displayWarning)
         if (this.displayWarning) {
             setTimeout(() => {
                 this.banner.open();
