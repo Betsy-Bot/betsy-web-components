@@ -4,6 +4,9 @@
             <img src="https://cdn.discordapp.com/emojis/${value.id}.webp?size=24&quality=lossless">
         </mdc-icon>
         <mdc-list>
+            <mdc-list-item value.bind="null">
+                - None -
+            </mdc-list-item>
             <mdc-list-item repeat.for="emoji of emojis" value.bind="emoji">
                 <img src="https://cdn.discordapp.com/emojis/${emoji.id}.webp?size=24&quality=lossless"> ${emoji.name}
             </mdc-list-item>

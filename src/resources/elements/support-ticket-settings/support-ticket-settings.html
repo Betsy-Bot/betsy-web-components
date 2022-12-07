@@ -131,6 +131,7 @@
         </div>
         <div class="col-12 col-lg-6">
             <discord-form-selector
+                if.bind="guildId"
                 label="Select a Form to Present on Opening"
                 form-id.two-way="request.discordFormId"
             ></discord-form-selector>
