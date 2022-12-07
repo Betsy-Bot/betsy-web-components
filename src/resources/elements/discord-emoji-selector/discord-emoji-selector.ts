@@ -21,7 +21,6 @@ export class DiscordEmojiSelector {
             emojis = await this.discordService.getLocalGuild().guild.emojis;
         }
         this.emojis = emojis;
-        console.log(this.value);
     }
 
     shouldDisplayEmoji(emojiName) {
