@@ -2,12 +2,14 @@ import {inject} from 'aurelia-framework';
 import {SessionService} from './session-service';
 import {toast} from "lets-toast";
 import {EventAggregator} from "aurelia-event-aggregator";
+import {DiscordService} from "./discord-service";
 
 const AUTHORIZATION_HEADER = 'Authorization';
+const GUILD_ID_HEADER = 'Discord-Guild-Id';
 
-@inject(SessionService, EventAggregator)
+@inject(SessionService, EventAggregator, DiscordService)
 export class ApiInterceptor {
-    constructor(private sessionService: SessionService, private ea: EventAggregator) {
+    constructor(private sessionService: SessionService, private ea: EventAggregator, private discordService: DiscordService) {
     }
 
     request(request) {
@@ -19,6 +21,11 @@ export class ApiInterceptor {
             if (!request.headers.get(AUTHORIZATION_HEADER)) {
                 const bearerToken = `Bearer ${this.sessionService.getStorageItem(SessionService.TOKEN_KEY)}`;
                 request.headers.append(AUTHORIZATION_HEADER, bearerToken);
+            }
+
+            const guildId = this.discordService.getLocalServerId();
+            if (guildId) {
+                request.headers.append(GUILD_ID_HEADER, guildId);
             }
 
             return request;

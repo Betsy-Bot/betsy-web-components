@@ -32,6 +32,9 @@ export class DiscordService {
     }
 
     getLocalServerId() {
+        if (!this.guild) {
+            return;
+        }
         return this.guild.id;
     }
 
