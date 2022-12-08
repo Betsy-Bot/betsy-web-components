@@ -43,5 +43,10 @@ export class Settings {
         await this.discordService.updateAuthorizedUsersForGuild(this.guild, this.guildId);
         toast('Updated Authorized Users', {severity: 'success'});
     }
+
+    async updateGlobalSettings() {
+        await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
+        toast("Updated Custom Bot Settings", {severity: 'success'})
+    }
 }
 
