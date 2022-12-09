@@ -23,7 +23,7 @@ export class ApiInterceptor {
                 request.headers.append(AUTHORIZATION_HEADER, bearerToken);
             }
 
-            const guildId = this.discordService.getLocalServerId();
+            const guildId = this.discordService.getDiscordGuildId();
             if (guildId) {
                 request.headers.append(GUILD_ID_HEADER, guildId);
             }

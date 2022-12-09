@@ -17,6 +17,7 @@ export class Guild {
     async activate(params) {
         this.params = params;
         this.guildId = this.params.guildId;
+        this.discordService.setDiscordGuildId(this.guildId);
         [this.guild] = await Promise.all([
             await this.discordService.getDiscordServerInformation(this.guildId),
             await this.discordService.getDiscordChannels(this.guildId)
