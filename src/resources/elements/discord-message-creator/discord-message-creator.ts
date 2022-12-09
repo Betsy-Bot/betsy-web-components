@@ -8,7 +8,7 @@ export class DiscordMessageCreator {
     };
     @bindable single;
     @bindable allowComponents: boolean;
-    @bindable maxComponents: number = 1;
+    @bindable maxComponents: number = 5;
     @bindable tab = 'message';
     @bindable selectedMessage;
     @bindable hideTemplate: boolean = false

@@ -31,6 +31,12 @@ export class EditTicketMessage {
         [this.ticket] = await Promise.all([
             await this.discordService.getSupportTicketSettingsById(this.supportTicketSettingsId)
         ])
+
+        //Temp solution because it wasn't clearing it for some reason
+        this.eventAggregator.subscribe('form-cleared', payload => {
+            this.ticket.discordFormId = null;
+            this.ticket.discordForm = null;
+        });
     }
 
     authorizedRoleChanged(newValue, oldvalue) {

@@ -1,5 +1,6 @@
 import {bindable, inject} from "aurelia-framework";
 import {DiscordService} from "../../../services/discord-service";
+import {EMOJIS} from "../../data/discord-emojis";
 
 @inject(DiscordService)
 export class DiscordEmojiSelector {
@@ -9,6 +10,9 @@ export class DiscordEmojiSelector {
     @bindable label;
     @bindable size;
 
+    useDefaultEmojis = false;
+    defaultEmojies = EMOJIS;
+
     constructor(private discordService: DiscordService) {}
 
     async attached() {
@@ -17,5 +21,9 @@ export class DiscordEmojiSelector {
             emojis = await this.discordService.getLocalGuild().guild.emojis;
         }
         this.emojis = emojis;
+    }
+
+    shouldDisplayEmoji(emojiName) {
+        return !emojiName.includes('tone') && !emojiName.includes('_');
     }
 }

@@ -11,6 +11,7 @@ export class DiscordService {
         guildId: null,
         data: null,
     }
+    discordGuildId;
     messages;
 
     RESPONSE_MESSAGES = 'ResponseMessages';
@@ -32,11 +33,25 @@ export class DiscordService {
     }
 
     getLocalServerId() {
+        if (!this.guild) {
+            return;
+        }
         return this.guild.id;
     }
 
     getLocalDiscordGuildId() {
+        if (!this.guild) {
+            return;
+        }
         return this.guild.guildId;
+    }
+
+    getDiscordGuildId() {
+        return this.discordGuildId;
+    }
+
+    setDiscordGuildId(guildId) {
+        this.discordGuildId = guildId;
     }
 
     async exchangeCode(code: string, redirectUrl?: string): Promise<discordModels.ExchangeCodeResponse> {
