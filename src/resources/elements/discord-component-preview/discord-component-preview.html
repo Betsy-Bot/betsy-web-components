@@ -1,10 +1,13 @@
 <template>
     <section id="discord-component-preview">
         <div class="row">
-            <div class="col" repeat.for="componentWrapper of components">
-                <div class="components" repeat.for="component of componentWrapper.components">
-                    <discord-button button.bind="component" if.bind="component.type === 2"></discord-button>
-                    <discord-menu menu.bind="component" if.bind="component.type === 3"></discord-menu>
+            <div class="col-12" repeat.for="componentWrapper of components">
+                <div class="row justify-content-start g-2">
+                    <div repeat.for="component of componentWrapper.components"
+                         class="components g-3 ${getColumnClass(component.length, component.type)}">
+                        <discord-button button.bind="component" if.bind="component.type === 2"></discord-button>
+                        <discord-menu menu.bind="component" if.bind="component.type === 3"></discord-menu>
+                    </div>
                 </div>
             </div>
         </div>
