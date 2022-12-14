@@ -30,7 +30,6 @@ export class Settings {
     permissionUserId;
 
     async addAuthorizedUser() {
-        console.log(this.guild.authorizedUsers.findIndex( x => this.permissionUserId));
         if (this.guild.authorizedUsers.findIndex( x => x == this.permissionUserId) == -1) {
             this.guild.authorizedUsers.push(this.permissionUserId);
         }
