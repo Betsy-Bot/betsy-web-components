@@ -4,7 +4,6 @@ import { DiscordButtonStyle, DiscordComponentType } from "services/models/discor
 export class DiscordComponentCreator {
     @bindable components = [];
     @bindable maxComponents = 1;
-    @bindable customBuilder = false;
 
     componentTypes = [
         {
@@ -32,18 +31,16 @@ export class DiscordComponentCreator {
         {
             label: 'Danger',
             value: 4,
+        },
+        {
+            label: 'Link',
+            value: 5,
         }
     ]
 
     attached() {
         if (!this.components) {
             this.components = [];
-        }
-        if (this.customBuilder) {
-            this.styles.push({
-                label: 'Link',
-                value: 5,
-            })
         }
     }
 
