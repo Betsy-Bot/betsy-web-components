@@ -1,8 +1,9 @@
 <template>
     <section class="auto-responders">
-        <div class="row">
+        <div class="row" if.bind="featureActive !== undefined">
             <div class="col-8">
                 <discord-feature-header
+                    display-warning.bind="!featureActive && responders.length > 0"
                     doc-url="https://docs.betsybot.xyz/features/auto-responders"
                     title="Auto Responders"
                     subtitle="Respond to commonly asked questions, comments, and more."
@@ -29,6 +30,7 @@
 
         <div>
             <feature-item-list
+                show-toggler.bind="true"
                 data.bind="responders"
                 show-toggler.bind="false"
                 toggle-handler.call="updateActive(item)"

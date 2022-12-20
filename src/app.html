@@ -17,6 +17,10 @@
                         <mdc-list-item class="list-item-padding">Giveaways</mdc-list-item>
                     </a>
 
+                    <a href="/guild/${guildId}/polls">
+                        <mdc-list-item class="list-item-padding">Polls</mdc-list-item>
+                    </a>
+
                     <mdc-list-item tabindex="0" mdclistitem:action.delegate="openSection('messaging')"
                                    no-list-action>
                         <span class="fw-bolder">Messaging</span>
@@ -88,6 +92,9 @@
                     <div if.bind="expandOptions.resources">
                         <a href="/guild/${guildId}/settings">
                             <mdc-list-item class="list-item-padding">Settings</mdc-list-item>
+                        </a>
+                        <a href="/guild/${guildId}/resources/users">
+                            <mdc-list-item class="list-item-padding">Users</mdc-list-item>
                         </a>
                         <a href="/guild/${guildId}/resources/messages">
                             <mdc-list-item class="list-item-padding">Messages</mdc-list-item>

@@ -1,5 +1,6 @@
 import {bindable, inject} from "aurelia-framework";
 import {Router} from "aurelia-router";
+import './discord-feature-header.scss';
 
 @inject(Router)
 export class DiscordFeatureHeader {
@@ -10,8 +11,22 @@ export class DiscordFeatureHeader {
     @bindable subtitle;
     @bindable hideBack;
     @bindable docUrl;
+    @bindable displayWarning;
+    banner;
 
     navigateBack() {
         this.router.navigateBack();
+    }
+
+    attached() {
+        if (this.displayWarning) {
+            setTimeout(() => {
+                this.banner.open();
+            })
+        } else {
+            setTimeout(() => {
+                this.banner.close();
+            })
+        }
     }
 }

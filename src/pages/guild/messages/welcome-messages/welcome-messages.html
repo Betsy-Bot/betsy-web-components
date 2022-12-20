@@ -1,10 +1,11 @@
 <template>
-    <div class="row">
+    <div class="row" if.bind="featureActive !== undefined">
         <div class="col-8">
             <discord-feature-header
                 doc-url="https://docs.betsybot.xyz/features/welcome-messages"
                 title="Welcome Messages"
                 subtitle="Create either custom channel welcome messages or direct DM welcome messages."
+                display-warning.bind="!featureActive && messages.length > 0"
             ></discord-feature-header>
 
             <div class="my-3">

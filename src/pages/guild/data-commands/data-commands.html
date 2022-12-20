@@ -1,8 +1,9 @@
 <template>
     <section id="data-commands">
-        <div class="row">
+        <div class="row" if.bind="featureActive !== undefined">
             <div class="col-8">
                 <discord-feature-header
+                    display-warning.bind="!featureActive && commands.length > 0"
                     doc-url="https://docs.betsybot.xyz/configurable-commands/data-commands"
                     title="Data Commands"
                     subtitle="Data commands are commands that gather information and relay that information to this admin panel or your own API integration. This can be captured in a form, a message embed, or just through command parameters."

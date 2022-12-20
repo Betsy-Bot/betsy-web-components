@@ -1,4 +1,4 @@
-import {DiscordForm} from "../../../../../services/models/discord";
+import { DiscordComponentType, DiscordForm } from "../../../../../services/models/discord";
 import {Router} from 'aurelia-router';
 import {inject} from "aurelia-framework";
 import {EventAggregator} from "aurelia-event-aggregator";
@@ -19,7 +19,16 @@ export class CreateForm {
         description: "",
         submissions: [],
         formData: {
-            components: []
+            components: [
+                {
+                    type: DiscordComponentType.ActionRow,
+                    components: [{
+                        custom_id: "",
+                        type: DiscordComponentType.TextInput,
+                        label: ""
+                    }]
+                }
+            ]
         }
     };
 

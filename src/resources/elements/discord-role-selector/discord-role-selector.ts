@@ -8,13 +8,18 @@ export class DiscordRoleSelector {
     @bindable guildId: string;
     @bindable selectedRole: string;
     @bindable label;
-    @bindable required: boolean = false;
-    @bindable removeEveryone: boolean = false;
+    @bindable required = false;
+    @bindable removeEveryone = false;
+    @bindable roleId;
+    @bindable disabled;
 
     roles;
 
     async attached() {
         this.roles = await this.discordService.getDiscordRoles(this.guildId);
+        if (this.roleId) {
+            this.selectedRole = this.roles.find(x => x.id == this.roleId);
+        }
         if (this.removeEveryone) {
             this.roles.splice(0, 1)
         }

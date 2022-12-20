@@ -7,11 +7,9 @@ export class DateFormatValueConverter {
             format = 'MMMM Do YYYY, h:mmA';
         }
         try {
-            if (!value.includes('Z')) {
-                value += "Z";
-            }
            return new Intl.DateTimeFormat('en', { dateStyle: 'long', timeStyle: 'short' }).format(new Date(value));
         } catch(e) {
+            console.log(e);
             return value;
         }
     }

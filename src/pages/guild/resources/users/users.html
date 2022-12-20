@@ -1,0 +1,12 @@
+<template>
+    <discord-feature-header
+        title="Users"
+        subtitle="When you have the verification feature turned on, information about your verified users will appear here."
+    ></discord-feature-header>
+    <div class="my-3" if.bind="users">
+        <dx-data-grid items.bind="users" columns.bind="columns" master-detail.bind="detailTemplate">
+            <div class="master-detail-caption" ref="rowCaption"></div>
+            <div class="master-detail" ref="rowDetail"></div>
+        </dx-data-grid>
+    </div>
+</template>

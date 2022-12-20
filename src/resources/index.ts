@@ -27,6 +27,8 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./elements/discord-form-preview/discord-form-preview'),
         PLATFORM.moduleName('./elements/discord-form-selector/discord-form-selector'),
         PLATFORM.moduleName('./elements/discord-form-submission-list/discord-form-submission-list'),
+        PLATFORM.moduleName('./elements/discord-menu/discord-menu'),
+        PLATFORM.moduleName('./elements/discord-menu-item/discord-menu-item'),
         PLATFORM.moduleName('./elements/discord-tracked-message-settings/discord-tracked-message-settings'),
         PLATFORM.moduleName('./elements/discord-welcome-message-settings/discord-welcome-message-settings'),
         PLATFORM.moduleName('./elements/feature-item-list/feature-item-list'),
@@ -35,6 +37,7 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./elements/support-ticket-transcript/support-ticket-transcript'),
         PLATFORM.moduleName('./elements/validation-error/validation-error'),
         PLATFORM.moduleName('./elements/request-header-creator/request-header-creator'),
+        PLATFORM.moduleName('./elements/dx-data-grid/dx-data-grid'),
 
         PLATFORM.moduleName('./value-converters/discord-markup'),
         PLATFORM.moduleName('./value-converters/date-formatter'),

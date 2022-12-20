@@ -17,6 +17,7 @@ export class Guild {
     async activate(params) {
         this.params = params;
         this.guildId = this.params.guildId;
+        this.discordService.setDiscordGuildId(this.guildId);
         [this.guild] = await Promise.all([
             await this.discordService.getDiscordServerInformation(this.guildId),
             await this.discordService.getDiscordChannels(this.guildId)
@@ -105,19 +106,10 @@ export class Guild {
                 }
             },
             {
-                name: 'create-tracked-message',
-                route: 'messages/tracked-messages/create',
-                moduleId: PLATFORM.moduleName('pages/guild/messages/tracked-message/create-tracked-message/create-tracked-message'),
-                title: 'Create Tracked Message',
-                settings: {
-                    auth: true
-                }
-            },
-            {
-                name: 'edit-tracked-message',
+                name: 'managed-tracked-message',
                 route: 'messages/tracked-messages/:messageId',
-                moduleId: PLATFORM.moduleName('pages/guild/messages/tracked-message/edit-tracked-message/edit-tracked-message'),
-                title: 'Edit Tracked Message',
+                moduleId: PLATFORM.moduleName('pages/guild/messages/tracked-message/manage-tracked-message/manage-tracked-message'),
+                title: 'Manage Tracked Message',
                 settings: {
                     auth: true
                 }
@@ -357,6 +349,24 @@ export class Guild {
                 }
             },
             {
+                name: 'manage-poll',
+                route: 'polls/:pollId',
+                moduleId: PLATFORM.moduleName('pages/guild/polls/manage-polls/manage-polls'),
+                title: 'Manage Poll',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'polls',
+                route: 'polls',
+                moduleId: PLATFORM.moduleName('pages/guild/polls/polls'),
+                title: 'Polls',
+                settings: {
+                    auth: true
+                }
+            },
+            {
                 name: 'verification',
                 route: 'verification',
                 moduleId: PLATFORM.moduleName('pages/guild/verification/verification'),
@@ -366,11 +376,14 @@ export class Guild {
                 }
             },
             {
-                name: 'verify',
-                route: 'verify/:userId',
-                moduleId: PLATFORM.moduleName('pages/guild/verification/verify/verify'),
-                title: 'Verify User',
-            }
+                name: 'guild-users',
+                route: 'resources/users',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/users/users'),
+                title: 'Guild Users',
+                settings: {
+                    auth: true
+                }
+            },
         ]);
 
         config.mapUnknownRoutes(() => {

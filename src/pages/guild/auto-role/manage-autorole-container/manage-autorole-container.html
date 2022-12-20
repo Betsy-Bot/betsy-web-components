@@ -80,29 +80,7 @@
 
                         <div class="row g-4 mt-2" if.bind="container.discordRoles">
                             <div class="col-12 col-lg-6" repeat.for="role of container.discordRoles">
-                                <div class="p-3" mdc-elevation="12">
-                                    <div class="row">
-                                        <div class="col-9">
-                                            <h5>${role.name}</h5>
-                                        </div>
-                                        <div class="col-3 text-danger fs-4 text-end">
-                                            <span click.delegate="removeRole($index)" class="cursor-pointer">
-                                                X
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <mdc-text-field
-                                        class="w-100 my-2"
-                                        label="Role Description"
-                                        value.bind="role.description"
-                                        placeholder="This is only used for select menu type role containers"
-                                    ></mdc-text-field>
-                                    <discord-emoji-selector
-                                        value.two-way="role.emoji"
-                                        size.bind="100"
-                                        label="Emoji"
-                                    ></discord-emoji-selector>
-                                </div>
+                                <discord-menu-item item.two-way="role" remove-function.call="removeRole($index)"></discord-menu-item>
                             </div>
                         </div>
 

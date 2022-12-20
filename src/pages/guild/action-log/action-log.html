@@ -1,11 +1,12 @@
 <template>
     <section id="support-tickets">
-        <div class="row">
+        <div class="row" if.bind="featureActive !== undefined">
             <div class="col-8">
                 <discord-feature-header
                     doc-url="https://docs.betsybot.xyz/features/action-logs"
                     title="Action Log"
                     subtitle="Watch for various message actions and log these to your desired audit log channel."
+                    display-warning.bind="!featureActive"
                 ></discord-feature-header>
             </div>
             <div class="col-4 text-end">

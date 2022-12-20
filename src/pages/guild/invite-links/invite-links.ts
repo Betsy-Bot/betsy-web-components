@@ -9,7 +9,6 @@ export class InviteLinks {
     }
 
     guildId: string;
-    channels;
     guild;
     params;
     featureActive;

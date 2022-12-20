@@ -15,7 +15,10 @@
                         guild-id.bind="guildId"
                     ></discord-welcome-message-settings>
 
-                    <discord-message-creator message.two-way="message.message"></discord-message-creator>
+                    <discord-message-creator
+                        message.two-way="message.message"
+                        allow-components.bind="true"
+                    ></discord-message-creator>
 
                     <div>
                         <div class="text-end mt-3">

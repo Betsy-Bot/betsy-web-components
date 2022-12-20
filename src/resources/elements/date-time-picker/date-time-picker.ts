@@ -8,7 +8,7 @@ export class DateTimePicker {
     @bindable required;
     pickerElement;
     config = {
-        enableTime: true ,
+        enableTime: true,
         onChange: (selectedDates, dateStr, instance) => this.value = new Date(dateStr).toISOString()
     };
 

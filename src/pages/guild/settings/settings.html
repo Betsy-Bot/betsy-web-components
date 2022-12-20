@@ -13,6 +13,7 @@
                     <div class="row my-2">
                         <div class="col-10">
                             <mdc-text-field
+                                disabled.bind="!isAdmin"
                                 min="100000000000000000"
                                 max="9999999999999999999"
                                 type="number"
@@ -22,7 +23,7 @@
                             ></mdc-text-field>
                         </div>
                         <div class="col-2">
-                            <button mdc-button class="button-primary w-100 h-100" type="submit">
+                            <button mdc-button class="button-primary w-100 h-100" type="submit" disabled.bind="!isAdmin">
                                 Add
                             </button>
                         </div>
@@ -35,8 +36,34 @@
                         </mdc-chip>
                     </mdc-chip-set>
                 </form>
-
             </div>
+        </div>
+        <div class="col12 col-lg-6">
+            <form submit.delegate="updateGlobalSettings()">
+                <div class="p-4" mdc-elevation="12">
+                    <h4>Custom Bot Settings</h4>
+                    <div class="text-danger fs-6">
+                        This feature is for Platinum supporters only. Learn more on our discord.
+                    </div>
+                    <mdc-text-field
+                        type="number"
+                        class="w-100 mb-3"
+                        placeholder="Custom Bot Id"
+                        value.bind="guild.customBotApplicationId"
+                    ></mdc-text-field>
+                    <mdc-text-field
+                        type="text"
+                        class="w-100"
+                        placeholder="Custom Bot Token"
+                        value.bind="guild.customBotJwtKey"
+                    ></mdc-text-field>
+                    <div class="text-end mt-3">
+                        <button mdc-button class="button-primary" type="submit" disabled.bind="!isAdmin">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </template>

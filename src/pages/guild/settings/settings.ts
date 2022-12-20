@@ -17,19 +17,19 @@ export class Settings {
     guildId: string;
     guild;
     params;
+    isAdmin;
 
     async attached() {
         this.guildId = this.params.guildId;
-        [this.guild] = await Promise.all([
-            await this.discordService.getDiscordServerInformation(this.guildId)
+        [this.guild, this.isAdmin] = await Promise.all([
+            await this.discordService.getDiscordServerInformation(this.guildId),
+            await this.sessionService.isAdmin(this.guildId)
         ]);
-        console.log(this.guild);
     }
 
     permissionUserId;
 
     async addAuthorizedUser() {
-        console.log(this.guild.authorizedUsers.findIndex( x => this.permissionUserId));
         if (this.guild.authorizedUsers.findIndex( x => x == this.permissionUserId) == -1) {
             this.guild.authorizedUsers.push(this.permissionUserId);
         }
@@ -41,6 +41,11 @@ export class Settings {
         this.guild.authorizedUsers.splice(index, 1);
         await this.discordService.updateAuthorizedUsersForGuild(this.guild, this.guildId);
         toast('Updated Authorized Users', {severity: 'success'});
+    }
+
+    async updateGlobalSettings() {
+        await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
+        toast("Updated Custom Bot Settings", {severity: 'success'})
     }
 }
 

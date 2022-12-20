@@ -36,8 +36,8 @@ export class SessionService {
         window.localStorage.removeItem(key);
     }
 
-    async loginWithOAuthCode(code: string) {
-        const response = await this.discordService.exchangeCode(code);
+    async loginWithOAuthCode(code: string, redirectUrl?: string) {
+        const response = await this.discordService.exchangeCode(code, redirectUrl);
 
         if (response.token) {
             this.saveStorageItem(SessionService.TOKEN_KEY, response.token);
@@ -87,5 +87,21 @@ export class SessionService {
         this.destroyStorageItem(SessionService.TOKEN_KEY);
         this.currentUser = null;
         this.eventAggregator.publish('user-updated', null);
+    }
+
+    async isAdmin(guildId): Promise<boolean> {
+        const user = await this.getUser();
+        if (!user) return;
+        //@ts-ignore
+        for (const server of user.activeServers) {
+           if (server.guildId == guildId) return true;
+           //@ts-ignore
+           if (server.ownerId == user.id) return true;
+        }
+        //@ts-ignore
+        for (const server of user.adminedServers) {
+           if (server.guildId == guildId) return true;
+        }
+        return false
     }
 }

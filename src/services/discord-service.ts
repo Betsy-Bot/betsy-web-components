@@ -11,6 +11,7 @@ export class DiscordService {
         guildId: null,
         data: null,
     }
+    discordGuildId;
     messages;
 
     RESPONSE_MESSAGES = 'ResponseMessages';
@@ -32,15 +33,33 @@ export class DiscordService {
     }
 
     getLocalServerId() {
+        if (!this.guild) {
+            return;
+        }
         return this.guild.id;
     }
 
     getLocalDiscordGuildId() {
+        if (!this.guild) {
+            return;
+        }
         return this.guild.guildId;
     }
 
-    async exchangeCode(code: string): Promise<discordModels.ExchangeCodeResponse> {
-        return await this.api.doPost('Discord/OAuth/ExchangeCode', {code: code})
+    getDiscordGuildId() {
+        return this.discordGuildId;
+    }
+
+    setDiscordGuildId(guildId) {
+        this.discordGuildId = guildId;
+    }
+
+    async exchangeCode(code: string, redirectUrl?: string): Promise<discordModels.ExchangeCodeResponse> {
+        let path = 'Discord/OAuth/ExchangeCode';
+        if (redirectUrl) {
+            path += '?redirectUrl=' + redirectUrl
+        }
+        return await this.api.doPost(path, {code: code})
     }
 
     async createServer(guildId: string): Promise<discordModels.BaseDiscordServer> {
@@ -61,6 +80,10 @@ export class DiscordService {
 
     async getResponseMessagesForGuild(guildId: string): Promise<discordModels.BaseDiscordCommand[]> {
         return await this.api.doGet(`DiscordGuild/${guildId}/ResponseMessages`);
+    }
+
+    async getUsersForGuild(guildId: string): Promise<any> {
+        return await this.api.doGet(`DiscordGuild/${guildId}/Users`);
     }
 
     async getDataCommandsForGuild(guildId: string): Promise<discordModels.BaseDiscordCommand[]> {
@@ -89,6 +112,18 @@ export class DiscordService {
 
     async getRequiresLogin(guildId: string): Promise<any> {
         return await this.api.doGet(`DiscordGuild/${guildId}/RequiresLogin`);
+    }
+
+    async verifyUser(guildId: string, userId: string): Promise<any> {
+        return await this.api.doPost(`DiscordGuild/${guildId}/Verify/${userId}`, {});
+    }
+
+    async verifyLogin(): Promise<any> {
+        return await this.api.doPost(`User/Verify`, {});
+    }
+
+    async updateVerifiedRole(guildId: string, roleId: string): Promise<any> {
+        return await this.api.doPost(`DiscordGuild/${guildId}/VerifiedRole`, {verifiedRoleId: roleId});
     }
 
     async getDiscordChannels(guildId: string) {
@@ -157,6 +192,10 @@ export class DiscordService {
 
     async getSupportTicket(guildId: string, settingsId: string, supportTicketId: string) {
         return this.api.doGet(`DiscordGuild/${guildId}/SupportTickets/${settingsId}/Submissions/${supportTicketId}`);
+    }
+
+    async closeSupportTicket(supportTicketId: string) {
+        return this.api.doPatch(`DiscordSupportTicket/${supportTicketId}/Close`, {});
     }
 
     async updateTrackedDiscordMessage(data: any) {
@@ -312,5 +351,29 @@ export class DiscordService {
 
     async getGiveawayById(giveawayId: string) {
         return this.api.doGet(`DiscordGiveaway/${giveawayId}`);
+    }
+
+    async deleteGiveawayById(settingsId: string) {
+        return this.api.doDelete(`DiscordGiveaway/${settingsId}`);
+    }
+
+    async getPolls(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/DiscordPolls`);
+    }
+
+    async createPoll(giveaway: any) {
+        return this.api.doPost(`DiscordPoll`, giveaway);
+    }
+
+    async updatePoll(giveaway: any) {
+        return this.api.doPatch(`DiscordPoll/${giveaway.id}`, giveaway);
+    }
+
+    async getPollById(giveawayId: string) {
+        return this.api.doGet(`DiscordPoll/${giveawayId}`);
+    }
+
+    async deletePollById(settingsId: string) {
+        return this.api.doDelete(`DiscordPoll/${settingsId}`);
     }
 }

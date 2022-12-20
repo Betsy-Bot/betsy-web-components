@@ -1,13 +1,22 @@
 <template>
-    <div class="discord-messages">
+    <div id="discord-messages">
         <div class="message-container" repeat.for="message of messages">
             <div class="author mt-3" if.bind="showAuthor(message, $index)">
-                ${message.discordUserName} <span class="time ms-3">${message.createdDate | dateFormat}</span>
+                <span class="fw-bolder">${message.discordUserName}</span> <span class="time ms-3">${message.createdDate | dateFormat}</span>
             </div>
             <div class="message">
-                    <span mdc-tooltip.bind="message.createdDate | dateFormat">
+                    <span mdc-tooltip.bind="message.createdDate | dateFormat" if.bind="!isImage(message.message)">
                         ${message.message}
                     </span>
+                <a href.bind="message.message" else target="_blank">
+                    <img src.bind="message.message" alt="image" class="my-2">
+                </a>
+            </div>
+            <div class="embeds" if.bind="message.embeds" repeat.for="embed of message.embeds">
+                <discord-embed-preview embed.bind="embed"></discord-embed-preview>
+            </div>
+            <div class="attachments" if.bind="message.attachments" repeat.for="attachment of message.attachments">
+                <img src.bind="attachment.proxy_url" alt="image" class="my-2">
             </div>
         </div>
     </div>
