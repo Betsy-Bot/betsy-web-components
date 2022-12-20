@@ -56,6 +56,7 @@ export interface DiscordMessageImage {
 }
 
 export interface SendMessageToChannelRequest {
+    sendTime?: string,
     channelType: DiscordChannelType,
     message: DiscordMessageContent
 }
