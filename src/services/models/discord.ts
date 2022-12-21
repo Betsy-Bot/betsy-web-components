@@ -166,6 +166,7 @@ export class DiscordFormFieldAnswer {
     label: string;
     value: string;
     custom_id: string;
+    fields: any[]
 }
 
 export class DiscordComponentWrapper {

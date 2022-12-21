@@ -1,6 +1,15 @@
 <template>
     <section id="edit-form">
-        <div class="row mt-4">
+        <div class="row">
+            <div class="col-12" if.bind="showingSubmissions">
+                <div class="py-5" if.bind="form.submissions && form.submissions.length > 0">
+                    <h4>Submissions</h4>
+                    <dx-data-grid items.bind="form.submissions" columns.bind="columns" master-detail.bind="detailTemplate">
+                        <div class="master-detail-caption" ref="rowCaption"></div>
+                        <div class="master-detail" ref="rowDetail"></div>
+                    </dx-data-grid>
+                </div>
+            </div>
             <div class="col-12 col-lg-8">
                 <discord-feature-header
                     title="Edit Your Discord Server Form"
@@ -27,12 +36,6 @@
                 <h4 class="text-center mt-3" if.bind="!showingSubmissions">
                     <discord-form-preview form.bind="form"></discord-form-preview>
                 </h4>
-                <div class="submissions" if.bind="showingSubmissions">
-                    <discord-form-submission-list
-                        form-data.bind="form.formData"
-                        submissions.bind="form.submissions"
-                    ></discord-form-submission-list>
-                </div>
             </div>
         </div>
     </section>
