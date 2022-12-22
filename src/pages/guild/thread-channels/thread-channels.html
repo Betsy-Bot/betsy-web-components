@@ -1,0 +1,34 @@
+<template>
+    <div class="row">
+        <div class="col-8">
+            <discord-feature-header
+                doc-url="https://docs.betsybot.xyz/features/thread-channels"
+                title="Thread Channels"
+                subtitle="Manage and track your thread channels."
+            ></discord-feature-header>
+
+            <div class="my-3">
+                <button mdc-button class="button-primary" click.delegate="goTo({id: 0})">
+                    Create New Thread Channel
+                </button>
+            </div>
+
+            <feature-item-list
+                data.bind="threadChannels"
+                show-toggler.bind="true"
+                toggle-handler.call="updateActive(item)"
+                item-click-handler.call="goTo(item)"
+                name-override="discordChannelId"
+            ></feature-item-list>
+        </div>
+        <div class="col-4">
+            <button
+                mdc-switch
+                selected.bind="featureActive"
+                value.bind="featureActive"
+                change.delegate="toggleFeature()"
+            ></button>
+            <label mdc-tooltip="When de-activated all thread channels will no longer work" class="me-5">Active?</label>
+        </div>
+    </div>
+</template>

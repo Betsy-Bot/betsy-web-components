@@ -367,6 +367,24 @@ export class Guild {
                 }
             },
             {
+                name: 'manage-thread-channel',
+                route: 'thread-channels/:threadChannelId',
+                moduleId: PLATFORM.moduleName('pages/guild/thread-channels/manage-thread-channel/manage-thread-channel'),
+                title: 'Manage Thread Channel',
+                settings: {
+                    auth: true
+                }
+            },
+            {
+                name: 'thread-channels',
+                route: 'thread-channels',
+                moduleId: PLATFORM.moduleName('pages/guild/thread-channels/thread-channels'),
+                title: 'Thread Channels',
+                settings: {
+                    auth: true
+                }
+            },
+            {
                 name: 'verification',
                 route: 'verification',
                 moduleId: PLATFORM.moduleName('pages/guild/verification/verification'),

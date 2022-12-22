@@ -82,11 +82,11 @@ export class ManagePolls {
             } else {
                 this.poll = await this.discordService.updatePoll(this.poll);
             }
-            toast(`Giveaway ${this.isNew ? 'Created' : 'Updated'}!`);
+            toast(`Poll ${this.isNew ? 'Created' : 'Updated'}!`);
             this.router.navigateBack();
         } catch(e) {
             console.log(e);
-            toast('Failed to create giveaway', {severity: 'error'})
+            toast('Failed to create poll', {severity: 'error'})
         }
     }
 
@@ -94,10 +94,10 @@ export class ManagePolls {
         if (event.detail.action == 'ok') {
             try {
                 await this.discordService.deleteGiveawayById(this.poll.id);
-                toast("Deleted giveaway message!", {severity: "success"})
+                toast("Deleted poll!", {severity: "success"})
                 this.router.navigateBack();
             } catch(e) {
-                toast("Failed to delete giveaway", {severity: "error"});
+                toast("Failed to delete poll", {severity: "error"});
                 throw e;
             }
         }

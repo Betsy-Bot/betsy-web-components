@@ -24,6 +24,7 @@ export class DiscordService {
     WELCOME_MESSAGES = 'WelcomeMessages';
     AUTO_RESPONDERS = 'AutoResponders';
     VERIFICATION = 'Verification';
+    THREAD_CHANNELS = 'ThreadChannels';
 
     constructor(private api: ApiService) {
     }
@@ -376,4 +377,25 @@ export class DiscordService {
     async deletePollById(settingsId: string) {
         return this.api.doDelete(`DiscordPoll/${settingsId}`);
     }
+
+    async getDiscordThreadChannels(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/DiscordThreadChannels`);
+    }
+
+    async createDiscordThreadChannels(threadChannel: any) {
+        return this.api.doPost(`DiscordThreadChannel`, threadChannel);
+    }
+
+    async updateDiscordThreadChannel(threadChannel: any) {
+        return this.api.doPatch(`DiscordThreadChannel/${threadChannel.id}`, threadChannel);
+    }
+
+    async getDiscordThreadChannelById(threadChannelId: string) {
+        return this.api.doGet(`DiscordThreadChannel/${threadChannelId}`);
+    }
+
+    async deleteDiscordThreadChannelById(threadChannelId: string) {
+        return this.api.doDelete(`DiscordThreadChannel/${threadChannelId}`);
+    }
+
 }
