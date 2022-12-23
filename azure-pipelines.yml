@@ -44,6 +44,3 @@ stages:
                         repository: 'BestyPanel-QA'
                         command: 'buildAndPush'
                         Dockerfile: '**/Dockerfile'
-                        tags: |
-                        $(Build.BuildId)
-                        latest
