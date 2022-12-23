@@ -34,10 +34,10 @@ stages:
                       targetType: 'inline'
                       script: 'npm i'
                 - task: Bash@3
-                  displayName: Run npm run build:staging
+                  displayName: Run npm run build:production
                   inputs:
                       targetType: 'inline'
-                      script: 'npm run build:staging'
+                      script: 'npm run build:production'
                 - task: Docker@2
                   inputs:
                         containerRegistry: 'BetsyContainerRegistry'
