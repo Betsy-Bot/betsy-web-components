@@ -1,6 +1,6 @@
 {
   "debug": true,
-  "apiEndpoint": "https://devapi.betsybot.xyz/",
-  "redirectUrl": "https://test.betsybot.xyz/login",
-  "botClientId": "943260131599220856"
+  "apiEndpoint": "https://dev.betsybot.xyz/",
+  "redirectUrl": "https://qa.betsybot.xyz/login",
+  "botClientId": "1055851802735677600"
 }
