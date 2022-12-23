@@ -11,7 +11,7 @@ resources:
 variables:
     # Container registry service connection established during pipeline creation
     dockerRegistryServiceConnection: '4d99b72f-99af-4aa6-9be8-c6f43af4d429'
-    imageRepository: 'betsypanelqa'
+    imageRepository: 'betsypanel'
     containerRegistry: 'BetsyContainerRegistry'
     dockerfilePath: '**/Dockerfile'
     tag: '$(Build.BuildId)'
