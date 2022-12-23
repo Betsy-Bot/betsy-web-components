@@ -39,10 +39,8 @@ stages:
                       targetType: 'inline'
                       script: 'npm run build:staging'
                 - task: Docker@2
-                  displayName: Build and push an image to container registry
                   inputs:
-                      command: buildAndPush
-                      repository: $(imageRepository)
-                      dockerfile: $(dockerfilePath)
-                      containerRegistry: $(dockerRegistryServiceConnection)
-                      tags: |
+                        containerRegistry: 'BetsyContainerRegistry'
+                        repository: 'BestyPanel-QA'
+                        command: 'buildAndPush'
+                        Dockerfile: '**/Dockerfile'
