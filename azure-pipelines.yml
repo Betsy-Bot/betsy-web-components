@@ -11,8 +11,8 @@ resources:
 variables:
     # Container registry service connection established during pipeline creation
     dockerRegistryServiceConnection: '4d99b72f-99af-4aa6-9be8-c6f43af4d429'
-    imageRepository: 'betsypanelqa'
-    containerRegistry: 'betsycontainerregistry.azurecr.io'
+    imageRepository: 'betsypanel-qa'
+    containerRegistry: 'BetsyContainerRegistry'
     dockerfilePath: '**/Dockerfile'
     tag: '$(Build.BuildId)'
 
@@ -39,10 +39,8 @@ stages:
                       targetType: 'inline'
                       script: 'npm run build:staging'
                 - task: Docker@2
-                  displayName: Build and push an image to container registry
                   inputs:
-                      command: buildAndPush
-                      repository: $(imageRepository)
-                      dockerfile: $(dockerfilePath)
-                      containerRegistry: $(dockerRegistryServiceConnection)
-                      tags: |
+                        containerRegistry: 'BetsyContainerRegistry'
+                        repository: 'BestyPanel-QA'
+                        command: 'buildAndPush'
+                        Dockerfile: '**/Dockerfile'
