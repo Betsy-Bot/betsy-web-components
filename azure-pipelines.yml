@@ -41,6 +41,6 @@ stages:
                 - task: Docker@2
                   inputs:
                         containerRegistry: 'BetsyContainerRegistry'
-                        repository: 'BestyPanel-QA'
+                        repository: 'BestyPanel'
                         command: 'buildAndPush'
                         Dockerfile: '**/Dockerfile'
