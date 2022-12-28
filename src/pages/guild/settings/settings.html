@@ -4,7 +4,7 @@
         subtitle="Manage various global settings for your server"
     ></discord-feature-header>
 
-    <div class="row mt-4">
+    <div class="row mt-4 g-4">
         <div class="col-12 col-lg-6">
             <div class="permission-area p-4" mdc-elevation="12">
                 <h4>Authorized Panel Users</h4>
@@ -38,7 +38,31 @@
                 </form>
             </div>
         </div>
-        <div class="col12 col-lg-6">
+        <div class="col-12 col-lg-6">
+            <form submit.delegate="updateGlobalSettings()">
+                <div class="p-4" mdc-elevation="12">
+                    <h4>Auto Roles</h4>
+                    <discord-role-selector
+                        remove-everyone.bind="true"
+                        label="Select Roles"
+                        selected-role.two-way="selectedRole"
+                    ></discord-role-selector>
+                    <mdc-chip-set input if.bind="guild.globalSettings.autoRoles">
+                        <!-- Compact notation -->
+                        <mdc-chip repeat.for="role of guild.globalSettings.autoRoles">
+                            ${role.name}
+                            <span click.delegate="removeRole($index)" trailing>X</span>
+                        </mdc-chip>
+                    </mdc-chip-set>
+                    <div class="text-end mt-3">
+                        <button mdc-button class="button-primary" type="submit">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-12 col-lg-6">
             <form submit.delegate="updateGlobalSettings()">
                 <div class="p-4" mdc-elevation="12">
                     <h4>Custom Bot Settings</h4>
