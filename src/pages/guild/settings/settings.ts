@@ -49,6 +49,11 @@ export class Settings {
         toast("Updated Custom Bot Settings", {severity: 'success'})
     }
 
+    async updateAutoRolesSettings() {
+        await this.discordService.updateAutoRolesForGuild(this.guild, this.guildId);
+        toast("Updated Auto Roles", {severity: 'success'})
+    }
+
     async selectedRoleChanged() {
         if (!this.guild.globalSettings) {
             this.guild.globalSettings = {};

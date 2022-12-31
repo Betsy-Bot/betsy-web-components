@@ -259,6 +259,10 @@ export class DiscordService {
         return this.api.doPatch(`DiscordGuild/${guildId}/GlobalSettings`, guild);
     }
 
+    async updateAutoRolesForGuild(guild: any, guildId: string) {
+        return this.api.doPatch(`DiscordGuild/${guildId}/AutoRoles`, guild);
+    }
+
     async updateApiKyesForGuild(guild: any, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/ApiKeys`, guild);
     }

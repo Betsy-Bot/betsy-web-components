@@ -136,5 +136,27 @@
                 form-id.two-way="request.discordFormId"
             ></discord-form-selector>
         </div>
+        <div class="col-12 col-lg-6">
+            <mdc-text-field
+                class="w-100"
+                label="Closed Response Text"
+                maxlength="255"
+                value.bind="request.textOptions.closedMessageText">
+            </mdc-text-field>
+            <mdc-text-field-helper-line>
+                <mdc-text-field-character-counter></mdc-text-field-character-counter>
+            </mdc-text-field-helper-line>
+        </div>
+        <div class="col-12 col-lg-6">
+            <mdc-text-field
+                class="w-100"
+                label="Form Data Text"
+                maxlength="255"
+                value.bind="request.textOptions.formDataText">
+            </mdc-text-field>
+            <mdc-text-field-helper-line>
+                <mdc-text-field-character-counter></mdc-text-field-character-counter>
+            </mdc-text-field-helper-line>
+        </div>
     </div>
 </template>
