@@ -32,6 +32,17 @@
                 click.delegate="request.hideName = !request.hideName"
             ></button>
         </div>
+        <div class="col-6 col-lg-6">
+            <label class="me-3">Public Transcript</label>
+            <button
+                mdc-switch
+                selected.bind="request.publicTranscript"
+                click.delegate="request.publicTranscript = !request.publicTranscript"
+            ></button>
+        </div>
+        <div class="col-6 col-lg-6">
+
+        </div>
         <div class="col-12 col-lg-6">
             <mdc-text-field
                 class="w-100"

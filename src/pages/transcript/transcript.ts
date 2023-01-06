@@ -18,6 +18,11 @@ export class Transcript {
     }
 
     async attached() {
+        const isPublic = await this.discordService.getTranscriptPublic(this.ticketId);
+        if (isPublic) {
+            this.ticket = await this.discordService.getSupportTicketById(this.ticketId);
+            return;
+        }
         this.user = await this.sessionService.getUser();
         if (this.user) {
             this.ticket = await this.discordService.getSupportTicketById(this.ticketId);

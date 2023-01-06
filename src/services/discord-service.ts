@@ -239,6 +239,9 @@ export class DiscordService {
         return this.api.doGet(`DiscordSupportTicketSettings/${ticketId}`);
     }
 
+    async getTranscriptPublic(ticketId: string) {
+        return this.api.doGet(`DiscordSupportTicket/${ticketId}/Public`);
+    }
     async getSupportTicketById(ticketId: string) {
         return this.api.doGet(`DiscordSupportTicket/${ticketId}`);
     }
