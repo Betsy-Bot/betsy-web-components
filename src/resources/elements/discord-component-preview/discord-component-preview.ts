@@ -5,6 +5,9 @@ export class DiscordComponentPreview {
     @bindable components;
 
     getColumnClass(length, type) {
+        if (length == 1) {
+            return 'col-12';
+        }
         switch (type) {
             case DiscordComponentType.Button:
                 return 'col-2'
