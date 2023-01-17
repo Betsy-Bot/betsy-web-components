@@ -27,10 +27,9 @@ export class ThreadChannels {
         this.featureActive = this.guild.activeFeatures.includes(this.discordService.THREAD_CHANNELS);
     }
 
-    async updateActive(event, threadChannel) {
-        event.stopPropagation();
-        threadChannel.active = !threadChannel.active;
-        await this.discordService.toggleDiscordMessageActiveStatus(threadChannel.id, threadChannel.active);
+    async updateActive(threadChannel) {
+        threadChannel.active = !!threadChannel.active;
+        await this.discordService.updateDiscordThreadChannel(threadChannel);
         toast(`Active status has been updated`, {severity: "success"})
     }
 
