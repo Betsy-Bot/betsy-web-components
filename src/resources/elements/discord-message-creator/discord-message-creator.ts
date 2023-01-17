@@ -13,6 +13,8 @@ export class DiscordMessageCreator {
     @bindable selectedMessage;
     @bindable hideTemplate: boolean = false
     @bindable customBuilder;
+    jsonDialog;
+    json: string;
 
     selectedMessageChanged() {
         if (this.selectedMessage?.message) {
@@ -37,6 +39,13 @@ export class DiscordMessageCreator {
             return !this.message.embeds || this.message.embeds.length < 10
         } else {
             return !this.message?.embeds || this.message?.embeds?.length < 1
+        }
+    }
+
+    importJson(event) {
+        if (event.detail.action == 'ok') {
+            this.message = JSON.parse(this.json);
+            this.json = "";
         }
     }
 }
