@@ -55,7 +55,7 @@ export class ManageThreadChannel {
             this.router.navigateBack();
         } catch(e) {
             console.log(e);
-            toast('Failed to create giveaway', {severity: 'error'})
+            toast('Failed to update thread channel', {severity: 'error'})
         }
     }
 
@@ -63,10 +63,10 @@ export class ManageThreadChannel {
         if (event.detail.action == 'ok') {
             try {
                 await this.discordService.deleteDiscordThreadChannelById(this.threadChannel.id);
-                toast("Deleted giveaway message!", {severity: "success"})
+                toast("Deleted thread channel!", {severity: "success"})
                 this.router.navigateBack();
             } catch(e) {
-                toast("Failed to delete giveaway", {severity: "error"});
+                toast("Failed to delete thread channel", {severity: "error"});
                 throw e;
             }
         }
