@@ -26,6 +26,10 @@ export class DiscordService {
     VERIFICATION = 'Verification';
     THREAD_CHANNELS = 'ThreadChannels';
 
+    get guildChannels() {
+        return this.guildChannelData.data;
+    }
+
     constructor(private api: ApiService) {
     }
 

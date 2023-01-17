@@ -42,5 +42,6 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./value-converters/date-formatter'),
         PLATFORM.moduleName('./value-converters/object-keys'),
         PLATFORM.moduleName('./value-converters/pascal-spacing'),
+        PLATFORM.moduleName('./value-converters/channel-name'),
     ]);
 }
