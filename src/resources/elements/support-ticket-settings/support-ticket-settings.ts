@@ -1,5 +1,14 @@
 import {DiscordService} from "../../../services/discord-service";
 import {bindable, inject} from "aurelia-framework";
+export const SupportTicketAudits = [
+    "Opened",
+    "Closed",
+    "Deleted",
+    "RoleAdded",
+    "RoleRemoved",
+    "UserAdded",
+    "UserRemoved"
+];
 
 @inject(DiscordService)
 export class SupportTicketSettings {

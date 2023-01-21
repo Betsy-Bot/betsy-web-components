@@ -56,7 +56,6 @@
 
                 <form submit.delegate="editSupportTicketSettings()">
                     <div if.bind="tab === 'settings'">
-                        <div class="fs-6 py-3">Customize the Message Container which is to house the Create Ticket Button</div>
                         <support-ticket-settings
                             guild-id.bind="guildId"
                             request.two-way="ticket"
@@ -74,7 +73,6 @@
                     </div>
 
                     <div if.bind="tab === 'initial'">
-                        <div class="fs-6 py-3">Customize the Initial Message that is sent to the channel when the support ticket channel is created</div>
                         <mdc-text-field
                             class="w-100"
                             label="Close Button Text"

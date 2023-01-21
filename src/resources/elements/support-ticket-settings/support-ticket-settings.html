@@ -44,6 +44,40 @@
 
         </div>
         <div class="col-12 col-lg-6">
+            <discord-channel-selector
+                label="Select Channel for Audits"
+                if.bind="guildId"
+                channel-id.two-way="request.logChannelId"
+                guild-id.bind="guildId"
+                type.bind="0"
+                required.bind="false"
+                include-null.bind="true"
+            ></discord-channel-selector>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="au-select" if.bind="channels">
+                <mdc-select
+                    class="standard-betsy-select w-100"
+                    value.bind="channelId"
+                    label="Select Active Audits"
+                >
+                    <mdc-icon mdc-select-icon>dns</mdc-icon>
+                    <mdc-list>
+                        <mdc-list-item value.bind="null" if.bind="includeNull">
+                            - None -
+                        </mdc-list-item>
+                        <mdc-list-item repeat.for="channel of channels" value.bind="channel.id" if.bind="matchesType(channel)">
+                            ${channel.name}
+                        </mdc-list-item>
+                    </mdc-list>
+                </mdc-select>
+                <mdc-select-helper-text validation></mdc-select-helper-text>
+            </div>
+        </div>
+        <div class="col-12" if.bind="request.activeSupportTicketAudits">
+
+        </div>
+        <div class="col-12 col-lg-6">
             <mdc-text-field
                 class="w-100"
                 label="Support Ticket Identifier"
@@ -71,17 +105,6 @@
                 guild-id.bind="guildId"
                 type.bind="0"
                 required.bind="true"
-            ></discord-channel-selector>
-        </div>
-        <div class="col-12 col-lg-6">
-            <discord-channel-selector
-                label="Select Channel for Audits"
-                if.bind="guildId"
-                channel-id.two-way="request.logChannelId"
-                guild-id.bind="guildId"
-                type.bind="0"
-                required.bind="false"
-                include-null.bind="true"
             ></discord-channel-selector>
         </div>
         <div class="col-12 col-lg-6">
