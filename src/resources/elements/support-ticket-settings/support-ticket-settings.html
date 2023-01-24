@@ -1,5 +1,5 @@
 <template>
-    <div class="row g-4">
+    <div class="row g-4 mt-1">
         <div class="col-6 col-lg-6">
             <label class="me-3">DM Transcript On Close</label>
             <button
@@ -55,27 +55,27 @@
             ></discord-channel-selector>
         </div>
         <div class="col-12 col-lg-6">
-            <div class="au-select" if.bind="channels">
+            <div class="au-select">
                 <mdc-select
                     class="standard-betsy-select w-100"
-                    value.bind="channelId"
+                    value.bind="selectedAuditOption"
+                    change.delegate="selectAuditOption($event)"
                     label="Select Active Audits"
                 >
                     <mdc-icon mdc-select-icon>dns</mdc-icon>
                     <mdc-list>
-                        <mdc-list-item value.bind="null" if.bind="includeNull">
-                            - None -
-                        </mdc-list-item>
-                        <mdc-list-item repeat.for="channel of channels" value.bind="channel.id" if.bind="matchesType(channel)">
-                            ${channel.name}
+                        <mdc-list-item repeat.for="option of options" value.bind="option">
+                            ${option | pascalSpacing}
                         </mdc-list-item>
                     </mdc-list>
                 </mdc-select>
                 <mdc-select-helper-text validation></mdc-select-helper-text>
             </div>
-        </div>
-        <div class="col-12" if.bind="request.activeSupportTicketAudits">
-
+            <div if.bind="request.supportTicketAudits">
+                <ul>
+                    <li repeat.for="audit of request.supportTicketAudits">* ${audit}</li>
+                </ul>
+            </div>
         </div>
         <div class="col-12 col-lg-6">
             <mdc-text-field

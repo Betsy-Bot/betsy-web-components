@@ -17,12 +17,20 @@ export class SupportTicketSettings {
     @bindable request;
     @bindable guildId;
     @bindable authorizedRole;
+    @bindable selectedAuditOption;
 
     roles;
     tab = 'settings';
-
+    options: string[] = SupportTicketAudits;
     async created() {
         this.roles = await this.discordService.getDiscordRoles(this.guildId);
+    }
+
+    selectAuditOption() {
+        if (this.selectedAuditOption) {
+            this.request.supportTicketAudits.push(this.selectedAuditOption);
+            this.selectedAuditOption = null;
+        }
     }
 
     removeRole(index) {
