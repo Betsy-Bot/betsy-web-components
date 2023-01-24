@@ -12,10 +12,20 @@ export class DiscordFeatureHeader {
     @bindable hideBack;
     @bindable docUrl;
     @bindable displayWarning;
+    @bindable deleteFunction;
+    @bindable copyFunction;
     banner;
 
     navigateBack() {
         this.router.navigateBack();
+    }
+
+    handleDelete() {
+        this.deleteFunction();
+    }
+
+    handleCopy() {
+        this.copyFunction();
     }
 
     attached() {

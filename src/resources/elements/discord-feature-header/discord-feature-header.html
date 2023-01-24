@@ -1,15 +1,37 @@
 <template>
     <section id="discord-feature-header">
         <h2>
+            <button
+                mdc-fab
+                mini.bind="true"
+                icon="arrow_back"
+                click.delegate="navigateBack()"
+                class="blackFab"
+            ></button>
+
             ${title}
-            <button mdc-button class="button-secondary" click.delegate="navigateBack()" if.bind="!hideBack">
-                Back
-            </button>
-            <a href="${docUrl}" if.bind="docUrl" target="_blank">
-                <button mdc-button class="button-primary" type="button">
-                    Read the Docs <mdc-icon>arrow_outward</mdc-icon>
-                </button>
+
+            <a href="${docUrl}" if.bind="docUrl" target="_blank" class="mx-2">
+                <button mdc-fab mini.bind="true" icon="description"></button>
             </a>
+
+            <button
+                class="mx-2"
+                mdc-fab
+                mini.bind="true"
+                icon="content_copy"
+                click.delegate="handleCopy()"
+                if.bind="copyFunction"
+            ></button>
+
+            <button
+                class="mx-2 redFab"
+                mdc-fab
+                mini.bind="true"
+                icon="delete"
+                click.delegate="handleDelete()"
+                if.bind="deleteFunction"
+            ></button>
         </h2>
         <div>
             ${subtitle}

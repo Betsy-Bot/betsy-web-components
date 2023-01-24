@@ -1,6 +1,8 @@
+@use '@material/theme/color-palette' as material-color;
+
 #validation-error {
     mdc-banner {
-        border-left: 13px solid red;
+        border-left: 13px solid material-color.$red-900;
     }
 
     .mdc-banner__actions {
