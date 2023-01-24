@@ -1,7 +1,8 @@
 @use '~@material/button';
 @use '~@material/theme';
-@use '@material/select';
-@use '@material/textfield';
+@use '~@material/select';
+@use '~@material/dialog';
+@use '~@material/textfield';
 @import 'bootstrap';
 
 body {
@@ -11,6 +12,11 @@ body {
     --mdc-background-primary: rgba(0, 0, 0, 0);
     --mdc-theme-surface: rgba(76, 96, 133, 1);
     --mdc-theme-text-primary-on-background: $body-color;
+}
+
+#confirmation-dialog {
+    @include dialog.max-width(1400px, 16px);
+    @include dialog.max-height(1000px, 16px);
 }
 
 .button-secondary {

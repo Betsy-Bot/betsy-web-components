@@ -29,6 +29,17 @@
 @use '~@material/linear-progress/mdc-linear-progress';
 @use '~@material/chips/styles'as chips-styles;
 @use '~@material/tooltip/styles'as toolip-styles;
+@use '@material/fab';
+@use '@material/theme/color-palette' as material-color;
 
 @include slider.core-styles;
 @include list-evolution-mixins.core-styles;
+
+
+.mdc-fab.blackFab {
+    @include fab.accessible(black);
+}
+
+.mdc-fab.redFab {
+    @include fab.accessible(material-color.$red-900);
+}

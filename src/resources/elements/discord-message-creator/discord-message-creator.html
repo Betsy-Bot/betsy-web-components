@@ -1,34 +1,38 @@
 <template>
     <confirmation-dialog
         cancel-text="Cancel"
-        confirm-text="Import"
+        confirm-text="Save"
         dialog.two-way="jsonDialog"
         handler.call="importJson(event)"
-        title="Import Json"
+        title="Json"
     >
         <mdc-text-field
             label.bind="JSON"
             textarea
             rows="8"
             ref="pickerElement"
-            class="w-100"
+            class="jsonField"
             required
             value.bind="json"
         ></mdc-text-field>
     </confirmation-dialog>
     <section id="discord-message-creator">
         <div class="row">
-            <div class="col-9">
+            <div class="col-10">
                 <message-resource-selector
                     if.bind="!hideTemplate"
                     label="Load Template"
                     selected-message.two-way="selectedMessage"
                 ></message-resource-selector>
             </div>
-            <div class="col-3">
-                <button mdc-button class="button-primary w-100 h-100" click.delegate="jsonDialog.open()">
-                    Import JSON
-                </button>
+            <div class="col-2 text-end">
+                <button
+                    mdc-fab
+                    extended
+                    label="JSON"
+                    icon="code"
+                    click.delegate="openDialog()"
+                ></button>
             </div>
         </div>
         <mdc-tab-bar view-model.ref="tabBar"

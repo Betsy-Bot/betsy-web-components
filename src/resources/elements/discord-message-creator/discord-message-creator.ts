@@ -1,5 +1,6 @@
 import { bindable, inject } from 'aurelia-framework';
 import {DiscordEmbed} from "../../../services/models/discord";
+import './discord-message-creator.scss';
 
 export class DiscordMessageCreator {
     @bindable message = {
@@ -47,5 +48,10 @@ export class DiscordMessageCreator {
             this.message = JSON.parse(this.json);
             this.json = "";
         }
+    }
+
+    openDialog() {
+        this.json = JSON.stringify(this.message, null, 4);
+        this.jsonDialog.open()
     }
 }
