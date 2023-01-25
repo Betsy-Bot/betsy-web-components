@@ -52,7 +52,7 @@
                 </mdc-tab-bar>
 
                 <form submit.delegate="save()">
-                    <div if.bind="tab === 'settings'">
+                    <div show.bind="tab === 'settings'">
                         <mdc-text-field
                             label="Name"
                             type="text"
@@ -96,7 +96,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="" if.bind="tab === 'roles'">
+                    <div class="" show.bind="tab === 'roles'">
                         <discord-role-selector
                             remove-everyone.bind="true"
                             label="Select Role"
@@ -141,7 +141,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="" if.bind="tab === 'container'">
+                    <div class="" show.bind="tab === 'container'">
                         <discord-message-creator
                             allow-components="true"
                             message.two-way="giveaway.containerMessage.message"
@@ -153,7 +153,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="" if.bind="tab === 'winning'">
+                    <div class="" show.bind="tab === 'winning'">
                         <discord-message-creator
                             message.two-way="giveaway.winningMessage.message"
                         ></discord-message-creator>

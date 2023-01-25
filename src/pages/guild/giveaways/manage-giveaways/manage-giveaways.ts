@@ -56,7 +56,7 @@ export class ManageGiveaways {
                         components: [{
                             type: DiscordComponentType.Button,
                             style: DiscordButtonStyle.Success,
-                            customId: "GiveawayEnter:",
+                            custom_id: "GiveawayEnter",
                             label: "Enter"
                         }]
                     }
