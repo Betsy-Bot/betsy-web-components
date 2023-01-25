@@ -34,7 +34,7 @@ export class FeatureItemList {
         if (this.nameOverride) {
             return this.convertValue(item[this.nameOverride]);
         }
-        let value = this.convertValue(item.name ? item.name : item.title);
+        return this.convertValue(item.name ? item.name : item.title);
     }
 
     convertValue(value) {

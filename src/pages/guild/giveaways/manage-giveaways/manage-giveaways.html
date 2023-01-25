@@ -16,21 +16,9 @@
                     doc-url="https://docs.betsybot.xyz/features/giveaways"
                     title="${isNew ? 'Create' : 'Edit'} Giveaway"
                     subtitle="Giveaways automatically select a winner and post that winner at the end of the giveaway."
+                    copy-function.call="cloneGiveaway()"
+                    delete-function.call="confirmDeleteDialog.open()"
                 ></discord-feature-header>
-                <div class="row my-4">
-                    <div class="col-6">
-                        <button mdc-button class="button-secondary" click.delegate="cloneGiveaway()">
-                            Clone Giveaway
-                        </button>
-                    </div>
-                    <div class="col-6">
-                        <div class="text-end">
-                            <button mdc-button class="button-secondary" click.delegate="confirmDeleteDialog.open()">
-                                Delete Giveaway
-                            </button>
-                        </div>
-                    </div>
-                </div>
                 <button
                     class="mt-3"
                     mdc-switch
