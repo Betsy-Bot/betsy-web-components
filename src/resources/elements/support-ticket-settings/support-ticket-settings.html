@@ -73,7 +73,9 @@
             </div>
             <div if.bind="request.supportTicketAudits">
                 <ul>
-                    <li repeat.for="audit of request.supportTicketAudits">* ${audit}</li>
+                    <li repeat.for="audit of request.supportTicketAudits">
+                        * ${audit} <span class="ms-2 text-danger cursor-pointer" click.delegate="removeAuditOption($index)">(X)</span>
+                    </li>
                 </ul>
             </div>
         </div>

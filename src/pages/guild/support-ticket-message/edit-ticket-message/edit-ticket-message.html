@@ -16,6 +16,8 @@
                     doc-url="https://docs.betsybot.xyz/features/support-tickets"
                     title="Edit Support Ticket Message"
                     subtitle="Edit the message that is already on your server."
+                    delete-function.call="confirmDeleteDialog.open()"
+                    copy-function.call="handleClone()"
                 ></discord-feature-header>
 
                 <div class="row mt-3 mb-4">
@@ -23,16 +25,6 @@
                         <a href="guild/${guildId}/support-tickets/${ticket.id}/submissions" mdc-button class="button-primary">
                             View Created Tickets
                         </a>
-                    </div>
-                    <div class="col-4 text-center">
-                        <button mdc-button class="button-primary" click.delegate="handleClone()">
-                            Clone Support Ticket
-                        </button>
-                    </div>
-                    <div class="col-4 text-end">
-                        <button mdc-button class="button-secondary" click.delegate="confirmDeleteDialog.open()">
-                            Delete Support Ticket
-                        </button>
                     </div>
                 </div>
 

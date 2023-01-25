@@ -33,6 +33,10 @@ export class SupportTicketSettings {
         }
     }
 
+    removeAuditOption(index) {
+        this.request.supportTicketAudits.splice(index, 1)
+    }
+
     removeRole(index) {
         this.request.assignedRoles.splice(index, 1)
     }
