@@ -1,0 +1,16 @@
+<template>
+    <section id="key-value-storage">
+        <discord-feature-header
+            title="Create and Manage Key Value Storage"
+            subtitle="Key value storage can be used in message templating to retrieve key value pairs and present them in a message."
+        ></discord-feature-header>
+
+        <div class="list-area mt-4">
+            <feature-item-list
+                show-toggler.bind="false"
+                data.bind="items"
+                item-click-handler.call="goToItem(item)"
+            ></feature-item-list>
+        </div>
+    </section>
+</template>
