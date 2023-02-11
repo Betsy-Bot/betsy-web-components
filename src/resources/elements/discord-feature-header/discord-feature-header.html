@@ -16,6 +16,15 @@
             </a>
 
             <button
+                class="mx-2 greenFab"
+                mdc-fab
+                mini.bind="true"
+                icon="add_circle"
+                click.delegate="handleCreate()"
+                if.bind="createFunction"
+            ></button>
+
+            <button
                 class="mx-2"
                 mdc-fab
                 mini.bind="true"

@@ -409,4 +409,20 @@ export class DiscordService {
         return this.api.doDelete(`DiscordThreadChannel/${threadChannelId}`);
     }
 
+    async createKeyValueCategory(keyValueCategory: any) {
+        return this.api.doPost(`KeyValueCategory`, keyValueCategory);
+    }
+
+    async updateKeyValueCategory(keyValueCategory: any) {
+        return this.api.doPatch(`KeyValueCategory/${keyValueCategory.id}`, keyValueCategory);
+    }
+
+    async getKeyValueCategoryById(keyValueCategory: string) {
+        return this.api.doGet(`KeyValueCategory/${keyValueCategory}`);
+    }
+
+    async deleteKeyValueCategoryById(keyValueCategory: string) {
+        return this.api.doDelete(`KeyValueCategory/${keyValueCategory}`);
+    }
+
 }

@@ -301,6 +301,12 @@ export class Guild {
                 moduleId: PLATFORM.moduleName('pages/guild/resources/key-value-storage/key-value-storage'),
                 title: 'Key Value Storage',
             },
+            {
+                name: 'key-value-storage',
+                route: 'resources/key-value-storage/:itemId',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/key-value-storage/manage-key-value-storage/manage-key-value-storage'),
+                title: 'Manage Key Value Storage',
+            },
         ]);
 
         config.mapUnknownRoutes(() => {

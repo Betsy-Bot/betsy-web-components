@@ -14,6 +14,7 @@ export class DiscordFeatureHeader {
     @bindable displayWarning;
     @bindable deleteFunction;
     @bindable copyFunction;
+    @bindable createFunction;
     banner;
 
     navigateBack() {
@@ -22,6 +23,10 @@ export class DiscordFeatureHeader {
 
     handleDelete() {
         this.deleteFunction();
+    }
+
+    handleCreate() {
+        this.createFunction();
     }
 
     handleCopy() {

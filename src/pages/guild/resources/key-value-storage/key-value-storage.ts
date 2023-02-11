@@ -16,6 +16,10 @@ export class KeyValueStorage {
         this.guildId = this.params.guildId;
     }
 
+    createFunction() {
+        this.goToItem({id: 0});
+    }
+
     goToItem(item) {
         this.router.navigate(`/guild/${this.guildId}/resources/key-value-storage/${item.id}`)
     }

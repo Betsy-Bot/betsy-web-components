@@ -43,3 +43,8 @@
 .mdc-fab.redFab {
     @include fab.accessible(material-color.$red-900);
 }
+
+.mdc-fab.greenFab {
+    color: white;
+    @include fab.accessible(material-color.$green-500);
+}
