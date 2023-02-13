@@ -10,27 +10,70 @@ export class KeyValueStorage {
     }
     guildId: string;
     params;
-    item = {};
+    item;
     itemId: string;
     isNew: boolean;
     itemTemplate = {
         discordServerId: '',
+        storedValues: [
+            {
+                key: '1',
+                value: '1',
+                used: false
+            },
+            {
+                key: '2',
+                value: '2',
+                used: true
+            },
+            {
+                key: '3',
+                value: '3',
+                used: false
+            },
+            {
+                key: '4',
+                value: '4',
+                used: true
+            }
+        ]
     }
+
+    columns = [
+        {
+            dataField: "key"
+        },
+        {
+            dataField: "value"
+        },
+        {
+            dataField: "used",
+            dataType: 'boolean'
+        }
+    ]
+
+    loading = true;
 
     activate(params) {
         this.params = params;
         this.guildId = this.params.guildId;
-        this.itemId = this.params.itemId;
+        this.itemId = this.params.itemId as string;
     }
 
     async attached() {
         if (!this.itemId || this.itemId == '0') {
+            this.itemTemplate.discordServerId = this.discordService.getLocalGuild().id;
             this.isNew = true;
             this.item = this.itemTemplate;
         } else {
             this.item = await this.discordService.getKeyValueCategoryById(this.itemId);
         }
-        this.itemTemplate.discordServerId = this.discordService.getLocalGuild().id;
+        console.log(this.item);
+        this.loading = false;
+    }
+
+    insertRow() {
+        console.log('inserted');
     }
 
     async save() {

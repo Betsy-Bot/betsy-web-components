@@ -5,6 +5,34 @@
             subtitle="Key value storage can be used in message templating to retrieve key value pairs and present them in a message."
         ></discord-feature-header>
 
-        <div>Create</div>
+        <div class="row">
+            <div class="col-12 col-xl-4">
+                <form submit.delegate="save()" class="mt-3">
+                    <mdc-text-field
+                        label="Identifier"
+                        type="text"
+                        class="w-100 my-2"
+                        value.bind="item.categoryName"
+                        required
+                    ></mdc-text-field>
+                    <div class="text-end mt-3">
+                        <button type="submit" mdc-button class="button-primary">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12 col-xl-8">
+                <dx-data-grid
+                    editing-mode="row"
+                    if.bind="!loading"
+                    allow-adding.bind="true"
+                    allow-editing.bind="true"
+                    allow-deleteing.bind="true"
+                    columns.bind="columns"
+                    data-source.bind="item.storedValues"
+                ></dx-data-grid>
+            </div>
+        </div>
     </section>
 </template>
