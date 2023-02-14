@@ -52,7 +52,6 @@ export class KeyValueStorage {
         }
         this.dataGrid = new DataGrid(this.table, {
             dataSource: this.item.storedValues,
-            keyExpr: 'key',
             showBorders: true,
             paging: {
                 enabled: false,
