@@ -409,6 +409,10 @@ export class DiscordService {
         return this.api.doDelete(`DiscordThreadChannel/${threadChannelId}`);
     }
 
+    async getKeyValueCategories() {
+        return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/KeyValueCategories`);
+    }
+
     async createKeyValueCategory(keyValueCategory: any) {
         return this.api.doPost(`KeyValueCategory`, keyValueCategory);
     }

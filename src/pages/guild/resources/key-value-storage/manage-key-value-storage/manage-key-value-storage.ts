@@ -3,6 +3,7 @@ import {inject} from "aurelia-framework";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {DiscordService} from 'services/discord-service';
 import {toast} from "lets-toast";
+import DataGrid from 'devextreme/ui/data_grid';
 
 @inject(EventAggregator, DiscordService, Router)
 export class KeyValueStorage {
@@ -13,30 +14,10 @@ export class KeyValueStorage {
     item;
     itemId: string;
     isNew: boolean;
+    table;
     itemTemplate = {
         discordServerId: '',
-        storedValues: [
-            {
-                key: '1',
-                value: '1',
-                used: false
-            },
-            {
-                key: '2',
-                value: '2',
-                used: true
-            },
-            {
-                key: '3',
-                value: '3',
-                used: false
-            },
-            {
-                key: '4',
-                value: '4',
-                used: true
-            }
-        ]
+        storedValues: []
     }
 
     columns = [
@@ -53,6 +34,7 @@ export class KeyValueStorage {
     ]
 
     loading = true;
+    dataGrid;
 
     activate(params) {
         this.params = params;
@@ -68,12 +50,32 @@ export class KeyValueStorage {
         } else {
             this.item = await this.discordService.getKeyValueCategoryById(this.itemId);
         }
-        console.log(this.item);
+        this.dataGrid = new DataGrid(this.table, {
+            dataSource: this.item.storedValues,
+            keyExpr: 'key',
+            showBorders: true,
+            paging: {
+                enabled: false,
+            },
+            editing: {
+                mode: 'batch',
+                allowUpdating: true,
+                allowAdding: true,
+                allowDeleting: true,
+                selectTextOnEditStart: true,
+                startEditAction: 'click',
+            },
+            onSaved: ({changes}) => {
+                for (let object of changes) {
+                    const index = this.item.storedValues.findIndex(x => x.key == object.data.key);
+                    this.item.storedValues[index] = object.data;
+                }
+                this.save();
+            },
+            // @ts-ignore
+            columns: this.columns,
+        })
         this.loading = false;
-    }
-
-    insertRow() {
-        console.log('inserted');
     }
 
     async save() {

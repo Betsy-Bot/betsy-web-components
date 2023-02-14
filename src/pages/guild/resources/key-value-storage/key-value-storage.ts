@@ -16,6 +16,10 @@ export class KeyValueStorage {
         this.guildId = this.params.guildId;
     }
 
+    async attached() {
+        this.items = await this.discordService.getKeyValueCategories();
+    }
+
     createFunction() {
         this.goToItem({id: 0});
     }
