@@ -58,7 +58,6 @@
                     <div if.bind="tab === 'container'">
                         <discord-message-creator
                             max-components.bind="1"
-                            allow-components.bind="true"
                             message.bind="ticket.discordMessage.message"
                             single.bind="true"
                         ></discord-message-creator>
@@ -75,7 +74,6 @@
                             <mdc-text-field-character-counter></mdc-text-field-character-counter>
                         </mdc-text-field-helper-line>
                         <discord-message-creator
-                            allow-components.bind="false"
                             message.two-way="ticket.initialMessage"
                             single.bind="true"
                         ></discord-message-creator>
