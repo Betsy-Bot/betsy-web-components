@@ -2,7 +2,8 @@
     <section id="discord-button">
         <button class="${getButtonClass(button.style)}" type="button">
             <img src="https://cdn.discordapp.com/emojis/${button.emoji.id}.webp?size=24&quality=lossless"
-                 if.bind="button.emoji">
+                 if.bind="button.emoji && !isEmoji">
+            <span if.bind="isEmoji">${button.emoji.name}</span>
             ${button.label}
             <span if.bind="button.style === 5" class="ms-1">
                 <svg class="launchIcon-2KvOPN" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24"><path

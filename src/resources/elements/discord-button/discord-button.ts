@@ -17,4 +17,15 @@ export class DiscordButton {
                 return 'discord-button-link'
         }
     }
+
+    get displayEmoji() {
+        if (this.button.emoji.name) {
+            return this.button.emoji.name
+        }
+        return null;
+    }
+
+    get isEmoji() {
+        return /\p{Extended_Pictographic}/u.test(this.button.emoji.name); // true :)
+    }
 }

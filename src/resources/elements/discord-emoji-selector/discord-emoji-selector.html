@@ -3,7 +3,10 @@
     <div class="row">
         <div class="col">
             <div if.bind="value">
-                Current Emoji: ${displayEmoji}
+                Current Emoji:
+                <img src="https://cdn.discordapp.com/emojis/${value.id}.webp?size=24&quality=lossless"
+                     if.bind="!isEmoji">
+                <span else>${displayEmoji}</span>
             </div>
         </div>
         <div class="col">

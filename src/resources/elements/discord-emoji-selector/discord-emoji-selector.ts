@@ -71,4 +71,8 @@ export class DiscordEmojiSelector {
         }
         return formattedEmojis;
     }
+
+    get isEmoji() {
+        return /\p{Extended_Pictographic}/u.test(this.value.name); // true :)
+    }
 }
