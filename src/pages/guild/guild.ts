@@ -307,10 +307,16 @@ export class Guild {
                 moduleId: PLATFORM.moduleName('pages/guild/resources/key-value-storage/manage-key-value-storage/manage-key-value-storage'),
                 title: 'Manage Key Value Storage',
             },
+            {
+                name: 'audit-logs',
+                route: 'resources/audit-logs',
+                moduleId: PLATFORM.moduleName('pages/guild/resources/audit-logs/audit-logs'),
+                title: 'Audit Logs',
+            },
         ]);
 
         config.mapUnknownRoutes(() => {
-            return {redirect: 'guild-dashboard'};
+            return { redirect: 'guild-dashboard' };
         });
     }
 }

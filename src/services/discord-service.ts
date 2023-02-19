@@ -429,4 +429,7 @@ export class DiscordService {
         return this.api.doDelete(`KeyValueCategory/${keyValueCategory}`);
     }
 
+    async getAuditLogs() {
+        return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/AuditLogs`);
+    }
 }

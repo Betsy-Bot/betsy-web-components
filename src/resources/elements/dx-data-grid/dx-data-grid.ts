@@ -95,7 +95,6 @@ export class DxDataGrid {
                 grouping: false,
                 summary: false
             },
-            //colCount: 2,
             scrolling: {
                 mode: 'standard',
                 showScrollbar: 'always'
@@ -146,7 +145,6 @@ export class DxDataGrid {
                 template: this.masterDetail
             },
         });
-        console.log(this.dataGrid);
     }
 
     /**
