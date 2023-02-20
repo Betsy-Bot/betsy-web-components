@@ -15,6 +15,16 @@
                         value.bind="item.categoryName"
                         required
                     ></mdc-text-field>
+                    <div>
+                        <label for="deliverOnFetch">Mark Used on Fetch</label>
+                        <button
+                            id="deliverOnFetch"
+                            mdc-switch
+                            selected.bind="item.deliverOnFetch"
+                            value.bind="item.deliverOnFetch"
+                            click.trigger="item.deliverOnFetch = !!item.deliverOnFetch"
+                        ></button>
+                    </div>
                     <div class="text-end mt-3">
                         <button type="submit" mdc-button class="button-primary">
                             Save
