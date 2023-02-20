@@ -82,7 +82,6 @@ export class KeyValueStorage {
                 this.item = await this.discordService.updateKeyValueCategory(this.item);
             }
             toast(`Key Value Category ${this.isNew ? 'Created' : 'Updated'}!`);
-            this.router.navigateBack();
         } catch(e) {
             console.log(e);
             toast('Failed to create key value category', {severity: 'error'})
