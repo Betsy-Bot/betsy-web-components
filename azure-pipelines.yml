@@ -3,7 +3,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-    - develop
+    - master
 
 resources:
     - repo: self
@@ -11,7 +11,7 @@ resources:
 variables:
     # Container registry service connection established during pipeline creation
     dockerRegistryServiceConnection: '4d99b72f-99af-4aa6-9be8-c6f43af4d429'
-    imageRepository: 'betsypanel-qa'
+    imageRepository: 'betsypanel'
     containerRegistry: 'BetsyContainerRegistry'
     dockerfilePath: '**/Dockerfile'
     tag: '$(Build.BuildId)'
@@ -34,13 +34,13 @@ stages:
                       targetType: 'inline'
                       script: 'npm i'
                 - task: Bash@3
-                  displayName: Run npm run build:staging
+                  displayName: Run npm run build:production
                   inputs:
                       targetType: 'inline'
-                      script: 'npm run build:staging'
+                      script: 'npm run build:production'
                 - task: Docker@2
                   inputs:
-                        containerRegistry: 'BetsyContainerRegistry'
-                        repository: 'BestyPanel-QA'
-                        command: 'buildAndPush'
-                        Dockerfile: '**/Dockerfile'
+                      containerRegistry: 'BetsyContainerRegistry'
+                      repository: 'BestyPanel'
+                      command: 'buildAndPush'
+                      Dockerfile: '**/Dockerfile'
