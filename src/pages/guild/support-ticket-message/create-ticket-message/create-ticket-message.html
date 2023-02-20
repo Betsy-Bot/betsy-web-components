@@ -49,7 +49,6 @@
                         <discord-message-creator
                             max-components.bind="1"
                             allow-components.bind="true"
-                            custom-builder.bind="true"
                             message.bind="request.discordMessage.message"
                             single.bind="true"
                         ></discord-message-creator>
@@ -76,7 +75,6 @@
 
                             <discord-message-creator
                                 allow-components.bind="true"
-                                custom-builder.bind="true"
                                 message.two-way="request.initialMessage"
                                 single.bind="true"
                             ></discord-message-creator>

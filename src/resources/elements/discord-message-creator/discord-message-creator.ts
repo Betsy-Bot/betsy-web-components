@@ -1,5 +1,6 @@
 import { bindable, inject } from 'aurelia-framework';
 import {DiscordEmbed} from "../../../services/models/discord";
+import './discord-message-creator.scss';
 
 export class DiscordMessageCreator {
     @bindable message = {
@@ -7,12 +8,14 @@ export class DiscordMessageCreator {
         components: []
     };
     @bindable single;
-    @bindable allowComponents: boolean;
+    @bindable allowComponents: boolean = true;
     @bindable maxComponents: number = 5;
     @bindable tab = 'message';
     @bindable selectedMessage;
     @bindable hideTemplate: boolean = false
     @bindable customBuilder;
+    jsonDialog;
+    json: string;
 
     selectedMessageChanged() {
         if (this.selectedMessage?.message) {
@@ -38,5 +41,17 @@ export class DiscordMessageCreator {
         } else {
             return !this.message?.embeds || this.message?.embeds?.length < 1
         }
+    }
+
+    importJson(event) {
+        if (event.detail.action == 'ok') {
+            this.message = JSON.parse(this.json);
+            this.json = "";
+        }
+    }
+
+    openDialog() {
+        this.json = JSON.stringify(this.message, null, 4);
+        this.jsonDialog.open()
     }
 }

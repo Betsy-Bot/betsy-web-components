@@ -26,7 +26,6 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./elements/discord-form-creator/discord-form-creator'),
         PLATFORM.moduleName('./elements/discord-form-preview/discord-form-preview'),
         PLATFORM.moduleName('./elements/discord-form-selector/discord-form-selector'),
-        PLATFORM.moduleName('./elements/discord-form-submission-list/discord-form-submission-list'),
         PLATFORM.moduleName('./elements/discord-menu/discord-menu'),
         PLATFORM.moduleName('./elements/discord-menu-item/discord-menu-item'),
         PLATFORM.moduleName('./elements/discord-tracked-message-settings/discord-tracked-message-settings'),
@@ -43,5 +42,6 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./value-converters/date-formatter'),
         PLATFORM.moduleName('./value-converters/object-keys'),
         PLATFORM.moduleName('./value-converters/pascal-spacing'),
+        PLATFORM.moduleName('./value-converters/channel-name'),
     ]);
 }

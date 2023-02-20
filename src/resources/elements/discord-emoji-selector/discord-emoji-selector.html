@@ -1,34 +1,25 @@
 <template>
-    <button
-        mdc-switch
-        selected.bind="useDefaultEmojis"
-        value.bind="useDefaultEmojis"
-    ></button>
-    <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Default Emojis</label>
 
-    <span if.bind="value && !value.id">
-        Current: ${value.name}
-    </span>
-    <mdc-select if.bind="emojis" class="standard-betsy-select w-${size}" value.bind="value" label.bind="label" required.bind="required">
-        <mdc-icon mdc-select-icon if.bind="value && value.id">
-            <img src="https://cdn.discordapp.com/emojis/${value.id}.webp?size=24&quality=lossless">
-        </mdc-icon>
-        <mdc-icon mdc-select-icon else>
-            ${emoji.name}
-        </mdc-icon>
-        <mdc-list>
-            <mdc-list-item value.bind="null">
-                - None -
-            </mdc-list-item>
-            <mdc-list-item repeat.for="emoji of emojis" value.bind="emoji" if.bind="!useDefaultEmojis">
-                <img src="https://cdn.discordapp.com/emojis/${emoji.id}.webp?size=24&quality=lossless"> ${emoji.name}
-            </mdc-list-item>
-            <template if.bind="useDefaultEmojis">
-                <mdc-list-item repeat.for="emoji of defaultEmojies" value.bind="emoji" if.bind="shouldDisplayEmoji(emoji.primaryName)">
-                    <span> ${emoji.name} </span>
-                    ${emoji.primaryName}
-                </mdc-list-item>
-            </template>
-        </mdc-list>
-    </mdc-select>
+    <div class="row">
+        <div class="col">
+            <div if.bind="value">
+                Current Emoji:
+                <img src="https://cdn.discordapp.com/emojis/${value.id}.webp?size=24&quality=lossless"
+                     if.bind="!isEmoji">
+                <span else>${displayEmoji}</span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="text-end">
+                <button mdc-button class="button-primary" click.delegate="selectingEmoji = !selectingEmoji" type="button">
+                    ${selectingEmoji ? 'Hide' : 'Show'} Emojis
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <button mdc-button class="button-danger" click.delegate="value = null" if.bind="selectingEmoji" type="button">
+        Remove Emoji
+    </button>
+    <div ref="emojiSelector" show.bind="selectingEmoji"></div>
 </template>

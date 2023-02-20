@@ -56,6 +56,7 @@ export interface DiscordMessageImage {
 }
 
 export interface SendMessageToChannelRequest {
+    sendTime?: string,
     channelType: DiscordChannelType,
     message: DiscordMessageContent
 }
@@ -165,6 +166,7 @@ export class DiscordFormFieldAnswer {
     label: string;
     value: string;
     custom_id: string;
+    fields: any[]
 }
 
 export class DiscordComponentWrapper {

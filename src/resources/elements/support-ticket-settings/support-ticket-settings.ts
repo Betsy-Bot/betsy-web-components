@@ -1,5 +1,14 @@
 import {DiscordService} from "../../../services/discord-service";
 import {bindable, inject} from "aurelia-framework";
+export const SupportTicketAudits = [
+    "Opened",
+    "Closed",
+    "Deleted",
+    "RoleAdded",
+    "RoleRemoved",
+    "UserAdded",
+    "UserRemoved"
+];
 
 @inject(DiscordService)
 export class SupportTicketSettings {
@@ -8,12 +17,24 @@ export class SupportTicketSettings {
     @bindable request;
     @bindable guildId;
     @bindable authorizedRole;
+    @bindable selectedAuditOption;
 
     roles;
     tab = 'settings';
-
+    options: string[] = SupportTicketAudits;
     async created() {
         this.roles = await this.discordService.getDiscordRoles(this.guildId);
+    }
+
+    selectAuditOption() {
+        if (this.selectedAuditOption) {
+            this.request.supportTicketAudits.push(this.selectedAuditOption);
+            this.selectedAuditOption = null;
+        }
+    }
+
+    removeAuditOption(index) {
+        this.request.supportTicketAudits.splice(index, 1)
     }
 
     removeRole(index) {

@@ -109,7 +109,10 @@
                         </div>
                     </div>
                     <div class="" if.bind="tab === 'message'">
-                        <discord-message-creator message.two-way="responder.discordMessage.message"></discord-message-creator>
+                        <discord-message-creator
+                            allow-components.bind="true"
+                            message.two-way="responder.discordMessage.message"
+                        ></discord-message-creator>
 
                         <div class="text-end mt-3">
                             <button type="submit" mdc-button class="button-primary">

@@ -1,5 +1,5 @@
 import 'devextreme/dist/css/dx.material.purple.dark.compact.css';
-import {bindable, inject, observable} from 'aurelia-framework';
+import {bindable, inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {SessionService} from 'services/session-service';
@@ -45,7 +45,7 @@ export class DxDataGrid {
     @bindable dataSource;
     @bindable onContentReady;
     //Value for storing filters on new accounts/currency/items filters
-    @bindable @observable auxFiltersForNewProduct;
+    @bindable auxFiltersForNewProduct;
     //Values for start and ending dates on toolbars for report.
     @bindable startDateForToolbar;
     @bindable endDateForToolbar;
@@ -63,7 +63,6 @@ export class DxDataGrid {
     }
 
     attached() {
-        const editing = this.prepareEditingOptions();
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         this.dataGrid = new DataGrid(this.control, {
@@ -96,7 +95,6 @@ export class DxDataGrid {
                 grouping: false,
                 summary: false
             },
-            //colCount: 2,
             scrolling: {
                 mode: 'standard',
                 showScrollbar: 'always'
@@ -141,7 +139,7 @@ export class DxDataGrid {
             onCellPrepared: this.onCellPrepared ? (e) => this.onCellPrepared(e) : undefined,
             onEditingStart: this.onEditingStart ? (e) => this.onEditingStart(e) : undefined,
             columnChooser: { enabled: this.allowChoosing, mode: 'select' },
-            ...editing,
+            ...this.prepareEditingOptions(),
             masterDetail: {
                 enabled: typeof(this.masterDetail) === 'object' ? false : this.masterDetail,
                 template: this.masterDetail
@@ -158,6 +156,8 @@ export class DxDataGrid {
             allowUpdating: this.allowEditing,
             allowAdding: this.allowAdding,
             allowDeleting: this.allowDeleting,
+            selectTextOnEditStart: true,
+            startEditAction: 'click',
             mode: this.editingMode, // 'batch' | 'cell' | 'form' | 'popup'
             useIcons: true,
             form: {

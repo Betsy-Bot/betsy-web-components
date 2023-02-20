@@ -2,7 +2,7 @@ import { EventAggregator } from "aurelia-event-aggregator";
 import { DiscordService } from "../../../services/discord-service";
 import { Router } from "aurelia-router";
 import { SessionService } from "../../../services/session-service";
-import { inject } from "aurelia-framework";
+import {bindable, inject} from "aurelia-framework";
 import { toast } from "lets-toast";
 
 @inject(EventAggregator, DiscordService, Router, SessionService)
@@ -18,6 +18,7 @@ export class Settings {
     guild;
     params;
     isAdmin;
+    @bindable selectedRole;
 
     async attached() {
         this.guildId = this.params.guildId;
@@ -30,7 +31,6 @@ export class Settings {
     permissionUserId;
 
     async addAuthorizedUser() {
-        console.log(this.guild.authorizedUsers.findIndex( x => this.permissionUserId));
         if (this.guild.authorizedUsers.findIndex( x => x == this.permissionUserId) == -1) {
             this.guild.authorizedUsers.push(this.permissionUserId);
         }
@@ -47,6 +47,30 @@ export class Settings {
     async updateGlobalSettings() {
         await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
         toast("Updated Custom Bot Settings", {severity: 'success'})
+    }
+
+    async updateAutoRolesSettings() {
+        await this.discordService.updateAutoRolesForGuild(this.guild, this.guildId);
+        toast("Updated Auto Roles", {severity: 'success'})
+    }
+
+    async selectedRoleChanged() {
+        if (!this.guild.globalSettings) {
+            this.guild.globalSettings = {};
+        }
+        if (!this.guild.globalSettings.autoRoles) {
+            this.guild.globalSettings.autoRoles = [];
+        }
+        if (this.selectedRole) {
+            this.guild.globalSettings.autoRoles.push({
+                name: this.selectedRole.name,
+                discordRoleId: this.selectedRole.id
+            });
+        }
+    }
+
+    async removeRole(index) {
+        this.guild.globalSettings.autoRoles.splice(index, 1);
     }
 }
 

@@ -1,84 +1,99 @@
 <template>
     <section id="discord-component-creator">
         <div if.bind="components.length < maxComponents" class="my-3">
-            <button mdc-button class="button-primary" click.delegate="addNewComponent()" type="button">
-                Add Component
+            <button mdc-button class="button-primary" click.delegate="addNewComponentRow()" type="button">
+                Add Component Row
             </button>
         </div>
         <div class="row">
-            <div class="col-12 col-lg-6 my-3" repeat.for="componentWrapper of components">
-                <div class="components" repeat.for="component of componentWrapper.components">
-                    <div class="inputs">
-                        <div mdc-elevation="9">
-                            <div class="text-end">
-                                <span class="cursor-pointer text-danger" click.delegate="removeComponent($parent.$index)">X</span>
-                            </div>
-                            <mdc-select class="standard-betsy-select w-100 mb-2" value.bind="component.type" label="Select Component Type">
-                                <mdc-icon mdc-select-icon>dns</mdc-icon>
-                                <mdc-list>
-                                    <mdc-list-item repeat.for="type of componentTypes" value.bind="type.type">
-                                        ${type.label}
-                                    </mdc-list-item>
-                                </mdc-list>
-                            </mdc-select>
-
-                            <!-- Menu -->
-                            <template if.bind="component.type === 3">
-                                <mdc-text-field
-                                    class="w-100 my-2"
-                                    label="Menu Custom ID"
-                                    value.bind="component.custom_id"
-                                ></mdc-text-field>
-                                <button mdc-button class="button-primary" click.delegate="addMenuOption($index)">
-                                    Add Option
-                                </button>
-                                <template repeat.for="item of component.options">
-                                    <discord-menu-item item.two-way="item" remove-function.call="removeMenuOption($index)"></discord-menu-item>
-                                </template>
-                            </template>
-
-                            <!-- Button -->
-                            <template if.bind="component.type === 2">
-                                <mdc-select class="standard-betsy-select w-100 mb-2" value.bind="component.style" label="Select Style">
+            <div class="col-12" repeat.for="componentWrapper of components">
+                <button mdc-button class="button-primary" click.delegate="addNewComponent($index)" type="button" if.bind="componentWrapper.components.length < 5">
+                    Add Button
+                </button>
+                <div class="row" mdc-elevation="9">
+                    <div class="col-12">
+                        <div class="text-end">
+                            <span class="cursor-pointer text-danger" click.delegate="removeComponentRow($index)">X</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6" repeat.for="component of componentWrapper.components">
+                        <div class="inputs">
+                            <div mdc-elevation="9">
+                                <div class="text-end">
+                                    <span class="cursor-pointer text-danger" click.delegate="removeComponent($parent.$index, $index)">X</span>
+                                </div>
+                                <mdc-select class="standard-betsy-select w-100 mb-2" value.bind="component.type" label="Select Component Type">
                                     <mdc-icon mdc-select-icon>dns</mdc-icon>
                                     <mdc-list>
-                                        <mdc-list-item repeat.for="style of styles" value.bind="style.value">
-                                            ${style.label}
+                                        <mdc-list-item repeat.for="type of componentTypes" value.bind="type.type">
+                                            ${type.label}
                                         </mdc-list-item>
                                     </mdc-list>
                                 </mdc-select>
-                                <div class="my-2">
+
+                                <!-- Menu -->
+                                <template if.bind="component.type === 3">
                                     <mdc-text-field
-                                        class="w-100"
-                                        label="Label"
-                                        value.bind="component.label"
-                                        required.bind="true"
-                                    ></mdc-text-field>
-                                </div>
-                                <div class="my-2" if.bind="!customBuilder && component.style === 5">
-                                    <mdc-text-field
-                                        class="w-100"
-                                        label="URL"
-                                        value.bind="component.url"
-                                        required.bind="true"
-                                    ></mdc-text-field>
-                                </div>
-                                <div class="my-2" if.bind="customBuilder && component.style !== 5">
-                                    <mdc-text-field
-                                        class="w-100"
-                                        label="Custom ID"
+                                        class="w-100 my-2"
+                                        label="Menu Custom ID"
                                         value.bind="component.custom_id"
-                                        required.bind="true"
                                     ></mdc-text-field>
-                                </div>
-                                <div class="my-2">
-                                    <discord-emoji-selector
-                                        value.two-way="component.emoji"
-                                        size.bind="100"
-                                        label="Button Emoji"
-                                    ></discord-emoji-selector>
-                                </div>
-                            </template>
+                                    <mdc-text-field
+                                        class="w-100 my-2"
+                                        label="Menu Placeholder"
+                                        value.bind="component.placeholder"
+                                    ></mdc-text-field>
+                                    <button mdc-button class="button-primary" click.delegate="addMenuOption($index)">
+                                        Add Option
+                                    </button>
+                                    <template repeat.for="item of component.options">
+                                        <discord-menu-item item.two-way="item" remove-function.call="removeMenuOption($index)"></discord-menu-item>
+                                    </template>
+                                </template>
+
+                                <!-- Button -->
+                                <template if.bind="component.type === 2">
+                                    <mdc-select class="standard-betsy-select w-100 mb-2" value.bind="component.style" label="Select Style">
+                                        <mdc-icon mdc-select-icon>dns</mdc-icon>
+                                        <mdc-list>
+                                            <mdc-list-item repeat.for="style of styles" value.bind="style.value">
+                                                ${style.label}
+                                            </mdc-list-item>
+                                        </mdc-list>
+                                    </mdc-select>
+                                    <div class="my-2">
+                                        <mdc-text-field
+                                            class="w-100"
+                                            label="Label"
+                                            value.bind="component.label"
+                                            required.bind="true"
+                                        ></mdc-text-field>
+                                    </div>
+                                    <div class="my-2" if.bind="component.style === 5">
+                                        <mdc-text-field
+                                            class="w-100"
+                                            label="URL"
+                                            value.bind="component.url"
+                                            required.bind="true"
+                                        ></mdc-text-field>
+                                    </div>
+                                    <div class="my-2" if.bind="component.style !== 5">
+                                        <mdc-text-field
+                                            class="w-100"
+                                            label="Custom ID"
+                                            value.bind="component.custom_id"
+                                            required.bind="true"
+                                        ></mdc-text-field>
+                                    </div>
+                                    <div class="my-2">
+                                        <discord-emoji-selector
+                                            value.two-way="component.emoji"
+                                            size.bind="100"
+                                            label="Button Emoji"
+                                        ></discord-emoji-selector>
+                                    </div>
+                                </template>
+                            </div>
                         </div>
                     </div>
                 </div>

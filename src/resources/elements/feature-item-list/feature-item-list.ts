@@ -1,6 +1,9 @@
-import {bindable, inject} from "aurelia-framework";
+import {bindable, autoinject} from "aurelia-framework";
 import './feature-item-list.scss';
+import { ChannelNameValueConverter } from "../../value-converters/channel-name";
 
+export enum ValueConverter { ChannelName = "ChannelName" }
+@autoinject
 export class FeatureItemList {
     @bindable data: any;
     @bindable showToggler: boolean;
@@ -11,6 +14,11 @@ export class FeatureItemList {
     @bindable nameSuffix;
     @bindable suffixProperty;
     @bindable trailingIcon
+    @bindable valueConverter: ValueConverter = null
+
+    constructor(private channelValueConverter: ChannelNameValueConverter) {
+    }
+
 
     handleToggleClick(event, item) {
         item.active = !item.active;
@@ -24,8 +32,17 @@ export class FeatureItemList {
 
     getName(item) {
         if (this.nameOverride) {
-            return item[this.nameOverride];
+            return this.convertValue(item[this.nameOverride]);
         }
-        return item.name ? item.name : item.title;
+        return this.convertValue(item.name ? item.name : item.title);
+    }
+
+    convertValue(value) {
+        switch (this.valueConverter) {
+            case ValueConverter.ChannelName:
+                return this.channelValueConverter.toView(value);
+            default:
+                return value;
+        }
     }
 }

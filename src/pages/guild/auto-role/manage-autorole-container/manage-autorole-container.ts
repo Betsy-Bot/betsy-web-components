@@ -56,6 +56,8 @@ export class ManageAutoroleContainer {
             this.container.discordRoles.push({
                 discordRoleId: this.selectedRole.id,
                 name: this.selectedRole.name,
+                label: this.selectedRole.name,
+                value: this.selectedRole.name,
                 description: '',
                 discordServerId: this.discordService.getLocalServerId()
             })

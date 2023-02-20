@@ -24,6 +24,11 @@ export class DiscordService {
     WELCOME_MESSAGES = 'WelcomeMessages';
     AUTO_RESPONDERS = 'AutoResponders';
     VERIFICATION = 'Verification';
+    THREAD_CHANNELS = 'ThreadChannels';
+
+    get guildChannels() {
+        return this.guildChannelData.data;
+    }
 
     constructor(private api: ApiService) {
     }
@@ -238,6 +243,9 @@ export class DiscordService {
         return this.api.doGet(`DiscordSupportTicketSettings/${ticketId}`);
     }
 
+    async getTranscriptPublic(ticketId: string) {
+        return this.api.doGet(`DiscordSupportTicket/${ticketId}/Public`);
+    }
     async getSupportTicketById(ticketId: string) {
         return this.api.doGet(`DiscordSupportTicket/${ticketId}`);
     }
@@ -256,6 +264,10 @@ export class DiscordService {
 
     async updateGlobalSettingsForGuild(guild: any, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/GlobalSettings`, guild);
+    }
+
+    async updateAutoRolesForGuild(guild: any, guildId: string) {
+        return this.api.doPatch(`DiscordGuild/${guildId}/AutoRoles`, guild);
     }
 
     async updateApiKyesForGuild(guild: any, guildId: string) {
@@ -375,5 +387,49 @@ export class DiscordService {
 
     async deletePollById(settingsId: string) {
         return this.api.doDelete(`DiscordPoll/${settingsId}`);
+    }
+
+    async getDiscordThreadChannels(guildId: string) {
+        return this.api.doGet(`DiscordGuild/${guildId}/DiscordThreadChannels`);
+    }
+
+    async createDiscordThreadChannels(threadChannel: any) {
+        return this.api.doPost(`DiscordThreadChannel`, threadChannel);
+    }
+
+    async updateDiscordThreadChannel(threadChannel: any) {
+        return this.api.doPatch(`DiscordThreadChannel/${threadChannel.id}`, threadChannel);
+    }
+
+    async getDiscordThreadChannelById(threadChannelId: string) {
+        return this.api.doGet(`DiscordThreadChannel/${threadChannelId}`);
+    }
+
+    async deleteDiscordThreadChannelById(threadChannelId: string) {
+        return this.api.doDelete(`DiscordThreadChannel/${threadChannelId}`);
+    }
+
+    async getKeyValueCategories() {
+        return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/KeyValueCategories`);
+    }
+
+    async createKeyValueCategory(keyValueCategory: any) {
+        return this.api.doPost(`KeyValueCategory`, keyValueCategory);
+    }
+
+    async updateKeyValueCategory(keyValueCategory: any) {
+        return this.api.doPatch(`KeyValueCategory/${keyValueCategory.id}`, keyValueCategory);
+    }
+
+    async getKeyValueCategoryById(keyValueCategory: string) {
+        return this.api.doGet(`KeyValueCategory/${keyValueCategory}`);
+    }
+
+    async deleteKeyValueCategoryById(keyValueCategory: string) {
+        return this.api.doDelete(`KeyValueCategory/${keyValueCategory}`);
+    }
+
+    async getAuditLogs() {
+        return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/AuditLogs`);
     }
 }
