@@ -38,6 +38,13 @@ export class ManageTrackedMessage {
         }
     }
 
+    copy() {
+        this.isNew = true;
+        this.message.id = undefined;
+        this.message.name = undefined;
+        this.message.discordMessage.id = undefined;
+    }
+
     async save() {
         try {
             if (this.isNew) {
