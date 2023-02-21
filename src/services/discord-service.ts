@@ -409,6 +409,10 @@ export class DiscordService {
         return this.api.doDelete(`DiscordThreadChannel/${threadChannelId}`);
     }
 
+    async deleteDiscordTrackedMessageById(threadChannelId: string) {
+        return this.api.doDelete(`DiscordTrackedMessage/${threadChannelId}`);
+    }
+
     async getKeyValueCategories() {
         return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/KeyValueCategories`);
     }

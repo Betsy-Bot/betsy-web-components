@@ -1,4 +1,13 @@
 <template>
+    <confirmation-dialog
+        cancel-text="Cancel"
+        confirm-text="Delete"
+        dialog.two-way="confirmDeleteDialog"
+        handler.call="deleteItem(event)"
+        title="Are you sure you would like to delete?"
+    >
+        This is a permanent action and cannot be undone
+    </confirmation-dialog>
     <section id="create-data-command">
         <div class="row">
             <div class="col-12 col-lg-8">
@@ -6,6 +15,7 @@
                     doc-url="https://docs.betsybot.xyz/features/tracked-messages"
                     title="${isNew ? 'Create' : 'Edit'} Tracked Message"
                     subtitle="Tracked Messages are just normal messages that you keep track of. This allows you to edit them without resending/using a command/etc."
+                    delete-function.call="confirmDeleteDialog.open()"
                 ></discord-feature-header>
 
                 <form submit.delegate="save()">
