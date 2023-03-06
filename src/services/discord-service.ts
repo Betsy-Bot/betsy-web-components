@@ -142,6 +142,9 @@ export class DiscordService {
         }
         return this.guildChannelData.data;
     }
+    getLocalDiscordChannels() {
+        return this.guildChannelData.data;
+    }
 
     async getDiscordRoles(guildId: string) {
         return this.guild.guild.roles;
