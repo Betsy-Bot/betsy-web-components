@@ -1,7 +1,7 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "services/discord-service";
-import {Router} from "aurelia-router";
-import {toast} from "lets-toast";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "services/discord-service";
+import { Router } from "aurelia-router";
+import { toast } from "lets-toast";
 import { bindable, inject, observable } from "aurelia-framework";
 
 @inject(EventAggregator, DiscordService, Router)
@@ -71,7 +71,7 @@ export class ManageAutoResponder {
             this.router.navigateBack();
         } catch (e) {
             console.log(e);
-            toast('Failed to create message', {severity: 'error'})
+            toast('Failed to create message', { severity: 'error' })
         }
     }
 
@@ -79,7 +79,7 @@ export class ManageAutoResponder {
         if (!this.responder.phrases) {
             this.responder.phrases = [];
         }
-        this.responder.phrases.push({value: this.phrase});
+        this.responder.phrases.push({ value: this.phrase });
     }
 
     async removePhrase(index) {

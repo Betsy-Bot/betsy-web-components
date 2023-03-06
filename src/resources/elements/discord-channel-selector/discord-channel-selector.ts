@@ -1,5 +1,5 @@
-import {inject, bindable} from "aurelia-framework";
-import {DiscordService} from "../../../services/discord-service";
+import { inject, bindable } from "aurelia-framework";
+import { DiscordService } from "../../../services/discord-service";
 import { ValidationControllerFactory, ValidationRules, ValidationController, Rule } from 'aurelia-validation';
 
 @inject(DiscordService, ValidationControllerFactory)
@@ -15,7 +15,7 @@ export class DiscordChannelSelector {
     @bindable channelId: string;
     @bindable type: number;
     @bindable label;
-    @bindable required: boolean = false;
+    @bindable required = false;
     @bindable class;
     @bindable includeNull;
     @bindable disabled;

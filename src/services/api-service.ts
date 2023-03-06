@@ -1,4 +1,4 @@
-import {inject, buildQueryString} from 'aurelia-framework';
+import { inject, buildQueryString } from 'aurelia-framework';
 import { HttpClient, json } from 'aurelia-fetch-client';
 
 @inject(HttpClient)

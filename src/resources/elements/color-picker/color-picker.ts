@@ -1,4 +1,4 @@
-import {bindable} from 'aurelia-framework';
+import { bindable } from 'aurelia-framework';
 import './color-picker.scss'
 
 export class ColorPicker {
@@ -11,7 +11,7 @@ export class ColorPicker {
     }
 
     getDecimalValue() {
-        let replaced = this.color.replace('#', '');
+        const replaced = this.color.replace('#', '');
         this.value = parseInt(replaced, 16);
     }
 }

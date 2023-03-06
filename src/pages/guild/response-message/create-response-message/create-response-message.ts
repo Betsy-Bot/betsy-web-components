@@ -1,7 +1,7 @@
-import {inject} from "aurelia-framework";
-import {BaseDiscordCommand, DiscordCommandActionType, DiscordCommandType} from "../../../../services/models/discord";
-import {DiscordService} from "../../../../services/discord-service";
-import {toast} from "lets-toast";
+import { inject } from "aurelia-framework";
+import { BaseDiscordCommand, DiscordCommandActionType, DiscordCommandType } from "../../../../services/models/discord";
+import { DiscordService } from "../../../../services/discord-service";
+import { toast } from "lets-toast";
 import { EventAggregator } from "aurelia-event-aggregator";
 import { Router } from "aurelia-router";
 
@@ -57,7 +57,7 @@ export class CreateResponseMessage {
             this.router.navigate(`/guild/${this.guildId}/response-message`);
         } catch(e) {
             console.log(e);
-            toast('Failed to create command', {severity: 'error'})
+            toast('Failed to create command', { severity: 'error' })
         }
     }
 }

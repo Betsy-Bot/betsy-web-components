@@ -1,8 +1,8 @@
 import 'devextreme/dist/css/dx.material.purple.dark.compact.css';
-import {bindable, inject} from 'aurelia-framework';
-import {Router} from 'aurelia-router';
-import {EventAggregator} from 'aurelia-event-aggregator';
-import {SessionService} from 'services/session-service';
+import { bindable, inject } from 'aurelia-framework';
+import { Router } from 'aurelia-router';
+import { EventAggregator } from 'aurelia-event-aggregator';
+import { SessionService } from 'services/session-service';
 import DataGrid from 'devextreme/ui/data_grid';
 
 @inject(Router, EventAggregator, SessionService)

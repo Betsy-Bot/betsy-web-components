@@ -1,4 +1,4 @@
-import {BaseDiscordServer} from "./discord";
+import { BaseDiscordServer } from "./discord";
 
 export interface ProfileResponse {
     token: string,

@@ -1,8 +1,8 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "services/discord-service";
-import {Router} from "aurelia-router";
-import {toast} from "lets-toast";
-import {bindable, inject} from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "services/discord-service";
+import { Router } from "aurelia-router";
+import { toast } from "lets-toast";
+import { bindable, inject } from "aurelia-framework";
 
 @inject(EventAggregator, DiscordService, Router)
 export class ManageTrackedMessage {
@@ -12,7 +12,6 @@ export class ManageTrackedMessage {
     activate(params) {
         this.guildId = params.guildId;
         this.messageId = params.messageId;
-
     }
 
     guildId: string;
@@ -28,6 +27,7 @@ export class ManageTrackedMessage {
             }
         }
     };
+    confirmDeleteDialog: HTMLElement;
 
     async attached() {
         if (!this.messageId || this.messageId == 0) {
@@ -36,6 +36,13 @@ export class ManageTrackedMessage {
         } else {
             this.message = await this.discordService.getTrackedMessage(this.guildId, this.messageId);
         }
+    }
+
+    copy() {
+        this.isNew = true;
+        this.message.id = undefined;
+        this.message.name = undefined;
+        this.message.discordMessage.id = undefined;
     }
 
     async save() {
@@ -50,7 +57,20 @@ export class ManageTrackedMessage {
             }
         } catch(e) {
             console.log(e);
-            toast('Failed to create message', {severity: 'error'})
+            toast('Failed to create message', { severity: 'error' })
+        }
+    }
+
+    async deleteItem(event) {
+        if (event.detail.action == 'ok') {
+            try {
+                await this.discordService.deleteDiscordTrackedMessageById(this.message.id);
+                toast("Deleted thread channel!", { severity: "success" })
+                this.router.navigateBack();
+            } catch(e) {
+                toast("Failed to delete thread channel", { severity: "error" });
+                throw e;
+            }
         }
     }
 }

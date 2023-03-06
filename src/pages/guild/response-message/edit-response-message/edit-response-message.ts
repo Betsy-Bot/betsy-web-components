@@ -1,7 +1,7 @@
-import {inject} from "aurelia-framework";
-import {BaseDiscordCommand, DiscordCommandType} from "../../../../services/models/discord";
-import {DiscordService} from "../../../../services/discord-service";
-import {toast} from "lets-toast";
+import { inject } from "aurelia-framework";
+import { BaseDiscordCommand, DiscordCommandType } from "../../../../services/models/discord";
+import { DiscordService } from "../../../../services/discord-service";
+import { toast } from "lets-toast";
 import { EventAggregator } from "aurelia-event-aggregator";
 import { Router } from "aurelia-router";
 
@@ -51,7 +51,7 @@ export class EditResponseMessage {
             await this.discordService.updateApplicationCommand(this.command);
             toast("Command Updated!");
         } catch(e) {
-            toast('Failed to create command', {severity: 'error'})
+            toast('Failed to create command', { severity: 'error' })
         }
     }
 }

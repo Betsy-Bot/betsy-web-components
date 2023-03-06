@@ -1,8 +1,8 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "services/discord-service";
-import {Router} from "aurelia-router";
-import {toast} from "lets-toast";
-import {bindable, inject} from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "services/discord-service";
+import { Router } from "aurelia-router";
+import { toast } from "lets-toast";
+import { bindable, inject } from "aurelia-framework";
 
 @inject(EventAggregator, DiscordService, Router)
 export class ManageWelcomeMessage {
@@ -47,7 +47,7 @@ export class ManageWelcomeMessage {
             this.router.navigateBack();
         } catch(e) {
             console.log(e);
-            toast('Failed to create message', {severity: 'error'})
+            toast('Failed to create message', { severity: 'error' })
         }
     }
 }

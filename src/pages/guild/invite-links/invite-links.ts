@@ -1,7 +1,7 @@
-import {inject} from "aurelia-framework";
-import {toast} from "lets-toast";
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "../../../services/discord-service";
+import { inject } from "aurelia-framework";
+import { toast } from "lets-toast";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "../../../services/discord-service";
 
 @inject(EventAggregator, DiscordService)
 export class InviteLinks {
@@ -56,13 +56,13 @@ export class InviteLinks {
             });
         }
         await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
-        toast('Updated Authorized Users', {severity: 'success'});
+        toast('Updated Authorized Users', { severity: 'success' });
     }
 
     async removeUser(index) {
         this.guild.globalSettings.authorizedInviteSenders.splice(index, 1);
         await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
-        toast('Updated Authorized Users', {severity: 'success'});
+        toast('Updated Authorized Users', { severity: 'success' });
     }
 
     async addAuthorizedRole() {
@@ -78,12 +78,12 @@ export class InviteLinks {
             });
         }
         await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
-        toast('Updated Authorized Roles', {severity: 'success'});
+        toast('Updated Authorized Roles', { severity: 'success' });
     }
 
     async removeRole(index) {
         this.guild.globalSettings.authorizedInviteSenderRoles.splice(index, 1);
         await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
-        toast('Updated Authorized Roles', {severity: 'success'});
+        toast('Updated Authorized Roles', { severity: 'success' });
     }
 }

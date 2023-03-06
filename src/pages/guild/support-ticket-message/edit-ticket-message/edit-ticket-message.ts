@@ -1,8 +1,8 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "services/discord-service";
-import {Router} from "aurelia-router";
-import {inject, observable} from "aurelia-framework";
-import {toast} from "lets-toast";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "services/discord-service";
+import { Router } from "aurelia-router";
+import { inject, observable } from "aurelia-framework";
+import { toast } from "lets-toast";
 
 
 @inject(EventAggregator, DiscordService, Router)
@@ -50,9 +50,9 @@ export class EditTicketMessage {
         try {
             this.ticket.discordGuildId = this.guildId;
             await this.discordService.updateSupportTicketSettings(this.guildId, this.ticket);
-            toast("Updated support message!", {severity: "success"})
+            toast("Updated support message!", { severity: "success" })
         } catch(e) {
-            toast("Failed to update support ticket creation message", {severity: "error"});
+            toast("Failed to update support ticket creation message", { severity: "error" });
             throw e;
         }
     }
@@ -61,16 +61,16 @@ export class EditTicketMessage {
         if (event.detail.action == 'ok') {
             try {
                 await this.discordService.deleteSupportTicketBySettingsId(this.ticket.id);
-                toast("Deleted support message!", {severity: "success"})
+                toast("Deleted support message!", { severity: "success" })
                 this.router.navigateBack();
             } catch(e) {
-                toast("Failed to delete support ticket creation message", {severity: "error"});
+                toast("Failed to delete support ticket creation message", { severity: "error" });
                 throw e;
             }
         }
     }
 
     handleClone() {
-        this.router.navigateToRoute(`create-ticket-message`, {data: JSON.stringify(this.ticket)});
+        this.router.navigateToRoute(`create-ticket-message`, { data: JSON.stringify(this.ticket) });
     }
 }

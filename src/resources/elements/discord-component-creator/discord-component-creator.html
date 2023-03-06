@@ -10,19 +10,27 @@
                 <button mdc-button class="button-primary" click.delegate="addNewComponent($index)" type="button" if.bind="componentWrapper.components.length < 5">
                     Add Button
                 </button>
-                <div class="row" mdc-elevation="9">
-                    <div class="col-12">
-                        <div class="text-end">
-                            <span class="cursor-pointer text-danger" click.delegate="removeComponentRow($index)">X</span>
-                        </div>
-                    </div>
+                <div class="row position-relative p-2" mdc-elevation="9">
+                    <button
+                        class="redFab topRight position-absolute top-0 end-0"
+                        mdc-fab
+                        mini.bind="true"
+                        icon="delete"
+                        click.delegate="removeComponentRow($index)"
+                        mdc-tooltip="Remove Component Row"
+                    ></button>
                     <div class="col-12 col-xl-6" repeat.for="component of componentWrapper.components">
                         <div class="inputs">
-                            <div mdc-elevation="9">
-                                <div class="text-end">
-                                    <span class="cursor-pointer text-danger" click.delegate="removeComponent($parent.$index, $index)">X</span>
-                                </div>
-                                <mdc-select class="standard-betsy-select w-100 mb-2" value.bind="component.type" label="Select Component Type">
+                            <div mdc-elevation="9" class="position-relative p-2">
+                                <button
+                                    class="redFab topRight position-absolute top-0 end-0"
+                                    mdc-fab
+                                    mini.bind="true"
+                                    icon="delete"
+                                    click.delegate="removeComponent($parent.$index, $index)"
+                                    mdc-tooltip="Remove Component"
+                                ></button>
+                                <mdc-select class="standard-betsy-select w-75 mb-2" value.bind="component.type" label="Select Component Type">
                                     <mdc-icon mdc-select-icon>dns</mdc-icon>
                                     <mdc-list>
                                         <mdc-list-item repeat.for="type of componentTypes" value.bind="type.type">

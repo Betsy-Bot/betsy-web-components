@@ -1,7 +1,7 @@
-import {DiscordService} from "services/discord-service";
-import {inject} from "aurelia-framework";
-import {Router} from "aurelia-router";
-import {toast} from "lets-toast";
+import { DiscordService } from "services/discord-service";
+import { inject } from "aurelia-framework";
+import { Router } from "aurelia-router";
+import { toast } from "lets-toast";
 
 @inject(DiscordService, Router)
 export class ThreadChannels {
@@ -30,7 +30,7 @@ export class ThreadChannels {
     async updateActive(threadChannel) {
         threadChannel.active = !!threadChannel.active;
         await this.discordService.updateDiscordThreadChannel(threadChannel);
-        toast(`Active status has been updated`, {severity: "success"})
+        toast(`Active status has been updated`, { severity: "success" })
     }
 
     goTo(threadChannel) {

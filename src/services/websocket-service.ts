@@ -1,5 +1,5 @@
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import {apiEndpoint} from "../environment";
+import { apiEndpoint } from "../environment";
 
 export class WebhookService {
     subscribeToGuildInvite(): any {

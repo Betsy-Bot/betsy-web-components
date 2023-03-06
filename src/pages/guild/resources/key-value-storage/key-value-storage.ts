@@ -1,7 +1,7 @@
-import {Router} from 'aurelia-router';
-import {inject} from "aurelia-framework";
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from 'services/discord-service';
+import { Router } from 'aurelia-router';
+import { inject } from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from 'services/discord-service';
 
 @inject(EventAggregator, DiscordService, Router)
 export class KeyValueStorage {
@@ -21,7 +21,7 @@ export class KeyValueStorage {
     }
 
     createFunction() {
-        this.goToItem({id: 0});
+        this.goToItem({ id: 0 });
     }
 
     goToItem(item) {

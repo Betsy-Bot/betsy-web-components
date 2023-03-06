@@ -1,5 +1,5 @@
-import {bindable} from "aurelia-framework";
-import {DiscordComponentType} from "../../../services/models/discord";
+import { bindable } from "aurelia-framework";
+import { DiscordComponentType } from "../../../services/models/discord";
 
 export class DiscordComponentPreview {
     @bindable components;

@@ -1,8 +1,8 @@
-import {Router} from 'aurelia-router';
-import {inject} from "aurelia-framework";
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from 'services/discord-service';
-import {toast} from "lets-toast";
+import { Router } from 'aurelia-router';
+import { inject } from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from 'services/discord-service';
+import { toast } from "lets-toast";
 import DataGrid from 'devextreme/ui/data_grid';
 
 @inject(EventAggregator, DiscordService, Router)
@@ -61,8 +61,8 @@ export class KeyValueStorage {
                 selectTextOnEditStart: true,
                 startEditAction: 'click',
             },
-            onSaved: ({changes}) => {
-                for (let object of changes) {
+            onSaved: ({ changes }) => {
+                for (const object of changes) {
                     const index = this.item.storedValues.findIndex(x => x.key == object.data.key);
                     this.item.storedValues[index] = object.data;
                 }
@@ -84,7 +84,7 @@ export class KeyValueStorage {
             toast(`Key Value Category ${this.isNew ? 'Created' : 'Updated'}!`);
         } catch(e) {
             console.log(e);
-            toast('Failed to create key value category', {severity: 'error'})
+            toast('Failed to create key value category', { severity: 'error' })
         }
     }
 }

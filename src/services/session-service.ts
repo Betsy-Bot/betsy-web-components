@@ -1,9 +1,9 @@
-import {inject} from 'aurelia-framework';
-import {ApiService} from "./api-service";
-import {DiscordService} from "./discord-service";
-import {ProfileResponse} from "./models/user";
-import {toast} from "lets-toast";
-import {EventAggregator} from 'aurelia-event-aggregator';
+import { inject } from 'aurelia-framework';
+import { ApiService } from "./api-service";
+import { DiscordService } from "./discord-service";
+import { ProfileResponse } from "./models/user";
+import { toast } from "lets-toast";
+import { EventAggregator } from 'aurelia-event-aggregator';
 
 @inject(ApiService, DiscordService, EventAggregator)
 export class SessionService {
@@ -63,7 +63,7 @@ export class SessionService {
         this.currentUser = await this.apiService.doGet('User/Profile');
         if (!this.currentUser) {
             //this.destroyStorageItem(SessionService.TOKEN_KEY);
-            toast("Please re-login", {severity: "error"});
+            toast("Please re-login", { severity: "error" });
         }
         this.eventAggregator.publish('user-updated', this.currentUser);
         return this.currentUser;

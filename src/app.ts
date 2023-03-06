@@ -1,8 +1,8 @@
-import {activationStrategy, Router} from 'aurelia-router';
-import {inject, PLATFORM} from 'aurelia-framework';
-import {ScrollPageStep} from "./resources/pipelines/scroll-page-step";
-import {SessionService} from "./services/session-service";
-import {EventAggregator} from "aurelia-event-aggregator";
+import { Router } from 'aurelia-router';
+import { inject, PLATFORM } from 'aurelia-framework';
+import { ScrollPageStep } from "./resources/pipelines/scroll-page-step";
+import { SessionService } from "./services/session-service";
+import { EventAggregator } from "aurelia-event-aggregator";
 
 @inject(Router, EventAggregator, SessionService)
 export class App {
@@ -103,7 +103,7 @@ export class App {
         ]);
 
         config.mapUnknownRoutes(() => {
-            return {redirect: '404'};
+            return { redirect: '404' };
         });
 
         this.router = router;

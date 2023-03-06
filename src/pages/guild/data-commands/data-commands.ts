@@ -1,8 +1,8 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "../../../services/discord-service";
-import {Router} from "aurelia-router";
-import {toast} from "lets-toast";
-import {inject} from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "../../../services/discord-service";
+import { Router } from "aurelia-router";
+import { toast } from "lets-toast";
+import { inject } from "aurelia-framework";
 
 @inject(EventAggregator, DiscordService, Router)
 export class DataCommands {
@@ -31,9 +31,9 @@ export class DataCommands {
         const foundCommandIndex = this.commands.findIndex(x => x.name === command.name);
         if (foundCommandIndex >= 0) {
             await this.discordService.toggleDiscordCommandActive(this.guildId, command.id, this.commands[foundCommandIndex].active);
-            toast(`Active status has been updated for /${command.name}`, {severity: "success"})
+            toast(`Active status has been updated for /${command.name}`, { severity: "success" })
         } else {
-            toast("Error", {severity: "error"})
+            toast("Error", { severity: "error" })
         }
     }
 

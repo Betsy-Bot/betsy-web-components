@@ -1,5 +1,5 @@
 import { bindable, inject } from 'aurelia-framework';
-import {DiscordEmbed} from "../../../services/models/discord";
+import { DiscordEmbed } from "../../../services/models/discord";
 import './discord-message-creator.scss';
 
 export class DiscordMessageCreator {
@@ -8,11 +8,11 @@ export class DiscordMessageCreator {
         components: []
     };
     @bindable single;
-    @bindable allowComponents: boolean = true;
-    @bindable maxComponents: number = 5;
+    @bindable allowComponents = true;
+    @bindable maxComponents = 5;
     @bindable tab = 'message';
     @bindable selectedMessage;
-    @bindable hideTemplate: boolean = false
+    @bindable hideTemplate = false
     @bindable customBuilder;
     jsonDialog;
     json: string;

@@ -1,9 +1,9 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "services/discord-service";
-import {Router} from "aurelia-router";
-import {toast} from "lets-toast";
-import {bindable, inject} from "aurelia-framework";
-import {DiscordComponentType} from "../../../../services/models/discord";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "services/discord-service";
+import { Router } from "aurelia-router";
+import { toast } from "lets-toast";
+import { bindable, inject } from "aurelia-framework";
+import { DiscordComponentType } from "../../../../services/models/discord";
 
 @inject(EventAggregator, DiscordService, Router)
 export class ManageThreadChannel {
@@ -55,7 +55,7 @@ export class ManageThreadChannel {
             this.router.navigateBack();
         } catch(e) {
             console.log(e);
-            toast('Failed to update thread channel', {severity: 'error'})
+            toast('Failed to update thread channel', { severity: 'error' })
         }
     }
 
@@ -63,10 +63,10 @@ export class ManageThreadChannel {
         if (event.detail.action == 'ok') {
             try {
                 await this.discordService.deleteDiscordThreadChannelById(this.threadChannel.id);
-                toast("Deleted thread channel!", {severity: "success"})
+                toast("Deleted thread channel!", { severity: "success" })
                 this.router.navigateBack();
             } catch(e) {
-                toast("Failed to delete thread channel", {severity: "error"});
+                toast("Failed to delete thread channel", { severity: "error" });
                 throw e;
             }
         }

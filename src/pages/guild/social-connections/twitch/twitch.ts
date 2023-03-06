@@ -1,7 +1,7 @@
-import {DiscordService} from "../../../../services/discord-service";
-import {Router} from "aurelia-router";
-import {toast} from "lets-toast";
-import {inject} from "aurelia-framework";
+import { DiscordService } from "../../../../services/discord-service";
+import { Router } from "aurelia-router";
+import { toast } from "lets-toast";
+import { inject } from "aurelia-framework";
 
 @inject(DiscordService, Router)
 export class Twitch {
@@ -55,12 +55,12 @@ export class Twitch {
     }
 
     async updateActive(subscription) {
-        let foundCommandIndex = this.subscriptions.findIndex(x => x.name === subscription.name);
+        const foundCommandIndex = this.subscriptions.findIndex(x => x.name === subscription.name);
         if (foundCommandIndex >= 0) {
             await this.discordService.toggleDiscordCommandActive(this.guildId, subscription.discordApplicationCommandId, this.subscriptions[foundCommandIndex].active);
-            toast(`Active status has been updated for /${subscription.name}`, {severity: "success"})
+            toast(`Active status has been updated for /${subscription.name}`, { severity: "success" })
         } else {
-            toast("Error", {severity: "error"})
+            toast("Error", { severity: "error" })
         }
     }
 

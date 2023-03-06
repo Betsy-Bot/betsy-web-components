@@ -1,6 +1,6 @@
-import { inject} from "aurelia-framework";
+import { inject } from "aurelia-framework";
 import { SessionService } from "../../services/session-service";
-import {toast} from "lets-toast";
+import { toast } from "lets-toast";
 import { Router } from "aurelia-router";
 import './login.scss';
 
@@ -20,7 +20,7 @@ export class Login {
                 await this.sessionService.loginWithOAuthCode(this.code);
                 this.router.navigate('');
             } catch(e) {
-                toast("Failed to exchange code", {severity: 'error'});
+                toast("Failed to exchange code", { severity: 'error' });
             }
         }
     }

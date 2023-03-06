@@ -1,9 +1,9 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "services/discord-service";
-import {Router} from "aurelia-router";
-import {inject, observable} from "aurelia-framework";
-import {toast} from "lets-toast";
-import {DiscordButtonStyle, DiscordComponentType} from "services/models/discord";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "services/discord-service";
+import { Router } from "aurelia-router";
+import { inject, observable } from "aurelia-framework";
+import { toast } from "lets-toast";
+import { DiscordButtonStyle, DiscordComponentType } from "services/models/discord";
 import { ValidationControllerFactory, ValidationRules, ValidationController, Rule } from 'aurelia-validation';
 
 @inject(EventAggregator, DiscordService, Router, ValidationControllerFactory)
@@ -84,10 +84,10 @@ export class CreateTicketMessage {
         try {
             this.loading = true;
             await this.discordService.setupSupportTicketMessage(this.guildId, this.request);
-            toast("Created support message!", {severity: "success"})
+            toast("Created support message!", { severity: "success" })
             this.router.navigate(`support-tickets`)
         } catch(e) {
-            toast("Failed to setup support ticket creation message", {severity: "error"});
+            toast("Failed to setup support ticket creation message", { severity: "error" });
             throw e;
         } finally {
             this.loading = false;

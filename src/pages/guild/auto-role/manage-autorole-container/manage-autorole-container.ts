@@ -39,7 +39,7 @@ export class ManageAutoroleContainer {
                 return toast("No container found by this ID. You are now creating a new Auto Role Container.");
             }
             const emojis = await this.discordService.getLocalGuild().guild.emojis;
-            for (let role of this.container.discordRoles) {
+            for (const role of this.container.discordRoles) {
                 role.emoji = emojis.find(x => x.id === role.discordEmojiId);
             }
         } else {
@@ -50,7 +50,7 @@ export class ManageAutoroleContainer {
 
     selectedRoleChanged() {
         if (this.container.discordRoles.length >= 25) {
-            return toast("A max of 25 roles are allowed for select menus", {severity: "error"});
+            return toast("A max of 25 roles are allowed for select menus", { severity: "error" });
         }
         if (!this.container?.discordRoles?.find(x => x.discordRoleId === this.selectedRole.id)) {
             this.container.discordRoles.push({
@@ -66,7 +66,7 @@ export class ManageAutoroleContainer {
 
     async putContainer() {
         try {
-            for (let role of this.container.discordRoles) {
+            for (const role of this.container.discordRoles) {
                 if (!role.emoji) continue;
                 role.discordEmojiId = role.emoji.id;
             }
@@ -75,10 +75,10 @@ export class ManageAutoroleContainer {
             } else {
                 await this.discordService.updateAutoroleContainer(this.container);
             }
-            toast(`Auto Role Container Successfully ${this.isNew ? 'Created' : 'Updated'}`, {severity: "success"});
+            toast(`Auto Role Container Successfully ${this.isNew ? 'Created' : 'Updated'}`, { severity: "success" });
             this.router.navigateBack();
         } catch(e) {
-            toast(`Failed to update Auto Role Container.`, {severity: "error"});
+            toast(`Failed to update Auto Role Container.`, { severity: "error" });
             console.log(e);
         }
     }

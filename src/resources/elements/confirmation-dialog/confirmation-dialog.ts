@@ -1,4 +1,4 @@
-import {bindable} from "aurelia-framework";
+import { bindable } from "aurelia-framework";
 import './confirmation-dialog.scss'
 
 export class ConfirmationDialog {
@@ -9,6 +9,6 @@ export class ConfirmationDialog {
     @bindable title;
 
     handleClosing(event) {
-        this.handler({event: event});
+        this.handler({ event: event });
     }
 }

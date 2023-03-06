@@ -1,9 +1,9 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "services/discord-service";
-import {Router} from "aurelia-router";
-import {toast} from "lets-toast";
-import {bindable, inject, observable} from "aurelia-framework";
-import {DiscordButtonStyle, DiscordComponentType} from "../../../../services/models/discord";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "services/discord-service";
+import { Router } from "aurelia-router";
+import { toast } from "lets-toast";
+import { bindable, inject, observable } from "aurelia-framework";
+import { DiscordButtonStyle, DiscordComponentType } from "../../../../services/models/discord";
 
 @inject(EventAggregator, DiscordService, Router)
 export class ManageGiveaways {
@@ -87,7 +87,7 @@ export class ManageGiveaways {
             this.router.navigateBack();
         } catch(e) {
             console.log(e);
-            toast('Failed to create giveaway', {severity: 'error'})
+            toast('Failed to create giveaway', { severity: 'error' })
         }
     }
 
@@ -95,10 +95,10 @@ export class ManageGiveaways {
         if (event.detail.action == 'ok') {
             try {
                 await this.discordService.deleteGiveawayById(this.giveaway.id);
-                toast("Deleted giveaway message!", {severity: "success"})
+                toast("Deleted giveaway message!", { severity: "success" })
                 this.router.navigateBack();
             } catch(e) {
-                toast("Failed to delete giveaway", {severity: "error"});
+                toast("Failed to delete giveaway", { severity: "error" });
                 throw e;
             }
         }

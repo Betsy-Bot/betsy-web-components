@@ -1,8 +1,8 @@
-import {DiscordForm} from "../../../../../services/models/discord";
-import {Router} from 'aurelia-router';
-import {inject} from "aurelia-framework";
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from 'services/discord-service';
+import { DiscordForm } from "../../../../../services/models/discord";
+import { Router } from 'aurelia-router';
+import { inject } from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from 'services/discord-service';
 import { toast } from "lets-toast";
 import DataGrid from "devextreme/ui/data_grid";
 
@@ -76,6 +76,6 @@ export class EditForm {
 
     async save() {
         await this.discordService.updateDiscordForm(this.guildId, this.form);
-        toast("Saved Form", {severity: "success"});
+        toast("Saved Form", { severity: "success" });
     }
 }
