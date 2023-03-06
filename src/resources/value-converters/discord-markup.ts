@@ -1,11 +1,15 @@
-import * as showdown from 'showdown';
-import sanitizeHtml from 'sanitize-html';
+import { toHTML } from '@darkguy10/discord-markdown';
 
 export class DiscordMarkupValueConverter {
     toView(value, page) {
-        const converter = new showdown.Converter({ strikethrough: true });
+        value = toHTML(value, {
+            discordCallback: {
+                emoji: node => {
+                    return `<img src="https://cdn.discordapp.com/emojis/${node.id}.webp?size=24&quality=lossless" alt="${node.name}">`
+                }
+            }
+        });
         value = value.replace(/(\r\n|\r|\n|\\n)/g, '<br>');
-        const html = converter.makeHtml(value);
-        return sanitizeHtml(html);
+        return value;
     }
 }
