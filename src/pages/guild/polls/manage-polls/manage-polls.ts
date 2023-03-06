@@ -1,9 +1,9 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "services/discord-service";
-import {Router} from "aurelia-router";
-import {toast} from "lets-toast";
-import {bindable, inject} from "aurelia-framework";
-import {DiscordButtonStyle, DiscordComponentType} from "../../../../services/models/discord";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "services/discord-service";
+import { Router } from "aurelia-router";
+import { toast } from "lets-toast";
+import { bindable, inject } from "aurelia-framework";
+import { DiscordButtonStyle, DiscordComponentType } from "../../../../services/models/discord";
 
 @inject(EventAggregator, DiscordService, Router)
 export class ManagePolls {
@@ -65,10 +65,10 @@ export class ManagePolls {
             this.poll = await this.discordService.getPollById(this.pollId);
         }
         this.pollTemplate.discordServerId = this.discordService.getLocalGuild().id;
-        for (let participant of this.poll.participants) {
+        for (const participant of this.poll.participants) {
             const index = this.answers.findIndex(x => x.answer === participant.answer);
             if (index === -1) {
-                this.answers.push({answer: participant.answer, count: 1});
+                this.answers.push({ answer: participant.answer, count: 1 });
             } else {
                 this.answers[index].count++;
             }
@@ -86,7 +86,7 @@ export class ManagePolls {
             this.router.navigateBack();
         } catch(e) {
             console.log(e);
-            toast('Failed to create poll', {severity: 'error'})
+            toast('Failed to create poll', { severity: 'error' })
         }
     }
 
@@ -94,10 +94,10 @@ export class ManagePolls {
         if (event.detail.action == 'ok') {
             try {
                 await this.discordService.deleteGiveawayById(this.poll.id);
-                toast("Deleted poll!", {severity: "success"})
+                toast("Deleted poll!", { severity: "success" })
                 this.router.navigateBack();
             } catch(e) {
-                toast("Failed to delete poll", {severity: "error"});
+                toast("Failed to delete poll", { severity: "error" });
                 throw e;
             }
         }

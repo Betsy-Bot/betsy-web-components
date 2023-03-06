@@ -28,12 +28,12 @@ export class EditMessage {
     }
 
     async saveMessage() {
-        let response = await this.discordService.updateDiscordMessage(this.message);
+        const response = await this.discordService.updateDiscordMessage(this.message);
         if (response) {
-            toast('Edited Message', {severity: 'success'});
+            toast('Edited Message', { severity: 'success' });
             this.router.navigate('/guild/' + this.guildId + '/resources/messages');
         } else {
-            toast('Failed to edit message', {severity: 'error'});
+            toast('Failed to edit message', { severity: 'error' });
         }
     }
 }

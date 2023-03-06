@@ -1,6 +1,6 @@
-import {DiscordService} from "services/discord-service";
+import { DiscordService } from "services/discord-service";
 import './dashboard.scss';
-import {inject} from "aurelia-framework";
+import { inject } from "aurelia-framework";
 
 @inject(DiscordService)
 export class Dashboard {

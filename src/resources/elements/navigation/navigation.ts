@@ -1,8 +1,8 @@
-import {bindable, inject} from 'aurelia-framework';
-import {SessionService} from "../../../services/session-service";
-import {Router} from 'aurelia-router';
-import {EventAggregator} from 'aurelia-event-aggregator';
-import {redirectUrl, botClientId} from "../../../environment";
+import { bindable, inject } from 'aurelia-framework';
+import { SessionService } from "../../../services/session-service";
+import { Router } from 'aurelia-router';
+import { EventAggregator } from 'aurelia-event-aggregator';
+import { redirectUrl, botClientId } from "../../../environment";
 import './navigation.scss';
 
 @inject(SessionService, Router, EventAggregator)

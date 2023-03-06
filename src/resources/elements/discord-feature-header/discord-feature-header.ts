@@ -1,5 +1,5 @@
-import {bindable, inject} from "aurelia-framework";
-import {Router} from "aurelia-router";
+import { bindable, inject } from "aurelia-framework";
+import { Router } from "aurelia-router";
 import './discord-feature-header.scss';
 
 @inject(Router)
@@ -16,6 +16,7 @@ export class DiscordFeatureHeader {
     @bindable copyFunction;
     @bindable createFunction;
     banner;
+    derp = '';
 
     navigateBack() {
         this.router.navigateBack();

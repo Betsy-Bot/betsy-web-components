@@ -1,10 +1,10 @@
-import {inject, bindable} from "aurelia-framework";
+import { inject, bindable } from "aurelia-framework";
 import { WebhookService } from "../../../services/websocket-service";
 import { DiscordService } from "../../../services/discord-service";
 import { toast } from "lets-toast";
 import { redirectUrl, botClientId } from "../../../environment";
 import './server-card.scss';
-import {Router} from "aurelia-router";
+import { Router } from "aurelia-router";
 
 @inject(WebhookService, DiscordService, Router)
 export class ServerCard {
@@ -34,7 +34,7 @@ export class ServerCard {
 
             this.openServerInvitePopup();
         } catch(e) {
-            toast(e, {severity: 'error'});
+            toast(e, { severity: 'error' });
             this.loading = false;
         }
     }

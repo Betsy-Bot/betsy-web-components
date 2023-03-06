@@ -1,5 +1,5 @@
-import {bindable} from "aurelia-framework";
-import {DiscordEmbed, DiscordEmbedField} from "../../../services/models/discord";
+import { bindable } from "aurelia-framework";
+import { DiscordEmbed, DiscordEmbedField } from "../../../services/models/discord";
 import './embed-editor.scss';
 
 export class EmbedEditor {

@@ -1,4 +1,4 @@
-import {bindable} from "aurelia-framework";
+import { bindable } from "aurelia-framework";
 
 export class SupportTicketTranscript {
     @bindable supportTicket
@@ -13,7 +13,7 @@ export class SupportTicketTranscript {
         for (const message of this.supportTicket.transcript.messages) {
             if (message.discordUserId != "943260131599220856" && message.discordUserId != "946433944390340688") {
                 if (this.participants.findIndex(x => x.id == message.discordUserId) < 0) {
-                    this.participants.push({name: message.discordUserName, id: message.discordUserId});
+                    this.participants.push({ name: message.discordUserName, id: message.discordUserId });
                 }
             }
         }

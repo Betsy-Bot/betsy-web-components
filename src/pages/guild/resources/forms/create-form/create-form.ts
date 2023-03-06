@@ -1,9 +1,9 @@
 import { DiscordComponentType, DiscordForm } from "../../../../../services/models/discord";
-import {Router} from 'aurelia-router';
-import {inject} from "aurelia-framework";
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from 'services/discord-service';
-import {toast} from "lets-toast";
+import { Router } from 'aurelia-router';
+import { inject } from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from 'services/discord-service';
+import { toast } from "lets-toast";
 
 @inject(EventAggregator, DiscordService, Router)
 export class CreateForm {
@@ -47,7 +47,7 @@ export class CreateForm {
             toast("Form Created!");
             this.router.navigate(`resources/forms`)
         } catch(e) {
-            toast(e, {severity: 'error'})
+            toast(e, { severity: 'error' })
             throw e;
         } finally {
             this.loading = false;

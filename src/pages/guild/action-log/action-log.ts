@@ -1,8 +1,8 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "../../../services/discord-service";
-import {Router} from "aurelia-router";
-import {toast} from "lets-toast";
-import {inject} from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "../../../services/discord-service";
+import { Router } from "aurelia-router";
+import { toast } from "lets-toast";
+import { inject } from "aurelia-framework";
 
 @inject(EventAggregator, DiscordService, Router)
 export class ActionLog {
@@ -94,8 +94,8 @@ export class ActionLog {
             await this.discordService.getDiscordServerInformation(this.guildId)
         ])
         this.featureActive = this.guild.activeFeatures.includes(this.discordService.AUDIT_LOG);
-        for (let feature of this.guild.activeAuditLogFeatures) {
-            let index = this.actionLogItems.findIndex(x => x.value === feature);
+        for (const feature of this.guild.activeAuditLogFeatures) {
+            const index = this.actionLogItems.findIndex(x => x.value === feature);
             this.actionLogItems[index].active = true;
         }
     }

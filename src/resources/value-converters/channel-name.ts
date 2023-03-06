@@ -1,5 +1,5 @@
-import {DiscordService} from "../../services/discord-service";
-import {autoinject} from "aurelia-framework";
+import { DiscordService } from "../../services/discord-service";
+import { autoinject } from "aurelia-framework";
 
 @autoinject
 export class ChannelNameValueConverter {

@@ -1,8 +1,8 @@
-import {inject} from 'aurelia-framework';
-import {ApiService} from './api-service';
+import { inject } from 'aurelia-framework';
+import { ApiService } from './api-service';
 
 import * as discordModels from "./models/discord";
-import {BaseDiscordCommand, DiscordForm, SendMessageToChannelRequest} from "./models/discord";
+import { BaseDiscordCommand, DiscordForm, SendMessageToChannelRequest } from "./models/discord";
 
 @inject(ApiService)
 export class DiscordService {
@@ -64,11 +64,11 @@ export class DiscordService {
         if (redirectUrl) {
             path += '?redirectUrl=' + redirectUrl
         }
-        return await this.api.doPost(path, {code: code})
+        return await this.api.doPost(path, { code: code })
     }
 
     async createServer(guildId: string): Promise<discordModels.BaseDiscordServer> {
-        return await this.api.doPost('DiscordGuild', {guildId: guildId})
+        return await this.api.doPost('DiscordGuild', { guildId: guildId })
     }
 
     async createApplicationCommand(command: BaseDiscordCommand): Promise<discordModels.BaseDiscordCommand> {
@@ -96,7 +96,7 @@ export class DiscordService {
     }
 
     async toggleDiscordCommandActive(guildId: string, discordApplicationCommandId, active: boolean) {
-        return await this.api.doPatch(`DiscordGuild/${guildId}/DiscordCommand/${discordApplicationCommandId}/ToggleActive`, {active: active});
+        return await this.api.doPatch(`DiscordGuild/${guildId}/DiscordCommand/${discordApplicationCommandId}/ToggleActive`, { active: active });
     }
 
     async getDiscordCommandDetails(id: string): Promise<discordModels.BaseDiscordCommand> {
@@ -128,7 +128,7 @@ export class DiscordService {
     }
 
     async updateVerifiedRole(guildId: string, roleId: string): Promise<any> {
-        return await this.api.doPost(`DiscordGuild/${guildId}/VerifiedRole`, {verifiedRoleId: roleId});
+        return await this.api.doPost(`DiscordGuild/${guildId}/VerifiedRole`, { verifiedRoleId: roleId });
     }
 
     async getDiscordChannels(guildId: string) {
@@ -148,15 +148,15 @@ export class DiscordService {
     }
 
     async setActiveFeaturesForDiscord(guildId: string, features: string[]): Promise<discordModels.BaseDiscordServer> {
-        return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, {activeFeatures: features});
+        return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, { activeFeatures: features });
     }
 
     async setActiveAuditFeaturesForDiscord(guildId: string, features: string[]): Promise<discordModels.BaseDiscordServer> {
-        return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, {activeAuditLogFeatures: features});
+        return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, { activeAuditLogFeatures: features });
     }
 
     async setAuditLogChannelId(guildId: string, auditLogChannelId: string[]): Promise<discordModels.BaseDiscordServer> {
-        return await this.api.doPatch(`DiscordGuild/${guildId}/SetAuditLogChannel`, {auditLogChannelId: auditLogChannelId});
+        return await this.api.doPatch(`DiscordGuild/${guildId}/SetAuditLogChannel`, { auditLogChannelId: auditLogChannelId });
     }
 
     async sendMessageToChannel(guildId: string, channelId: string[], message: SendMessageToChannelRequest): Promise<discordModels.BaseDiscordServer> {
@@ -208,7 +208,7 @@ export class DiscordService {
     }
 
     async toggleDiscordMessageActiveStatus(messageId, active) {
-        return this.api.doPatch(`DiscordMessage/${messageId}/ToggleActive`, {active: active});
+        return this.api.doPatch(`DiscordMessage/${messageId}/ToggleActive`, { active: active });
     }
 
     async createTwitchSubscription(request, guildId) {

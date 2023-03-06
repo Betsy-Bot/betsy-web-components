@@ -1,6 +1,6 @@
-import {inject, bindable} from "aurelia-framework";
-import {DiscordService} from "../../../services/discord-service";
-import {EventAggregator} from "aurelia-event-aggregator";
+import { inject, bindable } from "aurelia-framework";
+import { DiscordService } from "../../../services/discord-service";
+import { EventAggregator } from "aurelia-event-aggregator";
 
 @inject(DiscordService, EventAggregator)
 export class DiscordFormSelector {

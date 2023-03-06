@@ -1,9 +1,9 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "services/discord-service";
-import {inject} from "aurelia-framework";
-import {botClientId, verifyRedirectUrl} from "environment";
-import {toast} from "lets-toast";
-import {SessionService} from "services/session-service";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "services/discord-service";
+import { inject } from "aurelia-framework";
+import { botClientId, verifyRedirectUrl } from "environment";
+import { toast } from "lets-toast";
+import { SessionService } from "services/session-service";
 
 @inject(EventAggregator, DiscordService, SessionService)
 export class Verify {
@@ -30,12 +30,12 @@ export class Verify {
                 await this.sessionService.loginWithOAuthCode(this.code, verifyRedirectUrl());
                 await this.discordService.verifyLogin();
             } catch(e) {
-                toast("Failed to exchange code", {severity: 'error'});
+                toast("Failed to exchange code", { severity: 'error' });
             }
         } else {
             this.success = await this.discordService.verifyUser(this.guildId, this.userId);
             if (this.success == null) {
-                toast("Failed to attempt verification.", {severity: 'error'});
+                toast("Failed to attempt verification.", { severity: 'error' });
             }
         }
         setTimeout(() => {

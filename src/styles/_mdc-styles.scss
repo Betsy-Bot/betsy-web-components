@@ -48,3 +48,7 @@
     color: white;
     @include fab.accessible(material-color.$green-500);
 }
+
+.mdc-fab.topRight {
+    @include fab.shape-radius(0 0 0 50%);
+}

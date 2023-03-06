@@ -1,5 +1,5 @@
-import {DiscordService} from "../../../services/discord-service";
-import {bindable, inject} from "aurelia-framework";
+import { DiscordService } from "../../../services/discord-service";
+import { bindable, inject } from "aurelia-framework";
 export const SupportTicketAudits = [
     "Opened",
     "Closed",
@@ -42,7 +42,7 @@ export class SupportTicketSettings {
     }
 
     getRoleName(roleId) {
-        let found = this.roles.filter(x => x.id == roleId);
+        const found = this.roles.filter(x => x.id == roleId);
         return found[0].name;
     }
 }

@@ -21,12 +21,12 @@ export class AutoRole {
     }
 
     async updateActive(message) {
-        let foundCommandIndex = this.containers.findIndex(x => x.name === message.name);
+        const foundCommandIndex = this.containers.findIndex(x => x.name === message.name);
         if (foundCommandIndex >= 0) {
             await this.discordService.toggleAutoroleContainer(message.id);
-            toast(`Active status has been updated for /${message.name}`, {severity: "success"})
+            toast(`Active status has been updated for /${message.name}`, { severity: "success" })
         } else {
-            toast("Error", {severity: "error"})
+            toast("Error", { severity: "error" })
         }
     }
 

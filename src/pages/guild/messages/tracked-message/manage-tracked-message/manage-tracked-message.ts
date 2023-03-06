@@ -1,8 +1,8 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "services/discord-service";
-import {Router} from "aurelia-router";
-import {toast} from "lets-toast";
-import {bindable, inject} from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "services/discord-service";
+import { Router } from "aurelia-router";
+import { toast } from "lets-toast";
+import { bindable, inject } from "aurelia-framework";
 
 @inject(EventAggregator, DiscordService, Router)
 export class ManageTrackedMessage {
@@ -57,7 +57,7 @@ export class ManageTrackedMessage {
             }
         } catch(e) {
             console.log(e);
-            toast('Failed to create message', {severity: 'error'})
+            toast('Failed to create message', { severity: 'error' })
         }
     }
 
@@ -65,10 +65,10 @@ export class ManageTrackedMessage {
         if (event.detail.action == 'ok') {
             try {
                 await this.discordService.deleteDiscordTrackedMessageById(this.message.id);
-                toast("Deleted thread channel!", {severity: "success"})
+                toast("Deleted thread channel!", { severity: "success" })
                 this.router.navigateBack();
             } catch(e) {
-                toast("Failed to delete thread channel", {severity: "error"});
+                toast("Failed to delete thread channel", { severity: "error" });
                 throw e;
             }
         }

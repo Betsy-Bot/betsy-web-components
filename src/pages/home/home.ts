@@ -39,7 +39,7 @@ export class Home {
         this.otherGuilds = userGuilds.filter(g => !g.can_add)
 
         for (const guild of this.managedGuilds) {
-            let foundServerIndex = this.user.activeServers.findIndex(x => x.guildId == guild.id)
+            const foundServerIndex = this.user.activeServers.findIndex(x => x.guildId == guild.id)
             if (foundServerIndex >= 0) {
                 guild.exists = true;
                 guild.invited = this.user.activeServers[foundServerIndex].invited;

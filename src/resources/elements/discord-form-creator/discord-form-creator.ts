@@ -1,5 +1,5 @@
-import {bindable} from "aurelia-framework";
-import {DiscordComponentType, DiscordForm, DiscordTextInputType} from "../../../services/models/discord";
+import { bindable } from "aurelia-framework";
+import { DiscordComponentType, DiscordForm, DiscordTextInputType } from "../../../services/models/discord";
 
 export class DiscordFormCreator {
     @bindable form: DiscordForm;

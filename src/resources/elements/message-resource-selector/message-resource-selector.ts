@@ -1,5 +1,5 @@
-import {bindable, inject} from "aurelia-framework";
-import {DiscordService} from "services/discord-service";
+import { bindable, inject } from "aurelia-framework";
+import { DiscordService } from "services/discord-service";
 
 @inject(DiscordService)
 export class MessageResourceSelector {
@@ -7,7 +7,7 @@ export class MessageResourceSelector {
     }
     @bindable selectedMessage: string;
     @bindable label;
-    @bindable required: boolean = false;
+    @bindable required = false;
 
     messages;
 

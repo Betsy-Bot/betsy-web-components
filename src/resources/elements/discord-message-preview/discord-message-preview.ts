@@ -1,4 +1,4 @@
-import {bindable} from "aurelia-framework";
+import { bindable } from "aurelia-framework";
 import './discord-message-preview.scss';
 
 export class DiscordMessagePreview {

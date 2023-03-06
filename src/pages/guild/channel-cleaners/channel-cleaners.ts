@@ -32,31 +32,31 @@ export class ChannelCleaners {
             const response = await this.discordService.createChannelCleaner(this.request);
             this.cleaners.push(response);
             this.request = this.freshRequest;
-            toast('Created channel cleaner', {severity: "success"});
+            toast('Created channel cleaner', { severity: "success" });
         } catch(e) {
-            toast('Failed to create channel cleaner', {severity: "error"});
+            toast('Failed to create channel cleaner', { severity: "error" });
         }
     }
 
     async deleteChannelCleaner(id) {
         try {
             await this.discordService.deleteChannelCleaner(id);
-            let index = this.cleaners.findIndex(x => x.id == id);
+            const index = this.cleaners.findIndex(x => x.id == id);
             this.cleaners.splice(index, 1);
             this.request = null;
-            toast('Deleted channel cleaner', {severity: "success"});
+            toast('Deleted channel cleaner', { severity: "success" });
         } catch(e) {
-            toast('Failed to delete channel cleaner', {severity: "error"});
+            toast('Failed to delete channel cleaner', { severity: "error" });
         }
     }
 
     async manuallyClean(cleanerId) {
         if(window.confirm("This will run the channel cleaner. If improperly configured you may lose data. Confirm you want to test your cleaner?")) {
             try {
-                let response = await this.discordService.testCleanChannelCleaner(cleanerId);
-                toast(`Channel Cleaned. Deleted ${response} Messages`, {severity: "success"})
+                const response = await this.discordService.testCleanChannelCleaner(cleanerId);
+                toast(`Channel Cleaned. Deleted ${response} Messages`, { severity: "success" })
             } catch(e) {
-                toast('Failed to clean channel', {severity: "error"});
+                toast('Failed to clean channel', { severity: "error" });
             }
         } else {
             console.log('cancel')
@@ -68,14 +68,14 @@ export class ChannelCleaners {
         try {
             await this.discordService.updateChannelCleaner(cleaner);
             this.request = this.freshRequest;
-            toast('Updated channel cleaner', {severity: "success"});
+            toast('Updated channel cleaner', { severity: "success" });
         } catch(e) {
-            toast('Failed to update channel cleaner', {severity: "error"});
+            toast('Failed to update channel cleaner', { severity: "error" });
         }
     }
 
     getChannelName(channelId) {
-        let channel = this.channels.find(x => x.id == channelId);
+        const channel = this.channels.find(x => x.id == channelId);
         if (!channel) {
             return channelId;
         }

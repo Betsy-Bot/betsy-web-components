@@ -59,17 +59,17 @@ export class EditDataCommand {
             if (this.isNew) {
                 this.command.discordGuildId = this.guildId;
                 await this.discordService.createApplicationCommand(this.command);
-                toast("Data Command Created!", {severity: "success"});
+                toast("Data Command Created!", { severity: "success" });
                 this.router.navigateBack();
             } else {
                 this.command.discordGuildId = this.guildId;
                 await this.discordService.updateApplicationCommand(this.command);
-                toast("Data Command Updated!", {severity: "success"});
+                toast("Data Command Updated!", { severity: "success" });
                 this.router.navigateBack();
             }
         } catch(e) {
             console.log(e);
-            toast('Failed to create data command', {severity: 'error'})
+            toast('Failed to create data command', { severity: 'error' })
         }
     }
 
@@ -124,7 +124,7 @@ export class EditDataCommand {
         if (!this.command.commandInformation.options) {
             this.command.commandInformation.options = [];
         }
-        this.command.commandInformation.options.push({required: true})
+        this.command.commandInformation.options.push({ required: true })
     }
 
     removeParameter(index) {

@@ -33,12 +33,12 @@ export class CreateMessage {
     }
 
     async saveMessage() {
-        let response = await this.discordService.createDiscordMessage(this.request);
+        const response = await this.discordService.createDiscordMessage(this.request);
         if (response) {
-            toast('Created Message', {severity: 'success'});
+            toast('Created Message', { severity: 'success' });
             this.router.navigate('/guild/' + this.guildId + '/resources/messages');
         } else {
-            toast('Failed to create message', {severity: 'error'});
+            toast('Failed to create message', { severity: 'error' });
         }
     }
 }

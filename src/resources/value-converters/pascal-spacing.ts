@@ -1,4 +1,4 @@
-export class PascalSpacingValueConverter  {
+export class PascalSpacingValueConverter {
     toView(value) {
         if (!value) {
             return;

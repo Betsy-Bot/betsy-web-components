@@ -1,4 +1,4 @@
-import {bindable, inject} from "aurelia-framework";
+import { bindable, inject } from "aurelia-framework";
 import './discord-messages-renderer.scss';
 export class DiscordMessagesRenderer {
     @bindable messages;
@@ -16,15 +16,15 @@ export class DiscordMessagesRenderer {
         }
         const dt1 = new Date(message.createdDate);
         const dt2 = new Date(this.messages[index - 1].createdDate);
-        let timeDifference  =(dt2.getTime() - dt1.getTime()) / 1000;
+        let timeDifference =(dt2.getTime() - dt1.getTime()) / 1000;
         timeDifference /= 60;
-        let diff = Math.abs(Math.round(timeDifference));
+        const diff = Math.abs(Math.round(timeDifference));
         //TODO Check diff and show author if message between longer than 30 minutes
         return false;
     }
 
     isImage(url: string) {
-        let result = /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+        const result = /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
         if (result) return true
         return url.includes('s3.amazonaws.com');
     }

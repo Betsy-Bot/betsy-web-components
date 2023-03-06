@@ -1,5 +1,5 @@
 import flatpickr from "flatpickr";
-import {bindable} from "aurelia-framework";
+import { bindable } from "aurelia-framework";
 
 export class DateTimePicker {
     @bindable value: string;

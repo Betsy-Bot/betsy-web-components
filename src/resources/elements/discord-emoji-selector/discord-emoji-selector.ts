@@ -1,6 +1,6 @@
-import {bindable, inject} from "aurelia-framework";
-import {DiscordService} from "../../../services/discord-service";
-import {EMOJIS} from "../../data/discord-emojis";
+import { bindable, inject } from "aurelia-framework";
+import { DiscordService } from "../../../services/discord-service";
+import { EMOJIS } from "../../data/discord-emojis";
 import data from '@emoji-mart/data'
 import { Picker } from 'emoji-mart'
 
@@ -61,12 +61,12 @@ export class DiscordEmojiSelector {
     }
 
     buildCustomEmojis() {
-        let formattedEmojis = [];
+        const formattedEmojis = [];
         for (const emoji of this.emojis) {
             formattedEmojis.push({
                 name: emoji.name,
                 id: emoji.id,
-                skins: [{ src: `https://cdn.discordapp.com/emojis/${emoji.id}.webp?size=24&quality=lossless`}]
+                skins: [{ src: `https://cdn.discordapp.com/emojis/${emoji.id}.webp?size=24&quality=lossless` }]
             })
         }
         return formattedEmojis;

@@ -1,8 +1,8 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "services/discord-service";
-import {inject} from "aurelia-framework";
-import {toast} from "lets-toast";
-import {Router} from "aurelia-router";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "services/discord-service";
+import { inject } from "aurelia-framework";
+import { toast } from "lets-toast";
+import { Router } from "aurelia-router";
 
 @inject(EventAggregator, DiscordService, Router)
 export class TrackedMessage {
@@ -29,9 +29,9 @@ export class TrackedMessage {
         this.messages[foundCommandIndex].active = !!this.messages[foundCommandIndex].active;
         if (foundCommandIndex >= 0) {
             await this.discordService.updateDiscordMessage(this.messages[foundCommandIndex]);
-            toast(`Active status has been updated for /${message.name}`, {severity: "success"})
+            toast(`Active status has been updated for /${message.name}`, { severity: "success" })
         } else {
-            toast("Error", {severity: "error"})
+            toast("Error", { severity: "error" })
         }
     }
 

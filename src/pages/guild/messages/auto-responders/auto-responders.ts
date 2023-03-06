@@ -1,8 +1,8 @@
-import {toast} from "lets-toast";
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "../../../../services/discord-service";
-import {Router} from "aurelia-router";
-import {inject} from "aurelia-framework";
+import { toast } from "lets-toast";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "../../../../services/discord-service";
+import { Router } from "aurelia-router";
+import { inject } from "aurelia-framework";
 
 @inject(EventAggregator, DiscordService, Router)
 export class AutoResponders {
@@ -31,9 +31,9 @@ export class AutoResponders {
         this.responders[foundCommandIndex].active = !!this.responders[foundCommandIndex].active;
         if (foundCommandIndex >= 0) {
             await this.discordService.updateAutoResponder(this.responders[foundCommandIndex]);
-            toast(`Active status has been updated for /${responder.name}`, {severity: "success"})
+            toast(`Active status has been updated for /${responder.name}`, { severity: "success" })
         } else {
-            toast("Error", {severity: "error"})
+            toast("Error", { severity: "error" })
         }
     }
 

@@ -1,7 +1,7 @@
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from "services/discord-service";
-import {Router} from "aurelia-router";
-import {inject} from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from "services/discord-service";
+import { Router } from "aurelia-router";
+import { inject } from "aurelia-framework";
 import DataGrid from 'devextreme/ui/data_grid';
 
 @inject(EventAggregator, DiscordService, Router)

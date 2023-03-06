@@ -1,7 +1,7 @@
-import {Router} from 'aurelia-router';
-import {inject} from "aurelia-framework";
-import {EventAggregator} from "aurelia-event-aggregator";
-import {DiscordService} from 'services/discord-service';
+import { Router } from 'aurelia-router';
+import { inject } from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { DiscordService } from 'services/discord-service';
 
 @inject(EventAggregator, DiscordService, Router)
 export class GuildForms {

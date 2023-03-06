@@ -1,5 +1,5 @@
-import {inject} from "aurelia-framework";
-import {EventAggregator} from "aurelia-event-aggregator";
+import { inject } from "aurelia-framework";
+import { EventAggregator } from "aurelia-event-aggregator";
 import './validation-error.scss';
 
 @inject(EventAggregator)
@@ -12,7 +12,7 @@ export class ValidationError {
     banner;
 
     created() {
-        let subscription = this.ea.subscribe('validation-error', (data) => {
+        const subscription = this.ea.subscribe('validation-error', (data) => {
             this.errors = data;
             setTimeout(() => {
                 this.banner.open();

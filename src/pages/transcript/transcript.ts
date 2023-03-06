@@ -1,8 +1,8 @@
-import {Router} from "aurelia-router";
-import {EventAggregator} from "aurelia-event-aggregator";
-import {SessionService} from "services/session-service";
-import {inject} from "aurelia-framework";
-import {DiscordService} from "services/discord-service";
+import { Router } from "aurelia-router";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { SessionService } from "services/session-service";
+import { inject } from "aurelia-framework";
+import { DiscordService } from "services/discord-service";
 
 @inject(Router, EventAggregator, SessionService, DiscordService)
 export class Transcript {
