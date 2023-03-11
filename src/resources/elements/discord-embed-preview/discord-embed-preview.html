@@ -13,8 +13,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="body-title mb-2 fw-bold" if.bind="embed.title">
-                    ${embed.title}
+                <div class="body-title mb-2 fw-bold" if.bind="embed.title" innerhtml.bind="embed.title | discordMarkup">
+
                 </div>
                 <div class="body-description mb-1" if.bind="embed.description"
                      innerhtml.bind="embed.description | discordMarkup"></div>
@@ -25,8 +25,8 @@
                             <div class="field-name fw-bold mt-2" if.bind="field.name">
                                 ${field.name}
                             </div>
-                            <div class="field-value" if.bind="field.value">
-                                ${field.value}
+                            <div class="field-value" if.bind="field.value" innerhtml.bind="field.value | discordMarkup">
+
                             </div>
                         </section>
                     </div>
