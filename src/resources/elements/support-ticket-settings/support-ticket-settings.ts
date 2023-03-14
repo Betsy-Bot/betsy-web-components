@@ -28,6 +28,9 @@ export class SupportTicketSettings {
 
     selectAuditOption() {
         if (this.selectedAuditOption) {
+            if (!this.request.supportTicketAudits) {
+                this.request.supportTicketAudits = [];
+            }
             this.request.supportTicketAudits.push(this.selectedAuditOption);
             this.selectedAuditOption = null;
         }
