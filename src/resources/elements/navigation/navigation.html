@@ -1,31 +1,5 @@
 <template>
     <section id="navigation" if.bind="currentRoute !== 'validate' && currentRoute !== 'verify'">
-        <confirmation-dialog
-            cancel-text="Cancel"
-            dialog.two-way="donateDialog"
-            title="Donate"
-        >
-            <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-3 my-2" click.delegate="showCrypto = true" if.bind="!showCrypto">
-                Donate With Crypto
-                <mdc-icon>favorite</mdc-icon>
-            </button>
-            <div if.bind="showCrypto">
-                Send To 38PTfVsevXXFQ1B2kan7RVCFZkeGK24Cnt
-            </div>
-            <a href="https://buy.stripe.com/eVacOKdUaatdgFydQQ" target="_blank">
-                <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-3 my-2">
-                    Donate With Credit / Debit
-                    <mdc-icon>favorite</mdc-icon>
-                </button>
-            </a>
-            <a href="https://ko-fi.com/betsybot" target="_blank">
-                <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-3 mt-2">
-                    Ko-fi Project
-                    <mdc-icon>favorite</mdc-icon>
-                </button>
-            </a>
-        </confirmation-dialog>
-
         <mdc-top-app-bar style="position: relative">
             <mdc-top-app-bar-row>
                 <mdc-top-app-bar-section>
@@ -57,10 +31,6 @@
                             <mdc-icon>help</mdc-icon>
                         </button>
                     </a>
-                    <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-3" click.delegate="donateDialog.open()">
-                        Donate
-                        <mdc-icon>favorite</mdc-icon>
-                    </button>
                     <a href="https://top.gg/bot/946433944390340688" target="_blank">
                         <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-3">
                             Review

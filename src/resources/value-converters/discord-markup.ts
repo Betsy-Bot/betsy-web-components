@@ -8,7 +8,11 @@ export class DiscordMarkupValueConverter {
     }
 
     toView(value) {
-        const roles = this.discordService.getLocalGuild().guild.roles;
+        const guild = this.discordService.getLocalGuild();
+        if (!guild) {
+            return value;
+        }
+        const roles = guild.guild.roles;
         const channels = this.discordService.getLocalDiscordChannels();
         value = toHTML(value, {
             discordCallback: {
