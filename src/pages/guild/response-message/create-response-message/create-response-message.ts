@@ -23,7 +23,7 @@ export class CreateResponseMessage {
         type: DiscordCommandType.ResponseMessage,
         private: true,
         discordCommandActions: [{
-            type: DiscordCommandActionType.MessageChannel,
+            type: DiscordCommandActionType.MessageResponse,
             discordMessage: {
                 message: {
                     content: 'Some Content',
