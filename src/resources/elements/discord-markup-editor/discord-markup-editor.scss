@@ -1,0 +1,9 @@
+#discord-markup-editor {
+    .ink-mde {
+        --ink-toolbar-group-spacing: 0;
+        --ink-toolbar-item-spacing: 0;
+    }
+    .ink-mde .ink-mde-editor {
+        background-color: #202225;
+    }
+}

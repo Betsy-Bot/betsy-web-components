@@ -21,6 +21,7 @@ export function configure(config: FrameworkConfiguration): void {
         PLATFORM.moduleName('./elements/discord-embed-preview/discord-embed-preview'),
         PLATFORM.moduleName('./elements/discord-emoji-selector/discord-emoji-selector'),
         PLATFORM.moduleName('./elements/discord-feature-header/discord-feature-header'),
+        PLATFORM.moduleName('./elements/discord-markup-editor/discord-markup-editor'),
         PLATFORM.moduleName('./elements/discord-message-creator/discord-message-creator'),
         PLATFORM.moduleName('./elements/discord-message-preview/discord-message-preview'),
         PLATFORM.moduleName('./elements/discord-form-creator/discord-form-creator'),
