@@ -3,11 +3,12 @@
 @use '~@material/select';
 @use '~@material/dialog';
 @use '~@material/textfield';
+@use '~@material/list';
 @import 'bootstrap';
 
 body {
-    --mdc-theme-primary: rgba(87, 98, 213, 1);
-    --mdc-theme-secondary: rgba(76, 96, 133, 1);
+    --mdc-theme-primary: rgba(0, 68, 204, 1);
+    --mdc-theme-secondary: rgba(51, 151, 255, 1);
     --mdc-theme-on-primary: $body-bg;
     --mdc-background-primary: rgba(0, 0, 0, 0);
     --mdc-theme-surface: rgba(76, 96, 133, 1);
@@ -24,7 +25,7 @@ body {
 }
 
 .button-primary {
-    @include button.filled-accessible(theme.$primary);
+    @include button.filled-accessible(rgba(0, 68, 204, 1));
 }
 
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field-character-counter, .mdc-text-field:not(.mdc-text-field--disabled) + .mdc-text-field-helper-line .mdc-text-field-character-counter {
@@ -32,7 +33,7 @@ body {
 }
 
 .mdc-evolution-chip {
-    background-color: theme.$primary;
+    background-color: rgba(0, 68, 204, 1);
 
     .mdc-evolution-chip__text-label {
         color: #dcddde;
@@ -84,6 +85,7 @@ body {
 }
 
 .mdc-drawer .mdc-drawer__title {
+    color: white;
     text-align: center;
 }
 
@@ -97,4 +99,21 @@ body {
 
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__affix--prefix {
     color: darkgray;
+}
+
+
+.mdc-list-item.mdc-list-item--with-one-line {
+    height: 37px !important;
+}
+.mdc-list-item {
+    @include list.deprecated-single-line-height(37px);
+    @include list.deprecated-list-item-height(37px);
+}
+
+mdc-top-app-bar {
+    background-color: rgb(28, 30, 31) !important;
+}
+
+.button-secondary:not(:disabled) {
+    background-color: rgba(158, 61, 255, 1)
 }

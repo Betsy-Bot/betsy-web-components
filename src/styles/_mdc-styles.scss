@@ -41,7 +41,7 @@
 }
 
 .mdc-fab.redFab {
-    @include fab.accessible(material-color.$red-900);
+    @include fab.accessible(darkred);
 }
 
 .mdc-fab.greenFab {
