@@ -40,7 +40,7 @@ stages:
                       script: 'npm run build:production'
                 - task: Docker@2
                   inputs:
-                      containerRegistry: 'BetsyContainerRegistry'
-                      repository: 'BestyPanel'
+                      containerRegistry: 'DigitalOceanRegistry'
+                      repository: 'betsy-production'
                       command: 'buildAndPush'
                       Dockerfile: '**/Dockerfile'
