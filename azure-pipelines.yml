@@ -41,7 +41,7 @@ stages:
                 - task: Docker@2
                   inputs:
                       containerRegistry: 'DigitalOceanRegistry'
-                      repository: 'betsy-production'
+                      repository: 'BetsyAdminPanel'
                       command: 'buildAndPush'
                       Dockerfile: '**/Dockerfile'
                       tags: |
