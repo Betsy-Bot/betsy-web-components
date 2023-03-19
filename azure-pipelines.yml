@@ -37,7 +37,7 @@ stages:
                   displayName: Run npm run build:production
                   inputs:
                       targetType: 'inline'
-                      script: 'npm run build:production'
+                      script: 'npm run build'
                 - task: Docker@2
                   inputs:
                       containerRegistry: 'DigitalOceanRegistry'
