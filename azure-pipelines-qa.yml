@@ -3,21 +3,10 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-    - master
+    - develop
 
 resources:
     - repo: self
-
-variables:
-    # Container registry service connection established during pipeline creation
-    dockerRegistryServiceConnection: '4d99b72f-99af-4aa6-9be8-c6f43af4d429'
-    imageRepository: 'betsypanel'
-    containerRegistry: 'BetsyContainerRegistry'
-    dockerfilePath: '**/Dockerfile'
-    tag: '$(Build.BuildId)'
-
-    # Agent VM image name
-    vmImageName: 'ubuntu-latest'
 
 stages:
     - stage: Build_And_Deploy
@@ -26,7 +15,7 @@ stages:
           - job: Npm_Install
             displayName: Run NPM Install
             pool:
-                vmImage: $(vmImageName)
+                vmImage: ubuntu-latest
             steps:
                 - task: Bash@3
                   displayName: Run npm i
@@ -34,14 +23,14 @@ stages:
                       targetType: 'inline'
                       script: 'npm i'
                 - task: Bash@3
-                  displayName: Run npm run build:production
+                  displayName: Run npm run build:qa
                   inputs:
                       targetType: 'inline'
-                      script: 'npm run build'
+                      script: 'npm run build:staging'
                 - task: Docker@2
                   inputs:
                       containerRegistry: 'DigitalOceanRegistry'
-                      repository: 'betsy-production/adminpanel'
+                      repository: 'betsy-production/adminpanel-qa'
                       command: 'buildAndPush'
                       Dockerfile: '**/Dockerfile'
                       tags: |
