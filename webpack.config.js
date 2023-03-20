@@ -25,7 +25,7 @@ const cssRules = [
 ];
 
 
-module.exports = ({production}, {analyze, hmr, port, host}) => ({
+module.exports = ({production, staging}, {analyze, hmr, port, host}) => ({
     resolve: {
         extensions: ['.ts', '.js'],
         modules: [srcDir, 'node_modules'],
@@ -131,52 +131,52 @@ module.exports = ({production}, {analyze, hmr, port, host}) => ({
                 //   priority: 20
                 // },
                 vendors: { // picks up everything else being used from node_modules that is less than minSize
-                  test: /[\\/]node_modules[\\/]/,
-                  name: "vendors",
-                  priority: 19,
-                  enforce: true // create chunk regardless of the size of the chunk
+                    test: /[\\/]node_modules[\\/]/,
+                    name: "vendors",
+                    priority: 19,
+                    enforce: true // create chunk regardless of the size of the chunk
                 },
                 // generic 'async' vendor node module splits: separates out larger modules
                 vendorAsyncSplit: { // vendor async chunks, create each asynchronously used node module as separate chunk file if module is bigger than minSize
-                  test: /[\\/]node_modules[\\/]/,
-                  name(module) {
-                    // Extract the name of the package from the path segment after node_modules
-                    const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-                    return `vendor.async.${packageName.replace('@', '')}`;
-                  },
-                  chunks: 'async',
-                  priority: 10,
-                  reuseExistingChunk: true,
-                  minSize: 5000 // only create if 5k or larger
+                    test: /[\\/]node_modules[\\/]/,
+                    name(module) {
+                        // Extract the name of the package from the path segment after node_modules
+                        const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+                        return `vendor.async.${packageName.replace('@', '')}`;
+                    },
+                    chunks: 'async',
+                    priority: 10,
+                    reuseExistingChunk: true,
+                    minSize: 5000 // only create if 5k or larger
                 },
                 vendorsAsync: { // vendors async chunk, remaining asynchronously used node modules as single chunk file
-                  test: /[\\/]node_modules[\\/]/,
-                  name: 'vendors.async',
-                  chunks: 'async',
-                  priority: 9,
-                  reuseExistingChunk: true,
-                  enforce: true // create chunk regardless of the size of the chunk
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors.async',
+                    chunks: 'async',
+                    priority: 9,
+                    reuseExistingChunk: true,
+                    enforce: true // create chunk regardless of the size of the chunk
                 },
                 // generic 'async' common module splits: separates out larger modules
                 commonAsync: { // common async chunks, each asynchronously used module a separate chunk file if module is bigger than minSize
-                  name(module) {
-                    // Extract the name of the module from last path component. 'src/modulename/' results in 'modulename'
-                    const moduleName = module.context.match(/[^\\/]+(?=\/$|$)/)[0];
-                    return `common.async.${moduleName.replace('@', '')}`;
-                  },
-                  minChunks: 2, // Minimum number of chunks that must share a module before splitting
-                  chunks: 'async',
-                  priority: 1,
-                  reuseExistingChunk: true,
-                  minSize: 5000 // only create if 5k or larger
+                    name(module) {
+                        // Extract the name of the module from last path component. 'src/modulename/' results in 'modulename'
+                        const moduleName = module.context.match(/[^\\/]+(?=\/$|$)/)[0];
+                        return `common.async.${moduleName.replace('@', '')}`;
+                    },
+                    minChunks: 2, // Minimum number of chunks that must share a module before splitting
+                    chunks: 'async',
+                    priority: 1,
+                    reuseExistingChunk: true,
+                    minSize: 5000 // only create if 5k or larger
                 },
                 commonsAsync: { // commons async chunk, remaining asynchronously used modules as single chunk file
-                  name: 'commons.async',
-                  minChunks: 2, // Minimum number of chunks that must share a module before splitting
-                  chunks: 'async',
-                  priority: 0,
-                  reuseExistingChunk: true,
-                  enforce: true // create chunk regardless of the size of the chunk
+                    name: 'commons.async',
+                    minChunks: 2, // Minimum number of chunks that must share a module before splitting
+                    chunks: 'async',
+                    priority: 0,
+                    reuseExistingChunk: true,
+                    enforce: true // create chunk regardless of the size of the chunk
                 }
 
             }
@@ -236,9 +236,12 @@ module.exports = ({production}, {analyze, hmr, port, host}) => ({
             {test: /\.(woff|woff2|ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, type: 'asset'},
             {
                 test: /environment\.json$/i, use: [
-                    {loader: "app-settings-loader", options: {env: production ? 'production' : 'development'}},
+                    {
+                        loader: "app-settings-loader",
+                        options: {env: production ? 'production' : (staging ? 'staging' : 'development')}
+                    },
                 ]
-            }
+            },
         ]
     },
     plugins: [
