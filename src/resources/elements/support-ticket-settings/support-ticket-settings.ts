@@ -46,6 +46,9 @@ export class SupportTicketSettings {
 
     getRoleName(roleId) {
         const found = this.roles.filter(x => x.id == roleId);
+        if (!found) {
+            return '';
+        }
         return found[0].name;
     }
 }
