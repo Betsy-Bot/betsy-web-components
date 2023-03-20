@@ -15,7 +15,7 @@ stages:
           - job: Npm_Install
             displayName: Run NPM Install
             pool:
-                vmImage: $(vmImageName)
+                vmImage: ubuntu-latest
             steps:
                 - task: Bash@3
                   displayName: Run npm i
