@@ -10,7 +10,7 @@ export class DiscordMessageCreator {
     @bindable single;
     @bindable allowComponents = true;
     @bindable maxComponents = 5;
-    @bindable tab = 'message';
+    @bindable tab = 'embeds';
     @bindable selectedMessage;
     @bindable hideTemplate = false
     @bindable customBuilder;

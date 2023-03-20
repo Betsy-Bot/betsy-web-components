@@ -23,7 +23,7 @@ export class Navigation {
         const childRoute = this.router.currentInstruction.params.childRoute ? `/${this.router.currentInstruction.params.childRoute}` : null
         this.router.navigate(`guild/${this.guildId}${childRoute ?? ''}`);
         location.reload();
-    }d
+    }
 
     attached() {
         this.drawer.open = this.sessionService.getStorageItem(SessionService.SIDEBAR_STATUS_KEY, true);

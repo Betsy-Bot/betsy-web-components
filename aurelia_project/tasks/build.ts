@@ -9,16 +9,18 @@ export default function() {
 // Cleanup --env prod to --env production
 // for backwards compatibility
 function cleanArgs(args) {
-  const cleaned = [];
-  for (let i = 0, ii = args.length; i < ii; i++) {
-    if (args[i] === '--env' && i < ii - 1) {
-      const env = args[++i].toLowerCase();
-      if (env.startsWith('prod')) {
-        cleaned.push('--env production');
-      }
-    } else {
-      cleaned.push(args[i]);
+    const cleaned = [];
+    for (let i = 0, ii = args.length; i < ii; i++) {
+        if (args[i] === '--env' && i < ii - 1) {
+            const env = args[++i].toLowerCase();
+            if (env.startsWith('prod')) {
+                cleaned.push('--env production');
+            } else if (env.startsWith('staging')) {
+                cleaned.push('--env staging');
+            }
+        } else {
+            cleaned.push(args[i]);
+        }
     }
-  }
-  return cleaned;
+    return cleaned;
 }

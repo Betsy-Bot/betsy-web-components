@@ -36,29 +36,19 @@
         </div>
         <mdc-tab-bar view-model.ref="tabBar"
                      use-automatic-activation.bind="useAutomaticActivation" focus-on-activate.bind="false">
-            <mdc-tab label="Message" active.bind="tab === 'message'"
-                     click.delegate="tab = 'message'"></mdc-tab>
             <mdc-tab label="Embeds" active.bind="tab === 'embeds'"
                      click.delegate="tab = 'embeds'"></mdc-tab>
             <mdc-tab label="Components" active.bind="tab === 'components'"
                      click.delegate="tab = 'components'" if.bind="allowComponents"></mdc-tab>
         </mdc-tab-bar>
 
-        <div class="message-area" if.bind="tab === 'message'">
-            <mdc-text-field
-                rows="8"
-                class="w-100"
-                textarea
+        <div class="message-area mb-2">
+            <discord-markup-editor
                 label="Content"
-                value.bind="message.content"
-            ></mdc-text-field>
+                value.two-way="message.content"
+            ></discord-markup-editor>
         </div>
         <div class="embed-area" if.bind="tab === 'embeds'">
-            <mdc-text-field
-                class="w-100 mb-2"
-                label="Content"
-                value.bind="message.content"
-            ></mdc-text-field>
             <button mdc-button
                     class="button-primary mb-2"
                     if.bind="canCreateEmbed"

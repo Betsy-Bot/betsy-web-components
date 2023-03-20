@@ -28,6 +28,9 @@ export class SupportTicketSettings {
 
     selectAuditOption() {
         if (this.selectedAuditOption) {
+            if (!this.request.supportTicketAudits) {
+                this.request.supportTicketAudits = [];
+            }
             this.request.supportTicketAudits.push(this.selectedAuditOption);
             this.selectedAuditOption = null;
         }
@@ -43,6 +46,9 @@ export class SupportTicketSettings {
 
     getRoleName(roleId) {
         const found = this.roles.filter(x => x.id == roleId);
+        if (!found) {
+            return '';
+        }
         return found[0].name;
     }
 }

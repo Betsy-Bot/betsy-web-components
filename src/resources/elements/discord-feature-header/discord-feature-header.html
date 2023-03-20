@@ -7,11 +7,12 @@
                 icon="arrow_back"
                 click.delegate="navigateBack()"
                 class="blackFab"
+                mdc-tooltip="Back"
             ></button>
 
             ${title}
 
-            <a href="${docUrl}" if.bind="docUrl" target="_blank" class="mx-2">
+            <a href="${docUrl}" if.bind="docUrl" target="_blank" class="mx-2" mdc-tooltip="Read the Docs">
                 <button mdc-fab mini.bind="true" icon="description"></button>
             </a>
 
@@ -22,6 +23,7 @@
                 icon="add_circle"
                 click.delegate="handleCreate()"
                 if.bind="createFunction"
+                mdc-tooltip="Create"
             ></button>
 
             <button
@@ -31,6 +33,7 @@
                 icon="content_copy"
                 click.delegate="handleCopy()"
                 if.bind="copyFunction"
+                mdc-tooltip="Copy"
             ></button>
 
             <button
@@ -40,6 +43,7 @@
                 icon="delete"
                 click.delegate="handleDelete()"
                 if.bind="deleteFunction"
+                mdc-tooltip="Delete"
             ></button>
         </h2>
         <div>
