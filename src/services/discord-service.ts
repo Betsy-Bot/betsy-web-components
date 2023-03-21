@@ -257,8 +257,8 @@ export class DiscordService {
         return this.api.doDelete(`DiscordSupportTicketSettings/${settingsId}`);
     }
 
-    async updateSupportTicketSettings(guildId: string, settings: any) {
-        return this.api.doPatch(`DiscordGuild/${guildId}/SupportTickets/${settings.id}`, settings);
+    async updateSupportTicketSettings(settings: any) {
+        return this.api.doPatch(`DiscordSupportTicketSettings/${settings.id}`, settings);
     }
 
     async updateAuthorizedUsersForGuild(guild: any, guildId: string) {
