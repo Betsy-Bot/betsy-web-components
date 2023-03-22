@@ -25,19 +25,19 @@ export class DiscordMessageCreator {
     }
 
     addEmbed() {
-        if (!this.message.embeds) {
+        if (!this.message?.embeds) {
             this.message.embeds = [];
         }
         this.message.embeds.push(new DiscordEmbed())
     }
 
     deleteEmbed(index) {
-        this.message.embeds.splice(index, 1)
+        this.message?.embeds.splice(index, 1)
     }
 
     get canCreateEmbed() {
         if (!this.single) {
-            return !this.message.embeds || this.message.embeds.length < 10
+            return !this.message?.embeds || this.message?.embeds.length < 10
         } else {
             return !this.message?.embeds || this.message?.embeds?.length < 1
         }
