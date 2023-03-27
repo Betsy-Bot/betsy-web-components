@@ -9,6 +9,11 @@ import 'app.scss';
 import { apiEndpoint } from "./environment";
 import { ApiInterceptor } from "./services/api-interceptor";
 
+/*
+Material Web Components
+ */
+import '@material/web/button/filled-button';
+
 export function configure(aurelia: Aurelia): void {
     aurelia.use
         .standardConfiguration()
