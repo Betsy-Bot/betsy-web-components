@@ -1,46 +1,43 @@
 <template>
-  <section id="server-card">
-    <mdc-card mdc-elevation.bind="12" class="mb-2">
-      <mdc-card-primary-action>
-        <mdc-card-media square class="server-card-media mx-auto my-3"
-                        if.bind="server.icon"
-                        style="background-image: url(https://cdn.discordapp.com/icons/${server.id}/${server.icon}.${server.icon_extension})">
-        </mdc-card-media>
-        <div square class="server-card-media mx-auto my-3" else>
-          <div class="fs-5 d-flex discord-text-square justify-content-center align-items-center d-flex">
-            ${getServerText()}
-          </div>
+    <section id="server-card">
+        <mdc-card mdc-elevation.bind="12" class="mb-2">
+            <mdc-card-primary-action>
+                <mdc-card-media square class="server-card-media mx-auto my-3"
+                                if.bind="server.icon"
+                                style="background-image: url(https://cdn.discordapp.com/icons/${server.id}/${server.icon}.${server.icon_extension})">
+                </mdc-card-media>
+                <div square class="server-card-media mx-auto my-3" else>
+                    <div class="fs-5 d-flex discord-text-square justify-content-center align-items-center d-flex">
+                        ${getServerText()}
+                    </div>
+                </div>
+            </mdc-card-primary-action>
+        </mdc-card>
+        <div class="row">
+            <div class="col-12 col-lg-8 my-auto">
+                <div class="fs-6" mdc-headline6>
+                    ${server.name}
+                </div>
+                <div class="fs-7" if.bind="!hideButton && !loading">
+                    ${server.owner ? 'Owner' : 'Bot Manager'}
+                </div>
+                <div if.bind="loading" class="fs-7">
+                    Waiting for bot to be invited...
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 text-lg-end my-auto" if.bind="!hideButton">
+                <md-filled-button
+                    class="mwc-button-secondary"
+                    click.trigger="handleServerInvite()"
+                    label="SETUP"
+                    if.bind="((!server.invited && !loading) || !server.exists) && !forceGo"
+                ></md-filled-button>
+                <a route-href="route: guild; params.bind: { guildId: server.id }"
+                   if.bind="(forceGo || (server.exists && server.invited)) && !loading">
+                    <md-filled-button label="GO"></md-filled-button>
+                </a>
+                <mdc-circular-progress size="50" stroke-width="5" if.bind="loading"></mdc-circular-progress>
+            </div>
         </div>
-      </mdc-card-primary-action>
-    </mdc-card>
-    <div class="row">
-      <div class="col-12 col-lg-8 my-auto">
-        <div class="fs-6" mdc-headline6>
-          ${server.name}
-        </div>
-        <div class="fs-7" if.bind="!hideButton && !loading">
-          ${server.owner ? 'Owner' : 'Bot Manager'}
-        </div>
-        <div if.bind="loading" class="fs-7">
-          Waiting for bot to be invited...
-        </div>
-      </div>
-      <div class="col-12 col-lg-4 text-lg-end my-auto" if.bind="!hideButton">
-        <button mdc-button
-                class="button-secondary"
-                if.bind="((!server.invited && !loading) || !server.exists) && !forceGo"
-                click.delegate="handleServerInvite()">
-          Setup
-        </button>
-        <a route-href="route: guild; params.bind: { guildId: server.id }" if.bind="forceGo || (server.exists && server.invited)">
-          <button mdc-button class="button-primary">
-            Go
-          </button>
-        </a>
-        <mdc-circular-progress size="50" stroke-width="5" if.bind="loading"></mdc-circular-progress>
-      </div>
-    </div>
-    </div>
-  </section>
-
+    </section>
 </template>
