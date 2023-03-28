@@ -60,13 +60,17 @@ export class SessionService {
     }
 
     async refreshProfile() {
-        this.currentUser = await this.apiService.doGet('User/Profile');
-        if (!this.currentUser) {
-            //this.destroyStorageItem(SessionService.TOKEN_KEY);
-            toast("Please re-login", { severity: "error" });
+        try {
+            this.currentUser = await this.apiService.doGet('User/Profile');
+            if (!this.currentUser) {
+                //this.destroyStorageItem(SessionService.TOKEN_KEY);
+                toast("Please re-login", { severity: "error" });
+            }
+            this.eventAggregator.publish('user-updated', this.currentUser);
+            return this.currentUser;
+        } catch(e) {
+            this.clearSession();
         }
-        this.eventAggregator.publish('user-updated', this.currentUser);
-        return this.currentUser;
     }
 
     isTokenValid() {
