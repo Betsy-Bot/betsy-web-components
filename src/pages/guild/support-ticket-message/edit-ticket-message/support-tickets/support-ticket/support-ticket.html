@@ -7,8 +7,9 @@
 
         <div class="my-3">
             <div class="my-3">
-                <button mdc-button class="button-primary" if.bind="!supportTicket.closed" click.delegate="closeTicket()">
-                    Close Ticket
+                <button mdc-button class="button-primary" if.bind="!supportTicket.closed" click.delegate="closeTicket()" disabled.bind="closing">
+                    <span if.bind="!closing">Close Ticket</span>
+                    <mdc-circular-progress size="50" stroke-width="3" else></mdc-circular-progress>
                 </button>
             </div>
             <template if.bind="supportTicket.transcript">

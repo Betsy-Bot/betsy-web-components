@@ -49,7 +49,7 @@ export class EditTicketMessage {
     async editSupportTicketSettings() {
         try {
             this.ticket.discordGuildId = this.guildId;
-            await this.discordService.updateSupportTicketSettings(this.guildId, this.ticket);
+            await this.discordService.updateSupportTicketSettings(this.ticket);
             toast("Updated support message!", { severity: "success" })
         } catch(e) {
             toast("Failed to update support ticket creation message", { severity: "error" });

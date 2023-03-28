@@ -26,6 +26,9 @@ export class DiscordButton {
     }
 
     get isEmoji() {
-        return /\p{Extended_Pictographic}/u.test(this.button.emoji.name); // true :)
+        if (this.button.emoji?.name) {
+            return /\p{Extended_Pictographic}/u.test(this.button.emoji.name);
+        }
+        return false;
     }
 }

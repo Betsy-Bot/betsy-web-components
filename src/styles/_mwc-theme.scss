@@ -1,0 +1,51 @@
+:root {
+    --md-sys-color-primary: rgba(0, 68, 204, 1);
+    --md-sys-color-primary-container: #004F4F;
+    --md-sys-color-on-primary: #eaeaea;
+    --md-sys-color-on-primary-container: #6FF7F6;
+    --md-sys-color-secondary: rgba(51, 151, 255, 1);
+    --md-sys-color-secondary-container: #324B4B;
+    --md-sys-color-on-secondary: #ffffff;
+    --md-sys-color-on-secondary-container: #CCE8E7;
+    --md-sys-color-tertiary: #B3C8E8;
+    --md-sys-color-tertiary-container: #334863;
+    --md-sys-color-on-tertiary: #1C314B;
+    --md-sys-color-on-tertiary-container: #D3E4FF;
+    --md-sys-color-error: #FFB4AB;
+    --md-sys-color-error-container: #93000A;
+    --md-sys-color-on-error: #690005;
+    --md-sys-color-on-error-container: #FFDAD6;
+    --md-sys-color-outline: #889392;
+    --md-sys-color-background: #191C1C;
+    --md-sys-color-on-background: #E0E3E2;
+    --md-sys-color-surface: #191C1C;
+    --md-sys-color-on-surface: #E0E3E2;
+    --md-sys-color-surface-variant: #3F4948;
+    --md-sys-color-on-surface-variant: #BEC9C8;
+    --md-sys-color-inverse-surface: #E0E3E2;
+    --md-sys-color-inverse-on-surface: #191C1C;
+    --md-sys-color-inverse-primary: #006A6A;
+    --md-sys-color-shadow: #000000;
+    --md-sys-color-surface-tint: #4CDADA;
+    --md-sys-color-outline-variant: #3F4948;
+    --md-sys-color-scrim: #000000;
+    --md-filled-button-container-shape-start-end: 3px;
+    --md-filled-button-container-shape-end-end: 3px;
+    --md-filled-button-container-shape-start-start: 3px;
+    --md-filled-button-container-shape-end-start: 3px;
+    --md-elevated-button-container-shape-start-end: 3px;
+    --md-elevated-button-container-shape-end-end: 3px;
+    --md-elevated-button-container-shape-start-start: 3px;
+    --md-elevated-button-container-shape-end-start: 3px;
+}
+
+.mwc-round-button {
+    --md-filled-button-container-shape-start-end: 9999px;
+    --md-filled-button-container-shape-end-end: 9999px;
+    --md-filled-button-container-shape-start-start: 9999px;
+    --md-filled-button-container-shape-end-start: 9999px;
+}
+
+.mwc-button-secondary {
+    --md-sys-color-primary: rgba(158, 61, 255, 1);
+}

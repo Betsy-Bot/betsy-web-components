@@ -15,6 +15,7 @@ export class SupportTicket {
 
     featureActive;
     supportTicket;
+    closing = false;
 
     async activate(params) {
         this.guildId = params.guildId as string;
@@ -27,6 +28,8 @@ export class SupportTicket {
     }
 
     async closeTicket() {
+        this.closing = true;
         this.supportTicket = await this.discordService.closeSupportTicket(this.supportTicketId);
+        this.closing = false;
     }
 }

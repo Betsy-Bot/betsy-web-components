@@ -25,30 +25,20 @@
                     </mdc-select>
                 </mdc-top-app-bar-section>
                 <mdc-top-app-bar-section end>
-                    <a href="https://discord.gg/YzPW2YxGpJ" target="_blank">
-                        <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-3">
-                            Support
-                            <mdc-icon>help</mdc-icon>
-                        </button>
-                    </a>
-                    <a href="https://top.gg/bot/946433944390340688" target="_blank">
-                        <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-3">
-                            Review
-                            <mdc-icon>favorite</mdc-icon>
-                        </button>
-                    </a>
-                    <a href="https://top.gg/bot/946433944390340688/vote" target="_blank">
-                        <button mdc-button show.bind="guildId" class="d-none d-md-block button-primary me-2 me-lg-5">
-                            Vote
-                            <mdc-icon>favorite</mdc-icon>
-                        </button>
-                    </a>
+                    <template if.bind="user">
+                        <a href="https://discord.gg/YzPW2YxGpJ" target="_blank" class="d-none d-md-block me-2 me-lg-3">
+                            <md-filled-button label="SUPPORT"></md-filled-button>
+                        </a>
+                        <a href="https://top.gg/bot/946433944390340688" target="_blank" class="d-none d-md-block me-2 me-lg-3">
+                            <md-filled-button label="REVIEW"></md-filled-button>
+                        </a>
+                        <a href="https://top.gg/bot/946433944390340688/vote" target="_blank" class="d-none d-md-block me-2 me-lg-5">
+                            <md-filled-button label="VOTE"></md-filled-button>
+                        </a>
+                    </template>
                     <a if.bind="!user" external
                        href="${discordOauthUrl}">
-                        <button mdc-button class="button-secondary">
-                            <mdc-icon>login</mdc-icon>
-                            Login with Discord
-                        </button>
+                        <md-filled-button label="LOGIN WITH DISCORD"></md-filled-button>
                     </a>
                     <div else>
                         <img class="avatar" click.delegate="profileMenu.open = !profileMenu.open"
@@ -58,10 +48,6 @@
                     <div mdc-menu-surface-anchor ref="menuAnchor">
                         <mdc-menu view-model.ref="profileMenu" anchor.bind="menuAnchor" anchor-corner="BOTTOM_START">
                             <mdc-list>
-                                <a href="/">
-                                    <mdc-list-item>Dashboard</mdc-list-item>
-                                </a>
-                                <mdc-list-divider></mdc-list-divider>
                                 <mdc-list-item click.delegate="logout()">Sign out</mdc-list-item>
                             </mdc-list>
                         </mdc-menu>

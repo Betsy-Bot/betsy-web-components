@@ -23,7 +23,7 @@ export class ManageTrackedMessage {
         discordMessage: {
             message: {
                 content: '',
-                embeds: null
+                embeds: []
             }
         }
     };
