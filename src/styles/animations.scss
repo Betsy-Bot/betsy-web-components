@@ -1,0 +1,223 @@
+@keyframes slide-in-end {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-top {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-bottom {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-start {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: 113px;
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(1080deg);
+    stroke-dashoffset: (0.3 * 113px);
+  }
+
+  100% {
+    transform: rotate(0deg);
+    stroke-dashoffset: (0.3 * 113px);
+  }
+}
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(0.5, 0.5);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes rotate180 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes rotate0 {
+  0% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  80% {
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.ripple {
+  animation: ripple 2s forwards cubic-bezier(0, 0, 0.2, 1);
+}
+
+.zoom-in {
+  animation: zoom-in 0.2s;
+}
+
+.zoom-out {
+  animation: zoom-in 1s;
+}
+
+.spinner {
+  animation: spinner 1s infinite;
+}
+
+.rotate0 {
+  animation: rotate0 0.1s forwards;
+  display: block;
+}
+
+.rotate180 {
+  animation: rotate180 0.1s forwards;
+  display: block;
+}
+
+.fade-in {
+  animation: fade-in 1s;
+}
+
+.fade-out {
+  animation: fade-in 1s reverse;
+}
+
+.slide-in-start {
+  animation: slide-in-start 1s;
+}
+
+.slide-out-start {
+  animation: slide-in-start 1s reverse;
+}
+
+.slide-in-end {
+  animation: slide-in-end 1s;
+}
+
+.slide-out-end {
+  animation: slide-in-end 1s reverse;
+}
+
+.slide-in-top {
+  animation: slide-in-top 1s;
+}
+
+.slide-out-top {
+  animation: slide-in-top 1s reverse;
+}
+
+.slide-in-bottom {
+  animation: slide-in-bottom 1s;
+}
+
+.slide-out-bottom {
+  animation: slide-in-bottom 1s reverse;
+}
+
+.dot1,
+.dot2,
+.dot3 {
+  background: #fff;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin: 2px;
+}
+
+.dot1 {
+  animation: jump 2s -0.32s linear infinite;
+  background: #FFF;
+}
+
+.dot2 {
+  animation: jump 2s -0.16s linear infinite;
+  background: #FFF;
+}
+
+.dot3 {
+  animation: jump 2s linear infinite;
+  background: #FFF;
+}
+
+@keyframes jump {
+  0%,
+  20%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  35%,
+  65% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
