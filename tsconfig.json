@@ -17,6 +17,6 @@
     "src"
   ],
   "files": [
-    "src/resource.d.ts"
+    "dev-app/resource.d.ts"
   ]
 }

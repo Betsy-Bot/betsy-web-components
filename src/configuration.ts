@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
 import { DI } from 'aurelia';
 
-export const IDesignSystemConfiguration = DI.createInterface<BetsyWebComponentsConfiguration>('IBetsyWebComponentsConfiguration');
+export const IBetsyWebComponentsConfiguration = DI.createInterface<BetsyWebComponentsConfiguration>('IBetsyWebComponentsConfiguration');
 
 export interface BetsyWebComponentsConfiguration {
   components?: [];
