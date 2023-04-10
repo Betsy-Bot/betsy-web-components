@@ -1,0 +1,10 @@
+<a load="${route}" if.bind="route">
+    <li class="mdc-deprecated-list-item" data-value="${value}">
+        <span class="mdc-deprecated-list-item__ripple"></span>
+        <span class="mdc-deprecated-list-item__text">${label}</span>
+    </li>
+</a>
+<li class="mdc-deprecated-list-item" data-value="${value}" else>
+    <span class="mdc-deprecated-list-item__ripple"></span>
+    <span class="mdc-deprecated-list-item__text">${label}</span>
+</li>

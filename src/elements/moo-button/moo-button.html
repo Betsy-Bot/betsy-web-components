@@ -1,4 +1,4 @@
-<button class="material-button" ref="button">
+<button class="moo-button ${colorClass} ${class}" ref="button" type="${type}" click.trigger="handleClick()">
     <span class="material-icons" if.bind="icon">${icon}</span>
-    ${label}
+    ${label}<au-slot></au-slot>
 </button>

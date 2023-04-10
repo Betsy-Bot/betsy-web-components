@@ -1,14 +1,36 @@
-import {bindable, customElement, ICustomElementViewModel} from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel } from "aurelia";
 
-import template from './moo-button.html';
-import './moo-button.scss';
+import template from "./moo-button.html";
+import "./moo-button.scss";
+
+export type MOO_BUTTON_VARIANT = "primary" | "secondary";
 
 @customElement({
-    name: 'moo-button',
+    name: "moo-button",
     template,
+    containerless: true,
 })
 export class MooButton implements ICustomElementViewModel {
     button: HTMLButtonElement;
-    @bindable label;
-    @bindable icon;
+    @bindable label: string;
+    @bindable type: string;
+    @bindable icon: string;
+    @bindable variant: MOO_BUTTON_VARIANT = "primary";
+    @bindable class;
+    @bindable click: () => void;
+
+    get colorClass() {
+        switch (this.variant) {
+            case "primary":
+                return "";
+            case "secondary":
+                return "moo-button-secondary";
+        }
+    }
+
+    handleClick() {
+        if (this.click) {
+            this.click();
+        }
+    }
 }

@@ -1,11 +1,13 @@
-$moo-button-background-color: #6200ee;
-$moo-button-background-color-hover: #8e24aa;
+$moo-button-background-color: rgba(0, 68, 204, 1);
+$moo-button-background-color-hover: rgba(0, 75, 220, 1);
+$moo-button-background-color-secondary: rgba(158, 61, 255, 1);
+$moo-button-background-color-secondary-hover: rgba(158, 75, 255, 1);
 
 body {
 	font-family: 'Roboto', sans-serif;
 }
 
-.material-button {
+.moo-button {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -21,15 +23,23 @@ body {
 	transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.material-button:hover {
+.moo-button:hover {
 	background-color: $moo-button-background-color-hover;
 }
 
-.material-button:focus {
+.moo-button:focus {
 	outline: none;
 	box-shadow: 0 0 0 2px rgba(98, 0, 238, 0.3);
 }
 
-.material-button .material-icons {
-	margin-right: 8px;
+.moo-button .material-icons {
+	margin-right: .5rem;
+}
+
+.moo-button-secondary {
+    background-color: $moo-button-background-color-secondary;
+}
+
+.moo-button-secondary:hover {
+    background-color: $moo-button-background-color-secondary-hover;
 }
