@@ -1,14 +1,19 @@
-import { toast } from "lets-toast";
-import { DiscordService } from "../../../../services/discord-service";
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
-import { inject } from "aurelia";
+import {toast} from "lets-toast";
+import {DiscordService} from "../../../../services/discord-service";
+import {IRouteViewModel, route, Router} from "@aurelia/router-lite";
+import {inject} from "aurelia";
 
+@route({
+    path: "auto-responders",
+    title: "Auto Responders",
+})
 @inject(DiscordService, Router)
 export class AutoResponders implements IRouteViewModel {
     constructor(
         private discordService: DiscordService,
         private router: Router
-    ) {}
+    ) {
+    }
 
     guildId: string;
     responders;
@@ -40,7 +45,7 @@ export class AutoResponders implements IRouteViewModel {
                 severity: "success",
             });
         } else {
-            toast("Error", { severity: "error" });
+            toast("Error", {severity: "error"});
         }
     }
 

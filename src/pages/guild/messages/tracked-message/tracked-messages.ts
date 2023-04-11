@@ -1,16 +1,21 @@
-import { IEventAggregator } from "aurelia";
-import { DiscordService } from "../../../../services/discord-service";
-import { inject } from "aurelia";
-import { toast } from "lets-toast";
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
+import {IEventAggregator} from "aurelia";
+import {DiscordService} from "../../../../services/discord-service";
+import {inject} from "aurelia";
+import {toast} from "lets-toast";
+import {IRouteViewModel, route, Router} from "@aurelia/router-lite";
 
+@route({
+    path: "tracked-messages",
+    title: "Tracked Messages",
+})
 @inject(IEventAggregator, DiscordService, Router)
 export class TrackedMessages implements IRouteViewModel {
     constructor(
         private eventAggregator: IEventAggregator,
         private discordService: DiscordService,
         private router: Router
-    ) {}
+    ) {
+    }
 
     guildId: string;
     messages;
@@ -37,7 +42,7 @@ export class TrackedMessages implements IRouteViewModel {
                 severity: "success",
             });
         } else {
-            toast("Error", { severity: "error" });
+            toast("Error", {severity: "error"});
         }
     }
 

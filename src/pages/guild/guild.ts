@@ -86,11 +86,7 @@ const routes = [
         title: "Manage Thread Channel",
     },
     SendMessage,
-    {
-        component: AutoResponders,
-        path: "auto-responders",
-        title: "Auto Responders",
-    },
+    AutoResponders,
     {
         component: ManageAutoResponder,
         path: "auto-responders/:responderId",
