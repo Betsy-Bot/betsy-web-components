@@ -1,8 +1,8 @@
-import { bindable, inject } from "aurelia-framework";
-import { DiscordService } from "services/discord-service";
+import {bindable, ICustomElementViewModel, inject} from "aurelia";
+import { DiscordService } from "../../../services/discord-service";
 
 @inject(DiscordService)
-export class MessageResourceSelector {
+export class MessageResourceSelector implements ICustomElementViewModel {
     constructor(private discordService: DiscordService) {
     }
     @bindable selectedMessage: string;

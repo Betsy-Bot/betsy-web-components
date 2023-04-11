@@ -1,17 +1,23 @@
-import { DiscordComponentType, DiscordForm } from "../../../../../services/models/discord";
-import { Router } from 'aurelia-router';
-import { inject } from "aurelia-framework";
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from 'services/discord-service';
+import {
+    DiscordComponentType,
+    DiscordForm,
+} from "../../../../../services/models/discord";
+import { inject } from "aurelia";
+import { IEventAggregator } from "aurelia";
+import { DiscordService } from "../../../../../services/discord-service";
 import { toast } from "lets-toast";
+import { IRouteViewModel, Router } from "@aurelia/router-lite";
 
-@inject(EventAggregator, DiscordService, Router)
-export class CreateForm {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
-    }
+@inject(IEventAggregator, DiscordService, Router)
+export class CreateForm implements IRouteViewModel {
+    constructor(
+        private eventAggregator: IEventAggregator,
+        private discordService: DiscordService,
+        private router: Router
+    ) {}
     params;
     guildId;
-    loading = false;
+    didLoad = false;
 
     form: DiscordForm = {
         customId: "",
@@ -22,39 +28,44 @@ export class CreateForm {
             components: [
                 {
                     type: DiscordComponentType.ActionRow,
-                    components: [{
-                        custom_id: "",
-                        type: DiscordComponentType.TextInput,
-                        label: ""
-                    }]
-                }
-            ]
-        }
+                    components: [
+                        {
+                            custom_id: "",
+                            type: DiscordComponentType.TextInput,
+                            label: "",
+                        },
+                    ],
+                },
+            ],
+        },
     };
 
-    activate(params) {
+    loading(params) {
         this.params = params;
         this.guildId = this.params.guildId;
     }
 
     async save() {
         try {
-            if (this.loading) {
+            if (this.didLoad) {
                 return;
             }
-            this.loading = true;
-            await this.discordService.createDiscordForm(this.guildId, this.form);
+            this.didLoad = true;
+            await this.discordService.createDiscordForm(
+                this.guildId,
+                this.form
+            );
             toast("Form Created!");
-            this.router.navigate(`resources/forms`)
-        } catch(e) {
-            toast(e, { severity: 'error' })
+            this.router.load(`resources/forms`);
+        } catch (e) {
+            toast(e, { severity: "error" });
             throw e;
         } finally {
-            this.loading = false;
+            this.didLoad = false;
         }
     }
 
     get loadingIndicator() {
-        return '<mdc-circular-progress size="50" stroke-width="3"></mdc-circular-progress>'
+        return '<moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>';
     }
 }

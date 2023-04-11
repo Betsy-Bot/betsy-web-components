@@ -1,9 +1,19 @@
-import { defineOptions, ink } from 'ink-mde'
-import './discord-markup-editor.scss';
-import { bindable } from "aurelia-framework";
-
-export class DiscordMarkupEditor {
-    @bindable value: string;
+import { defineOptions, ink } from "ink-mde";
+import "./discord-markup-editor.scss";
+import {
+    bindable,
+    BindingMode,
+    customElement,
+    ICustomElementViewModel,
+} from "aurelia";
+import template from "./discord-markup-editor.html";
+@customElement({
+    name: "discord-markup-editor",
+    template: template,
+    containerless: true,
+})
+export class DiscordMarkupEditor implements ICustomElementViewModel {
+    @bindable({ mode: BindingMode.twoWay }) value: string;
     @bindable label: string;
     editor;
     element: HTMLElement;
@@ -11,7 +21,7 @@ export class DiscordMarkupEditor {
         interface: {
             attribution: false,
             toolbar: true,
-            appearance: 'dark',
+            appearance: "dark",
         },
         toolbar: {
             bold: true,
@@ -31,8 +41,8 @@ export class DiscordMarkupEditor {
             afterUpdate: (doc: string) => {
                 this.value = doc;
             },
-        }
-    })
+        },
+    });
 
     attached() {
         if (!this.editor) {

@@ -1,52 +1,55 @@
 <template>
-    <confirmation-dialog
-        cancel-text="Cancel"
-        confirm-text="Delete"
-        dialog.two-way="confirmDeleteDialog"
-        handler.call="deleteSupportTicket(event)"
-        title="Are you sure you would like to delete?"
-    >
-        This is a permanent action and cannot be undone
-    </confirmation-dialog>
+<!--    <confirmation-dialog-->
+<!--        cancel-text="Cancel"-->
+<!--        confirm-text="Delete"-->
+<!--        dialog.two-way="confirmDeleteDialog"-->
+<!--        handler.bind="e => deleteSupportTicket(event)"-->
+<!--        title="Are you sure you would like to delete?"-->
+<!--    >-->
+<!--        This is a permanent action and cannot be undone-->
+<!--    </confirmation-dialog>-->
 
     <section id="support-tickets">
-        <div class="row">
+        <div class="row" if.bind="ticket">
             <div class="col-12 col-lg-8">
-                <discord-feature-header
+                <feature-header
                     doc-url="https://docs.betsybot.xyz/features/support-tickets"
                     title="Edit Support Ticket Message"
                     subtitle="Edit the message that is already on your server."
-                    delete-function.call="confirmDeleteDialog.open()"
-                    copy-function.call="handleClone()"
-                ></discord-feature-header>
+                    delete-function.bind="e => confirmDeleteDialog.open()"
+                    copy-function.bind="e => handleClone()"
+                ></feature-header>
 
                 <div class="row mt-3 mb-4">
                     <div class="col-4">
-                        <a href="guild/${guildId}/support-tickets/${ticket.id}/submissions" mdc-button class="button-primary">
-                            View Created Tickets
+                        <a load="../support-tickets/${supportTicketSettingsId}/submissions">
+                            <moo-button>View Created Tickets</moo-button>
                         </a>
                     </div>
                 </div>
 
-                <mdc-tab-bar view-model.ref="tabBar">
-                    <mdc-tab
+                <moo-tab-bar>
+                    <moo-tab
                         label="Settings"
+                        tab.bind="tab"
+                        value="settings"
                         active.bind="tab === 'settings'"
-                        click.delegate="tab = 'settings'"
-                    ></mdc-tab>
-                    <mdc-tab
-                        label="Support Ticket Container"
+                    ></moo-tab>
+                    <moo-tab
+                        label="Panel Message"
                         active.bind="tab === 'container'"
-                        click.delegate="tab = 'container'"
-                    ></mdc-tab>
-                    <mdc-tab
-                        label="Ticket Created Message"
+                        value="container"
+                        tab.bind="tab"
+                    ></moo-tab>
+                    <moo-tab
+                        label="Initial Message"
                         active.bind="tab === 'initial'"
-                        click.delegate="tab = 'initial'"
-                    ></mdc-tab>
-                </mdc-tab-bar>
+                        value="initial"
+                        tab.bind="tab"
+                    ></moo-tab>
+                </moo-tab-bar>
 
-                <form submit.delegate="editSupportTicketSettings()">
+                <form submit.trigger="editSupportTicketSettings()">
                     <div if.bind="tab === 'settings'">
                         <support-ticket-settings
                             guild-id.bind="guildId"
@@ -64,12 +67,12 @@
                     </div>
 
                     <div if.bind="tab === 'initial'">
-                        <mdc-text-field
+                        <moo-text-field
                             class="w-100"
                             label="Close Button Text"
                             maxlength="15"
                             value.bind="ticket.closeButtonText">
-                        </mdc-text-field>
+                        </moo-text-field>
                         <mdc-text-field-helper-line>
                             <mdc-text-field-character-counter></mdc-text-field-character-counter>
                         </mdc-text-field-helper-line>
@@ -79,14 +82,14 @@
                         ></discord-message-creator>
                     </div>
 
-                    <button mdc-button class="button-primary mt-2" type="submit">
+                    <moo-button class="button-primary mt-2" type="submit">
                         Save
-                    </button>
+                    </moo-button>
                 </form>
             </div>
             <div class="col-12 col-lg-4">
-                <discord-message-preview message.two-way="ticket.discordMessage.message" if.bind="tab === 'container'"></discord-message-preview>
-                <discord-message-preview message.two-way="ticket.initialMessage" if.bind="tab === 'initial'"></discord-message-preview>
+                <discord-message-preview message.bind="ticket.discordMessage.message" if.bind="tab === 'container'"></discord-message-preview>
+                <discord-message-preview message.bind="ticket.initialMessage" if.bind="tab === 'initial'"></discord-message-preview>
             </div>
         </div>
     </section>

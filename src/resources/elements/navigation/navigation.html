@@ -1,59 +1,27 @@
-<template>
-    <section id="navigation" if.bind="currentRoute !== 'validate' && currentRoute !== 'verify'">
-        <mdc-top-app-bar style="position: relative">
-            <mdc-top-app-bar-row>
-                <mdc-top-app-bar-section>
-                    <button mdc-top-app-bar-nav-icon show.bind="guildId"
-                            click.delegate="toggleSidebar()">
-                        <mdc-icon>menu</mdc-icon>
-                    </button>
-                    <a href="/" class="me-5">
-                        <mdc-top-app-bar-title>Betsy Bot</mdc-top-app-bar-title>
-                    </a>
-                    <mdc-select if.bind="user"
-                                ref="guildSelect"
-                                change.delegate="handleServerChange($event)"
-                                class="standard-betsy-select ms-5 d-none d-lg-block"
-                                value.bind="guildId"
-                                label="Select Server to Manage">
-                        <mdc-icon mdc-select-icon>dns</mdc-icon>
-                        <mdc-list>
-                            <mdc-list-item repeat.for="server of user.activeServers" value.bind="server.guildId">
-                                ${server.name}
-                            </mdc-list-item>
-                        </mdc-list>
-                    </mdc-select>
-                </mdc-top-app-bar-section>
-                <mdc-top-app-bar-section end>
-                    <template if.bind="user">
-                        <a href="https://discord.gg/YzPW2YxGpJ" target="_blank" class="d-none d-md-block me-2 me-lg-3">
-                            <md-filled-button label="SUPPORT"></md-filled-button>
-                        </a>
-                        <a href="https://top.gg/bot/946433944390340688" target="_blank" class="d-none d-md-block me-2 me-lg-3">
-                            <md-filled-button label="REVIEW"></md-filled-button>
-                        </a>
-                        <a href="https://top.gg/bot/946433944390340688/vote" target="_blank" class="d-none d-md-block me-2 me-lg-5">
-                            <md-filled-button label="VOTE"></md-filled-button>
-                        </a>
-                    </template>
-                    <a if.bind="!user" external
-                       href="${discordOauthUrl}">
-                        <md-filled-button label="LOGIN WITH DISCORD"></md-filled-button>
-                    </a>
-                    <div else>
-                        <img class="avatar" click.delegate="profileMenu.open = !profileMenu.open"
-                             src.bind="avatarLink" alt="avatar">
-                    </div>
-
-                    <div mdc-menu-surface-anchor ref="menuAnchor">
-                        <mdc-menu view-model.ref="profileMenu" anchor.bind="menuAnchor" anchor-corner="BOTTOM_START">
-                            <mdc-list>
-                                <mdc-list-item click.delegate="logout()">Sign out</mdc-list-item>
-                            </mdc-list>
-                        </mdc-menu>
-                    </div>
-                </mdc-top-app-bar-section>
-            </mdc-top-app-bar-row>
-        </mdc-top-app-bar>
+<moo-topbar>
+    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+        <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">menu</button>
+        <span class="mdc-top-app-bar__title">Betsy Bot</span>
     </section>
-</template>
+    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+        <template if.bind="user">
+            <a href="https://discord.gg/YzPW2YxGpJ" target="_blank" class="d-none d-md-block me-2 me-lg-3" external>
+                <md-filled-button label="SUPPORT"></md-filled-button>
+            </a>
+            <a href="https://top.gg/bot/946433944390340688" target="_blank" class="d-none d-md-block me-2 me-lg-3" external>
+                <md-filled-button label="REVIEW"></md-filled-button>
+            </a>
+            <a href="https://top.gg/bot/946433944390340688/vote" target="_blank" class="d-none d-md-block me-2 me-lg-5" external>
+                <md-filled-button label="VOTE"></md-filled-button>
+            </a>
+        </template>
+        <a if.bind="!user" external
+           href="${discordOauthUrl}">
+            <moo-button label="LOGIN WITH DISCORD"></moo-button>
+        </a>
+        <div else>
+            <img class="avatar" click.trigger="profileMenu.open = !profileMenu.open"
+                 src.bind="avatarLink" alt="avatar">
+        </div>
+    </section>
+</moo-topbar>

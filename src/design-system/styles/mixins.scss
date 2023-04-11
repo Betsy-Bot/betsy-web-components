@@ -1,0 +1,17 @@
+@mixin scrollbars($width, $borderRadius, $background-color: mix(8px, 12px, var(--primary))) {
+  /* width */
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    border-radius: $borderRadius;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background-color: $background-color;
+    border-radius: $borderRadius;
+  }
+}

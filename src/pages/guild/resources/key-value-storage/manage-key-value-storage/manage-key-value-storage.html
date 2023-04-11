@@ -1,34 +1,31 @@
 <template>
     <section id="key-value-storage">
-        <discord-feature-header
+        <feature-header
             title="Manage Key Value Storage"
             subtitle="Key value storage can be used in message templating to retrieve key value pairs and present them in a message."
-        ></discord-feature-header>
+        ></feature-header>
 
         <div class="row mt-3">
             <div class="col-12 col-xl-4">
-                <form submit.delegate="save()">
-                    <mdc-text-field
+                <form submit.trigger="save()">
+                    <moo-text-field
                         label="Identifier"
                         type="text"
                         class="w-100 my-2"
                         value.bind="item.categoryName"
                         required
-                    ></mdc-text-field>
+                    ></moo-text-field>
                     <div>
                         <label for="deliverOnFetch">Mark Used on Fetch</label>
-                        <button
+                        <moo-switch
                             id="deliverOnFetch"
-                            mdc-switch
-                            selected.bind="item.deliverOnFetch"
                             value.bind="item.deliverOnFetch"
-                            click.trigger="item.deliverOnFetch = !!item.deliverOnFetch"
-                        ></button>
+                        ></moo-switch>
                     </div>
                     <div class="text-end mt-3">
-                        <button type="submit" mdc-button class="button-primary">
+                        <moo-button type="submit" variant="primary">
                             Save
-                        </button>
+                        </moo-button>
                     </div>
                 </form>
             </div>

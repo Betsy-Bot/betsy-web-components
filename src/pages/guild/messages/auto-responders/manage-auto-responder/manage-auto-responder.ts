@@ -1,15 +1,18 @@
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from "services/discord-service";
-import { Router } from "aurelia-router";
+import { IEventAggregator } from "aurelia";
+import { DiscordService } from "../../../../../services/discord-service";
+import { IRouteViewModel, Router } from "@aurelia/router-lite";
 import { toast } from "lets-toast";
-import { bindable, inject, observable } from "aurelia-framework";
+import { bindable, inject, observable } from "aurelia";
 
-@inject(EventAggregator, DiscordService, Router)
-export class ManageAutoResponder {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
-    }
+@inject(IEventAggregator, DiscordService, Router)
+export class ManageAutoResponder implements IRouteViewModel {
+    constructor(
+        private eventAggregator: IEventAggregator,
+        private discordService: DiscordService,
+        private router: Router
+    ) {}
 
-    activate(params) {
+    loading(params) {
         this.guildId = params.guildId;
         this.responderId = params.responderId;
     }
@@ -24,54 +27,58 @@ export class ManageAutoResponder {
     @observable selectedIgnoreChannelId;
     @observable selectedWhitelistChannelId;
     responderTemplate = {
-        name: '',
-        discordServerId: '',
+        name: "",
+        discordServerId: "",
         phrases: [],
         type: 0,
         ignoredChannels: [],
         discordMessage: {
-            message: {
-
-            }
-        }
-    }
+            message: {},
+        },
+    };
     types = [
         {
             value: 0,
-            label: "Reply Message"
+            label: "Reply Message",
         },
         {
             value: 1,
-            label: "DM Message"
+            label: "DM Message",
         },
         {
             value: 2,
-            label: "Channel Message"
-        }
-    ]
+            label: "Channel Message",
+        },
+    ];
 
     async attached() {
         if (!this.responderId || this.responderId == 0) {
             this.isNew = true;
             this.responder = this.responderTemplate;
         } else {
-            this.responder = await this.discordService.getResponderById(this.responderId);
+            this.responder = await this.discordService.getResponderById(
+                this.responderId
+            );
         }
-        this.responderTemplate.discordServerId = this.discordService.getLocalGuild().id;
+        this.responderTemplate.discordServerId =
+            this.discordService.getLocalGuild().id;
     }
 
     async save() {
         try {
             if (this.isNew) {
-                this.responder = await this.discordService.createAutoResponder(this.responder);
+                this.responder = await this.discordService.createAutoResponder(
+                    this.responder
+                );
             } else {
-                this.responder = await this.discordService.updateAutoResponder(this.responder);
+                this.responder = await this.discordService.updateAutoResponder(
+                    this.responder
+                );
             }
-            toast(`Responder ${this.isNew ? 'Created' : 'Updated'}!`);
-            this.router.navigateBack();
+            toast(`Responder ${this.isNew ? "Created" : "Updated"}!`);
         } catch (e) {
             console.log(e);
-            toast('Failed to create message', { severity: 'error' })
+            toast("Failed to create message", { severity: "error" });
         }
     }
 
@@ -83,9 +90,8 @@ export class ManageAutoResponder {
     }
 
     async removePhrase(index) {
-        this.responder.phrases.splice(index, 1)
+        this.responder.phrases.splice(index, 1);
     }
-
 
     async selectedIgnoreChannelIdChanged() {
         if (!this.responder.ignoredChannels) {
@@ -95,17 +101,19 @@ export class ManageAutoResponder {
     }
 
     async removeIgnoredChannel(index) {
-        this.responder.ignoredChannels.splice(index, 1)
+        this.responder.ignoredChannels.splice(index, 1);
     }
 
     async selectedWhitelistChannelIdChanged() {
         if (!this.responder.whitelistedChannels) {
             this.responder.whitelistedChannels = [];
         }
-        this.responder.whitelistedChannels.push(this.selectedWhitelistChannelId);
+        this.responder.whitelistedChannels.push(
+            this.selectedWhitelistChannelId
+        );
     }
 
     async removeWhitelistedChannel(index) {
-        this.responder.whitelistedChannels.splice(index, 1)
+        this.responder.whitelistedChannels.splice(index, 1);
     }
 }

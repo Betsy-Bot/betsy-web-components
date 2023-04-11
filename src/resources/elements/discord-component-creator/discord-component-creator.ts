@@ -1,5 +1,5 @@
-import { bindable } from "aurelia-framework";
-import { DiscordButtonStyle, DiscordComponentType } from "services/models/discord";
+import { bindable } from "aurelia";
+import { DiscordButtonStyle, DiscordComponentType } from "../../../services/models/discord";
 
 export class DiscordComponentCreator {
     @bindable components = [];

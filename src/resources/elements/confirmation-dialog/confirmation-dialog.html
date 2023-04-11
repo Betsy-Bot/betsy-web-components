@@ -1,33 +1,34 @@
-<template>
-    <section id="confirmation-dialog">
-        <mdc-dialog view-model.ref="dialog" mdcdialog:closing.trigger="handleClosing($event)">
-            <mdc-dialog-title>
-                ${title}
-            </mdc-dialog-title>
-            <mdc-dialog-content>
-                <slot>Body</slot>
-            </mdc-dialog-content>
-            <mdc-dialog-actions if.bind="!(!cancelText && !confirmText)">
-                <button
-                    mdc-button
-                    data-mdc-dialog-action="cancel"
-                    class="button-secondary"
-                    if.bind="cancelText"
-                    type="button"
-                >
-                    ${cancelText}
-                </button>
-                <button
-                    type="button"
-                    if.bind="confirmText"
-                    mdc-button
-                    data-mdc-dialog-action="ok"
-                    data-mdc-dialog-button-default
-                    data-mdc-dialog-initial-focus
-                    class="button-primary">
-                    ${confirmText}
-                </button>
-            </mdc-dialog-actions>
-        </mdc-dialog>
-    </section>
-</template>
+<!--<template>-->
+<!--    <section id="confirmation-dialog">-->
+<!--        <mdc-dialog view-model.ref="dialog" mdcdialog:closing.trigger="handleClosing($event)">-->
+<!--            <mdc-dialog-title>-->
+<!--                ${title}-->
+<!--            </mdc-dialog-title>-->
+<!--            <mdc-dialog-content>-->
+<!--                <au-slot>Body</au-slot>-->
+<!--            </mdc-dialog-content>-->
+<!--            <mdc-dialog-actions if.bind="!(!cancelText && !confirmText)">-->
+<!--                <button-->
+<!--                    mdc-button-->
+<!--                    data-mdc-dialog-action="cancel"-->
+<!--                    class="button-secondary"-->
+<!--                    if.bind="cancelText"-->
+<!--                    type="button"-->
+<!--                >-->
+<!--                    ${cancelText}-->
+<!--                </button>-->
+<!--                <button-->
+<!--                    type="button"-->
+<!--                    if.bind="confirmText"-->
+<!--                    mdc-button-->
+<!--                    data-mdc-dialog-action="ok"-->
+<!--                    data-mdc-dialog-button-default-->
+<!--                    data-mdc-dialog-initial-focus-->
+<!--                    class="button-primary">-->
+<!--                    ${confirmText}-->
+<!--                </button>-->
+<!--            </mdc-dialog-actions>-->
+<!--        </mdc-dialog>-->
+<!--    </section>-->
+<!--</template>-->
+<moo-dialog></moo-dialog>

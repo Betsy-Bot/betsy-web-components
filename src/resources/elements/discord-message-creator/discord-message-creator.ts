@@ -1,9 +1,15 @@
-import { bindable, inject } from 'aurelia-framework';
+import {bindable, BindingMode, customElement, ICustomElementViewModel, inject} from 'aurelia';
 import { DiscordEmbed } from "../../../services/models/discord";
 import './discord-message-creator.scss';
+import template from "./discord-message-creator.html";
 
-export class DiscordMessageCreator {
-    @bindable message = {
+@customElement({
+    name: 'discord-message-creator',
+    template: template,
+    containerless: true
+})
+export class DiscordMessageCreator implements ICustomElementViewModel{
+    @bindable({mode: BindingMode.twoWay}) message = {
         embeds: [],
         components: []
     };
@@ -25,19 +31,19 @@ export class DiscordMessageCreator {
     }
 
     addEmbed() {
-        if (!this.message?.embeds) {
+        if (!this.message.embeds) {
             this.message.embeds = [];
         }
         this.message.embeds.push(new DiscordEmbed())
     }
 
     deleteEmbed(index) {
-        this.message?.embeds.splice(index, 1)
+        this.message.embeds.splice(index, 1)
     }
 
     get canCreateEmbed() {
         if (!this.single) {
-            return !this.message?.embeds || this.message?.embeds.length < 10
+            return !this.message?.embeds || this.message?.embeds?.length < 10
         } else {
             return !this.message?.embeds || this.message?.embeds?.length < 1
         }

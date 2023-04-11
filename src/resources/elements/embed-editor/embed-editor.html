@@ -1,32 +1,30 @@
 <template>
     <section id="embed-editor">
-        <mdc-expandable>
-            <div slot="caption">Author</div>
-            <mdc-text-field
+        <moo-accordion header="Author">
+            <moo-text-field
                 class="w-100 mt-2"
                 label="Author Name"
                 value.bind="embed.author.name"
-            ></mdc-text-field>
+            ></moo-text-field>
 
-            <mdc-text-field
+            <moo-text-field
                 class="w-100 mt-2"
                 label="Author URL"
                 value.bind="embed.author.url"
-            ></mdc-text-field>
+            ></moo-text-field>
 
-            <mdc-text-field
+            <moo-text-field
                 class="w-100 mt-2"
                 label="Author Icon URL"
                 value.bind="embed.author.icon_url"
-            ></mdc-text-field>
-        </mdc-expandable>
-        <mdc-expandable>
-            <div slot="caption">Main Body</div>
-            <mdc-text-field
+            ></moo-text-field>
+        </moo-accordion>
+        <moo-accordion header="Main Body">
+            <moo-text-field
                 class="w-100 mt-2"
                 label="Embed Title"
                 value.bind="embed.title"
-            ></mdc-text-field>
+            ></moo-text-field>
 
             <div class="mt-2">
                 <discord-markup-editor
@@ -35,53 +33,53 @@
                 ></discord-markup-editor>
             </div>
 
-            <mdc-text-field
+            <moo-text-field
                 class="w-100 mt-2"
                 label="Embed URL"
                 value.bind="embed.url"
-            ></mdc-text-field>
+            ></moo-text-field>
 
-            <mdc-text-field
+            <moo-text-field
                 class="w-100 mt-2"
                 label="Embed Image URL"
                 value.bind="embed.image.url"
-            ></mdc-text-field>
+            ></moo-text-field>
 
-            <mdc-text-field
+            <moo-text-field
                 class="w-100 mt-2"
                 label="Embed Thumbnail URL"
                 value.bind="embed.thumbnail.url"
-            ></mdc-text-field>
+            ></moo-text-field>
 
             <!--            <mdc-text-field-->
             <!--                class="w-100 mt-2"-->
             <!--                label="Embed Video URL"-->
             <!--                value.bind="embed.video.url"-->
-            <!--            ></mdc-text-field>-->
+            <!--            ></moo-text-field>-->
 
-            <button mdc-button class="button-primary mt-3" click.delegate="addField()">
+            <moo-button class="button-primary mt-3" click.trigger="() => addField()">
                 Add Field
-            </button>
+            </moo-button>
 
             <div class="row" if.bind="embed.fields">
                 <div class="col-12 col-lg-6" repeat.for="field of embed.fields">
                     <mdc-form-field class="mt-2">
-                        <button mdc-switch selected.bind="field.inline"></button>
-                        <label mdc-tooltip="Fields will be added in column form">Inline?</label>
+                        <moo-switch value.bind="field.inline"></moo-switch>
+                        <label>Inline?</label>
                     </mdc-form-field>
-                    <mdc-text-field
+                    <moo-text-field
                         class="w-100 mt-2"
                         label="Field Name"
                         value.bind="field.name"
                         required.bind="true"
-                    ></mdc-text-field>
+                    ></moo-text-field>
                     <div class="mt-2">
                         <discord-markup-editor
                             label="Field Value"
                             value.two-way="field.value"
                         ></discord-markup-editor>
                     </div>
-                    <button mdc-button class="button-secondary" click.delegate="deleteField($index)">
+                    <button mdc-button class="button-secondary" click.trigger="deleteField($index)">
                         Delete Field
                     </button>
                 </div>
@@ -91,27 +89,26 @@
                 label="Embed Colour"
                 value.two-way="embed.color"
             ></color-picker>
-        </mdc-expandable>
-        <mdc-expandable>
-            <div slot="caption">Footer</div>
-            <mdc-text-field
+        </moo-accordion>
+        <moo-accordion header="footer">
+            <moo-text-field
                 class="w-100 mt-2"
                 label="Footer Content"
                 value.bind="embed.footer.text"
-            ></mdc-text-field>
+            ></moo-text-field>
 
-            <mdc-text-field
+            <moo-text-field
                 class="w-100 mt-2"
                 label="Footer Icon URL"
                 value.bind="embed.footer.icon_url"
-            ></mdc-text-field>
+            ></moo-text-field>
 
             <!--            <mdc-text-field-->
             <!--                    class="w-100 mt-2"-->
             <!--                    label="Footer Timestamp"-->
             <!--                    value.bind="embed.timestamp"-->
-            <!--            ></mdc-text-field>-->
-        </mdc-expandable>
+            <!--            ></moo-text-field>-->
+        </moo-accordion>
     </section>
 
 </template>

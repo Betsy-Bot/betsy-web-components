@@ -1,84 +1,87 @@
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from "services/discord-service";
-import { Router } from "aurelia-router";
-import { inject } from "aurelia-framework";
-import DataGrid from 'devextreme/ui/data_grid';
+import { IEventAggregator } from "aurelia";
+import { DiscordService } from "../../../../services/discord-service";
+import { IRouteViewModel, Router } from "@aurelia/router-lite";
+import { inject } from "aurelia";
+import DataGrid from "devextreme/ui/data_grid";
 
-@inject(EventAggregator, DiscordService, Router)
-export class Users {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
-    }
+@inject(IEventAggregator, DiscordService, Router)
+export class Users implements IRouteViewModel {
+    constructor(
+        private eventAggregator: IEventAggregator,
+        private discordService: DiscordService,
+        private router: Router
+    ) {}
 
     users;
-    columns: object[];
     detailTemplate;
     rowDetail;
     rowCaption;
+    columns = [
+        {
+            dataField: "discordUserId",
+        },
+        {
+            dataField: "lastKnownName",
+        },
+        {
+            dataField: "createdDate",
+            dataType: "date",
+        },
+        {
+            caption: "Email Fraud Score",
+            dataField: "emailInformation.fraudScore",
+        },
+        {
+            caption: "Number of IPs",
+            dataField: "ips.length",
+        },
+    ];
 
     async attached() {
-        this.users = await this.discordService.getUsersForGuild(this.discordService.getLocalDiscordGuildId());
-        this.columns = [
-            {
-                dataField: "discordUserId"
-            },
-            {
-                dataField: "lastKnownName"
-            },
-            {
-                dataField: "createdDate",
-                dataType: 'date',
-            },
-            {
-                caption: 'Email Fraud Score',
-                dataField: "emailInformation.fraudScore"
-            },
-            {
-                caption: "Number of IPs",
-                dataField: "ips.length"
-            }
-        ]
-        console.log(this.users);
+        this.users = await this.discordService.getUsersForGuild(
+            this.discordService.getLocalDiscordGuildId()
+        );
 
         this.detailTemplate = (container, options) => {
             const data = options.data;
-            this.rowCaption.innerText = 'Found Ips for ' + data.discordUserId;
+            this.rowCaption.innerText = "Found Ips for " + data.discordUserId;
             container.appendChild(this.rowCaption);
             new DataGrid(this.rowDetail, {
                 columnAutoWidth: true,
                 showBorders: true,
                 columns: [
                     {
-                        dataField: 'ip',
+                        dataField: "ip",
                     },
                     {
-                        dataField: 'fraudScore',
+                        dataField: "fraudScore",
                     },
                     {
-                        dataField: 'isp',
+                        dataField: "isp",
                     },
                     {
-                        dataField: 'countryCode',
+                        dataField: "countryCode",
                     },
                     {
-                        dataField: 'recentAbuse',
+                        dataField: "recentAbuse",
                     },
                     {
-                        dataField: 'botStatus',
+                        dataField: "botStatus",
                     },
                     {
-                        dataField: 'proxy',
+                        dataField: "proxy",
                     },
                     {
-                        dataField: 'vpn',
+                        dataField: "vpn",
                     },
                     {
-                        dataField: 'tor',
+                        dataField: "tor",
                     },
                     {
-                        dataField: 'mobile',
-                    }
+                        dataField: "mobile",
+                    },
                 ],
-                dataSource: data.ips
+                dataSource: data.ips,
             });
 
             container.appendChild(this.rowDetail);

@@ -1,5 +1,39 @@
-<template>
-    <router-view></router-view>
-    <div class="my-3"></div>
-    <validation-error></validation-error>
-</template>
+<moo-drawer open.bind="true">
+    <moo-list>
+        <moo-list-item label="Dashboard" route="/"></moo-list-item>
+        <moo-list-item label="Support Tickets" route="support-tickets"></moo-list-item>
+        <moo-list-item label="Giveaways" route="giveaways"></moo-list-item>
+        <moo-list-item label="Polls" route="polls"></moo-list-item>
+        <moo-list-item label="Thread Channels" route="thread-channels"></moo-list-item>
+        <li role="separator" class="mdc-deprecated-list-divider"></li>
+        <moo-list-item label="Send Message" route="send-message"></moo-list-item>
+        <moo-list-item label="Tracked Messages" route="tracked-messages"></moo-list-item>
+        <moo-list-item label="Welcome Message" route="welcome-messages"></moo-list-item>
+        <moo-list-item label="Auto Responders" route="auto-responders"></moo-list-item>
+        <li role="separator" class="mdc-deprecated-list-divider"></li>
+        <moo-list-item label="Response Messages" route="response-messages"></moo-list-item>
+        <moo-list-item label="Data Commands" route="data-commands"></moo-list-item>
+        <moo-list-item label="Payments" route="payments"></moo-list-item>
+        <li role="separator" class="mdc-deprecated-list-divider"></li>
+        <moo-list-item label="Action Log" route="action-log"></moo-list-item>
+        <moo-list-item label="Delete Invite Links" route="invite-links"></moo-list-item>
+        <moo-list-item label="Role Selector" route="role-selector"></moo-list-item>
+        <moo-list-item label="Channel Cleaners" route="channel-cleaners"></moo-list-item>
+        <moo-list-item label="Verification" route="verification"></moo-list-item>
+        <li role="separator" class="mdc-deprecated-list-divider"></li>
+        <moo-list-item label="Settings" route="settings"></moo-list-item>
+        <moo-list-item label="Users" route="users"></moo-list-item>
+        <moo-list-item label="Messages" route="messages"></moo-list-item>
+        <moo-list-item label="Forms" route="forms"></moo-list-item>
+        <moo-list-item label="Key Value Storage" route="key-value-storage"></moo-list-item>
+        <moo-list-item label="Audit Logs" route="audit-logs"></moo-list-item>
+        <li role="separator" class="mdc-deprecated-list-divider"></li>
+        <moo-list-item label="Twitch" route="twitch"></moo-list-item>
+    </moo-list>
+</moo-drawer>
+<div class="mdc-drawer-app-content">
+    <div class="p-3">
+        <validation-error></validation-error>
+        <au-viewport></au-viewport>
+    </div>
+</div>

@@ -3,7 +3,7 @@
         cancel-text="Cancel"
         confirm-text="Delete"
         dialog.two-way="confirmDeleteDialog"
-        handler.call="deleteThreadChannel(event)"
+        handler.bind="() => deleteThreadChannel(event)"
         title="Are you sure you would like to delete?"
     >
         This is a permanent action and cannot be undone
@@ -12,39 +12,37 @@
     <section id="create-data-command">
         <div class="row">
             <div class="col-12 col-lg-8">
-                <discord-feature-header
+                <feature-header
                     doc-url="https://docs.betsybot.xyz/features/polls"
                     title="${isNew ? 'Create' : 'Edit'} Thread Channel"
                     subtitle="Manage your thread channel to help organize your server channels."
-                ></discord-feature-header>
+                ></feature-header>
                 <div class="text-end my-4">
-                    <button mdc-button class="button-secondary" click.delegate="confirmDeleteDialog.open()">
+                    <moo-button class="button-secondary" click.bind="() => confirmDeleteDialog.open()" if.bind="!isNew">
                         Delete Thread Channel
-                    </button>
+                    </moo-button>
                 </div>
-                <button
+                <moo-switch
                     class="mt-3"
-                    mdc-switch
-                    selected.bind="threadChannel.active"
                     value.bind="threadChannel.active"
-                    change.delegate="threadChannel.active = !!threadChannel.active"
-                ></button>
+                ></moo-switch>
                 <label class="me-5 mb-3">Active?</label>
 
-                <mdc-tab-bar view-model.ref="tabBar">
-                    <mdc-tab
+                <moo-tab-bar>
+                    <moo-tab
                         label="Settings"
-                        active.bind="tab === 'settings'"
-                        click.delegate="tab = 'settings'"
-                    ></mdc-tab>
-                    <mdc-tab
-                        label="Initial Message"
-                        active.bind="tab === 'initial-message'"
-                        click.delegate="tab = 'initial-message'"
-                    ></mdc-tab>
-                </mdc-tab-bar>
+                        tab.bind="tab"
+                        value="settings"
+                        active.bind="true"
+                    ></moo-tab>
+                    <moo-tab
+                        label="Roles"
+                        value="initial-message"
+                        tab.bind="tab"
+                    ></moo-tab>
+                </moo-tab-bar>
 
-                <form submit.delegate="save()">
+                <form submit.trigger="save()">
                     <div if.bind="tab === 'settings'">
                         <div class="mt-3 mb-2">
                             <discord-channel-selector
@@ -54,9 +52,9 @@
                             ></discord-channel-selector>
                         </div>
                         <div class="text-end">
-                            <button mdc-button class="button-primary" click.delegate="tab = 'initial-message'" type="button">
+                            <moo-button variant="primary" click.trigger="tab = 'initial-message'" type="button">
                                 Next
-                            </button>
+                            </moo-button>
                         </div>
                     </div>
                     <div class="" if.bind="tab === 'initial-message'">
@@ -66,9 +64,9 @@
                         ></discord-message-creator>
 
                         <div class="text-end mt-3">
-                            <button type="submit" mdc-button class="button-primary">
+                            <moo-button variant="primary" type="submit">
                                 Save
-                            </button>
+                            </moo-button>
                         </div>
                     </div>
                 </form>

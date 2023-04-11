@@ -2,20 +2,18 @@
     <section id="response-message">
         <div class="row">
             <div class="col-8">
-                <discord-feature-header
+                <feature-header
                     doc-url="https://docs.betsybot.xyz/features/payments"
                     title="Payments"
                     subtitle="Create and manage the way your discord users can complete payments through your server"
-                ></discord-feature-header>
+                ></feature-header>
             </div>
             <div class="col-4 text-end">
-                <button
-                    mdc-switch
-                    selected.bind="featureActive"
+                <moo-switch
                     value.bind="featureActive"
-                    change.delegate="toggleFeature()"
-                ></button>
-                <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+                    change.bind="() => toggleFeature()"
+                ></moo-switch>
+                <label class="me-5">Active?</label>
             </div>
         </div>
 
@@ -24,17 +22,17 @@
             <div class="py-3">
                 <div>
                     Coinbase Commerce is a very easy to set up and use cryptocurrency platform.
-                    <br> Get started on <a href="https://commerce.coinbase.com/" target="_blank" class="text-blue">Coinbase Commerce</a>
+                    <br> Get started on <a href="https://commerce.coinbase.com/" target="_blank" class="text-blue" external>Coinbase Commerce</a>
                     <br> Coinbase commerce takes a 1% fee.
                     <br> Simply provide your coinbase API key which can be found in your settings to start accepting cryptocurrency.
                 </div>
-                <form submit.delegate="updateKeys()">
-                    <mdc-text-field
+                <form submit.trigger="updateKeys()">
+                    <moo-text-field
                         class="w-100"
                         label="Coinbase Commerce Api Key"
                         value.bind="guild.coinbaseCommerceApiKey"
-                    ></mdc-text-field>
-                    <button mdc-button class="button-primary">Save</button>
+                    ></moo-text-field>
+                    <moo-button type="submit" variant="primary">Save</moo-button>
                 </form>
             </div>
         </mdc-expandable>

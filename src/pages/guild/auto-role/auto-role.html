@@ -1,10 +1,10 @@
 <template>
     <section id="support-tickets">
-        <discord-feature-header
+        <feature-header
             doc-url="https://docs.betsybot.xyz/features/auto-role"
             title="Role Selector Containers"
             subtitle="Create a message with a select menu allowing users to select roles they want to be added to for your server."
-        ></discord-feature-header>
+        ></feature-header>
         <div class="my-1">
             <div class="mt-1 mb-3 text-danger fs-7 d-inline-flex align-content-center">
                             <span class="material-icons me-2">
@@ -15,10 +15,10 @@
         </div>
 
         <div class="my-3">
-            <a href="/guild/${guildId}/auto-role/0" if.bind="guildId">
-                <button mdc-button class="button-primary">
+            <a load="../role-selector/0" if.bind="guildId">
+                <moo-button variant="primary">
                     Create New Role Selector Container
-                </button>
+                </moo-button>
             </a>
         </div>
 
@@ -26,8 +26,8 @@
             <feature-item-list
                 data.bind="containers"
                 show-toggler.bind="true"
-                toggle-handler.call="updateActive(item)"
-                item-click-handler.call="goTo(item)"
+                toggle-handler.bind="() => updateActive(item)"
+                item-click-handler.bind="() => goTo(item)"
             ></feature-item-list>
         </div>
     </section>

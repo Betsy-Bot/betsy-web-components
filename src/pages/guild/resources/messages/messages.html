@@ -1,13 +1,13 @@
 <template>
-    <discord-feature-header
+    <feature-header
         title="Message Templates"
         subtitle="Create prebuilt messages that can be used in a variety of features throughout the bot's functionality"
-    ></discord-feature-header>
+    ></feature-header>
 
-    <a href="/guild/${guildId}/resources/messages/create" if.bind="guildId" class="mt-2">
-        <button mdc-button class="button-primary">
+    <a href="../messages/create" if.bind="guildId" class="mt-2">
+        <moo-button variant="primary">
             Create New Message
-        </button>
+        </moo-button>
     </a>
 
 
@@ -15,7 +15,7 @@
         <feature-item-list
             show-toggler.bind="false"
             data.bind="messages"
-            item-click-handler.call="goToEdit(item)"
+            item-click-handler.bind="() => goToEdit(item)"
         ></feature-item-list>
     </div>
 </template>

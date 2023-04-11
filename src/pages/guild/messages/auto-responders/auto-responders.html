@@ -2,29 +2,27 @@
     <section class="auto-responders">
         <div class="row" if.bind="featureActive !== undefined">
             <div class="col-8">
-                <discord-feature-header
+                <feature-header
                     display-warning.bind="!featureActive && responders.length > 0"
                     doc-url="https://docs.betsybot.xyz/features/auto-responders"
                     title="Auto Responders"
                     subtitle="Respond to commonly asked questions, comments, and more."
-                ></discord-feature-header>
+                ></feature-header>
             </div>
             <div class="col-4">
-                <button
-                    mdc-switch
-                    selected.bind="featureActive"
+                <moo-switch
                     value.bind="featureActive"
-                    change.delegate="toggleFeature()"
-                ></button>
-                <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+                    change.bind="() => toggleFeature()"
+                ></moo-switch>
+                <label class="me-5">Active?</label>
             </div>
         </div>
 
         <div class="my-3">
             <a href="/guild/${guildId}/messages/auto-responders/0">
-                <button mdc-button class="button-primary">
+                <moo-button variant="primary">
                     Create New Auto Responder
-                </button>
+                </moo-button>
             </a>
         </div>
 
@@ -33,8 +31,8 @@
                 show-toggler.bind="true"
                 data.bind="responders"
                 show-toggler.bind="false"
-                toggle-handler.call="updateActive(item)"
-                item-click-handler.call="goTo(item)"
+                toggle-handler.bind="() => updateActive(item)"
+                item-click-handler.bind="() => goTo(item)"
             ></feature-item-list>
         </div>
     </section>

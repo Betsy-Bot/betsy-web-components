@@ -1,21 +1,22 @@
-import { inject } from "aurelia-framework";
-import { EventAggregator } from "aurelia-event-aggregator";
+import { inject } from "aurelia";
+import { IEventAggregator } from "aurelia";
 import './validation-error.scss';
 
-@inject(EventAggregator)
+@inject(IEventAggregator)
 export class ValidationError {
-    constructor(private ea: EventAggregator) {
+    constructor(private ea: IEventAggregator) {
 
     }
 
     errors;
     banner;
+    bannerOpen;
 
     created() {
         const subscription = this.ea.subscribe('validation-error', (data) => {
             this.errors = data;
             setTimeout(() => {
-                this.banner.open();
+                this.bannerOpen = true;
             })
         })
     }

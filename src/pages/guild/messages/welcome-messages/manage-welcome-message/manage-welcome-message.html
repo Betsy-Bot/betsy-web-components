@@ -2,13 +2,13 @@
     <section id="create-data-command">
         <div class="row">
             <div class="col-12 col-lg-8">
-                <discord-feature-header
+                <feature-header
                     doc-url="https://docs.betsybot.xyz/features/welcome-messages"
                     title="${isNew ? 'Create' : 'Edit'} Welcome Message"
                     subtitle="Create either custom channel welcome messages or direct DM welcome messages."
-                ></discord-feature-header>
+                ></feature-header>
 
-                <form submit.delegate="save()">
+                <form submit.trigger="save()">
 
                     <discord-welcome-message-settings
                         message.two-way="message"
@@ -22,9 +22,9 @@
 
                     <div>
                         <div class="text-end mt-3">
-                            <button type="submit" mdc-button class="button-primary">
+                            <moo-button type="submit" variant="primary">
                                 Save
-                            </button>
+                            </moo-button>
                         </div>
                     </div>
                 </form>

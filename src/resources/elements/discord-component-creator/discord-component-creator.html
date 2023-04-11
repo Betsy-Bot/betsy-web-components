@@ -1,35 +1,29 @@
 <template>
     <section id="discord-component-creator">
         <div if.bind="components.length < maxComponents" class="my-3">
-            <button mdc-button class="button-primary" click.delegate="addNewComponentRow()" type="button">
+            <button mdc-button class="button-primary" click.trigger="addNewComponentRow()" type="button">
                 Add Component Row
             </button>
         </div>
         <div class="row">
             <div class="col-12" repeat.for="componentWrapper of components">
-                <button mdc-button class="button-primary" click.delegate="addNewComponent($index)" type="button" if.bind="componentWrapper.components.length < 5">
+                <button mdc-button class="button-primary" click.trigger="addNewComponent($index)" type="button" if.bind="componentWrapper.components.length < 5">
                     Add Button
                 </button>
                 <div class="row position-relative p-2" mdc-elevation="9">
-                    <button
+                    <moo-fab
                         class="redFab topRight position-absolute top-0 end-0"
-                        mdc-fab
-                        mini.bind="true"
                         icon="delete"
-                        click.delegate="removeComponentRow($index)"
-                        mdc-tooltip="Remove Component Row"
-                    ></button>
+                        click.bind="() => removeComponentRow($index)"
+                    ></moo-fab>
                     <div class="col-12 col-xl-6" repeat.for="component of componentWrapper.components">
                         <div class="inputs">
                             <div mdc-elevation="9" class="position-relative p-2">
-                                <button
+                                <moo-fab
                                     class="redFab topRight position-absolute top-0 end-0"
-                                    mdc-fab
-                                    mini.bind="true"
                                     icon="delete"
-                                    click.delegate="removeComponent($parent.$index, $index)"
-                                    mdc-tooltip="Remove Component"
-                                ></button>
+                                    click.bind="() => removeComponent($parent.$index, $index)"
+                                ></moo-fab>
                                 <mdc-select class="standard-betsy-select w-75 mb-2" value.bind="component.type" label="Select Component Type">
                                     <mdc-icon mdc-select-icon>dns</mdc-icon>
                                     <mdc-list>
@@ -41,21 +35,21 @@
 
                                 <!-- Menu -->
                                 <template if.bind="component.type === 3">
-                                    <mdc-text-field
+                                    <moo-text-field
                                         class="w-100 my-2"
                                         label="Menu Custom ID"
                                         value.bind="component.custom_id"
-                                    ></mdc-text-field>
-                                    <mdc-text-field
+                                    ></moo-text-field>
+                                    <moo-text-field
                                         class="w-100 my-2"
                                         label="Menu Placeholder"
                                         value.bind="component.placeholder"
-                                    ></mdc-text-field>
-                                    <button mdc-button class="button-primary" click.delegate="addMenuOption($index)">
+                                    ></moo-text-field>
+                                    <button mdc-button class="button-primary" click.trigger="addMenuOption($index)">
                                         Add Option
                                     </button>
                                     <template repeat.for="item of component.options">
-                                        <discord-menu-item item.two-way="item" remove-function.call="removeMenuOption($index)"></discord-menu-item>
+                                        <discord-menu-item item.two-way="item" remove-function.bind="() => removeMenuOption($index)"></discord-menu-item>
                                     </template>
                                 </template>
 
@@ -70,28 +64,28 @@
                                         </mdc-list>
                                     </mdc-select>
                                     <div class="my-2">
-                                        <mdc-text-field
+                                        <moo-text-field
                                             class="w-100"
                                             label="Label"
                                             value.bind="component.label"
                                             required.bind="true"
-                                        ></mdc-text-field>
+                                        ></moo-text-field>
                                     </div>
                                     <div class="my-2" if.bind="component.style === 5">
-                                        <mdc-text-field
+                                        <moo-text-field
                                             class="w-100"
                                             label="URL"
                                             value.bind="component.url"
                                             required.bind="true"
-                                        ></mdc-text-field>
+                                        ></moo-text-field>
                                     </div>
                                     <div class="my-2" if.bind="component.style !== 5">
-                                        <mdc-text-field
+                                        <moo-text-field
                                             class="w-100"
                                             label="Custom ID"
                                             value.bind="component.custom_id"
                                             required.bind="true"
-                                        ></mdc-text-field>
+                                        ></moo-text-field>
                                     </div>
                                     <div class="my-2">
                                         <discord-emoji-selector

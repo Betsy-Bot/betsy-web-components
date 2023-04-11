@@ -2,18 +2,18 @@
     <section id="data-commands">
         <div class="row" if.bind="featureActive !== undefined">
             <div class="col-8">
-                <discord-feature-header
+                <feature-header
                     display-warning.bind="!featureActive && commands.length > 0"
                     doc-url="https://docs.betsybot.xyz/configurable-commands/data-commands"
                     title="Data Commands"
                     subtitle="Data commands are commands that gather information and relay that information to this admin panel or your own API integration. This can be captured in a form, a message embed, or just through command parameters."
-                ></discord-feature-header>
+                ></feature-header>
 
                 <div class="my-3">
-                    <a href="/guild/${guildId}/data-commands/0" if.bind="guildId">
-                        <button mdc-button class="button-primary">
+                    <a load="../data-commands/0">
+                        <moo-button variant="primary">
                             Create New Command
-                        </button>
+                        </moo-button>
                     </a>
                 </div>
 
@@ -22,19 +22,17 @@
                         data.bind="commands"
                         show-toggler.bind="true"
                         name-prefix="/"
-                        toggle-handler.call="updateActive(item)"
-                        item-click-handler.call="goToCommand(item)"
+                        toggle-handler.bind="() => updateActive(item)"
+                        item-click-handler.bind="() => goToCommand(item)"
                     ></feature-item-list>
                 </div>
             </div>
             <div class="col-4 text-end">
-                <button
-                    mdc-switch
-                    selected.bind="featureActive"
+                <moo-switch
                     value.bind="featureActive"
-                    change.delegate="toggleFeature()"
-                ></button>
-                <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+                    change.bind="() => toggleFeature()"
+                ></moo-switch>
+                <label class="me-5">Active?</label>
             </div>
         </div>
     </section>

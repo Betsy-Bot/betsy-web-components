@@ -1,49 +1,43 @@
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from "services/discord-service";
-import { inject } from "aurelia-framework";
-import { SendMessageToChannelRequest } from "services/models/discord";
-import { toast } from "lets-toast";
+import { inject } from 'aurelia';
+import { IRouteViewModel } from '@aurelia/router-lite';
 
-@inject(EventAggregator, DiscordService)
-export class SendMessage {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService) {
-    }
+import { DiscordService } from '../../../../services/discord-service';
+import { SendMessageToChannelRequest } from '../../../../services/models/discord';
 
-    params;
-    guild;
-    guildId;
-    channels;
-    request: SendMessageToChannelRequest = {
-        channelType: null,
-        message: {
-            content: 'Some Content',
-            embeds: null
-        }
-    }
-    channelId;
+import { toast } from 'lets-toast';
 
-    activate(params) {
-        this.params = params;
-    }
+@inject(DiscordService)
+export class SendMessage implements IRouteViewModel {
+  constructor(private discordService: DiscordService) {}
 
-    async attached() {
-        this.guildId = this.params.guildId as string;
-        [this.guild] = await Promise.all([
-            this.discordService.getDiscordServerInformation(this.guildId)
-        ])
-    }
+  guild;
+  guildId;
+  channels;
+  request: SendMessageToChannelRequest = {
+    channelType: null,
+    message: {
+      content: 'Some Content',
+      embeds: null,
+    },
+  };
+  channelId;
 
-    async sendMessage() {
-        if (!this.channelId) {
-            toast("Please select a channel first!", { severity: "error" });
-            return;
-        }
-        try {
-            await this.discordService.sendMessageToChannel(this.guildId, this.channelId, this.request);
-            toast("Message sent to channel(s)!");
-        } catch(e) {
-            toast("Failed to send message! Check audit channel if you have one setup.", { severity: "error" });
-            console.log(e);
-        }
+  async attached() {
+    this.guildId = this.discordService.getLocalDiscordGuildId();
+    [this.guild] = await Promise.all([this.discordService.getDiscordServerInformation(this.guildId)]);
+  }
+
+  async sendMessage() {
+    if (!this.channelId) {
+      toast('Please select a channel first!', { severity: 'error' });
+      return;
     }
+    try {
+      await this.discordService.sendMessageToChannel(this.guildId, this.channelId, this.request);
+      toast('Message sent to channel(s)!');
+    } catch (e) {
+      toast('Failed to send message! Check audit channel if you have one setup.', { severity: 'error' });
+      console.log(e);
+    }
+  }
 }

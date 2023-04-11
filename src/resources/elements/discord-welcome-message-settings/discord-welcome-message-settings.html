@@ -3,11 +3,9 @@
         <div class="row my-2 g-4">
             <div class="col-6 h-100">
                 <label class="me-3">Active?</label>
-                <button
-                    mdc-switch
+                <moo-switch
                     selected.bind="message.active"
-                    click.delegate="message.active = !message.discordMessage.active"
-                ></button>
+                ></moo-switch>
             </div>
             <div class="col-6">
                 <mdc-form-field repeat.for="type of types">
@@ -16,13 +14,13 @@
                 </mdc-form-field>
             </div>
             <div class="col-12 col-lg-6 h-100">
-                <mdc-text-field
+                <moo-text-field
                     class="w-100"
                     label="Name"
                     value.bind="message.name"
                     placeholder="Internal Identifier - Not used in message"
                     required.bind="true"
-                ></mdc-text-field>
+                ></moo-text-field>
             </div>
             <div class="col-12 col-lg-6 h-100">
                 <discord-channel-selector

@@ -1,0 +1,26 @@
+/// <reference types="vite/client" />
+
+declare module '*.html' {
+  import { IContainer, PartialBindableDefinition } from 'aurelia';
+  export const name: string;
+  export const template: string;
+  export default template;
+  export const dependencies: string[];
+  export const containerless: boolean | undefined;
+  export const bindables: Record<string, PartialBindableDefinition>;
+  export const shadowOptions: { mode: 'open' | 'closed' } | undefined;
+  export function register(container: IContainer): void;
+}
+
+declare module '*.css';
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
+interface ImportMetaEnv {
+  readonly VITE_API_ENDPOINT: string;
+  readonly VITE_REDIRECT_URL: string;
+  readonly VITE_VERIFY_REDIRECT_URL: string;
+  readonly VITE_BOT_CLIENT_ID: number;
+}

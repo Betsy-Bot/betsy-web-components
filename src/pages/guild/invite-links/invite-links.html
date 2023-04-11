@@ -2,20 +2,18 @@
   <section id="invite-links">
       <div class="row">
           <div class="col-8">
-              <discord-feature-header
+              <feature-header
                   doc-url="https://docs.betsybot.xyz/features/invite-link-blocker"
                   title="Delete Invite Links"
                   subtitle="Any invites sent in the server will immediately be deleted and if you have an audit channel selected a message will be posted in the channel with information regarding the message deleted."
-              ></discord-feature-header>
+              ></feature-header>
           </div>
           <div class="col-4 text-end">
-              <button
-                  mdc-switch
-                  selected.bind="featureActive"
+              <moo-switch
                   value.bind="featureActive"
-                  change.delegate="toggleFeature()"
-              ></button>
-              <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+                  change.bind="() => toggleFeature()"
+              ></moo-switch>
+              <label class="me-5">Active?</label>
           </div>
       </div>
 
@@ -31,63 +29,63 @@
               ></discord-channel-selector>
           </div>
           <div class="mt-2">
-              <form submit.delegate="addAuthorizedUser()">
+              <form submit.trigger="addAuthorizedUser()">
                   <div class="row my-2">
                       <div class="col-10">
-                          <mdc-text-field
+                          <moo-text-field
                               label="Whitelisted Users"
                               type="number"
                               class="w-100"
                               placeholder="Add Authorized Users"
                               value.bind="userId"
-                          ></mdc-text-field>
+                          ></moo-text-field>
                       </div>
                       <div class="col-2">
-                          <button mdc-button class="button-primary w-100 h-100" type="submit">
+                          <moo-button class="w-100 h-100" variant="primary" type="submit">
                               Add
-                          </button>
+                          </moo-button>
                       </div>
                   </div>
                   <mdc-chip-set input if.bind="guild.globalSettings.authorizedInviteSenders">
                       <!-- Compact notation -->
                       <mdc-chip repeat.for="user of guild.globalSettings.authorizedInviteSenders">
                           ${user.discordUserId}
-                          <span click.delegate="removeUser($index)" trailing>X</span>
+                          <span click.trigger="removeUser($index)" trailing>X</span>
                       </mdc-chip>
                   </mdc-chip-set>
               </form>
           </div>
           <div class="mt-2">
-              <form submit.delegate="addAuthorizedRole()">
+              <form submit.trigger="addAuthorizedRole()">
                   <div class="row my-2">
                       <div class="col-10">
-                          <mdc-text-field
+                          <moo-text-field
                               label="Whitelisted Roles"
                               type="number"
                               class="w-100"
                               placeholder="Add Authorized Roles"
                               value.bind="roleId"
-                          ></mdc-text-field>
+                          ></moo-text-field>
                       </div>
                       <div class="col-2">
-                          <button mdc-button class="button-primary w-100 h-100" type="submit">
+                          <moo-button class="w-100 h-100" type="submit">
                               Add
-                          </button>
+                          </moo-button>
                       </div>
                   </div>
                   <mdc-chip-set input if.bind="guild.globalSettings.authorizedInviteSenderRoles">
                       <!-- Compact notation -->
                       <mdc-chip repeat.for="user of guild.globalSettings.authorizedInviteSenderRoles">
                           ${user.discordRoleId}
-                          <span click.delegate="removeRole($index)" trailing>X</span>
+                          <span click.trigger="removeRole($index)" trailing>X</span>
                       </mdc-chip>
                   </mdc-chip-set>
               </form>
           </div>
           <div class="mt-2">
-              <button mdc-button class="button-primary" click.delegate="save()">
+              <moo-button variant="primary" click.trigger="save()">
                   Save
-              </button>
+              </moo-button>
           </div>
       </div>
   </section>

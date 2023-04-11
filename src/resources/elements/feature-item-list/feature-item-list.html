@@ -1,29 +1,28 @@
-<template>
-    <section id="feature-item-list">
-        <mdc-list if.bind="data">
-            <mdc-list-item two-line repeat.for="item of data" class="list-item-background mb-3 position-relative"
-                           mdc-elevation="12" click.trigger="handleItemClick(item)">
-                <mdc-icon mdc-list-item-leading>folder</mdc-icon>
-                <mdc-list-item-primary-text>
-                    ${namePrefix}${getName(item)} ${nameSuffix} ${item[suffixProperty] | dateFormat}
-                </mdc-list-item-primary-text>
-                <mdc-list-item-secondary-text>${item.description}</mdc-list-item-secondary-text>
-                <mdc-form-field mdc-list-item-trailing>
-                    <button
-                        if.bind="showToggler"
-                        mdc-switch
-                        selected.bind="item.active"
-                        value.bind="item.active"
-                        if.bind="showToggler"
-                        click.trigger="handleToggleClick($event, item)"
-                    ></button>
-                    <mdc-icon if.bind="trailingIcon" mdc-list-item-leading>${trailingIcon}</mdc-icon>
-                </mdc-form-field>
-            </mdc-list-item>
-        </mdc-list>
-        <div class="text-center m-5" else>
-            <h5>Fetching Data...</h5>
-            <mdc-circular-progress size="100" stroke-width="5"></mdc-circular-progress>
-        </div>
-    </section>
-</template>
+<section id="feature-item-list">
+    <template if.bind="data">
+        <moo-data-grid items.bind="data" if.bind="data" columns.bind="columns"></moo-data-grid>
+<!--        <div repeat.for="row of data" class="list-item my-2">-->
+<!--            <div class="row">-->
+<!--                <div class="col">-->
+<!--                    <div class="d-flex list-item-name">-->
+<!--                        ${getName(row)}-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col">-->
+<!--                    <div class="d-flex justify-content-end">-->
+<!--                        <a load="${route}/${row.id}" class="my-x">-->
+<!--                            <moo-button varaint="primary" label="Edit"></moo-button>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </template>
+    <div class="text-center m-5" else>
+        <h5>Fetching Data...</h5>
+        <moo-circular-progress size="100" stroke-width="5"></moo-circular-progress>
+    </div>
+</section>
+<a ref="linkEl" class="d-none">
+    <moo-button label="View" type="button"></moo-button>
+</a>

@@ -3,7 +3,7 @@
         cancel-text="Cancel"
         confirm-text="Delete"
         dialog.two-way="confirmDeleteDialog"
-        handler.call="deleteCommand(event)"
+        handler.bind="() => deleteCommand(event)"
         title="Are you sure you would like to delete?"
     >
         This is a permanent action and cannot be undone
@@ -17,9 +17,9 @@
                     </h3>
                 </div>
                 <div class="col-3 text-end">
-                    <button mdc-button class="button-secondary" click.delegate="confirmDeleteDialog.open()">
+                    <moo-button variant="secondary" click.trigger="confirmDeleteDialog.open()">
                         Delete
-                    </button>
+                    </moo-button>
                 </div>
             </div>
 
@@ -38,31 +38,31 @@
 
             <div class="my-3" repeat.for="action of command.discordCommandActions">
                 <discord-action-creator
-                    delete-function.call="deleteAction($index)"
+                    delete-function.bind="() => deleteAction($index)"
                     action.two-way="action"
                 ></discord-action-creator>
             </div>
 
             <div class="text-end">
-                <button mdc-button
-                        class="button-primary"
-                        if.bind="command.discordCommandActions.length < 10"
-                        click.delegate="createNewCommandAction()">
+                <moo-button
+                    variant="primary"
+                    if.bind="command.discordCommandActions.length < 10"
+                    click.trigger="createNewCommandAction()">
                     Add Action
-                </button>
+                </moo-button>
             </div>
 
             <div class="mt-4">
                 <a href="/guild/${guildId}/response-message">
-                    <button mdc-button class="button-secondary">
+                    <moo-button variant="secondary" class="button-secondary">
                         Cancel
-                    </button>
+                    </moo-button>
                 </a>
-                <button mdc-button
-                        class="button-primary ms-4"
-                        click.delegate="updateCommand()">
+                <moo-button variant="primary"
+                        class="ms-4"
+                        click.trigger="updateCommand()">
                     Save
-                </button>
+                </moo-button>
             </div>
         </div>
         <div class="col-12 col-lg-4">

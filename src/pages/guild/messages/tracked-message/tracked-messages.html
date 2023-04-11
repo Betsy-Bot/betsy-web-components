@@ -1,0 +1,26 @@
+<template>
+    <section id="send-message py-5">
+        <feature-header
+            doc-url="https://docs.betsybot.xyz/features/tracked-messages"
+            title="Tracked Messages"
+            subtitle="Tracked Messages are just normal messages that you keep track of. This allows you to edit them without resending/using a command/etc."
+        ></feature-header>
+
+        <div class="my-3">
+            <a load="../tracked-messages/0" >
+                <moo-button variant="primary">
+                    Create New Tracked Message
+                </moo-button>
+            </a>
+        </div>
+
+        <div class="existing-commands-area">
+            <feature-item-list
+                data.bind="messages"
+                show-toggler.bind="false"
+                toggle-handler.bind="() => updateActive(item)"
+                item-click-handler.bind="() => goTo(item)"
+            ></feature-item-list>
+        </div>
+    </section>
+</template>

@@ -1,0 +1,115 @@
+@use 'sass:color' as color;
+@use 'sass:string' as string;
+
+@mixin define-color-rgb($color-name, $value) {
+  $red: color.red($value);
+  $green: color.green($value);
+  $blue: color.blue($value);
+
+  #{$color-name}: string.unquote('rgb(#{$red}, #{$green}, #{$blue})');
+  #{$color-name}-rgb: $red, $green, $blue;
+  #{$color-name}-r: $red;
+  #{$color-name}-g: $green;
+  #{$color-name}-b: $blue;
+}
+
+$primary: rgb(42 166 161);
+$primary-light: rgb(234, 246, 246);
+$primary-text: rgb(18 15 15);
+$secondary: rgb(128, 55, 34);
+$secondary-light: rgb(251, 239, 235);
+$dark: rgb(46, 52, 55);
+$dark-light: rgb(237, 238, 239);
+
+:root {
+  // Base Colors from Figma
+  @include define-color-rgb(--cheese, rgb(255, 191, 134));
+  @include define-color-rgb(--sandy-brown, rgb(245, 161, 74));
+  @include define-color-rgb(--terra-cotta, rgb(240, 124, 75));
+  @include define-color-rgb(--dark-coral, rgb(213, 92, 56));
+  @include define-color-rgb(--don-juan, rgb(92, 76, 76));
+  @include define-color-rgb(--breaker-bay, rgb(48, 117, 130));
+
+  @include define-color-rgb(--ocean-blue, $primary);
+  @include define-color-rgb(--green-apple, rgb(104, 219, 136));
+  @include define-color-rgb(--ice-cold, rgb(142, 240, 205));
+  @include define-color-rgb(--tranquil, rgb(225, 237, 231));
+  @include define-color-rgb(--concrete, rgb(243, 241, 241));
+  @include define-color-rgb(--white, rgb(255, 255, 255));
+
+  // Tints/Shades for specific brand colors
+  @include define-color-rgb(--ocean-blue-025, rgb(244, 250, 250));
+  @include define-color-rgb(--ocean-blue-050, $primary-light);
+  @include define-color-rgb(--ocean-blue-100, rgb(212, 237, 236));
+  @include define-color-rgb(--ocean-blue-200, rgb(170, 219, 217));
+  @include define-color-rgb(--ocean-blue-300, rgb(127, 202, 199));
+  @include define-color-rgb(--ocean-blue-400, rgb(85, 184, 180));
+  @include define-color-rgb(--ocean-blue-500, $primary);
+  @include define-color-rgb(--ocean-blue-600, rgb(34, 133, 129));
+  @include define-color-rgb(--ocean-blue-700, rgb(25, 100, 97));
+  @include define-color-rgb(--ocean-blue-800, rgb(17, 66, 64));
+  @include define-color-rgb(--ocean-blue-900, rgb(8, 33, 32));
+
+  @include define-color-rgb(--dark-coral-025, rgb(253, 248, 246));
+  @include define-color-rgb(--dark-coral-050, $secondary-light);
+  @include define-color-rgb(--dark-coral-100, rgb(247, 222, 215));
+  @include define-color-rgb(--dark-coral-200, rgb(238, 190, 175));
+  @include define-color-rgb(--dark-coral-300, rgb(230, 157, 136));
+  @include define-color-rgb(--dark-coral-400, rgb(221, 125, 96));
+  @include define-color-rgb(--dark-coral-500, $secondary);
+  @include define-color-rgb(--dark-coral-600, rgb(170, 74, 45));
+  @include define-color-rgb(--dark-coral-700, rgb(128, 55, 34));
+  @include define-color-rgb(--dark-coral-800, rgb(85, 37, 22));
+  @include define-color-rgb(--dark-coral-900, rgb(43, 18, 11));
+
+  @include define-color-rgb(--don-juan-025, rgb(246, 244, 244));
+  @include define-color-rgb(--don-juan-050, rgb(239, 237, 237));
+  @include define-color-rgb(--don-juan-100, rgb(222, 219, 219));
+  @include define-color-rgb(--don-juan-200, rgb(190, 183, 183));
+  @include define-color-rgb(--don-juan-300, rgb(157, 148, 148));
+  @include define-color-rgb(--don-juan-400, rgb(125, 112, 112));
+  @include define-color-rgb(--don-juan-500, rgb(92, 76, 76));
+  @include define-color-rgb(--don-juan-600, rgb(74, 61, 61));
+  @include define-color-rgb(--don-juan-700, rgb(55, 46, 46));
+  @include define-color-rgb(--don-juan-800, rgb(37, 30, 30));
+  @include define-color-rgb(--don-juan-900, $primary-text);
+
+  @include define-color-rgb(--san-juan-025, rgb(244, 245, 245));
+  @include define-color-rgb(--san-juan-050, $dark-light);
+  @include define-color-rgb(--san-juan-100, rgb(219, 221, 222));
+  @include define-color-rgb(--san-juan-200, rgb(183, 188, 190));
+  @include define-color-rgb(--san-juan-300, rgb(148, 154, 157));
+  @include define-color-rgb(--san-juan-400, rgb(112, 121, 125));
+  @include define-color-rgb(--san-juan-500, rgb(76, 87, 92));
+  @include define-color-rgb(--san-juan-600, rgb(61, 70, 74));
+  @include define-color-rgb(--san-juan-700, $dark);
+  @include define-color-rgb(--san-juan-800, rgb(30, 35, 37));
+  @include define-color-rgb(--san-juan-900, rgb(15, 17, 18));
+
+  // Utitliy Colors
+  @include define-color-rgb(--success, rgb(0, 160, 76));
+  @include define-color-rgb(--success-light, rgb(235, 250, 238));
+  @include define-color-rgb(--success-dark, rgb(0, 107, 51));
+
+  @include define-color-rgb(--error, rgb(220, 77, 77));
+  @include define-color-rgb(--error-light, rgb(255, 239, 239));
+  @include define-color-rgb(--error-dark, rgb(140, 52, 52));
+
+  @include define-color-rgb(--warning, rgb(219, 123, 10));
+  @include define-color-rgb(--warning-light, rgb(254, 248, 237));
+  @include define-color-rgb(--warning-dark, rgb(180, 99, 3));
+
+  @include define-color-rgb(--info, rgb(63, 143, 218));
+  @include define-color-rgb(--info-light, rgb(229, 239, 249));
+  @include define-color-rgb(--info-dark, rgb(30, 91, 148));
+
+  @include define-color-rgb(--primary, $primary);
+  @include define-color-rgb(--primary-light, $primary-light);
+  @include define-color-rgb(--primary-text, $primary-text);
+
+  @include define-color-rgb(--secondary, $secondary);
+  @include define-color-rgb(--secondary-light, $secondary-light);
+
+  @include define-color-rgb(--dark, $dark);
+  @include define-color-rgb(--dark-light, $dark-light);
+}

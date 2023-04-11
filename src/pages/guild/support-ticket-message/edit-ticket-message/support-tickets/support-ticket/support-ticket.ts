@@ -1,13 +1,16 @@
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from "services/discord-service";
-import { Router } from "aurelia-router";
-import { inject } from "aurelia-framework";
-import './support-ticket.scss';
+import { inject } from "aurelia";
+import { IRouteViewModel, Router } from "@aurelia/router-lite";
 
-@inject(EventAggregator, DiscordService, Router)
-export class SupportTicket {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
-    }
+import { DiscordService } from "../../../../../../services/discord-service";
+
+import "./support-ticket.scss";
+
+@inject(DiscordService, Router)
+export class SupportTicket implements IRouteViewModel {
+    constructor(
+        private discordService: DiscordService,
+        private router: Router
+    ) {}
 
     guildId: string;
     settingsId: string;
@@ -17,19 +20,25 @@ export class SupportTicket {
     supportTicket;
     closing = false;
 
-    async activate(params) {
-        this.guildId = params.guildId as string;
-        this.settingsId = params.settingsId as string;
+    async loading(params) {
+        this.settingsId = params.supportTicketSettingsId as string;
         this.supportTicketId = params.ticketId as string;
     }
 
     async attached() {
-        this.supportTicket = await this.discordService.getSupportTicket(this.guildId, this.settingsId, this.supportTicketId);
+        this.guildId = this.discordService.getLocalDiscordGuildId();
+        this.supportTicket = await this.discordService.getSupportTicket(
+            this.guildId,
+            this.settingsId,
+            this.supportTicketId
+        );
     }
 
     async closeTicket() {
         this.closing = true;
-        this.supportTicket = await this.discordService.closeSupportTicket(this.supportTicketId);
+        this.supportTicket = await this.discordService.closeSupportTicket(
+            this.supportTicketId
+        );
         this.closing = false;
     }
 }

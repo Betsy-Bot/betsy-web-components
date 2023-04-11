@@ -1,19 +1,12 @@
 #feature-item-list {
-    .list-item-background {
-        min-width: 300px;
-        max-width: 700px;
+    .list-item {
+        padding: 1rem;
+        border: 1px solid black;
+        border-radius: .5rem;
     }
 
-    @media (max-width: 1200px) {
-        .list-item-background {
-            width: 100% !important;
-        }
-    }
-
-    .delete-icon {
-        position: absolute;
-        top: -8px;
-        right: -50px;
-        z-index: 99999;
+    .list-item-name {
+        font-size: 1.5rem;
+        font-weight: bold;
     }
 }

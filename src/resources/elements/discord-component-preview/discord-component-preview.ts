@@ -1,7 +1,13 @@
-import { bindable } from "aurelia-framework";
+import {bindable, customElement, ICustomElementViewModel} from "aurelia";
 import { DiscordComponentType } from "../../../services/models/discord";
+import template from "./discord-component-preview.html";
 
-export class DiscordComponentPreview {
+@customElement({
+    name: 'discord-component-preview',
+    template: template,
+    containerless: true
+})
+export class DiscordComponentPreview implements ICustomElementViewModel{
     @bindable components;
 
     getColumnClass(length, type) {

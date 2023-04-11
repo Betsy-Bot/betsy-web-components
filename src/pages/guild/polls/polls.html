@@ -1,20 +1,20 @@
 <template>
-    <discord-feature-header
+    <feature-header
         doc-url="https://docs.betsybot.xyz/features/polls"
         title="Polls"
         subtitle="Manage and track your polls."
-    ></discord-feature-header>
+    ></feature-header>
 
     <div class="my-3">
-        <button mdc-button class="button-primary" click.delegate="goTo({id: 0})">
-            Create New Poll
-        </button>
+        <a load="../polls/0" if.bind="guildId" class="mt-2">
+            <moo-button varaint="primary" label="Create New Poll"></moo-button>
+        </a>
     </div>
 
     <feature-item-list
         data.bind="polls"
         show-toggler.bind="false"
-        toggle-handler.call="updateActive(item)"
-        item-click-handler.call="goTo(item)"
+        toggle-handler.trigger="(item) => updateActive(item)"
+        route="../polls"
     ></feature-item-list>
 </template>

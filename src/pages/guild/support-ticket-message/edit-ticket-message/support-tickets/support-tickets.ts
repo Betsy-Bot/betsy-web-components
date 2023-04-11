@@ -1,13 +1,15 @@
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from "services/discord-service";
-import { Router } from "aurelia-router";
-import { inject } from "aurelia-framework";
-import { toast } from "lets-toast";
+import { IEventAggregator } from "aurelia";
+import { inject } from "aurelia";
+import { IRouteViewModel, Params, Router } from "@aurelia/router-lite";
 
-@inject(EventAggregator, DiscordService, Router)
-export class SupportTickets {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
-    }
+import { DiscordService } from "../../../../../services/discord-service";
+@inject(IEventAggregator, DiscordService, Router)
+export class SupportTickets implements IRouteViewModel {
+    constructor(
+        private eventAggregator: IEventAggregator,
+        private discordService: DiscordService,
+        private router: Router
+    ) {}
 
     guildId: string;
     settingsId: string;
@@ -15,43 +17,55 @@ export class SupportTickets {
     featureActive;
     supportTickets;
     columns;
+    linkEl: HTMLElement;
 
-    async activate(params) {
-        this.guildId = params.guildId as string;
-        this.settingsId = params.settingsId as string;
+    loading(params: Params) {
+        this.settingsId = params.supportTicketSettingsId;
     }
 
     async attached() {
+        this.guildId = this.discordService.getLocalDiscordGuildId();
         this.columns = [
             {
-                dataField: "createdBy"
+                dataField: "createdBy",
             },
             {
-                dataField: "discordUserId"
+                dataField: "discordUserId",
             },
             {
-                dataField: "closed"
+                dataField: "closed",
             },
             {
-                dataField: "closedBy"
+                dataField: "closedBy",
             },
             {
                 dataField: "createdDate",
-                dataType: 'date',
+                dataType: "date",
             },
             {
-                caption: '',
+                caption: "",
                 cellTemplate: this.linkTemplate,
-                alignment: 'center'
+                alignment: "center",
             },
-        ]
+        ];
 
-        this.supportTickets = await this.discordService.getDiscordMessageSupportTickets(this.guildId, this.settingsId);
+        this.supportTickets =
+            await this.discordService.getDiscordMessageSupportTickets(
+                this.guildId,
+                this.settingsId
+            );
+    }
+
+    async routeToTicket(ticketId: string) {
+        await this.router.load(
+            `/guild/${this.guildId}/support-tickets/${this.settingsId}/submissions/${ticketId}`
+        );
     }
 
     linkTemplate = (container, options) => {
-        const el = document.createElement('span');
-        el.innerHTML = `<a class="button-primary py-2 px-3" href="/guild/${this.guildId}/support-tickets/${this.settingsId}/submissions/${options.data.id}">View</a>`;
-        container.append(el);
+        const clone = this.linkEl.cloneNode(true) as HTMLAnchorElement;
+        clone.classList.remove("d-none");
+        clone.onclick = () => this.routeToTicket(options.data.id);
+        container.append(clone);
     };
 }

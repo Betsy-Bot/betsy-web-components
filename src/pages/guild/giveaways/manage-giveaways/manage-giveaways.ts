@@ -1,16 +1,16 @@
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from "services/discord-service";
-import { Router } from "aurelia-router";
+import { IEventAggregator } from "aurelia";
+import { DiscordService } from "../../../../services/discord-service";
+import {IRouteViewModel, Router} from "@aurelia/router-lite";
 import { toast } from "lets-toast";
-import { bindable, inject, observable } from "aurelia-framework";
+import { bindable, inject, observable } from "aurelia";
 import { DiscordButtonStyle, DiscordComponentType } from "../../../../services/models/discord";
 
-@inject(EventAggregator, DiscordService, Router)
-export class ManageGiveaways {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
+@inject(IEventAggregator, DiscordService, Router)
+export class ManageGiveaways implements IRouteViewModel {
+    constructor(private eventAggregator: IEventAggregator, private discordService: DiscordService, private router: Router) {
     }
 
-    activate(params) {
+    loading(params) {
         this.guildId = params.guildId;
         this.giveawayId = params.giveawayId;
     }
@@ -84,7 +84,6 @@ export class ManageGiveaways {
                 this.giveaway = await this.discordService.updateGiveaway(this.giveaway);
             }
             toast(`Giveaway ${this.isNew ? 'Created' : 'Updated'}!`);
-            this.router.navigateBack();
         } catch(e) {
             console.log(e);
             toast('Failed to create giveaway', { severity: 'error' })
@@ -96,7 +95,6 @@ export class ManageGiveaways {
             try {
                 await this.discordService.deleteGiveawayById(this.giveaway.id);
                 toast("Deleted giveaway message!", { severity: "success" })
-                this.router.navigateBack();
             } catch(e) {
                 toast("Failed to delete giveaway", { severity: "error" });
                 throw e;
@@ -131,6 +129,6 @@ export class ManageGiveaways {
         this.giveaway.ended = undefined;
         this.isNew = true;
         toast("Cloned Giveaway");
-        this.router.navigate(`/guild/${this.guildId}/giveaways/0`)
+        this.router.load(`/guild/${this.guildId}/giveaways/0`)
     }
 }

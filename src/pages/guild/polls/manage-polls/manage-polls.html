@@ -3,7 +3,7 @@
         cancel-text="Cancel"
         confirm-text="Delete"
         dialog.two-way="confirmDeleteDialog"
-        handler.call="deletePoll(event)"
+        handler.trigger="(event) => deletePoll(event)"
         title="Are you sure you would like to delete?"
     >
         This is a permanent action and cannot be undone
@@ -12,52 +12,52 @@
     <section id="create-data-command">
         <div class="row">
             <div class="col-12 col-lg-8">
-                <discord-feature-header
+                <feature-header
                     doc-url="https://docs.betsybot.xyz/features/polls"
                     title="${isNew ? 'Create' : 'Edit'} Poll"
                     subtitle="Polls will keep a record of the results here for your convenience."
-                ></discord-feature-header>
+                ></feature-header>
                 <div class="text-end my-4">
-                    <button mdc-button class="button-secondary" click.delegate="confirmDeleteDialog.open()">
+                    <moo-button variant="secondary" class="button-secondary" click.trigger="confirmDeleteDialog.open()">
                         Delete Poll
-                    </button>
+                    </moo-button>
                 </div>
-                <button
+                <moo-switch
                     class="mt-3"
-                    mdc-switch
-                    selected.bind="poll.active"
                     value.bind="poll.active"
-                    change.delegate="poll.active = !!poll.active"
-                ></button>
+                ></moo-switch>
                 <label class="me-5 mb-3">Active?</label>
 
-                <mdc-tab-bar view-model.ref="tabBar">
-                    <mdc-tab
+                <moo-tab-bar>
+                    <moo-tab
                         label="Settings"
+                        tab.bind="tab"
+                        value="settings"
                         active.bind="tab === 'settings'"
-                        click.delegate="tab = 'settings'"
-                    ></mdc-tab>
-                    <mdc-tab
+                    ></moo-tab>
+                    <moo-tab
                         label="Container"
                         active.bind="tab === 'container'"
-                        click.delegate="tab = 'container'"
-                    ></mdc-tab>
-                    <mdc-tab
+                        value="container"
+                        tab.bind="tab"
+                    ></moo-tab>
+                    <moo-tab
                         label="Options"
                         active.bind="tab === 'options'"
-                        click.delegate="tab = 'options'"
-                    ></mdc-tab>
-                </mdc-tab-bar>
+                        value="options"
+                        tab.bind="tab"
+                    ></moo-tab>
+                </moo-tab-bar>
 
-                <form submit.delegate="save()">
+                <form submit.trigger="save()">
                     <div if.bind="tab === 'settings'">
-                        <mdc-text-field
+                        <moo-text-field
                             label="Name"
                             type="text"
                             class="w-100 my-2"
                             value.bind="poll.name"
                             required
-                        ></mdc-text-field>
+                        ></moo-text-field>
 <!--                        <div class="my-2">-->
 <!--                            <date-time-picker-->
 <!--                                label="End Date Time"-->
@@ -72,9 +72,9 @@
                             ></discord-channel-selector>
                         </div>
                         <div class="text-end">
-                            <button mdc-button class="button-primary" click.delegate="tab = 'container'" type="button">
+                            <moo-button variant="primary" click.trigger="tab = 'container'" type="button">
                                 Next
-                            </button>
+                            </moo-button>
                         </div>
                     </div>
                     <div class="" if.bind="tab === 'container'">
@@ -84,31 +84,31 @@
                         ></discord-message-creator>
 
                         <div class="text-end mt-3">
-                            <button type="button" mdc-button class="button-primary" click.delegate="tab = 'options'">
+                            <moo-button type="button" variant="primary" click.trigger="tab = 'options'">
                                 Next
-                            </button>
+                            </moo-button>
                         </div>
                     </div>
                     <div class="" if.bind="tab === 'options'">
-                        <mdc-text-field
+                        <moo-text-field
                             label="Select Menu Label"
                             type="text"
                             class="w-100 my-2"
                             value.bind="poll.containerMessage.message.components[0].components[0].label"
                             required
-                        ></mdc-text-field>
+                        ></moo-text-field>
 
                         <div class="p-3" mdc-elevation="9">
-                            <mdc-text-field
+                            <moo-text-field
                                 class="w-100 my-2"
                                 label="Option Label"
                                 value.bind="option.label"
-                            ></mdc-text-field>
-                            <mdc-text-field
+                            ></moo-text-field>
+                            <moo-text-field
                                 class="w-100 my-2"
                                 label="Option Description"
                                 value.bind="option.description"
-                            ></mdc-text-field>
+                            ></moo-text-field>
                             <discord-emoji-selector
                                 value.two-way="option.emoji"
                                 size.bind="100"
@@ -116,9 +116,9 @@
                             ></discord-emoji-selector>
 
                             <div class="my-3">
-                                <button type="button" mdc-button class="button-primary" click.delegate="addOption()">
+                                <moo-button type="button" class="button-primary" click.trigger="addOption()">
                                     Add Option
-                                </button>
+                                </moo-button>
                             </div>
                         </div>
 
@@ -130,18 +130,18 @@
                                         <div>Label: ${option.label}</div>
                                         <div>Description: ${option.description}</div>
                                         <div>Emoji: <img src="https://cdn.discordapp.com/emojis/${option.emoji.id}.webp?size=24&quality=lossless"> ${option.emoji.name}</div>
-                                        <button type="button" mdc-button class="button-primary" click.delegate="removeOption($index)">
+                                        <moo-button type="button" class="button-primary" click.trigger="removeOption($index)">
                                             Delete Option
-                                        </button>
+                                        </moo-button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="text-end mt-3">
-                            <button type="submit" mdc-button class="button-primary">
+                            <moo-button type="submit" class="button-primary">
                                 Save
-                            </button>
+                            </moo-button>
                         </div>
                     </div>
                 </form>

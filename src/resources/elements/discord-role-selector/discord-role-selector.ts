@@ -1,11 +1,22 @@
-import { bindable, inject } from "aurelia-framework";
-import { DiscordService } from "services/discord-service";
+import {
+    bindable,
+    customElement,
+    ICustomElementViewModel,
+    inject,
+} from "aurelia";
 
+import { DiscordService } from "../../../services/discord-service";
+
+import template from "./discord-role-selector.html";
+
+@customElement({
+    name: "discord-role-selector",
+    template: template,
+    containerless: true,
+})
 @inject(DiscordService)
-export class DiscordRoleSelector {
-    constructor(private discordService: DiscordService) {
-    }
-    @bindable guildId: string;
+export class DiscordRoleSelector implements ICustomElementViewModel {
+    constructor(private discordService: DiscordService) {}
     @bindable selectedRole: string;
     @bindable label;
     @bindable required = false;
@@ -16,16 +27,22 @@ export class DiscordRoleSelector {
     roles;
 
     async attached() {
-        this.roles = await this.discordService.getDiscordRoles(this.guildId);
+        this.roles = await this.discordService.getDiscordRoles();
+        if (!this.roles) {
+            const guild = await this.discordService.getDiscordServerInformation(
+                this.discordService.getLocalDiscordGuildId()
+            );
+            this.roles = guild.guild.roles;
+        }
         if (this.roleId) {
-            this.selectedRole = this.roles.find(x => x.id == this.roleId);
+            this.selectedRole = this.roles.find((x) => x.id == this.roleId);
         }
         if (this.removeEveryone) {
-            this.roles.splice(0, 1)
+            this.roles.splice(0, 1);
         }
     }
 
     getColorStyle(color) {
-        return `color: #${color?.toString(16)}`
+        return `color: #${color?.toString(16)}`;
     }
 }

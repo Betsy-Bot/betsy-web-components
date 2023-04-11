@@ -2,21 +2,18 @@
     <section id="response-message">
         <div class="row" if.bind="featureActive !== undefined">
             <div class="col-8">
-                <discord-feature-header
+                <feature-header
                     display-warning.bind="!featureActive && commands.length > 0"
                     doc-url="https://docs.betsybot.xyz/configurable-commands/response-commands"
                     title="Response Messages"
                     subtitle="Response messages can be used to respond to any commands you create. The response can be done in several ways. Each of the ways will be described in the options when creating a new response command."
-                ></discord-feature-header>
+                ></feature-header>
             </div>
             <div class="col-4 text-end">
-                <button
-                    mdc-switch
-                    selected.bind="featureActive"
+                <moo-switch
                     value.bind="featureActive"
-                    change.delegate="toggleFeature()"
-                ></button>
-                <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+                ></moo-switch>
+                <label class="me-5">Active?</label>
             </div>
         </div>
 
@@ -31,10 +28,10 @@
             </div>
         </div>
 
-        <a href="/guild/${guildId}/response-message/create" if.bind="guildId">
-            <button mdc-button class="button-primary">
+        <a load="../response-messages/0" >
+            <moo-button variant="primary">
                 Create New Command
-            </button>
+            </moo-button>
         </a>
 
         <div class="existing-commands-area">
@@ -42,8 +39,8 @@
                 data.bind="commands"
                 show-toggler.bind="true"
                 name-prefix="/"
-                toggle-handler.call="updateActive(item)"
-                item-click-handler.call="goToCommand(item)"
+                toggle-handler.bind="() => updateActive(item)"
+                item-click-handler.bind="() => goToCommand(item)"
             ></feature-item-list>
         </div>
     </section>

@@ -1,18 +1,18 @@
 <template>
-    <discord-feature-header
+    <feature-header
         title="Settings"
         subtitle="Manage various global settings for your server"
-    ></discord-feature-header>
+    ></feature-header>
 
     <div class="row mt-4 g-4">
         <div class="col-12 col-lg-6">
             <div class="permission-area p-4" mdc-elevation="12">
                 <h4>Authorized Panel Users</h4>
                 <span>Add administrators to help manage your server</span>
-                <form submit.delegate="addAuthorizedUser()">
+                <form submit.trigger="addAuthorizedUser()">
                     <div class="row my-2">
                         <div class="col-10">
-                            <mdc-text-field
+                            <moo-text-field
                                 disabled.bind="!isAdmin"
                                 min="100000000000000000"
                                 max="9999999999999999999"
@@ -20,26 +20,26 @@
                                 class="w-100"
                                 placeholder="Enter Discord User ID"
                                 value.bind="permissionUserId"
-                            ></mdc-text-field>
+                            ></moo-text-field>
                         </div>
                         <div class="col-2">
-                            <button mdc-button class="button-primary w-100 h-100" type="submit" disabled.bind="!isAdmin">
+                            <moo-button variant="primary" class="w-100 h-100" type="submit" disabled.bind="!isAdmin">
                                 Add
-                            </button>
+                            </moo-button>
                         </div>
                     </div>
                     <mdc-chip-set input if.bind="guild.authorizedUsers">
                         <!-- Compact notation -->
                         <mdc-chip repeat.for="user of guild.authorizedUsers">
                             ${user}
-                            <span click.delegate="removeUser($index)" trailing>X</span>
+                            <span click.trigger="removeUser($index)" trailing>X</span>
                         </mdc-chip>
                     </mdc-chip-set>
                 </form>
             </div>
         </div>
         <div class="col-12 col-lg-6">
-            <form submit.delegate="updateAutoRolesSettings()">
+            <form submit.trigger="updateAutoRolesSettings()">
                 <div class="p-4" mdc-elevation="12">
                     <h4>Auto Roles</h4>
                     <discord-role-selector
@@ -51,40 +51,40 @@
                         <!-- Compact notation -->
                         <mdc-chip repeat.for="role of guild.globalSettings.autoRoles">
                             ${role.name}
-                            <span click.delegate="removeRole($index)" trailing>X</span>
+                            <span click.trigger="removeRole($index)" trailing>X</span>
                         </mdc-chip>
                     </mdc-chip-set>
                     <div class="text-end mt-3">
-                        <button mdc-button class="button-primary" type="submit">
+                        <moo-button variant="primary" type="submit">
                             Save
-                        </button>
+                        </moo-button>
                     </div>
                 </div>
             </form>
         </div>
         <div class="col-12 col-lg-6">
-            <form submit.delegate="updateGlobalSettings()">
+            <form submit.trigger="updateGlobalSettings()">
                 <div class="p-4" mdc-elevation="12">
                     <h4>Custom Bot Settings</h4>
                     <div class="text-danger fs-6">
                         This feature is for Platinum supporters only. Learn more on our discord.
                     </div>
-                    <mdc-text-field
+                    <moo-text-field
                         type="number"
                         class="w-100 mb-3"
                         placeholder="Custom Bot Id"
                         value.bind="guild.customBotApplicationId"
-                    ></mdc-text-field>
-                    <mdc-text-field
+                    ></moo-text-field>
+                    <moo-text-field
                         type="text"
                         class="w-100"
                         placeholder="Custom Bot Token"
                         value.bind="guild.customBotJwtKey"
-                    ></mdc-text-field>
+                    ></moo-text-field>
                     <div class="text-end mt-3">
-                        <button mdc-button class="button-primary" type="submit" disabled.bind="!isAdmin">
+                        <moo-button variant="primary" type="submit" disabled.bind="!isAdmin">
                             Save
-                        </button>
+                        </moo-button>
                     </div>
                 </div>
             </form>

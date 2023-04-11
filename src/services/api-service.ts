@@ -1,10 +1,30 @@
-import { inject, buildQueryString } from 'aurelia-framework';
-import { HttpClient, json } from 'aurelia-fetch-client';
+import { inject } from 'aurelia';
+import { IHttpClient, json } from '@aurelia/fetch-client';
+import {apiEndpoint} from "../environment";
+import { ApiInterceptor } from "./api-interceptor";
 
-@inject(HttpClient)
+@inject(IHttpClient, ApiInterceptor)
 export class ApiService {
-  constructor(private http: HttpClient) {
-  }
+    constructor(readonly http: IHttpClient, readonly interceptor: ApiInterceptor) {
+        http.configure(config =>
+            config.withBaseUrl(apiEndpoint())
+                .withInterceptor(
+                    {
+                        request(request) {
+                            return interceptor.request(request);
+                        },
+                        response(response) {
+                            return interceptor.response(response);
+                        }
+                    }
+                )
+                .withDefaults({
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+        )
+    }
 
   async _request(path, options) {
     const result = await this.http.fetch(path, options);
@@ -40,7 +60,7 @@ export class ApiService {
     };
 
     if (params) {
-      path += `?${buildQueryString(params)}`;
+      path += `?${new URLSearchParams(params).toString()}`;
     }
 
     return this._request(path, options);

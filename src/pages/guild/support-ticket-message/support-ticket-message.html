@@ -2,47 +2,38 @@
     <section id="support-tickets">
         <div class="row">
             <div class="col-8">
-                <discord-feature-header
+                <feature-header
                     doc-url="https://docs.betsybot.xyz/features/support-tickets"
                     title="Support Tickets"
                     subtitle="Create a support ticket tracking system. Create your message with the 'Create Ticket' component. Open tickets to your selected category. When tickets are closed the entire channel transcript is saved."
-                ></discord-feature-header>
+                ></feature-header>
 
-                <a href="/guild/${guildId}/support-tickets/create" if.bind="guildId" class="mt-2">
-                    <button mdc-button class="button-primary">
-                        Create New Support Ticket Panel
-                    </button>
+                <a load="../support-tickets/0" if.bind="guildId" class="mt-2">
+                    <moo-button variant="primary">
+                        Create New Support Panel
+                    </moo-button>
+                </a>
+
+                <a load="../support-tickets/08daf326-b44c-4a61-89e0-e095eb50b05e" if.bind="guildId" class="mt-2">
+                    <moo-button variant="primary">
+                        Manually Navigate
+                    </moo-button>
                 </a>
 
                 <div class="existing-commands-area mt-4">
-                    <section id="feature-item-list" if.bind="!loading">
-                        <mdc-list>
-                            <mdc-list-item two-line repeat.for="item of supportTickets" class="list-item-background mb-3 position-relative"
-                                           mdc-elevation="12" click.trigger="goToMessage(item)">
-                                <mdc-icon mdc-list-item-leading>folder</mdc-icon>
-                                <mdc-list-item-primary-text>
-                                    ${item.identifier}
-                                </mdc-list-item-primary-text>
-                                <mdc-form-field mdc-list-item-trailing>
-                                    <button mdc-switch selected.bind="item.discordMessage.active" value.bind="item.discordMessage.active"
-                                            click.trigger="updateActive($event, item)"></button>
-                                </mdc-form-field>
-                            </mdc-list-item>
-                        </mdc-list>
-                    </section>
-                    <div else>
-                        <mdc-circular-progress size="50" stroke-width="3"></mdc-circular-progress>
-                    </div>
+                    <feature-item-list
+                            data.bind="supportTickets"
+                            item-click-handler.trigger="(item) => goToMessage(item)"
+                            name-override="identifier"
+                            route="../support-tickets"
+                    ></feature-item-list>
                 </div>
             </div>
             <div class="col-4 text-end">
-                <button
-                    mdc-switch
-                    selected.bind="featureActive"
+                <moo-switch
                     value.bind="featureActive"
-                    change.delegate="toggleFeature()"
-                ></button>
-                <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+                ></moo-switch>
+                <label class="me-5">Active?</label>
             </div>
         </div>
     </section>

@@ -1,37 +1,36 @@
 import { DiscordService } from "../../../services/discord-service";
-import { Router } from "aurelia-router";
-import { inject } from "aurelia-framework";
+import { Router } from "@aurelia/router-lite";
+import { inject } from "aurelia";
 import { toast } from "lets-toast";
+import { IRouteViewModel } from "@aurelia/router-lite";
 
 @inject(DiscordService, Router)
-export class AutoRole {
-    constructor(private discordService: DiscordService, private router: Router) {
-    }
+export class AutoRole implements IRouteViewModel {
+    constructor(private discordService: DiscordService) {}
 
     guildId;
     containers;
-    async activate(params) {
-        this.guildId = params.guildId as string;
-    }
 
     async attached() {
+        this.guildId = this.discordService.getLocalDiscordGuildId();
         [this.containers] = await Promise.all([
-            await this.discordService.getAutoroleContainers(this.discordService.getLocalDiscordGuildId())
-        ])
+            await this.discordService.getAutoroleContainers(
+                this.discordService.getLocalDiscordGuildId()
+            ),
+        ]);
     }
 
     async updateActive(message) {
-        const foundCommandIndex = this.containers.findIndex(x => x.name === message.name);
+        const foundCommandIndex = this.containers.findIndex(
+            (x) => x.name === message.name
+        );
         if (foundCommandIndex >= 0) {
             await this.discordService.toggleAutoroleContainer(message.id);
-            toast(`Active status has been updated for /${message.name}`, { severity: "success" })
+            toast(`Active status has been updated for /${message.name}`, {
+                severity: "success",
+            });
         } else {
-            toast("Error", { severity: "error" })
+            toast("Error", { severity: "error" });
         }
     }
-
-    goTo(message) {
-        this.router.navigate(`/guild/${this.guildId}/auto-role/${message.id}`)
-    }
 }
-

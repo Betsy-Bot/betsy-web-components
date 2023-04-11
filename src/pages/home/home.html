@@ -1,46 +1,42 @@
-<template>
-    <div class="container">
-        <section if.bind="managedGuilds">
-            <h2>
-                My Servers
-            </h2>
-            <div class="fs-7 mb-4">
-                You have permission to invite a bot to these servers
-            </div>
-            <div class="row g-5">
-                <div class="card-container col-12 col-sm-6 col-lg-4" repeat.for="guild of managedGuilds">
-                    <server-card server.bind="guild"></server-card>
-                </div>
-            </div>
-        </section>
-
-        <section if.bind="user.adminedServers.length > 0" class="my-3">
-            <h2>
-                Servers I Admin
-            </h2>
-            <div class="fs-7 mb-4">
-                You were given permission to admin these servers
-            </div>
-            <div class="row g-5">
-                <div class="card-container col-12 col-sm-6 col-lg-4" repeat.for="guild of user.adminedServers">
-                    <server-card server.bind="guild" force-go.bind="true"></server-card>
-                </div>
-            </div>
-        </section>
-
-        <section if.bind="otherGuilds" class.bind="managedGuilds ? 'mt-5' : ''">
-            <h2>
-                Other Servers
-            </h2>
-            <div class="fs-7 mb-4">
-                You can not invite a bot to these servers
-            </div>
-
-            <div class="row g-5">
-                <div class="card-container col-12 col-sm-6 col-lg-4" repeat.for="guild of otherGuilds">
-                    <server-card server.bind="guild" hide-button.bind="true"></server-card>
-                </div>
-            </div>
-        </section>
+<section if.bind="managedGuilds" class="my-4">
+    <h2>
+        My Servers
+    </h2>
+    <div class="fs-7 mb-4">
+        You have permission to invite a bot to these servers
     </div>
-</template>
+    <div class="row g-5">
+        <div class="card-container col-12 col-sm-6 col-lg-4" repeat.for="guild of managedGuilds">
+            <server-card server.bind="guild"></server-card>
+        </div>
+    </div>
+</section>
+
+<section if.bind="user.adminedServers.length > 0" class="my-4">
+    <h2>
+        Servers I Admin
+    </h2>
+    <div class="fs-7 mb-4">
+        You were given permission to admin these servers
+    </div>
+    <div class="row g-5">
+        <div class="card-container col-12 col-sm-6 col-lg-4" repeat.for="guild of user.adminedServers">
+            <server-card server.bind="guild" force-go.bind="true"></server-card>
+        </div>
+    </div>
+</section>
+
+<section if.bind="otherGuilds" class.bind="managedGuilds ? 'my-4' : ''">
+    <h2>
+        Other Servers
+    </h2>
+    <div class="fs-7 mb-4">
+        You can not invite a bot to these servers
+    </div>
+
+    <div class="row g-5">
+        <div class="card-container col-12 col-sm-6 col-lg-4" repeat.for="guild of otherGuilds">
+            <server-card server.bind="guild" hide-button.bind="true"></server-card>
+        </div>
+    </div>
+</section>

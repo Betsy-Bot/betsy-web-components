@@ -1,9 +1,9 @@
-@use '~@material/button';
-@use '~@material/theme';
-@use '~@material/select';
-@use '~@material/dialog';
-@use '~@material/textfield';
-@use '~@material/list';
+//@use '@material/button';
+@use '@material/theme';
+@use '@material/select';
+@use '@material/dialog';
+@use '@material/textfield';
+@use '@material/list';
 @import 'bootstrap';
 
 body {
@@ -19,14 +19,14 @@ body {
     @include dialog.max-width(1400px, 16px);
     @include dialog.max-height(1000px, 16px);
 }
-
-.button-secondary {
-    @include button.filled-accessible(theme.$secondary);
-}
-
-.button-primary {
-    @include button.filled-accessible(rgba(0, 68, 204, 1));
-}
+//
+//.button-secondary {
+//    @include button.filled-accessible(theme.$secondary);
+//}
+//
+//.button-primary {
+//    @include button.filled-accessible(rgba(0, 68, 204, 1));
+//}
 
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field-character-counter, .mdc-text-field:not(.mdc-text-field--disabled) + .mdc-text-field-helper-line .mdc-text-field-character-counter {
     color: #dcddde
@@ -60,15 +60,13 @@ body {
     background-color: #dcddde !important;
 }
 
-.standard-betsy-select {
-    .mdc-select__selected-text,
-    .mdc-floating-label--float-above,
-    .mdc-select__icon {
-        color: #dcddde !important;
-    }
-    .mdc-floating-label {
-        color: #dcddde !important;
-    }
+.mdc-select__selected-text,
+.mdc-floating-label--float-above,
+.mdc-select__icon {
+    color: #dcddde !important;
+}
+.mdc-floating-label {
+    color: #dcddde !important;
 }
 
 .standard-betsy-select:not(.mdc-select--disabled) .mdc-select__anchor {
@@ -77,7 +75,11 @@ body {
 }
 
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
-    color: $body-color;
+    color: $body-color !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #36393f !important;
 }
 
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
@@ -101,10 +103,10 @@ body {
     color: darkgray;
 }
 
-
 .mdc-list-item.mdc-list-item--with-one-line {
     height: 37px !important;
 }
+
 .mdc-list-item {
     @include list.deprecated-single-line-height(37px);
     @include list.deprecated-list-item-height(37px);
@@ -115,5 +117,16 @@ mdc-top-app-bar {
 }
 
 .button-secondary:not(:disabled) {
-    background-color: rgba(158, 61, 255, 1)
+    background-color: rgba(158, 61, 255, 1);
+}
+
+.mdc-tab .mdc-tab__text-label {
+    color: #eaeaea !important;
+}
+.mdc-tab .mdc-tab__icon {
+    color: #eaeaea !important;
+}
+
+.mdc-tab--active .mdc-tab__text-label, .mdc-tab--active .mdc-tab__icon {
+    color: rgba(51, 151, 255, 1) !important;
 }

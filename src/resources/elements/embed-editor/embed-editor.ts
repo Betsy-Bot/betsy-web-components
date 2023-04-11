@@ -1,8 +1,14 @@
-import { bindable } from "aurelia-framework";
+import {bindable, customElement, ICustomElementViewModel} from "aurelia";
 import { DiscordEmbed, DiscordEmbedField } from "../../../services/models/discord";
 import './embed-editor.scss';
+import template from "./embed-editor.html";
 
-export class EmbedEditor {
+@customElement({
+    name: 'embed-editor',
+    template: template,
+    containerless: true
+})
+export class EmbedEditor implements ICustomElementViewModel{
     @bindable embed: DiscordEmbed = {};
 
     addField() {

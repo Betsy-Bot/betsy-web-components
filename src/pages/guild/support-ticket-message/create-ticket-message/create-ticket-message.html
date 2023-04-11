@@ -2,94 +2,103 @@
     <section id="support-tickets">
         <div class="row">
             <div class="col-12 col-lg-8">
-                <discord-feature-header
+                <feature-header
                     doc-url="https://docs.betsybot.xyz/features/support-tickets"
                     title="Create Support Ticket Message"
                     subtitle="Create a support ticket tracking system. Create your message with the 'Create Ticket' component. Open tickets to your selected category. When tickets are closed the entire channel transcript is saved."
-                ></discord-feature-header>
+                ></feature-header>
 
-                    <mdc-tab-bar view-model.ref="tabBar">
-                        <mdc-tab
-                            label="Settings"
-                            active.bind="tab === 'settings'"
-                            click.delegate="tab = 'settings'"
-                        ></mdc-tab>
-                        <mdc-tab
-                            label="Support Ticket Container"
-                            active.bind="tab === 'container'"
-                            click.delegate="tab = 'container'"
-                        ></mdc-tab>
-                        <mdc-tab
-                            label="Ticket Created Message"
-                            active.bind="tab === 'initial'"
-                            click.delegate="tab = 'initial'"
-                        ></mdc-tab>
-                    </mdc-tab-bar>
+                <moo-tab-bar>
+                    <moo-tab
+                        label="Settings"
+                        tab.bind="tab"
+                        value="settings"
+                        active.bind="tab === 'settings'"
+                    ></moo-tab>
+                    <moo-tab
+                        label="Panel Message"
+                        active.bind="tab === 'container'"
+                        value="container"
+                        tab.bind="tab"
+                    ></moo-tab>
+                    <moo-tab
+                        label="Initial Message"
+                        active.bind="tab === 'initial'"
+                        value="initial"
+                        tab.bind="tab"
+                    ></moo-tab>
+                </moo-tab-bar>
 
-                    <div class="my-3"></div>
+                <div class="my-3"></div>
 
-                    <div if.bind="tab === 'settings'">
-                        <form submit.delegate="tab = 'container'">
-                            <support-ticket-settings
-                                guild-id.bind="guildId"
-                                request.two-way="request"
-                                authorized-role.two-way="authorizedRole"
-                            ></support-ticket-settings>
+                <div if.bind="tab === 'settings'">
+                    <form submit.trigger="tab = 'container'">
+                        <support-ticket-settings
+                            guild-id.bind="guildId"
+                            request.two-way="request"
+                            authorized-role.two-way="authorizedRole"
+                        ></support-ticket-settings>
 
-                            <div class="text-end">
-                                <button mdc-button class="button-primary mt-2" disabled.bind="loading" type="submit">
-                                    Next
-                                </button>
-                            </div>
-                        </form>
+                        <div class="text-end">
+                            <moo-button class="mt-2" disabled.bind="didLoad" type="submit">
+                                Next
+                            </moo-button>
+                        </div>
+                    </form>
+                </div>
+
+                <div if.bind="tab === 'container'">
+                    <div class="fs-6 pb-3">Customize the Message Container which is to house the Create Ticket Button
                     </div>
+                    <discord-message-creator
+                        max-components.bind="1"
+                        allow-components.bind="true"
+                        message.bind="request.discordMessage.message"
+                        single.bind="true"
+                    ></discord-message-creator>
 
-                    <div if.bind="tab === 'container'">
-                        <div class="fs-6 pb-3">Customize the Message Container which is to house the Create Ticket Button</div>
+                    <div class="text-end">
+                        <moo-button label="next" class="button-primary mt-2" type="button" disabled.bind="didLoad"
+                                click.trigger="tab = 'initial'">
+                            Next
+                        </moo-button>
+                    </div>
+                </div>
+
+                <div if.bind="tab === 'initial'">
+                    <form submit.trigger="setupSupportTicket()" class="mt-3" if.bind="didBind">
+                        <div class="fs-6 pb-3">Customize the Initial Message that is sent to the channel when the
+                            support ticket channel is created
+                        </div>
+                        <moo-text-field
+                            class="w-100"
+                            label="Close Button Text"
+                            maxlength="15"
+                            value.bind="request.closeButtonText">
+                        </moo-text-field>
+                        <mdc-text-field-helper-line>
+                            <mdc-text-field-character-counter></mdc-text-field-character-counter>
+                        </mdc-text-field-helper-line>
+
                         <discord-message-creator
-                            max-components.bind="1"
                             allow-components.bind="true"
-                            message.bind="request.discordMessage.message"
+                            message.two-way="request.initialMessage"
                             single.bind="true"
                         ></discord-message-creator>
 
                         <div class="text-end">
-                            <button mdc-button class="button-primary mt-2" type="button" disabled.bind="loading" click.delegate="tab = 'initial'">
-                                Next
-                            </button>
+                            <moo-button class="button-primary mt-2" type="submit" disabled.bind="didLoad">
+                                Setup Message
+                            </moo-button>
                         </div>
-                    </div>
-
-                    <div if.bind="tab === 'initial'">
-                        <form submit.delegate="setupSupportTicket()" class="mt-3" if.bind="bound">
-                            <div class="fs-6 pb-3">Customize the Initial Message that is sent to the channel when the support ticket channel is created</div>
-                            <mdc-text-field
-                                class="w-100"
-                                label="Close Button Text"
-                                maxlength="15"
-                                value.bind="request.closeButtonText">
-                            </mdc-text-field>
-                            <mdc-text-field-helper-line>
-                                <mdc-text-field-character-counter></mdc-text-field-character-counter>
-                            </mdc-text-field-helper-line>
-
-                            <discord-message-creator
-                                allow-components.bind="true"
-                                message.two-way="request.initialMessage"
-                                single.bind="true"
-                            ></discord-message-creator>
-
-                            <div class="text-end">
-                                <button mdc-button class="button-primary mt-2" type="submit" disabled.bind="loading">
-                                    Setup Message
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                    </form>
+                </div>
             </div>
             <div class="col-12 col-lg-4">
-                <discord-message-preview message.two-way="request.discordMessage.message" if.bind="tab === 'container'"></discord-message-preview>
-                <discord-message-preview message.two-way="request.initialMessage" if.bind="tab === 'initial'"></discord-message-preview>
+                <discord-message-preview message.two-way="request.discordMessage.message"
+                                         if.bind="tab === 'container'"></discord-message-preview>
+                <discord-message-preview message.two-way="request.initialMessage"
+                                         if.bind="tab === 'initial'"></discord-message-preview>
             </div>
         </div>
     </section>
