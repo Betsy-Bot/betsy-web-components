@@ -1,15 +1,20 @@
-import { DiscordService } from "../../../services/discord-service";
-import { Router } from "@aurelia/router-lite";
-import { toast } from "lets-toast";
-import { inject } from "aurelia";
-import { IRouteViewModel } from "@aurelia/router-lite";
+import {DiscordService} from "../../../services/discord-service";
+import {route, Router} from "@aurelia/router-lite";
+import {toast} from "lets-toast";
+import {inject} from "aurelia";
+import {IRouteViewModel} from "@aurelia/router-lite";
 
+@route({
+    path: "data-commands",
+    title: "Data Commands",
+})
 @inject(DiscordService, Router)
 export class DataCommands implements IRouteViewModel {
     constructor(
         private discordService: DiscordService,
         private router: Router
-    ) {}
+    ) {
+    }
 
     guildId: string;
     commands;
@@ -41,7 +46,7 @@ export class DataCommands implements IRouteViewModel {
                 severity: "success",
             });
         } else {
-            toast("Error", { severity: "error" });
+            toast("Error", {severity: "error"});
         }
     }
 

@@ -1,16 +1,21 @@
-import { DiscordService } from "../../../services/discord-service";
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
-import { SessionService } from "../../../services/session-service";
-import { inject } from "aurelia";
-import { toast } from "lets-toast";
+import {DiscordService} from "../../../services/discord-service";
+import {IRouteViewModel, route, Router} from "@aurelia/router-lite";
+import {SessionService} from "../../../services/session-service";
+import {inject} from "aurelia";
+import {toast} from "lets-toast";
 
+@route({
+    path: "payments",
+    title: "Payments",
+},)
 @inject(DiscordService, Router, SessionService)
 export class Payments implements IRouteViewModel {
     constructor(
         private discordService: DiscordService,
         private router: Router,
         private sessionService: SessionService
-    ) {}
+    ) {
+    }
 
     guild;
     featureActive;

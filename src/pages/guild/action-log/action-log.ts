@@ -1,15 +1,20 @@
-import { DiscordService } from "../../../services/discord-service";
-import { Router } from "@aurelia/router-lite";
-import { toast } from "lets-toast";
-import { inject } from "aurelia";
-import { IRouteViewModel } from "@aurelia/router-lite";
+import {DiscordService} from "../../../services/discord-service";
+import {route, Router} from "@aurelia/router-lite";
+import {toast} from "lets-toast";
+import {inject} from "aurelia";
+import {IRouteViewModel} from "@aurelia/router-lite";
 
+@route({
+    path: "action-log",
+    title: "Action Log",
+})
 @inject(DiscordService, Router)
 export class ActionLog implements IRouteViewModel {
     constructor(
         private discordService: DiscordService,
         private router: Router
-    ) {}
+    ) {
+    }
 
     guildId: string;
     guild;

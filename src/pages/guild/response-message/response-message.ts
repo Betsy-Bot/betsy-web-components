@@ -1,16 +1,21 @@
-import { inject } from "aurelia";
-import { DiscordService } from "../../../services/discord-service";
-import { toast } from "lets-toast";
-import { IEventAggregator } from "aurelia";
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
+import {inject} from "aurelia";
+import {DiscordService} from "../../../services/discord-service";
+import {toast} from "lets-toast";
+import {IEventAggregator} from "aurelia";
+import {IRouteViewModel, route, Router} from "@aurelia/router-lite";
 
+@route({
+    path: "response-messages",
+    title: "Response Messages",
+})
 @inject(IEventAggregator, DiscordService, Router)
 export class ResponseMessage implements IRouteViewModel {
     constructor(
         private eventAggregator: IEventAggregator,
         private discordService: DiscordService,
         private router: Router
-    ) {}
+    ) {
+    }
 
     guildId: string;
     commands;
@@ -43,7 +48,7 @@ export class ResponseMessage implements IRouteViewModel {
                 severity: "success",
             });
         } else {
-            toast("Error", { severity: "error" });
+            toast("Error", {severity: "error"});
         }
     }
 
