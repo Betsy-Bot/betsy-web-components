@@ -18,8 +18,9 @@
             <feature-item-list
                 data.bind="messages"
                 show-toggler.bind="false"
-                toggle-handler.bind="() => updateActive(item)"
-                item-click-handler.bind="() => goTo(item)"
+                toggle-handler.bind="(item) => updateActive(item)"
+                item-click-handler.bind="(item) => goTo(item)"
+                route="../tracked-messages"
             ></feature-item-list>
         </div>
     </section>

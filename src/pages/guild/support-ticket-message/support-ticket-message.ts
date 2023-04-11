@@ -38,6 +38,7 @@ export class SupportTicketMessage implements IRouteViewModel {
     }
 
     async updateActive(ticket) {
+        console.log('ticket', ticket)
         ticket.discordMessage.active = !ticket.discordMessage.active;
         if (ticket.discordMessage.active && window.confirm('This will re-create the message for you. Proceed?')) {
             await this.discordService.toggleDiscordMessageActiveStatus(ticket.discordMessage.id, ticket.discordMessage.active);
