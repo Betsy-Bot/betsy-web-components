@@ -1,11 +1,15 @@
 import {inject} from 'aurelia';
-import {IRouteViewModel, Router} from '@aurelia/router-lite';
+import {IRouteViewModel, route, Router} from '@aurelia/router-lite';
 import {watch} from '@aurelia/runtime-html';
 
 import {DiscordService} from '../../../services/discord-service';
 
 import {toast} from 'lets-toast';
 
+@route({
+    path: "support-tickets",
+    title: "Support Tickets",
+},)
 @inject(DiscordService, Router)
 export class SupportTicketMessage implements IRouteViewModel {
     constructor(private discordService: DiscordService, private router: Router) {

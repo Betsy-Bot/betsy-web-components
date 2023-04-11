@@ -1,10 +1,14 @@
 import { inject } from 'aurelia';
-import { IRouteViewModel } from '@aurelia/router-lite';
+import {IRouteViewModel, route} from '@aurelia/router-lite';
 
 import { DiscordService } from '../../../services/discord-service';
 
 import './dashboard.scss';
 
+@route({
+    path: "",
+    title: "Dashboard",
+},)
 @inject(DiscordService)
 export class Dashboard implements IRouteViewModel {
   constructor(private discordService: DiscordService) {}

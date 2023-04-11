@@ -45,16 +45,8 @@ import { CreateMessage } from "./resources/messages/create-message/create-messag
 import { EditMessage } from "./resources/messages/edit-message/edit-message";
 
 const routes = [
-    {
-        component: Dashboard,
-        path: "",
-        title: "Dashboard",
-    },
-    {
-        component: SupportTicketMessage,
-        path: "support-tickets",
-        title: "Support Tickets",
-    },
+    Dashboard,
+    SupportTicketMessage,
     {
         component: CreateTicketMessage,
         path: "support-tickets/0",
@@ -75,41 +67,25 @@ const routes = [
         path: "support-tickets/:supportTicketSettingsId/submissions/:ticketId",
         title: "View Support Ticket",
     },
-    {
-        component: Giveaways,
-        path: "giveaways",
-        title: "Giveaways",
-    },
+    Giveaways,
     {
         component: ManageGiveaways,
         path: "giveaways/:giveawayId",
         title: "Manage Giveaway",
     },
-    {
-        component: Polls,
-        path: "polls",
-        title: "Polls",
-    },
+    Polls,
     {
         component: ManagePolls,
         path: "polls/:pollId",
         title: "Manage Poll",
     },
-    {
-        component: ThreadChannels,
-        path: "thread-channels",
-        title: "Thread Channels",
-    },
+    ThreadChannels,
     {
         component: ManageThreadChannel,
         path: "thread-channels/:threadChannelId",
         title: "Manage Thread Channel",
     },
-    {
-        component: SendMessage,
-        path: "send-message",
-        title: "Send Message",
-    },
+    SendMessage,
     {
         component: AutoResponders,
         path: "auto-responders",
