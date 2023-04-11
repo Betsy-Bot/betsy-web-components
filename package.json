@@ -14,7 +14,7 @@
         "pretest": "npm run lint",
         "start": "vite",
         "build": "rimraf dist && webpack --env production",
-        "build:staging": "rimraf dist && webpack --env staging",
+        "build:staging": "rimraf dist && webpack --env=NODE_ENV=staging",
         "analyze": "rimraf dist && webpack --env production --analyze",
         "update-services": "npx orval",
         "test": "jest"

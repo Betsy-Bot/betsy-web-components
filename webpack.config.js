@@ -6,8 +6,8 @@ const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const Dotenv = require("dotenv-webpack");
 
 module.exports = function (env, { analyze }) {
-    const production = env.production || process.env.NODE_ENV === "production";
-    const staging = env.staging;
+    const environment = env.NODE_ENV || "development";
+    const production = env.production || environment === "production";
     return {
         target: "web",
         mode: production ? "production" : "development",
@@ -74,7 +74,7 @@ module.exports = function (env, { analyze }) {
         devServer: {
             historyApiFallback: true,
             open: !process.env.CI,
-            port: 9000,
+            port: 9500,
         },
         module: {
             rules: [
@@ -122,11 +122,7 @@ module.exports = function (env, { analyze }) {
                 favicon: "favicon.ico",
             }),
             new Dotenv({
-                path: `./.env${
-                    production
-                        ? ""
-                        : "." + (process.env.NODE_ENV || "development")
-                }`,
+                path: `./.env${environment === "production" ? "" : "." + environment}`,
             }),
             new CopyWebpackPlugin({
                 patterns: [
