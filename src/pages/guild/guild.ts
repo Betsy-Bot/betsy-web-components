@@ -265,6 +265,6 @@ export class Guild implements IRouteViewModel {
     }
 
     async binding() {
-        await this.discordService.getDiscordServerInformation(this.guildId);
+        await Promise.all([await this.discordService.getDiscordServerInformation(this.guildId), await this.discordService.getDiscordChannels(this.guildId)]);
     }
 }

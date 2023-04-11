@@ -49,14 +49,13 @@ export class FeatureItemList {
         this.guildId = this.discordService.getLocalDiscordGuildId();
     }
 
-    handleToggleClick(event, item) {
+    handleToggleClick(item) {
         item.active = !item.active;
-        this.toggleHandler({ item: item });
-        event.stopPropagation();
+        this.toggleHandler(item);
     }
 
     handleItemClick(item) {
-        this.itemClickHandler({ item: item });
+        this.itemClickHandler(item);
     }
 
     getName(item) {

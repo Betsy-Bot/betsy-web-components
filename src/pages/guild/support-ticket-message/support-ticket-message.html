@@ -14,18 +14,12 @@
                     </moo-button>
                 </a>
 
-                <a load="../support-tickets/08daf326-b44c-4a61-89e0-e095eb50b05e" if.bind="guildId" class="mt-2">
-                    <moo-button variant="primary">
-                        Manually Navigate
-                    </moo-button>
-                </a>
-
                 <div class="existing-commands-area mt-4">
                     <feature-item-list
                             data.bind="supportTickets"
-                            item-click-handler.trigger="(item) => goToMessage(item)"
                             name-override="identifier"
                             route="../support-tickets"
+                            toggle-handler.bind="item => updateActive(item)"
                     ></feature-item-list>
                 </div>
             </div>

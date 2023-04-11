@@ -1,22 +1,32 @@
 <section id="feature-item-list">
     <template if.bind="data">
-        <moo-data-grid items.bind="data" if.bind="data" columns.bind="columns"></moo-data-grid>
-<!--        <div repeat.for="row of data" class="list-item my-2">-->
-<!--            <div class="row">-->
-<!--                <div class="col">-->
-<!--                    <div class="d-flex list-item-name">-->
-<!--                        ${getName(row)}-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col">-->
-<!--                    <div class="d-flex justify-content-end">-->
-<!--                        <a load="${route}/${row.id}" class="my-x">-->
-<!--                            <moo-button varaint="primary" label="Edit"></moo-button>-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+<!--        <moo-data-grid items.bind="data" if.bind="data" columns.bind="columns"></moo-data-grid>-->
+        <div repeat.for="row of data" class="list-item my-2">
+            <div class="row">
+                <div class="col-8">
+                    <div class="d-flex list-item-name">
+                        ${getName(row)}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex justify-content-end h-100 align-items-center">
+                        <a load="${route}/${row.id}" class="my-x">
+                            <moo-button varaint="primary" label="Edit"></moo-button>
+                        </a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex justify-content-center h-100 align-items-center">
+                        Active
+                        <moo-switch
+                            class="ms-1"
+                            value.bind="row.active"
+                            change.bind="() => handleToggleClick(row)"
+                        ></moo-switch>
+                    </div>
+                </div>
+            </div>
+        </div>
     </template>
     <div class="text-center m-5" else>
         <h5>Fetching Data...</h5>
