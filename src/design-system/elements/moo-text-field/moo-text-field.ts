@@ -17,6 +17,9 @@ export class MooTextField implements ICustomElementViewModel {
     @bindable({ mode: BindingMode.twoWay }) value;
     @bindable label;
     @bindable class;
+    @bindable type;
+    @bindable rows;
+    @bindable cols;
     input: HTMLElement;
     textField;
 

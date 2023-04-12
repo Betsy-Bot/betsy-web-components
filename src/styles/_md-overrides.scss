@@ -130,3 +130,9 @@ mdc-top-app-bar {
 .mdc-tab--active .mdc-tab__text-label, .mdc-tab--active .mdc-tab__icon {
     color: rgba(51, 151, 255, 1) !important;
 }
+
+@media (min-width: 1200px) {
+    .mdc-dialog .mdc-dialog__surface {
+        max-width: 960px !important;
+    }
+}

@@ -2,13 +2,13 @@
     <confirmation-dialog
         cancel-text="Cancel"
         confirm-text="Save"
-        dialog.two-way="jsonDialog"
-        handler.bind="() => importJson(event)"
+        dialog.bind="jsonDialog"
+        handler.bind="(event) => importJson(event)"
         title="Json"
     >
         <moo-text-field
             label.bind="JSON"
-            textarea
+            type="textarea"
             rows="8"
             ref="pickerElement"
             class="jsonField"

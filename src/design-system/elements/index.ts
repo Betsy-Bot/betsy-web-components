@@ -1,6 +1,7 @@
 export * from "./moo-button";
 export * from "./moo-topbar";
 export * from "./moo-drawer";
+export * from './moo-dialog';
 export * from "./moo-card";
 export * from "./moo-card-header";
 export * from "./moo-card-content";

@@ -1,4 +1,4 @@
-import {bindable, customElement, ICustomElementViewModel} from "aurelia";
+import {bindable, BindingMode, customElement, ICustomElementViewModel} from "aurelia";
 import './confirmation-dialog.scss'
 import template from "./confirmation-dialog.html";
 
@@ -11,10 +11,10 @@ export class ConfirmationDialog implements ICustomElementViewModel {
     @bindable handler;
     @bindable cancelText;
     @bindable confirmText;
-    @bindable dialog;
+    @bindable({ mode: BindingMode.twoWay }) dialog;
     @bindable title;
 
     handleClosing(event) {
-        this.handler({ event: event });
+        this.handler(event);
     }
 }

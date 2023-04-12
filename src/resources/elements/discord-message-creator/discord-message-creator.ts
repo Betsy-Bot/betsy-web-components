@@ -50,6 +50,7 @@ export class DiscordMessageCreator implements ICustomElementViewModel{
     }
 
     importJson(event) {
+        console.log(event);
         if (event.detail.action == 'ok') {
             this.message = JSON.parse(this.json);
             this.json = "";

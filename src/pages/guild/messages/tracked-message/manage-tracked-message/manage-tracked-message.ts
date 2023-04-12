@@ -17,7 +17,6 @@ export class ManageTrackedMessage implements IRouteViewModel {
     ) {}
 
     loading(params) {
-        this.guildId = params.guildId;
         this.messageId = params.messageId;
     }
 
@@ -37,6 +36,7 @@ export class ManageTrackedMessage implements IRouteViewModel {
     confirmDeleteDialog: HTMLElement;
 
     async attached() {
+        this.guildId = this.discordService.getLocalDiscordGuildId();
         if (!this.messageId || this.messageId == 0) {
             this.isNew = true;
             this.message = this.messageTemplate;

@@ -1,1 +1,1 @@
-export * from './moo-dialog'
+export * from './moo-dialog';

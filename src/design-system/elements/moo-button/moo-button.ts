@@ -18,7 +18,7 @@ export class MooButton implements ICustomElementViewModel {
     @bindable variant: MOO_BUTTON_VARIANT = "primary";
     @bindable class = "";
     @bindable click = undefined;
-    notTrue = false;
+    @bindable dataMdcDialogAction;
 
     get colorClass() {
         switch (this.variant) {
