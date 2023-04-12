@@ -1,5 +1,5 @@
 import { bindable, inject } from "aurelia";
-import { IRouter, Router } from "@aurelia/router-lite";
+import { Router } from "@aurelia/router-lite";
 
 import { ChannelNameValueConverter } from "../../value-converters/channel-name";
 
@@ -28,7 +28,7 @@ export class FeatureItemList {
 
     constructor(
         private channelValueConverter: ChannelNameValueConverter,
-        private router: IRouter,
+        private router: Router,
         private discordService: DiscordService
     ) {}
 
