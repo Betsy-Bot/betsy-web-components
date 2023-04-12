@@ -49,7 +49,7 @@
                     ></moo-tab>
                 </moo-tab-bar>
 
-                <form submit.trigger="editSupportTicketSettings()">
+                <form submit.trigger="editSupportTicketSettings()" if.bind="ticket">
                     <div if.bind="tab === 'settings'">
                         <support-ticket-settings
                             guild-id.bind="guildId"

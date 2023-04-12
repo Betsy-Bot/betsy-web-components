@@ -29,11 +29,11 @@ export class EditTicketMessage implements IRouteViewModel {
     @observable authorizedRole;
 
     loading(params: Params) {
-        this.guildId = params.guildId;
         this.supportTicketSettingsId = params.supportTicketSettingsId;
     }
 
     async attached() {
+        this.guildId = this.discordService.getLocalDiscordGuildId();
         [this.ticket] = await Promise.all([
             await this.discordService.getSupportTicketSettingsById(
                 this.supportTicketSettingsId
