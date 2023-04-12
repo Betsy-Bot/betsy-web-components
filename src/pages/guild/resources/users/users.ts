@@ -1,9 +1,13 @@
 import { IEventAggregator } from "aurelia";
 import { DiscordService } from "../../../../services/discord-service";
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 import { inject } from "aurelia";
 import DataGrid from "devextreme/ui/data_grid";
 
+@route({
+    path: "users",
+    title: "Users",
+})
 @inject(IEventAggregator, DiscordService, Router)
 export class Users implements IRouteViewModel {
     constructor(

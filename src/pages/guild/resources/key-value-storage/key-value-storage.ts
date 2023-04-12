@@ -1,8 +1,12 @@
 import { inject } from "aurelia";
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
 
+@route({
+    path: "key-value-storage",
+    title: "Key Value Storage",
+})
 @inject(DiscordService, Router)
 export class KeyValueStorage implements IRouteViewModel {
     constructor(

@@ -1,8 +1,12 @@
 import { DiscordService } from "../../../../services/discord-service";
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 import { toast } from "lets-toast";
 import { inject } from "aurelia";
 
+@route({
+    path: "twitch",
+    title: "Twitch",
+})
 @inject(DiscordService, Router)
 export class Twitch implements IRouteViewModel {
     constructor(

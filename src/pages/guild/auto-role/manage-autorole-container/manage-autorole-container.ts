@@ -1,9 +1,13 @@
 import { DiscordService } from "../../../../services/discord-service";
-import { Router } from "@aurelia/router-lite";
+import { route, Router } from "@aurelia/router-lite";
 import { bindable, inject } from "aurelia";
 import { toast } from "lets-toast";
 import { IRouteViewModel } from "@aurelia/router-lite";
 
+@route({
+    path: "role-selector/:containerId",
+    title: "Manage Role Selector",
+})
 @inject(DiscordService, Router)
 export class ManageAutoroleContainer implements IRouteViewModel {
     constructor(

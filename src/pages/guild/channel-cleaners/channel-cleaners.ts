@@ -1,8 +1,12 @@
 import { inject } from "aurelia";
 import { DiscordService } from "../../../services/discord-service";
 import { toast } from "lets-toast";
-import { IRouteViewModel } from "@aurelia/router-lite";
+import { IRouteViewModel, route } from "@aurelia/router-lite";
 
+@route({
+    path: "channel-cleaners",
+    title: "Channel Cleaners",
+})
 @inject(DiscordService)
 export class ChannelCleaners implements IRouteViewModel {
     constructor(private discordService: DiscordService) {}

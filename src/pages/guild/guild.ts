@@ -75,64 +75,20 @@ const routes = [
     ActionLog,
     InviteLinks,
     AutoRole,
-    {
-        component: ManageAutoroleContainer,
-        path: "role-selector/:containerId",
-        title: "Manage Role Selector",
-    },
-    {
-        component: ChannelCleaners,
-        path: "channel-cleaners",
-        title: "Channel Cleaners",
-    },
-    {
-        component: Verification,
-        path: "verification",
-        title: "Verification Settings",
-    },
-    {
-        component: Settings,
-        path: "settings",
-        title: "Settings",
-    },
-    {
-        component: Users,
-        path: "users",
-        title: "Users",
-    },
-    {
-        component: Messages,
-        path: "messages",
-        title: "Messages",
-    },
-    {
-        component: CreateMessage,
-        path: "messages/create",
-        title: "Create Message",
-    },
-    {
-        component: EditMessage,
-        path: "messages/:messageId",
-        title: "Manage Message",
-    },
+    ManageAutoroleContainer,
+    ChannelCleaners,
+    Verification,
+    Settings,
+    Users,
+    Messages,
+    CreateMessage,
+    EditMessage,
     Forms,
     CreateForm,
     EditForm,
-    {
-        component: KeyValueStorage,
-        path: "key-value-storage",
-        title: "Key Value Storage",
-    },
-    {
-        component: AuditLogs,
-        path: "audit-logs",
-        title: "Audit Logs",
-    },
-    {
-        component: Twitch,
-        path: "twitch",
-        title: "Twitch",
-    },
+    KeyValueStorage,
+    AuditLogs,
+    Twitch,
 ];
 
 @route({

@@ -2,8 +2,12 @@ import { toast } from "lets-toast";
 import { DiscordService } from "../../../services/discord-service";
 import { inject } from "aurelia";
 import { SessionService } from "../../../services/session-service";
-import { IRouteViewModel } from "@aurelia/router-lite";
+import { IRouteViewModel, route } from "@aurelia/router-lite";
 
+@route({
+    path: "verification",
+    title: "Verification Settings",
+})
 @inject(DiscordService, SessionService)
 export class Verification implements IRouteViewModel {
     constructor(
