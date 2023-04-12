@@ -1,7 +1,7 @@
 {
-    "name": "betsy-admin-panel-au2",
+    "name": "betsy-admin-panel",
     "description": "An Aurelia 2 client application.",
-    "version": "0.1.0",
+    "version": "2.0.0",
     "repository": {
         "type": "git",
         "url": "???"
@@ -27,6 +27,7 @@
         "@aurelia/compat-v1": "dev",
         "@aurelia/dialog": "dev",
         "@aurelia/validation-html": "dev",
+        "@aurelia/runtime-html": "dev",
         "@darkguy10/discord-markdown": "2.6.0",
         "@emoji-mart/data": "^1.1.2",
         "@material/banner": "^14.0.0",

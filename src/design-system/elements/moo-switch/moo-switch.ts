@@ -4,6 +4,7 @@ import {
     customElement,
     ICustomElementViewModel,
 } from "aurelia";
+import {watch} from '@aurelia/runtime-html';
 import { MDCSwitch } from "@material/switch";
 import template from "./moo-switch.html";
 import "./moo-switch.scss";
@@ -19,9 +20,15 @@ export class MooSwitch implements ICustomElementViewModel {
     @bindable class: string;
     @bindable change;
     switchEl: HTMLButtonElement;
+    switch: MDCSwitch;
 
     attached() {
-        new MDCSwitch(this.switchEl);
+        this.switch = new MDCSwitch(this.switchEl);
+    }
+
+    @watch('value')
+    valueChangedHandler() {
+        this.switch.selected = this.value;
     }
 
     changeValue() {
