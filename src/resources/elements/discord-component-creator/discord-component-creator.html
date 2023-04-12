@@ -1,15 +1,15 @@
 <template>
     <section id="discord-component-creator">
         <div if.bind="components.length < maxComponents" class="my-3">
-            <button mdc-button class="button-primary" click.trigger="addNewComponentRow()" type="button">
+            <moo-button variant="primary" click.bind="() => addNewComponentRow()" type="button">
                 Add Component Row
-            </button>
+            </moo-button>
         </div>
         <div class="row">
             <div class="col-12" repeat.for="componentWrapper of components">
-                <button mdc-button class="button-primary" click.trigger="addNewComponent($index)" type="button" if.bind="componentWrapper.components.length < 5">
+                <moo-button variant="primary" click.bind="() => addNewComponent($index)" type="button" if.bind="componentWrapper.components.length < 5">
                     Add Button
-                </button>
+                </moo-button>
                 <div class="row position-relative p-2" mdc-elevation="9">
                     <moo-fab
                         class="redFab topRight position-absolute top-0 end-0"
