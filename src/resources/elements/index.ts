@@ -24,3 +24,4 @@ export * from "./discord-action-creator";
 export * from "./discord-command-creator";
 export * from "./discord-command-parameter-creator";
 export * from "./validation-error";
+export * from './discord-component-creator';

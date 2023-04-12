@@ -3,7 +3,7 @@ import { DiscordButtonStyle, DiscordComponentType } from "../../../services/mode
 
 export class DiscordComponentCreator {
     @bindable components = [];
-    @bindable maxComponents = 1;
+    @bindable maxComponents = 5;
 
     componentTypes = [
         {

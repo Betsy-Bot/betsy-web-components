@@ -48,6 +48,8 @@ export class DiscordMarkupEditor implements ICustomElementViewModel {
         if (!this.editor) {
             this.options.placeholder = this.label;
             this.editor = ink(this.element, this.options);
+        }
+        if (this.editor) {
             this.editor.update(this.value);
         }
     }

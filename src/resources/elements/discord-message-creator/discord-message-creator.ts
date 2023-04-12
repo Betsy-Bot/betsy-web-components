@@ -18,7 +18,7 @@ export class DiscordMessageCreator implements ICustomElementViewModel{
     @bindable maxComponents = 5;
     @bindable tab = 'embeds';
     @bindable selectedMessage;
-    @bindable hideTemplate = false
+    @bindable hideTemplate = false;
     @bindable customBuilder;
     jsonDialog;
     json: string;
