@@ -29,9 +29,9 @@
             <mdc-text-field-character-counter></mdc-text-field-character-counter>
         </mdc-text-field-helper-line>
 
-        <button mdc-button class="button-primary mt-4" click.trigger="addField()" if.bind="form.formData.components.length < 5">
+        <moo-button variant="primary" class="mt-4" click.bind="() => addField()" if.bind="form.formData.components.length < 5">
             Add New Field
-        </button>
+        </moo-button>
 
         <div class="field-container row g-4 mb-3">
             <div class="col-12 col-xl-6" repeat.for="component of form.formData.components">
@@ -39,23 +39,21 @@
                     <div class="text-end text-danger me-1 mt-3 mb-1">
                         <span class="cursor-pointer" click.trigger="deleteField($parent.$index)">X</span>
                     </div>
-                    <mdc-select class="standard-betsy-select w-100" value.bind="field.type" label="Field Type" required.bind="true">
-                        <mdc-icon mdc-select-icon>text_format</mdc-icon>
-                        <mdc-list>
-                            <mdc-list-item repeat.for="type of fieldTypes" value.bind="type.value" disabled.bind="type.disabled">
+                    <moo-select class="standard-betsy-select w-100" value.bind="field.type" label="Field Type" required.bind="true">
+                        <moo-list>
+                            <moo-list-item label="${type.label}" repeat.for="type of fieldTypes" value.bind="type.value" disabled.bind="type.disabled">
                                 ${type.label}
                                 <span class="ms-1" if.bind="type.disabled">- Coming Soon</span>
-                            </mdc-list-item>
-                        </mdc-list>
-                    </mdc-select>
-                    <mdc-select class="standard-betsy-select w-100" value.bind="field.style" label="Field Type" required.bind="true" if.bind="field.type === 4">
-                        <mdc-icon mdc-select-icon>text_format</mdc-icon>
-                        <mdc-list>
-                            <mdc-list-item repeat.for="type of textInputType" value.bind="type.value" disabled.bind="type.disabled">
+                            </moo-list-item>
+                        </moo-list>
+                    </moo-select>
+                    <moo-select class="standard-betsy-select w-100" value.bind="field.style" label="Field Type" required.bind="true" if.bind="field.type === 4">
+                        <moo-list>
+                            <moo-list-item label="${type.label}" repeat.for="type of textInputType" value.bind="type.value" disabled.bind="type.disabled">
                                 ${type.label}
-                            </mdc-list-item>
-                        </mdc-list>
-                    </mdc-select>
+                            </moo-list-item>
+                        </moo-list>
+                    </moo-select>
                     <moo-text-field
                         class="w-100 mt-2"
                         label="Label"
