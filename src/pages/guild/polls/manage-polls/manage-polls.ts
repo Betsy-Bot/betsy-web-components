@@ -1,11 +1,15 @@
 import { bindable, inject } from "aurelia";
-import { IRouteViewModel } from "@aurelia/router-lite";
+import { IRouteViewModel, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
 import { DiscordComponentType } from "../../../../services/models/discord";
 
 import { toast } from "lets-toast";
 
+@route({
+    path: "polls/:pollId",
+    title: "Manage Poll",
+})
 @inject(DiscordService)
 export class ManagePolls implements IRouteViewModel {
     constructor(private discordService: DiscordService) {}

@@ -1,10 +1,14 @@
 import { inject } from "aurelia";
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../../../services/discord-service";
 
 import "./support-ticket.scss";
 
+@route({
+    path: "support-tickets/:supportTicketSettingsId/submissions/:ticketId",
+    title: "View Support Ticket",
+})
 @inject(DiscordService, Router)
 export class SupportTicket implements IRouteViewModel {
     constructor(

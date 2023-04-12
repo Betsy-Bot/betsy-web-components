@@ -1,71 +1,89 @@
-import { IEventAggregator, inject, observable } from 'aurelia';
-import { IRouteViewModel, Params, Router } from '@aurelia/router-lite';
+import { IEventAggregator, inject, observable } from "aurelia";
+import { IRouteViewModel, Params, route, Router } from "@aurelia/router-lite";
 
-import { DiscordService } from '../../../../services/discord-service';
+import { DiscordService } from "../../../../services/discord-service";
 
-import { toast } from 'lets-toast';
+import { toast } from "lets-toast";
 
+@route({
+    path: "support-tickets/:supportTicketSettingsId",
+    title: "Edit Ticket",
+})
 @inject(IEventAggregator, DiscordService, Router)
 export class EditTicketMessage implements IRouteViewModel {
-  constructor(private eventAggregator: IEventAggregator, private discordService: DiscordService, private router: Router) {}
+    constructor(
+        private eventAggregator: IEventAggregator,
+        private discordService: DiscordService,
+        private router: Router
+    ) {}
 
-  guildId: string;
-  supportTicketSettingsId: string;
-  confirmDeleteDialog;
-  featureActive;
+    guildId: string;
+    supportTicketSettingsId: string;
+    confirmDeleteDialog;
+    featureActive;
 
-  ticket;
+    ticket;
 
-  tab = 'settings';
+    tab = "settings";
 
-  @observable authorizedRole;
+    @observable authorizedRole;
 
-  loading(params: Params) {
-    this.guildId = params.guildId;
-    this.supportTicketSettingsId = params.supportTicketSettingsId;
-  }
-
-  async attached() {
-    [this.ticket] = await Promise.all([await this.discordService.getSupportTicketSettingsById(this.supportTicketSettingsId)]);
-
-    //Temp solution because it wasn't clearing it for some reason
-    this.eventAggregator.subscribe('form-cleared', (payload) => {
-      this.ticket.discordFormId = null;
-      this.ticket.discordForm = null;
-    });
-  }
-
-  authorizedRoleChanged(newValue, oldvalue) {
-    if (!this.ticket.assignedRoles) {
-      this.ticket.assignedRoles = [];
+    loading(params: Params) {
+        this.guildId = params.guildId;
+        this.supportTicketSettingsId = params.supportTicketSettingsId;
     }
-    this.ticket.assignedRoles.push(newValue.id);
-  }
 
-  async editSupportTicketSettings() {
-    try {
-      this.ticket.discordGuildId = this.guildId;
-      await this.discordService.updateSupportTicketSettings(this.ticket);
-      toast('Updated support message!', { severity: 'success' });
-    } catch (e) {
-      toast('Failed to update support ticket creation message', { severity: 'error' });
-      throw e;
+    async attached() {
+        [this.ticket] = await Promise.all([
+            await this.discordService.getSupportTicketSettingsById(
+                this.supportTicketSettingsId
+            ),
+        ]);
+
+        //Temp solution because it wasn't clearing it for some reason
+        this.eventAggregator.subscribe("form-cleared", (payload) => {
+            this.ticket.discordFormId = null;
+            this.ticket.discordForm = null;
+        });
     }
-  }
 
-  async deleteSupportTicket(event) {
-    if (event.detail.action == 'ok') {
-      try {
-        await this.discordService.deleteSupportTicketBySettingsId(this.ticket.id);
-        toast('Deleted support message!', { severity: 'success' });
-      } catch (e) {
-        toast('Failed to delete support ticket creation message', { severity: 'error' });
-        throw e;
-      }
+    authorizedRoleChanged(newValue, oldvalue) {
+        if (!this.ticket.assignedRoles) {
+            this.ticket.assignedRoles = [];
+        }
+        this.ticket.assignedRoles.push(newValue.id);
     }
-  }
 
-  handleClone() {
-    this.router.load(`create-ticket-message`);
-  }
+    async editSupportTicketSettings() {
+        try {
+            this.ticket.discordGuildId = this.guildId;
+            await this.discordService.updateSupportTicketSettings(this.ticket);
+            toast("Updated support message!", { severity: "success" });
+        } catch (e) {
+            toast("Failed to update support ticket creation message", {
+                severity: "error",
+            });
+            throw e;
+        }
+    }
+
+    async deleteSupportTicket(event) {
+        if (event.detail.action == "ok") {
+            try {
+                await this.discordService.deleteSupportTicketBySettingsId(
+                    this.ticket.id
+                );
+                toast("Deleted support message!", { severity: "success" });
+            } catch (e) {
+                toast("Failed to delete support ticket creation message", {
+                    severity: "error",
+                });
+                throw e;
+            }
+        }
+    }
+
+    handleClone() {
+        this.router.load(`create-ticket-message`);
+    }
 }

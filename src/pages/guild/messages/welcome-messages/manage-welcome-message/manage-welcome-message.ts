@@ -1,9 +1,13 @@
 import { IEventAggregator } from "aurelia";
 import { DiscordService } from "../../../../../services/discord-service";
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 import { toast } from "lets-toast";
 import { bindable, inject } from "aurelia";
 
+@route({
+    path: "welcome-messages/:messageId",
+    title: "Manage Welcome Message",
+})
 @inject(IEventAggregator, DiscordService, Router)
 export class ManageWelcomeMessage implements IRouteViewModel {
     constructor(

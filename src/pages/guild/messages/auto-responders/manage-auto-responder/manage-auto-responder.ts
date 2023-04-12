@@ -1,9 +1,13 @@
 import { IEventAggregator } from "aurelia";
 import { DiscordService } from "../../../../../services/discord-service";
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 import { toast } from "lets-toast";
 import { bindable, inject, observable } from "aurelia";
 
+@route({
+    path: "auto-responders/:responderId",
+    title: "Manage Auto Responder",
+})
 @inject(IEventAggregator, DiscordService, Router)
 export class ManageAutoResponder implements IRouteViewModel {
     constructor(

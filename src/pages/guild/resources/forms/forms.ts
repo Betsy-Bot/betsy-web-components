@@ -3,7 +3,7 @@ import { DiscordService } from "../../../../services/discord-service";
 import { IRouteViewModel } from "@aurelia/router-lite";
 
 @inject(DiscordService)
-export class GuildForms implements IRouteViewModel {
+export class Forms implements IRouteViewModel {
     constructor(private discordService: DiscordService) {}
 
     guildId: string;
