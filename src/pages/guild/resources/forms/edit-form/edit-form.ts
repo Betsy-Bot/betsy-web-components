@@ -1,17 +1,17 @@
 import { DiscordForm } from "../../../../../services/models/discord";
-import { Router } from "@aurelia/router-lite";
+import { route } from "@aurelia/router-lite";
 import { inject } from "aurelia";
 import { DiscordService } from "../../../../../services/discord-service";
 import { toast } from "lets-toast";
 import DataGrid from "devextreme/ui/data_grid";
 import { IRouteViewModel } from "@aurelia/router-lite";
-
-@inject(DiscordService, Router)
+@route({
+    path: "forms/:formId",
+    title: "Manage Form",
+})
+@inject(DiscordService)
 export class EditForm implements IRouteViewModel {
-    constructor(
-        private discordService: DiscordService,
-        private router: Router
-    ) {}
+    constructor(private discordService: DiscordService) {}
 
     params;
     guildId;
@@ -37,12 +37,11 @@ export class EditForm implements IRouteViewModel {
     ];
 
     loading(params) {
-        this.params = params;
-        this.guildId = this.params.guildId;
-        this.formId = this.params.formId;
+        this.formId = params.formId;
     }
 
     async attached() {
+        this.guildId = this.discordService.getLocalDiscordGuildId();
         this.form = await this.discordService.getDiscordForm(
             this.guildId,
             this.formId

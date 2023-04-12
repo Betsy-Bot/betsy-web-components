@@ -6,8 +6,13 @@ import { inject } from "aurelia";
 import { IEventAggregator } from "aurelia";
 import { DiscordService } from "../../../../../services/discord-service";
 import { toast } from "lets-toast";
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { Forms } from "../forms";
 
+@route({
+    path: "forms/create",
+    title: "Create Form",
+})
 @inject(IEventAggregator, DiscordService, Router)
 export class CreateForm implements IRouteViewModel {
     constructor(
@@ -15,6 +20,7 @@ export class CreateForm implements IRouteViewModel {
         private discordService: DiscordService,
         private router: Router
     ) {}
+
     params;
     guildId;
     didLoad = false;

@@ -6,8 +6,12 @@ import {
 } from "../../../../services/models/discord";
 import { DiscordService } from "../../../../services/discord-service";
 import { toast } from "lets-toast";
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 
+@route({
+    path: "response-messages/0",
+    title: "Create Response Messages",
+})
 @inject(DiscordService, Router)
 export class CreateResponseMessage implements IRouteViewModel {
     constructor(

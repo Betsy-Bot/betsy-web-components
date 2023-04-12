@@ -43,6 +43,8 @@ import { AuditLogs } from "./resources/audit-logs/audit-logs";
 import { Twitch } from "./social-connections/twitch/twitch";
 import { CreateMessage } from "./resources/messages/create-message/create-message";
 import { EditMessage } from "./resources/messages/edit-message/edit-message";
+import { CreateForm } from "./resources/forms/create-form/create-form";
+import { EditForm } from "./resources/forms/edit-form/edit-form";
 
 const routes = [
     Dashboard,
@@ -65,34 +67,14 @@ const routes = [
     WelcomeMessages,
     ManageWelcomeMessage,
     ResponseMessage,
-    {
-        component: CreateResponseMessage,
-        path: "response-messages/0",
-        title: "Create Response Messages",
-    },
-    {
-        component: EditResponseMessage,
-        path: "response-messages/:messageId",
-        title: "Response Message",
-    },
+    CreateResponseMessage,
+    EditResponseMessage,
     DataCommands,
-    {
-        component: EditDataCommand,
-        path: "data-commands/:commandId",
-        title: "Manage Data Command",
-    },
+    EditDataCommand,
     Payments,
     ActionLog,
-    {
-        component: InviteLinks,
-        path: "invite-links",
-        title: "Delete Invite Links",
-    },
-    {
-        component: AutoRole,
-        path: "role-selector",
-        title: "Role Selector",
-    },
+    InviteLinks,
+    AutoRole,
     {
         component: ManageAutoroleContainer,
         path: "role-selector/:containerId",
@@ -133,11 +115,9 @@ const routes = [
         path: "messages/:messageId",
         title: "Manage Message",
     },
-    {
-        component: Forms,
-        path: "forms",
-        title: "forms",
-    },
+    Forms,
+    CreateForm,
+    EditForm,
     {
         component: KeyValueStorage,
         path: "key-value-storage",

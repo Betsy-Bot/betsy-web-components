@@ -1,8 +1,12 @@
 import { inject } from "aurelia";
 import { toast } from "lets-toast";
 import { DiscordService } from "../../../services/discord-service";
-import { IRouteViewModel } from "@aurelia/router-lite";
+import { IRouteViewModel, route } from "@aurelia/router-lite";
 
+@route({
+    path: "invite-links",
+    title: "Delete Invite Links",
+})
 @inject(DiscordService)
 export class InviteLinks implements IRouteViewModel {
     constructor(private discordService: DiscordService) {}

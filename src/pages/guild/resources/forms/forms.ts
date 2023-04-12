@@ -1,7 +1,11 @@
 import { inject } from "aurelia";
 import { DiscordService } from "../../../../services/discord-service";
-import { IRouteViewModel } from "@aurelia/router-lite";
+import { IRouteViewModel, route } from "@aurelia/router-lite";
 
+@route({
+    path: "forms",
+    title: "forms",
+})
 @inject(DiscordService)
 export class Forms implements IRouteViewModel {
     constructor(private discordService: DiscordService) {}
