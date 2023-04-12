@@ -101,11 +101,11 @@
                         <discord-role-selector
                             remove-everyone.bind="true"
                             label="Select Role"
-                            selected-role.two-way="role"
+                            selected-role.bind="role"
                         ></discord-role-selector>
 
                         <div class="row my-3">
-                            <div class="col-12 col-xl-6 p-3" mdc-elevation="9" repeat.for="role of giveaway.roles">
+                            <div class="col-12 col-xl-6 p-3" elevation="9" repeat.for="role of giveaway.roles">
                                 <div class="text-end text-danger me-1 mb-1">
                                     <span class="cursor-pointer" click.trigger="deleteRole($index)">X</span>
                                 </div>
@@ -123,7 +123,6 @@
                                     class="w-100 my-2"
                                     value.bind="role.name"
                                     required
-                                    readonly
                                 ></moo-text-field>
                                 <moo-text-field
                                     label="Number of Entries"

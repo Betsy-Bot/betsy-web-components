@@ -4,3 +4,4 @@ export * from './full-width';
 export * from './link';
 export * from './ripple';
 export * from './underline';
+export * from './elevation';

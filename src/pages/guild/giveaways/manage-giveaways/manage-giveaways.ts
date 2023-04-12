@@ -7,6 +7,7 @@ import {
     DiscordButtonStyle,
     DiscordComponentType,
 } from "../../../../services/models/discord";
+import {watch} from "@aurelia/runtime-html";
 
 @route({
     path: "giveaways/:giveawayId",
@@ -29,7 +30,7 @@ export class ManageGiveaways implements IRouteViewModel {
     @bindable giveaway;
     giveawayId;
     isNew: boolean;
-    @observable role;
+    role;
     giveawayTemplate = {
         name: "",
         discordServerId: "",
@@ -121,15 +122,18 @@ export class ManageGiveaways implements IRouteViewModel {
         }
     }
 
+    @watch('role')
     roleChanged() {
+        console.log('role changes');
         if (!this.giveaway.roles) {
             this.giveaway.roles = [];
         }
         this.giveaway.roles.push({
-            name: this.role.name,
-            discordRoleId: this.role.id,
+            name: this.role,
+            discordRoleId: this.role,
             numberOfEntries: 1,
         });
+        console.log(this.giveaway.roles);
     }
 
     deleteRole(index) {

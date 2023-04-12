@@ -1,5 +1,5 @@
 import {
-    bindable,
+    bindable, BindingMode,
     customElement,
     ICustomElementViewModel,
     inject,
@@ -17,7 +17,7 @@ import template from "./discord-role-selector.html";
 @inject(DiscordService)
 export class DiscordRoleSelector implements ICustomElementViewModel {
     constructor(private discordService: DiscordService) {}
-    @bindable selectedRole: string;
+    @bindable({ mode: BindingMode.twoWay }) selectedRole: string;
     @bindable label;
     @bindable required = false;
     @bindable removeEveryone = false;

@@ -22,6 +22,7 @@ export class MooTextField implements ICustomElementViewModel {
     @bindable rows;
     @bindable cols;
     @observable input: HTMLElement;
+    @bindable readonly;
     textField;
 
     attached() {
