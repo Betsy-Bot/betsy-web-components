@@ -1,6 +1,5 @@
 import {DiscordService} from "../../../services/discord-service";
-import {IRouteViewModel, route, Router} from "@aurelia/router-lite";
-import {SessionService} from "../../../services/session-service";
+import {IRouteViewModel, route} from "@aurelia/router-lite";
 import {inject} from "aurelia";
 import {toast} from "lets-toast";
 
@@ -8,12 +7,10 @@ import {toast} from "lets-toast";
     path: "payments",
     title: "Payments",
 },)
-@inject(DiscordService, Router, SessionService)
+@inject(DiscordService)
 export class Payments implements IRouteViewModel {
     constructor(
-        private discordService: DiscordService,
-        private router: Router,
-        private sessionService: SessionService
+        private discordService: DiscordService
     ) {
     }
 
@@ -36,6 +33,7 @@ export class Payments implements IRouteViewModel {
             this.guild,
             this.guildId
         );
+        toast("API Key Updated");
     }
 
     async toggleFeature() {
