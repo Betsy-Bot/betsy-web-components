@@ -2,12 +2,15 @@ import {bindable, BindingMode, customElement, ICustomElementViewModel, inject} f
 import { DiscordEmbed } from "../../../services/models/discord";
 import './discord-message-creator.scss';
 import template from "./discord-message-creator.html";
+import {watch} from "@aurelia/runtime-html";
+import {DiscordService} from "../../../services/discord-service";
 
 @customElement({
     name: 'discord-message-creator',
     template: template,
     containerless: true
 })
+@inject(DiscordService)
 export class DiscordMessageCreator implements ICustomElementViewModel{
     @bindable({mode: BindingMode.twoWay}) message = {
         embeds: [],
@@ -17,15 +20,24 @@ export class DiscordMessageCreator implements ICustomElementViewModel{
     @bindable allowComponents = true;
     @bindable maxComponents = 5;
     @bindable tab = 'embeds';
-    @bindable selectedMessage;
+    selectedMessage;
     @bindable hideTemplate = false;
     @bindable customBuilder;
     jsonDialog;
     json: string;
 
+    constructor(private discordService: DiscordService) {
+    }
+
+    @watch('selectedMessage')
     selectedMessageChanged() {
-        if (this.selectedMessage?.message) {
-            this.message = this.selectedMessage.message;
+        if (this.selectedMessage) {
+            console.log(this.message);
+            let foundMessage = this.discordService.getMessageResourceById(this.selectedMessage);
+            if (foundMessage) {
+                this.message = foundMessage.message;
+            }
+            console.log(this.message);
             this.selectedMessage = null;
         }
     }

@@ -287,9 +287,17 @@ export class DiscordService {
 
   async getResourceMessagesForGuild(guildId: string) {
     if (!this.messages) {
-      this.messages = this.api.doGet(`DiscordGuild/${guildId}/Resources/Messages`);
+      this.messages = await this.api.doGet(`DiscordGuild/${guildId}/Resources/Messages`);
     }
     return this.messages;
+  }
+
+  getMessageResourceById(id: string) {
+      console.log('messages', this.messages);
+      if (this.messages) {
+          return this.messages.find(x => x.id == id);
+      }
+      return null;
   }
 
   async createDiscordMessage(message: any) {
