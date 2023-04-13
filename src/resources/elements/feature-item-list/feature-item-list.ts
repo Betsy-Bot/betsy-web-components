@@ -1,5 +1,5 @@
 import { bindable, inject } from "aurelia";
-import { Router } from "@aurelia/router-lite";
+import { IRouter, IRouteContext } from "@aurelia/router-lite";
 
 import { ChannelNameValueConverter } from "../../value-converters/channel-name";
 
@@ -9,7 +9,7 @@ import { DiscordService } from "../../../services/discord-service";
 export enum ValueConverter {
     ChannelName = "ChannelName",
 }
-@inject(ChannelNameValueConverter, Router, DiscordService)
+@inject(ChannelNameValueConverter, IRouter, DiscordService, IRouteContext)
 export class FeatureItemList {
     @bindable data: any[];
     @bindable showToggler: boolean;
@@ -24,12 +24,14 @@ export class FeatureItemList {
     @bindable route;
     columns = [];
     linkEl: HTMLAnchorElement;
+    switchEl: HTMLSpanElement;
     guildId: string;
 
     constructor(
         private channelValueConverter: ChannelNameValueConverter,
-        private router: Router,
-        private discordService: DiscordService
+        private router: IRouter,
+        private discordService: DiscordService,
+        private context: IRouteContext
     ) {}
 
     binding() {
@@ -41,6 +43,13 @@ export class FeatureItemList {
                 caption: "",
                 cellTemplate: this.linkTemplate,
                 alignment: "center",
+                width: 200
+            },
+            {
+                caption: "Active",
+                cellTemplate: this.toggleTemplate,
+                alignment: "center",
+                width: 200
             },
         ];
     }
@@ -83,14 +92,23 @@ export class FeatureItemList {
     async routeToItem(id: string) {
         console.log(`load route`, `${this.route}/${id}`);
         await this.router.load(`${this.route}/${id}`, {
-            context: this,
+            context: this.context,
         });
     }
 
     linkTemplate = (container, options) => {
-        const clone = this.linkEl.cloneNode(true) as HTMLSpanElement;
+        const clone = this.linkEl.cloneNode(true) as HTMLAnchorElement;
         clone.classList.remove("d-none");
         clone.onclick = () => this.routeToItem(options.data.id);
+        container.append(clone);
+    };
+
+    toggleTemplate = (container, options) => {
+        const clone = this.switchEl.cloneNode(true) as HTMLSpanElement;
+        let switchComponent = this.switchEl.querySelector('moo-switch');
+        switchComponent.setAttribute('value', options.data.active);
+        clone.classList.remove("d-none");
+        clone.onclick = () => this.handleToggleClick(options.data);
         container.append(clone);
     };
 }

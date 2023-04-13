@@ -48,21 +48,22 @@
                 </div>
 
                 <div if.bind="tab === 'container'">
-                    <div class="fs-6 pb-3">Customize the Message Container which is to house the Create Ticket Button
-                    </div>
-                    <discord-message-creator
-                        max-components.bind="1"
-                        allow-components.bind="true"
-                        message.bind="request.discordMessage.message"
-                        single.bind="true"
-                    ></discord-message-creator>
+                    <form submit.trigger="tab = 'initial'">
+                        <div class="fs-6 pb-3">Customize the Message Container which is to house the Create Ticket Button
+                        </div>
+                        <discord-message-creator
+                            max-components.bind="1"
+                            allow-components.bind="true"
+                            message.bind="request.discordMessage.message"
+                            single.bind="true"
+                        ></discord-message-creator>
 
-                    <div class="text-end">
-                        <moo-button label="next" class="button-primary mt-2" type="button" disabled.bind="didLoad"
-                                click.trigger="tab = 'initial'">
-                            Next
-                        </moo-button>
-                    </div>
+                        <div class="text-end">
+                            <moo-button class="mt-2" disabled.bind="didLoad" type="submit">
+                                Next
+                            </moo-button>
+                        </div>
+                    </form>
                 </div>
 
                 <div if.bind="tab === 'initial'">
