@@ -12,7 +12,7 @@ export class MooFab implements ICustomElementViewModel {
     @bindable icon: string;
     @bindable text: string;
     @bindable class: string;
-    @bindable click: () => void;
+    @bindable click;
     @bindable external: boolean;
     @bindable url: string;
     fabEl: HTMLElement;

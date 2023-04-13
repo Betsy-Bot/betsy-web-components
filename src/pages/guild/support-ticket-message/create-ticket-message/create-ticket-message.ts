@@ -1,5 +1,5 @@
 import { inject, observable } from "aurelia";
-import { IRouteViewModel, Params, route, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, Params, route, IRouter, IRouteContext } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
 import {
@@ -13,11 +13,12 @@ import { toast } from "lets-toast";
     path: "support-tickets/0",
     title: "Create",
 })
-@inject(DiscordService, Router)
+@inject(DiscordService, IRouter, IRouteContext)
 export class CreateTicketMessage implements IRouteViewModel {
     constructor(
         private discordService: DiscordService,
-        private router: Router
+        private router: IRouter,
+        private context: IRouteContext
     ) {}
 
     guildId: string;
@@ -61,7 +62,8 @@ export class CreateTicketMessage implements IRouteViewModel {
     didBind = false;
 
     loading(params: Params) {
-        this.params = params;
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        this.params = Object.fromEntries(urlSearchParams.entries()) ?? {};
     }
 
     async attached() {
@@ -72,8 +74,8 @@ export class CreateTicketMessage implements IRouteViewModel {
         this.featureActive = this.guild.activeFeatures.includes(
             this.discordService.SUPPORT_TICKETS
         );
-        if (this.params.data) {
-            this.request = JSON.parse(this.params.data);
+        if (this.params) {
+           this.request = {...this.params}
         }
         this.didBind = true;
     }
@@ -96,7 +98,7 @@ export class CreateTicketMessage implements IRouteViewModel {
                 this.request
             );
             toast("Created support message!", { severity: "success" });
-            this.router.load(`support-tickets`);
+            await this.router.load(`../support-tickets`, {context: this.context});
         } catch (e) {
             toast("Failed to setup support ticket creation message", {
                 severity: "error",

@@ -1,13 +1,13 @@
 <template>
-<!--    <confirmation-dialog-->
-<!--        cancel-text="Cancel"-->
-<!--        confirm-text="Delete"-->
-<!--        dialog.two-way="confirmDeleteDialog"-->
-<!--        handler.bind="e => deleteSupportTicket(event)"-->
-<!--        title="Are you sure you would like to delete?"-->
-<!--    >-->
-<!--        This is a permanent action and cannot be undone-->
-<!--    </confirmation-dialog>-->
+    <confirmation-dialog
+        cancel-text="Cancel"
+        confirm-text="Delete"
+        dialog.two-way="confirmDeleteDialog"
+        handler.bind="e => deleteSupportTicket(event)"
+        title="Are you sure you would like to delete?"
+    >
+        This is a permanent action and cannot be undone
+    </confirmation-dialog>
 
     <section id="support-tickets">
         <div class="row" if.bind="ticket">
@@ -16,8 +16,8 @@
                     doc-url="https://docs.betsybot.xyz/features/support-tickets"
                     title="Edit Support Ticket Message"
                     subtitle="Edit the message that is already on your server."
-                    delete-function.bind="e => confirmDeleteDialog.open()"
-                    copy-function.bind="e => handleClone()"
+                    delete-function.bind="() => confirmDeleteDialog.open()"
+                    copy-function.bind="() => handleClone()"
                 ></feature-header>
 
                 <div class="row mt-3 mb-4">

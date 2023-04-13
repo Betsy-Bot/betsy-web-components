@@ -1,5 +1,5 @@
 import { IEventAggregator, inject, observable } from "aurelia";
-import { IRouteViewModel, Params, route, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, Params, route, IRouter, IRouteContext } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
 
@@ -9,12 +9,13 @@ import { toast } from "lets-toast";
     path: "support-tickets/:supportTicketSettingsId",
     title: "Edit Ticket",
 })
-@inject(IEventAggregator, DiscordService, Router)
+@inject(IEventAggregator, DiscordService, IRouter, IRouteContext)
 export class EditTicketMessage implements IRouteViewModel {
     constructor(
         private eventAggregator: IEventAggregator,
         private discordService: DiscordService,
-        private router: Router
+        private router: IRouter,
+        private context: IRouteContext
     ) {}
 
     guildId: string;
@@ -84,6 +85,6 @@ export class EditTicketMessage implements IRouteViewModel {
     }
 
     handleClone() {
-        this.router.load(`create-ticket-message`);
+        this.router.load(`../support-tickets/0`, {context: this.context, queryParams: this.ticket});
     }
 }
