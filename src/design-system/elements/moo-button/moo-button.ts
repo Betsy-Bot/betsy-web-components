@@ -1,6 +1,7 @@
 import { bindable, customElement, ICustomElementViewModel } from "aurelia";
 
 import template from "./moo-button.html";
+
 import "./moo-button.scss";
 
 export type MOO_BUTTON_VARIANT = "primary" | "secondary";
@@ -19,13 +20,14 @@ export class MooButton implements ICustomElementViewModel {
     @bindable class = "";
     @bindable click = undefined;
     @bindable dataMdcDialogAction;
+    @bindable disabled = false;
 
     get colorClass() {
         switch (this.variant) {
-            case "primary":
-                return "";
-            case "secondary":
-                return "moo-button-secondary";
+        case "primary":
+            return "";
+        case "secondary":
+            return "moo-button-secondary";
         }
     }
 

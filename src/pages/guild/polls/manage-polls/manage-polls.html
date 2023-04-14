@@ -116,7 +116,7 @@
                             ></discord-emoji-selector>
 
                             <div class="my-3">
-                                <moo-button type="button" class="button-primary" click.trigger="addOption()">
+                                <moo-button type="button" class="button-primary" click.bind="() => addOption()" disabled.bind="!option.label || !option.description">
                                     Add Option
                                 </moo-button>
                             </div>
@@ -130,7 +130,7 @@
                                         <div>Label: ${option.label}</div>
                                         <div>Description: ${option.description}</div>
                                         <div>Emoji: <img src="https://cdn.discordapp.com/emojis/${option.emoji.id}.webp?size=24&quality=lossless"> ${option.emoji.name}</div>
-                                        <moo-button type="button" class="button-primary" click.trigger="removeOption($index)">
+                                        <moo-button type="button" class="button-primary" click.bind="() => removeOption($index)">
                                             Delete Option
                                         </moo-button>
                                     </div>

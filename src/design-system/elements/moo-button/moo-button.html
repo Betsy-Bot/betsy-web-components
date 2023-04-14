@@ -1,9 +1,9 @@
-<button class="moo-button ${colorClass} ${class}" ref="button" type="${type}" if.bind="!hasClickFunction" data-mdc-dialog-action="dataMdcDialogAction">
+<button class="moo-button ${colorClass} ${class}" ref="button" type="${type}" if.bind="!hasClickFunction" data-mdc-dialog-action="dataMdcDialogAction" disabled.bind="disabled">
     <span class="material-icons" if.bind="icon">${icon}</span>
     ${label}<au-slot></au-slot>
 </button>
 
-<button else class="moo-button ${colorClass} ${class}" ref="button" type="${type}" click.trigger="handleClick()" data-mdc-dialog-action="dataMdcDialogAction">
+<button else class="moo-button ${colorClass} ${class}" ref="button" type="${type}" click.trigger="handleClick()" data-mdc-dialog-action="dataMdcDialogAction" disabled.bind="disabled">
     <span class="material-icons" if.bind="icon">${icon}</span>
     ${label}<au-slot></au-slot>
 </button>
