@@ -28,13 +28,13 @@
                             </moo-button>
                         </div>
                     </div>
-                    <mdc-chip-set input if.bind="guild.authorizedUsers">
+                    <moo-chip-set input if.bind="guild.authorizedUsers">
                         <!-- Compact notation -->
-                        <mdc-chip repeat.for="user of guild.authorizedUsers">
+                        <moo-chip repeat.for="user of guild.authorizedUsers">
                             ${user}
                             <span click.trigger="removeUser($index)" trailing>X</span>
-                        </mdc-chip>
-                    </mdc-chip-set>
+                        </moo-chip>
+                    </moo-chip-set>
                 </form>
             </div>
         </div>

@@ -20,3 +20,5 @@ export * from "./moo-banner";
 export * from "./moo-accordion";
 export * from "./moo-radio";
 export * from './moo-form-field';
+export * from './moo-chip-set';
+export * from './moo-chip';
