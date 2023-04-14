@@ -1,4 +1,5 @@
 import { bindable } from "aurelia";
+
 import { DiscordButtonStyle, DiscordComponentType } from "../../../services/models/discord";
 
 export class DiscordComponentCreator {
@@ -54,6 +55,10 @@ export class DiscordComponentCreator {
                 label: "Text"
             }]
         })
+    }
+
+    componentsChanged() {
+        console.log(this.components);
     }
 
     addNewComponent(index) {

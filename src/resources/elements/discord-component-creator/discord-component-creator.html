@@ -24,17 +24,15 @@
                                     icon="delete"
                                     click.bind="() => removeComponent($parent.$index, $index)"
                                 ></moo-fab>
-                                <mdc-select class="standard-betsy-select w-75 mb-2" value.bind="component.type" label="Select Component Type">
-                                    <mdc-icon mdc-select-icon>dns</mdc-icon>
-                                    <mdc-list>
-                                        <mdc-list-item repeat.for="type of componentTypes" value.bind="type.type">
-                                            ${type.label}
-                                        </mdc-list-item>
-                                    </mdc-list>
-                                </mdc-select>
+                                <moo-select class="standard-betsy-select w-75 mb-2" value.bind="component.type" label="Select Component Type">
+                                    <moo-list>
+                                        <moo-list-item label.bind="type.label" repeat.for="type of componentTypes" value.bind="type.type">
+                                        </moo-list-item>
+                                    </moo-list>
+                                </moo-select>
 
                                 <!-- Menu -->
-                                <template if.bind="component.type === 3">
+                                <template if.bind="component.type == 3">
                                     <moo-text-field
                                         class="w-100 my-2"
                                         label="Menu Custom ID"
@@ -45,24 +43,22 @@
                                         label="Menu Placeholder"
                                         value.bind="component.placeholder"
                                     ></moo-text-field>
-                                    <button mdc-button class="button-primary" click.trigger="addMenuOption($index)">
+                                    <moo-button class="button-primary" click.bind="() => addMenuOption($index)">
                                         Add Option
-                                    </button>
+                                    </moo-button>
                                     <template repeat.for="item of component.options">
                                         <discord-menu-item item.two-way="item" remove-function.bind="() => removeMenuOption($index)"></discord-menu-item>
                                     </template>
                                 </template>
 
                                 <!-- Button -->
-                                <template if.bind="component.type === 2">
-                                    <mdc-select class="standard-betsy-select w-100 mb-2" value.bind="component.style" label="Select Style">
-                                        <mdc-icon mdc-select-icon>dns</mdc-icon>
-                                        <mdc-list>
-                                            <mdc-list-item repeat.for="style of styles" value.bind="style.value">
-                                                ${style.label}
-                                            </mdc-list-item>
-                                        </mdc-list>
-                                    </mdc-select>
+                                <template if.bind="component.type == 2">
+                                    <moo-select class="standard-betsy-select w-100 mb-2" value.bind="component.style" label="Select Style">
+                                        <moo-list>
+                                            <moo-list-item label.bind="style.label" repeat.for="style of styles" value.bind="style.value">
+                                            </moo-list-item>
+                                        </moo-list>
+                                    </moo-select>
                                     <div class="my-2">
                                         <moo-text-field
                                             class="w-100"

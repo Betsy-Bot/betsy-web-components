@@ -1,4 +1,5 @@
-import {bindable, customElement, ICustomElementViewModel} from "aurelia";
+import { bindable, BindingMode, customElement, ICustomElementViewModel } from "aurelia";
+
 import template from "./moo-list-item.html";
 
 @customElement({
@@ -8,6 +9,6 @@ import template from "./moo-list-item.html";
 })
 export class MooListItem implements ICustomElementViewModel {
     @bindable label;
-    @bindable value;
+    @bindable({ mode: BindingMode.twoWay }) value;
     @bindable route;
 }
