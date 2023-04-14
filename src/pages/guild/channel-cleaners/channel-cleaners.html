@@ -8,7 +8,7 @@
     <div class="container-fluid mt-2">
         <div class="row g-5">
             <div class="col-12 col-lg-6 col-xl-4">
-                <form submit.trigger="addChannelCleaner()" mdc-elevation="10" class="p-4">
+                <form submit.trigger="addChannelCleaner()" elevation="10" class="p-4">
                     <h5>Create New Cleaner</h5>
                     <discord-channel-selector
                         required.bind="true"
@@ -32,8 +32,8 @@
                     </div>
                 </form>
             </div>
-            <div class="col-12 col-lg-6 col-xl-4" repeat.for="cleaner of cleaners">
-                <div mdc-elevation="10" class="p-4 h-100">
+            <div if.bind="channels && cleaners" class="col-12 col-lg-6 col-xl-4" repeat.for="cleaner of cleaners">
+                <div elevation="10" class="p-4 h-100">
                     <h5>Cleaner in #${getChannelName(cleaner.discordChannelId)}</h5>
                     <div>
                         Messages older than ${cleaner.ageInHours} hours old are deleted hourly at the top of the hour.

@@ -70,7 +70,7 @@
                             <div class="row g-4">
                                 <div class="col-12 col-md-6"
                                      repeat.for="header of command.discordCommandActions[0].restRequestMetadata.requestHeaders">
-                                    <div mdc-elevation="9" class="p-2">
+                                    <div elevation="9" class="p-2">
                                         <div class="text-end">
                                             <span class="cursor-pointer" click.trigger="removeHeader($index)">X</span>
                                         </div>
@@ -96,7 +96,7 @@
                             <div class="row g-4">
                                 <div class="col-12 col-md-6"
                                      repeat.for="parameter of command.commandInformation.options">
-                                    <div mdc-elevation="9" class="p-2">
+                                    <div elevation="9" class="p-2">
                                         <div class="text-end">
                                             <span class="cursor-pointer"
                                                   click.trigger="removeParameter($index)">X</span>
@@ -124,7 +124,7 @@
                             <div class="row g-4">
                                 <div class="col-12 col-md-6"
                                      repeat.for="parameter of command.discordCommandActions[0].restRequestMetadata.defaultRequestData">
-                                    <div mdc-elevation="9" class="p-2">
+                                    <div elevation="9" class="p-2">
                                         <div class="text-end">
                                             <span class="cursor-pointer"
                                                   click.trigger="removeDefaultData($index)">X</span>
@@ -157,7 +157,7 @@
                             <div class="row g-4">
                                 <div class="col-12 col-md-6"
                                      repeat.for="parameter of command.discordCommandActions[0].restRequestMetadata.requestResponseMappings">
-                                    <div mdc-elevation="9" class="p-2">
+                                    <div elevation="9" class="p-2">
                                         <div class="text-end">
                                             <span class="cursor-pointer"
                                                   click.trigger="removeResponseMapping($index)">X</span>
@@ -174,7 +174,7 @@
                     </template>
 
 
-                    <div mdc-elevation="12" class="mt-4 p-3">
+                    <div elevation="12" class="mt-4 p-3">
                         <div>
                             Command Response Message
                         </div>

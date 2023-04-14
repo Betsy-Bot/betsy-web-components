@@ -35,7 +35,7 @@
 
         <div class="field-container row g-4 mb-3">
             <div class="col-12 col-xl-6" repeat.for="component of form.formData.components">
-                <div mdc-elevation="12" class="px-3 pb-3" repeat.for="field of component.components">
+                <div elevation="12" class="px-3 pb-3" repeat.for="field of component.components">
                     <div class="text-end text-danger me-1 mt-3 mb-1">
                         <span class="cursor-pointer" click.trigger="deleteField($parent.$index)">X</span>
                     </div>

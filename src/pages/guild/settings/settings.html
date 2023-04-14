@@ -6,7 +6,7 @@
 
     <div class="row mt-4 g-4">
         <div class="col-12 col-lg-6">
-            <div class="permission-area p-4" mdc-elevation="12">
+            <div class="permission-area p-4" elevation="12">
                 <h4>Authorized Panel Users</h4>
                 <span>Add administrators to help manage your server</span>
                 <form submit.trigger="addAuthorizedUser()">
@@ -40,7 +40,7 @@
         </div>
         <div class="col-12 col-lg-6">
             <form submit.trigger="updateAutoRolesSettings()">
-                <div class="p-4" mdc-elevation="12">
+                <div class="p-4" elevation="12">
                     <h4>Auto Roles</h4>
                     <discord-role-selector
                         remove-everyone.bind="true"
@@ -64,7 +64,7 @@
         </div>
         <div class="col-12 col-lg-6">
             <form submit.trigger="updateGlobalSettings()">
-                <div class="p-4" mdc-elevation="12">
+                <div class="p-4" elevation="12">
                     <h4>Custom Bot Settings</h4>
                     <div class="text-danger fs-6">
                         This feature is for Platinum supporters only. Learn more on our discord.

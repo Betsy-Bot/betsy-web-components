@@ -10,7 +10,7 @@
                 <moo-button variant="primary" click.bind="() => addNewComponent($index)" type="button" if.bind="componentWrapper.components.length < 5">
                     Add Button
                 </moo-button>
-                <div class="row position-relative p-2" mdc-elevation="9">
+                <div class="row position-relative p-2" elevation="9">
                     <moo-fab
                         class="redFab topRight position-absolute top-0 end-0"
                         icon="delete"
@@ -18,7 +18,7 @@
                     ></moo-fab>
                     <div class="col-12 col-xl-6" repeat.for="component of componentWrapper.components">
                         <div class="inputs">
-                            <div mdc-elevation="9" class="position-relative p-2">
+                            <div elevation="9" class="position-relative p-2">
                                 <moo-fab
                                     class="redFab topRight position-absolute top-0 end-0"
                                     icon="delete"

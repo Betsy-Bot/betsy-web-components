@@ -1,7 +1,9 @@
 import { inject } from "aurelia";
-import { DiscordService } from "../../../services/discord-service";
-import { toast } from "lets-toast";
 import { IRouteViewModel, route } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../services/discord-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "channel-cleaners",
@@ -26,6 +28,7 @@ export class ChannelCleaners implements IRouteViewModel {
         this.cleaners = await this.discordService.getChannelCleaners(
             this.discordService.getLocalDiscordGuildId()
         );
+        this.channels = this.discordService.getLocalDiscordChannels();
     }
 
     async addChannelCleaner() {
@@ -39,6 +42,7 @@ export class ChannelCleaners implements IRouteViewModel {
             this.request = this.freshRequest;
             toast("Created channel cleaner", { severity: "success" });
         } catch (e) {
+            console.log(e);
             toast("Failed to create channel cleaner", { severity: "error" });
         }
     }

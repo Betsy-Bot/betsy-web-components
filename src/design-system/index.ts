@@ -1,8 +1,8 @@
-import {IContainer, IRegistry, Registration} from 'aurelia';
-import {ValidationHtmlConfiguration, ValidationTrigger} from '@aurelia/validation-html';
+import { IContainer, IRegistry, Registration } from 'aurelia';
+import { ValidationHtmlConfiguration, ValidationTrigger } from '@aurelia/validation-html';
 
 import * as attributes from './attributes';
-import {BetsyWebComponentsConfiguration, IBetsyWebComponentsConfiguration} from './configuration';
+import { BetsyWebComponentsConfiguration, IBetsyWebComponentsConfiguration } from './configuration';
 import * as elements from './elements';
 import * as valueConverters from './value-converters';
 
@@ -24,7 +24,7 @@ export class BetsyWebComponentsPlugin implements IRegistry {
         }
 
         if (!instance.#configuration.formatDateTime) {
-            instance.#configuration.formatDateTime = (date?: string | number | Date) => new Intl.DateTimeFormat('default', {dateStyle: 'full'}).format(typeof date === 'string' ? new Date(date) : date);
+            instance.#configuration.formatDateTime = (date?: string | number | Date) => new Intl.DateTimeFormat('default', { dateStyle: 'full' }).format(typeof date === 'string' ? new Date(date) : date);
         }
 
         if (!instance.#configuration.formatDate) {
@@ -37,7 +37,7 @@ export class BetsyWebComponentsPlugin implements IRegistry {
         }
 
         if (!instance.#configuration.formatNumber) {
-            instance.#configuration.formatNumber = (number?: string | number | bigint) => new Intl.NumberFormat('default', {maximumFractionDigits: 2}).format(number == null ? 0 : Number(number));
+            instance.#configuration.formatNumber = (number?: string | number | bigint) => new Intl.NumberFormat('default', { maximumFractionDigits: 2 }).format(number == null ? 0 : Number(number));
         }
 
         if (!instance.#configuration.formatCurrency) {
@@ -49,7 +49,7 @@ export class BetsyWebComponentsPlugin implements IRegistry {
         }
 
         if (!instance.#configuration.formatPercent) {
-            instance.#configuration.formatPercent = (number?: string | number | bigint) => new Intl.NumberFormat('default', {style: 'percent'}).format(number == null ? 0 : Number(number));
+            instance.#configuration.formatPercent = (number?: string | number | bigint) => new Intl.NumberFormat('default', { style: 'percent' }).format(number == null ? 0 : Number(number));
         }
 
         return instance;
@@ -77,5 +77,5 @@ export class BetsyWebComponentsPlugin implements IRegistry {
     }
 }
 
-export {IBetsyWebComponentsConfiguration};
-export {attributes, elements, valueConverters};
+export { IBetsyWebComponentsConfiguration };
+export { attributes, elements, valueConverters };

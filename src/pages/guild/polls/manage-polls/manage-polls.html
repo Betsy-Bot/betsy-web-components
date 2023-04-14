@@ -98,7 +98,7 @@
                             required
                         ></moo-text-field>
 
-                        <div class="p-3" mdc-elevation="9">
+                        <div class="p-3" elevation="9">
                             <moo-text-field
                                 class="w-100 my-2"
                                 label="Option Label"
@@ -126,7 +126,7 @@
                             <h5>Options:</h5>
                             <div class="row">
                                 <div class="my-3 col-6" repeat.for="option of poll.containerMessage.message.components[0].components[0].options">
-                                    <div class="p-2" mdc-elevation="9">
+                                    <div class="p-2" elevation="9">
                                         <div>Label: ${option.label}</div>
                                         <div>Description: ${option.description}</div>
                                         <div>Emoji: <img src="https://cdn.discordapp.com/emojis/${option.emoji.id}.webp?size=24&quality=lossless"> ${option.emoji.name}</div>
