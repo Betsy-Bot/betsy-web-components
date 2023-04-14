@@ -1,19 +1,21 @@
 import { IEventAggregator } from "aurelia";
-import { DiscordService } from "../../../../../services/discord-service";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 import { inject } from "aurelia";
+import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../../services/discord-service";
+
 import { toast } from "lets-toast";
 
 @route({
     path: "messages/:messageId",
     title: "Manage Message",
 })
-@inject(IEventAggregator, DiscordService, Router)
+@inject(IEventAggregator, DiscordService, IRouter)
 export class EditMessage implements IRouteViewModel {
     constructor(
         private eventAggregator: IEventAggregator,
         private discordService: DiscordService,
-        private router: Router
+        private router: IRouter
     ) {}
 
     guildId: string;
@@ -41,7 +43,7 @@ export class EditMessage implements IRouteViewModel {
         );
         if (response) {
             toast("Edited Message", { severity: "success" });
-            this.router.load("/guild/" + this.guildId + "/resources/messages");
+            this.router.load("../resources/messages", { context: this });
         } else {
             toast("Failed to edit message", { severity: "error" });
         }

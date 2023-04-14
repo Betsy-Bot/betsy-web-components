@@ -1,8 +1,10 @@
 import { IEventAggregator } from "aurelia";
-import { DiscordService } from "../../../../../services/discord-service";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
-import { toast } from "lets-toast";
 import { bindable, inject } from "aurelia";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../../services/discord-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "welcome-messages/:messageId",
@@ -30,6 +32,17 @@ export class ManageWelcomeMessage implements IRouteViewModel {
         discordServerId: "",
         type: 3,
     };
+
+    types = [
+        {
+            displayName: "Welcome Channel Message",
+            value: 3
+        },
+        {
+            displayName: "Welcome Direct Message",
+            value: 4
+        }
+    ]
 
     async attached() {
         this.guildId = this.discordService.getLocalDiscordGuildId();

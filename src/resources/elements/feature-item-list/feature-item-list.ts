@@ -46,14 +46,16 @@ export class FeatureItemList {
                 cellTemplate: this.linkTemplate,
                 alignment: "center",
                 width: 200
-            },
-            {
+            }
+        ];
+        if (this.showToggler) {
+            this.columns.push({
                 caption: "Active",
                 cellTemplate: this.toggleTemplate,
                 alignment: "center",
                 width: 200
-            },
-        ];
+            });
+        }
     }
 
     attached() {

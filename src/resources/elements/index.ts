@@ -19,7 +19,6 @@ export * from "./embed-editor";
 export * from "./discord-markup-editor";
 export * from "./discord-form-selector";
 export * from "./date-time-picker";
-export * from "./discord-welcome-message-settings";
 export * from "./discord-action-creator";
 export * from "./discord-command-creator";
 export * from "./discord-command-parameter-creator";
