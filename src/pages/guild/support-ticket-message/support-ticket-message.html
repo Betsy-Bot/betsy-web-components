@@ -1,34 +1,22 @@
-<template>
-    <section id="support-tickets">
-        <div class="row">
-            <div class="col-8">
-                <feature-header
-                    doc-url="https://docs.betsybot.xyz/features/support-tickets"
-                    title="Support Tickets"
-                    subtitle="Create a support ticket tracking system. Create your message with the 'Create Ticket' component. Open tickets to your selected category. When tickets are closed the entire channel transcript is saved."
-                ></feature-header>
+<feature-header
+    doc-url="https://docs.betsybot.xyz/features/support-tickets"
+    title="Support Tickets"
+    subtitle="Create a support ticket tracking system. Create your message with the 'Create Ticket' component. Open tickets to your selected category. When tickets are closed the entire channel transcript is saved."
+></feature-header>
 
-                <a load="../support-tickets/0" if.bind="guildId" class="mt-2">
-                    <moo-button variant="primary">
-                        Create New Support Panel
-                    </moo-button>
-                </a>
+<a load="../support-tickets/0" if.bind="guildId" class="mt-2">
+    <moo-button variant="primary">
+        Create New Support Panel
+    </moo-button>
+</a>
 
-                <div class="existing-commands-area mt-4">
-                    <feature-item-list
-                            data.bind="supportTickets"
-                            name-override="identifier"
-                            route="../support-tickets"
-                            toggle-handler.bind="item => updateActive(item)"
-                    ></feature-item-list>
-                </div>
-            </div>
-            <div class="col-4 text-end">
-                <moo-switch
-                    value.bind="featureActive"
-                ></moo-switch>
-                <label class="me-5">Active?</label>
-            </div>
-        </div>
-    </section>
-</template>
+<div class="row">
+    <div class="col-12 col-xl-10 existing-commands-area mt-4">
+        <feature-item-list
+            data.bind="supportTickets"
+            name-override="identifier"
+            route="../support-tickets"
+            toggle-handler.bind="item => updateActive(item)"
+        ></feature-item-list>
+    </div>
+</div>

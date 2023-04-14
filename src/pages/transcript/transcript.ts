@@ -1,9 +1,12 @@
 import { inject } from 'aurelia';
-import { Params } from '@aurelia/router-lite';
+import { Params, route } from '@aurelia/router-lite';
 
 import { DiscordService } from '../../services/discord-service';
 import { SessionService } from '../../services/session-service';
 
+@route({
+    path: 'transcript/:ticketId'
+})
 @inject(DiscordService, SessionService)
 export class Transcript {
     constructor(private discordService: DiscordService, private sessionService: SessionService) {}
@@ -12,7 +15,7 @@ export class Transcript {
     user;
     ticket;
 
-    activate(params: Params) {
+    loading(params: Params) {
         this.ticketId = params.ticketId;
     }
 

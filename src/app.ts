@@ -1,6 +1,7 @@
 import { IEventAggregator, inject } from 'aurelia';
 import { route, Router } from '@aurelia/router-lite';
 
+import { Transcript } from "./pages/transcript/transcript";
 import { SessionService } from './services/session-service';
 
 import './app.scss';
@@ -23,6 +24,7 @@ const routes = [
         component: () => import('./pages/four-oh-four/four-oh-four'),
         title: '404',
     },
+    Transcript
 ];
 
 @route({ title: 'Besty Bot', routes: routes })
