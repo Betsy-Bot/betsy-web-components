@@ -39,7 +39,9 @@ export class FeatureItemList {
     binding() {
         this.columns = [
             {
-                dataField: this.nameOverride ?? "identifier",
+                caption: "Identifier",
+                cellTemplate: this.nameTemplate,
+                width: 500,
             },
             {
                 caption: "",
@@ -50,7 +52,7 @@ export class FeatureItemList {
         ];
         if (this.showToggler) {
             this.columns.push({
-                caption: "Active",
+                caption: "Active?",
                 cellTemplate: this.toggleTemplate,
                 alignment: "center",
                 width: 200
@@ -95,7 +97,7 @@ export class FeatureItemList {
 
     nameTemplate = (container, options) => {
         const el = document.createElement("span");
-        el.innerHTML = this.getName(options.data);
+        el.innerHTML = (this.namePrefix ?? '') + this.getName(options.data) + (this.nameSuffix ?? '');
         container.append(el);
     };
 
