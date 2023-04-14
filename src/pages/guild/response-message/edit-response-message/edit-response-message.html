@@ -17,7 +17,7 @@
                     </h3>
                 </div>
                 <div class="col-3 text-end">
-                    <moo-button variant="secondary" click.trigger="confirmDeleteDialog.open()">
+                    <moo-button variant="secondary" click.bind="() => confirmDeleteDialog.open()">
                         Delete
                     </moo-button>
                 </div>
@@ -47,7 +47,7 @@
                 <moo-button
                     variant="primary"
                     if.bind="command.discordCommandActions.length < 10"
-                    click.trigger="createNewCommandAction()">
+                    click.bind="() => createNewCommandAction()">
                     Add Action
                 </moo-button>
             </div>
@@ -60,7 +60,7 @@
                 </a>
                 <moo-button variant="primary"
                         class="ms-4"
-                        click.trigger="updateCommand()">
+                        click.bind="() => updateCommand()">
                     Save
                 </moo-button>
             </div>
