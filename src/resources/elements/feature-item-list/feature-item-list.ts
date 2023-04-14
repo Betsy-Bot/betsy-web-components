@@ -63,6 +63,11 @@ export class FeatureItemList {
     handleToggleClick(item, switchComponent: HTMLElement) {
         item.active = !item.active;
         switchComponent.innerText = item.active ? "Deactivate" : "Activate";
+        if (item.active) {
+            switchComponent.classList.add('moo-button-secondary')
+        } else {
+            switchComponent.classList.remove('moo-button-secondary')
+        }
         this.toggleHandler(item);
     }
 
@@ -107,8 +112,13 @@ export class FeatureItemList {
     };
 
     toggleTemplate = (container, options) => {
-        const switchComponent = this.switchEl.querySelector('button').cloneNode(true) ;
+        const switchComponent = this.switchEl.querySelector('button').cloneNode(true) as HTMLElement;
         switchComponent.innerText = options.data.active ? "Deactivate" : "Activate";
+        if (options.data.active) {
+            switchComponent.classList.add('moo-button-secondary')
+        } else {
+            switchComponent.classList.remove('moo-button-secondary')
+        }
         switchComponent.onclick = () => this.handleToggleClick(options.data, switchComponent);
         container.append(switchComponent);
     };
