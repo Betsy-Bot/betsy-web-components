@@ -1,14 +1,15 @@
 import { bindable, inject } from "aurelia";
-import { IRouter, IRouteContext } from "@aurelia/router-lite";
+import { IRouteContext,IRouter } from "@aurelia/router-lite";
 
+import { DiscordService } from "../../../services/discord-service";
 import { ChannelNameValueConverter } from "../../value-converters/channel-name";
 
 import "./feature-item-list.scss";
-import { DiscordService } from "../../../services/discord-service";
 
 export enum ValueConverter {
     ChannelName = "ChannelName",
 }
+
 @inject(ChannelNameValueConverter, IRouter, DiscordService, IRouteContext)
 export class FeatureItemList {
     @bindable data: any[];
@@ -32,7 +33,8 @@ export class FeatureItemList {
         private router: IRouter,
         private discordService: DiscordService,
         private context: IRouteContext
-    ) {}
+    ) {
+    }
 
     binding() {
         this.columns = [
@@ -58,8 +60,9 @@ export class FeatureItemList {
         this.guildId = this.discordService.getLocalDiscordGuildId();
     }
 
-    handleToggleClick(item) {
+    handleToggleClick(item, switchComponent: HTMLElement) {
         item.active = !item.active;
+        switchComponent.innerText = item.active ? "Deactivate" : "Activate";
         this.toggleHandler(item);
     }
 
@@ -76,10 +79,10 @@ export class FeatureItemList {
 
     convertValue(value) {
         switch (this.valueConverter) {
-            case ValueConverter.ChannelName:
-                return this.channelValueConverter.toView(value);
-            default:
-                return value;
+        case ValueConverter.ChannelName:
+            return this.channelValueConverter.toView(value);
+        default:
+            return value;
         }
     }
 
@@ -104,11 +107,9 @@ export class FeatureItemList {
     };
 
     toggleTemplate = (container, options) => {
-        const clone = this.switchEl.cloneNode(true) as HTMLSpanElement;
-        let switchComponent = this.switchEl.querySelector('moo-switch');
-        switchComponent.setAttribute('value', options.data.active);
-        clone.classList.remove("d-none");
-        clone.onclick = () => this.handleToggleClick(options.data);
-        container.append(clone);
+        const switchComponent = this.switchEl.querySelector('button').cloneNode(true) ;
+        switchComponent.innerText = options.data.active ? "Deactivate" : "Activate";
+        switchComponent.onclick = () => this.handleToggleClick(options.data, switchComponent);
+        container.append(switchComponent);
     };
 }

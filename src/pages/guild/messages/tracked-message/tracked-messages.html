@@ -17,6 +17,7 @@
         <div class="existing-commands-area">
             <feature-item-list
                 data.bind="messages"
+                name-override="name"
                 show-toggler.bind="false"
                 toggle-handler.bind="(item) => updateActive(item)"
                 item-click-handler.bind="(item) => goTo(item)"

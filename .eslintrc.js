@@ -1,21 +1,16 @@
-/**
- * @type {import('eslint').Linter.Config}
- */
 module.exports = {
     root: true,
     parser: "@typescript-eslint/parser",
     plugins: [
         "@typescript-eslint",
         "unused-imports",
-        "simple-import-sort",
-        "prettier"
+        "simple-import-sort"
     ],
     extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        "plugin:@typescript-eslint/strict",
-        "prettier"
+        "plugin:@typescript-eslint/strict"
     ],
     parserOptions: {
         ecmaVersion: 2020,
@@ -30,13 +25,13 @@ module.exports = {
         jest: true
     },
     rules: {
+        "indent": ["error", 4],
         "prettier/prettier": [
             "error",
-            // these cannot be overridden by prettier, so must pull them in here explicitly from prettier
             {
                 trailingComma: "all",
                 singleQuote: true,
-                printWidth: 200,
+                printWidth: 200
             },
             {
                 usePrettierrc: false
@@ -87,15 +82,12 @@ module.exports = {
         ],
         "object-curly-spacing": ["error", "always"]
     },
-    /**
-     * require services to be explicit about public/private access
-     */
     overrides: [
         {
             files: ["./src/models/generated/**/*.ts"],
             rules: {
                 "@typescript-eslint/ban-tslint-comment": "off",
-                "indent": ["warning", 4]
+                "indent": ["warn", 4]
             }
         },
         {
