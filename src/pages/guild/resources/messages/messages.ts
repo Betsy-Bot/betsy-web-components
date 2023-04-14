@@ -1,7 +1,8 @@
 import { IEventAggregator } from "aurelia";
-import { DiscordService } from "../../../../services/discord-service";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 import { inject } from "aurelia";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../services/discord-service";
 
 @route({
     path: "messages",
@@ -24,12 +25,6 @@ export class Messages implements IRouteViewModel {
         this.guildId = this.discordService.getLocalDiscordGuildId();
         this.messages = await this.discordService.getResourceMessagesForGuild(
             this.guildId
-        );
-    }
-
-    goToEdit(message) {
-        this.router.load(
-            `/guild/${this.guildId}/resources/messages/edit/${message.id}`
         );
     }
 }

@@ -1,6 +1,6 @@
 import { IEventAggregator } from "aurelia";
 import { inject } from "aurelia";
-import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
+import { IRouter, IRouteViewModel, Params, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../../services/discord-service";
 
@@ -26,8 +26,8 @@ export class EditMessage implements IRouteViewModel {
     message = {};
     guild;
 
-    loading(params) {
-        this.messageId = this.params.messageId;
+    loading(params: Params) {
+        this.messageId = params.messageId;
     }
 
     async attached() {
@@ -43,7 +43,7 @@ export class EditMessage implements IRouteViewModel {
         );
         if (response) {
             toast("Edited Message", { severity: "success" });
-            this.router.load("../resources/messages", { context: this });
+            this.router.load("../messages", { context: this });
         } else {
             toast("Failed to edit message", { severity: "error" });
         }
