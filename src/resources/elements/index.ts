@@ -27,3 +27,4 @@ export * from './discord-component-creator';
 export * from './discord-form-creator';
 export * from './discord-form-preview';
 export * from './discord-menu-item';
+export * from './discord-emoji-selector';
