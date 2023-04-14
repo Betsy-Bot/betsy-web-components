@@ -6,13 +6,13 @@
     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
         <template if.bind="user">
             <a href="https://discord.gg/YzPW2YxGpJ" target="_blank" class="d-none d-md-block me-2 me-lg-3" external>
-                <md-filled-button label="SUPPORT"></md-filled-button>
+                <moo-button label="SUPPORT"></moo-button>
             </a>
             <a href="https://top.gg/bot/946433944390340688" target="_blank" class="d-none d-md-block me-2 me-lg-3" external>
-                <md-filled-button label="REVIEW"></md-filled-button>
+                <moo-button label="REVIEW"></moo-button>
             </a>
             <a href="https://top.gg/bot/946433944390340688/vote" target="_blank" class="d-none d-md-block me-2 me-lg-5" external>
-                <md-filled-button label="VOTE"></md-filled-button>
+                <moo-button label="VOTE"></moo-button>
             </a>
         </template>
         <a if.bind="!user" external

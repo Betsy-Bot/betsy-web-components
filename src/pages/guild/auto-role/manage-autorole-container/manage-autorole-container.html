@@ -47,39 +47,41 @@
                         </moo-tab-bar>
                     </div>
 
-                    <section if.bind="tab === 'container'">
-                        <moo-text-field
-                            label="Identifier"
-                            class="w-100 my-2"
-                            placeholder="Container Identifier"
-                            value.bind="container.name"
-                            required
-                        ></moo-text-field>
-                        <moo-text-field
-                            label="Description"
-                            class="w-100 mb-2"
-                            placeholder="Container Description"
-                            value.bind="container.description"
-                        ></moo-text-field>
-                        <discord-channel-selector
-                            required.bind="true"
-                            label="Select Channel for Container"
-                            type.bind="0"
-                            channel-id.two-way="container.discordMessage.discordChannelId"
-                        ></discord-channel-selector>
+                    <template if.bind="tab === 'container'">
+                        <form submit.trigger="tab = 'roles'">
+                            <moo-text-field
+                                label="Identifier"
+                                class="w-100 my-2"
+                                placeholder="Container Identifier"
+                                value.bind="container.name"
+                                required
+                            ></moo-text-field>
+                            <moo-text-field
+                                label="Description"
+                                class="w-100 mb-2"
+                                placeholder="Container Description"
+                                value.bind="container.description"
+                            ></moo-text-field>
+                            <discord-channel-selector
+                                required.bind="true"
+                                label="Select Channel for Container"
+                                type.bind="0"
+                                channel-id.two-way="container.discordMessage.discordChannelId"
+                            ></discord-channel-selector>
 
-                        <discord-message-creator
-                            message.two-way="container.discordMessage.message"
-                        ></discord-message-creator>
+                            <discord-message-creator
+                                message.two-way="container.discordMessage.message"
+                            ></discord-message-creator>
 
-                        <div class="mt-3 text-end">
-                            <moo-button variant="primary" type="button" click.trigger="tab = 'roles'">
-                                Next
-                            </moo-button>
-                        </div>
-                    </section>
+                            <div class="mt-3 text-end">
+                                <moo-button variant="primary" type="submit">
+                                    Next
+                                </moo-button>
+                            </div>
+                        </form>
+                    </template>
 
-                    <section if.bind="tab === 'roles'">
+                    <template if.bind="tab === 'roles'">
                         <discord-role-selector
                             remove-everyone.bind="true"
                             label="Select Roles"
@@ -97,7 +99,7 @@
                                 ${isNew ? 'Create' : 'Save'}
                             </moo-button>
                         </div>
-                    </section>
+                    </template>
                 </form>
             </div>
         </div>
