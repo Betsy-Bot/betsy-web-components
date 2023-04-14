@@ -1,6 +1,6 @@
 import { IEventAggregator } from "aurelia";
 import { inject } from "aurelia";
-import { IRouteViewModel, Params, route, Router } from "@aurelia/router-lite";
+import { IRouteContext,IRouter, IRouteViewModel, Params, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../../services/discord-service";
 
@@ -8,12 +8,13 @@ import { DiscordService } from "../../../../../services/discord-service";
     path: "support-tickets/:supportTicketSettingsId/submissions",
     title: "Support Tickets",
 })
-@inject(IEventAggregator, DiscordService, Router)
+@inject(IEventAggregator, DiscordService, IRouter, IRouteContext)
 export class SupportTickets implements IRouteViewModel {
     constructor(
         private eventAggregator: IEventAggregator,
         private discordService: DiscordService,
-        private router: Router
+        private router: IRouter,
+        private context: IRouteContext
     ) {}
 
     guildId: string;
@@ -63,7 +64,8 @@ export class SupportTickets implements IRouteViewModel {
 
     async routeToTicket(ticketId: string) {
         await this.router.load(
-            `/guild/${this.guildId}/support-tickets/${this.settingsId}/submissions/${ticketId}`
+            `../support-tickets/${this.settingsId}/submissions/${ticketId}`,
+            { context: this.context }
         );
     }
 
