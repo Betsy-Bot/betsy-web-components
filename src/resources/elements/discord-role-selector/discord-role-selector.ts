@@ -20,7 +20,6 @@ export class DiscordRoleSelector implements ICustomElementViewModel {
     @bindable({ mode: BindingMode.twoWay }) selectedRole: string;
     @bindable label;
     @bindable required = false;
-    @bindable removeEveryone = false;
     @bindable roleId;
     @bindable disabled;
 
@@ -36,9 +35,6 @@ export class DiscordRoleSelector implements ICustomElementViewModel {
         }
         if (this.roleId) {
             this.selectedRole = this.roles.find((x) => x.id == this.roleId);
-        }
-        if (this.removeEveryone) {
-            this.roles.splice(0, 1);
         }
     }
 

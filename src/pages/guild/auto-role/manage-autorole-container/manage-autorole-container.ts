@@ -1,8 +1,11 @@
-import { DiscordService } from "../../../../services/discord-service";
+import { inject } from "aurelia";
 import { route, Router } from "@aurelia/router-lite";
-import { bindable, inject } from "aurelia";
-import { toast } from "lets-toast";
 import { IRouteViewModel } from "@aurelia/router-lite";
+import { watch } from "@aurelia/runtime-html";
+
+import { DiscordService } from "../../../../services/discord-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "role-selector/:containerId",
@@ -32,13 +35,15 @@ export class ManageAutoroleContainer implements IRouteViewModel {
     isNew = false;
     tab = "container";
 
-    @bindable selectedRole;
+    selectedRole;
+    roles;
 
     async loading(params) {
         this.containerId = params.containerId as string;
     }
 
     async attached() {
+        this.roles = await this.discordService.getDiscordRoles();
         if (this.containerId && this.containerId != "0") {
             this.container = await this.discordService.getAutoroleContainer(
                 this.containerId
@@ -62,22 +67,26 @@ export class ManageAutoroleContainer implements IRouteViewModel {
         }
     }
 
+    @watch('selectedRole')
     selectedRoleChanged() {
+        console.log(this.selectedRole);
+        const foundRole = this.roles.find(x => x.id == this.selectedRole);
+        console.log(foundRole);
         if (this.container.discordRoles.length >= 25) {
             return toast("A max of 25 roles are allowed for select menus", {
                 severity: "error",
             });
         }
         if (
-            !this.container?.discordRoles?.find(
-                (x) => x.discordRoleId === this.selectedRole.id
+            !this.container.discordRoles.find(
+                (x) => x.discordRoleId === this.selectedRole
             )
         ) {
             this.container.discordRoles.push({
-                discordRoleId: this.selectedRole.id,
-                name: this.selectedRole.name,
-                label: this.selectedRole.name,
-                value: this.selectedRole.name,
+                discordRoleId: foundRole.id,
+                name: foundRole.name,
+                label: foundRole.name,
+                value: foundRole.name,
                 description: "",
                 discordServerId: this.discordService.getLocalServerId(),
             });

@@ -49,7 +49,6 @@
         <div class="my-3">
             <discord-role-selector
                 disabled.bind="!isAdmin"
-                remove-everyone.bind="true"
                 label="Select Verified Role"
                 selected-role.two-way="selectedRole"
                 role-id.bind="guild.globalSettings.verificationSettings.verifiedRoleId"
