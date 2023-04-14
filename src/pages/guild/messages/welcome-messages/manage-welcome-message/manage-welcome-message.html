@@ -8,8 +8,7 @@
                     subtitle="Create either custom channel welcome messages or direct DM welcome messages."
                 ></feature-header>
 
-                <form submit.trigger="save()">
-
+                <form submit.trigger="save()" if.bind="message">
                     <div class="row my-2 g-4">
                         <div class="col-6 h-100">
                             <label class="me-3">Active?</label>
@@ -18,10 +17,18 @@
                             ></moo-switch>
                         </div>
                         <div class="col-6">
-                            <mdc-form-field repeat.for="type of types">
-                                <mdc-radio model.bind="type.value" checked.bind="message.type"></mdc-radio>
-                                <label>${type.displayName}</label>
-                            </mdc-form-field>
+                            <moo-select class="standard-betsy-select w-100"
+                                        value.bind="message.type"
+                                        label="Welcome Message Type"
+                                        required.bind="true">
+                                <moo-list>
+                                    <moo-list-item
+                                        repeat.for="type of types"
+                                        label.bind="type.displayName"
+                                        value.bind="type.value"
+                                    ></moo-list-item>
+                                </moo-list>
+                            </moo-select>
                         </div>
                         <div class="col-12 col-lg-6 h-100">
                             <moo-text-field

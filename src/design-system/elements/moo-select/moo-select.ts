@@ -1,6 +1,8 @@
-import {bindable, BindingMode, customElement, ICustomElementViewModel} from "aurelia";
+import { bindable, BindingMode, customElement, ICustomElementViewModel } from "aurelia";
+
 import template from "./moo-select.html";
-import {MDCSelect} from '@material/select';
+
+import { MDCSelect } from '@material/select';
 
 @customElement({
     name: 'moo-select',
@@ -10,8 +12,9 @@ import {MDCSelect} from '@material/select';
 export class MooSelect implements ICustomElementViewModel {
     @bindable label;
     @bindable options;
-    @bindable({mode: BindingMode.twoWay}) value;
+    @bindable({ mode: BindingMode.twoWay }) value;
     @bindable class;
+    @bindable required;
     selectEl: HTMLElement;
 
     attached() {
@@ -21,5 +24,11 @@ export class MooSelect implements ICustomElementViewModel {
         select.listen('MDCSelect:change', () => {
             this.value = select.value;
         });
+    }
+
+    get requiredClass() {
+        if (this.required) {
+            return "mdc-select--required"
+        }
     }
 }

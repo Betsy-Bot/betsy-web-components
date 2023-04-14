@@ -59,7 +59,10 @@ export class ManageWelcomeMessage implements IRouteViewModel {
     }
 
     async save() {
-        if (!this.message.discordChannelId && this.message.type == 3) return;
+        if (!this.message.discordChannelId && this.message.type == 3) {
+            toast("Missing Channel ID or Message Type");
+            return;
+        }
         try {
             if (this.isNew) {
                 this.message = await this.discordService.createDiscordMessage(
