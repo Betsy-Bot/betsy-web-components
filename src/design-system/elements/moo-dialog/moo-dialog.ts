@@ -21,7 +21,6 @@ export class MooDialog implements ICustomElementViewModel {
     attached() {
         this.dialog = new MDCDialog(this.dialogEl);
         this.dialog.listen("MDCDialog:closed", (e) => {
-            console.log(this.handler);
             if (this.handler) {
                 this.handler(e);
             }

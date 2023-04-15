@@ -103,7 +103,6 @@ export class FeatureItemList {
     };
 
     async routeToItem(id: string) {
-        console.log(`load route`, `${this.route}/${id}`);
         await this.router.load(`${this.route}/${id}`, {
             context: this.context,
         });

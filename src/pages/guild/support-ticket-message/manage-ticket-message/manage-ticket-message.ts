@@ -70,12 +70,10 @@ export class ManageTicketMessage implements IRouteViewModel {
     };
 
     loading(params: Params) {
-        console.log("loading");
         this.supportTicketSettingsId = params.supportTicketSettingsId;
     }
 
     async binding() {
-        console.log("binding");
         this.guildId = this.discordService.getLocalDiscordGuildId();
         if (
             !this.supportTicketSettingsId ||
@@ -96,10 +94,6 @@ export class ManageTicketMessage implements IRouteViewModel {
             this.ticket.discordFormId = null;
             this.ticket.discordForm = null;
         });
-    }
-
-    async attached() {
-        console.log("attached");
     }
 
     authorizedRoleChanged(newValue, oldvalue) {
@@ -137,6 +131,7 @@ export class ManageTicketMessage implements IRouteViewModel {
                     this.ticket.id
                 );
                 toast("Deleted support message!", { severity: "success" });
+                await this.router.load("../support-tickets", { context: this });
             } catch (e) {
                 toast("Failed to delete support ticket creation message", {
                     severity: "error",
