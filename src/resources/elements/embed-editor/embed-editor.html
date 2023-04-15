@@ -74,12 +74,14 @@
                         class="w-100 mt-2"
                         label="Field Name"
                         value.bind="field.name"
+                        maxlength.bind="256"
                         required.bind="true"
                     ></moo-text-field>
                     <div class="mt-2">
                         <discord-markup-editor
                             label="Field Value"
                             value.two-way="field.value"
+                            maxlength.bind="1024"
                         ></discord-markup-editor>
                     </div>
                     <button mdc-button class="button-secondary" click.trigger="deleteField($index)">
