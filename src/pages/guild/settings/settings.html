@@ -70,15 +70,21 @@
                     </div>
                     <moo-text-field
                         type="number"
-                        class="w-100 mb-3"
+                        class="w-100 my-2"
                         placeholder="Custom Bot Id"
                         value.bind="guild.customBotApplicationId"
                     ></moo-text-field>
                     <moo-text-field
                         type="text"
-                        class="w-100"
+                        class="w-100 my-2"
                         placeholder="Custom Bot Token"
                         value.bind="guild.customBotJwtKey"
+                    ></moo-text-field>
+                    <moo-text-field
+                        type="text"
+                        class="w-100 my-2"
+                        placeholder="Custom Bot Status"
+                        value.bind="guild.customBotStatus"
                     ></moo-text-field>
                     <div class="text-end mt-3">
                         <moo-button variant="primary" type="submit" disabled.bind="!isAdmin">
