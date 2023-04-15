@@ -44,6 +44,8 @@ import { EditMessage } from "./resources/messages/edit-message/edit-message";
 import { CreateForm } from "./resources/forms/create-form/create-form";
 import { EditForm } from "./resources/forms/edit-form/edit-form";
 import { ManageTicketMessage } from "./support-ticket-message/manage-ticket-message/manage-ticket-message";
+import { ChannelBackups } from "./resources/channel-backups/channel-backups";
+import { ChannelBackup } from "./resources/channel-backups/channel-backup/channel-backup";
 
 const routes = [
     Dashboard,
@@ -87,6 +89,8 @@ const routes = [
     KeyValueStorage,
     AuditLogs,
     Twitch,
+    ChannelBackups,
+    ChannelBackup,
 ];
 
 @route({
@@ -98,7 +102,6 @@ export class Guild implements IRouteViewModel {
     constructor(private discordService: DiscordService) {}
 
     guildId: string;
-    @bindable testValue = "tickets";
 
     canLoad(params: Params) {
         this.guildId = params.guildId;
