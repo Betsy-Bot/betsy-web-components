@@ -4,3 +4,7 @@
 @use "@material/textfield";
 
 @include textfield.core-styles;
+
+.mdc-text-field-character-counter {
+    color: white !important;
+}

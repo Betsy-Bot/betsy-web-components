@@ -15,6 +15,7 @@ import template from "./discord-markup-editor.html";
 export class DiscordMarkupEditor implements ICustomElementViewModel {
     @bindable({ mode: BindingMode.twoWay }) value: string;
     @bindable label: string;
+    @bindable maxlength: number;
     editor;
     element: HTMLElement;
     options = defineOptions({

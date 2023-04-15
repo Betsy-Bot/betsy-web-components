@@ -2,12 +2,13 @@ import {
     bindable,
     BindingMode,
     customElement,
-    ICustomElementViewModel, observable,
+    ICustomElementViewModel,
+    observable,
 } from "aurelia";
 import template from "./moo-text-field.html";
 import { MDCTextField } from "@material/textfield";
 import "./moo-text-field.scss";
-import {watch} from "@aurelia/runtime-html";
+import { watch } from "@aurelia/runtime-html";
 
 @customElement({
     name: "moo-text-field",
@@ -23,6 +24,10 @@ export class MooTextField implements ICustomElementViewModel {
     @bindable cols;
     @observable input: HTMLElement;
     @bindable readonly;
+    @bindable min: number;
+    @bindable max: number;
+    @bindable minlength: number;
+    @bindable maxlength: number;
     textField;
 
     attached() {

@@ -1,5 +1,6 @@
-<template>
-    <section id="discord-markup-editor">
-        <div ref="element"></div>
-    </section>
-</template>
+<section id="discord-markup-editor">
+    <div ref="element"></div>
+    <div class="mdc-text-field-helper-line" if.bind="maxlength">
+        <div class="mdc-text-field-character-counter">${value ? value.length : 0} / ${maxlength}</div>
+    </div>
+</section>
