@@ -1,5 +1,5 @@
 import { bindable, inject } from "aurelia";
-import { IRouteContext,IRouter } from "@aurelia/router-lite";
+import { IRouteContext, IRouter } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../services/discord-service";
 import { ChannelNameValueConverter } from "../../value-converters/channel-name";
@@ -33,29 +33,27 @@ export class FeatureItemList {
         private router: IRouter,
         private discordService: DiscordService,
         private context: IRouteContext
-    ) {
-    }
+    ) {}
 
     binding() {
         this.columns = [
             {
                 caption: "Identifier",
                 cellTemplate: this.nameTemplate,
-                width: 500,
             },
             {
                 caption: "",
                 cellTemplate: this.linkTemplate,
                 alignment: "center",
-                width: 200
-            }
+                width: 200,
+            },
         ];
         if (this.showToggler) {
             this.columns.push({
                 caption: "Active?",
                 cellTemplate: this.toggleTemplate,
                 alignment: "center",
-                width: 200
+                width: 200,
             });
         }
     }
@@ -68,9 +66,9 @@ export class FeatureItemList {
         item.active = !item.active;
         switchComponent.innerText = item.active ? "Deactivate" : "Activate";
         if (item.active) {
-            switchComponent.classList.add('moo-button-secondary')
+            switchComponent.classList.add("moo-button-secondary");
         } else {
-            switchComponent.classList.remove('moo-button-secondary')
+            switchComponent.classList.remove("moo-button-secondary");
         }
         this.toggleHandler(item);
     }
@@ -88,16 +86,19 @@ export class FeatureItemList {
 
     convertValue(value) {
         switch (this.valueConverter) {
-        case ValueConverter.ChannelName:
-            return this.channelValueConverter.toView(value);
-        default:
-            return value;
+            case ValueConverter.ChannelName:
+                return this.channelValueConverter.toView(value);
+            default:
+                return value;
         }
     }
 
     nameTemplate = (container, options) => {
         const el = document.createElement("span");
-        el.innerHTML = (this.namePrefix ?? '') + this.getName(options.data) + (this.nameSuffix ?? '');
+        el.innerHTML =
+            (this.namePrefix ?? "") +
+            this.getName(options.data) +
+            (this.nameSuffix ?? "");
         container.append(el);
     };
 
@@ -116,14 +117,19 @@ export class FeatureItemList {
     };
 
     toggleTemplate = (container, options) => {
-        const switchComponent = this.switchEl.querySelector('button').cloneNode(true) as HTMLElement;
-        switchComponent.innerText = options.data.active ? "Deactivate" : "Activate";
+        const switchComponent = this.switchEl
+            .querySelector("button")
+            .cloneNode(true) as HTMLElement;
+        switchComponent.innerText = options.data.active
+            ? "Deactivate"
+            : "Activate";
         if (options.data.active) {
-            switchComponent.classList.add('moo-button-secondary')
+            switchComponent.classList.add("moo-button-secondary");
         } else {
-            switchComponent.classList.remove('moo-button-secondary')
+            switchComponent.classList.remove("moo-button-secondary");
         }
-        switchComponent.onclick = () => this.handleToggleClick(options.data, switchComponent);
+        switchComponent.onclick = () =>
+            this.handleToggleClick(options.data, switchComponent);
         container.append(switchComponent);
     };
 }

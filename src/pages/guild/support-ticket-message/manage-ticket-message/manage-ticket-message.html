@@ -14,10 +14,10 @@
             <div class="col-12 col-lg-8">
                 <feature-header
                     doc-url="https://docs.betsybot.xyz/features/support-tickets"
-                    title="Edit Support Ticket Message"
+                    title="${isNew ? 'Create' : 'Edit'} Support Ticket Message"
                     subtitle="Edit the message that is already on your server."
-                    delete-function.bind="() => confirmDeleteDialog.open()"
-                    copy-function.bind="() => handleClone()"
+                    delete-function.bind="isNew ? null : () => confirmDeleteDialog.open()"
+                    copy-function.bind="isNew ? null : () => handleClone()"
                 ></feature-header>
 
                 <div class="row mt-3 mb-4">
@@ -49,7 +49,7 @@
                     ></moo-tab>
                 </moo-tab-bar>
 
-                <form submit.trigger="editSupportTicketSettings()" if.bind="ticket">
+                <form submit.trigger="submit()" if.bind="ticket">
                     <div if.bind="tab === 'settings'">
                         <support-ticket-settings
                             guild-id.bind="guildId"

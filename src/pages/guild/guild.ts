@@ -9,10 +9,8 @@ import { ManageGiveaways } from "./giveaways/manage-giveaways/manage-giveaways";
 import { SendMessage } from "./messages/send-message/send-message";
 import { ManagePolls } from "./polls/manage-polls/manage-polls";
 import { Polls } from "./polls/polls";
-import { CreateTicketMessage } from "./support-ticket-message/create-ticket-message/create-ticket-message";
-import { EditTicketMessage } from "./support-ticket-message/edit-ticket-message/edit-ticket-message";
-import { SupportTicket } from "./support-ticket-message/edit-ticket-message/support-tickets/support-ticket/support-ticket";
-import { SupportTickets } from "./support-ticket-message/edit-ticket-message/support-tickets/support-tickets";
+import { SupportTicket } from "./support-ticket-message/manage-ticket-message/support-tickets/support-ticket/support-ticket";
+import { SupportTickets } from "./support-ticket-message/manage-ticket-message/support-tickets/support-tickets";
 import { SupportTicketMessage } from "./support-ticket-message/support-ticket-message";
 import { ManageThreadChannel } from "./thread-channels/manage-thread-channel/manage-thread-channel";
 import { ThreadChannels } from "./thread-channels/thread-channels";
@@ -45,12 +43,12 @@ import { CreateMessage } from "./resources/messages/create-message/create-messag
 import { EditMessage } from "./resources/messages/edit-message/edit-message";
 import { CreateForm } from "./resources/forms/create-form/create-form";
 import { EditForm } from "./resources/forms/edit-form/edit-form";
+import { ManageTicketMessage } from "./support-ticket-message/manage-ticket-message/manage-ticket-message";
 
 const routes = [
     Dashboard,
     SupportTicketMessage,
-    CreateTicketMessage,
-    EditTicketMessage,
+    ManageTicketMessage,
     SupportTickets,
     SupportTicket,
     Giveaways,
