@@ -1,24 +1,15 @@
-<template>
-    <feature-header
-        title="Message Templates"
-        subtitle="Create prebuilt messages that can be used in a variety of features throughout the bot's functionality"
-    ></feature-header>
+<feature-header
+    title="Message Templates"
+    subtitle="Create prebuilt messages that can be used in a variety of features throughout the bot's functionality"
+    create-route="../messages/create"
+></feature-header>
 
-    <a href="../messages/create" if.bind="guildId" class="mt-2">
-        <moo-button variant="primary">
-            Create New Message
-        </moo-button>
-    </a>
-
-
-    <div class="existing-commands-area mt-4">
-        <feature-item-list
-            show-toggler.bind="false"
-            data.bind="messages"
-            name-override="name"
-            item-click-handler.bind="() => goToEdit(item)"
-            route="../messages"
-        ></feature-item-list>
-    </div>
-</template>
-e
+<div class="existing-commands-area mt-4">
+    <feature-item-list
+        show-toggler.bind="false"
+        data.bind="messages"
+        name-override="name"
+        item-click-handler.bind="() => goToEdit(item)"
+        route="../messages"
+    ></feature-item-list>
+</div>

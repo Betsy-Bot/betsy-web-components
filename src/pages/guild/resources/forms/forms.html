@@ -1,24 +1,13 @@
-<template>
-    <section id="guild-forms">
-        <feature-header
-            title="Create and Manage Your Discord Server Forms"
-            subtitle="Forms can be used in a variety of places. This is the place to manage your forms as well as view any submissions that have come in."
-        ></feature-header>
+<feature-header
+    title="Create and Manage Your Discord Server Forms"
+    subtitle="Forms can be used in a variety of places. This is the place to manage your forms as well as view any submissions that have come in."
+    create-route="../forms/create"
+></feature-header>
 
-        <div class="mt-4">
-            <a load="../forms/create" if.bind="guildId">
-                <moo-button variant="primary">
-                    Create New Form
-                </moo-button>
-            </a>
-        </div>
-
-        <div class="existing-commands-area mt-4">
-            <feature-item-list
-                show-toggler.bind="false"
-                data.bind="forms"
-                item-click-handler.bind="() => goToForm(item)"
-            ></feature-item-list>
-        </div>
-    </section>
-</template>
+<div class="existing-commands-area mt-4">
+    <feature-item-list
+        show-toggler.bind="false"
+        data.bind="forms"
+        item-click-handler.bind="() => goToForm(item)"
+    ></feature-item-list>
+</div>

@@ -1,18 +1,14 @@
-<template>
-    <section id="key-value-storage">
-        <feature-header
-            title="Create and Manage Key Value Storage"
-            subtitle="Key value storage can be used in message templating to retrieve key value pairs and present them in a message."
-            create-route="../key-value-storage/0"
-        ></feature-header>
+<feature-header
+    title="Create and Manage Key Value Storage"
+    subtitle="Key value storage can be used in message templating to retrieve key value pairs and present them in a message."
+    create-route="../key-value-storage/0"
+></feature-header>
 
-        <div class="list-area mt-4" if.bind="items">
-            <feature-item-list
-                name-override="categoryName"
-                show-toggler.bind="false"
-                data.bind="items"
-                route="../key-value-storage"
-            ></feature-item-list>
-        </div>
-    </section>
-</template>
+<div class="list-area mt-4" if.bind="items">
+    <feature-item-list
+        name-override="categoryName"
+        show-toggler.bind="false"
+        data.bind="items"
+        route="../key-value-storage"
+    ></feature-item-list>
+</div>

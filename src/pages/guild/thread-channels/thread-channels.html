@@ -1,24 +1,9 @@
-<div class="row">
-    <div class="col-8">
-        <feature-header
-            doc-url="https://docs.betsybot.xyz/features/thread-channels"
-            title="Thread Channels"
-            subtitle="Manage and track your thread channels."
-        ></feature-header>
-
-        <div class="my-3">
-            <a load="../thread-channels/0" if.bind="guildId" class="mt-2">
-                <moo-button varaint="primary" label="Create New Thread channel"></moo-button>
-            </a>
-        </div>
-    </div>
-    <div class="col-4">
-        <moo-switch
-            value.bind="featureActive"
-        ></moo-switch>
-        <label class="me-5">Active?</label>
-    </div>
-</div>
+<feature-header
+    doc-url="https://docs.betsybot.xyz/features/thread-channels"
+    title="Thread Channels"
+    subtitle="Manage and track your thread channels."
+    create-route="../thread-channels/0"
+></feature-header>
 
 <template if.bind="threadChannels">
     <feature-item-list

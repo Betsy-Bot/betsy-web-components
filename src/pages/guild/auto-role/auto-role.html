@@ -1,36 +1,26 @@
-<template>
-    <section id="support-tickets">
-        <feature-header
-            doc-url="https://docs.betsybot.xyz/features/auto-role"
-            title="Role Selector Containers"
-            subtitle="Create a message with a select menu allowing users to select roles they want to be added to for your server."
-        ></feature-header>
-        <div class="my-1">
-            <div class="mt-1 mb-3 text-danger fs-7 d-inline-flex align-content-center">
+<feature-header
+    doc-url="https://docs.betsybot.xyz/features/auto-role"
+    title="Role Selector Containers"
+    subtitle="Create a message with a select menu allowing users to select roles they want to be added to for your server."
+    create-route="../key-selector/0"
+></feature-header>
+<div class="my-1">
+    <div class="mt-1 mb-3 text-danger fs-7 d-inline-flex align-content-center">
                             <span class="material-icons me-2">
                                 warning
                             </span>
-                In order for the bot to add or remove a specific role it MUST be above it in the role list. If you do not have the Betsy role above the roles selected it will NOT remove/add those roles.
-            </div>
-        </div>
+        In order for the bot to add or remove a specific role it MUST be above it in the role list. If you do not have
+        the Betsy role above the roles selected it will NOT remove/add those roles.
+    </div>
+</div>
 
-        <div class="my-3">
-            <a load="../role-selector/0" if.bind="guildId">
-                <moo-button variant="primary">
-                    Create New Role Selector Container
-                </moo-button>
-            </a>
-        </div>
-
-        <div class="existing-commands-area">
-            <feature-item-list
-                data.bind="containers"
-                show-toggler.bind="true"
-                toggle-handler.bind="() => updateActive(item)"
-                item-click-handler.bind="() => goTo(item)"
-                route="../role-selector"
-                name-override="name"
-            ></feature-item-list>
-        </div>
-    </section>
-</template>
+<div class="existing-commands-area">
+    <feature-item-list
+        data.bind="containers"
+        show-toggler.bind="true"
+        toggle-handler.bind="() => updateActive(item)"
+        item-click-handler.bind="() => goTo(item)"
+        route="../role-selector"
+        name-override="name"
+    ></feature-item-list>
+</div>

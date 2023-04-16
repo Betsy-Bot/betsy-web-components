@@ -1,40 +1,29 @@
-<template>
-    <section class="auto-responders">
-        <div class="row" if.bind="featureActive !== undefined">
-            <div class="col-8">
-                <feature-header
-                    display-warning.bind="!featureActive && responders.length > 0"
-                    doc-url="https://docs.betsybot.xyz/features/auto-responders"
-                    title="Auto Responders"
-                    subtitle="Respond to commonly asked questions, comments, and more."
-                ></feature-header>
-            </div>
-            <div class="col-4">
-                <moo-switch
-                    value.bind="featureActive"
-                    change.bind="() => toggleFeature()"
-                ></moo-switch>
-                <label class="me-5">Active?</label>
-            </div>
-        </div>
+<div class="row" if.bind="featureActive !== undefined">
+    <div class="col-8">
+        <feature-header
+            display-warning.bind="!featureActive && responders.length > 0"
+            doc-url="https://docs.betsybot.xyz/features/auto-responders"
+            title="Auto Responders"
+            subtitle="Respond to commonly asked questions, comments, and more."
+            create-route="../auto-responders/0"
+        ></feature-header>
+    </div>
+    <div class="col-4">
+        <moo-switch
+            value.bind="featureActive"
+            change.bind="() => toggleFeature()"
+        ></moo-switch>
+        <label class="me-5">Active?</label>
+    </div>
+</div>
 
-        <div class="my-3">
-            <a href="/guild/${guildId}/messages/auto-responders/0">
-                <moo-button variant="primary">
-                    Create New Auto Responder
-                </moo-button>
-            </a>
-        </div>
-
-        <div>
-            <feature-item-list
-                show-toggler.bind="true"
-                data.bind="responders"
-                show-toggler.bind="false"
-                toggle-handler.bind="() => updateActive(item)"
-                item-click-handler.bind="() => goTo(item)"
-                route="../auto-responders"
-            ></feature-item-list>
-        </div>
-    </section>
-</template>
+<div>
+    <feature-item-list
+        show-toggler.bind="true"
+        data.bind="responders"
+        show-toggler.bind="false"
+        toggle-handler.bind="() => updateActive(item)"
+        item-click-handler.bind="() => goTo(item)"
+        route="../auto-responders"
+    ></feature-item-list>
+</div>

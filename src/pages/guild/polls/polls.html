@@ -1,18 +1,11 @@
-<template>
-    <feature-header
-        doc-url="https://docs.betsybot.xyz/features/polls"
-        title="Polls"
-        subtitle="Manage and track your polls."
-    ></feature-header>
+<feature-header
+    doc-url="https://docs.betsybot.xyz/features/polls"
+    title="Polls"
+    subtitle="Manage and track your polls."
+    create-route="../polls/0"
+></feature-header>
 
-    <div class="my-3">
-        <a load="../polls/0" if.bind="guildId" class="mt-2">
-            <moo-button varaint="primary" label="Create New Poll"></moo-button>
-        </a>
-    </div>
-
-    <feature-item-list
-        data.bind="polls"
-        route="../polls"
-    ></feature-item-list>
-</template>
+<feature-item-list
+    data.bind="polls"
+    route="../polls"
+></feature-item-list>

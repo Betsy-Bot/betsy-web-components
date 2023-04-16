@@ -1,23 +1,14 @@
 <feature-header
     doc-url="https://docs.betsybot.xyz/features/support-tickets"
     title="Support Tickets"
+    create-route="../support-tickets/0"
     subtitle="Create a support ticket tracking system. Create your message with the 'Create Ticket' component. Open tickets to your selected category. When tickets are closed the entire channel transcript is saved."
 ></feature-header>
 
-<a load="../support-tickets/0" if.bind="guildId" class="mt-2">
-    <moo-button variant="primary">
-        Create New Support Panel
-    </moo-button>
-</a>
-
-<div class="row">
-    <div class="col-12 col-xl-10 existing-commands-area mt-4">
-        <feature-item-list
-            show-toggler.bind="true"
-            data.bind="supportTickets"
-            name-override="identifier"
-            route="../support-tickets"
-            toggle-handler.bind="item => updateActive(item)"
-        ></feature-item-list>
-    </div>
-</div>
+<feature-item-list
+    show-toggler.bind="true"
+    data.bind="supportTickets"
+    name-override="identifier"
+    route="../support-tickets"
+    toggle-handler.bind="item => updateActive(item)"
+></feature-item-list>

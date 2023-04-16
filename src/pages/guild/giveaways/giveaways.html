@@ -1,23 +1,14 @@
-<template>
-    <feature-header
-        doc-url="https://docs.betsybot.xyz/features/giveaways"
-        title="Giveaways"
-        subtitle="Manage and track your giveaways."
-    ></feature-header>
+<feature-header
+    doc-url="https://docs.betsybot.xyz/features/giveaways"
+    title="Giveaways"
+    subtitle="Manage and track your giveaways."
+    create-route="../giveaways/0"
+></feature-header>
 
-    <div class="my-3">
-        <a load="../giveaways/0">
-            <moo-button variant="primary">
-                Create New Giveaway
-            </moo-button>
-        </a>
-    </div>
-
-    <feature-item-list
-        data.bind="giveaways"
-        show-toggler.bind="false"
-        toggle-handler.bind="() => updateActive(item)"
-        item-click-handler.bind="() => goTo(item)"
-        route="../giveaways"
-    ></feature-item-list>
-</template>
+<feature-item-list
+    data.bind="giveaways"
+    show-toggler.bind="false"
+    toggle-handler.bind="() => updateActive(item)"
+    item-click-handler.bind="() => goTo(item)"
+    route="../giveaways"
+></feature-item-list>

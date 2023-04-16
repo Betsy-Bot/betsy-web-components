@@ -1,90 +1,86 @@
-<template>
-    <section id="twitch">
-        <confirmation-dialog
-            dialog.two-way="createDialog"
-            title="Create Subscription"
-        >
-            <form submit.trigger="handleCreateModal()">
-                <mdc-select class="standard-betsy-select w-100" value.bind="request.type" label="Subscription Type" required>
-                    <mdc-icon mdc-select-icon>dns</mdc-icon>
-                    <mdc-list>
-                        <mdc-list-item repeat.for="type of subscriptionTypes" value.bind="type">
-                            ${type}
-                        </mdc-list-item>
-                    </mdc-list>
-                </mdc-select>
-                <moo-text-field
-                    class="w-100 my-3"
-                    label="Twitch Username"
-                    value.bind="request.twitchLogin"
-                    placeholder="Twitch Username"
-                    required.bind="true"
-                ></moo-text-field>
-                <discord-channel-selector
-                    class="my-3"
-                    label="Select Channel for Message"
-                    if.bind="guildId"
-                    channel-id.two-way="request.discordChannelId"
-                    guild-id.bind="guildId"
-                    type.bind="0"
-                    required.bind="true"
-                ></discord-channel-selector>
-                <div class="text-end">
-                    <moo-button variant="primary" type="submit">Create Subscription</moo-button>
-                </div>
-            </form>
-        </confirmation-dialog>
-
-        <confirmation-dialog
-            cancel-text="Cancel"
-            confirm-text="Yes, Delete"
-            dialog.two-way="deleteDialog"
-            handler.bind="(event) => handleDeleteModal(event)"
-            title="Delete Twitch Subscription"
-        >
-            This action is permanent and cannot be undone
-        </confirmation-dialog>
-
-        <div class="row">
-            <div class="col-8">
-                <feature-header
-                    doc-url="https://docs.betsybot.xyz/features/twitch-go-live-messages"
-                    title="Twitch Subscriptions"
-                    subtitle="Create a Twitch Subscription to post on your server when certain things happen with a given streamer."
-                ></feature-header>
-            </div>
-            <div class="col-4 text-end">
-                <moo-switch
-                    value.bind="featureActive"
-                ></moo-switch>
-                <label class="me-5">Active?</label>
-            </div>
+<confirmation-dialog
+    dialog.two-way="createDialog"
+    title="Create Subscription"
+>
+    <form submit.trigger="handleCreateModal()">
+        <mdc-select class="standard-betsy-select w-100" value.bind="request.type" label="Subscription Type" required>
+            <mdc-icon mdc-select-icon>dns</mdc-icon>
+            <mdc-list>
+                <mdc-list-item repeat.for="type of subscriptionTypes" value.bind="type">
+                    ${type}
+                </mdc-list-item>
+            </mdc-list>
+        </mdc-select>
+        <moo-text-field
+            class="w-100 my-3"
+            label="Twitch Username"
+            value.bind="request.twitchLogin"
+            placeholder="Twitch Username"
+            required.bind="true"
+        ></moo-text-field>
+        <discord-channel-selector
+            class="my-3"
+            label="Select Channel for Message"
+            if.bind="guildId"
+            channel-id.two-way="request.discordChannelId"
+            guild-id.bind="guildId"
+            type.bind="0"
+            required.bind="true"
+        ></discord-channel-selector>
+        <div class="text-end">
+            <moo-button variant="primary" type="submit">Create Subscription</moo-button>
         </div>
+    </form>
+</confirmation-dialog>
 
-        <div>
-            <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+<confirmation-dialog
+    cancel-text="Cancel"
+    confirm-text="Yes, Delete"
+    dialog.two-way="deleteDialog"
+    handler.bind="(event) => handleDeleteModal(event)"
+    title="Delete Twitch Subscription"
+>
+    This action is permanent and cannot be undone
+</confirmation-dialog>
+
+<div class="row">
+    <div class="col-8">
+        <feature-header
+            doc-url="https://docs.betsybot.xyz/features/twitch-go-live-messages"
+            title="Twitch Subscriptions"
+            subtitle="Create a Twitch Subscription to post on your server when certain things happen with a given streamer."
+        ></feature-header>
+    </div>
+    <div class="col-4 text-end">
+        <moo-switch
+            value.bind="featureActive"
+        ></moo-switch>
+        <label class="me-5">Active?</label>
+    </div>
+</div>
+
+<div>
+    <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
                 <span class="material-icons me-2">
                     warning
                 </span>
-                The Twitch Webhook can take several minutes after going live before it is sent. This is not something we
-                can change.
-            </div>
-        </div>
+        The Twitch Webhook can take several minutes after going live before it is sent. This is not something we
+        can change.
+    </div>
+</div>
 
-        <moo-button class="button-primary" click.trigger="createDialog.open()">
-            Create New Twitch Subscription
-        </moo-button>
+<moo-button class="button-primary" click.trigger="createDialog.open()">
+    Create New Twitch Subscription
+</moo-button>
 
-        <div class="existing-commands-area">
-            <feature-item-list
-                name-suffix=" - "
-                data.bind="subscriptions"
-                name-override="username"
-                show-toggler.bind="false"
-                item-click-handler.bind="() => openDeleteDialog(item)"
-                trailing-icon="delete"
-                suffix-property="type"
-            ></feature-item-list>
-        </div>
-    </section>
-</template>
+<div class="existing-commands-area">
+    <feature-item-list
+        name-suffix=" - "
+        data.bind="subscriptions"
+        name-override="username"
+        show-toggler.bind="false"
+        item-click-handler.bind="() => openDeleteDialog(item)"
+        trailing-icon="delete"
+        suffix-property="type"
+    ></feature-item-list>
+</div>
