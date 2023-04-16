@@ -612,4 +612,10 @@ export class DiscordService {
     async deleteDiscordChannelBackup(itemId: string) {
         return this.api.doDelete(`DiscordChannelBackup/${itemId}`);
     }
+
+    async getGuildMember(memberId: string) {
+        return this.api.doGet(
+            `User/DiscordUser?discordGuildId=${this.getLocalDiscordGuildId()}&discordUserId=${memberId}`
+        );
+    }
 }

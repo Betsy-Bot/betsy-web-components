@@ -32,7 +32,11 @@
                     <moo-chip-set input if.bind="guild.authorizedUsers">
                         <!-- Compact notation -->
                         <moo-chip repeat.for="user of guild.authorizedUsers">
-                            ${user}
+                            <template promise.bind="user | discordName">
+                                <span then.from-view="data">
+                                    ${data}
+                                </span>
+                            </template>
                             <span click.trigger="removeUser($index)" trailing>X</span>
                         </moo-chip>
                     </moo-chip-set>
