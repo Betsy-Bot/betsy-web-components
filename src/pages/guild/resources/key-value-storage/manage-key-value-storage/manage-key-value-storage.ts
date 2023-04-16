@@ -1,10 +1,14 @@
-import { IRouteViewModel, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, Params, route, Router } from "@aurelia/router-lite";
 import { inject } from "aurelia";
 import { IEventAggregator } from "aurelia";
 import { DiscordService } from "../../../../../services/discord-service";
 import { toast } from "lets-toast";
 import DataGrid from "devextreme/ui/data_grid";
 
+@route({
+    path: "key-value-storage/:itemId",
+    title: "Key Value Storage",
+})
 @inject(IEventAggregator, DiscordService, Router)
 export class ManageKeyValueStorage implements IRouteViewModel {
     constructor(
@@ -39,13 +43,12 @@ export class ManageKeyValueStorage implements IRouteViewModel {
     didLoad = true;
     dataGrid;
 
-    loading(params) {
-        this.params = params;
-        this.guildId = this.params.guildId;
-        this.itemId = this.params.itemId as string;
+    loading(params: Params) {
+        this.itemId = params.itemId as string;
     }
 
     async attached() {
+        this.guildId = this.discordService.getLocalDiscordGuildId();
         if (!this.itemId || this.itemId == "0") {
             this.itemTemplate.discordServerId =
                 this.discordService.getLocalGuild().id;

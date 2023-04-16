@@ -46,6 +46,7 @@ import { EditForm } from "./resources/forms/edit-form/edit-form";
 import { ManageTicketMessage } from "./support-ticket-message/manage-ticket-message/manage-ticket-message";
 import { ChannelBackups } from "./resources/channel-backups/channel-backups";
 import { ChannelBackup } from "./resources/channel-backups/channel-backup/channel-backup";
+import { ManageKeyValueStorage } from "./resources/key-value-storage/manage-key-value-storage/manage-key-value-storage";
 
 const routes = [
     Dashboard,
@@ -87,6 +88,7 @@ const routes = [
     CreateForm,
     EditForm,
     KeyValueStorage,
+    ManageKeyValueStorage,
     AuditLogs,
     Twitch,
     ChannelBackups,

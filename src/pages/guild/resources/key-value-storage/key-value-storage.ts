@@ -1,5 +1,5 @@
 import { inject } from "aurelia";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
 
@@ -7,16 +7,16 @@ import { DiscordService } from "../../../../services/discord-service";
     path: "key-value-storage",
     title: "Key Value Storage",
 })
-@inject(DiscordService, Router)
+@inject(DiscordService, IRouter)
 export class KeyValueStorage implements IRouteViewModel {
     constructor(
         private discordService: DiscordService,
-        private router: Router
+        private router: IRouter
     ) {}
 
     guildId: string;
     params;
-    items = [];
+    items: any[];
 
     loading(params) {
         this.params = params;
@@ -25,15 +25,5 @@ export class KeyValueStorage implements IRouteViewModel {
 
     async attached() {
         this.items = await this.discordService.getKeyValueCategories();
-    }
-
-    createFunction() {
-        this.goToItem({ id: 0 });
-    }
-
-    goToItem(item) {
-        this.router.load(
-            `/guild/${this.guildId}/resources/key-value-storage/${item.id}`
-        );
     }
 }

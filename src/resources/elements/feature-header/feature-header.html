@@ -8,7 +8,8 @@
             class="mx-2 greenFab"
             icon="add_circle"
             click.bind="() => handleCreate()"
-            if.bind="createFunction"
+            if.bind="createFunction || createRoute"
+            route.bind="createRoute"
         ></moo-fab>
 
         <moo-fab

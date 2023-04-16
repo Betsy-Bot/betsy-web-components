@@ -1,17 +1,21 @@
-import {bindable, customElement, ICustomElementViewModel, inject} from "aurelia";
+import {
+    bindable,
+    customElement,
+    ICustomElementViewModel,
+    inject,
+} from "aurelia";
 import { IRouter } from "@aurelia/router-lite";
-import './feature-header.scss';
+import "./feature-header.scss";
 import template from "./feature-header.html";
 
 @customElement({
-    name: 'feature-header',
+    name: "feature-header",
     template: template,
-    containerless: true
+    containerless: true,
 })
 @inject(IRouter)
 export class FeatureHeader implements ICustomElementViewModel {
-    constructor(private router: IRouter) {
-    }
+    constructor(private router: IRouter) {}
 
     @bindable title;
     @bindable subtitle;
@@ -21,6 +25,7 @@ export class FeatureHeader implements ICustomElementViewModel {
     @bindable deleteFunction;
     @bindable copyFunction;
     @bindable createFunction;
+    @bindable createRoute: string;
     bannerOpen: boolean;
 
     handleDelete() {
