@@ -1,24 +1,24 @@
 import { IEventAggregator } from "aurelia";
 import { DiscordService } from "../../../../services/discord-service";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
 import { toast } from "lets-toast";
 import { bindable, inject, observable } from "aurelia";
 import {
     DiscordButtonStyle,
     DiscordComponentType,
 } from "../../../../services/models/discord";
-import {watch} from "@aurelia/runtime-html";
+import { watch } from "@aurelia/runtime-html";
 
 @route({
     path: "giveaways/:giveawayId",
     title: "Manage Giveaway",
 })
-@inject(IEventAggregator, DiscordService, Router)
+@inject(IEventAggregator, DiscordService, IRouter)
 export class ManageGiveaways implements IRouteViewModel {
     constructor(
         private eventAggregator: IEventAggregator,
         private discordService: DiscordService,
-        private router: Router
+        private router: IRouter
     ) {}
 
     loading(params) {
@@ -98,6 +98,7 @@ export class ManageGiveaways implements IRouteViewModel {
                 this.giveaway = await this.discordService.createGiveaway(
                     this.giveaway
                 );
+                await this.router.load("../giveaways", { context: this });
             } else {
                 this.giveaway = await this.discordService.updateGiveaway(
                     this.giveaway
@@ -122,9 +123,9 @@ export class ManageGiveaways implements IRouteViewModel {
         }
     }
 
-    @watch('role')
+    @watch("role")
     roleChanged() {
-        console.log('role changes');
+        console.log("role changes");
         if (!this.giveaway.roles) {
             this.giveaway.roles = [];
         }
