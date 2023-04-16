@@ -1,8 +1,10 @@
 <template>
     <div id="discord-messages">
         <div class="message-container" repeat.for="message of messages">
-            <div class="author mt-3" if.bind="showAuthor(message, $index)">
-                <span class="fw-bolder">${message.discordUserName}</span> <span class="time ms-3">${message.createdDate | dateFormat}</span>
+            <div class="mt-1">
+                <div class="author mt-3" if.bind="showAuthor(message, $index)">
+                    <span class="fw-bolder">${message.discordUserName}</span> <span class="time ms-3">${message.createdDate | dateFormat}</span>
+                </div>
             </div>
             <div class="message">
                     <span if.bind="!isImage(message.message)">

@@ -51,12 +51,12 @@
                         ></moo-text-field>
                         <div class="row mt-4">
                             <div class="col">
-                                <moo-button variant="secondary" type="button" click.trigger="deleteChannelCleaner(cleaner.id)">
+                                <moo-button variant="secondary" type="button" click.bind="() => deleteChannelCleaner(cleaner.id)">
                                     Delete
                                 </moo-button>
                             </div>
                             <div class="col text-center">
-                                <moo-button variant="secondary" type="button" click.trigger="manuallyClean(cleaner.id)">
+                                <moo-button variant="secondary" type="button" click.bind="() => manuallyClean(cleaner.id)">
                                     TEST
                                 </moo-button>
                             </div>
