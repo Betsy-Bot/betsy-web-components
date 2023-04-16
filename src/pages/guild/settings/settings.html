@@ -33,6 +33,7 @@
                         <!-- Compact notation -->
                         <moo-chip repeat.for="user of guild.authorizedUsers">
                             <template promise.bind="user | discordName">
+                                <let data.bind="null" err.bind="null"></let>
                                 <span then.from-view="data">
                                     ${data}
                                 </span>
