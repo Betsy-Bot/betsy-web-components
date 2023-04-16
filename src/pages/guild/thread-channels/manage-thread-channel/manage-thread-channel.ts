@@ -1,6 +1,6 @@
 import { IEventAggregator } from "aurelia";
 import { DiscordService } from "../../../../services/discord-service";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
 import { toast } from "lets-toast";
 import { bindable, inject } from "aurelia";
 
@@ -8,12 +8,12 @@ import { bindable, inject } from "aurelia";
     path: "thread-channels/:threadChannelId",
     title: "Manage Thread Channel",
 })
-@inject(IEventAggregator, DiscordService, Router)
+@inject(IEventAggregator, DiscordService, IRouter)
 export class ManageThreadChannel implements IRouteViewModel {
     constructor(
         private eventAggregator: IEventAggregator,
         private discordService: DiscordService,
-        private router: Router
+        private router: IRouter
     ) {}
 
     loading(params) {
@@ -68,6 +68,7 @@ export class ManageThreadChannel implements IRouteViewModel {
                     );
             }
             toast(`Thread Channel ${this.isNew ? "Created" : "Updated"}!`);
+            await this.router.load("../thread-channels", { context: this });
         } catch (e) {
             console.log(e);
             toast("Failed to update thread channel", { severity: "error" });
@@ -81,7 +82,7 @@ export class ManageThreadChannel implements IRouteViewModel {
                     this.threadChannel.id
                 );
                 toast("Deleted thread channel!", { severity: "success" });
-                //this.router.back();
+                await this.router.load("../thread-channels", { context: this });
             } catch (e) {
                 toast("Failed to delete thread channel", { severity: "error" });
                 throw e;
