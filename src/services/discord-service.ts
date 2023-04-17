@@ -618,4 +618,10 @@ export class DiscordService {
             `User/DiscordUser?discordGuildId=${this.getLocalDiscordGuildId()}&discordUserId=${memberId}`
         );
     }
+
+    async exportTemplate(topics: string[]) {
+        return this.api.doGet(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/ImportTemplate?topics=${topics}`
+        );
+    }
 }

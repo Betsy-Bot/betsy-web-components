@@ -1,0 +1,17 @@
+<feature-header
+    doc-url="https://docs.betsybot.xyz/features/import-export"
+    title="Import / Export"
+    subtitle="Import or export Betsy configuration across different servers."
+></feature-header>
+
+<div elevation="9">
+    <h4 class="my-3">Select settings to export</h4>
+    <div repeat.for="feature of features">
+        <moo-form-field label="${feature | pascalSpacing}">
+            <moo-checkbox checked.bind="true" changed.bind="(value, checked) => handleCheckedChanged(value, checked)" value.bind="feature"></moo-checkbox>
+        </moo-form-field>
+    </div>
+    <div class="ps-3 py-3">
+        <moo-button label="Download JSON" click.bind="() => handleExport()"></moo-button>
+    </div>
+</div>

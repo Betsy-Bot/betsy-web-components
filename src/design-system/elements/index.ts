@@ -22,3 +22,4 @@ export * from "./moo-radio";
 export * from './moo-form-field';
 export * from './moo-chip-set';
 export * from './moo-chip';
+export * from './moo-checkbox';
