@@ -1,4 +1,4 @@
-import { bindable, inject } from "aurelia-framework";
+import { bindable, inject } from "aurelia";
 import './discord-messages-renderer.scss';
 export class DiscordMessagesRenderer {
     @bindable messages;

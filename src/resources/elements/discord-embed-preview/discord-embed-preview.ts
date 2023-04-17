@@ -1,7 +1,13 @@
-import { bindable } from "aurelia-framework";
+import {bindable, customElement, ICustomElementViewModel} from "aurelia";
 
 import './discord-embed-preview.scss';
+import template from "./discord-embed-preview.html";
 
-export class DiscordEmbedPreview {
+@customElement({
+    name: 'discord-embed-preview',
+    template: template,
+    containerless: true
+})
+export class DiscordEmbedPreview implements ICustomElementViewModel{
     @bindable embed;
 }

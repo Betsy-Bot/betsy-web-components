@@ -1,23 +1,21 @@
 <template>
     <div class="row" if.bind="featureActive !== undefined">
         <div class="col-8">
-            <discord-feature-header
+            <feature-header
                 doc-url="https://docs.betsybot.xyz/features/user-verification"
                 title="Verification"
                 subtitle="Require Verification from your new users before they are able to talk on your server.
                 When the feature is activated, new users will be sent a PM to verify themselves.
                 They will automatically receive the chosen role once verified."
                 display-warning.bind="!featureActive"
-            ></discord-feature-header>
+            ></feature-header>
         </div>
         <div class="col-4 text-end">
-            <button
-                mdc-switch
-                selected.bind="featureActive"
+            <moo-switch
                 value.bind="featureActive"
-                change.delegate="toggleFeature()"
-            ></button>
-            <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
+                change.bind="() => toggleFeature()"
+            ></moo-switch>
+            <label class="me-5">Active?</label>
         </div>
     </div>
     <mdc-expandable accordion="acc1" class="my-3">
@@ -29,29 +27,28 @@
             <div>
                 IPQualityScore is an industry leading anti-fraud platform that comes with a variety of verification options.
                 <br> We use this for looking up information on IP Addresses and Emails
-                <br> Get started on <a href="https://www.ipqualityscore.com//" target="_blank" class="text-blue">IP Quality Score</a>
+                <br> Get started on <a href="https://www.ipqualityscore.com/" target="_blank" class="text-blue" external>IP Quality Score</a>
                 <br> IP Quality Score is free for a large amount of requests. Simply add your API key here to start taking advantage
                 <br> Note that gathering information on user's emails requires user login setting on.
                 <br> Don't want to sign up? Ask us in a ticket about getting a provided API key.
             </div>
-            <form submit.delegate="updateKeys()">
-                <mdc-text-field
+            <form submit.trigger="updateKeys()">
+                <moo-text-field
                     disabled.bind="!isAdmin"
                     class="w-100"
                     label="IP Quality Score API Key"
                     value.bind="guild.ipQualityScoreApiKey"
-                ></mdc-text-field>
-                <button mdc-button class="button-primary" disabled.bind="!isAdmin">
+                ></moo-text-field>
+                <moo-button variant="primary" disabled.bind="!isAdmin">
                     Save
-                </button>
+                </moo-button>
             </form>
         </div>
     </mdc-expandable>
-    <form submit.delegate="save()" if.bind="guild">
+    <form submit.trigger="save()" if.bind="guild">
         <div class="my-3">
             <discord-role-selector
                 disabled.bind="!isAdmin"
-                remove-everyone.bind="true"
                 label="Select Verified Role"
                 selected-role.two-way="selectedRole"
                 role-id.bind="guild.globalSettings.verificationSettings.verifiedRoleId"
@@ -78,29 +75,23 @@
             ></discord-channel-selector>
         </div>
         <div class="my-3">
-            <button
-                mdc-switch
+            <moo-switch
                 disabled.bind="!isAdmin"
-                selected.bind="guild.globalSettings.verificationSettings.blockAlts"
                 value.bind="guild.globalSettings.verificationSettings.blockAlts"
-                change.delegate="guild.globalSettings.verificationSettings.blockAlts = !!guild.globalSettings.verificationSettings.blockAlts"
-            ></button>
+            ></moo-switch>
             <label class="me-5">Block Alts?</label>
         </div>
         <div class="col-12 my-3">
-            <button
-                mdc-switch
+            <moo-switch
                 disabled.bind="!isAdmin"
-                selected.bind="guild.globalSettings.verificationSettings.requireLogin"
                 value.bind="guild.globalSettings.verificationSettings.requireLogin"
-                change.delegate="guild.globalSettings.verificationSettings.requireLogin = !!guild.globalSettings.verificationSettings.requireLogin"
-            ></button>
+            ></moo-switch>
             <label class="me-5">Require Login?</label>
         </div>
         <div class="text-end">
-            <button mdc-button class="button-primary" type="submit" disabled.bind="!isAdmin">
+            <moo-button variant="primary" type="submit" disabled.bind="!isAdmin">
                 Save
-            </button>
+            </moo-button>
         </div>
     </form>
 </template>

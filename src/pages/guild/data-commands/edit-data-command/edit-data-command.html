@@ -2,11 +2,11 @@
     <section id="edit-data-command">
         <div class="row">
             <div class="col-8">
-                <discord-feature-header
+                <feature-header
                     doc-url="https://docs.betsybot.xyz/configurable-commands/data-commands"
                     title="${isNew ? 'Create' : 'Edit'} Data Command"
                     subtitle="Data commands are commands that gather information and relay that information to this admin panel or your own API integration. This can be captured in a form, a message embed, or just through command parameters."
-                ></discord-feature-header>
+                ></feature-header>
 
                 <div>
                     <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
@@ -17,23 +17,25 @@
                     </div>
                 </div>
 
-                <form submit.delegate="save()">
+                <form submit.trigger="save()">
                     <div class="mt-4">
                         <discord-command-creator command.two-way="command"></discord-command-creator>
                     </div>
 
-                    <mdc-tab-bar view-model.ref="tabBar">
-                        <mdc-tab
+                    <moo-tab-bar>
+                        <moo-tab
                             label="Form Command"
+                            tab.bind="tab"
+                            value="form"
                             active.bind="tab === 'form'"
-                            click.delegate="tab = 'form'"
-                        ></mdc-tab>
-                        <mdc-tab
+                        ></moo-tab>
+                        <moo-tab
                             label="REST Request Command"
                             active.bind="tab === 'rest'"
-                            click.delegate="tab = 'rest'"
-                        ></mdc-tab>
-                    </mdc-tab-bar>
+                            value="rest"
+                            tab.bind="tab"
+                        ></moo-tab>
+                    </moo-tab-bar>
 
                     <template if.bind="tab === 'form'">
                         <div class="my-2 fs-6 fw-bolder">
@@ -49,24 +51,28 @@
                         <div class="my-2 fs-6 fw-bolder">
                             REST Requests commands send a POST/PUT/PATCH to your entered API.
                         </div>
-                        <mdc-text-field
+                        <moo-text-field
                             class="w-100"
                             label="API Url"
                             value.bind="command.discordCommandActions[0].restRequestMetadata.apiUrl"
                             placeholder="https://example.com/api/someEndpoint"
                             required.bind="true"
-                        ></mdc-text-field>
+                        ></moo-text-field>
                         <mdc-form-field repeat.for="type of restTypes">
-                            <mdc-radio model.bind="type" checked.bind="command.discordCommandActions[0].type"></mdc-radio>
+                            <mdc-radio model.bind="type"
+                                       checked.bind="command.discordCommandActions[0].type"></mdc-radio>
                             <label>${getDisplayTextForCommandActionType(type)}</label>
                         </mdc-form-field>
                         <div class="my-2" style="min-height: 45px;">
-                            <button mdc-button class="button-primary" click.delegate="addHeader()" type="button">Add Header</button>
+                            <moo-button variant="primary" click.bind="() => addHeader()" type="button">
+                                Add Header
+                            </moo-button>
                             <div class="row g-4">
-                                <div class="col-12 col-md-6" repeat.for="header of command.discordCommandActions[0].restRequestMetadata.requestHeaders">
-                                    <div mdc-elevation="9" class="p-2">
+                                <div class="col-12 col-md-6"
+                                     repeat.for="header of command.discordCommandActions[0].restRequestMetadata.requestHeaders">
+                                    <div elevation="9" class="p-2">
                                         <div class="text-end">
-                                            <span class="cursor-pointer" click.delegate="removeHeader($index)">X</span>
+                                            <span class="cursor-pointer" click.trigger="removeHeader($index)">X</span>
                                         </div>
                                         <request-header-creator header.two-way="header"></request-header-creator>
                                     </div>
@@ -83,15 +89,20 @@
                                 <br> <span class="fw-bolder">Reach out in Discord if you need assistance</span>
                             </span>
                             <div class="my-2">
-                                <button mdc-button class="button-primary" click.delegate="addParameter()" type="button">Add Parameter</button>
+                                <moo-button variant="primary" click.bind="() => addParameter()" type="button">
+                                    Add Parameter
+                                </moo-button>
                             </div>
                             <div class="row g-4">
-                                <div class="col-12 col-md-6" repeat.for="parameter of command.commandInformation.options">
-                                    <div mdc-elevation="9" class="p-2">
+                                <div class="col-12 col-md-6"
+                                     repeat.for="parameter of command.commandInformation.options">
+                                    <div elevation="9" class="p-2">
                                         <div class="text-end">
-                                            <span class="cursor-pointer" click.delegate="removeParameter($index)">X</span>
+                                            <span class="cursor-pointer"
+                                                  click.trigger="removeParameter($index)">X</span>
                                         </div>
-                                        <discord-command-parameter-creator parameter.two-way="parameter"></discord-command-parameter-creator>
+                                        <discord-command-parameter-creator
+                                            parameter.two-way="parameter"></discord-command-parameter-creator>
                                     </div>
                                 </div>
                             </div>
@@ -105,15 +116,18 @@
                                 <br>Which are not required to be entered in with the command
                             </span>
                             <div class="my-2" style="min-height: 50px;">
-                                <button mdc-button class="button-primary" click.delegate="addDefaultData()" type="button">
+                                <moo-button variant="primary" click.bind="() => addDefaultData()"
+                                        type="button">
                                     Add Default Data
-                                </button>
+                                </moo-button>
                             </div>
                             <div class="row g-4">
-                                <div class="col-12 col-md-6" repeat.for="parameter of command.discordCommandActions[0].restRequestMetadata.defaultRequestData">
-                                    <div mdc-elevation="9" class="p-2">
+                                <div class="col-12 col-md-6"
+                                     repeat.for="parameter of command.discordCommandActions[0].restRequestMetadata.defaultRequestData">
+                                    <div elevation="9" class="p-2">
                                         <div class="text-end">
-                                            <span class="cursor-pointer" click.delegate="removeDefaultData($index)">X</span>
+                                            <span class="cursor-pointer"
+                                                  click.trigger="removeDefaultData($index)">X</span>
                                         </div>
                                         <discord-command-parameter-creator
                                             parameter.two-way="parameter"
@@ -135,15 +149,18 @@
                                 <br> This also uses dot notation and will fill in any data you need for your API
                             </span>
                             <div class="my-2" style="min-height: 50px;">
-                                <button mdc-button class="button-primary" click.delegate="addResponseMapping()" type="button">
+                                <moo-button variant="primary" click.bind="() => addResponseMapping()"
+                                        type="button">
                                     Add Response Mapping
-                                </button>
+                                </moo-button>
                             </div>
                             <div class="row g-4">
-                                <div class="col-12 col-md-6" repeat.for="parameter of command.discordCommandActions[0].restRequestMetadata.requestResponseMappings">
-                                    <div mdc-elevation="9" class="p-2">
+                                <div class="col-12 col-md-6"
+                                     repeat.for="parameter of command.discordCommandActions[0].restRequestMetadata.requestResponseMappings">
+                                    <div elevation="9" class="p-2">
                                         <div class="text-end">
-                                            <span class="cursor-pointer" click.delegate="removeResponseMapping($index)">X</span>
+                                            <span class="cursor-pointer"
+                                                  click.trigger="removeResponseMapping($index)">X</span>
                                         </div>
                                         <discord-command-parameter-creator
                                             parameter.two-way="parameter"
@@ -157,7 +174,7 @@
                     </template>
 
 
-                    <div mdc-elevation="12" class="mt-4 p-3">
+                    <div elevation="12" class="mt-4 p-3">
                         <div>
                             Command Response Message
                         </div>
@@ -169,16 +186,17 @@
 
                         <div class="mt-5">
                             <div class="text-end mt-3">
-                                <button type="submit" mdc-button class="button-primary">
+                                <moo-button variant="primary" type="submit" class="button-primary">
                                     Save
-                                </button>
+                                </moo-button>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="col-4">
-                <discord-message-preview message.two-way="command.discordCommandActions[0].discordMessage.message"></discord-message-preview>
+                <discord-message-preview
+                    message.two-way="command.discordCommandActions[0].discordMessage.message"></discord-message-preview>
             </div>
         </div>
     </section>

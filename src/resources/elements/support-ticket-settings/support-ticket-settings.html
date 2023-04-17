@@ -2,43 +2,33 @@
     <div class="row g-4 mt-1">
         <div class="col-6 col-lg-6">
             <label class="me-3">DM Transcript On Close</label>
-            <button
-                mdc-switch
-                selected.bind="request.sendTranscriptOnClose"
-                click.delegate="request.sendTranscriptOnClose = !request.sendTranscriptOnClose"
-            ></button>
+            <moo-switch
+                value.bind="request.sendTranscriptOnClose"
+            ></moo-switch>
         </div>
         <div class="col-6 col-lg-6">
             <label class="me-3">Auto Increment Number</label>
-            <button
-                mdc-switch
-                selected.bind="request.useAutoIncrement"
-                click.delegate="request.useAutoIncrement = !request.useAutoIncrement"
-            ></button>
+            <moo-switch
+                value.bind="request.useAutoIncrement"
+            ></moo-switch>
         </div>
         <div class="col-6 col-lg-6">
             <label class="me-3">Allowing Claiming</label>
-            <button
-                mdc-switch
-                selected.bind="request.allowClaiming"
-                click.delegate="request.allowClaiming = !request.allowClaiming"
-            ></button>
+            <moo-switch
+                value.bind="request.allowClaiming"
+            ></moo-switch>
         </div>
         <div class="col-6 col-lg-6">
             <label class="me-3">Hide Name</label>
-            <button
-                mdc-switch
-                selected.bind="request.hideName"
-                click.delegate="request.hideName = !request.hideName"
-            ></button>
+            <moo-switch
+                value.bind="request.hideName"
+            ></moo-switch>
         </div>
         <div class="col-6 col-lg-6">
             <label class="me-3">Public Transcript</label>
-            <button
-                mdc-switch
-                selected.bind="request.publicTranscript"
-                click.delegate="request.publicTranscript = !request.publicTranscript"
-            ></button>
+            <moo-switch
+                value.bind="request.publicTranscript"
+            ></moo-switch>
         </div>
         <div class="col-6 col-lg-6">
 
@@ -56,37 +46,38 @@
         </div>
         <div class="col-12 col-lg-6">
             <div class="au-select">
-                <mdc-select
-                    class="standard-betsy-select w-100"
-                    value.bind="selectedAuditOption"
-                    change.delegate="selectAuditOption($event)"
-                    label="Select Active Audits"
-                >
-                    <mdc-icon mdc-select-icon>dns</mdc-icon>
-                    <mdc-list>
-                        <mdc-list-item repeat.for="option of options" value.bind="option">
-                            ${option | pascalSpacing}
-                        </mdc-list-item>
-                    </mdc-list>
-                </mdc-select>
-                <mdc-select-helper-text validation></mdc-select-helper-text>
+                <moo-select disabled.bind="disabled"
+                            if.bind="options"
+                            class="standard-betsy-select w-100"
+                            value.bind="selectedAuditOption"
+                            change.trigger="() => selectAuditOption($event)"
+                            label="Select Active Audits"
+                            required.bind="required">
+                    <moo-list>
+                        <moo-list-item
+                            repeat.for="option of options"
+                            label.bind="option | pascalSpacing"
+                            value.bind="option"
+                        ></moo-list-item>
+                    </moo-list>
+                </moo-select>
             </div>
             <div if.bind="request.supportTicketAudits">
                 <ul>
                     <li repeat.for="audit of request.supportTicketAudits">
-                        * ${audit} <span class="ms-2 text-danger cursor-pointer" click.delegate="removeAuditOption($index)">(X)</span>
+                        * ${audit} <span class="ms-2 text-danger cursor-pointer" click.trigger="removeAuditOption($index)">(X)</span>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="col-12 col-lg-6">
-            <mdc-text-field
+            <moo-text-field
                 class="w-100"
                 label="Support Ticket Identifier"
                 value.bind="request.identifier"
                 placeholder="Used to identify your support ticket. Not visible to customer"
                 required
-            ></mdc-text-field>
+            ></moo-text-field>
         </div>
         <div class="col-12 col-lg-6">
             <discord-channel-selector
@@ -119,7 +110,7 @@
                 <!-- Compact notation -->
                 <mdc-chip repeat.for="role of request.assignedRoles">
                     ${getRoleName(role)}
-                    <span click.delegate="removeRole($index)" trailing>X</span>
+                    <span click.trigger="removeRole($index)" trailing>X</span>
                 </mdc-chip>
             </mdc-chip-set>
         </div>
@@ -134,28 +125,28 @@
             ></discord-channel-selector>
         </div>
         <div class="col-12 col-lg-6">
-            <mdc-text-field
+            <moo-text-field
                 class="w-100"
                 label="Created Channel Name Prefix"
                 maxlength="8"
                 value.bind="request.channelPrefix">
-            </mdc-text-field>
+            </moo-text-field>
             <mdc-text-field-helper-line>
                 <mdc-text-field-character-counter></mdc-text-field-character-counter>
             </mdc-text-field-helper-line>
         </div>
         <div class="col-12 col-lg-6">
-            <mdc-text-field
+            <moo-text-field
                 class="w-100"
                 label="Max Open Per Person"
                 max="10"
                 type="number"
                 value.bind="request.maxOpenPerPerson"
                 placeholder="The maximum amount of tickets a single person can have for this ticket container."
-            ></mdc-text-field>
+            ></moo-text-field>
         </div>
         <div class="col-12 col-lg-6">
-            <mdc-text-field
+            <moo-text-field
                 class="w-100"
                 label="Auto Close After (Minutes)"
                 min="5"
@@ -163,7 +154,7 @@
                 type="number"
                 value.bind="request.autoCloseMinutes"
                 placeholder="When closed the ticket will begin auto closing instead of immediately closing"
-            ></mdc-text-field>
+            ></moo-text-field>
         </div>
         <div class="col-12 col-lg-6">
             <discord-form-selector
@@ -173,23 +164,23 @@
             ></discord-form-selector>
         </div>
         <div class="col-12 col-lg-6">
-            <mdc-text-field
+            <moo-text-field
                 class="w-100"
                 label="Closed Response Text"
                 maxlength="255"
                 value.bind="request.textOptions.closedMessageText">
-            </mdc-text-field>
+            </moo-text-field>
             <mdc-text-field-helper-line>
                 <mdc-text-field-character-counter></mdc-text-field-character-counter>
             </mdc-text-field-helper-line>
         </div>
         <div class="col-12 col-lg-6">
-            <mdc-text-field
+            <moo-text-field
                 class="w-100"
                 label="Form Data Text"
                 maxlength="255"
                 value.bind="request.textOptions.formDataText">
-            </mdc-text-field>
+            </moo-text-field>
             <mdc-text-field-helper-line>
                 <mdc-text-field-character-counter></mdc-text-field-character-counter>
             </mdc-text-field-helper-line>

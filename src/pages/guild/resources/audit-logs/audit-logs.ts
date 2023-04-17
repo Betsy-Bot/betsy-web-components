@@ -1,13 +1,22 @@
-import { Router } from 'aurelia-router';
-import { inject } from "aurelia-framework";
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from 'services/discord-service';
-import DataGrid from 'devextreme/ui/data_grid';
+import { route, Router } from "@aurelia/router-lite";
+import { inject } from "aurelia";
+import { IEventAggregator } from "aurelia";
+import { DiscordService } from "../../../../services/discord-service";
+import DataGrid from "devextreme/ui/data_grid";
+import { IRouteViewModel } from "@aurelia/router-lite";
 
-@inject(EventAggregator, DiscordService, Router)
-export class AuditLogs {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
-    }
+@route({
+    path: "audit-logs",
+    title: "Audit Logs",
+})
+@inject(IEventAggregator, DiscordService, Router)
+export class AuditLogs implements IRouteViewModel {
+    constructor(
+        private eventAggregator: IEventAggregator,
+        private discordService: DiscordService,
+        private router: Router
+    ) {}
+
     guildId: string;
     params;
     auditLogs;
@@ -17,19 +26,19 @@ export class AuditLogs {
     actionTypes = [
         {
             value: 0,
-            text: "Create"
+            text: "Create",
         },
         {
             value: 1,
-            text: "Update"
+            text: "Update",
         },
         {
             value: 2,
-            text: "Delete"
-        }
-    ]
+            text: "Delete",
+        },
+    ];
 
-    activate(params) {
+    loading(params) {
         this.params = params;
         this.guildId = this.params.guildId;
     }
@@ -41,47 +50,51 @@ export class AuditLogs {
             showBorders: true,
             filterRow: {
                 visible: true,
-                applyFilter: 'auto'
+                applyFilter: "auto",
             },
             paging: {
                 enabled: true,
-                pageSize: 25
+                pageSize: 25,
             },
             pager: {
                 showPageSizeSelector: true,
-                allowedPageSizes: [10, 25, 50, 100]
+                allowedPageSizes: [10, 25, 50, 100],
             },
             columns: [
                 {
-                    dataField: "tableName"
+                    dataField: "tableName",
                 },
                 {
-                    dataField: "before"
+                    dataField: "before",
                 },
                 {
-                    dataField: "after"
+                    dataField: "after",
                 },
                 {
-                    dataField: "propertyName"
+                    dataField: "propertyName",
                 },
                 {
                     dataField: "action",
                     customizeText: (cellInfo) => {
                         if (cellInfo.value) {
-                            return this.actionTypes.find(x => x.value == cellInfo.value).text;
+                            return this.actionTypes.find(
+                                (x) => x.value == cellInfo.value
+                            ).text;
                         }
-                    }
+                    },
                 },
                 {
                     dataField: "user.firstName",
                     calculateCellValue: (rowData) => {
-                        return rowData.user.firstName + "#" + rowData.user.lastName;
-                    }
+                        return (
+                            rowData.user.firstName + "#" + rowData.user.lastName
+                        );
+                    },
                 },
                 {
-                    dataField: "discordUserId"
+                    dataField: "discordUserId",
                 },
-            ]
-        })
+            ],
+        });
     }
 }

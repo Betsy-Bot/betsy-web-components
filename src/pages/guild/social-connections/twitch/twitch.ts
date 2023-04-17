@@ -1,12 +1,18 @@
 import { DiscordService } from "../../../../services/discord-service";
-import { Router } from "aurelia-router";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 import { toast } from "lets-toast";
-import { inject } from "aurelia-framework";
+import { inject } from "aurelia";
 
+@route({
+    path: "twitch",
+    title: "Twitch",
+})
 @inject(DiscordService, Router)
-export class Twitch {
-    constructor(private discordService: DiscordService, private router: Router) {
-    }
+export class Twitch implements IRouteViewModel {
+    constructor(
+        private discordService: DiscordService,
+        private router: Router
+    ) {}
 
     guildId: string;
     subscriptions;
@@ -15,9 +21,9 @@ export class Twitch {
     featureActive;
 
     request = {
-        twitchLogin: '',
-        discordChannelId: '',
-        type: ''
+        twitchLogin: "",
+        discordChannelId: "",
+        type: "",
     };
     createDialog;
     deleteDialog;
@@ -40,59 +46,87 @@ export class Twitch {
         //"channel.prediction.progress",
         //"channel.prediction.lock",
         //"channel.prediction.end",
-    ]
-
-    async activate(params) {
-        this.guildId = params.guildId as string;
-    }
+    ];
 
     async attached() {
+        this.guildId = this.discordService.getLocalDiscordGuildId();
         [this.subscriptions, this.guild] = await Promise.all([
             await this.discordService.getTwitchSubscriptions(this.guildId),
-            await this.discordService.getDiscordServerInformation(this.guildId)
-        ])
-        this.featureActive = this.guild.activeFeatures.includes(this.discordService.TWITCH_SUBSCRIPTIONS);
+            await this.discordService.getDiscordServerInformation(this.guildId),
+        ]);
+        this.featureActive = this.guild.activeFeatures.includes(
+            this.discordService.TWITCH_SUBSCRIPTIONS
+        );
     }
 
     async updateActive(subscription) {
-        const foundCommandIndex = this.subscriptions.findIndex(x => x.name === subscription.name);
+        const foundCommandIndex = this.subscriptions.findIndex(
+            (x) => x.name === subscription.name
+        );
         if (foundCommandIndex >= 0) {
-            await this.discordService.toggleDiscordCommandActive(this.guildId, subscription.discordApplicationCommandId, this.subscriptions[foundCommandIndex].active);
-            toast(`Active status has been updated for /${subscription.name}`, { severity: "success" })
+            await this.discordService.toggleDiscordCommandActive(
+                this.guildId,
+                subscription.discordApplicationCommandId,
+                this.subscriptions[foundCommandIndex].active
+            );
+            toast(`Active status has been updated for /${subscription.name}`, {
+                severity: "success",
+            });
         } else {
-            toast("Error", { severity: "error" })
+            toast("Error", { severity: "error" });
         }
     }
 
     handle(subscription) {
-        this.router.navigate(`/guild/${this.guildId}/social-connections/twitch/${subscription.id}`)
+        this.router.load(
+            `/guild/${this.guildId}/social-connections/twitch/${subscription.id}`
+        );
     }
 
     async toggleFeature() {
         if (this.featureActive) {
-            this.guild.activeFeatures.push(this.discordService.TWITCH_SUBSCRIPTIONS);
-            await this.discordService.setActiveFeaturesForDiscord(this.guildId, this.guild.activeFeatures);
+            this.guild.activeFeatures.push(
+                this.discordService.TWITCH_SUBSCRIPTIONS
+            );
+            await this.discordService.setActiveFeaturesForDiscord(
+                this.guildId,
+                this.guild.activeFeatures
+            );
         } else {
-            this.guild.activeFeatures = this.guild.activeFeatures.filter(x => x !== this.discordService.TWITCH_SUBSCRIPTIONS);
-            await this.discordService.setActiveFeaturesForDiscord(this.guildId, this.guild.activeFeatures);
+            this.guild.activeFeatures = this.guild.activeFeatures.filter(
+                (x) => x !== this.discordService.TWITCH_SUBSCRIPTIONS
+            );
+            await this.discordService.setActiveFeaturesForDiscord(
+                this.guildId,
+                this.guild.activeFeatures
+            );
         }
-        toast(this.featureActive ? "Toggled feature on" : "Toggled feature off");
+        toast(
+            this.featureActive ? "Toggled feature on" : "Toggled feature off"
+        );
     }
 
     async handleCreateModal(event) {
-        if (!this.request.twitchLogin || !this.request.discordChannelId || !this.request.type) {
+        if (
+            !this.request.twitchLogin ||
+            !this.request.discordChannelId ||
+            !this.request.type
+        ) {
             toast("Both the Twitch Username and Channel are required.");
             return;
         }
         let subscription;
         try {
-            subscription = await this.discordService.createTwitchSubscription(this.request, this.guildId)
+            subscription = await this.discordService.createTwitchSubscription(
+                this.request,
+                this.guildId
+            );
             if (subscription) {
                 this.subscriptions.push(subscription);
                 toast("Twitch Go-Live Event Subscription Created.");
-                this.createDialog.close('cancel');
+                this.createDialog.close("cancel");
             }
-        } catch(e) {
+        } catch (e) {
             console.log(e);
         }
     }
@@ -103,9 +137,14 @@ export class Twitch {
     }
 
     async handleDeleteModal(event) {
-        if (this.lastSelected && event.detail.action == 'ok') {
-            await this.discordService.deleteTwitchSubscription(this.lastSelected.id, this.guildId);
-            const index = this.subscriptions.findIndex(x => x.id === this.lastSelected.id);
+        if (this.lastSelected && event.detail.action == "ok") {
+            await this.discordService.deleteTwitchSubscription(
+                this.lastSelected.id,
+                this.guildId
+            );
+            const index = this.subscriptions.findIndex(
+                (x) => x.id === this.lastSelected.id
+            );
             this.subscriptions.splice(index, 1);
         }
     }

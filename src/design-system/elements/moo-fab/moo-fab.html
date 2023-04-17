@@ -1,0 +1,15 @@
+<button if.bind="!url && !route" class="mdc-fab mdc-fab--mini ${class}" aria-label="${icon}" ref="fabEl" click.trigger="handleClick()">
+    <div class="mdc-fab__ripple"></div>
+    <span class="mdc-fab__icon material-icons">${icon}</span>
+    <span class="mdc-fab__label">${text}</span>
+</button>
+<a if.bind="url" href="${url}" class="mdc-fab mdc-fab--mini ${class}" aria-label="${icon}" ref="fabEl" external target="_blank">
+    <div class="mdc-fab__ripple"></div>
+    <span class="mdc-fab__icon material-icons">${icon}</span>
+    <span class="mdc-fab__label">${text}</span>
+</a>
+<a if.bind="route" load="${route}" class="mdc-fab mdc-fab--mini ${class}" aria-label="${icon}" ref="fabEl">
+    <div class="mdc-fab__ripple"></div>
+    <span class="mdc-fab__icon material-icons">${icon}</span>
+    <span class="mdc-fab__label">${text}</span>
+</a>

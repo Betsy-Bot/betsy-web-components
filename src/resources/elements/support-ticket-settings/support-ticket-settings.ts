@@ -1,5 +1,6 @@
 import { DiscordService } from "../../../services/discord-service";
-import { bindable, inject } from "aurelia-framework";
+import {bindable, customElement, inject} from "aurelia";
+import template from "./support-ticket-settings.html";
 export const SupportTicketAudits = [
     "Opened",
     "Closed",
@@ -9,7 +10,11 @@ export const SupportTicketAudits = [
     "UserAdded",
     "UserRemoved"
 ];
-
+@customElement({
+    name: 'support-ticket-settings',
+    template: template,
+    containerless: true
+})
 @inject(DiscordService)
 export class SupportTicketSettings {
     constructor(private discordService: DiscordService) {
@@ -22,8 +27,8 @@ export class SupportTicketSettings {
     roles;
     tab = 'settings';
     options: string[] = SupportTicketAudits;
-    async created() {
-        this.roles = await this.discordService.getDiscordRoles(this.guildId);
+    async binding() {
+        this.roles = await this.discordService.getDiscordRoles();
     }
 
     selectAuditOption() {

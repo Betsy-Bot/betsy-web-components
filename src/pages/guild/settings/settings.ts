@@ -1,57 +1,73 @@
-import { EventAggregator } from "aurelia-event-aggregator";
 import { DiscordService } from "../../../services/discord-service";
-import { Router } from "aurelia-router";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 import { SessionService } from "../../../services/session-service";
-import { bindable, inject } from "aurelia-framework";
+import { bindable, inject } from "aurelia";
 import { toast } from "lets-toast";
 
-@inject(EventAggregator, DiscordService, Router, SessionService)
-export class Settings {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router, private sessionService: SessionService) {
-    }
-
-    async activate(params) {
-        this.params = params;
-    }
+@route({
+    path: "settings",
+    title: "Settings",
+})
+@inject(DiscordService, Router, SessionService)
+export class Settings implements IRouteViewModel {
+    constructor(
+        private discordService: DiscordService,
+        private router: Router,
+        private sessionService: SessionService
+    ) {}
 
     guildId: string;
     guild;
-    params;
     isAdmin;
     @bindable selectedRole;
+    permissionUserId;
 
     async attached() {
-        this.guildId = this.params.guildId;
+        this.guildId = this.discordService.getLocalDiscordGuildId();
         [this.guild, this.isAdmin] = await Promise.all([
             await this.discordService.getDiscordServerInformation(this.guildId),
-            await this.sessionService.isAdmin(this.guildId)
+            await this.sessionService.isAdmin(this.guildId),
         ]);
     }
 
-    permissionUserId;
-
     async addAuthorizedUser() {
-        if (this.guild.authorizedUsers.findIndex( x => x == this.permissionUserId) == -1) {
+        if (
+            this.guild.authorizedUsers.findIndex(
+                (x) => x == this.permissionUserId
+            ) == -1
+        ) {
             this.guild.authorizedUsers.push(this.permissionUserId);
         }
-        await this.discordService.updateAuthorizedUsersForGuild(this.guild, this.guildId);
-        toast('Updated Authorized Users', { severity: 'success' });
+        await this.discordService.updateAuthorizedUsersForGuild(
+            this.guild,
+            this.guildId
+        );
+        toast("Updated Authorized Users", { severity: "success" });
     }
 
     async removeUser(index) {
         this.guild.authorizedUsers.splice(index, 1);
-        await this.discordService.updateAuthorizedUsersForGuild(this.guild, this.guildId);
-        toast('Updated Authorized Users', { severity: 'success' });
+        await this.discordService.updateAuthorizedUsersForGuild(
+            this.guild,
+            this.guildId
+        );
+        toast("Updated Authorized Users", { severity: "success" });
     }
 
     async updateGlobalSettings() {
-        await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
-        toast("Updated Custom Bot Settings", { severity: 'success' })
+        await this.discordService.updateGlobalSettingsForGuild(
+            this.guild,
+            this.guildId
+        );
+        toast("Updated Custom Bot Settings", { severity: "success" });
     }
 
     async updateAutoRolesSettings() {
-        await this.discordService.updateAutoRolesForGuild(this.guild, this.guildId);
-        toast("Updated Auto Roles", { severity: 'success' })
+        await this.discordService.updateAutoRolesForGuild(
+            this.guild,
+            this.guildId
+        );
+        toast("Updated Auto Roles", { severity: "success" });
     }
 
     async selectedRoleChanged() {
@@ -64,7 +80,7 @@ export class Settings {
         if (this.selectedRole) {
             this.guild.globalSettings.autoRoles.push({
                 name: this.selectedRole.name,
-                discordRoleId: this.selectedRole.id
+                discordRoleId: this.selectedRole.id,
             });
         }
     }
@@ -73,4 +89,3 @@ export class Settings {
         this.guild.globalSettings.autoRoles.splice(index, 1);
     }
 }
-

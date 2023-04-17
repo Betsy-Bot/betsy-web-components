@@ -1,0 +1,18 @@
+<confirmation-dialog
+    cancel-text="Cancel"
+    confirm-text="Delete"
+    dialog.two-way="confirmDeleteDialog"
+    handler.bind="(event) => deleteBackup(event)"
+    title="Are you sure you would like to delete?"
+>
+    This is a permanent action and cannot be undone
+</confirmation-dialog>
+
+<feature-header
+    title="Channel Backup"
+    subtitle="View the transcript for your channel backup"
+    delete-function.bind="() => confirmDeleteDialog.open()"
+></feature-header>
+
+<h4 class="mt-5">Transcript</h4>
+<discord-messages-renderer messages.bind="channelBackup.transcript.messages"></discord-messages-renderer>

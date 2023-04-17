@@ -1,38 +1,19 @@
-import { Aurelia } from 'aurelia-framework';
-import environment from '../config/environment.json';
-import { PLATFORM } from 'aurelia-pal';
-import { HttpClient } from 'aurelia-fetch-client';
+import Aurelia from 'aurelia';
+import { RouterConfiguration } from '@aurelia/router-lite';
 
-import 'bootstrap';
-import '@popperjs/core';
-import 'app.scss';
-import { apiEndpoint } from "./environment";
-import { ApiInterceptor } from "./services/api-interceptor";
+import * as Elements from './resources/elements';
+import * as ValueConverters from './resources/value-converters';
+import { App } from './app';
+import * as BetsyWebComponentsPlugin from './design-system';
 
-/*
-Material Web Components
- */
-import '@material/web/button/filled-button';
-
-export function configure(aurelia: Aurelia): void {
-    aurelia.use
-        .standardConfiguration()
-        .plugin(PLATFORM.moduleName('@aurelia-mdc-web/all'))
-        .plugin(PLATFORM.moduleName('aurelia-validation'))
-        .feature(PLATFORM.moduleName('resources/index'));
-
-    aurelia.use.developmentLogging(environment.debug ? 'debug' : 'warn');
-
-    aurelia.container.get(HttpClient).configure(config => {
-        config
-            .withBaseUrl(apiEndpoint())
-            .withInterceptor(aurelia.container.get(ApiInterceptor))
-            .withDefaults({
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-    });
-
-    aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
-}
+await Aurelia.register(
+  RouterConfiguration.customize({
+    //title: "Betsy Bot Admin Panel",
+    useUrlFragmentHash: false,
+  }),
+)
+  .register(BetsyWebComponentsPlugin)
+  .register(Elements)
+  .register(ValueConverters)
+  .app(App)
+  .start();

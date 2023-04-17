@@ -1,24 +1,21 @@
 <template>
     <section id="discord-form-selector">
-        <mdc-select
-            if.bind="forms"
-            class="standard-betsy-select w-100"
-            value.bind="formId"
-            label.bind="label"
-            required.bind="required"
-        >
-            <mdc-icon mdc-select-icon>list</mdc-icon>
-            <mdc-list>
-                <mdc-list-item value.bind="null">
-                    - None -
-                </mdc-list-item>
-                <mdc-list-item repeat.for="form of forms" value.bind="form.id">
-                   ${form.title}
-                </mdc-list-item>
-            </mdc-list>
-        </mdc-select>
+        <moo-select disabled.bind="disabled"
+                    if.bind="forms"
+                    class="standard-betsy-select w-100"
+                    value.bind="formId"
+                    label.bind="label"
+                    required.bind="required">
+            <moo-list>
+                <moo-list-item
+                    repeat.for="form of forms"
+                    label.bind="form.title"
+                    value.bind="form.id"
+                ></moo-list-item>
+            </moo-list>
+        </moo-select>
         <div else>
-            <mdc-circular-progress size="50" stroke-width="3"></mdc-circular-progress>
+            <moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>
         </div>
     </section>
 </template>

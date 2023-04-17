@@ -6,16 +6,16 @@
           <mdc-radio model.bind="act.value" checked.bind="action.type"></mdc-radio>
           <label>
             ${act.label}
-            <span class="material-icons fs-6" mdc-tooltip.bind="act.description">
+            <span class="material-icons fs-6">
                 help
             </span>
           </label>
         </mdc-form-field>
       </div>
       <div class="col-4 text-end">
-        <button mdc-button class="button-secondary" click.delegate="deleteAction()" if.bind="!single">
+        <moo-button variant="secondary" click.bind="() => deleteAction()" if.bind="!single">
           Delete Action
-        </button>
+        </moo-button>
       </div>
     </div>
 

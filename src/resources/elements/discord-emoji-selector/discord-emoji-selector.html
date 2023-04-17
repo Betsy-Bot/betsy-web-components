@@ -11,15 +11,15 @@
         </div>
         <div class="col">
             <div class="text-end">
-                <button mdc-button class="button-primary" click.delegate="selectingEmoji = !selectingEmoji" type="button">
+                <moo-button variant="primary" click.bind="() => selectingEmoji = !selectingEmoji" type="button">
                     ${selectingEmoji ? 'Hide' : 'Show'} Emojis
-                </button>
+                </moo-button>
             </div>
         </div>
     </div>
 
-    <button mdc-button class="button-danger" click.delegate="value = null" if.bind="selectingEmoji" type="button">
+    <moo-button variant="danger" click.bind="() => value = null" if.bind="selectingEmoji" type="button">
         Remove Emoji
-    </button>
+    </moo-button>
     <div ref="emojiSelector" show.bind="selectingEmoji"></div>
 </template>

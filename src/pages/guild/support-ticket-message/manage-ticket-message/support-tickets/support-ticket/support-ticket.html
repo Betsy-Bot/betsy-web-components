@@ -1,0 +1,32 @@
+<template>
+    <section id="support-ticket">
+        <feature-header
+            title="Support Ticket"
+            subtitle="View the transcript and any additional information for a support ticket."
+        ></feature-header>
+
+        <div class="my-3">
+            <div class="my-3">
+                <moo-button if.bind="!supportTicket.closed" click.trigger="closeTicket()" disabled.bind="closing">
+                    <span if.bind="!closing">Close Ticket</span>
+                    <moo-circular-progress size="50" stroke-width="3" else></moo-circular-progress>
+                </moo-button>
+            </div>
+            <template if.bind="supportTicket.transcript">
+                <a href="transcript/${supportTicket.id}">
+                    <moo-button class="button-primary">
+                        Direct Transcript Link
+                    </moo-button>
+                </a>
+
+                <div class="mt-3">
+                    <support-ticket-transcript support-ticket.bind="supportTicket"></support-ticket-transcript>
+                </div>
+            </template>
+        </div>
+
+        <h5 class="empty mt-4" if.bind="!supportTicket.transcript">
+            The ticket has yet had its transcript generated. The transcript is generated when the ticket is closed, or by using "/ticket transcript"
+        </h5>
+    </section>
+</template>

@@ -1,0 +1,13 @@
+<section id="support-ticket-submissions">
+    <feature-header
+        title="Support Tickets"
+        subtitle="View the support tickets created for the support ticket message"
+    ></feature-header>
+    <div class="my-3">
+        <moo-data-grid items.bind="supportTickets" columns.bind="columns" if.bind="supportTickets"></moo-data-grid>
+    </div>
+</section>
+
+<a ref="linkEl" class="d-none">
+    <moo-button label="View"></moo-button>
+</a>

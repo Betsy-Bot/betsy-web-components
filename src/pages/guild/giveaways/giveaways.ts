@@ -1,32 +1,33 @@
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from "services/discord-service";
-import { inject } from "aurelia-framework";
-import { Router } from "aurelia-router";
+import { inject } from "aurelia";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 
-@inject(EventAggregator, DiscordService, Router)
-export class Giveaways {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
-    }
+import { DiscordService } from "../../../services/discord-service";
+
+@route({
+    path: "giveaways",
+    title: "Giveaways",
+})
+@inject(DiscordService, Router)
+export class Giveaways implements IRouteViewModel {
+    constructor(
+        private discordService: DiscordService,
+        private router: Router
+    ) {}
 
     featureActive;
     guild;
     guildId;
-    params;
-    giveaways = [];
-
-    activate(params) {
-        this.params = params;
-    }
+    giveaways: any[];
 
     async attached() {
-        this.guildId = this.params.guildId as string;
+        this.guildId = this.discordService.getLocalDiscordGuildId();
         [this.guild, this.giveaways] = await Promise.all([
             this.discordService.getDiscordServerInformation(this.guildId),
-            this.discordService.getGiveaways(this.guildId)
-        ])
+            this.discordService.getGiveaways(this.guildId),
+        ]);
     }
 
     goTo(giveaway) {
-        this.router.navigate(`/guild/${this.guildId}/giveaways/${giveaway.id}`)
+        this.router.load(`/guild/${this.guildId}/giveaways/${giveaway.id}`);
     }
 }

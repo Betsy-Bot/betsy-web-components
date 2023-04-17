@@ -1,24 +1,24 @@
 <template>
     <div class="row g-4">
         <div class="col-12 col-xl-8">
-            <form submit.delegate="saveMessage()">
-                <discord-feature-header
+            <form submit.trigger="saveMessage()">
+                <feature-header
                     title="Create Message Templates"
                     subtitle="Create prebuilt messages that can be used in a variety of features throughout the bot's functionality"
-                ></discord-feature-header>
+                ></feature-header>
                 <div class="mt-5">
-                    <mdc-text-field
+                    <moo-text-field
                         label="Identifier"
-                        class="w-100"
+                        class="w-100 mb-2"
                         placeholder="Message Identifier"
                         value.bind="request.name"
                         required
-                    ></mdc-text-field>
+                    ></moo-text-field>
                     <discord-message-creator message.two-way="request.message"></discord-message-creator>
                 </div>
-                <button mdc-button class="button-primary mt-2" type="submit">
+                <moo-button class="mt-2" type="submit" variant="primary">
                     Save Message
-                </button>
+                </moo-button>
             </form>
         </div>
         <div class="col-12 col-xl-4">

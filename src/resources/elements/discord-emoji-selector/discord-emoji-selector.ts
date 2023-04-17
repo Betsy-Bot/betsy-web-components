@@ -1,4 +1,4 @@
-import { bindable, inject } from "aurelia-framework";
+import { bindable, inject } from "aurelia";
 import { DiscordService } from "../../../services/discord-service";
 import { EMOJIS } from "../../data/discord-emojis";
 import data from '@emoji-mart/data'

@@ -1,18 +1,18 @@
-import { inject } from 'aurelia-framework';
+import { inject } from 'aurelia';
 import { ApiService } from "./api-service";
 import { DiscordService } from "./discord-service";
 import { ProfileResponse } from "./models/user";
 import { toast } from "lets-toast";
-import { EventAggregator } from 'aurelia-event-aggregator';
+import { IEventAggregator } from 'aurelia';
 
-@inject(ApiService, DiscordService, EventAggregator)
+@inject(ApiService, DiscordService, IEventAggregator)
 export class SessionService {
     static TOKEN_KEY = 'jwt_token';
     static SIDEBAR_STATUS_KEY = 'sidebar_open';
 
     public currentUser;
 
-    constructor(private apiService: ApiService, private discordService: DiscordService, private eventAggregator: EventAggregator) {
+    constructor(private apiService: ApiService, private discordService: DiscordService, private eventAggregator: IEventAggregator) {
     }
 
     saveStorageItem(key: string, value: string) {
@@ -45,6 +45,7 @@ export class SessionService {
 
         this.currentUser = response;
         this.eventAggregator.publish('user-updated', this.currentUser);
+        return response;
     }
 
     async getUser(): Promise<ProfileResponse | boolean> {
@@ -60,17 +61,13 @@ export class SessionService {
     }
 
     async refreshProfile() {
-        try {
-            this.currentUser = await this.apiService.doGet('User/Profile');
-            if (!this.currentUser) {
-                //this.destroyStorageItem(SessionService.TOKEN_KEY);
-                toast("Please re-login", { severity: "error" });
-            }
-            this.eventAggregator.publish('user-updated', this.currentUser);
-            return this.currentUser;
-        } catch(e) {
-            this.clearSession();
+        this.currentUser = await this.apiService.doGet('User/Profile');
+        if (!this.currentUser) {
+            //this.destroyStorageItem(SessionService.TOKEN_KEY);
+            toast("Please re-login", { severity: "error" });
         }
+        this.eventAggregator.publish('user-updated', this.currentUser);
+        return this.currentUser;
     }
 
     isTokenValid() {
@@ -96,12 +93,15 @@ export class SessionService {
     async isAdmin(guildId): Promise<boolean> {
         const user = await this.getUser();
         if (!user) return;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         for (const server of user.activeServers) {
            if (server.guildId == guildId) return true;
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
            //@ts-ignore
            if (server.ownerId == user.id) return true;
         }
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         for (const server of user.adminedServers) {
            if (server.guildId == guildId) return true;

@@ -2,28 +2,28 @@
     <section id="discord-command-creator">
         <div class="row g-4 mb-3">
             <div class="col-12 col-lg-7">
-                <mdc-text-field
+                <moo-text-field
                     class="w-100"
                     label="Command"
                     prefix="/"
                     value.bind="command.name"
                     required.bind="true"
-                ></mdc-text-field>
+                ></moo-text-field>
             </div>
             <div class="col-12 col-lg-7">
-                <mdc-text-field
+                <moo-text-field
                     class="w-100"
                     label="Command Description"
                     value.bind="command.description"
                     required.bind="true"
-                ></mdc-text-field>
+                ></moo-text-field>
             </div>
         </div>
 
         <div class="mb-2">
             <mdc-form-field>
-                <button mdc-switch selected.bind="command.private"></button>
-                <label mdc-tooltip="The response to the interaction will be kept hidden from others (Only the command executioner can see this)">
+                <moo-switch value.bind="command.private"></moo-switch>
+                <label>
                     Private?
                 </label>
             </mdc-form-field>

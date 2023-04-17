@@ -1,36 +1,47 @@
-import { inject } from "aurelia-framework";
-import { BaseDiscordCommand, DiscordCommandActionType, DiscordCommandType } from "../../../../services/models/discord";
+import { inject } from "aurelia";
+import {
+    BaseDiscordCommand,
+    DiscordCommandActionType,
+    DiscordCommandType,
+} from "../../../../services/models/discord";
 import { DiscordService } from "../../../../services/discord-service";
 import { toast } from "lets-toast";
-import { EventAggregator } from "aurelia-event-aggregator";
-import { Router } from "aurelia-router";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 
-@inject(EventAggregator, DiscordService, Router)
-export class CreateResponseMessage {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
-    }
+@route({
+    path: "response-messages/0",
+    title: "Create Response Messages",
+})
+@inject(DiscordService, Router)
+export class CreateResponseMessage implements IRouteViewModel {
+    constructor(
+        private discordService: DiscordService,
+        private router: Router
+    ) {}
 
-    activate(params) {
-        this.guildId = params.guildId;
+    attached() {
+        this.guildId = this.discordService.getLocalDiscordGuildId();
     }
 
     guildId: string;
 
     command: BaseDiscordCommand = {
         name: null,
-        description : null,
+        description: null,
         discordGuildId: null,
         type: DiscordCommandType.ResponseMessage,
         private: true,
-        discordCommandActions: [{
-            type: DiscordCommandActionType.MessageResponse,
-            discordMessage: {
-                message: {
-                    content: 'Some Content',
-                    embeds: null
-                }
-            }
-        }]
+        discordCommandActions: [
+            {
+                type: DiscordCommandActionType.MessageResponse,
+                discordMessage: {
+                    message: {
+                        content: "Some Content",
+                        embeds: null,
+                    },
+                },
+            },
+        ],
     };
 
     createNewCommandAction() {
@@ -38,11 +49,11 @@ export class CreateResponseMessage {
             type: 2,
             discordMessage: {
                 message: {
-                    content: 'Some Content',
-                    embeds: null
-                }
-            }
-        })
+                    content: "Some Content",
+                    embeds: null,
+                },
+            },
+        });
     }
 
     deleteAction(index) {
@@ -54,10 +65,10 @@ export class CreateResponseMessage {
             this.command.discordGuildId = this.guildId;
             await this.discordService.createApplicationCommand(this.command);
             toast("Command Created!");
-            this.router.navigate(`/guild/${this.guildId}/response-message`);
-        } catch(e) {
+            this.router.load(`/guild/${this.guildId}/response-message`);
+        } catch (e) {
             console.log(e);
-            toast('Failed to create command', { severity: 'error' })
+            toast("Failed to create command", { severity: "error" });
         }
     }
 }

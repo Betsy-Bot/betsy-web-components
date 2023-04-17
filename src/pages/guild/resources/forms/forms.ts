@@ -1,27 +1,25 @@
-import { Router } from 'aurelia-router';
-import { inject } from "aurelia-framework";
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from 'services/discord-service';
+import { inject } from "aurelia";
+import { DiscordService } from "../../../../services/discord-service";
+import { IRouteViewModel, route } from "@aurelia/router-lite";
 
-@inject(EventAggregator, DiscordService, Router)
-export class GuildForms {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
-    }
+@route({
+    path: "forms",
+    title: "forms",
+})
+@inject(DiscordService)
+export class Forms implements IRouteViewModel {
+    constructor(private discordService: DiscordService) {}
 
     guildId: string;
     params;
     forms;
 
-    activate(params) {
-        this.params = params;
-        this.guildId = this.params.guildId;
-    }
-
     async attached() {
+        this.guildId = this.discordService.getLocalDiscordGuildId();
         this.forms = await this.discordService.getDiscordForms(this.guildId);
     }
 
-    goToForm(item) {
-        this.router.navigate(`/guild/${this.guildId}/resources/forms/${item.id}`)
-    }
+    // goToForm(item) {
+    //     this.router.load(`/guild/${this.guildId}/resources/forms/${item.id}`);
+    // }
 }

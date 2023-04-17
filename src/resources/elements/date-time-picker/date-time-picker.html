@@ -1,12 +1,10 @@
-<template>
-    <mdc-text-field
-        label.bind="label"
-        ref="pickerElement"
-        class="w-100"
-        required.bind="required"
-        value.bind="pickerValue"
-    ></mdc-text-field>
-    <div>
-        ${value | dateFormat}
-    </div>
-</template>
+
+<label class="mdc-text-field mdc-text-field--filled ${class} w-100" ref="labelEl">
+    <span class="mdc-text-field__ripple"></span>
+    <span class="mdc-floating-label" id="my-label-id">${label}</span>
+    <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id" value.bind="value" ref="inputEl" required.bind="required">
+    <span class="mdc-line-ripple"></span>
+</label>
+<div if.bind="value">
+    ${value | dateFormat}
+</div>

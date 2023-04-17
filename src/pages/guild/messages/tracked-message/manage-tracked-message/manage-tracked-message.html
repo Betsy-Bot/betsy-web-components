@@ -3,7 +3,7 @@
         cancel-text="Cancel"
         confirm-text="Delete"
         dialog.two-way="confirmDeleteDialog"
-        handler.call="deleteItem(event)"
+        handler.bind="(event) => deleteItem(event)"
         title="Are you sure you would like to delete?"
     >
         This is a permanent action and cannot be undone
@@ -11,15 +11,16 @@
     <section id="create-data-command">
         <div class="row">
             <div class="col-12 col-lg-8">
-                <discord-feature-header
+                <feature-header
                     doc-url="https://docs.betsybot.xyz/features/tracked-messages"
                     title="${isNew ? 'Create' : 'Edit'} Tracked Message"
                     subtitle="Tracked Messages are just normal messages that you keep track of. This allows you to edit them without resending/using a command/etc."
-                    delete-function.call="confirmDeleteDialog.open()"
-                    copy-function.call="copy()"
-                ></discord-feature-header>
+                    delete-function.bind="() => confirmDeleteDialog.open()"
+                    copy-function.bind="() => copy()"
+                ></feature-header>
 
-                <form submit.delegate="save()">
+                <form submit.trigger="save()">
+
                     <discord-tracked-message-settings
                         message.two-way="message"
                         guild-id.bind="guildId"
@@ -32,9 +33,9 @@
                     ></discord-message-creator>
 
                     <div class="text-end mt-3">
-                        <button type="submit" mdc-button class="button-primary">
+                        <moo-button variant="primary" type="submit">
                             Save
-                        </button>
+                        </moo-button>
                     </div>
                 </form>
             </div>

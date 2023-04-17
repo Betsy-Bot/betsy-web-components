@@ -1,16 +1,27 @@
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from "services/discord-service";
-import { Router } from "aurelia-router";
+import { IEventAggregator } from "aurelia";
+import { DiscordService } from "../../../../services/discord-service";
+import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
 import { toast } from "lets-toast";
-import { bindable, inject, observable } from "aurelia-framework";
-import { DiscordButtonStyle, DiscordComponentType } from "../../../../services/models/discord";
+import { bindable, inject, observable } from "aurelia";
+import {
+    DiscordButtonStyle,
+    DiscordComponentType,
+} from "../../../../services/models/discord";
+import { watch } from "@aurelia/runtime-html";
 
-@inject(EventAggregator, DiscordService, Router)
-export class ManageGiveaways {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
-    }
+@route({
+    path: "giveaways/:giveawayId",
+    title: "Manage Giveaway",
+})
+@inject(IEventAggregator, DiscordService, IRouter)
+export class ManageGiveaways implements IRouteViewModel {
+    constructor(
+        private eventAggregator: IEventAggregator,
+        private discordService: DiscordService,
+        private router: IRouter
+    ) {}
 
-    activate(params) {
+    loading(params) {
         this.guildId = params.guildId;
         this.giveawayId = params.giveawayId;
     }
@@ -19,10 +30,10 @@ export class ManageGiveaways {
     @bindable giveaway;
     giveawayId;
     isNew: boolean;
-    @observable role;
+    role;
     giveawayTemplate = {
-        name: '',
-        discordServerId: '',
+        name: "",
+        discordServerId: "",
         type: 3,
         active: true,
         roles: [],
@@ -31,10 +42,10 @@ export class ManageGiveaways {
                 embeds: [
                     {
                         title: "Congrats!",
-                        color: 5726933
-                    }
-                ]
-            }
+                        color: 5726933,
+                    },
+                ],
+            },
         },
         containerMessage: {
             message: {
@@ -45,25 +56,27 @@ export class ManageGiveaways {
                         fields: [
                             {
                                 name: "Prize",
-                                value: ""
-                            }
-                        ]
-                    }
+                                value: "",
+                            },
+                        ],
+                    },
                 ],
                 components: [
                     {
                         type: DiscordComponentType.ActionRow,
-                        components: [{
-                            type: DiscordComponentType.Button,
-                            style: DiscordButtonStyle.Success,
-                            custom_id: "GiveawayEnter",
-                            label: "Enter"
-                        }]
-                    }
-                ]
-            }
-        }
-    }
+                        components: [
+                            {
+                                type: DiscordComponentType.Button,
+                                style: DiscordButtonStyle.Success,
+                                custom_id: "GiveawayEnter",
+                                label: "Enter",
+                            },
+                        ],
+                    },
+                ],
+            },
+        },
+    };
     tab = "settings";
 
     async attached() {
@@ -71,48 +84,57 @@ export class ManageGiveaways {
             this.isNew = true;
             this.giveaway = this.giveawayTemplate;
         } else {
-            this.giveaway = await this.discordService.getGiveawayById(this.giveawayId);
+            this.giveaway = await this.discordService.getGiveawayById(
+                this.giveawayId
+            );
         }
-        this.giveawayTemplate.discordServerId = this.discordService.getLocalGuild().id;
+        this.giveawayTemplate.discordServerId =
+            this.discordService.getLocalGuild().id;
     }
 
     async save() {
         try {
             if (this.isNew) {
-                this.giveaway = await this.discordService.createGiveaway(this.giveaway);
+                this.giveaway = await this.discordService.createGiveaway(
+                    this.giveaway
+                );
+                await this.router.load("../giveaways", { context: this });
             } else {
-                this.giveaway = await this.discordService.updateGiveaway(this.giveaway);
+                this.giveaway = await this.discordService.updateGiveaway(
+                    this.giveaway
+                );
             }
-            toast(`Giveaway ${this.isNew ? 'Created' : 'Updated'}!`);
-            this.router.navigateBack();
-        } catch(e) {
+            toast(`Giveaway ${this.isNew ? "Created" : "Updated"}!`);
+        } catch (e) {
             console.log(e);
-            toast('Failed to create giveaway', { severity: 'error' })
+            toast("Failed to create giveaway", { severity: "error" });
         }
     }
 
     async deleteGiveaway(event) {
-        if (event.detail.action == 'ok') {
+        if (event.detail.action == "ok") {
             try {
                 await this.discordService.deleteGiveawayById(this.giveaway.id);
-                toast("Deleted giveaway message!", { severity: "success" })
-                this.router.navigateBack();
-            } catch(e) {
+                toast("Deleted giveaway message!", { severity: "success" });
+            } catch (e) {
                 toast("Failed to delete giveaway", { severity: "error" });
                 throw e;
             }
         }
     }
 
+    @watch("role")
     roleChanged() {
+        console.log("role changes");
         if (!this.giveaway.roles) {
             this.giveaway.roles = [];
         }
         this.giveaway.roles.push({
-            name: this.role.name,
-            discordRoleId: this.role.id,
-            numberOfEntries: 1
-        })
+            name: this.role,
+            discordRoleId: this.role,
+            numberOfEntries: 1,
+        });
+        console.log(this.giveaway.roles);
     }
 
     deleteRole(index) {
@@ -125,12 +147,12 @@ export class ManageGiveaways {
         this.giveaway.id = undefined;
         this.giveaway.discordServer = undefined;
         this.giveaway.winningMessageId = undefined;
-        this.giveaway.winningMessage.id = undefined
+        this.giveaway.winningMessage.id = undefined;
         this.giveaway.containerMessageId = undefined;
         this.giveaway.containerMessage.id = undefined;
         this.giveaway.ended = undefined;
         this.isNew = true;
         toast("Cloned Giveaway");
-        this.router.navigate(`/guild/${this.guildId}/giveaways/0`)
+        this.router.load(`/guild/${this.guildId}/giveaways/0`);
     }
 }

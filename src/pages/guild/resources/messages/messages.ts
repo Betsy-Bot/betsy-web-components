@@ -1,28 +1,30 @@
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from "../../../../services/discord-service";
-import { Router } from "aurelia-router";
-import { inject } from "aurelia-framework";
+import { IEventAggregator } from "aurelia";
+import { inject } from "aurelia";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 
-@inject(EventAggregator, DiscordService, Router)
-export class Messages {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
-    }
+import { DiscordService } from "../../../../services/discord-service";
+
+@route({
+    path: "messages",
+    title: "Messages",
+})
+@inject(IEventAggregator, DiscordService, Router)
+export class Messages implements IRouteViewModel {
+    constructor(
+        private eventAggregator: IEventAggregator,
+        private discordService: DiscordService,
+        private router: Router
+    ) {}
 
     guildId: string;
     params;
     forms;
     messages;
 
-    activate(params) {
-        this.params = params;
-        this.guildId = this.params.guildId;
-    }
-
     async attached() {
-        this.messages = await this.discordService.getResourceMessagesForGuild(this.guildId);
-    }
-
-    goToEdit(message) {
-        this.router.navigate(`/guild/${this.guildId}/resources/messages/edit/${message.id}`)
+        this.guildId = this.discordService.getLocalDiscordGuildId();
+        this.messages = await this.discordService.getResourceMessagesForGuild(
+            this.guildId
+        );
     }
 }

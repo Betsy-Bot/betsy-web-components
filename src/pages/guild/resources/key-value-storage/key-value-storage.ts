@@ -1,17 +1,24 @@
-import { Router } from 'aurelia-router';
-import { inject } from "aurelia-framework";
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from 'services/discord-service';
+import { inject } from "aurelia";
+import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
 
-@inject(EventAggregator, DiscordService, Router)
-export class KeyValueStorage {
-    constructor(private eventAggregator: EventAggregator, private discordService: DiscordService, private router: Router) {
-    }
+import { DiscordService } from "../../../../services/discord-service";
+
+@route({
+    path: "key-value-storage",
+    title: "Key Value Storage",
+})
+@inject(DiscordService, IRouter)
+export class KeyValueStorage implements IRouteViewModel {
+    constructor(
+        private discordService: DiscordService,
+        private router: IRouter
+    ) {}
+
     guildId: string;
     params;
-    items = [];
+    items: any[];
 
-    activate(params) {
+    loading(params) {
         this.params = params;
         this.guildId = this.params.guildId;
     }
@@ -19,13 +26,4 @@ export class KeyValueStorage {
     async attached() {
         this.items = await this.discordService.getKeyValueCategories();
     }
-
-    createFunction() {
-        this.goToItem({ id: 0 });
-    }
-
-    goToItem(item) {
-        this.router.navigate(`/guild/${this.guildId}/resources/key-value-storage/${item.id}`)
-    }
-
 }

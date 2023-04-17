@@ -1,6 +1,4 @@
-#confirmation-dialog {
-    .mdc-dialog__surface,
-    .mdc-dialog__content {
-        overflow: visible;
-    }
+.mdc-dialog__surface,
+.mdc-dialog__content {
+    overflow: visible !important;
 }

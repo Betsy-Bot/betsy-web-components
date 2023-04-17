@@ -1,35 +1,35 @@
 <template>
-    <div class="p-3" mdc-elevation="12">
+    <div class="p-3" elevation="12">
         <div class="row">
             <div class="col-9">
                 <h5>${item.label}</h5>
             </div>
             <div class="col-3 text-danger fs-4 text-end">
-                 <span click.delegate="removeItem()" class="cursor-pointer">
+                 <span click.trigger="removeItem()" class="cursor-pointer">
                      X
                  </span>
             </div>
         </div>
-        <mdc-text-field
+        <moo-text-field
             class="w-100 my-2"
             label="Item Label"
             value.bind="item.label"
             placeholder="Name displayed as the option"
             required
-        ></mdc-text-field>
-        <mdc-text-field
+        ></moo-text-field>
+        <moo-text-field
             class="w-100 my-2"
             label="Item Value"
             value.bind="item.value"
             placeholder="Value used for the menu item"
             required
-        ></mdc-text-field>
-        <mdc-text-field
+        ></moo-text-field>
+        <moo-text-field
             class="w-100 my-2"
             label="item Description"
             value.bind="item.description"
             placeholder="This is only used for select menu type item containers"
-        ></mdc-text-field>
+        ></moo-text-field>
         <discord-emoji-selector
             value.two-way="item.emoji"
             size.bind="100"

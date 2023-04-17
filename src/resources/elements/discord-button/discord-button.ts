@@ -1,6 +1,12 @@
-import { bindable } from "aurelia-framework";
+import {bindable, customElement} from "aurelia";
 import './discord-button.scss';
+import template from "./discord-button.html";
 
+@customElement({
+    name: 'discord-button',
+    template: template,
+    containerless: true
+})
 export class DiscordButton {
     @bindable button;
     getButtonClass(style) {

@@ -1,19 +1,19 @@
 <template>
-    <mdc-text-field
+    <moo-text-field
         class="w-100 my-2"
         label="Parameter Name"
         value.bind="parameter.name"
         placeholder="name"
         required.bind="true"
-    ></mdc-text-field>
-    <mdc-text-field
+    ></moo-text-field>
+    <moo-text-field
         if.bind="!hideDescription"
         class="w-100 my-2"
         label="Parameter Description"
         value.bind="parameter.description"
         placeholder="description"
         required.bind="true"
-    ></mdc-text-field>
+    ></moo-text-field>
     <mdc-select class="standard-betsy-select w-100 my-2" value.bind="parameter.type" label="Type" required>
         <mdc-list>
             <mdc-list-item repeat.for="type of optionTypes" value.bind="type">
@@ -22,29 +22,26 @@
         </mdc-list>
     </mdc-select>
     <template if.bind="!hideSwitch">
-        <button
+        <moo-switch
             if.bind="!hideSwitch"
-            mdc-switch
-            selected.bind="parameter.required"
             value.bind="parameter.required"
-            change.delegate="parameter.required = !!parameter.required"
-        ></button>
+        ></moo-switch>
         <label class="me-5">Required?</label>
     </template>
-    <mdc-text-field
+    <moo-text-field
         class="w-100 my-2"
         label="Parameter Mapping"
         value.bind="parameter.apiPath"
         placeholder="someObject.someProperty"
         required.bind="true"
-    ></mdc-text-field>
+    ></moo-text-field>
     <template if.bind="showValue">
-        <mdc-text-field
+        <moo-text-field
             class="w-100 my-2"
             label="Value"
             value.bind="parameter.value"
             placeholder="Value"
             required.bind="true"
-        ></mdc-text-field>
+        ></moo-text-field>
     </template>
 </template>

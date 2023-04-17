@@ -1,32 +1,32 @@
-import { inject } from 'aurelia-framework';
-import { SessionService } from './session-service';
+import { inject } from 'aurelia';
 import { toast } from "lets-toast";
-import { EventAggregator } from "aurelia-event-aggregator";
-import { DiscordService } from "./discord-service";
+import { IEventAggregator } from "aurelia";
+import {SessionService} from "./session-service";
 
 const AUTHORIZATION_HEADER = 'Authorization';
 const GUILD_ID_HEADER = 'Discord-Guild-Id';
 
-@inject(SessionService, EventAggregator, DiscordService)
+@inject(IEventAggregator)
 export class ApiInterceptor {
-    constructor(private sessionService: SessionService, private ea: EventAggregator, private discordService: DiscordService) {
+    constructor(private ea: IEventAggregator) {
     }
 
     request(request) {
         try {
-            if (!this.sessionService.hasValidSession()) {
+            if (!this.hasValidSession()) {
                 return request;
             }
 
             if (!request.headers.get(AUTHORIZATION_HEADER)) {
-                const bearerToken = `Bearer ${this.sessionService.getStorageItem(SessionService.TOKEN_KEY)}`;
+                const bearerToken = `Bearer ${this.getStorageItem(SessionService.TOKEN_KEY)}`;
                 request.headers.append(AUTHORIZATION_HEADER, bearerToken);
             }
 
-            const guildId = this.discordService.getDiscordGuildId();
-            if (guildId) {
-                request.headers.append(GUILD_ID_HEADER, guildId);
-            }
+            // TODO: Replace with store service later for DI issues
+            // const guildId = this.discordService.getDiscordGuildId();
+            // if (guildId) {
+            //     request.headers.append(GUILD_ID_HEADER, guildId);
+            // }
 
             return request;
         } catch (e) {
@@ -42,14 +42,14 @@ export class ApiInterceptor {
             let msg;
             switch (response?.status) {
                 case 401:
-                    await this.sessionService.clearSession();
+                    await this.clearSession();
                     break;
                 case 403:
                     try {
                         data = await response.json();
                         if (data.message == "Expired Token? Please relog") {
                             toast("Discord Token Expired. Please Login Again", { severity: "error" });
-                            await this.sessionService.clearSession();
+                            await this.clearSession();
                         }
                     } catch(e) {
                         console.log(e);
@@ -75,5 +75,34 @@ export class ApiInterceptor {
             console.log(e);
             //this.notification.error('Something went wrong. If this error continues, please contact support.', 'Error');
         }
+    }
+
+    getStorageItem(key: string, defaultValue: any = null): string | boolean {
+        if (window.localStorage[key] !== undefined) {
+            try {
+                return JSON.parse(window.localStorage.getItem(key));
+            } catch (e) {
+                return window.localStorage.getItem(key);
+            }
+        } else {
+            this.saveStorageItem(key, defaultValue);
+            return defaultValue;
+        }
+    }
+
+    saveStorageItem(key: string, value: string) {
+        window.localStorage.setItem(key, value);
+    }
+
+    hasValidSession() {
+        const token = this.getStorageItem(SessionService.TOKEN_KEY);
+        return token && token !== '' && token !== undefined && token !== 'undefined' && token !== 'null';
+    }
+    clearSession() {
+        this.destroyStorageItem(SessionService.TOKEN_KEY);
+        this.ea.publish('user-updated', null);
+    }
+    destroyStorageItem(key: string) {
+        window.localStorage.removeItem(key);
     }
 }

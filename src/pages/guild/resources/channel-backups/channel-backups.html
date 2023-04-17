@@ -1,0 +1,33 @@
+<confirmation-dialog
+    cancel-text="Cancel"
+    confirm-text="Create"
+    dialog.two-way="createChannelBackupDialog"
+    handler.bind="(event) => handleCreateDialog(event)"
+    title="Create new Channel Backup"
+>
+    <discord-channel-selector
+        label="Select Channel for Backup"
+        type.bind="0"
+        channel-id.two-way="newChannel"
+        guild-id.bind="guildId"
+    ></discord-channel-selector>
+    <div class="my-2">
+        The transcript will automatically be generated once created.
+    </div>
+</confirmation-dialog>
+
+<feature-header
+    title="Channel Backups"
+    subtitle="View or Create Backups of the messages sent to a channel in your server."
+></feature-header>
+
+<div class="my-3">
+    <moo-button click.bind="() => createChannelBackupDialog.open()" varaint="primary" label="Create New Channel Backup"></moo-button>
+</div>
+
+<feature-item-list
+    name-override="channelName"
+    data.bind="channelBackups"
+    show-toggler.bind="false"
+    route="../channel-backups"
+></feature-item-list>

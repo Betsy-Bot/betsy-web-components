@@ -1,20 +1,16 @@
-<template>
-    <discord-feature-header
-        doc-url="https://docs.betsybot.xyz/features/giveaways"
-        title="Giveaways"
-        subtitle="Manage and track your giveaways."
-    ></discord-feature-header>
+<feature-header
+    doc-url="https://docs.betsybot.xyz/features/giveaways"
+    title="Giveaways"
+    subtitle="Manage and track your giveaways."
+    create-route="../giveaways/0"
+></feature-header>
 
-    <div class="my-3">
-        <button mdc-button class="button-primary" click.delegate="goTo({id: 0})">
-            Create New Giveaway
-        </button>
-    </div>
-
+<template if.bind="giveaways">
     <feature-item-list
         data.bind="giveaways"
         show-toggler.bind="false"
-        toggle-handler.call="updateActive(item)"
-        item-click-handler.call="goTo(item)"
+        toggle-handler.bind="() => updateActive(item)"
+        item-click-handler.bind="() => goTo(item)"
+        route="../giveaways"
     ></feature-item-list>
 </template>

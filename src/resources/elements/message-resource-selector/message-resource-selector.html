@@ -1,13 +1,19 @@
 <template>
-    <mdc-select if.bind="messages" class="standard-betsy-select w-100" value.bind="selectedMessage" label.bind="label" required.bind="required">
-        <mdc-icon mdc-select-icon>folder</mdc-icon>
-        <mdc-list>
-            <mdc-list-item repeat.for="message of messages" value.bind="message">
-                ${message.name}
-            </mdc-list-item>
-        </mdc-list>
-    </mdc-select>
+    <moo-select disabled.bind="disabled"
+                if.bind="messages"
+                class="standard-betsy-select w-100"
+                value.bind="selectedMessage"
+                label.bind="label"
+                required.bind="required">
+        <moo-list>
+            <moo-list-item
+                repeat.for="message of messages"
+                label.bind="message.name"
+                value.bind="message.id"
+            ></moo-list-item>
+        </moo-list>
+    </moo-select>
     <div else>
-        <mdc-circular-progress size="50" stroke-width="3"></mdc-circular-progress>
+        <moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>
     </div>
 </template>

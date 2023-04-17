@@ -1,6 +1,6 @@
 import { toHTML } from '@darkguy10/discord-markdown';
 import { DiscordService } from "../../services/discord-service";
-import { inject } from "aurelia-framework";
+import { inject } from "aurelia";
 
 @inject(DiscordService)
 export class DiscordMarkupValueConverter {

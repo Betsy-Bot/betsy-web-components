@@ -1,27 +1,19 @@
 <template>
     <section id="discord-channel-selector" class.bind="class">
         <div class="au-select" if.bind="channels">
-            <mdc-select
-                disabled.bind="disabled"
-                class="standard-betsy-select w-100"
-                value.bind="channelId & validate"
-                label.bind="label"
-                required.bind="required"
-            >
-                <mdc-icon mdc-select-icon>dns</mdc-icon>
-                <mdc-list>
-                    <mdc-list-item value.bind="null" if.bind="includeNull">
-                        - None -
-                    </mdc-list-item>
-                    <mdc-list-item repeat.for="channel of channels" value.bind="channel.id" if.bind="matchesType(channel)">
-                        ${channel.name}
-                    </mdc-list-item>
-                </mdc-list>
-            </mdc-select>
-            <mdc-select-helper-text validation></mdc-select-helper-text>
+            <moo-select label.bind="label" value.bind="channelId" class="standard-betsy-select w-100" disabled.bind="disabled" required.bind="required">
+                <moo-list>
+                    <moo-list-item
+                        repeat.for="channel of channels"
+                        label.bind="channel.name"
+                        value.bind="channel.id"
+                        if.bind="matchesType(channel)"
+                    ></moo-list-item>
+                </moo-list>
+            </moo-select>
         </div>
         <div else>
-            <mdc-circular-progress size="50" stroke-width="3"></mdc-circular-progress>
+            <moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>
         </div>
     </section>
 </template>

@@ -1,67 +1,56 @@
-<template>
-    <section id="support-tickets">
-        <div class="row" if.bind="featureActive !== undefined">
-            <div class="col-8">
-                <discord-feature-header
-                    doc-url="https://docs.betsybot.xyz/features/action-logs"
-                    title="Action Log"
-                    subtitle="Watch for various message actions and log these to your desired audit log channel."
-                    display-warning.bind="!featureActive"
-                ></discord-feature-header>
-            </div>
-            <div class="col-4 text-end">
-                <button
-                    mdc-switch
-                    selected.bind="featureActive"
-                    value.bind="featureActive"
-                    change.delegate="toggleFeature()"
-                ></button>
-                <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
-            </div>
-        </div>
+<div class="row" if.bind="featureActive !== undefined">
+    <div class="col-8">
+        <feature-header
+            doc-url="https://docs.betsybot.xyz/features/action-logs"
+            title="Action Log"
+            subtitle="Watch for various message actions and log these to your desired audit log channel."
+            display-warning.bind="!featureActive"
+        ></feature-header>
+    </div>
+    <div class="col-4 text-end">
+        <moo-switch
+            value.bind="featureActive"
+            change.bind="() => toggleFeature()"
+        ></moo-switch>
+        <label class="me-5">Active?</label>
+    </div>
+</div>
 
-        <form submit.delegate="updateAuditLogChannel()" class="mb-2">
-            <h6> Select or edit your audit log channel for your server</h6>
-            <div class="mt-3">
-                <discord-channel-selector
-                    required.bind="true"
-                    label="Select Channel for Audits"
-                    if.bind="guildId"
-                    type.bind="0"
-                    channel-id.two-way="guild.auditLogChannelId"
-                    guild-id.bind="guildId"
-                ></discord-channel-selector>
-            </div>
-            <div class="mt-2">
-                <button mdc-button class="button-primary" type="submit">
-                    Save
-                </button>
-            </div>
-        </form>
+<form submit.trigger="updateAuditLogChannel()" class="mb-2">
+    <h6> Select or edit your audit log channel for your server</h6>
+    <div class="mt-3">
+        <discord-channel-selector
+            required.bind="true"
+            label="Select Channel for Audits"
+            if.bind="guildId"
+            type.bind="0"
+            channel-id.two-way="guild.auditLogChannelId"
+            guild-id.bind="guildId"
+        ></discord-channel-selector>
+    </div>
+    <div class="mt-2">
+        <moo-button variant="primary" type="submit">
+            Save
+        </moo-button>
+    </div>
+</form>
 
-        <div class="feature-list row g-4">
-            <div class="col-6 col-lg-4 col-xl-3" repeat.for="feature of actionLogItems">
-                <mdc-card class="p-3 h-100">
-                    <mdc-card-primary-action>
-                        <div class="" mdc-headline5>${feature.label}</div>
-                        <div class="py-3" mdc-body2>${feature.description}</div>
-                    </mdc-card-primary-action>
-                    <mdc-list-divider></mdc-list-divider>
-                    <mdc-card-actions class="text-end">
-                        <mdc-card-action-buttons>
-                            Active?
-                            <span class="ms-3">
-                                <button
-                                    mdc-switch
-                                    selected.bind="feature.active"
-                                    value.bind="feature.active"
-                                    change.delegate="toggleActionFeature(feature)"
-                                ></button>
+<div class="feature-list row g-4">
+    <div class="col-6 col-lg-4 col-xl-3" repeat.for="logItem of actionLogItems">
+        <moo-card class="p-3 h-100">
+            <moo-card-header>
+                <div class="">${logItem.label}</div>
+                <div class="py-3">${logItem.description}</div>
+            </moo-card-header>
+            <moo-card-footer class="text-end">
+                Active?
+                <span class="ms-3">
+                                <moo-switch
+                                    value.bind="logItem.active"
+                                    change.bind="() => toggleActionFeature(logItem)"
+                                ></moo-switch>
                             </span>
-                        </mdc-card-action-buttons>
-                    </mdc-card-actions>
-                </mdc-card>
-            </div>
-        </div>
-    </section>
-</template>
+            </moo-card-footer>
+        </moo-card>
+    </div>
+</div>

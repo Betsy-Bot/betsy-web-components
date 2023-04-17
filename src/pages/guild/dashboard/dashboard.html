@@ -1,10 +1,10 @@
 <template>
     <section id="guild-dashboard">
-        <discord-feature-header
+        <feature-header
             title="Server Dashboard"
             subtitle="View Information About Your Server"
             hide-back.bind="true"
-        ></discord-feature-header>
+        ></feature-header>
 
         <div class="server-header mt-4 mb-2" if.bind="guild">
             <div class="fs-4">
@@ -13,21 +13,21 @@
 
             <div class="row">
                 <div class="col-12 col-md-6 col-xl-4 col-xxl-3" repeat.for="stat of stats">
-                    <mdc-card class="stat-card stat-card__square">
-                        <mdc-card-primary-action>
-                            <div class="stat-card__square-row">
-                                <mdc-card-media square class="demo-card__media stat-card__media-music text-center">
-                                <span class="material-icons fs-2 mt-3 mx-auto">
-                                    bar_chart
-                                </span>
-                                </mdc-card-media>
-                                <div class="stat-card__info">
-                                    <div mdc-headline5>${stat.title}</div>
-                                    <div mdc-body2>${stat.prefix}${getStat(stat)}</div>
-                                </div>
-                            </div>
-                        </mdc-card-primary-action>
-                    </mdc-card>
+<!--                    <mdc-card class="stat-card stat-card__square">-->
+<!--                        <mdc-card-primary-action>-->
+<!--                            <div class="stat-card__square-row">-->
+<!--                                <mdc-card-media square class="demo-card__media stat-card__media-music text-center">-->
+<!--                                <span class="material-icons fs-2 mt-3 mx-auto">-->
+<!--                                    bar_chart-->
+<!--                                </span>-->
+<!--                                </mdc-card-media>-->
+<!--                                <div class="stat-card__info">-->
+<!--                                    <div mdc-headline5>${stat.title}</div>-->
+<!--                                    <div mdc-body2>${stat.prefix}${getStat(stat)}</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </mdc-card-primary-action>-->
+<!--                    </mdc-card>-->
                 </div>
             </div>
         </div>

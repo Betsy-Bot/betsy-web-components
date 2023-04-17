@@ -1,50 +1,40 @@
-<template>
-    <section id="response-message">
-        <div class="row" if.bind="featureActive !== undefined">
-            <div class="col-8">
-                <discord-feature-header
-                    display-warning.bind="!featureActive && commands.length > 0"
-                    doc-url="https://docs.betsybot.xyz/configurable-commands/response-commands"
-                    title="Response Messages"
-                    subtitle="Response messages can be used to respond to any commands you create. The response can be done in several ways. Each of the ways will be described in the options when creating a new response command."
-                ></discord-feature-header>
-            </div>
-            <div class="col-4 text-end">
-                <button
-                    mdc-switch
-                    selected.bind="featureActive"
-                    value.bind="featureActive"
-                    change.delegate="toggleFeature()"
-                ></button>
-                <label mdc-tooltip="When de-activated all commands will no longer work" class="me-5">Active?</label>
-            </div>
-        </div>
+<div class="row" if.bind="featureActive !== undefined">
+    <div class="col-8">
+        <feature-header
+            display-warning.bind="!featureActive && commands.length > 0"
+            doc-url="https://docs.betsybot.xyz/configurable-commands/response-commands"
+            title="Response Messages"
+            create-route="../response-messages/0"
+            subtitle="Response messages can be used to respond to any commands you create. The response can be done in several ways. Each of the ways will be described in the options when creating a new response command."
+        ></feature-header>
+    </div>
+    <div class="col-4 text-end">
+        <moo-switch
+            value.bind="featureActive"
+        ></moo-switch>
+        <label class="me-5">Active?</label>
+    </div>
+</div>
 
-        <div>
-            <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
+<div>
+    <div class="mt-1 mb-3 text-warning fs-7 d-inline-flex align-content-center">
                 <span class="material-icons me-2">
                     warning
                 </span>
-                Servers have a limit of 200 command creation actions per day. Activating or creating a command count
-                towards this limit.
-                Reaching this limit will prevent you from activating or creating for the day.
-            </div>
-        </div>
+        Servers have a limit of 200 command creation actions per day. Activating or creating a command count
+        towards this limit.
+        Reaching this limit will prevent you from activating or creating for the day.
+    </div>
+</div>
 
-        <a href="/guild/${guildId}/response-message/create" if.bind="guildId">
-            <button mdc-button class="button-primary">
-                Create New Command
-            </button>
-        </a>
-
-        <div class="existing-commands-area">
-            <feature-item-list
-                data.bind="commands"
-                show-toggler.bind="true"
-                name-prefix="/"
-                toggle-handler.call="updateActive(item)"
-                item-click-handler.call="goToCommand(item)"
-            ></feature-item-list>
-        </div>
-    </section>
-</template>
+<div class="existing-commands-area">
+    <feature-item-list
+        data.bind="commands"
+        show-toggler.bind="true"
+        name-prefix="/"
+        toggle-handler.bind="() => updateActive(item)"
+        item-click-handler.bind="() => goToCommand(item)"
+        route="../response-messages"
+        name-override="name"
+    ></feature-item-list>
+</div>

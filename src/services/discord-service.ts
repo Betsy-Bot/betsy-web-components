@@ -1,39 +1,48 @@
-import { inject } from 'aurelia-framework';
-import { ApiService } from './api-service';
+import { inject } from "aurelia";
+import { IRouter } from "@aurelia/router-lite";
 
 import * as discordModels from "./models/discord";
-import { BaseDiscordCommand, DiscordForm, SendMessageToChannelRequest } from "./models/discord";
+import {
+    BaseDiscordCommand,
+    DiscordForm,
+    SendMessageToChannelRequest,
+} from "./models/discord";
+import { ApiService } from "./api-service";
 
-@inject(ApiService)
+@inject(ApiService, IRouter)
 export class DiscordService {
+    guildId: string;
     guild;
     guildChannelData = {
         guildId: null,
         data: null,
-    }
+    };
     discordGuildId;
     messages;
 
-    RESPONSE_MESSAGES = 'ResponseMessages';
-    DATA_COMMANDS = 'DataCommands';
-    BLOCK_INVITES = 'BlockInvites';
-    SUPPORT_TICKETS = 'SupportTickets';
-    AUDIT_LOG = 'AuditLog';
-    TWITCH_SUBSCRIPTIONS = 'TwitchSubscriptions';
-    PAYMENTS = 'Payments';
-    WELCOME_MESSAGES = 'WelcomeMessages';
-    AUTO_RESPONDERS = 'AutoResponders';
-    VERIFICATION = 'Verification';
-    THREAD_CHANNELS = 'ThreadChannels';
+    RESPONSE_MESSAGES = "ResponseMessages";
+    DATA_COMMANDS = "DataCommands";
+    BLOCK_INVITES = "BlockInvites";
+    SUPPORT_TICKETS = "SupportTickets";
+    AUDIT_LOG = "AuditLog";
+    TWITCH_SUBSCRIPTIONS = "TwitchSubscriptions";
+    PAYMENTS = "Payments";
+    WELCOME_MESSAGES = "WelcomeMessages";
+    AUTO_RESPONDERS = "AutoResponders";
+    VERIFICATION = "Verification";
+    THREAD_CHANNELS = "ThreadChannels";
 
     get guildChannels() {
         return this.guildChannelData.data;
     }
 
-    constructor(private api: ApiService) {
+    public setGuildId(value) {
+        this.guildId = value;
     }
 
-    getLocalGuild() {
+    constructor(private api: ApiService, private router: IRouter) {}
+
+    public getLocalGuild() {
         return this.guild;
     }
 
@@ -41,14 +50,14 @@ export class DiscordService {
         if (!this.guild) {
             return;
         }
-        return this.guild.id;
+        return this.guild?.id;
     }
 
     getLocalDiscordGuildId() {
         if (!this.guild) {
-            return;
+            return this.guildId;
         }
-        return this.guild.guildId;
+        return this.guild?.guildId;
     }
 
     getDiscordGuildId() {
@@ -59,31 +68,44 @@ export class DiscordService {
         this.discordGuildId = guildId;
     }
 
-    async exchangeCode(code: string, redirectUrl?: string): Promise<discordModels.ExchangeCodeResponse> {
-        let path = 'Discord/OAuth/ExchangeCode';
+    async exchangeCode(
+        code: string,
+        redirectUrl?: string
+    ): Promise<discordModels.ExchangeCodeResponse> {
+        let path = "Discord/OAuth/ExchangeCode";
         if (redirectUrl) {
-            path += '?redirectUrl=' + redirectUrl
+            path += "?redirectUrl=" + redirectUrl;
         }
-        return await this.api.doPost(path, { code: code })
+        return await this.api.doPost(path, { code: code });
     }
 
-    async createServer(guildId: string): Promise<discordModels.BaseDiscordServer> {
-        return await this.api.doPost('DiscordGuild', { guildId: guildId })
+    async createServer(
+        guildId: string
+    ): Promise<discordModels.BaseDiscordServer> {
+        return await this.api.doPost("DiscordGuild", { guildId: guildId });
     }
 
-    async createApplicationCommand(command: BaseDiscordCommand): Promise<discordModels.BaseDiscordCommand> {
-        return await this.api.doPost('Discord/ApplicationCommand', command);
+    async createApplicationCommand(
+        command: BaseDiscordCommand
+    ): Promise<discordModels.BaseDiscordCommand> {
+        return await this.api.doPost("Discord/ApplicationCommand", command);
     }
 
-    async setupServer(guildId: string): Promise<discordModels.BaseDiscordCommand> {
+    async setupServer(
+        guildId: string
+    ): Promise<discordModels.BaseDiscordCommand> {
         return await this.api.doPost(`DiscordGuild/${guildId}/Setup`, {});
     }
 
-    async updateApplicationCommand(command: BaseDiscordCommand): Promise<discordModels.BaseDiscordCommand> {
-        return await this.api.doPatch('Discord/ApplicationCommand', command);
+    async updateApplicationCommand(
+        command: BaseDiscordCommand
+    ): Promise<discordModels.BaseDiscordCommand> {
+        return await this.api.doPatch("Discord/ApplicationCommand", command);
     }
 
-    async getResponseMessagesForGuild(guildId: string): Promise<discordModels.BaseDiscordCommand[]> {
+    async getResponseMessagesForGuild(
+        guildId: string
+    ): Promise<discordModels.BaseDiscordCommand[]> {
         return await this.api.doGet(`DiscordGuild/${guildId}/ResponseMessages`);
     }
 
@@ -91,15 +113,26 @@ export class DiscordService {
         return await this.api.doGet(`DiscordGuild/${guildId}/Users`);
     }
 
-    async getDataCommandsForGuild(guildId: string): Promise<discordModels.BaseDiscordCommand[]> {
+    async getDataCommandsForGuild(
+        guildId: string
+    ): Promise<discordModels.BaseDiscordCommand[]> {
         return await this.api.doGet(`DiscordGuild/${guildId}/DataCommands`);
     }
 
-    async toggleDiscordCommandActive(guildId: string, discordApplicationCommandId, active: boolean) {
-        return await this.api.doPatch(`DiscordGuild/${guildId}/DiscordCommand/${discordApplicationCommandId}/ToggleActive`, { active: active });
+    async toggleDiscordCommandActive(
+        guildId: string,
+        discordApplicationCommandId,
+        active: boolean
+    ) {
+        return await this.api.doPatch(
+            `DiscordGuild/${guildId}/DiscordCommand/${discordApplicationCommandId}/ToggleActive`,
+            { active: active }
+        );
     }
 
-    async getDiscordCommandDetails(id: string): Promise<discordModels.BaseDiscordCommand> {
+    async getDiscordCommandDetails(
+        id: string
+    ): Promise<discordModels.BaseDiscordCommand> {
         return await this.api.doGet(`Discord/ApplicationCommand/${id}`);
     }
 
@@ -107,10 +140,13 @@ export class DiscordService {
         return await this.api.doDelete(`Discord/ApplicationCommand/${id}`);
     }
 
-    async getDiscordServerInformation(guildId: string): Promise<discordModels.BaseDiscordServer> {
-        if (!this.guild || guildId !== this.guild.guildId) {
+    async getDiscordServerInformation(guildId: string): Promise<any> {
+        if (!this.guild || guildId != this.guild.guildId) {
             this.guild = await this.api.doGet(`DiscordGuild/${guildId}`);
             this.messages = null;
+        }
+        if (!this.guildChannelData.guildId) {
+            await this.getDiscordChannels(guildId);
         }
         return this.guild;
     }
@@ -120,7 +156,10 @@ export class DiscordService {
     }
 
     async verifyUser(guildId: string, userId: string): Promise<any> {
-        return await this.api.doPost(`DiscordGuild/${guildId}/Verify/${userId}`, {});
+        return await this.api.doPost(
+            `DiscordGuild/${guildId}/Verify/${userId}`,
+            {}
+        );
     }
 
     async verifyLogin(): Promise<any> {
@@ -128,82 +167,142 @@ export class DiscordService {
     }
 
     async updateVerifiedRole(guildId: string, roleId: string): Promise<any> {
-        return await this.api.doPost(`DiscordGuild/${guildId}/VerifiedRole`, { verifiedRoleId: roleId });
+        return await this.api.doPost(`DiscordGuild/${guildId}/VerifiedRole`, {
+            verifiedRoleId: roleId,
+        });
     }
 
-    async getDiscordChannels(guildId: string) {
-        if (this.guildChannelData.guildId == guildId && this.guildChannelData.data) {
+    async getDiscordChannels(guildId?: string) {
+        if (
+            this.guildChannelData.guildId == guildId &&
+            this.guildChannelData.data
+        ) {
             return this.guildChannelData.data;
         }
-        const channels = await this.api.doGet(`DiscordGuild/${guildId}/Channels`);
+        if (!this.guildId) {
+            return [];
+        }
+        const channels = await this.api.doGet(
+            `DiscordGuild/${guildId}/Channels`
+        );
         this.guildChannelData = {
             guildId: guildId,
-            data: channels
-        }
+            data: channels,
+        };
         return this.guildChannelData.data;
     }
     getLocalDiscordChannels() {
         return this.guildChannelData.data;
     }
 
-    async getDiscordRoles(guildId: string) {
-        return this.guild.guild.roles;
+    public async getDiscordRoles() {
+        return this.guild?.guild?.roles;
     }
 
-    async setActiveFeaturesForDiscord(guildId: string, features: string[]): Promise<discordModels.BaseDiscordServer> {
-        return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, { activeFeatures: features });
+    public async setActiveFeaturesForDiscord(
+        guildId: string,
+        features: string[]
+    ): Promise<discordModels.BaseDiscordServer> {
+        return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, {
+            activeFeatures: features,
+        });
     }
 
-    async setActiveAuditFeaturesForDiscord(guildId: string, features: string[]): Promise<discordModels.BaseDiscordServer> {
-        return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, { activeAuditLogFeatures: features });
+    public async setActiveAuditFeaturesForDiscord(
+        guildId: string,
+        features: string[]
+    ): Promise<discordModels.BaseDiscordServer> {
+        return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, {
+            activeAuditLogFeatures: features,
+        });
     }
 
-    async setAuditLogChannelId(guildId: string, auditLogChannelId: string[]): Promise<discordModels.BaseDiscordServer> {
-        return await this.api.doPatch(`DiscordGuild/${guildId}/SetAuditLogChannel`, { auditLogChannelId: auditLogChannelId });
+    public async setAuditLogChannelId(
+        guildId: string,
+        auditLogChannelId: string[]
+    ): Promise<discordModels.BaseDiscordServer> {
+        return await this.api.doPatch(
+            `DiscordGuild/${guildId}/SetAuditLogChannel`,
+            { auditLogChannelId: auditLogChannelId }
+        );
     }
 
-    async sendMessageToChannel(guildId: string, channelId: string[], message: SendMessageToChannelRequest): Promise<discordModels.BaseDiscordServer> {
-        return await this.api.doPatch(`DiscordGuild/${guildId}/Channel/${channelId}/SendMessage`, message);
+    public async sendMessageToChannel(
+        guildId: string,
+        channelId: string[],
+        message: SendMessageToChannelRequest
+    ): Promise<discordModels.BaseDiscordServer> {
+        return await this.api.doPatch(
+            `DiscordGuild/${guildId}/Channel/${channelId}/SendMessage`,
+            message
+        );
     }
 
-    async getDiscordForms(guildId: string) {
+    public async getDiscordForms(guildId: string) {
         return this.api.doGet(`DiscordForm/Guild/${guildId}/Forms`);
     }
 
-    async getDiscordForm(guildId: string, formId: string) {
+    public getDiscordForm(guildId: string, formId: string) {
         return this.api.doGet(`DiscordForm/Guild/${guildId}/Forms/${formId}`);
     }
 
-    async createDiscordForm(guildId: string, form: DiscordForm): Promise<discordModels.DiscordForm> {
+    public async createDiscordForm(
+        guildId: string,
+        form: DiscordForm
+    ): Promise<discordModels.DiscordForm> {
         return this.api.doPost(`DiscordForm/Guild/${guildId}/Forms`, form);
     }
 
-    async updateDiscordForm(guildId: string, form: DiscordForm): Promise<discordModels.DiscordForm> {
+    public async updateDiscordForm(
+        guildId: string,
+        form: DiscordForm
+    ): Promise<discordModels.DiscordForm> {
         return this.api.doPatch(`DiscordForm/Guild/${guildId}/Forms`, form);
     }
 
-    async setupSupportTicketMessage(guildId: string, request: any): Promise<any> {
-        return this.api.doPost(`DiscordGuild/${guildId}/SupportTickets`, request);
+    public async setupSupportTicketMessage(
+        guildId: string,
+        request: any
+    ): Promise<any> {
+        return this.api.doPost(
+            `DiscordGuild/${guildId}/SupportTickets`,
+            request
+        );
     }
 
-    async getDiscordSupportTicketSettings() {
-        return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/SupportTickets`);
+    public async getDiscordSupportTicketSettings() {
+        return await this.api.doGet(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/SupportTicketPanels`
+        );
     }
 
-    async getDiscordWelcomeMessages() {
-        return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/WelcomeMessages`);
+    public async getDiscordWelcomeMessages() {
+        return this.api.doGet(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/WelcomeMessages`
+        );
     }
 
     async getDiscordMessageSupportTickets(guildId: string, settingsId: string) {
-        return this.api.doGet(`DiscordGuild/${guildId}/SupportTickets/${settingsId}/Submissions`);
+        return this.api.doGet(
+            `DiscordGuild/${guildId}/SupportTickets/${settingsId}/Submissions`
+        );
     }
 
-    async getSupportTicket(guildId: string, settingsId: string, supportTicketId: string) {
-        return this.api.doGet(`DiscordGuild/${guildId}/SupportTickets/${settingsId}/Submissions/${supportTicketId}`);
+    async getSupportTicket(
+        guildId: string,
+        settingsId: string,
+        supportTicketId: string
+    ) {
+        return this.api.doGet(
+            `DiscordGuild/${guildId}/SupportTickets/${settingsId}/Submissions/${supportTicketId}`
+        );
     }
 
     async closeSupportTicket(supportTicketId: string) {
-        return this.api.doPatch(`DiscordSupportTicket/${supportTicketId}/Close`, {});
+        return this.api.doPatch(
+            `DiscordSupportTicket/${supportTicketId}/Close`,
+            {}
+        );
     }
 
     async updateTrackedDiscordMessage(data: any) {
@@ -211,23 +310,34 @@ export class DiscordService {
     }
 
     async toggleDiscordMessageActiveStatus(messageId, active) {
-        return this.api.doPatch(`DiscordMessage/${messageId}/ToggleActive`, { active: active });
+        return this.api.doPatch(`DiscordMessage/${messageId}/ToggleActive`, {
+            active: active,
+        });
     }
 
     async createTwitchSubscription(request, guildId) {
-        return this.api.doPost(`DiscordGuild/${guildId}/TwitchEventSubscriptions`, request);
+        return this.api.doPost(
+            `DiscordGuild/${guildId}/TwitchEventSubscriptions`,
+            request
+        );
     }
 
     async getTwitchSubscriptions(guildId: string) {
-        return this.api.doGet(`DiscordGuild/${guildId}/TwitchEventSubscriptions`);
+        return this.api.doGet(
+            `DiscordGuild/${guildId}/TwitchEventSubscriptions`
+        );
     }
 
     async deleteTwitchSubscription(subscriptionId: string, guildId: string) {
-        return this.api.doDelete(`DiscordGuild/${guildId}/TwitchEventSubscriptions/${subscriptionId}`);
+        return this.api.doDelete(
+            `DiscordGuild/${guildId}/TwitchEventSubscriptions/${subscriptionId}`
+        );
     }
 
     async getTrackedMessage(guildId: string, messageId: string) {
-        return this.api.doGet(`DiscordGuild/${guildId}/TrackedMessages/${messageId}`);
+        return this.api.doGet(
+            `DiscordGuild/${guildId}/TrackedMessages/${messageId}`
+        );
     }
 
     async getTrackedMessages(guildId: string) {
@@ -235,7 +345,10 @@ export class DiscordService {
     }
 
     async createTrackedMessage(guildId: string, request: any) {
-        return this.api.doPost(`DiscordGuild/${guildId}/TrackedMessages`, request);
+        return this.api.doPost(
+            `DiscordGuild/${guildId}/TrackedMessages`,
+            request
+        );
     }
 
     async updateTrackedMessage(request: any) {
@@ -258,15 +371,24 @@ export class DiscordService {
     }
 
     async updateSupportTicketSettings(settings: any) {
-        return this.api.doPatch(`DiscordSupportTicketSettings/${settings.id}`, settings);
+        return this.api.doPatch(
+            `DiscordSupportTicketSettings/${settings.id}`,
+            settings
+        );
     }
 
     async updateAuthorizedUsersForGuild(guild: any, guildId: string) {
-        return this.api.doPatch(`DiscordGuild/${guildId}/AuthorizedUsers`, guild);
+        return this.api.doPatch(
+            `DiscordGuild/${guildId}/AuthorizedUsers`,
+            guild
+        );
     }
 
     async updateGlobalSettingsForGuild(guild: any, guildId: string) {
-        return this.api.doPatch(`DiscordGuild/${guildId}/GlobalSettings`, guild);
+        return this.api.doPatch(
+            `DiscordGuild/${guildId}/GlobalSettings`,
+            guild
+        );
     }
 
     async updateAutoRolesForGuild(guild: any, guildId: string) {
@@ -279,9 +401,19 @@ export class DiscordService {
 
     async getResourceMessagesForGuild(guildId: string) {
         if (!this.messages) {
-            this.messages = this.api.doGet(`DiscordGuild/${guildId}/Resources/Messages`);
+            this.messages = await this.api.doGet(
+                `DiscordGuild/${guildId}/Resources/Messages`
+            );
         }
         return this.messages;
+    }
+
+    getMessageResourceById(id: string) {
+        console.log("messages", this.messages);
+        if (this.messages) {
+            return this.messages.find((x) => x.id == id);
+        }
+        return null;
     }
 
     async createDiscordMessage(message: any) {
@@ -305,7 +437,7 @@ export class DiscordService {
     }
 
     async testCleanChannelCleaner(cleanerId: string) {
-        return this.api.doPost(`DiscordChannelCleaner/${cleanerId}/Clean`, { });
+        return this.api.doPost(`DiscordChannelCleaner/${cleanerId}/Clean`, {});
     }
 
     async deleteChannelCleaner(cleanerId: string) {
@@ -329,11 +461,17 @@ export class DiscordService {
     }
 
     async updateAutoroleContainer(container: any) {
-        return this.api.doPatch(`DiscordAutoroleContainer/${container.id}`, container);
+        return this.api.doPatch(
+            `DiscordAutoroleContainer/${container.id}`,
+            container
+        );
     }
 
     async toggleAutoroleContainer(containerId: string) {
-        return this.api.doPatch(`DiscordAutoroleContainer/${containerId}/ToggleActive`, { });
+        return this.api.doPatch(
+            `DiscordAutoroleContainer/${containerId}/ToggleActive`,
+            {}
+        );
     }
 
     async getAutoResponders(guildId: string) {
@@ -345,7 +483,10 @@ export class DiscordService {
     }
 
     async updateAutoResponder(responder: any) {
-        return this.api.doPatch(`DiscordAutoResponder/${responder.id}`, responder);
+        return this.api.doPatch(
+            `DiscordAutoResponder/${responder.id}`,
+            responder
+        );
     }
 
     async getResponderById(responderId: string) {
@@ -401,7 +542,10 @@ export class DiscordService {
     }
 
     async updateDiscordThreadChannel(threadChannel: any) {
-        return this.api.doPatch(`DiscordThreadChannel/${threadChannel.id}`, threadChannel);
+        return this.api.doPatch(
+            `DiscordThreadChannel/${threadChannel.id}`,
+            threadChannel
+        );
     }
 
     async getDiscordThreadChannelById(threadChannelId: string) {
@@ -417,7 +561,9 @@ export class DiscordService {
     }
 
     async getKeyValueCategories() {
-        return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/KeyValueCategories`);
+        return this.api.doGet(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/KeyValueCategories`
+        );
     }
 
     async createKeyValueCategory(keyValueCategory: any) {
@@ -425,7 +571,10 @@ export class DiscordService {
     }
 
     async updateKeyValueCategory(keyValueCategory: any) {
-        return this.api.doPatch(`KeyValueCategory/${keyValueCategory.id}`, keyValueCategory);
+        return this.api.doPatch(
+            `KeyValueCategory/${keyValueCategory.id}`,
+            keyValueCategory
+        );
     }
 
     async getKeyValueCategoryById(keyValueCategory: string) {
@@ -437,6 +586,36 @@ export class DiscordService {
     }
 
     async getAuditLogs() {
-        return this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/AuditLogs`);
+        return this.api.doGet(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/AuditLogs`
+        );
+    }
+
+    async getChannelBackups() {
+        return this.api.doGet(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/DiscordChannelBackups`
+        );
+    }
+
+    async createDiscordChannelBackup(item: any) {
+        return this.api.doPost(`DiscordChannelBackup`, item);
+    }
+
+    async updateDiscordChannelBackup(item: any) {
+        return this.api.doPatch(`DiscordChannelBackup/${item.id}`, item);
+    }
+
+    async getDiscordChannelBackup(itemId: string) {
+        return this.api.doGet(`DiscordChannelBackup/${itemId}`);
+    }
+
+    async deleteDiscordChannelBackup(itemId: string) {
+        return this.api.doDelete(`DiscordChannelBackup/${itemId}`);
+    }
+
+    async getGuildMember(memberId: string) {
+        return this.api.doGet(
+            `User/DiscordUser?discordGuildId=${this.getLocalDiscordGuildId()}&discordUserId=${memberId}`
+        );
     }
 }

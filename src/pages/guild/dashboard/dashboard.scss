@@ -1,12 +1,8 @@
-@use "@material/card";
-@use "@material/theme";
-@use "@material/rtl";
-
 #guild-dashboard {
-    .stat-card {
-        width: 350px;
-        margin: 28px;
-    }
+    //.stat-card {
+    //    width: 350px;
+    //    margin: 28px;
+    //}
 
     .guild-icon {
         border-radius: 50%;
@@ -16,37 +12,37 @@
         max-width: 100%;
     }
 
-    .stat-card__square {
-        @include card.shape-radius(24px 4px);
-
-        @include rtl.rtl {
-            @include card.shape-radius(4px 24px);
-        }
-    }
-
-    .stat-card__square-row {
-        display: flex;
-        border-top-left-radius: inherit;
-
-        @include rtl.rtl {
-            border-top-left-radius: 0;
-            border-top-right-radius: inherit;
-        }
-    }
-
-    .stat-card__media-music {
-        width: 70px;
-        border-top-left-radius: inherit;
-
-        @include rtl.rtl {
-            border-top-left-radius: 0;
-            border-top-right-radius: inherit;
-        }
-    }
-
-    .stat-card__info {
-        display: flex;
-        flex-direction: column;
-        padding: 8px 16px;
-    }
+    //.stat-card__square {
+    //    @include card.shape-radius(24px 4px);
+    //
+    //    @include rtl.rtl {
+    //        @include card.shape-radius(4px 24px);
+    //    }
+    //}
+    //
+    //.stat-card__square-row {
+    //    display: flex;
+    //    border-top-left-radius: inherit;
+    //
+    //    @include rtl.rtl {
+    //        border-top-left-radius: 0;
+    //        border-top-right-radius: inherit;
+    //    }
+    //}
+    //
+    //.stat-card__media-music {
+    //    width: 70px;
+    //    border-top-left-radius: inherit;
+    //
+    //    @include rtl.rtl {
+    //        border-top-left-radius: 0;
+    //        border-top-right-radius: inherit;
+    //    }
+    //}
+    //
+    //.stat-card__info {
+    //    display: flex;
+    //    flex-direction: column;
+    //    padding: 8px 16px;
+    //}
 }

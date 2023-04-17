@@ -1,25 +1,30 @@
-#navigation {
-  .mdc-list-item--selected .mdc-list-item__primary-text, .mdc-list-item--activated .mdc-list-item__primary-text {
-    color: black !important;
-  }
-
-  .avatar {
+.avatar {
     border-radius: 50%;
     height: 50px;
     width: 50px;
     max-height: 100%;
     max-width: 100%;
-  }
+}
 
-  .list-item-padding {
+.logo {
+    height: 50px;
+    width: 50px;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.list-item-padding {
     padding-left: 25px;
-  }
+}
 
-  .mdc-select__anchor {
-    width: 300px !important;
-  }
+.mdc-top-app-bar {
+    background-color: #1c1e1f !important;
+}
 
-  .mdc-drawer__title {
-    text-align: center;
-  }
+.mdc-drawer .mdc-deprecated-list-item {
+    color: #eaeaea !important;
+}
+
+.mdc-drawer .mdc-deprecated-list-item {
+    margin: 1px 8px !important;
 }

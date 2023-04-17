@@ -1,4 +1,4 @@
 <template>
     <label for="colour">${label}</label>
-    <input type="color" value.bind="color" id="colour" change.delegate="getDecimalValue($event)">
+    <input type="color" value.bind="color" id="colour" change.trigger="getDecimalValue($event)">
 </template>

@@ -1,9 +1,9 @@
 <template>
     <section id="validation-error">
-        <mdc-banner
+        <moo-banner
             secondary-action="Close"
-            view-model.ref="banner"
             centered
+            open.bind="bannerOpen"
             if.bind="errors"
         >
             <div class="pb-3">
@@ -12,6 +12,6 @@
                     ${error}
                 </div>
             </div>
-        </mdc-banner>
+        </moo-banner>
     </section>
 </template>

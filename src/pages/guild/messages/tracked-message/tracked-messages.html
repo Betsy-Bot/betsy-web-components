@@ -1,0 +1,15 @@
+<feature-header
+    doc-url="https://docs.betsybot.xyz/features/tracked-messages"
+    title="Tracked Messages"
+    create-route="../tracked-messages/0"
+    subtitle="Tracked Messages are just normal messages that you keep track of. This allows you to edit them without resending/using a command/etc."
+></feature-header>
+
+<feature-item-list
+    data.bind="messages"
+    name-override="name"
+    show-toggler.bind="false"
+    toggle-handler.bind="(item) => updateActive(item)"
+    item-click-handler.bind="(item) => goTo(item)"
+    route="../tracked-messages"
+></feature-item-list>

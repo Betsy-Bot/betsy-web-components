@@ -1,15 +1,9 @@
-import { inject, bindable } from "aurelia-framework";
+import { inject, bindable } from "aurelia";
 import { DiscordService } from "../../../services/discord-service";
-import { ValidationControllerFactory, ValidationRules, ValidationController, Rule } from 'aurelia-validation';
 
-@inject(DiscordService, ValidationControllerFactory)
+@inject(DiscordService)
 export class DiscordChannelSelector {
-    constructor(private discordService: DiscordService, private validationControllerFactory: ValidationControllerFactory) {
-        this.validationController = this.validationControllerFactory.createForCurrentScope();
-        this.rules = ValidationRules
-            .ensure('channelId').required().withMessage('Required').then()
-            .rules;
-    }
+    constructor(private discordService: DiscordService) {}
 
     @bindable guildId: string;
     @bindable channelId: string;
@@ -19,22 +13,14 @@ export class DiscordChannelSelector {
     @bindable class;
     @bindable includeNull;
     @bindable disabled;
-    validationController: ValidationController;
-    rules: Rule<DiscordChannelSelector, unknown>[][];
 
     channels;
 
-    async created() {
-        if (!this.guildId) {
-            this.guildId = this.discordService.getLocalDiscordGuildId();
-        }
-    }
-
     async attached() {
-        this.channels = await this.discordService.getDiscordChannels(this.guildId);
-        if (this.required) {
-            this.validationController.addObject(this, this.rules);
-        }
+        this.guildId = this.discordService.getLocalDiscordGuildId();
+        this.channels = await this.discordService.getDiscordChannels(
+            this.guildId
+        );
     }
 
     matchesType(channel) {
