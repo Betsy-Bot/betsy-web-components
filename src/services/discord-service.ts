@@ -624,4 +624,10 @@ export class DiscordService {
             `DiscordGuild/${this.getLocalDiscordGuildId()}/ImportTemplate?topics=${topics}`
         );
     }
+
+    async importTemplate(request) {
+        return this.api.doPost(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/ImportTemplate`, request
+        );
+    }
 }

@@ -12,6 +12,11 @@
         </moo-form-field>
     </div>
     <div class="ps-3 py-3">
-        <moo-button label="Download JSON" click.bind="() => handleExport()"></moo-button>
+        <moo-button label="Download JSON" click.bind="() => handleExport()" disabled.bind="isExporting"></moo-button>
     </div>
+</div>
+
+<div class="mt-3 p-3" elevation="9">
+    <h4>Import Settings</h4>
+    <input type="file" ref="uploadElement">
 </div>

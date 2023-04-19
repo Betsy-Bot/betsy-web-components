@@ -7,7 +7,7 @@
             if.bind="errors"
         >
             <div class="pb-3">
-                <h5>Validation Error</h5>
+                <h5>${errorHeader}</h5>
                 <div class="error" repeat.for="error of errors | objectKeys">
                     ${error}
                 </div>

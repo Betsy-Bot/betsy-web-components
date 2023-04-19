@@ -1,21 +1,19 @@
 <template>
     <div class="row g-4">
         <div class="col-12 col-xl-8">
-            <form submit.trigger="saveMessage()">
-                <feature-header
-                    title="Edit Message Template"
-                    subtitle="Edit the prebuilt message that can be used in a variety of features throughout the bot's functionality"
-                ></feature-header>
-                <div class="mt-5">
-                    <moo-text-field
-                        label="Identifier"
-                        class="w-100 mb-3"
-                        placeholder="Message Identifier"
-                        value.bind="message.name"
-                        required
-                    ></moo-text-field>
-                    <discord-message-creator message.two-way="message.message"></discord-message-creator>
-                </div>
+            <feature-header
+                title="Edit Message Template"
+                subtitle="Edit the prebuilt message that can be used in a variety of features throughout the bot's functionality"
+            ></feature-header>
+            <form submit.trigger="saveMessage()" class="mt-5">
+                <moo-text-field
+                    label="Identifier"
+                    class="w-100 mb-3"
+                    placeholder="Message Identifier"
+                    value.bind="message.name"
+                    required
+                ></moo-text-field>
+                <discord-message-creator message.two-way="message.message"></discord-message-creator>
                 <moo-button variant="primary" class="mt-2" type="submit">
                     Save Message
                 </moo-button>

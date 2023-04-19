@@ -58,9 +58,12 @@
                             <moo-select class="standard-betsy-select w-100 mb-2" value.bind="component.style"
                                         label="Select Style">
                                 <moo-list>
-                                    <moo-list-item label.bind="style.label" repeat.for="style of styles"
-                                                   value.bind="style.value">
-                                    </moo-list-item>
+                                    <moo-list-item
+                                        label.bind="style.label"
+                                        repeat.for="style of styles"
+                                        value.bind="style.value"
+                                        click.trigger="(value) => component.style = value"
+                                    ></moo-list-item>
                                 </moo-list>
                             </moo-select>
                             <div class="my-2">
@@ -71,7 +74,7 @@
                                     required.bind="true"
                                 ></moo-text-field>
                             </div>
-                            <div class="my-2" if.bind="component.style === 5">
+                            <div class="my-2" if.bind="component.style == 5">
                                 <moo-text-field
                                     class="w-100"
                                     label="URL"
@@ -79,7 +82,7 @@
                                     required.bind="true"
                                 ></moo-text-field>
                             </div>
-                            <div class="my-2" if.bind="component.style !== 5">
+                            <div class="my-2" if.bind="component.style != 5">
                                 <moo-text-field
                                     class="w-100"
                                     label="Custom ID"

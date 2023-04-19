@@ -20,7 +20,7 @@ export class MooListItem implements ICustomElementViewModel {
 
     clickHandler() {
         if (this.click) {
-            this.click();
+            this.click(this.value);
         }
     }
 }

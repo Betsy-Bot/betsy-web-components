@@ -1,6 +1,7 @@
 import {route} from "@aurelia/router-lite";
-import {inject} from 'aurelia';
+import {inject, observable} from 'aurelia';
 import {DiscordService} from "../../../services/discord-service";
+import {toast} from "lets-toast";
 
 @route({
     path: "import-export",
@@ -10,13 +11,42 @@ import {DiscordService} from "../../../services/discord-service";
 export class ImportExport {
     features = ["MessageTemplates", "SupportTickets", "Forms"]
     selectedFeatures = [];
+    isExporting = false;
+    isImporting = false;
+    @observable uploadFile: File;
+    uploadElement: HTMLInputElement;
 
     constructor(private discordService: DiscordService) {
         this.selectedFeatures = [...this.features];
     }
 
+    attached() {
+        this.uploadElement.addEventListener('change', (event) => {
+            console.log(event)
+            //@ts-ignore
+            const file = event.target.files[0];
+
+            if (file) {
+                this.isImporting = true;
+                const reader = new FileReader();
+
+                reader.addEventListener('load', async (event) => {
+                    const uploadedJSON = event.target.result;
+
+                    // Parse the JSON string into a JavaScript object
+                    //@ts-ignore;
+                    const jsonObject = JSON.parse(uploadedJSON);
+                    const count = await this.discordService.importTemplate(jsonObject);
+                    toast(`Imported settings. ${count} Settings Imported`)
+                });
+
+                reader.readAsText(file);
+            }
+        });
+    }
+
     async handleExport() {
-        console.log('export', this.selectedFeatures);
+        this.isExporting = true;
         const response = await this.discordService.exportTemplate(this.selectedFeatures);
         const jsonString = JSON.stringify(response, null, 4);
         const blob = new Blob([jsonString], { type: "application/json" });
@@ -29,6 +59,7 @@ export class ImportExport {
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
+        this.isExporting = false;
     }
 
     handleCheckedChanged(feature, checked) {
@@ -37,5 +68,9 @@ export class ImportExport {
         } else {
             this.selectedFeatures.push(feature);
         }
+    }
+
+    handleImport() {
+        this.isImporting = true;
     }
 }

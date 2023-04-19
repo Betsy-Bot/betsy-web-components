@@ -3,7 +3,7 @@ import { WebhookService } from "../../../services/websocket-service";
 import { DiscordService } from "../../../services/discord-service";
 import { toast } from "lets-toast";
 import { redirectUrl, botClientId } from "../../../environment";
-import { Router } from "@aurelia/router-lite";
+import { IRouter } from "@aurelia/router-lite";
 
 import template from './server-card.html';
 import './server-card.scss';
@@ -13,9 +13,9 @@ import './server-card.scss';
     template: template,
     containerless: true
 })
-@inject(WebhookService, DiscordService, Router)
+@inject(WebhookService, DiscordService, IRouter)
 export class ServerCard implements ICustomElementViewModel {
-    constructor(private webhookService: WebhookService, private discordServerService: DiscordService, private router: Router) {
+    constructor(private webhookService: WebhookService, private discordServerService: DiscordService, private router: IRouter) {
     }
     @bindable server;
     @bindable hideButton;
@@ -33,7 +33,7 @@ export class ServerCard implements ICustomElementViewModel {
         try {
             if (await this.discordServerService.setupServer(this.server.id)) {
                 toast("It appears your server is already invited. Taking you there");
-                return await this.router.load(`/guild/${this.server.id}/dashboard`)
+                return await this.router.load(`guild/${this.server.id}/dashboard`)
             }
 
             await this.discordServerService.createServer(this.server.id);

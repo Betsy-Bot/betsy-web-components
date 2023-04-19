@@ -29,7 +29,7 @@
             <moo-button variant="secondary"
                         label="Setup"
                         if.bind="((!server.invited && !loading) || !server.exists) && !forceGo"
-                        click.trigger="handleServerInvite()"
+                        click.bind="() => handleServerInvite()"
             ></moo-button>
             <a href="../guild/${server.id}"
                if.bind="forceGo || (server.exists && server.invited)">
