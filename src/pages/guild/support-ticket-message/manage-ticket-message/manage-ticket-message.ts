@@ -115,7 +115,6 @@ export class ManageTicketMessage implements IRouteViewModel {
         try {
             this.ticket.discordGuildId = this.guildId;
             await this.discordService.updateSupportTicketSettings(this.ticket);
-            toast("Updated support message!", { severity: "success" });
         } catch (e) {
             toast("Failed to update support ticket creation message", {
                 severity: "error",
@@ -159,9 +158,7 @@ export class ManageTicketMessage implements IRouteViewModel {
                 this.ticket
             );
             toast("Created support message!", { severity: "success" });
-            await this.router.load(`../support-tickets`, {
-                context: this.context,
-            });
+            await this.router.load("../support-tickets", { context: this });
         } catch (e) {
             toast("Failed to setup support ticket creation message", {
                 severity: "error",
