@@ -1,0 +1,22 @@
+<section id="validation-error">
+    <moo-banner
+        secondary-action="Close"
+        centered
+        open.bind="bannerOpen"
+        if.bind="errors || error"
+    >
+        <div class="pb-3">
+            <h4>${errorHeader}</h4>
+            <h5>${errorSubheader}</h5>
+            <div class="error" if.bind="errors" repeat.for="error of errors | objectKeys">
+                ${error}
+            </div>
+            <h6 class="error" if.bind="error">
+                ${error}
+            </h6>
+            <div class="error" if.bind="details">
+                ${details}
+            </div>
+        </div>
+    </moo-banner>
+</section>

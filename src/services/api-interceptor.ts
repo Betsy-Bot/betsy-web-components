@@ -1,15 +1,14 @@
-import { inject } from 'aurelia';
+import { inject } from "aurelia";
 import { toast } from "lets-toast";
 import { IEventAggregator } from "aurelia";
-import {SessionService} from "./session-service";
+import { SessionService } from "./session-service";
 
-const AUTHORIZATION_HEADER = 'Authorization';
-const GUILD_ID_HEADER = 'Discord-Guild-Id';
+const AUTHORIZATION_HEADER = "Authorization";
+const GUILD_ID_HEADER = "Discord-Guild-Id";
 
 @inject(IEventAggregator)
 export class ApiInterceptor {
-    constructor(private ea: IEventAggregator) {
-    }
+    constructor(private ea: IEventAggregator) {}
 
     request(request) {
         try {
@@ -18,7 +17,9 @@ export class ApiInterceptor {
             }
 
             if (!request.headers.get(AUTHORIZATION_HEADER)) {
-                const bearerToken = `Bearer ${this.getStorageItem(SessionService.TOKEN_KEY)}`;
+                const bearerToken = `Bearer ${this.getStorageItem(
+                    SessionService.TOKEN_KEY
+                )}`;
                 request.headers.append(AUTHORIZATION_HEADER, bearerToken);
             }
 
@@ -48,10 +49,12 @@ export class ApiInterceptor {
                     try {
                         data = await response.json();
                         if (data.message == "Expired Token? Please relog") {
-                            toast("Discord Token Expired. Please Login Again", { severity: "error" });
+                            toast("Discord Token Expired. Please Login Again", {
+                                severity: "error",
+                            });
                             await this.clearSession();
                         }
-                    } catch(e) {
+                    } catch (e) {
                         console.log(e);
                     }
                     break;
@@ -63,11 +66,20 @@ export class ApiInterceptor {
                     break;
                 case 422:
                     data = await response.json();
-                    this.ea.publish('present-error', {errors: data.validationErrors});
+                    this.ea.publish("present-error", {
+                        errors: data.validationErrors,
+                    });
                     toast("Error!", { severity: "error" });
                     break;
                 case 500:
                     data = await response.json();
+                    this.ea.publish("present-error", {
+                        error: data.message,
+                        details: data.details,
+                        header: "Server Error",
+                        subheader:
+                            "Please create a bug report and include the details below.",
+                    });
                     break;
             }
             return response;
@@ -96,11 +108,17 @@ export class ApiInterceptor {
 
     hasValidSession() {
         const token = this.getStorageItem(SessionService.TOKEN_KEY);
-        return token && token !== '' && token !== undefined && token !== 'undefined' && token !== 'null';
+        return (
+            token &&
+            token !== "" &&
+            token !== undefined &&
+            token !== "undefined" &&
+            token !== "null"
+        );
     }
     clearSession() {
         this.destroyStorageItem(SessionService.TOKEN_KEY);
-        this.ea.publish('user-updated', null);
+        this.ea.publish("user-updated", null);
     }
     destroyStorageItem(key: string) {
         window.localStorage.removeItem(key);
