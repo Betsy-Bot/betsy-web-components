@@ -25,8 +25,15 @@
             <moo-button label="LOGIN WITH DISCORD"></moo-button>
         </a>
         <div else>
-            <img class="avatar" click.trigger="profileMenu.open = !profileMenu.open"
-                 src.bind="avatarLink" alt="avatar">
+            <div class="mdc-menu-surface--anchor">
+                <img class="avatar" click.trigger="menuOpen = true"
+                     src.bind="avatarLink ?? logo" alt="avatar">
+                <moo-menu open.bind="menuOpen">
+                    <moo-list>
+                        <moo-list-item label="Logout" click.bind="() => logout()"></moo-list-item>
+                    </moo-list>
+                </moo-menu>
+            </div>
         </div>
     </section>
 </moo-topbar>

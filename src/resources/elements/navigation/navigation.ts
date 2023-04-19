@@ -5,7 +5,7 @@ import {
     inject,
 } from "aurelia";
 import { SessionService } from "../../../services/session-service";
-import { Router } from "@aurelia/router-lite";
+import { IRouter } from "@aurelia/router-lite";
 import { IEventAggregator } from "aurelia";
 import { redirectUrl, botClientId } from "../../../environment";
 import template from "./navigation.html";
@@ -18,11 +18,11 @@ import logo from "../../../images/logo.png";
     template: template,
     containerless: true,
 })
-@inject(SessionService, Router, IEventAggregator)
+@inject(SessionService, IRouter, IEventAggregator)
 export class Navigation implements ICustomElementViewModel {
     constructor(
         private sessionService: SessionService,
-        private router: Router,
+        private router: IRouter,
         readonly ea: IEventAggregator
     ) {}
 
@@ -34,6 +34,7 @@ export class Navigation implements ICustomElementViewModel {
     currentRoute;
     donateDialog;
     logo = logo;
+    menuOpen = false;
 
     async handleServerChange(event: CustomEvent) {
         this.guildId = event?.detail?.value;
@@ -71,6 +72,7 @@ export class Navigation implements ICustomElementViewModel {
 
     async logout() {
         await this.sessionService.clearSession();
+        await this.router.load("");
         location.reload();
     }
 
@@ -79,6 +81,9 @@ export class Navigation implements ICustomElementViewModel {
     }
 
     get avatarLink() {
-        return `https://cdn.discordapp.com/avatars/${this.user.discordId}/${this.user.avatar}.webp`;
+        if (this.user?.discordId && this.user?.avatar) {
+            return `https://cdn.discordapp.com/avatars/${this.user.discordId}/${this.user.avatar}.webp`;
+        }
+        return null;
     }
 }
