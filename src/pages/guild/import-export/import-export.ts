@@ -9,7 +9,7 @@ import {toast} from "lets-toast";
 })
 @inject(DiscordService)
 export class ImportExport {
-    features = ["MessageTemplates", "SupportTickets", "Forms"]
+    features = ["MessageTemplates", "Forms"]
     selectedFeatures = [];
     isExporting = false;
     isImporting = false;

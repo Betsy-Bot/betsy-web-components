@@ -5,8 +5,8 @@
                 <div class="row justify-content-start g-2">
                     <div repeat.for="component of componentWrapper.components"
                          class="components g-3 ${getColumnClass(componentWrapper.components.length, component.type)}">
-                        <discord-button button.bind="component" if.bind="component.type === 2"></discord-button>
-                        <discord-menu menu.bind="component" if.bind="component.type === 3"></discord-menu>
+                        <discord-button button.bind="component" if.bind="component.type == 2"></discord-button>
+                        <discord-menu menu.bind="component" if.bind="component.type == 3"></discord-menu>
                     </div>
                 </div>
             </div>

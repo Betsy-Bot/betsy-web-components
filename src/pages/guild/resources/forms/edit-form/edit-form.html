@@ -16,7 +16,7 @@
                     subtitle="Once the form has been saved anywhere it is currently being used will also be updated to use the updated form"
                 ></feature-header>
 
-                <form submit.trigger="save()" class="mt-3">
+                <form submit.trigger="save()" class="mt-3" if.bind="form">
                     <discord-form-creator
                         form.two-way="form"
                     ></discord-form-creator>

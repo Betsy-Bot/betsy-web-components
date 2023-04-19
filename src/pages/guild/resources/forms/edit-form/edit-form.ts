@@ -79,7 +79,7 @@ export class EditForm implements IRouteViewModel {
     }
 
     async save() {
-        await this.discordService.updateDiscordForm(this.guildId, this.form);
+        await this.discordService.updateDiscordForm(this.form);
         toast("Saved Form", { severity: "success" });
     }
 }

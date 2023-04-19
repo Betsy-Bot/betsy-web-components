@@ -247,17 +247,15 @@ export class DiscordService {
     }
 
     public async createDiscordForm(
-        guildId: string,
         form: DiscordForm
     ): Promise<discordModels.DiscordForm> {
-        return this.api.doPost(`DiscordForm/Guild/${guildId}/Forms`, form);
+        return this.api.doPost(`DiscordForm/Guild/${this.getLocalDiscordGuildId()}/Forms`, form);
     }
 
     public async updateDiscordForm(
-        guildId: string,
         form: DiscordForm
     ): Promise<discordModels.DiscordForm> {
-        return this.api.doPatch(`DiscordForm/Guild/${guildId}/Forms`, form);
+        return this.api.doPatch(`DiscordForm/Guild/${this.getLocalDiscordGuildId()}/Forms`, form);
     }
 
     public async setupSupportTicketMessage(

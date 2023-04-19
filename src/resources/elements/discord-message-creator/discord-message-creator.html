@@ -1,83 +1,79 @@
-<template>
-    <confirmation-dialog
-        cancel-text="Cancel"
-        confirm-text="Save"
-        dialog.bind="jsonDialog"
-        handler.bind="(event) => importJson(event)"
-        title="Json"
-    >
-        <moo-text-field
-            label.bind="JSON"
-            type="textarea"
-            rows="8"
-            ref="pickerElement"
-            class="jsonField"
-            value.bind="json"
-        ></moo-text-field>
-    </confirmation-dialog>
-    <section id="discord-message-creator">
-        <div class="row">
-            <div class="col-10">
-                <message-resource-selector
-                    if.bind="!hideTemplate"
-                    label="Load Template"
-                    selected-message.bind="selectedMessage"
-                ></message-resource-selector>
-            </div>
-            <div class="col-2 text-end">
-                <moo-fab
-                    extended
-                    label="JSON"
-                    icon="code"
-                    click.bind="() => openDialog()"
-                ></moo-fab>
-            </div>
-        </div>
+<confirmation-dialog
+    cancel-text="Cancel"
+    confirm-text="Save"
+    dialog.bind="jsonDialog"
+    handler.bind="(event) => importJson(event)"
+    title="Json"
+>
+    <moo-text-field
+        label.bind="JSON"
+        type="textarea"
+        rows="8"
+        ref="pickerElement"
+        class="jsonField"
+        value.bind="json"
+    ></moo-text-field>
+</confirmation-dialog>
+<div class="row">
+    <div class="col-10">
+        <message-resource-selector
+            if.bind="!hideTemplate"
+            label="Load Template"
+            selected-message.bind="selectedMessage"
+        ></message-resource-selector>
+    </div>
+    <div class="col-2 text-end">
+        <moo-fab
+            extended
+            label="JSON"
+            icon="code"
+            click.bind="() => openDialog()"
+        ></moo-fab>
+    </div>
+</div>
 
-        <moo-tab-bar>
-            <moo-tab
-                label="Embeds"
-                active.bind="tab === 'embeds'"
-                value="embeds"
-                tab.bind="tab"
-            ></moo-tab>
-            <moo-tab
-                label="Components"
-                active.bind="tab === 'components'"
-                value="components"
-                tab.bind="tab"
-            ></moo-tab>
-        </moo-tab-bar>
+<moo-tab-bar>
+    <moo-tab
+        label="Embeds"
+        active.bind="tab == 'embeds'"
+        value="embeds"
+        tab.bind="tab"
+    ></moo-tab>
+    <moo-tab
+        label="Components"
+        active.bind="tab === 'components'"
+        value="components"
+        tab.bind="tab"
+    ></moo-tab>
+</moo-tab-bar>
 
-        <div class="message-area mb-2">
-            <discord-markup-editor
-                maxlength.bind="2000"
-                label="Content"
-                value.bind="message.content"
-            ></discord-markup-editor>
-        </div>
-        <div class="embed-area" if.bind="tab === 'embeds'">
-            <moo-button variant="primary"
-                        class="mb-2"
-                        if.bind="canCreateEmbed"
-                        click.bind="() => addEmbed()">
-                Add Embed
-            </moo-button>
-            <div class="embed mb-2" repeat.for="embed of message.embeds">
-                <embed-editor embed.two-way="embed"></embed-editor>
-                <moo-button variant="secondary"
-                        class="button-secondary mb-2"
-                        click.bind="() => deleteEmbed($index)">
-                    Delete Embed
-                </moo-button>
-            </div>
-        </div>
+<div class="message-area mb-2">
+    <discord-markup-editor
+        maxlength.bind="2000"
+        label="Content"
+        value.bind="message.content"
+    ></discord-markup-editor>
+</div>
+<div class="embed-area" if.bind="tab === 'embeds'">
+    <moo-button variant="primary"
+                class="mb-2"
+                if.bind="canCreateEmbed"
+                click.bind="() => addEmbed()">
+        Add Embed
+    </moo-button>
+    <div class="embed mb-2" repeat.for="embed of message.embeds">
+        <embed-editor embed.two-way="embed"></embed-editor>
+        <moo-button variant="secondary"
+                    class="button-secondary mb-2"
+                    click.bind="() => deleteEmbed($index)">
+            Delete Embed
+        </moo-button>
+    </div>
+</div>
 
-        <div class="component-area" if.bind="tab === 'components'">
-            <discord-component-creator
-                max-components.bind="maxComponents"
-                components.two-way="message.components"
-            ></discord-component-creator>
-        </div>
-    </section>
-</template>
+<div class="component-area" if.bind="tab === 'components'">
+    <discord-component-creator
+        max-components.bind="maxComponents"
+        components.two-way="message.components"
+    ></discord-component-creator>
+</div>

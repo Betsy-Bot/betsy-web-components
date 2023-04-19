@@ -6,19 +6,18 @@ import { inject } from "aurelia";
 import { IEventAggregator } from "aurelia";
 import { DiscordService } from "../../../../../services/discord-service";
 import { toast } from "lets-toast";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
-import { Forms } from "../forms";
+import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
 
 @route({
     path: "forms/create",
     title: "Create Form",
 })
-@inject(IEventAggregator, DiscordService, Router)
+@inject(IEventAggregator, DiscordService, IRouter)
 export class CreateForm implements IRouteViewModel {
     constructor(
         private eventAggregator: IEventAggregator,
         private discordService: DiscordService,
-        private router: Router
+        private router: IRouter
     ) {}
 
     params;
@@ -46,23 +45,15 @@ export class CreateForm implements IRouteViewModel {
         },
     };
 
-    loading(params) {
-        this.params = params;
-        this.guildId = this.params.guildId;
-    }
-
     async save() {
         try {
             if (this.didLoad) {
                 return;
             }
             this.didLoad = true;
-            await this.discordService.createDiscordForm(
-                this.guildId,
-                this.form
-            );
+            await this.discordService.createDiscordForm(this.form);
             toast("Form Created!");
-            this.router.load(`resources/forms`);
+            await this.router.load( `../forms`, {context: this});
         } catch (e) {
             toast(e, { severity: "error" });
             throw e;
