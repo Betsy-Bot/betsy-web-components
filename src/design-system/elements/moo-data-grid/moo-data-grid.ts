@@ -74,7 +74,8 @@ export class MooDataGrid implements ICustomElementViewModel {
             searchPanel: {
                 visible: this.searchPanelVisible,
                 width: 300,
-                text: this.searchPanelText
+                text: this.searchPanelText,
+                searchVisibleColumnsOnly: true
             },
             loadPanel: {
                 width: 100
