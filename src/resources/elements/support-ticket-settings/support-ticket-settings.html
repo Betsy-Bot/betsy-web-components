@@ -103,16 +103,16 @@
         <div class="col-12 col-lg-6">
             <discord-role-selector
                 label="Select Authorized Roles"
-                selected-role.two-way="authorizedRole"
+                selected-role.bind="authorizedRole"
                 guild-id.bind="guildId"
             ></discord-role-selector>
-            <mdc-chip-set input if.bind="roles">
+            <moo-chip-set input if.bind="roles">
                 <!-- Compact notation -->
-                <mdc-chip repeat.for="role of request.assignedRoles">
+                <moo-chip repeat.for="role of request.assignedRoles">
                     ${getRoleName(role)}
                     <span click.trigger="removeRole($index)" trailing>X</span>
-                </mdc-chip>
-            </mdc-chip-set>
+                </moo-chip>
+            </moo-chip-set>
         </div>
         <div class="col-12 col-lg-6">
             <discord-channel-selector
@@ -131,9 +131,6 @@
                 maxlength="8"
                 value.bind="request.channelPrefix">
             </moo-text-field>
-            <mdc-text-field-helper-line>
-                <mdc-text-field-character-counter></mdc-text-field-character-counter>
-            </mdc-text-field-helper-line>
         </div>
         <div class="col-12 col-lg-6">
             <moo-text-field
@@ -170,9 +167,6 @@
                 maxlength="255"
                 value.bind="request.textOptions.closedMessageText">
             </moo-text-field>
-            <mdc-text-field-helper-line>
-                <mdc-text-field-character-counter></mdc-text-field-character-counter>
-            </mdc-text-field-helper-line>
         </div>
         <div class="col-12 col-lg-6">
             <moo-text-field
@@ -181,9 +175,6 @@
                 maxlength="255"
                 value.bind="request.textOptions.formDataText">
             </moo-text-field>
-            <mdc-text-field-helper-line>
-                <mdc-text-field-character-counter></mdc-text-field-character-counter>
-            </mdc-text-field-helper-line>
         </div>
     </div>
 </template>

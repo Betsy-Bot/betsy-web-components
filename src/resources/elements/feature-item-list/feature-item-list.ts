@@ -4,8 +4,6 @@ import { IRouteContext, IRouter } from "@aurelia/router-lite";
 import { DiscordService } from "../../../services/discord-service";
 import { ChannelNameValueConverter } from "../../value-converters/channel-name";
 
-import "./feature-item-list.scss";
-
 export enum ValueConverter {
     ChannelName = "ChannelName",
 }
@@ -36,10 +34,11 @@ export class FeatureItemList {
     ) {}
 
     binding() {
-        this.columns = [
+        let columns = [
             {
                 caption: "Identifier",
                 cellTemplate: this.nameTemplate,
+                dataField: this.nameOverride
             },
             {
                 caption: "",
@@ -48,6 +47,7 @@ export class FeatureItemList {
                 width: 200,
             },
         ];
+        this.columns = columns;
         if (this.showToggler) {
             this.columns.push({
                 caption: "Active?",

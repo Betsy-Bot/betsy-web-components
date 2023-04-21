@@ -1,5 +1,5 @@
 import { DiscordService } from "../../../services/discord-service";
-import {bindable, customElement, inject} from "aurelia";
+import {bindable, customElement, inject, observable} from "aurelia";
 import template from "./support-ticket-settings.html";
 export const SupportTicketAudits = [
     "Opened",

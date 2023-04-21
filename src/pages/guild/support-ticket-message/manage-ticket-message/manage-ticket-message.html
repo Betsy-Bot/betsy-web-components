@@ -73,16 +73,13 @@
                             maxlength="15"
                             value.bind="ticket.closeButtonText">
                         </moo-text-field>
-                        <mdc-text-field-helper-line>
-                            <mdc-text-field-character-counter></mdc-text-field-character-counter>
-                        </mdc-text-field-helper-line>
                         <discord-message-creator
                             message.two-way="ticket.initialMessage"
                             single.bind="true"
                         ></discord-message-creator>
                     </div>
 
-                    <moo-button class="button-primary mt-2" type="submit">
+                    <moo-button class="button-primary mt-2" type="submit" disabled.bind="isLoading">
                         Save
                     </moo-button>
                 </form>
