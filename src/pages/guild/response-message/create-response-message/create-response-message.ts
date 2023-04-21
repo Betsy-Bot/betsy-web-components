@@ -6,17 +6,17 @@ import {
 } from "../../../../services/models/discord";
 import { DiscordService } from "../../../../services/discord-service";
 import { toast } from "lets-toast";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
 
 @route({
     path: "response-messages/0",
     title: "Create Response Messages",
 })
-@inject(DiscordService, Router)
+@inject(DiscordService, IRouter)
 export class CreateResponseMessage implements IRouteViewModel {
     constructor(
         private discordService: DiscordService,
-        private router: Router
+        private router: IRouter
     ) {}
 
     attached() {
@@ -65,7 +65,7 @@ export class CreateResponseMessage implements IRouteViewModel {
             this.command.discordGuildId = this.guildId;
             await this.discordService.createApplicationCommand(this.command);
             toast("Command Created!");
-            this.router.load(`/guild/${this.guildId}/response-message`);
+            await this.router.load(`../response-messages`, {context: this});
         } catch (e) {
             console.log(e);
             toast("Failed to create command", { severity: "error" });
