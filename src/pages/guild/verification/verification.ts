@@ -76,5 +76,6 @@ export class Verification implements IRouteViewModel {
             this.guild,
             this.guildId
         );
+        toast("Updated Settings", {severity: "success"})
     }
 }

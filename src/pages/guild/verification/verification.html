@@ -39,7 +39,7 @@
                     label="IP Quality Score API Key"
                     value.bind="guild.ipQualityScoreApiKey"
                 ></moo-text-field>
-                <moo-button variant="primary" disabled.bind="!isAdmin">
+                <moo-button variant="primary" disabled.bind="!isAdmin" type="submit">
                     Save
                 </moo-button>
             </form>
@@ -48,6 +48,7 @@
     <form submit.trigger="save()" if.bind="guild">
         <div class="my-3">
             <discord-role-selector
+                required.bind="true"
                 disabled.bind="!isAdmin"
                 label="Select Verified Role"
                 selected-role.two-way="selectedRole"
