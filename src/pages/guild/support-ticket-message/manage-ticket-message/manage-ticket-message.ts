@@ -38,6 +38,7 @@ export class ManageTicketMessage implements IRouteViewModel {
 
     tab = "settings";
     isNew = false;
+    isLoading = true;
 
     @observable authorizedRole;
 
@@ -88,6 +89,7 @@ export class ManageTicketMessage implements IRouteViewModel {
                 ),
             ]);
         }
+        this.isLoading = false;
 
         //Temp solution because it wasn't clearing it for some reason
         this.eventAggregator.subscribe("form-cleared", (payload) => {
@@ -100,7 +102,8 @@ export class ManageTicketMessage implements IRouteViewModel {
         if (!this.ticket.assignedRoles) {
             this.ticket.assignedRoles = [];
         }
-        this.ticket.assignedRoles.push(newValue.id);
+        this.ticket.assignedRoles.push(newValue);
+        console.log(this.ticket.assignedRoles)
     }
 
     async submit() {
@@ -113,13 +116,17 @@ export class ManageTicketMessage implements IRouteViewModel {
 
     async editSupportTicketSettings() {
         try {
+            this.isLoading = true;
             this.ticket.discordGuildId = this.guildId;
             await this.discordService.updateSupportTicketSettings(this.ticket);
+            toast("Updated Support Ticket", {severity: "success"})
         } catch (e) {
             toast("Failed to update support ticket creation message", {
                 severity: "error",
             });
             throw e;
+        } finally {
+            this.isLoading = false;
         }
     }
 
