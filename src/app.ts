@@ -7,6 +7,7 @@ import { SessionService } from './services/session-service';
 import './app.scss';
 
 import { toast } from 'lets-toast';
+import {Verify} from "./pages/verify/verify";
 
 const routes = [
     {
@@ -24,10 +25,11 @@ const routes = [
         component: () => import('./pages/four-oh-four/four-oh-four'),
         title: '404',
     },
-    Transcript
+    Transcript,
+    Verify
 ];
 
-@route({ title: 'Besty Bot', routes: routes })
+@route({ title: 'Besty Bot', routes: routes, fallback: '404' })
 @inject(Router, IEventAggregator, SessionService)
 export class App {
     constructor(private router: Router, private ea: IEventAggregator, private sessionService: SessionService) {}

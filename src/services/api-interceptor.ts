@@ -71,6 +71,14 @@ export class ApiInterceptor {
                     });
                     toast("Error!", { severity: "error" });
                     break;
+                case 412:
+                    data = await response.json();
+                    this.ea.publish("present-error", {
+                        error: data.message,
+                        header: "Server Configuration Error",
+                        subheader:
+                            "Please talk to your server admin to resolve.",
+                    });
                 case 500:
                     data = await response.json();
                     this.ea.publish("present-error", {

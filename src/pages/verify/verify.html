@@ -1,0 +1,31 @@
+<error-banner></error-banner>
+<div class="align-items-center justify-content-center text-center" style="height: 97vh; width: 97vw; margin-top: 40vh" if.bind="response.requiresLogin">
+    <h3 class="mb-3 w-100 d-block">
+        This server requires you to login for further validation. <br> Please click the button below to login.
+    </h3>
+    <div class="d-block">
+        <a if.bind="!user" external
+           href="${discordOauthUrl}">
+            <button mdc-button class="button-secondary">
+                <mdc-icon>login</mdc-icon>
+                Login with Discord
+            </button>
+        </a>
+    </div>
+</div>
+<div class="d-flex align-items-center justify-content-center" style="height: 97vh; width: 97vw;" else>
+    <h3 if.bind="!loading && success">
+        You're all set! You have been verified and your role has been set.
+    </h3>
+    <h3 if.bind="!loading && !success">
+        You've been detected as an alternate account. This server blocks alternative accounts. <br> Please join the server with your original account.
+    </h3>
+    <div if.bind="isLoading">
+        <h3>
+            Running the automated verification system...
+        </h3>
+        <div class="text-center mt-3">
+            <moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>
+        </div>
+    </div>
+</div>
