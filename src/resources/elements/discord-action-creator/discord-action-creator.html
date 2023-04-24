@@ -1,27 +1,26 @@
-<template>
-  <section id="discord-action-creator">
-    <div class="row my-3">
-      <div class="col-8">
-        <mdc-form-field repeat.for="act of actions" if.bind="!forcedType">
-          <mdc-radio model.bind="act.value" checked.bind="action.type"></mdc-radio>
-          <label>
-            ${act.label}
-            <span class="material-icons fs-6">
-                help
-            </span>
-          </label>
-        </mdc-form-field>
-      </div>
-      <div class="col-4 text-end">
-        <moo-button variant="secondary" click.bind="() => deleteAction()" if.bind="!single">
-          Delete Action
-        </moo-button>
-      </div>
+<div class="row my-3">
+    <div class="col-8">
+        <moo-select class="standard-betsy-select w-100"
+                    value.bind="action.type"
+                    label="Action Type"
+                    required.bind="true">
+            <moo-list>
+                <moo-list-item
+                    repeat.for="act of actions"
+                    label.bind="act.label"
+                    value.bind="act.value"
+                ></moo-list-item>
+            </moo-list>
+        </moo-select>
     </div>
+    <div class="col-4 text-end">
+        <moo-button variant="secondary" click.bind="() => deleteAction()" if.bind="!single">
+            Delete Action
+        </moo-button>
+    </div>
+</div>
 
-    <discord-message-creator
-        allow-components.bind="true"
-        message.two-way="action.discordMessage.message"
-    ></discord-message-creator>
-  </section>
-</template>
+<discord-message-creator
+    allow-components.bind="true"
+    message.two-way="action.discordMessage.message"
+></discord-message-creator>
