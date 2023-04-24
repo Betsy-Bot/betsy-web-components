@@ -42,6 +42,16 @@ export class ApiInterceptor {
             let err;
             let msg;
             switch (response?.status) {
+                case 400:
+                    data = await response.json();
+                    this.ea.publish("present-error", {
+                        error: data.message,
+                        header: "Unexpected Error",
+                        details: data.details,
+                        subheader:
+                            "Please report this to Betsy Support Server",
+                    });
+                    break;
                 case 401:
                     await this.clearSession();
                     break;
@@ -60,10 +70,6 @@ export class ApiInterceptor {
                     break;
                 case 404:
                     return null;
-                case 400:
-                    data = await response.json();
-                    toast(data?.message, { severity: "error" });
-                    break;
                 case 422:
                     data = await response.json();
                     this.ea.publish("present-error", {
