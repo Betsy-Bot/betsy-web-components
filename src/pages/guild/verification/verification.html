@@ -18,7 +18,7 @@
             <label class="me-5">Active?</label>
         </div>
     </div>
-    <mdc-expandable accordion="acc1" class="my-3">
+    <moo-expandable accordion="acc1" class="my-3">
         <div if.bind="!isAdmin">
             <span class="text-danger">Only the owner may edit these settings.</span>
         </div>
@@ -44,7 +44,7 @@
                 </moo-button>
             </form>
         </div>
-    </mdc-expandable>
+    </moo-expandable>
     <form submit.trigger="save()" if.bind="guild">
         <div class="my-3">
             <discord-role-selector

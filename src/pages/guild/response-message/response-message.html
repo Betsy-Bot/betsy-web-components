@@ -11,6 +11,7 @@
     <div class="col-4 text-end">
         <moo-switch
             value.bind="featureActive"
+            change.bind="() => toggleFeature()"
         ></moo-switch>
         <label class="me-5">Active?</label>
     </div>
