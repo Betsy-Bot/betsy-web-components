@@ -19,7 +19,7 @@ export class MooSelect implements ICustomElementViewModel {
 
     attached() {
         const select = new MDCSelect(this.selectEl);
-        select.value = this.value;
+        select.value = this.value.toString();
 
         select.listen('MDCSelect:change', () => {
             this.value = select.value;
