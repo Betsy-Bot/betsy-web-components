@@ -36,4 +36,11 @@ export class MooTextField implements ICustomElementViewModel {
             this.textField = new MDCTextField(this.input);
         }
     }
+
+    get floatLabelClass(): string {
+        if (this.value == undefined) {
+            return ''
+        }
+        return 'mdc-text-field--label-floating';
+    }
 }
