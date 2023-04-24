@@ -7,7 +7,7 @@ import {
 import "./discord-message-preview.scss";
 import { DiscordService } from "../../../services/discord-service";
 import template from "./discord-message-preview.html";
-import cow from "../../../images/cow.jpeg";
+import cow from "../../../images/logo.png";
 
 @customElement({
     name: "discord-message-preview",
@@ -24,6 +24,7 @@ export class DiscordMessagePreview implements ICustomElementViewModel {
     cow = cow;
 
     @bindable message;
+    @bindable title;
     @bindable first = true;
     discordGuild;
 
