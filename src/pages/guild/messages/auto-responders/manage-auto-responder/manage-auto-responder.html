@@ -38,12 +38,20 @@
                             value.bind="responder.name"
                         ></moo-text-field>
                         <div class="row">
-                            <div class="col-12">
-                                <mdc-form-field repeat.for="type of types">
-                                    <div></div>
-                                    <mdc-radio model.bind="type.value" checked.bind="responder.type"></mdc-radio>
-                                    <label>${type.label}</label>
-                                </mdc-form-field>
+                            <div class="col-12 mt-2">
+                                <moo-select
+                                    class="standard-betsy-select w-100"
+                                    value.bind="responder.type"
+                                    label="Message Type"
+                                    required.bind="true">
+                                    <moo-list>
+                                        <moo-list-item
+                                            repeat.for="type of types"
+                                            label.bind="type.label"
+                                            value.bind="type.value"
+                                        ></moo-list-item>
+                                    </moo-list>
+                                </moo-select>
                             </div>
                             <div class="col-12">
                                     <div class="row my-3">
@@ -56,7 +64,7 @@
                                             ></moo-text-field>
                                         </div>
                                         <div class="col-2">
-                                            <moo-button variant="primary" class="button-primary w-100 h-100" type="button" click.trigger="addPhrase()">
+                                            <moo-button variant="primary" class="w-100 h-100" type="button" click.bind="() => addPhrase()">
                                                 Add
                                             </moo-button>
                                         </div>
