@@ -85,8 +85,17 @@
                 </form>
             </div>
             <div class="col-12 col-lg-4">
-                <discord-message-preview message.bind="ticket.discordMessage.message" if.bind="tab === 'container'"></discord-message-preview>
-                <discord-message-preview message.bind="ticket.initialMessage" if.bind="tab === 'initial'"></discord-message-preview>
+                <discord-message-preview
+                    title="Panel Message"
+                    message.bind="ticket.discordMessage.message"
+                    if.bind="tab === 'container' || tab === 'settings'"
+                ></discord-message-preview>
+                <div class="my-5" if.bind="tab === 'settings'"></div>
+                <discord-message-preview
+                    title="Initial Message"
+                    message.bind="ticket.initialMessage"
+                    if.bind="tab === 'initial' || tab === 'settings'"
+                ></discord-message-preview>
             </div>
         </div>
     </section>

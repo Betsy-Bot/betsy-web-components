@@ -12,14 +12,16 @@ import { MDCSelect } from '@material/select';
 export class MooSelect implements ICustomElementViewModel {
     @bindable label;
     @bindable options;
-    @bindable({ mode: BindingMode.twoWay }) value;
+    @bindable({ mode: BindingMode.twoWay }) value: string | number | undefined;
     @bindable class;
     @bindable required;
     selectEl: HTMLElement;
 
     attached() {
         const select = new MDCSelect(this.selectEl);
-        select.value = this.value.toString();
+        if (this.value) {
+            select.value = this.value.toString();
+        }
 
         select.listen('MDCSelect:change', () => {
             this.value = select.value;

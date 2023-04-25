@@ -60,7 +60,7 @@
             <!--                value.bind="embed.video.url"-->
             <!--            ></moo-text-field>-->
 
-            <moo-button class="button-primary mt-3" click.trigger="() => addField()">
+            <moo-button class="button-primary mt-3" click.bind="() => addField()" type="button">
                 Add Field
             </moo-button>
 
@@ -84,9 +84,9 @@
                             maxlength.bind="1024"
                         ></discord-markup-editor>
                     </div>
-                    <button mdc-button class="button-secondary" click.trigger="deleteField($index)">
+                    <moo-button class="button-secondary" click.bind="() => deleteField($index)" type="button">
                         Delete Field
-                    </button>
+                    </moo-button>
                 </div>
             </div>
 

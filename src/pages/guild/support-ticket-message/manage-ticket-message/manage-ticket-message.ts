@@ -43,17 +43,45 @@ export class ManageTicketMessage implements IRouteViewModel {
     @observable authorizedRole;
 
     ticketTemplate = {
-        identifier: "",
+        identifier: "identifier",
         id: undefined,
         logChannelId: "",
         assignedRoles: [],
-        initialMessage: {},
+        initialMessage: {
+            embeds: [
+                {
+                    title: "Your support channel has been created for you.",
+                    description: "We will be with you shortly!",
+                    color: 5726933
+                }
+            ],
+            components: [
+                {
+                    type: DiscordComponentType.ActionRow,
+                    components: [
+                        {
+                            type: DiscordComponentType.Button,
+                            label: "Close Ticket",
+                            style: DiscordButtonStyle.Danger,
+                            custom_id: 'CloseTicket'
+                        },
+                    ],
+                },
+            ],
+        },
         closeButtonText: "Close",
         discordMessage: {
             discordChannelId: "",
             discordCategoryId: "",
             type: 1,
             message: {
+                embeds: [
+                    {
+                        title: "Create a Ticket Using the Button Below!",
+                        description: "We will respond ASAP!",
+                        color: 5726933
+                    }
+                ],
                 components: [
                     {
                         type: DiscordComponentType.ActionRow,
@@ -82,6 +110,7 @@ export class ManageTicketMessage implements IRouteViewModel {
         ) {
             this.isNew = true;
             this.ticket = this.ticketTemplate;
+            this.ticket.discordMessage.message.components[0].components[0].custom_id = `ButtonCreateTicket:${this.ticket.identifier}`
         } else {
             [this.ticket] = await Promise.all([
                 await this.discordService.getSupportTicketSettingsById(
