@@ -4,10 +4,10 @@
             <div class="col-12" if.bind="showingSubmissions">
                 <div class="py-5" if.bind="form.submissions && form.submissions.length > 0">
                     <h4>Submissions</h4>
-                    <dx-data-grid items.bind="form.submissions" columns.bind="columns" master-detail.bind="detailTemplate">
+                    <moo-data-grid items.bind="form.submissions" columns.bind="columns" master-detail.bind="detailTemplate">
                         <div class="master-detail-caption" ref="rowCaption"></div>
                         <div class="master-detail" ref="rowDetail"></div>
-                    </dx-data-grid>
+                    </moo-data-grid>
                 </div>
             </div>
             <div class="col-12 col-lg-8">
@@ -29,7 +29,7 @@
             </div>
             <div class="col-12 col-lg-4">
                 <div class="text-end">
-                    <moo-button variant="primary" click.trigger="showingSubmissions = !showingSubmissions">
+                    <moo-button variant="primary" click.bind="() => showingSubmissions = !showingSubmissions" type="button">
                         ${showingSubmissions ? 'Hide' : 'Show'} Submissions
                     </moo-button>
                 </div>
