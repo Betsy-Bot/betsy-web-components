@@ -14,12 +14,6 @@
     </div>
 </div>
 <div class="d-flex align-items-center justify-content-center" style="height: 97vh; width: 97vw;" else>
-    <h3 if.bind="!loading && success">
-        You're all set! You have been verified and your role has been set.
-    </h3>
-    <h3 if.bind="!loading && !success">
-        You've been detected as an alternate account. This server blocks alternative accounts. <br> Please join the server with your original account.
-    </h3>
     <div if.bind="isLoading">
         <h3>
             Running the automated verification system...
@@ -28,4 +22,12 @@
             <moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>
         </div>
     </div>
+    <template else>
+        <h3 if.bind="success">
+            You're all set! You have been verified and your role has been set.
+        </h3>
+        <h3 else>
+            You've been detected as an alternate account. This server blocks alternative accounts. <br> Please join the server with your original account.
+        </h3>
+    </template>
 </div>

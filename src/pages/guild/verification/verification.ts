@@ -70,12 +70,10 @@ export class Verification implements IRouteViewModel {
     }
 
     async save() {
-        this.guild.globalSettings.verificationSettings.verifiedRoleId =
-            this.selectedRole.id;
         await this.discordService.updateGlobalSettingsForGuild(
             this.guild,
             this.guildId
         );
-        toast("Updated Settings", {severity: "success"})
+        toast("Updated Settings", { severity: "success" });
     }
 }

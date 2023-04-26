@@ -18,7 +18,7 @@
             <label class="me-5">Active?</label>
         </div>
     </div>
-    <moo-expandable accordion="acc1" class="my-3">
+    <moo-accordion class="my-3">
         <div if.bind="!isAdmin">
             <span class="text-danger">Only the owner may edit these settings.</span>
         </div>
@@ -44,15 +44,14 @@
                 </moo-button>
             </form>
         </div>
-    </moo-expandable>
+    </moo-accordion>
     <form submit.trigger="save()" if.bind="guild">
         <div class="my-3">
             <discord-role-selector
                 required.bind="true"
                 disabled.bind="!isAdmin"
                 label="Select Verified Role"
-                selected-role.two-way="selectedRole"
-                role-id.bind="guild.globalSettings.verificationSettings.verifiedRoleId"
+                selected-role.bind="guild.globalSettings.verificationSettings.verifiedRoleId"
             ></discord-role-selector>
         </div>
         <div class="mt-3">
@@ -63,6 +62,7 @@
                 type.bind="0"
                 channel-id.two-way="guild.globalSettings.verificationSettings.logChannel"
                 guild-id.bind="guildId"
+                required.bind="true"
             ></discord-channel-selector>
         </div>
         <div class="mb-3">
