@@ -30,6 +30,7 @@ export class ManageAutoResponder implements IRouteViewModel {
     tab = "settings";
     @observable selectedIgnoreChannelId;
     @observable selectedWhitelistChannelId;
+    @observable selectedWhitelistCategoryId;
     responderTemplate = {
         name: "",
         discordServerId: "",
@@ -119,5 +120,18 @@ export class ManageAutoResponder implements IRouteViewModel {
 
     async removeWhitelistedChannel(index) {
         this.responder.whitelistedChannels.splice(index, 1);
+    }
+
+    async selectedWhitelistCategoryIdChanged() {
+        if (!this.responder.whitelistedCategories) {
+            this.responder.whitelistedCategories = [];
+        }
+        this.responder.whitelistedCategories.push(
+            this.selectedWhitelistCategoryId
+        );
+    }
+
+    async removeWhitelistedCategory(index) {
+        this.responder.whitelistedCategories.splice(index, 1);
     }
 }
