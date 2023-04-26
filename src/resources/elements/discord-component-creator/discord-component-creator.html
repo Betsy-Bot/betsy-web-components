@@ -44,7 +44,7 @@
                                 label="Menu Placeholder"
                                 value.bind="component.placeholder"
                             ></moo-text-field>
-                            <moo-button class="button-primary" click.bind="() => addMenuOption($index)">
+                            <moo-button class="button-primary" click.bind="() => addMenuOption($parent.$index)" type="button">
                                 Add Option
                             </moo-button>
                             <template repeat.for="item of component.options">
