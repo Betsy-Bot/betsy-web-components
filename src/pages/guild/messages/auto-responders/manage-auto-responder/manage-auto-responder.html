@@ -103,22 +103,26 @@
                             type.bind="0"
                             channel-id.two-way="selectedWhitelistChannelId"
                         ></discord-channel-selector>
-                        <div repeat.for="channelId of responder.whitelistedChannels">
-                            ${channelId}
-                            <span class="text-danger me-2 cursor-pointer" click.trigger="removeWhitelistedChannel($index)">
-                                ( X )
-                            </span>
+                        <div class="mb-3">
+                            <div repeat.for="channelId of responder.whitelistedChannels">
+                                ${channelId}
+                                <span class="text-danger me-2 cursor-pointer" click.trigger="removeWhitelistedChannel($index)">
+                                    ( X )
+                                </span>
+                            </div>
                         </div>
                         <discord-channel-selector
                             label="Add Whitelisted Categories"
                             type.bind="4"
                             channel-id.two-way="selectedWhitelistCategoryId"
                         ></discord-channel-selector>
-                        <div repeat.for="categoryId of responder.whitelistedCategories">
-                            ${categoryId}
-                            <span class="text-danger me-2 cursor-pointer" click.trigger="removeWhitelistedCategory($index)">
-                                ( X )
-                            </span>
+                        <div class="mb-3">
+                            <div repeat.for="categoryId of responder.whitelistedCategories">
+                                ${categoryId}
+                                <span class="text-danger me-2 cursor-pointer" click.trigger="removeWhitelistedCategory($index)">
+                                    ( X )
+                                </span>
+                            </div>
                         </div>
                         <div class="text-end">
                             <moo-button variant="primary" click.trigger="tab = 'message'" type="button">
