@@ -50,7 +50,6 @@
                             if.bind="options"
                             class="standard-betsy-select w-100"
                             value.bind="selectedAuditOption"
-                            change.trigger="() => selectAuditOption($event)"
                             label="Select Active Audits"
                             required.bind="required">
                     <moo-list>
@@ -62,13 +61,13 @@
                     </moo-list>
                 </moo-select>
             </div>
-            <div if.bind="request.supportTicketAudits">
-                <ul>
-                    <li repeat.for="audit of request.supportTicketAudits">
-                        * ${audit} <span class="ms-2 text-danger cursor-pointer" click.trigger="removeAuditOption($index)">(X)</span>
-                    </li>
-                </ul>
-            </div>
+            <moo-chip-set input if.bind="request.supportTicketAudits">
+                <!-- Compact notation -->
+                <moo-chip repeat.for="audit of request.supportTicketAudits">
+                    ${audit | pascalSpacing}
+                    <span click.trigger="removeAuditOption($index)">X</span>
+                </moo-chip>
+            </moo-chip-set>
         </div>
         <div class="col-12 col-lg-6">
             <moo-text-field

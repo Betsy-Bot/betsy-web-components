@@ -30,11 +30,13 @@ export class SupportTicketSettings {
         this.roles = await this.discordService.getDiscordRoles();
     }
 
-    selectAuditOption() {
+    selectedAuditOptionChanged() {
+        console.log(this.selectedAuditOption);
         if (this.selectedAuditOption) {
             if (!this.request.supportTicketAudits) {
                 this.request.supportTicketAudits = [];
             }
+            console.log(this.request);
             this.request.supportTicketAudits.push(this.selectedAuditOption);
             this.selectedAuditOption = null;
         }
