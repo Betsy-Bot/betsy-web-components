@@ -8,6 +8,10 @@
                     required.bind="required">
             <moo-list>
                 <moo-list-item
+                    label="- None - "
+                    value=""
+                ></moo-list-item>
+                <moo-list-item
                     repeat.for="form of forms"
                     label.bind="form.title"
                     value.bind="form.id"
