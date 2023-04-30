@@ -8,23 +8,17 @@ import "./app.scss";
 
 import { toast } from "lets-toast";
 import { Verify } from "./pages/verify/verify";
+import { FourOhFour } from "./pages/four-oh-four/four-oh-four";
+import { Home } from "./pages/home/home";
 
 const routes = [
-    {
-        path: ["", "login"],
-        component: () => import("./pages/home/home"),
-        title: "Home",
-    },
+    Home,
     {
         path: "guild/:guildId",
         component: () => import("./pages/guild/guild"),
         title: "Guild",
     },
-    {
-        path: "404",
-        component: () => import("./pages/four-oh-four/four-oh-four"),
-        title: "404",
-    },
+    FourOhFour,
     Transcript,
     Verify,
 ];

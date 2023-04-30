@@ -1,14 +1,21 @@
-import { inject } from 'aurelia';
-import { IRouter,IRouteViewModel } from '@aurelia/router-lite';
+import { inject } from "aurelia";
+import { IRouter, IRouteViewModel, route } from "@aurelia/router-lite";
 
-import { SessionService } from '../../services/session-service';
-import { UserService } from '../../services/user-service';
-import { WebhookService } from '../../services/websocket-service';
-
+import { SessionService } from "../../services/session-service";
+import { UserService } from "../../services/user-service";
+import { WebhookService } from "../../services/websocket-service";
+@route({
+    path: ["", "login"],
+    title: "Home",
+})
 @inject(SessionService, UserService, WebhookService, IRouter)
 export class Home implements IRouteViewModel {
-    constructor(private sessionService: SessionService, private userService: UserService, private webhookService: WebhookService, private router: IRouter) {
-    }
+    constructor(
+        private sessionService: SessionService,
+        private userService: UserService,
+        private webhookService: WebhookService,
+        private router: IRouter
+    ) {}
 
     user;
     private managedGuilds;
@@ -27,7 +34,9 @@ export class Home implements IRouteViewModel {
 
         const userGuilds = await this.userService.getGuilds();
         for (const guild of userGuilds) {
-            guild.icon_extension = guild.icon?.startsWith('a_') ? 'gif' : 'webp';
+            guild.icon_extension = guild.icon?.startsWith("a_")
+                ? "gif"
+                : "webp";
             guild.can_add = guild.owner || (guild.permissions & 0x8) == 0x8;
         }
 
@@ -35,17 +44,20 @@ export class Home implements IRouteViewModel {
         this.otherGuilds = userGuilds.filter((g) => !g.can_add);
 
         for (const guild of this.managedGuilds) {
-            const foundServerIndex = this.user.activeServers.findIndex((x) => x.guildId == guild.id);
+            const foundServerIndex = this.user.activeServers.findIndex(
+                (x) => x.guildId == guild.id
+            );
             if (foundServerIndex >= 0) {
                 guild.exists = true;
-                guild.invited = this.user.activeServers[foundServerIndex].invited;
+                guild.invited =
+                    this.user.activeServers[foundServerIndex].invited;
                 this.user.activeServers[foundServerIndex].name = guild.name;
             }
         }
 
         this.connection = this.webhookService.subscribeToGuildInvite();
         await this.connection.start();
-        this.connection.on('BotInvited', async (id, name, description) => {
+        this.connection.on("BotInvited", async (id, name, description) => {
             await this.router.load(`guild/${id}`);
         });
     }

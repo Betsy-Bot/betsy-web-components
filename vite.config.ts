@@ -1,11 +1,9 @@
-import { defineConfig } from 'vite';
-import aurelia from '@aurelia/vite-plugin';
-
+import { defineConfig } from "vite";
+import aurelia from "@aurelia/vite-plugin";
 export default defineConfig({
-  server: {
-    port: 9500,
-    strictPort: true,
-  },
-  plugins: [aurelia()],
+    server: {
+        port: 9500,
+        strictPort: true,
+    },
+    plugins: [aurelia()],
 });
-
