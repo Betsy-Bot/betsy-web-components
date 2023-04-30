@@ -47,7 +47,7 @@ import { ManageTicketMessage } from "./support-ticket-message/manage-ticket-mess
 import { ChannelBackups } from "./resources/channel-backups/channel-backups";
 import { ChannelBackup } from "./resources/channel-backups/channel-backup/channel-backup";
 import { ManageKeyValueStorage } from "./resources/key-value-storage/manage-key-value-storage/manage-key-value-storage";
-import {ImportExport} from "./import-export/import-export";
+import { ImportExport } from "./import-export/import-export";
 
 const routes = [
     Dashboard,
@@ -94,12 +94,13 @@ const routes = [
     Twitch,
     ChannelBackups,
     ChannelBackup,
-    ImportExport
+    ImportExport,
 ];
 
 @route({
     title: "Guild",
     routes: routes,
+    path: "guild/:guildId",
 })
 @inject(DiscordService)
 export class Guild implements IRouteViewModel {

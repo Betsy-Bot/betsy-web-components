@@ -10,19 +10,9 @@ import { toast } from "lets-toast";
 import { Verify } from "./pages/verify/verify";
 import { FourOhFour } from "./pages/four-oh-four/four-oh-four";
 import { Home } from "./pages/home/home";
+import { Guild } from "./pages/guild/guild";
 
-const routes = [
-    Home,
-    {
-        path: "guild/:guildId",
-        component: () => import("./pages/guild/guild"),
-        title: "Guild",
-    },
-    FourOhFour,
-    Transcript,
-    Verify,
-];
-
+const routes = [Home, Guild, FourOhFour, Transcript, Verify];
 @route({ title: "Besty Bot", routes: routes, fallback: "404" })
 @inject(Router, IEventAggregator, SessionService)
 export class App {
