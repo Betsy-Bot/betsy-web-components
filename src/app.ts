@@ -1,5 +1,5 @@
 import { IEventAggregator, inject } from "aurelia";
-import { route, Router } from "@aurelia/router-lite";
+import { route } from "@aurelia/router-lite";
 
 import { Transcript } from "./pages/transcript/transcript";
 import { SessionService } from "./services/session-service";
@@ -14,10 +14,9 @@ import { Guild } from "./pages/guild/guild";
 
 const routes = [Home, Guild, FourOhFour, Transcript, Verify];
 @route({ title: "Besty Bot", routes: routes, fallback: "404" })
-@inject(Router, IEventAggregator, SessionService)
+@inject(IEventAggregator, SessionService)
 export class App {
     constructor(
-        private router: Router,
         private ea: IEventAggregator,
         private sessionService: SessionService
     ) {}
