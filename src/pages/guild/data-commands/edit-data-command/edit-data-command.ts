@@ -1,6 +1,6 @@
 import { IEventAggregator } from "aurelia";
 import { DiscordService } from "../../../../services/discord-service";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
 import { toast } from "lets-toast";
 import { bindable, inject } from "aurelia";
 import {
@@ -13,12 +13,12 @@ import {
     path: "data-commands/:commandId",
     title: "Manage Data Command",
 })
-@inject(IEventAggregator, DiscordService, Router)
+@inject(IEventAggregator, DiscordService, IRouter)
 export class EditDataCommand implements IRouteViewModel {
     constructor(
         private eventAggregator: IEventAggregator,
         private discordService: DiscordService,
-        private router: Router
+        private router: IRouter
     ) {}
 
     command: BaseDiscordCommand = {
@@ -80,6 +80,7 @@ export class EditDataCommand implements IRouteViewModel {
                     this.command
                 );
                 toast("Data Command Created!", { severity: "success" });
+                await this.router.load("../data-commands", { context: this });
             } else {
                 this.command.discordGuildId = this.guildId;
                 await this.discordService.updateApplicationCommand(
