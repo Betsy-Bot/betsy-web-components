@@ -39,8 +39,6 @@ export class ApiInterceptor {
     async response(response) {
         try {
             let data;
-            let err;
-            let msg;
             switch (response?.status) {
                 case 400:
                     data = await response.json();
@@ -48,12 +46,14 @@ export class ApiInterceptor {
                         error: data.message,
                         header: "Unexpected Error",
                         details: data.details,
-                        subheader:
-                            "Please report this to Betsy Support Server",
+                        subheader: "Please report this to Betsy Support Server",
                     });
                     break;
                 case 401:
-                    await this.clearSession();
+                    this.ea.publish("present-error", {
+                        header: "Unauthorized",
+                        subheader: "You don't have access to this resource",
+                    });
                     break;
                 case 403:
                     try {
