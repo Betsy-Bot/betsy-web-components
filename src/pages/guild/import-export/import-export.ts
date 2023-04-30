@@ -1,7 +1,7 @@
-import {route} from "@aurelia/router-lite";
-import {inject, observable} from 'aurelia';
-import {DiscordService} from "../../../services/discord-service";
-import {toast} from "lets-toast";
+import { route } from "@aurelia/router-lite";
+import { inject, observable } from "aurelia";
+import { DiscordService } from "../../../services/discord-service";
+import { toast } from "lets-toast";
 
 @route({
     path: "import-export",
@@ -9,7 +9,7 @@ import {toast} from "lets-toast";
 })
 @inject(DiscordService)
 export class ImportExport {
-    features = ["MessageTemplates", "Forms"]
+    features = ["MessageTemplates", "Forms", "Commands"];
     selectedFeatures = [];
     isExporting = false;
     isImporting = false;
@@ -21,8 +21,8 @@ export class ImportExport {
     }
 
     attached() {
-        this.uploadElement.addEventListener('change', (event) => {
-            console.log(event)
+        this.uploadElement.addEventListener("change", (event) => {
+            console.log(event);
             //@ts-ignore
             const file = event.target.files[0];
 
@@ -30,14 +30,16 @@ export class ImportExport {
                 this.isImporting = true;
                 const reader = new FileReader();
 
-                reader.addEventListener('load', async (event) => {
+                reader.addEventListener("load", async (event) => {
                     const uploadedJSON = event.target.result;
 
                     // Parse the JSON string into a JavaScript object
                     //@ts-ignore;
                     const jsonObject = JSON.parse(uploadedJSON);
-                    const count = await this.discordService.importTemplate(jsonObject);
-                    toast(`Imported settings. ${count} Settings Imported`)
+                    const count = await this.discordService.importTemplate(
+                        jsonObject
+                    );
+                    toast(`Imported settings. ${count} Settings Imported`);
                 });
 
                 reader.readAsText(file);
@@ -47,7 +49,9 @@ export class ImportExport {
 
     async handleExport() {
         this.isExporting = true;
-        const response = await this.discordService.exportTemplate(this.selectedFeatures);
+        const response = await this.discordService.exportTemplate(
+            this.selectedFeatures
+        );
         const jsonString = JSON.stringify(response, null, 4);
         const blob = new Blob([jsonString], { type: "application/json" });
         // Create an anchor element with a download attribute
@@ -64,7 +68,10 @@ export class ImportExport {
 
     handleCheckedChanged(feature, checked) {
         if (!checked) {
-            this.selectedFeatures.splice(this.selectedFeatures.indexOf(feature), 1);
+            this.selectedFeatures.splice(
+                this.selectedFeatures.indexOf(feature),
+                1
+            );
         } else {
             this.selectedFeatures.push(feature);
         }
