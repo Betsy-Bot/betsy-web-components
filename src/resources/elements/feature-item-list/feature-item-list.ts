@@ -4,6 +4,7 @@ import { IRouteContext, IRouter } from "@aurelia/router-lite";
 import { DiscordService } from "../../../services/discord-service";
 import { ChannelNameValueConverter } from "../../value-converters/channel-name";
 
+
 export enum ValueConverter {
     ChannelName = "ChannelName",
 }
@@ -34,26 +35,28 @@ export class FeatureItemList {
     ) {}
 
     binding() {
-        let columns = [
+        this.columns = [
             {
                 caption: "Identifier",
                 cellTemplate: this.nameTemplate,
-                dataField: this.nameOverride
+                dataField: this.nameOverride,
+                visibleIndex: 1
             },
             {
                 caption: "",
                 cellTemplate: this.linkTemplate,
                 alignment: "center",
                 width: 200,
+                visibleIndex: 2
             },
         ];
-        this.columns = columns;
         if (this.showToggler) {
             this.columns.push({
                 caption: "Active?",
                 cellTemplate: this.toggleTemplate,
                 alignment: "center",
                 width: 200,
+                visibleIndex: 3
             });
         }
     }
@@ -86,10 +89,10 @@ export class FeatureItemList {
 
     convertValue(value) {
         switch (this.valueConverter) {
-            case ValueConverter.ChannelName:
-                return this.channelValueConverter.toView(value);
-            default:
-                return value;
+        case ValueConverter.ChannelName:
+            return this.channelValueConverter.toView(value);
+        default:
+            return value;
         }
     }
 
