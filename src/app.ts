@@ -41,7 +41,7 @@ export class App {
                 } catch (e) {
                     toast("Failed to exchange code", { severity: "error" });
                 } finally {
-                    await this.router.load('');
+                    await this.router.load('/', { context: this });
                 }
             } else {
                 this.user = await this.sessionService.getUser();

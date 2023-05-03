@@ -11,7 +11,7 @@ import { ApiService } from "./api-service";
 
 @inject(ApiService, IRouter)
 export class DiscordService {
-    guildId: string;
+    public guildId: string;
     guild;
     guildChannelData = {
         guildId: null,
@@ -32,7 +32,7 @@ export class DiscordService {
     VERIFICATION = "Verification";
     THREAD_CHANNELS = "ThreadChannels";
 
-    get guildChannels() {
+    public get guildChannels(): any {
         return this.guildChannelData.data;
     }
 
@@ -53,7 +53,7 @@ export class DiscordService {
         return this.guild?.id;
     }
 
-    getLocalDiscordGuildId() {
+    public getLocalDiscordGuildId(): string | undefined {
         if (!this.guild) {
             return this.guildId;
         }

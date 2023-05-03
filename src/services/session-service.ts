@@ -83,7 +83,7 @@ export class SessionService {
         return token && token !== '' && token !== undefined && token !== 'undefined' && token !== 'null';
     }
 
-    public async logout() {
+    public logout() {
         this.clearSession();
     }
 
