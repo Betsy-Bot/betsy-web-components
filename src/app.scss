@@ -5,6 +5,8 @@
 @use 'styles/scrollbar';
 @use 'styles/mdc-styles';
 @use 'styles/md-overrides';
+@use 'flatpickr/dist/flatpickr.min.css';
+@use 'material-icons/iconfont/material-icons.css';
 
 body {
   background-color: #202225;

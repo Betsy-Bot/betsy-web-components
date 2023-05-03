@@ -50,6 +50,7 @@
         "flatpickr": "^4.6.13",
         "ink-mde": "^0.25.0",
         "lets-toast": "^1.0.1",
+        "material-icons": "^1.13.6",
         "rollup": "^3.21.4"
     },
     "devDependencies": {
