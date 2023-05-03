@@ -61,7 +61,7 @@ export class DiscordComponentCreator {
         console.log(this.components);
     }
 
-    addNewComponent(index) {
+    addNewComponent(index: number) {
         this.components[index].components.push({
             type: DiscordComponentType.Button,
             style: DiscordButtonStyle.Success,
@@ -70,7 +70,7 @@ export class DiscordComponentCreator {
         })
     }
 
-    addMenuOption(index) {
+    addMenuOption(index: number) {
         if (!this.components[index].components[0]) {
             this.components[index].components[0] = [];
         }
@@ -85,15 +85,18 @@ export class DiscordComponentCreator {
         });
     }
 
-    removeMenuOption(index) {
+    removeMenuOption(index: number) {
         this.components[0].components[0].options.splice(index, 1);
     }
 
-    removeComponentRow(rowIndex) {
+    removeComponentRow(rowIndex: number) {
         this.components.splice(rowIndex, 1);
     }
 
-    removeComponent(rowIndex, componentIndex) {
+    removeComponent(rowIndex: number, componentIndex: number) {
         this.components[rowIndex].components.splice(componentIndex, 1);
+        if (this.components[rowIndex].components.length == 0) {
+            this.components.splice(rowIndex, 1);
+        }
     }
 }
