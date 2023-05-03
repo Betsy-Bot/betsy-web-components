@@ -1,12 +1,9 @@
-import {bindable, customElement, ICustomElementViewModel} from "aurelia";
-import { DiscordComponentType } from "../../../services/models/discord";
-import template from "./discord-component-preview.html";
+import { bindable, containerless, ICustomElementViewModel } from "aurelia";
 
-@customElement({
-    name: 'discord-component-preview',
-    template: template,
-    containerless: true
-})
+import { DiscordComponentType } from "../../../services/models/discord";
+
+
+@containerless()
 export class DiscordComponentPreview implements ICustomElementViewModel{
     @bindable components;
 
@@ -15,10 +12,10 @@ export class DiscordComponentPreview implements ICustomElementViewModel{
             return 'col-12';
         }
         switch (type) {
-            case DiscordComponentType.Button:
-                return 'col-2'
-            case DiscordComponentType.MenuSelect:
-                return 'col-12'
+        case DiscordComponentType.Button:
+            return 'col-2'
+        case DiscordComponentType.MenuSelect:
+            return 'col-12'
         }
     }
 }

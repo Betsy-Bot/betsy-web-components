@@ -1,12 +1,8 @@
-import {bindable, BindingMode, customElement, ICustomElementViewModel} from "aurelia";
-import './confirmation-dialog.scss'
-import template from "./confirmation-dialog.html";
+import { bindable, BindingMode, containerless, ICustomElementViewModel } from "aurelia";
 
-@customElement({
-    name: 'confirmation-dialog',
-    template: template,
-    containerless: true
-})
+import './confirmation-dialog.scss'
+
+@containerless()
 export class ConfirmationDialog implements ICustomElementViewModel {
     @bindable handler;
     @bindable cancelText;

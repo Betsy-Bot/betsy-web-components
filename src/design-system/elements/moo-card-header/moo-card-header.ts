@@ -1,11 +1,7 @@
-import { bindable, customElement, ICustomElementViewModel } from "aurelia";
-import template from "./moo-card-header.html";
+import { bindable, containerless, ICustomElementViewModel } from "aurelia";
 
-@customElement({
-    name: "moo-card-header",
-    template,
-    containerless: true,
-})
+
+@containerless()
 export class MooCardHeader implements ICustomElementViewModel {
     @bindable outlined: boolean;
 }

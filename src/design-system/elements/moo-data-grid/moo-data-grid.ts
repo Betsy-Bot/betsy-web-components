@@ -1,12 +1,9 @@
+import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
+
 import 'devextreme/dist/css/dx.material.purple.dark.compact.css';
-import {bindable, customElement, ICustomElementViewModel} from 'aurelia';
+
 import DataGrid from 'devextreme/ui/data_grid';
-import template from "./moo-data-grid.html";
-@customElement({
-    name: 'moo-data-grid',
-    template,
-    containerless: true
-})
+@containerless()
 export class MooDataGrid implements ICustomElementViewModel {
     @bindable items = null;
     @bindable columns;
@@ -61,7 +58,7 @@ export class MooDataGrid implements ICustomElementViewModel {
 
     attached() {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+        // @ts-expect-error
         this.dataGrid = new DataGrid(this.control, {
             allowColumnReordering: this.allowColumnReordering || true,
             filterRow: {

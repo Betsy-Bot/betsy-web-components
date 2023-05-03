@@ -1,13 +1,10 @@
-import {bindable, customElement, ICustomElementViewModel} from "aurelia";
-import { DiscordEmbed, DiscordEmbedField } from "../../../services/models/discord";
-import './embed-editor.scss';
-import template from "./embed-editor.html";
+import { bindable, containerless, ICustomElementViewModel } from "aurelia";
 
-@customElement({
-    name: 'embed-editor',
-    template: template,
-    containerless: true
-})
+import { DiscordEmbed, DiscordEmbedField } from "../../../services/models/discord";
+
+import './embed-editor.scss';
+
+@containerless()
 export class EmbedEditor implements ICustomElementViewModel{
     @bindable embed: DiscordEmbed = {};
 

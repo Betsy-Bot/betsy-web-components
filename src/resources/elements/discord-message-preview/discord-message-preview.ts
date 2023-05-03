@@ -1,19 +1,15 @@
 import {
-    bindable,
-    customElement,
+    bindable, containerless,
     ICustomElementViewModel,
     inject,
 } from "aurelia";
-import "./discord-message-preview.scss";
-import { DiscordService } from "../../../services/discord-service";
-import template from "./discord-message-preview.html";
-import cow from "../../../images/logo.png";
 
-@customElement({
-    name: "discord-message-preview",
-    template: template,
-    containerless: true,
-})
+import cow from "../../../images/logo.png";
+import { DiscordService } from "../../../services/discord-service";
+
+import "./discord-message-preview.scss";
+
+@containerless()
 @inject(DiscordService)
 export class DiscordMessagePreview implements ICustomElementViewModel {
     constructor(private discordService: DiscordService) {}

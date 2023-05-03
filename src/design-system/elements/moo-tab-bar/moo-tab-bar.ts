@@ -1,13 +1,10 @@
-import {bindable, customElement, ICustomElementViewModel} from "aurelia";
-import {MDCTabBar} from '@material/tab-bar';
-import template from "./moo-tab-bar.html";
+import { bindable, containerless, ICustomElementViewModel } from "aurelia";
+
 import './moo-tab-bar.scss';
 
-@customElement({
-    name: 'moo-tab-bar',
-    template,
-    containerless: true
-})
+import { MDCTabBar } from '@material/tab-bar';
+
+@containerless()
 export class MooTabBar implements ICustomElementViewModel {
     @bindable id;
     @bindable class;

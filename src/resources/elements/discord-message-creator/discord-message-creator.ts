@@ -1,18 +1,15 @@
-import {bindable, BindingMode, customElement, ICustomElementViewModel, inject} from 'aurelia';
-import { DiscordEmbed } from "../../../services/models/discord";
-import './discord-message-creator.scss';
-import template from "./discord-message-creator.html";
-import {watch} from "@aurelia/runtime-html";
-import {DiscordService} from "../../../services/discord-service";
+import { bindable, BindingMode, containerless, ICustomElementViewModel, inject } from 'aurelia';
+import { watch } from "@aurelia/runtime-html";
 
-@customElement({
-    name: 'discord-message-creator',
-    template: template,
-    containerless: true
-})
+import { DiscordService } from "../../../services/discord-service";
+import { DiscordEmbed } from "../../../services/models/discord";
+
+import './discord-message-creator.scss';
+
+@containerless()
 @inject(DiscordService)
 export class DiscordMessageCreator implements ICustomElementViewModel{
-    @bindable({mode: BindingMode.twoWay}) message = {
+    @bindable({ mode: BindingMode.twoWay }) message = {
         embeds: [],
         components: []
     };
@@ -33,7 +30,7 @@ export class DiscordMessageCreator implements ICustomElementViewModel{
     selectedMessageChanged() {
         if (this.selectedMessage) {
             console.log(this.message);
-            let foundMessage = this.discordService.getMessageResourceById(this.selectedMessage);
+            const foundMessage = this.discordService.getMessageResourceById(this.selectedMessage);
             if (foundMessage) {
                 this.message = foundMessage.message;
             }
@@ -55,9 +52,9 @@ export class DiscordMessageCreator implements ICustomElementViewModel{
 
     get canCreateEmbed() {
         if (!this.single) {
-            return !this.message?.embeds || this.message?.embeds?.length < 10
+            return !this.message.embeds || this.message.embeds.length < 10
         } else {
-            return !this.message?.embeds || this.message?.embeds?.length < 1
+            return !this.message.embeds || this.message.embeds.length < 1
         }
     }
 

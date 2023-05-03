@@ -1,6 +1,5 @@
 import {
-    bindable,
-    customElement,
+    bindable, containerless,
     ICustomElementViewModel,
     inject,
 } from "aurelia";
@@ -11,15 +10,9 @@ import { botClientId,redirectUrl } from "../../../environment";
 import logo from "../../../images/logo.png";
 import { SessionService } from "../../../services/session-service";
 
-import template from "./navigation.html";
-
 import "./navigation.scss";
 
-@customElement({
-    name: "navigation",
-    template: template,
-    containerless: true,
-})
+@containerless()
 @inject(SessionService, IRouter, IEventAggregator)
 export class Navigation implements ICustomElementViewModel {
     constructor(

@@ -1,19 +1,13 @@
 import {
-    bindable, BindingMode,
-    customElement,
+    bindable, BindingMode, containerless,
     ICustomElementViewModel,
     inject,
 } from "aurelia";
 
 import { DiscordService } from "../../../services/discord-service";
 
-import template from "./discord-role-selector.html";
 
-@customElement({
-    name: "discord-role-selector",
-    template: template,
-    containerless: true,
-})
+@containerless()
 @inject(DiscordService)
 export class DiscordRoleSelector implements ICustomElementViewModel {
     constructor(private discordService: DiscordService) {}

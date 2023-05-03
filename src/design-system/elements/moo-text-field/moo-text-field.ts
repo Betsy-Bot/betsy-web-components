@@ -1,20 +1,15 @@
 import {
     bindable,
-    BindingMode,
-    customElement,
+    BindingMode, containerless,
     ICustomElementViewModel,
     observable,
 } from "aurelia";
-import template from "./moo-text-field.html";
-import { MDCTextField } from "@material/textfield";
-import "./moo-text-field.scss";
-import { watch } from "@aurelia/runtime-html";
 
-@customElement({
-    name: "moo-text-field",
-    template,
-    containerless: true,
-})
+import "./moo-text-field.scss";
+
+import { MDCTextField } from "@material/textfield";
+
+@containerless()
 export class MooTextField implements ICustomElementViewModel {
     @bindable({ mode: BindingMode.twoWay }) value;
     @bindable label;

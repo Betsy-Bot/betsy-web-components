@@ -1,11 +1,7 @@
-import {bindable, customElement} from "aurelia";
+import { bindable, containerless } from "aurelia";
+
 import './discord-menu.scss';
-import template from "./discord-menu.html";
-@customElement({
-    name: 'discord-menu',
-    template: template,
-    containerless: true
-})
+@containerless()
 export class DiscordMenu {
     @bindable menu;
 }

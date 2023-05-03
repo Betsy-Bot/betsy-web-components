@@ -1,16 +1,10 @@
-import { bindable, customElement, ICustomElementViewModel } from "aurelia";
-
-import template from "./moo-fab.html";
+import { bindable, containerless, ICustomElementViewModel } from "aurelia";
 
 import "./moo-fab.scss";
 
 import { MDCRipple } from "@material/ripple";
 
-@customElement({
-    name: "moo-fab",
-    template,
-    containerless: true,
-})
+@containerless()
 export class MooFab implements ICustomElementViewModel {
     @bindable icon: string;
     @bindable label: string;

@@ -1,17 +1,11 @@
 import {
     bindable,
-    BindingMode,
-    customElement,
+    BindingMode, containerless,
     ICustomElementViewModel,
 } from "aurelia";
 
-import template from "./moo-list-item.html";
 
-@customElement({
-    name: "moo-list-item",
-    template,
-    containerless: true,
-})
+@containerless()
 export class MooListItem implements ICustomElementViewModel {
     @bindable label;
     @bindable({ mode: BindingMode.twoWay }) value;

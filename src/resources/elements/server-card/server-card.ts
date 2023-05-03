@@ -1,18 +1,15 @@
-import {inject, bindable, customElement, ICustomElementViewModel} from "aurelia";
-import { WebhookService } from "../../../services/websocket-service";
-import { DiscordService } from "../../../services/discord-service";
-import { toast } from "lets-toast";
-import { redirectUrl, botClientId } from "../../../environment";
+import { bindable, containerless, ICustomElementViewModel, inject } from "aurelia";
 import { IRouter } from "@aurelia/router-lite";
 
-import template from './server-card.html';
+import { botClientId,redirectUrl } from "../../../environment";
+import { DiscordService } from "../../../services/discord-service";
+import { WebhookService } from "../../../services/websocket-service";
+
 import './server-card.scss';
 
-@customElement({
-    name: 'server-card',
-    template: template,
-    containerless: true
-})
+import { toast } from "lets-toast";
+
+@containerless()
 @inject(WebhookService, DiscordService, IRouter)
 export class ServerCard implements ICustomElementViewModel {
     constructor(private webhookService: WebhookService, private discordServerService: DiscordService, private router: IRouter) {

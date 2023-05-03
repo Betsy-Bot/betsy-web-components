@@ -1,14 +1,8 @@
-import { bindable, BindingMode, customElement, ICustomElementViewModel } from "aurelia";
-
-import template from "./moo-select.html";
+import { bindable, BindingMode, containerless, ICustomElementViewModel } from "aurelia";
 
 import { MDCSelect } from '@material/select';
 
-@customElement({
-    name: 'moo-select',
-    template,
-    containerless: true
-})
+@containerless()
 export class MooSelect implements ICustomElementViewModel {
     @bindable label;
     @bindable options;

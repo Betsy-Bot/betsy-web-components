@@ -1,19 +1,15 @@
 import {
     bindable,
-    BindingMode,
-    customElement,
+    BindingMode, containerless,
     ICustomElementViewModel,
 } from "aurelia";
-import {watch} from '@aurelia/runtime-html';
-import { MDCSwitch } from "@material/switch";
-import template from "./moo-switch.html";
+import { watch } from '@aurelia/runtime-html';
+
 import "./moo-switch.scss";
 
-@customElement({
-    name: "moo-switch",
-    template,
-    containerless: true,
-})
+import { MDCSwitch } from "@material/switch";
+
+@containerless()
 export class MooSwitch implements ICustomElementViewModel {
     @bindable({ mode: BindingMode.twoWay }) value: boolean;
     @bindable id;

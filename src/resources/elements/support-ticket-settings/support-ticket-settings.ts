@@ -1,6 +1,7 @@
+import { bindable, containerless, inject } from "aurelia";
+
 import { DiscordService } from "../../../services/discord-service";
-import { bindable, customElement, inject, observable } from "aurelia";
-import template from "./support-ticket-settings.html";
+
 export const SupportTicketAudits = [
     "Opened",
     "Closed",
@@ -10,11 +11,7 @@ export const SupportTicketAudits = [
     "UserAdded",
     "UserRemoved",
 ];
-@customElement({
-    name: "support-ticket-settings",
-    template: template,
-    containerless: true,
-})
+@containerless()
 @inject(DiscordService)
 export class SupportTicketSettings {
     constructor(private discordService: DiscordService) {}

@@ -5,5 +5,8 @@ export default defineConfig({
         port: 9500,
         strictPort: true,
     },
+    build: {
+        target: ['chrome91', 'edge89', 'es2022', 'firefox90', 'safari15']
+    },
     plugins: [aurelia()],
 });

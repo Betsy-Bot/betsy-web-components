@@ -1,18 +1,14 @@
 import {
-    inject,
     bindable,
-    customElement,
-    ICustomElementViewModel,
+    containerless,
+    ICustomElementViewModel,     inject,
 } from "aurelia";
-import { DiscordService } from "../../../services/discord-service";
 import { IEventAggregator } from "aurelia";
-import template from "./discord-form-selector.html";
 
-@customElement({
-    name: "discord-form-selector",
-    template: template,
-    containerless: true,
-})
+import { DiscordService } from "../../../services/discord-service";
+
+
+@containerless()
 @inject(DiscordService, IEventAggregator)
 export class DiscordFormSelector implements ICustomElementViewModel {
     constructor(

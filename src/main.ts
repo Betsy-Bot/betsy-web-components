@@ -7,13 +7,13 @@ import { App } from './app';
 import * as BetsyWebComponentsPlugin from './design-system';
 
 await Aurelia.register(
-  RouterConfiguration.customize({
-    //title: "Betsy Bot Admin Panel",
-    useUrlFragmentHash: false,
-  }),
+    RouterConfiguration.customize({
+        //title: "Betsy Bot Admin Panel",
+        useUrlFragmentHash: false,
+    }),
 )
-  .register(BetsyWebComponentsPlugin)
-  .register(Elements)
-  .register(ValueConverters)
-  .app(App)
-  .start();
+    .register(BetsyWebComponentsPlugin)
+    .register(Elements)
+    .register(ValueConverters)
+    .app(App)
+    .start();

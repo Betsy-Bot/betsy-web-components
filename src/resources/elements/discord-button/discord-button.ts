@@ -1,26 +1,22 @@
-import {bindable, customElement} from "aurelia";
-import './discord-button.scss';
-import template from "./discord-button.html";
+import { bindable, containerless } from "aurelia";
 
-@customElement({
-    name: 'discord-button',
-    template: template,
-    containerless: true
-})
+import './discord-button.scss';
+
+@containerless()
 export class DiscordButton {
     @bindable button;
     getButtonClass(style) {
         switch (style) {
-            case 1:
-                return 'discord-button-primary'
-            case 3:
-                return 'discord-button-success'
-            case 2:
-                return 'discord-button-secondary'
-            case 4:
-                return 'discord-button-danger'
-            case 5:
-                return 'discord-button-link'
+        case 1:
+            return 'discord-button-primary'
+        case 3:
+            return 'discord-button-success'
+        case 2:
+            return 'discord-button-secondary'
+        case 4:
+            return 'discord-button-danger'
+        case 5:
+            return 'discord-button-link'
         }
     }
 
