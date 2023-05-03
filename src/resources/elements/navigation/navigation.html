@@ -20,20 +20,25 @@
                 <moo-button label="VOTE"></moo-button>
             </a>
         </template>
-        <a if.bind="!user" external
-           href="${discordOauthUrl}">
-            <moo-button label="LOGIN WITH DISCORD"></moo-button>
-        </a>
-        <div else>
-            <div class="mdc-menu-surface--anchor">
-                <img class="avatar" click.trigger="menuOpen = true"
-                     src.bind="avatarLink ?? logo" alt="avatar">
-                <moo-menu open.bind="menuOpen">
-                    <moo-list>
-                        <moo-list-item label="Logout" click.bind="() => logout()"></moo-list-item>
-                    </moo-list>
-                </moo-menu>
+        <template if.bind="isLoading">
+            <moo-circular-progress></moo-circular-progress>
+        </template>
+        <template else>
+            <a if.bind="!user" external
+               href="${discordOauthUrl}">
+                <moo-button label="LOGIN WITH DISCORD"></moo-button>
+            </a>
+            <div else>
+                <div class="mdc-menu-surface--anchor">
+                    <img class="avatar" click.trigger="menuOpen = true"
+                         src.bind="avatarLink ?? logo" alt="avatar">
+                    <moo-menu open.bind="menuOpen">
+                        <moo-list>
+                            <moo-list-item label="Logout" click.bind="() => logout()"></moo-list-item>
+                        </moo-list>
+                    </moo-menu>
+                </div>
             </div>
-        </div>
+        </template>
     </section>
 </moo-topbar>

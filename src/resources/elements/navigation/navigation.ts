@@ -4,14 +4,16 @@ import {
     ICustomElementViewModel,
     inject,
 } from "aurelia";
-import { SessionService } from "../../../services/session-service";
-import { IRouter } from "@aurelia/router-lite";
 import { IEventAggregator } from "aurelia";
-import { redirectUrl, botClientId } from "../../../environment";
-import template from "./navigation.html";
-import "./navigation.scss";
+import { IRouter } from "@aurelia/router-lite";
 
+import { botClientId,redirectUrl } from "../../../environment";
 import logo from "../../../images/logo.png";
+import { SessionService } from "../../../services/session-service";
+
+import template from "./navigation.html";
+
+import "./navigation.scss";
 
 @customElement({
     name: "navigation",
@@ -27,6 +29,7 @@ export class Navigation implements ICustomElementViewModel {
     ) {}
 
     @bindable() user: any;
+    @bindable isLoading: boolean;
     guildId: number;
     drawer = {
         open: null,
@@ -37,7 +40,7 @@ export class Navigation implements ICustomElementViewModel {
     menuOpen = false;
 
     async handleServerChange(event: CustomEvent) {
-        this.guildId = event?.detail?.value;
+        this.guildId = event.detail?.value;
         //const childRoute = this.router.activeNavigation ? `/${this.router.currentInstruction.params.childRoute}` : null
         await this.router.load(`guild/${this.guildId}`);
         location.reload();

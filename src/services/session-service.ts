@@ -1,25 +1,28 @@
 import { inject } from 'aurelia';
+import { IEventAggregator } from 'aurelia';
+
+import { ExchangeCodeResponse } from "./models/discord";
+import { ProfileResponse } from "./models/user";
 import { ApiService } from "./api-service";
 import { DiscordService } from "./discord-service";
-import { ProfileResponse } from "./models/user";
+
 import { toast } from "lets-toast";
-import { IEventAggregator } from 'aurelia';
 
 @inject(ApiService, DiscordService, IEventAggregator)
 export class SessionService {
-    static TOKEN_KEY = 'jwt_token';
-    static SIDEBAR_STATUS_KEY = 'sidebar_open';
+    public static TOKEN_KEY = 'jwt_token';
+    public static SIDEBAR_STATUS_KEY = 'sidebar_open';
 
-    public currentUser;
+    public currentUser: ProfileResponse | ExchangeCodeResponse;
 
     constructor(private apiService: ApiService, private discordService: DiscordService, private eventAggregator: IEventAggregator) {
     }
 
-    saveStorageItem(key: string, value: string) {
+    public saveStorageItem(key: string, value: string) {
         window.localStorage.setItem(key, value);
     }
 
-    getStorageItem(key: string, defaultValue: any = null): string | boolean {
+    public getStorageItem(key: string, defaultValue: any = null): string | boolean {
         if (window.localStorage[key] !== undefined) {
             try {
                 return JSON.parse(window.localStorage.getItem(key));
@@ -32,11 +35,11 @@ export class SessionService {
         }
     }
 
-    destroyStorageItem(key: string) {
+    public destroyStorageItem(key: string) {
         window.localStorage.removeItem(key);
     }
 
-    async loginWithOAuthCode(code: string, redirectUrl?: string) {
+    public async loginWithOAuthCode(code: string, redirectUrl?: string) {
         const response = await this.discordService.exchangeCode(code, redirectUrl);
 
         if (response.token) {
@@ -48,7 +51,7 @@ export class SessionService {
         return response;
     }
 
-    async getUser(): Promise<ProfileResponse | boolean> {
+    public async getUser(): Promise<ProfileResponse | boolean> {
         if (this.isTokenValid()) {
             if (this.currentUser) {
                 return this.currentUser;
@@ -60,7 +63,7 @@ export class SessionService {
         }
     }
 
-    async refreshProfile() {
+    public async refreshProfile() {
         this.currentUser = await this.apiService.doGet('User/Profile');
         if (!this.currentUser) {
             //this.destroyStorageItem(SessionService.TOKEN_KEY);
@@ -70,41 +73,41 @@ export class SessionService {
         return this.currentUser;
     }
 
-    isTokenValid() {
-        const token = <string>this.getStorageItem(SessionService.TOKEN_KEY);
+    public isTokenValid() {
+        const token = this.getStorageItem(SessionService.TOKEN_KEY) as string;
         return token && token !== '' && token !== undefined && token !== 'undefined' && token !== 'null';
     }
 
-    hasValidSession() {
+    public hasValidSession() {
         const token = this.getStorageItem(SessionService.TOKEN_KEY);
         return token && token !== '' && token !== undefined && token !== 'undefined' && token !== 'null';
     }
 
-    async logout() {
+    public async logout() {
         this.clearSession();
     }
 
-    clearSession() {
+    public clearSession() {
         this.destroyStorageItem(SessionService.TOKEN_KEY);
         this.currentUser = null;
         this.eventAggregator.publish('user-updated', null);
     }
 
-    async isAdmin(guildId): Promise<boolean> {
+    public async isAdmin(guildId): Promise<boolean> {
         const user = await this.getUser();
         if (!user) return;
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
+        //@ts-expect-error
         for (const server of user.activeServers) {
-           if (server.guildId == guildId) return true;
+            if (server.guildId == guildId) return true;
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-           //@ts-ignore
-           if (server.ownerId == user.id) return true;
+            //@ts-expect-error
+            if (server.ownerId == user.id) return true;
         }
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
+        //@ts-expect-error
         for (const server of user.adminedServers) {
-           if (server.guildId == guildId) return true;
+            if (server.guildId == guildId) return true;
         }
         return false
     }
