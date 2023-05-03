@@ -51,7 +51,7 @@ export class SessionService {
         return response;
     }
 
-    public async getUser(): Promise<ProfileResponse | boolean> {
+    public async getUser(): Promise<ProfileResponse | ExchangeCodeResponse  | boolean> {
         if (this.isTokenValid()) {
             if (this.currentUser) {
                 return this.currentUser;
