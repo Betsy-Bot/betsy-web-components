@@ -20,14 +20,6 @@
         "test": "jest"
     },
     "dependencies": {
-        "@aurelia/compat-v1": "dev",
-        "@aurelia/dialog": "dev",
-        "@aurelia/i18n": "dev",
-        "@aurelia/router": "dev",
-        "@aurelia/router-lite": "dev",
-        "@aurelia/runtime-html": "dev",
-        "@aurelia/state": "dev",
-        "@aurelia/validation-html": "dev",
         "@darkguy10/discord-markdown": "2.6.0",
         "@emoji-mart/data": "^1.1.2",
         "@material/banner": "^14.0.0",
@@ -48,7 +40,7 @@
         "@material/tab-bar": "^14.0.0",
         "@material/textfield": "^14.0.0",
         "@material/top-app-bar": "^14.0.0",
-        "@microsoft/signalr": "7.0.5",
+        "@microsoft/signalr": "^7.0.5",
         "@popperjs/core": "^2.11.7",
         "@rollup/plugin-node-resolve": "^15.0.2",
         "aurelia": "dev",
@@ -59,9 +51,17 @@
         "flatpickr": "^4.6.13",
         "ink-mde": "^0.25.0",
         "lets-toast": "^1.0.1",
-        "rollup": "^3.21.2"
+        "rollup": "^3.21.4"
     },
     "devDependencies": {
+        "@aurelia/compat-v1": "dev",
+        "@aurelia/dialog": "dev",
+        "@aurelia/i18n": "dev",
+        "@aurelia/router": "dev",
+        "@aurelia/router-lite": "dev",
+        "@aurelia/runtime-html": "dev",
+        "@aurelia/state": "dev",
+        "@aurelia/validation-html": "dev",
         "@aurelia/vite-plugin": "dev",
         "@aurelia/webpack-loader": "latest",
         "@types/jest": "^29.5.1",
