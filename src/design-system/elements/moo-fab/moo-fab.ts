@@ -1,7 +1,10 @@
 import { bindable, customElement, ICustomElementViewModel } from "aurelia";
-import { MDCRipple } from "@material/ripple";
+
 import template from "./moo-fab.html";
+
 import "./moo-fab.scss";
+
+import { MDCRipple } from "@material/ripple";
 
 @customElement({
     name: "moo-fab",
@@ -10,7 +13,7 @@ import "./moo-fab.scss";
 })
 export class MooFab implements ICustomElementViewModel {
     @bindable icon: string;
-    @bindable text: string;
+    @bindable label: string;
     @bindable class: string;
     @bindable click;
     @bindable external: boolean;
@@ -26,5 +29,12 @@ export class MooFab implements ICustomElementViewModel {
         if (this.click) {
             this.click();
         }
+    }
+
+    get extendedClass() {
+        if (this.label) {
+            return 'mdc-fab--extended'
+        }
+        return 'mdc-fab--mini'
     }
 }
