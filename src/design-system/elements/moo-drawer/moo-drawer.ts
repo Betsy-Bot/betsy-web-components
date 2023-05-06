@@ -6,9 +6,9 @@ import { MDCDrawer } from "@material/drawer";
 
 @containerless()
 export class MooDrawer implements ICustomElementViewModel {
-    @bindable open;
+    @bindable open: boolean;
     drawerEl: HTMLElement;
-    drawer;
+    drawer: MDCDrawer;
     didAttach = false;
     attached() {
         if (!this.didAttach) {
@@ -19,6 +19,7 @@ export class MooDrawer implements ICustomElementViewModel {
     }
 
     openChanged() {
+        console.log('open changed', this.open)
         this.drawer.open = this.open;
     }
 }

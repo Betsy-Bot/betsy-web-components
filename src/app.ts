@@ -49,25 +49,10 @@ export class App {
             this.ea.subscribe("user-updated", (payload) => {
                 this.user = payload;
             });
-            this.ea.subscribe("guild-updated", (payload) => {
-                this.guildId = payload;
-            });
-            this.ea.subscribe("drawer-updated", (payload) => {
-                this.drawerOpen = payload as boolean;
-            });
 
             if (this.user) {
                 this.ea.publish("user-updated", this.user);
             }
-
-            //For some reason without this timeout it fails to bind properly. Race condition
-            setTimeout(() => {
-                if (this.guildId && this.user) {
-                    this.drawerOpen = this.sessionService.getStorageItem(
-                        SessionService.SIDEBAR_STATUS_KEY
-                    ) as boolean;
-                }
-            }, 100);
         } finally {
             this.isLoading = false;
         }

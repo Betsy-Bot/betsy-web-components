@@ -1,9 +1,9 @@
-import { IEventAggregator } from "aurelia";
-import { bindable, inject } from "aurelia";
+import { bindable, IEventAggregator, inject } from "aurelia";
 import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../../services/discord-service";
 
+import { MDCDialogCloseEvent } from "@material/dialog";
 import { toast } from "lets-toast";
 
 @route({
@@ -78,7 +78,7 @@ export class ManageTrackedMessage implements IRouteViewModel {
         }
     }
 
-    async deleteItem(event) {
+    async deleteItem(event: MDCDialogCloseEvent) {
         if (event.detail.action == "ok") {
             try {
                 await this.discordService.deleteDiscordTrackedMessageById(

@@ -22,3 +22,11 @@
 .mdc-fab.topRight {
     @include fab.shape-radius(0 0 0 50%);
 }
+
+.mdc-fab.topLeft {
+    @include fab.shape-radius(50% 0 0 0);
+}
+
+.mdc-fab.bottomRight {
+    @include fab.shape-radius(0 0 50% 0);
+}
