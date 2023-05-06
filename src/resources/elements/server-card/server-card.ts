@@ -20,9 +20,9 @@ export class ServerCard implements ICustomElementViewModel {
     loading: boolean;
 
     get serverText() {
-        const matches = this.server.name.match(/\b(\w)/g);
-        const acronym = matches.join('').toString();
-        return acronym.length > 4 ? acronym.slice(0, 4) : acronym;
+        const matches = this.server?.name?.match(/\b(\w)/g);
+        const acronym = matches?.join('').toString();
+        return acronym?.length > 4 ? acronym.slice(0, 4) : acronym;
     }
 
     async handleServerInvite() {

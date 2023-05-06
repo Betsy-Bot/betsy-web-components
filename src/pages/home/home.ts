@@ -61,4 +61,16 @@ export class Home implements IRouteViewModel {
             await this.router.load(`guild/${id}`);
         });
     }
+
+    showInManagedServers(server): boolean {
+        if (!this.user.adminedServers) {
+            return true;
+        }
+        for (const adminedServer of this.user.adminedServers) {
+            if (server.id == adminedServer.id) {
+                return false
+            }
+        }
+        return true;
+    }
 }
