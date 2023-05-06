@@ -51,7 +51,7 @@
         "ink-mde": "^0.25.0",
         "lets-toast": "^1.0.1",
         "material-icons": "^1.13.6",
-        "rollup": "^3.21.4"
+        "rollup": "^3.21.5"
     },
     "devDependencies": {
         "@aurelia/compat-v1": "dev",
@@ -64,15 +64,15 @@
         "@aurelia/validation-html": "dev",
         "@aurelia/vite-plugin": "dev",
         "@types/jest": "^29.5.1",
-        "@types/node": "^18.16.3",
-        "@typescript-eslint/eslint-plugin": "^5.59.1",
-        "@typescript-eslint/parser": "^5.59.1",
+        "@types/node": "^20.1.0",
+        "@typescript-eslint/eslint-plugin": "^5.59.2",
+        "@typescript-eslint/parser": "^5.59.2",
         "autoprefixer": "^10.4.14",
         "css-loader": "^6.7.3",
-        "eslint": "^8.39.0",
+        "eslint": "^8.40.0",
         "eslint-config-prettier": "^8.8.0",
         "eslint-import-resolver-typescript": "^3.5.5",
-        "eslint-plugin-cypress": "^2.13.2",
+        "eslint-plugin-cypress": "^2.13.3",
         "eslint-plugin-import": "^2.27.5",
         "eslint-plugin-prettier": "^4.2.1",
         "eslint-plugin-simple-import-sort": "^10.0.0",
@@ -83,14 +83,14 @@
         "jest-transform-stub": "^2.0.0",
         "postcss": "^8.4.23",
         "postcss-loader": "^7.3.0",
-        "rimraf": "^4.4.1",
-        "sass": "^1.62.0",
+        "rimraf": "^5.0.0",
+        "sass": "^1.62.1",
         "sass-loader": "^13.2.2",
         "style-loader": "^3.3.2",
         "ts-loader": "^9.4.2",
         "tslib": "^2.5.0",
         "typescript": "^5.0.4",
-        "vite": "^4.3.3"
+        "vite": "^4.3.5"
     },
     "jest": {
         "testMatch": [
