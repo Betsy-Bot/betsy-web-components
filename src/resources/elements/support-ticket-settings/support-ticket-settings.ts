@@ -20,7 +20,7 @@ export class SupportTicketSettings {
     @bindable authorizedRole;
     @bindable selectedAuditOption;
 
-    roles;
+    roles: any[];
     tab = "settings";
     options: string[] = SupportTicketAudits;
     async binding() {
@@ -28,7 +28,6 @@ export class SupportTicketSettings {
     }
 
     selectedAuditOptionChanged() {
-        console.log(this.selectedAuditOption);
         if (this.selectedAuditOption) {
             if (!this.request.supportTicketAudits) {
                 this.request.supportTicketAudits = [];

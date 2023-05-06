@@ -1,19 +1,21 @@
 import { IEventAggregator } from "aurelia";
-import { DiscordService } from "../../../../../services/discord-service";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
-import { toast } from "lets-toast";
 import { bindable, inject } from "aurelia";
+import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../../services/discord-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "tracked-messages/:messageId",
     title: "Manage Tracked Message",
 })
-@inject(IEventAggregator, DiscordService, Router)
+@inject(IEventAggregator, DiscordService, IRouter)
 export class ManageTrackedMessage implements IRouteViewModel {
     constructor(
         private eventAggregator: IEventAggregator,
         private discordService: DiscordService,
-        private router: Router
+        private router: IRouter
     ) {}
 
     loading(params) {
@@ -63,9 +65,7 @@ export class ManageTrackedMessage implements IRouteViewModel {
                     this.message
                 );
                 toast("Tracked Message Created!");
-                this.router.load(
-                    `/guild/${this.guildId}/messages/tracked-messages`
-                );
+                await this.router.load(`../tracked-messages`, { context: this });
             } else {
                 this.message = await this.discordService.updateTrackedMessage(
                     this.message
