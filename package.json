@@ -19,7 +19,7 @@
         "test": "jest"
     },
     "dependencies": {
-        "@darkguy10/discord-markdown": "2.6.0",
+        "@darkguy10/discord-markdown": "^2.6.0",
         "@emoji-mart/data": "^1.1.2",
         "@material/banner": "^14.0.0",
         "@material/card": "^14.0.0",
@@ -40,10 +40,9 @@
         "@material/textfield": "^14.0.0",
         "@material/top-app-bar": "^14.0.0",
         "@microsoft/signalr": "^7.0.5",
-        "@popperjs/core": "^2.11.7",
         "@rollup/plugin-node-resolve": "^15.0.2",
         "aurelia": "dev",
-        "aurelia-fetch-client": "1.8.2",
+        "aurelia-fetch-client": "^1.8.2",
         "bootstrap": "^5.2.3",
         "devextreme": "^22.2.6",
         "emoji-mart": "^5.5.2",
