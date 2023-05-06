@@ -19,7 +19,6 @@ export class MooDrawer implements ICustomElementViewModel {
     }
 
     openChanged() {
-        console.log('open changed', this.open)
         this.drawer.open = this.open;
     }
 }
