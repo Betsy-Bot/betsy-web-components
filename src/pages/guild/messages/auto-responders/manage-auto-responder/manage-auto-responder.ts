@@ -1,6 +1,6 @@
 import { IEventAggregator } from "aurelia";
 import { DiscordService } from "../../../../../services/discord-service";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
 import { toast } from "lets-toast";
 import { bindable, inject, observable } from "aurelia";
 
@@ -8,12 +8,12 @@ import { bindable, inject, observable } from "aurelia";
     path: "auto-responders/:responderId",
     title: "Manage Auto Responder",
 })
-@inject(IEventAggregator, DiscordService, Router)
+@inject(IEventAggregator, DiscordService, IRouter)
 export class ManageAutoResponder implements IRouteViewModel {
     constructor(
         private eventAggregator: IEventAggregator,
         private discordService: DiscordService,
-        private router: Router
+        private router: IRouter
     ) {}
 
     loading(params) {
@@ -75,6 +75,7 @@ export class ManageAutoResponder implements IRouteViewModel {
                 this.responder = await this.discordService.createAutoResponder(
                     this.responder
                 );
+                await this.router.load("../", { context: this });
             } else {
                 this.responder = await this.discordService.updateAutoResponder(
                     this.responder

@@ -22,8 +22,8 @@
         show-toggler.bind="true"
         data.bind="responders"
         show-toggler.bind="false"
-        toggle-handler.bind="() => updateActive(item)"
-        item-click-handler.bind="() => goTo(item)"
+        toggle-handler.bind="(item) => updateActive(item)"
+        item-click-handler.bind="(item) => goTo(item)"
         route="../auto-responders"
     ></feature-item-list>
 </div>
