@@ -21,6 +21,7 @@ export class Home implements IRouteViewModel {
     private managedGuilds;
     private otherGuilds;
     connection;
+    isLoading = false;
 
     async attached() {
         this.user = await this.sessionService.getUser();
@@ -40,26 +41,28 @@ export class Home implements IRouteViewModel {
             guild.can_add = guild.owner || (guild.permissions & 0x8) == 0x8;
         }
 
-        this.managedGuilds = userGuilds.filter((g) => g.can_add);
-        this.otherGuilds = userGuilds.filter((g) => !g.can_add);
-
-        for (const guild of this.managedGuilds) {
-            const foundServerIndex = this.user.activeServers.findIndex(
-                (x) => x.guildId == guild.id
+        for (let server of this.user?.adminedServers) {
+            const foundServerIndex = userGuilds.findIndex(
+                (x) => x.id == server.guildId
             );
             if (foundServerIndex >= 0) {
-                guild.exists = true;
-                guild.invited =
-                    this.user.activeServers[foundServerIndex].invited;
-                this.user.activeServers[foundServerIndex].name = guild.name;
+                server.icon = userGuilds[foundServerIndex].icon;
+                server.icon_extension = server.icon?.startsWith("a_")
+                    ? "gif"
+                    : "webp";
             }
+            console.log(foundServerIndex);
         }
+
+        this.managedGuilds = userGuilds.filter((g) => g.can_add);
+        this.otherGuilds = userGuilds.filter((g) => !g.can_add);
 
         this.connection = this.webhookService.subscribeToGuildInvite();
         await this.connection.start();
         this.connection.on("BotInvited", async (id, name, description) => {
             await this.router.load(`guild/${id}`);
         });
+        this.isLoading = false;
     }
 
     showInManagedServers(server): boolean {
@@ -68,7 +71,7 @@ export class Home implements IRouteViewModel {
         }
         for (const adminedServer of this.user.adminedServers) {
             if (server.id == adminedServer.id) {
-                return false
+                return false;
             }
         }
         return true;

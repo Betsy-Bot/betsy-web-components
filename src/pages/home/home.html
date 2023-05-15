@@ -1,4 +1,4 @@
-<div class="container" if.bind="user">
+<div class="container" if.bind="user && !isLoading">
     <section if.bind="user.adminedServers.length > 0" class="my-4">
         <h2>
             Servers I Admin
