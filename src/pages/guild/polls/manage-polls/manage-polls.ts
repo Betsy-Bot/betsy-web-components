@@ -30,7 +30,7 @@ export class ManagePolls implements IRouteViewModel {
         label: "",
         description: "",
         value: "",
-        emoji: {},
+        emoji: null,
     };
     pollTemplate = {
         name: "",
@@ -123,7 +123,7 @@ export class ManagePolls implements IRouteViewModel {
             label: "",
             description: "",
             value: "",
-            emoji: {},
+            emoji: null,
         };
     }
 
