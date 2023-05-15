@@ -9,7 +9,7 @@
         This is a permanent action and cannot be undone
     </confirmation-dialog>
 
-    <section id="create-data-command">
+    <section id="create-data-command" if.bind="poll">
         <div class="row">
             <div class="col-12 col-lg-8">
                 <feature-header
@@ -18,7 +18,7 @@
                     subtitle="Polls will keep a record of the results here for your convenience."
                 ></feature-header>
                 <div class="text-end my-4">
-                    <moo-button variant="secondary" class="button-secondary" click.trigger="confirmDeleteDialog.open()">
+                    <moo-button variant="secondary" class="button-secondary" click.bind="() => confirmDeleteDialog.open()">
                         Delete Poll
                     </moo-button>
                 </div>

@@ -1,5 +1,5 @@
 import { bindable, inject } from "aurelia";
-import { IRouteViewModel, route } from "@aurelia/router-lite";
+import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
 import { DiscordComponentType } from "../../../../services/models/discord";
@@ -10,9 +10,12 @@ import { toast } from "lets-toast";
     path: "polls/:pollId",
     title: "Manage Poll",
 })
-@inject(DiscordService)
+@inject(DiscordService, IRouter)
 export class ManagePolls implements IRouteViewModel {
-    constructor(private discordService: DiscordService) {}
+    constructor(
+        private discordService: DiscordService,
+        private router: IRouter
+    ) {}
 
     loading(params) {
         this.pollId = params.pollId;
@@ -88,6 +91,7 @@ export class ManagePolls implements IRouteViewModel {
         try {
             if (this.isNew) {
                 this.poll = await this.discordService.createPoll(this.poll);
+                await this.router.load("../polls", { context: this });
             } else {
                 this.poll = await this.discordService.updatePoll(this.poll);
             }
@@ -101,8 +105,9 @@ export class ManagePolls implements IRouteViewModel {
     async deletePoll(event) {
         if (event.detail.action == "ok") {
             try {
-                await this.discordService.deleteGiveawayById(this.poll.id);
+                await this.discordService.deletePollById(this.poll.id);
                 toast("Deleted poll!", { severity: "success" });
+                await this.router.load("../polls", { context: this });
             } catch (e) {
                 toast("Failed to delete poll", { severity: "error" });
                 throw e;

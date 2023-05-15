@@ -75,7 +75,7 @@ export class ManageAutoResponder implements IRouteViewModel {
                 this.responder = await this.discordService.createAutoResponder(
                     this.responder
                 );
-                await this.router.load("../", { context: this });
+                await this.router.load("../auto-responders", { context: this });
             } else {
                 this.responder = await this.discordService.updateAutoResponder(
                     this.responder
