@@ -14,8 +14,8 @@
                 show-toggler.bind="true"
                 name-prefix="/"
                 route="../data-commands"
-                toggle-handler.bind="() => updateActive(item)"
-                item-click-handler.bind="() => goToCommand(item)"
+                toggle-handler.bind="(item) => updateActive(item)"
+                item-click-handler.bind="(item) => goToCommand(item)"
             ></feature-item-list>
         </div>
     </div>
