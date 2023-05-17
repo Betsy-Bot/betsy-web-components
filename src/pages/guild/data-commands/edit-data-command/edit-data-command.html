@@ -58,11 +58,19 @@
                             placeholder="https://example.com/api/someEndpoint"
                             required.bind="true"
                         ></moo-text-field>
-                        <mdc-form-field repeat.for="type of restTypes">
-                            <mdc-radio model.bind="type"
-                                       checked.bind="command.discordCommandActions[0].type"></mdc-radio>
-                            <label>${getDisplayTextForCommandActionType(type)}</label>
-                        </mdc-form-field>
+                        <moo-select
+                            class="standard-betsy-select w-100 mt-2"
+                            value.bind="command.discordCommandActions[0].type"
+                            label="Data Type"
+                            required.bind="true">
+                            <moo-list>
+                                <moo-list-item
+                                    repeat.for="type of restTypes"
+                                    label.bind="getDisplayTextForCommandActionType(type)"
+                                    value.bind="type"
+                                ></moo-list-item>
+                            </moo-list>
+                        </moo-select>
                         <div class="my-2" style="min-height: 45px;">
                             <moo-button variant="primary" click.bind="() => addHeader()" type="button">
                                 Add Header
