@@ -20,8 +20,8 @@ export class EditDataCommand implements IRouteViewModel {
         private discordService: DiscordService,
         private router: IRouter
     ) {}
-
-    command: BaseDiscordCommand = {
+    command;
+    commandTemplate: BaseDiscordCommand = {
         name: "",
         description: "",
         discordGuildId: null,
@@ -62,6 +62,7 @@ export class EditDataCommand implements IRouteViewModel {
             this.discordApplicationCommandId == 0
         ) {
             this.isNew = true;
+            this.command = this.commandTemplate;
         } else {
             this.command = await this.discordService.getDiscordCommandDetails(
                 this.discordApplicationCommandId
