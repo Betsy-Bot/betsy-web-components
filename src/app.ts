@@ -1,5 +1,5 @@
 import { IEventAggregator, inject } from "aurelia";
-import { IRouter,route } from "@aurelia/router-lite";
+import { IRouter, route } from "@aurelia/router-lite";
 
 import { FourOhFour } from "./pages/four-oh-four/four-oh-four";
 import { Guild } from "./pages/guild/guild";
@@ -25,7 +25,6 @@ export class App {
     user;
     guildId;
     code: string;
-    drawerOpen: boolean;
     isLoading = true;
 
     async attached() {
@@ -41,7 +40,7 @@ export class App {
                 } catch (e) {
                     toast("Failed to exchange code", { severity: "error" });
                 } finally {
-                    await this.router.load('/', { context: this });
+                    await this.router.load("/", { context: this });
                 }
             } else {
                 this.user = await this.sessionService.getUser();

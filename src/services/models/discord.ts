@@ -1,54 +1,54 @@
 export interface ExchangeCodeResponse {
-    token: string,
-    id: string
+    token: string;
+    id: string;
 }
 
 export interface DiscordRole {
-    discordRoleId: string,
-    discordServerId: string
+    discordRoleId: string;
+    discordServerId: string;
 }
 
 export interface BaseDiscordCommand {
-    id?: string,
-    name: string,
-    private: boolean,
-    description: string,
-    discordGuildId: string,
-    type: DiscordCommandType,
-    discordCommandActions: DiscordCommandAction[],
-    commandInformation?: any,
+    id?: string;
+    name: string;
+    private: boolean;
+    active: boolean;
+    description: string;
+    discordGuildId: string;
+    type: DiscordCommandType;
+    discordCommandActions: DiscordCommandAction[];
+    commandInformation?: any;
 }
 
-export enum DiscordApplicationCommandType
-{
+export enum DiscordApplicationCommandType {
     ChatInput = 1,
     User = 2,
-    Message = 3
+    Message = 3,
 }
 
 export interface DiscordCommandAction {
-    id?: string,
-    type: number,
-    discordChannelId?: number,
-    discordCategoryId?: number,
-    restRequestMetadata?: any,
-    discordMessage: DiscordMessage
+    id?: string;
+    type: number;
+    discordChannelId?: number;
+    discordCategoryId?: number;
+    restRequestMetadata?: any;
+    discordMessage: DiscordMessage;
 }
 
 export interface DiscordMessage {
-    id?: string,
-    message: DiscordMessageContent
+    id?: string;
+    message: DiscordMessageContent;
 }
 
 export interface DiscordMessageContent {
-    content?: string
-    embeds?: DiscordMessageEmbed[]
+    content?: string;
+    embeds?: DiscordMessageEmbed[];
 }
 
 export interface DiscordMessageEmbed {
     title?: string;
     description?: string;
-    image?: DiscordMessageImage
+    image?: DiscordMessageImage;
 }
 
 export interface DiscordMessageImage {
@@ -56,17 +56,17 @@ export interface DiscordMessageImage {
 }
 
 export interface SendMessageToChannelRequest {
-    sendTime?: string,
-    channelType: DiscordChannelType,
-    message: DiscordMessageContent
+    sendTime?: string;
+    channelType: DiscordChannelType;
+    message: DiscordMessageContent;
 }
 
 export interface BaseDiscordServer {
-    guildId: string,
-    ownerId: string,
-    roles: DiscordRole[],
-    commands: BaseDiscordCommand[]
-    activeFeatures: string[]
+    guildId: string;
+    ownerId: string;
+    roles: DiscordRole[];
+    commands: BaseDiscordCommand[];
+    activeFeatures: string[];
 }
 
 export interface DiscordInvitedWebhookResponse {
@@ -76,28 +76,28 @@ export interface DiscordInvitedWebhookResponse {
 
 export enum DiscordCommandType {
     ResponseMessage = 1,
-    Data = 2
+    Data = 2,
 }
 
 export interface DiscordEmbedField {
-    name: string,
-    value: string,
-    inline: boolean
+    name: string;
+    value: string;
+    inline: boolean;
 }
 
 export interface DiscordEmbedFooter {
-    text: string,
-    icon_url: URL
+    text: string;
+    icon_url: URL;
 }
 
 export interface DiscordEmbedImage {
-    url: URL,
+    url: URL;
     height: number;
     width: number;
 }
 
 export interface DiscordEmbedVideo {
-    url: URL
+    url: URL;
     height: number;
     width: number;
 }
@@ -112,7 +112,7 @@ export class DiscordEmbed {
     image?: DiscordEmbedImage;
     thumbnail?: DiscordEmbedImage;
     video?: DiscordEmbedVideo;
-    timestamp?: Date
+    timestamp?: Date;
 }
 
 export enum DiscordChannelType {
@@ -126,7 +126,7 @@ export enum DiscordChannelType {
     GuildNewsThread = 10,
     GuildPublicThread = 11,
     GuildPrivateThread = 12,
-    GuildStageVoice = 13
+    GuildStageVoice = 13,
 }
 
 export enum DiscordApplicationCommandOptionType {
@@ -140,7 +140,7 @@ export enum DiscordApplicationCommandOptionType {
     Role = 8,
     Mentionable = 9,
     Number = 10,
-    Attachment = 11
+    Attachment = 11,
 }
 
 export class DiscordForm {
@@ -148,12 +148,12 @@ export class DiscordForm {
     description?: string;
     customId: string;
     private?: boolean;
-    submissions: DiscordFormSubmission[]
-    formData: DiscordFormData
+    submissions: DiscordFormSubmission[];
+    formData: DiscordFormData;
 }
 
 export class DiscordFormData {
-    components: DiscordComponentWrapper[]
+    components: DiscordComponentWrapper[];
 }
 
 export class DiscordFormSubmission {
@@ -166,12 +166,12 @@ export class DiscordFormFieldAnswer {
     label: string;
     value: string;
     custom_id: string;
-    fields: any[]
+    fields: any[];
 }
 
 export class DiscordComponentWrapper {
-    type: DiscordComponentType
-    components: DiscordComponent[]
+    type: DiscordComponentType;
+    components: DiscordComponent[];
 }
 
 export class DiscordSupportTicketSettings {
@@ -179,7 +179,7 @@ export class DiscordSupportTicketSettings {
     logChannelId?: string;
     assignedRoles?: string[];
     discordMessageId?: string;
-    discordMessage?: DiscordMessage
+    discordMessage?: DiscordMessage;
 }
 
 export enum DiscordComponentType {
@@ -205,13 +205,12 @@ export class DiscordComponent {
     required?: boolean;
 }
 
-export enum DiscordButtonStyle
-{
+export enum DiscordButtonStyle {
     Primary = 1,
     Secondary = 2,
     Success = 3,
     Danger = 4,
-    Link = 5
+    Link = 5,
 }
 
 export enum DiscordCommandActionType {

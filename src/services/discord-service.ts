@@ -249,13 +249,19 @@ export class DiscordService {
     public async createDiscordForm(
         form: DiscordForm
     ): Promise<discordModels.DiscordForm> {
-        return this.api.doPost(`DiscordForm/Guild/${this.getLocalDiscordGuildId()}/Forms`, form);
+        return this.api.doPost(
+            `DiscordForm/Guild/${this.getLocalDiscordGuildId()}/Forms`,
+            form
+        );
     }
 
     public async updateDiscordForm(
         form: DiscordForm
     ): Promise<discordModels.DiscordForm> {
-        return this.api.doPatch(`DiscordForm/Guild/${this.getLocalDiscordGuildId()}/Forms`, form);
+        return this.api.doPatch(
+            `DiscordForm/Guild/${this.getLocalDiscordGuildId()}/Forms`,
+            form
+        );
     }
 
     public async setupSupportTicketMessage(
@@ -424,6 +430,13 @@ export class DiscordService {
 
     async updateDiscordMessage(message: any) {
         return this.api.doPatch(`DiscordMessage/${message.id}`, message);
+    }
+
+    async updateTrackedMessageActiveStatus(message: any) {
+        return this.api.doPatch(
+            `DiscordTrackedMessage/${message.id}/Active`,
+            message
+        );
     }
 
     async createChannelCleaner(cleaner: any) {
@@ -625,7 +638,8 @@ export class DiscordService {
 
     async importTemplate(request) {
         return this.api.doPost(
-            `DiscordGuild/${this.getLocalDiscordGuildId()}/ImportTemplate`, request
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/ImportTemplate`,
+            request
         );
     }
 }

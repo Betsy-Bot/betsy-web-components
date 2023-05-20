@@ -8,7 +8,7 @@
 <feature-item-list
     data.bind="messages"
     name-override="name"
-    show-toggler.bind="false"
+    show-toggler.bind="true"
     toggle-handler.bind="(item) => updateActive(item)"
     item-click-handler.bind="(item) => goTo(item)"
     route="../tracked-messages"

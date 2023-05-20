@@ -1,8 +1,8 @@
-import {IEventAggregator} from "aurelia";
-import {DiscordService} from "../../../../services/discord-service";
-import {inject} from "aurelia";
-import {toast} from "lets-toast";
-import {IRouteViewModel, route, Router} from "@aurelia/router-lite";
+import { IEventAggregator } from "aurelia";
+import { DiscordService } from "../../../../services/discord-service";
+import { inject } from "aurelia";
+import { toast } from "lets-toast";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 
 @route({
     path: "tracked-messages",
@@ -14,8 +14,7 @@ export class TrackedMessages implements IRouteViewModel {
         private eventAggregator: IEventAggregator,
         private discordService: DiscordService,
         private router: Router
-    ) {
-    }
+    ) {}
 
     guildId: string;
     messages;
@@ -29,20 +28,13 @@ export class TrackedMessages implements IRouteViewModel {
     }
 
     async updateActive(message) {
-        const foundCommandIndex = this.messages.findIndex(
-            (x) => x.name === message.name
-        );
-        this.messages[foundCommandIndex].active =
-            !!this.messages[foundCommandIndex].active;
-        if (foundCommandIndex >= 0) {
-            await this.discordService.updateDiscordMessage(
-                this.messages[foundCommandIndex]
-            );
+        try {
+            await this.discordService.updateTrackedMessageActiveStatus(message);
             toast(`Active status has been updated for /${message.name}`, {
                 severity: "success",
             });
-        } else {
-            toast("Error", {severity: "error"});
+        } catch (e) {
+            toast("Error", { severity: "error" });
         }
     }
 

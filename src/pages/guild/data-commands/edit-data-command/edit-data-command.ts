@@ -27,6 +27,7 @@ export class EditDataCommand implements IRouteViewModel {
         discordGuildId: null,
         type: DiscordCommandType.Data,
         private: false,
+        active: true,
         discordCommandActions: [
             {
                 type: DiscordCommandActionType.OpenForm,
@@ -83,6 +84,7 @@ export class EditDataCommand implements IRouteViewModel {
                 toast("Data Command Created!", { severity: "success" });
                 await this.router.load("../data-commands", { context: this });
             } else {
+                console.log(this.command);
                 this.command.discordGuildId = this.guildId;
                 await this.discordService.updateApplicationCommand(
                     this.command
