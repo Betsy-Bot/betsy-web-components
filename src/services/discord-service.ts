@@ -1,4 +1,4 @@
-import { inject } from "aurelia";
+import { inject, IEventAggregator } from "aurelia";
 import { IRouter } from "@aurelia/router-lite";
 
 import * as discordModels from "./models/discord";
@@ -9,7 +9,7 @@ import {
 } from "./models/discord";
 import { ApiService } from "./api-service";
 
-@inject(ApiService, IRouter)
+@inject(ApiService, IRouter, IEventAggregator)
 export class DiscordService {
     public guildId: string;
     guild;
@@ -38,9 +38,14 @@ export class DiscordService {
 
     public setGuildId(value) {
         this.guildId = value;
+        this.ea.publish("guild-updated", this.guildId);
     }
 
-    constructor(private api: ApiService, private router: IRouter) {}
+    constructor(
+        private api: ApiService,
+        private router: IRouter,
+        private ea: IEventAggregator
+    ) {}
 
     public getLocalGuild() {
         return this.guild;

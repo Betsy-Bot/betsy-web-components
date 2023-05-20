@@ -8,7 +8,12 @@ const GUILD_ID_HEADER = "Discord-Guild-Id";
 
 @inject(IEventAggregator)
 export class ApiInterceptor {
-    constructor(private ea: IEventAggregator) {}
+    guildId;
+    constructor(private ea: IEventAggregator) {
+        this.ea.subscribe("guild-updated", (payload) => {
+            this.guildId = payload as number;
+        });
+    }
 
     request(request) {
         try {
@@ -23,11 +28,9 @@ export class ApiInterceptor {
                 request.headers.append(AUTHORIZATION_HEADER, bearerToken);
             }
 
-            // TODO: Replace with store service later for DI issues
-            // const guildId = this.discordService.getDiscordGuildId();
-            // if (guildId) {
-            //     request.headers.append(GUILD_ID_HEADER, guildId);
-            // }
+            if (this.guildId) {
+                request.headers.append(GUILD_ID_HEADER, this.guildId);
+            }
 
             return request;
         } catch (e) {
