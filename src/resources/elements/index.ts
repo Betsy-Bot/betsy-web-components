@@ -25,8 +25,6 @@ export * from "./discord-command-parameter-creator";
 export * from "./error-banner";
 export * from "./discord-component-creator";
 export * from "./discord-form-creator";
-export * from "./discord-form-preview";
 export * from "./discord-menu-item";
 export * from "./discord-emoji-selector";
-export * from './color-picker';
-
+export * from "./color-picker";
