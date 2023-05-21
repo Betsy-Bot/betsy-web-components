@@ -1,25 +1,21 @@
-<template>
-    <section id="discord-form-selector">
-        <moo-select disabled.bind="disabled"
-                    if.bind="forms"
-                    class="standard-betsy-select w-100"
-                    value.bind="formId"
-                    label.bind="label"
-                    required.bind="required">
-            <moo-list>
-                <moo-list-item
-                    label="- None - "
-                    value=""
-                ></moo-list-item>
-                <moo-list-item
-                    repeat.for="form of forms"
-                    label.bind="form.title"
-                    value.bind="form.id"
-                ></moo-list-item>
-            </moo-list>
-        </moo-select>
-        <div else>
-            <moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>
-        </div>
-    </section>
-</template>
+<moo-select disabled.bind="disabled"
+            if.bind="forms"
+            class="standard-betsy-select w-100"
+            value.bind="formId"
+            label.bind="label"
+            required.bind="required">
+    <moo-list>
+        <moo-list-item
+            label="- None - "
+            value=""
+        ></moo-list-item>
+        <moo-list-item
+            repeat.for="form of forms"
+            label.bind="form.title"
+            value.bind="form.id"
+        ></moo-list-item>
+    </moo-list>
+</moo-select>
+<div else>
+    <moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>
+</div>

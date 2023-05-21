@@ -1,29 +1,18 @@
-<template>
-    <section id="create-form">
-        <feature-header
-            title="Create Your Discord Server Form"
-            subtitle="Forms can be used in a variety of places. Use the form builder below to create your form."
-        ></feature-header>
+<feature-header
+    title="Create Your Discord Server Form"
+    subtitle="Forms can be used in a variety of places. Use the form builder below to create your form."
+></feature-header>
 
-        <div class="row mt-4">
-            <div class="col-12 col-lg-8">
-                <form submit.trigger="save()">
-                    <discord-form-creator
-                        form.two-way="form"
-                    ></discord-form-creator>
-                    <div class="text-end mt-3">
-                        <moo-button variant="primary" type="submit" disabled.bind="didLoad">
-                            Save
-                        </moo-button>
-                        <moo-circular-progress size="50" stroke-width="3" if.bind="didLoad"></moo-circular-progress>
-                    </div>
-                </form>
-            </div>
-            <div class="col-12 col-lg-4">
-                <h4 class="text-center">
-                    <discord-form-preview form.bind="form"></discord-form-preview>
-                </h4>
-            </div>
+<div class="mt-4">
+    <form submit.trigger="save()">
+        <discord-form-creator
+            form.two-way="form"
+        ></discord-form-creator>
+        <div class="text-end mt-3">
+            <moo-button variant="primary" type="submit" disabled.bind="didLoad">
+                Save
+            </moo-button>
+            <moo-circular-progress size="50" stroke-width="3" if.bind="didLoad"></moo-circular-progress>
         </div>
-    </section>
-</template>
+    </form>
+</div>

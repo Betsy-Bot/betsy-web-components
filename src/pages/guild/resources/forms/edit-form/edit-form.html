@@ -1,42 +1,35 @@
-<template>
-    <section id="edit-form">
-        <div class="row">
-            <div class="col-12" if.bind="showingSubmissions">
-                <div class="py-5" if.bind="form.submissions && form.submissions.length > 0">
-                    <h4>Submissions</h4>
-                    <moo-data-grid items.bind="form.submissions" columns.bind="columns" master-detail.bind="detailTemplate">
-                        <div class="master-detail-caption" ref="rowCaption"></div>
-                        <div class="master-detail" ref="rowDetail"></div>
-                    </moo-data-grid>
-                </div>
-            </div>
-            <div class="col-12 col-lg-8">
-                <feature-header
-                    title="Edit Your Discord Server Form"
-                    subtitle="Once the form has been saved anywhere it is currently being used will also be updated to use the updated form"
-                ></feature-header>
-
-                <form submit.trigger="save()" class="mt-3" if.bind="form">
-                    <discord-form-creator
-                        form.two-way="form"
-                    ></discord-form-creator>
-                    <div class="text-end mt-3">
-                        <moo-button variant="primary" type="submit" if.bind="form.formData.components.length > 0">
-                            Update
-                        </moo-button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-12 col-lg-4">
-                <div class="text-end">
-                    <moo-button variant="primary" click.bind="() => showingSubmissions = !showingSubmissions" type="button">
-                        ${showingSubmissions ? 'Hide' : 'Show'} Submissions
-                    </moo-button>
-                </div>
-                <h4 class="text-center mt-3" if.bind="!showingSubmissions">
-                    <discord-form-preview form.bind="form"></discord-form-preview>
-                </h4>
-            </div>
+<div class="row">
+    <div class="col-12" if.bind="showingSubmissions">
+        <div class="py-5" if.bind="form.submissions && form.submissions.length > 0">
+            <h4>Submissions</h4>
+            <moo-data-grid items.bind="form.submissions" columns.bind="columns" master-detail.bind="detailTemplate">
+                <div class="master-detail-caption" ref="rowCaption"></div>
+                <div class="master-detail" ref="rowDetail"></div>
+            </moo-data-grid>
         </div>
-    </section>
-</template>
+    </div>
+    <div class="col-12 col-lg-8">
+        <feature-header
+            title="Edit Your Discord Server Form"
+            subtitle="Once the form has been saved anywhere it is currently being used will also be updated to use the updated form"
+        ></feature-header>
+
+        <form submit.trigger="save()" class="mt-3" if.bind="form">
+            <discord-form-creator
+                form.two-way="form"
+            ></discord-form-creator>
+            <div class="text-end mt-3">
+                <moo-button variant="primary" type="submit" if.bind="form.formData.components.length > 0">
+                    Update
+                </moo-button>
+            </div>
+        </form>
+    </div>
+    <div class="col-12 col-lg-4">
+        <div class="text-end">
+            <moo-button variant="primary" click.bind="() => showingSubmissions = !showingSubmissions" type="button">
+                ${showingSubmissions ? 'Hide' : 'Show'} Submissions
+            </moo-button>
+        </div>
+    </div>
+</div>
