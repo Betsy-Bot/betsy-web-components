@@ -1,8 +1,7 @@
 import { inject } from "aurelia";
-import { IRouter, IRouteViewModel, Params, route } from "@aurelia/router-lite";
+import { IRouteViewModel, Params, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../services/discord-service";
-import { SessionService } from "../../services/session-service";
 
 import { ActionLog } from "./action-log/action-log";
 import { AutoRole } from "./auto-role/auto-role";
@@ -49,6 +48,7 @@ import { SupportTicketMessage } from "./support-ticket-message/support-ticket-me
 import { ManageThreadChannel } from "./thread-channels/manage-thread-channel/manage-thread-channel";
 import { ThreadChannels } from "./thread-channels/thread-channels";
 import { Verification } from "./verification/verification";
+import { Reviews } from "./reviews/reviews";
 
 const routes = [
     Dashboard,
@@ -96,6 +96,7 @@ const routes = [
     ChannelBackups,
     ChannelBackup,
     ImportExport,
+    Reviews,
 ];
 
 @route({
@@ -103,9 +104,9 @@ const routes = [
     routes: routes,
     path: "guild/:guildId",
 })
-@inject(DiscordService, IRouter, SessionService)
+@inject(DiscordService)
 export class Guild implements IRouteViewModel {
-    constructor(private discordService: DiscordService, private router: IRouter, private sessionService: SessionService) {}
+    constructor(private discordService: DiscordService) {}
 
     guildId: string;
 
@@ -114,7 +115,6 @@ export class Guild implements IRouteViewModel {
         this.discordService.setGuildId(this.guildId);
         return true;
     }
-
 
     async binding() {
         await Promise.all([

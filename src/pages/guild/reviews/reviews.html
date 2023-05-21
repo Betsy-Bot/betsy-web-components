@@ -1,0 +1,24 @@
+<feature-header
+    doc-url="https://docs.betsybot.xyz/features/reviews"
+    title="Reviews"
+    subtitle="Manage and track your server and user reviews"
+></feature-header>
+
+<div class="my-3 d-flex" if.bind="guild.reviewSettings">
+    <div class="w-75">
+        <discord-channel-selector
+            label="Select Channel for Reviews"
+            type.bind="0"
+            channel-id.bind="guild.reviewSettings.reviewsChannelId"
+        ></discord-channel-selector>
+    </div>
+    <div class="ms-3 w-25">
+        <moo-button class="w-100 h-100" variant="primary" click.bind="() => handleSave()" type="button">
+            Save
+        </moo-button>
+    </div>
+</div>
+
+<template if.bind="reviews && columns">
+    <moo-data-grid items.bind="reviews" columns.bind="columns"></moo-data-grid>
+</template>

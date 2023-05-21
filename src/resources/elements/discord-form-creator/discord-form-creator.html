@@ -31,16 +31,16 @@
 <div class="field-container row g-4 mb-3">
     <div class="col-12 col-xl-6" repeat.for="component of form.formData.components">
         <div elevation="12" class="px-3 pb-3" repeat.for="field of component.components">
-            <div class="text-end text-danger me-1 mt-3 mb-1">
-                <span class="cursor-pointer" click.trigger="deleteField($parent.$index)">X</span>
-            </div>
+            <moo-fab
+                class="redFab topRight position-absolute top-0 end-0"
+                icon="delete"
+                click.bind="() => deleteField($parent.$index)"
+            ></moo-fab>
             <moo-select class="standard-betsy-select w-100" value.bind="field.type" label="Field Type"
                         required.bind="true">
                 <moo-list>
-                    <moo-list-item label="${type.label}" repeat.for="type of fieldTypes" value.bind="type.value"
-                                   disabled.bind="type.disabled">
+                    <moo-list-item label="${type.label}" repeat.for="type of fieldTypes" value.bind="type.value">
                         ${type.label}
-                        <span class="ms-1" if.bind="type.disabled">- Coming Soon</span>
                     </moo-list-item>
                 </moo-list>
             </moo-select>

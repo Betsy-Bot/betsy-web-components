@@ -1,12 +1,10 @@
-import { inject, bindable } from "aurelia";
+import { inject, bindable, BindingMode } from "aurelia";
 import { DiscordService } from "../../../services/discord-service";
 
 @inject(DiscordService)
 export class DiscordChannelSelector {
     constructor(private discordService: DiscordService) {}
-
-    @bindable guildId: string;
-    @bindable channelId: string;
+    @bindable({ mode: BindingMode.twoWay }) channelId: string;
     @bindable type: number;
     @bindable label;
     @bindable required = false;
@@ -17,10 +15,7 @@ export class DiscordChannelSelector {
     channels;
 
     async attached() {
-        this.guildId = this.discordService.getLocalDiscordGuildId();
-        this.channels = await this.discordService.getDiscordChannels(
-            this.guildId
-        );
+        this.channels = await this.discordService.getDiscordChannels();
     }
 
     matchesType(channel) {

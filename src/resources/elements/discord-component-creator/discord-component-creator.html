@@ -62,7 +62,7 @@
                                         label.bind="style.label"
                                         repeat.for="style of styles"
                                         value.bind="style.value"
-                                        click.trigger="(value) => component.style = value"
+                                        click.bind="(value) => component.style = value"
                                     ></moo-list-item>
                                 </moo-list>
                             </moo-select>

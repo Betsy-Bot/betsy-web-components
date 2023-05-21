@@ -151,7 +151,7 @@ export class DiscordService {
             this.messages = null;
         }
         if (!this.guildChannelData.guildId) {
-            await this.getDiscordChannels(guildId);
+            await this.getDiscordChannels();
         }
         return this.guild;
     }
@@ -177,7 +177,8 @@ export class DiscordService {
         });
     }
 
-    async getDiscordChannels(guildId?: string) {
+    async getDiscordChannels() {
+        const guildId = this.getLocalDiscordGuildId();
         if (
             this.guildChannelData.guildId == guildId &&
             this.guildChannelData.data
@@ -400,6 +401,13 @@ export class DiscordService {
         );
     }
 
+    async updateReviewSettingsForGuild(guild: any) {
+        return this.api.doPatch(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/ReviewSettings`,
+            guild
+        );
+    }
+
     async updateAutoRolesForGuild(guild: any, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/AutoRoles`, guild);
     }
@@ -551,6 +559,12 @@ export class DiscordService {
 
     async getDiscordThreadChannels(guildId: string) {
         return this.api.doGet(`DiscordGuild/${guildId}/DiscordThreadChannels`);
+    }
+
+    async getDiscordReviews() {
+        return this.api.doGet(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/DiscordReviews`
+        );
     }
 
     async createDiscordThreadChannels(threadChannel: any) {
