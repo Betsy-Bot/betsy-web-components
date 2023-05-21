@@ -1,56 +1,54 @@
-<template>
-    <section id="discord-embed-preview" class="px-3 py-3"
-             style.bind="'border-left: 3px solid #' + embed.color.toString(16)">
-        <div class="row">
-            <div class.bind="embed.thumbnail.url ? 'col-9' : 'col-12'">
-                <div class="row">
-                    <div class="col-2" if.bind="embed.author.icon_url">
-                        <img src="${embed.author.icon_url}" class="author-img">
-                    </div>
-                    <div class="${embed.author.icon_url ? 'col-10 ps-0' : 'col-12'}">
-                        <div class="author mb-3 mt-2 fw-bold" if.bind="embed.author.name">
-                            ${embed.author.name}
-                        </div>
-                    </div>
-                </div>
-                <div class="body-title mb-2 fw-bold" if.bind="embed.title" innerhtml.bind="embed.title | discordMarkup">
-
-                </div>
-                <div class="body-description mb-1" if.bind="embed.description"
-                     innerhtml.bind="embed.description | discordMarkup"></div>
-
-                <div class="body-fields" if.bind="embed.fields">
-                    <div class="row">
-                        <section repeat.for="field of embed.fields" class="${field.inline ? 'col-6' : 'col-12'">
-                            <div class="field-name fw-bold mt-2" if.bind="field.name">
-                                ${field.name}
-                            </div>
-                            <div class="field-value" if.bind="field.value" innerhtml.bind="field.value | discordMarkup">
-
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 thumbnail text-end" if.bind="embed.thumbnail.url">
-                <img src.bind="embed.thumbnail.url">
-            </div>
-        </div>
-        <div class="embed-video" if.bind="embed.image.url">
-            <img src="${embed.image.url}">
-        </div>
-
-        <div class="footer mt-2" if.bind="embed.footer">
+<section id="discord-embed-preview" class="px-3 py-3"
+         style.bind="'border-left: 3px solid #' + embed.color.toString(16)">
+    <div class="row">
+        <div class.bind="embed.thumbnail.url ? 'col-9' : 'col-12'">
             <div class="row">
-                <div class="col-1 px-2" if.bind="embed.footer.icon_url">
-                    <img src="${embed.footer.icon_url}" class="footer-img">
+                <div class="col-2" if.bind="embed.author.icon_url">
+                    <img src="${embed.author.icon_url}" class="author-img" alt="author icon">
                 </div>
-                <div class="${embed.footer.icon_url ? 'col-11 ps-0' : 'col-12'}">
-                    <div class="author mb-3 mt-1 fw-bold" if.bind="embed.footer.text">
-                        ${embed.footer.text}
+                <div class="${embed.author.icon_url ? 'col-10 ps-0' : 'col-12'}">
+                    <div class="author mb-3 mt-2 fw-bold" if.bind="embed.author.name">
+                        ${embed.author.name}
                     </div>
                 </div>
             </div>
+            <div class="body-title mb-2 fw-bold" if.bind="embed.title" innerhtml.bind="embed.title | discordMarkup">
+
+            </div>
+            <div class="body-description mb-1" if.bind="embed.description"
+                 innerhtml.bind="embed.description | discordMarkup"></div>
+
+            <div class="body-fields" if.bind="embed.fields">
+                <div class="row">
+                    <section repeat.for="field of embed.fields" class="${field.inline ? 'col-6' : 'col-12'">
+                        <div class="field-name fw-bold mt-2" if.bind="field.name">
+                            ${field.name}
+                        </div>
+                        <div class="field-value" if.bind="field.value" innerhtml.bind="field.value | discordMarkup">
+
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
-    </section>
-</template>
+        <div class="col-3 thumbnail text-end" if.bind="embed.thumbnail.url">
+            <img src.bind="embed.thumbnail.url" alt="thumbnail">
+        </div>
+    </div>
+    <div class="embed-video" if.bind="embed.image.url">
+        <img src="${embed.image.url}" alt="embed image">
+    </div>
+
+    <div class="footer mt-2" if.bind="embed.footer">
+        <div class="row">
+            <div class="col-1 px-2" if.bind="embed.footer.icon_url">
+                <img src="${embed.footer.icon_url}" class="footer-img" alt="embed footer msg">
+            </div>
+            <div class="${embed.footer.icon_url ? 'col-11 ps-0' : 'col-12'}">
+                <div class="author mb-3 mt-1 fw-bold" if.bind="embed.footer.text">
+                    ${embed.footer.text}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

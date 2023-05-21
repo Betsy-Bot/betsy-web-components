@@ -1,25 +1,22 @@
-<template>
-
-    <div class="row">
-        <div class="col">
-            <div if.bind="value">
-                Current Emoji:
-                <img src="https://cdn.discordapp.com/emojis/${value.id}.webp?size=24&quality=lossless"
-                     if.bind="!isEmoji">
-                <span else>${displayEmoji}</span>
-            </div>
-        </div>
-        <div class="col">
-            <div class="text-end">
-                <moo-button variant="primary" click.bind="() => selectingEmoji = !selectingEmoji" type="button">
-                    ${selectingEmoji ? 'Hide' : 'Show'} Emojis
-                </moo-button>
-            </div>
+<div class="row">
+    <div class="col">
+        <div if.bind="value">
+            Current Emoji:
+            <img src="https://cdn.discordapp.com/emojis/${value.id}.webp?size=24&quality=lossless"
+                 if.bind="!isEmoji" alt="emoji">
+            <span else>${displayEmoji}</span>
         </div>
     </div>
+    <div class="col">
+        <div class="text-end">
+            <moo-button variant="primary" click.bind="() => selectingEmoji = !selectingEmoji" type="button">
+                ${selectingEmoji ? 'Hide' : 'Show'} Emojis
+            </moo-button>
+        </div>
+    </div>
+</div>
 
-    <moo-button variant="danger" click.bind="() => value = null" if.bind="selectingEmoji" type="button">
-        Remove Emoji
-    </moo-button>
-    <div ref="emojiSelector" show.bind="selectingEmoji"></div>
-</template>
+<moo-button variant="danger" click.bind="() => value = null" if.bind="selectingEmoji" type="button">
+    Remove Emoji
+</moo-button>
+<div ref="emojiSelector" show.bind="selectingEmoji"></div>

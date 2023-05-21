@@ -1,98 +1,98 @@
-<template>
-    <div class="row" if.bind="featureActive !== undefined">
-        <div class="col-8">
-            <feature-header
-                doc-url="https://docs.betsybot.xyz/features/user-verification"
-                title="Verification"
-                subtitle="Require Verification from your new users before they are able to talk on your server.
+<div class="row" if.bind="featureActive !== undefined">
+    <div class="col-8">
+        <feature-header
+            doc-url="https://docs.betsybot.xyz/features/user-verification"
+            title="Verification"
+            subtitle="Require Verification from your new users before they are able to talk on your server.
                 When the feature is activated, new users will be sent a PM to verify themselves.
                 They will automatically receive the chosen role once verified."
-                display-warning.bind="!featureActive"
-            ></feature-header>
-        </div>
-        <div class="col-4 text-end">
-            <moo-switch
-                value.bind="featureActive"
-                change.bind="() => toggleFeature()"
-            ></moo-switch>
-            <label class="me-5">Active?</label>
-        </div>
+            display-warning.bind="!featureActive"
+        ></feature-header>
     </div>
-    <moo-accordion class="my-3">
-        <div if.bind="!isAdmin">
-            <span class="text-danger">Only the owner may edit these settings.</span>
+    <div class="col-4 text-end">
+        <moo-switch
+            value.bind="featureActive"
+            change.bind="() => toggleFeature()"
+        ></moo-switch>
+        <label class="me-5">Active?</label>
+    </div>
+</div>
+<moo-accordion class="my-3">
+    <div if.bind="!isAdmin">
+        <span class="text-danger">Only the owner may edit these settings.</span>
+    </div>
+    <div slot="caption">IP Quality Score</div>
+    <div class="py-3">
+        <div>
+            IPQualityScore is an industry leading anti-fraud platform that comes with a variety of verification options.
+            <br> We use this for looking up information on IP Addresses and Emails
+            <br> Get started on <a href="https://www.ipqualityscore.com/" target="_blank" class="text-blue" external>IP
+            Quality Score</a>
+            <br> IP Quality Score is free for a large amount of requests. Simply add your API key here to start taking
+            advantage
+            <br> Note that gathering information on user's emails requires user login setting on.
+            <br> Don't want to sign up? Ask us in a ticket about getting a provided API key.
         </div>
-        <div slot="caption">IP Quality Score</div>
-        <div class="py-3">
-            <div>
-                IPQualityScore is an industry leading anti-fraud platform that comes with a variety of verification options.
-                <br> We use this for looking up information on IP Addresses and Emails
-                <br> Get started on <a href="https://www.ipqualityscore.com/" target="_blank" class="text-blue" external>IP Quality Score</a>
-                <br> IP Quality Score is free for a large amount of requests. Simply add your API key here to start taking advantage
-                <br> Note that gathering information on user's emails requires user login setting on.
-                <br> Don't want to sign up? Ask us in a ticket about getting a provided API key.
-            </div>
-            <form submit.trigger="updateKeys()">
-                <moo-text-field
-                    disabled.bind="!isAdmin"
-                    class="w-100"
-                    label="IP Quality Score API Key"
-                    value.bind="guild.ipQualityScoreApiKey"
-                ></moo-text-field>
-                <moo-button variant="primary" disabled.bind="!isAdmin" type="submit">
-                    Save
-                </moo-button>
-            </form>
-        </div>
-    </moo-accordion>
-    <form submit.trigger="save()" if.bind="guild">
-        <div class="my-3">
-            <discord-role-selector
-                required.bind="true"
+        <form submit.trigger="updateKeys()">
+            <moo-text-field
                 disabled.bind="!isAdmin"
-                label="Select Verified Role"
-                selected-role.bind="guild.globalSettings.verificationSettings.verifiedRoleId"
-            ></discord-role-selector>
-        </div>
-        <div class="mt-3">
-            <discord-channel-selector
-                disabled.bind="!isAdmin"
-                label="Select Channel for Audits"
-                if.bind="guildId"
-                type.bind="0"
-                channel-id.two-way="guild.globalSettings.verificationSettings.logChannel"
-                guild-id.bind="guildId"
-                required.bind="true"
-            ></discord-channel-selector>
-        </div>
-        <div class="mb-3">
-            <discord-channel-selector
-                disabled.bind="!isAdmin"
-                label="Select Channel for Verify Button"
-                if.bind="guildId"
-                type.bind="0"
-                channel-id.two-way="guild.globalSettings.verificationSettings.verifyChannelId"
-                guild-id.bind="guildId"
-            ></discord-channel-selector>
-        </div>
-        <div class="my-3">
-            <moo-switch
-                disabled.bind="!isAdmin"
-                value.bind="guild.globalSettings.verificationSettings.blockAlts"
-            ></moo-switch>
-            <label class="me-5">Block Alts?</label>
-        </div>
-        <div class="col-12 my-3">
-            <moo-switch
-                disabled.bind="!isAdmin"
-                value.bind="guild.globalSettings.verificationSettings.requireLogin"
-            ></moo-switch>
-            <label class="me-5">Require Login?</label>
-        </div>
-        <div class="text-end">
-            <moo-button variant="primary" type="submit" disabled.bind="!isAdmin">
+                class="w-100"
+                label="IP Quality Score API Key"
+                value.bind="guild.ipQualityScoreApiKey"
+            ></moo-text-field>
+            <moo-button variant="primary" disabled.bind="!isAdmin" type="submit">
                 Save
             </moo-button>
-        </div>
-    </form>
-</template>
+        </form>
+    </div>
+</moo-accordion>
+<form submit.trigger="save()" if.bind="guild">
+    <div class="my-3">
+        <discord-role-selector
+            required.bind="true"
+            disabled.bind="!isAdmin"
+            label="Select Verified Role"
+            selected-role.bind="guild.globalSettings.verificationSettings.verifiedRoleId"
+        ></discord-role-selector>
+    </div>
+    <div class="mt-3">
+        <discord-channel-selector
+            disabled.bind="!isAdmin"
+            label="Select Channel for Audits"
+            if.bind="guildId"
+            type.bind="0"
+            channel-id.two-way="guild.globalSettings.verificationSettings.logChannel"
+            guild-id.bind="guildId"
+            required.bind="true"
+        ></discord-channel-selector>
+    </div>
+    <div class="mb-3">
+        <discord-channel-selector
+            disabled.bind="!isAdmin"
+            label="Select Channel for Verify Button"
+            if.bind="guildId"
+            type.bind="0"
+            channel-id.two-way="guild.globalSettings.verificationSettings.verifyChannelId"
+            guild-id.bind="guildId"
+        ></discord-channel-selector>
+    </div>
+    <div class="my-3">
+        <moo-switch
+            disabled.bind="!isAdmin"
+            value.bind="guild.globalSettings.verificationSettings.blockAlts"
+        ></moo-switch>
+        <label class="me-5">Block Alts?</label>
+    </div>
+    <div class="col-12 my-3">
+        <moo-switch
+            disabled.bind="!isAdmin"
+            value.bind="guild.globalSettings.verificationSettings.requireLogin"
+        ></moo-switch>
+        <label class="me-5">Require Login?</label>
+    </div>
+    <div class="text-end">
+        <moo-button variant="primary" type="submit" disabled.bind="!isAdmin">
+            Save
+        </moo-button>
+    </div>
+</form>

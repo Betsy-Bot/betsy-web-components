@@ -1,102 +1,100 @@
-<template>
-    <confirmation-dialog
-        cancel-text="Cancel"
-        confirm-text="Delete"
-        dialog.two-way="confirmDeleteDialog"
-        handler.bind="(event) => deleteSupportTicket(event)"
-        title="Are you sure you would like to delete?"
-    >
-        This is a permanent action and cannot be undone
-    </confirmation-dialog>
+<confirmation-dialog
+    cancel-text="Cancel"
+    confirm-text="Delete"
+    dialog.two-way="confirmDeleteDialog"
+    handler.bind="(event) => deleteSupportTicket(event)"
+    title="Are you sure you would like to delete?"
+>
+    This is a permanent action and cannot be undone
+</confirmation-dialog>
 
-    <section id="support-tickets">
-        <div class="row" if.bind="ticket">
-            <div class="col-12 col-lg-8">
-                <feature-header
-                    doc-url="https://docs.betsybot.xyz/features/support-tickets"
-                    title="${isNew ? 'Create' : 'Edit'} Support Ticket Message"
-                    subtitle="Edit the message that is already on your server."
-                    delete-function.bind="isNew ? null : () => confirmDeleteDialog.open()"
-                    copy-function.bind="isNew ? null : () => handleClone()"
-                ></feature-header>
+<section id="support-tickets">
+    <div class="row" if.bind="ticket">
+        <div class="col-12 col-lg-8">
+            <feature-header
+                doc-url="https://docs.betsybot.xyz/features/support-tickets"
+                title="${isNew ? 'Create' : 'Edit'} Support Ticket Message"
+                subtitle="Edit the message that is already on your server."
+                delete-function.bind="isNew ? null : () => confirmDeleteDialog.open()"
+                copy-function.bind="isNew ? null : () => handleClone()"
+            ></feature-header>
 
-                <div class="row mt-3 mb-4">
-                    <div class="col-4">
-                        <a load="../support-tickets/${supportTicketSettingsId}/submissions">
-                            <moo-button>View Created Tickets</moo-button>
-                        </a>
-                    </div>
+            <div class="row mt-3 mb-4">
+                <div class="col-4">
+                    <a load="../support-tickets/${supportTicketSettingsId}/submissions">
+                        <moo-button>View Created Tickets</moo-button>
+                    </a>
+                </div>
+            </div>
+
+            <moo-tab-bar>
+                <moo-tab
+                    label="Settings"
+                    tab.bind="tab"
+                    value="settings"
+                    active.bind="tab === 'settings'"
+                ></moo-tab>
+                <moo-tab
+                    label="Panel Message"
+                    active.bind="tab === 'container'"
+                    value="container"
+                    tab.bind="tab"
+                ></moo-tab>
+                <moo-tab
+                    label="Initial Message"
+                    active.bind="tab === 'initial'"
+                    value="initial"
+                    tab.bind="tab"
+                ></moo-tab>
+            </moo-tab-bar>
+
+            <form submit.trigger="submit()" if.bind="ticket">
+                <div if.bind="tab === 'settings'">
+                    <support-ticket-settings
+                        guild-id.bind="guildId"
+                        request.two-way="ticket"
+                        authorized-role.two-way="authorizedRole"
+                    ></support-ticket-settings>
                 </div>
 
-                <moo-tab-bar>
-                    <moo-tab
-                        label="Settings"
-                        tab.bind="tab"
-                        value="settings"
-                        active.bind="tab === 'settings'"
-                    ></moo-tab>
-                    <moo-tab
-                        label="Panel Message"
-                        active.bind="tab === 'container'"
-                        value="container"
-                        tab.bind="tab"
-                    ></moo-tab>
-                    <moo-tab
-                        label="Initial Message"
-                        active.bind="tab === 'initial'"
-                        value="initial"
-                        tab.bind="tab"
-                    ></moo-tab>
-                </moo-tab-bar>
+                <div if.bind="tab === 'container'">
+                    <discord-message-creator
+                        max-components.bind="1"
+                        message.bind="ticket.discordMessage.message"
+                        single.bind="true"
+                    ></discord-message-creator>
+                </div>
 
-                <form submit.trigger="submit()" if.bind="ticket">
-                    <div if.bind="tab === 'settings'">
-                        <support-ticket-settings
-                            guild-id.bind="guildId"
-                            request.two-way="ticket"
-                            authorized-role.two-way="authorizedRole"
-                        ></support-ticket-settings>
-                    </div>
+                <div if.bind="tab === 'initial'">
+                    <moo-text-field
+                        class="w-100"
+                        label="Close Button Text"
+                        maxlength="15"
+                        value.bind="ticket.closeButtonText">
+                    </moo-text-field>
+                    <discord-message-creator
+                        message.two-way="ticket.initialMessage"
+                        single.bind="true"
+                    ></discord-message-creator>
+                </div>
 
-                    <div if.bind="tab === 'container'">
-                        <discord-message-creator
-                            max-components.bind="1"
-                            message.bind="ticket.discordMessage.message"
-                            single.bind="true"
-                        ></discord-message-creator>
-                    </div>
-
-                    <div if.bind="tab === 'initial'">
-                        <moo-text-field
-                            class="w-100"
-                            label="Close Button Text"
-                            maxlength="15"
-                            value.bind="ticket.closeButtonText">
-                        </moo-text-field>
-                        <discord-message-creator
-                            message.two-way="ticket.initialMessage"
-                            single.bind="true"
-                        ></discord-message-creator>
-                    </div>
-
-                    <moo-button class="button-primary mt-2" type="submit" disabled.bind="isLoading">
-                        Save
-                    </moo-button>
-                </form>
-            </div>
-            <div class="col-12 col-lg-4">
-                <discord-message-preview
-                    title="Panel Message"
-                    message.bind="ticket.discordMessage.message"
-                    if.bind="tab === 'container' || tab === 'settings'"
-                ></discord-message-preview>
-                <div class="my-5" if.bind="tab === 'settings'"></div>
-                <discord-message-preview
-                    title="Initial Message"
-                    message.bind="ticket.initialMessage"
-                    if.bind="tab === 'initial' || tab === 'settings'"
-                ></discord-message-preview>
-            </div>
+                <moo-button class="button-primary mt-2" type="submit" disabled.bind="isLoading">
+                    Save
+                </moo-button>
+            </form>
         </div>
-    </section>
-</template>
+        <div class="col-12 col-lg-4">
+            <discord-message-preview
+                title="Panel Message"
+                message.bind="ticket.discordMessage.message"
+                if.bind="tab === 'container' || tab === 'settings'"
+            ></discord-message-preview>
+            <div class="my-5" if.bind="tab === 'settings'"></div>
+            <discord-message-preview
+                title="Initial Message"
+                message.bind="ticket.initialMessage"
+                if.bind="tab === 'initial' || tab === 'settings'"
+            ></discord-message-preview>
+        </div>
+    </div>
+</section>

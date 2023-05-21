@@ -1,109 +1,109 @@
-<template>
-    <div class="row g-4">
-        <div class="col-12 col-xl-8">
-            <feature-header
-                doc-url="https://docs.betsybot.xyz/features/auto-role"
-                title="Role Selector Containers"
-                subtitle="Create a message with a select menu allowing users to select roles they want to be added to for your server."
-            ></feature-header>
-            <div class="my-1">
-                <div class="mt-1 mb-3 text-danger fs-7 d-inline-flex align-content-center">
+<div class="row g-4">
+    <div class="col-12 col-xl-8">
+        <feature-header
+            doc-url="https://docs.betsybot.xyz/features/auto-role"
+            title="Role Selector Containers"
+            subtitle="Create a message with a select menu allowing users to select roles they want to be added to for your server."
+        ></feature-header>
+        <div class="my-1">
+            <div class="mt-1 mb-3 text-danger fs-7 d-inline-flex align-content-center">
                             <span class="material-icons me-2">
                                 warning
                             </span>
-                    In order for the bot to add or remove a specific role it MUST be above it in the role list. If you do not have the Betsy role above the roles selected it will NOT remove/add those roles.
-                </div>
+                In order for the bot to add or remove a specific role it MUST be above it in the role list. If you do
+                not have the Betsy role above the roles selected it will NOT remove/add those roles.
             </div>
-            <div class="mt-4">
-                <form submit.trigger="putContainer()">
-                    <div class="col-12 my-3">
-                        <moo-switch
-                            value.bind="container.active"
-                            change.bind="() => container.active = !!responder.active"
-                        ></moo-switch>
-                        <label class="me-5">Active?</label>
-                    </div>
+        </div>
+        <div class="mt-4">
+            <form submit.trigger="putContainer()">
+                <div class="col-12 my-3">
+                    <moo-switch
+                        value.bind="container.active"
+                        change.bind="() => container.active = !!responder.active"
+                    ></moo-switch>
+                    <label class="me-5">Active?</label>
+                </div>
 
-                    <div class="mb-3">
-                        <moo-tab-bar>
-                            <moo-tab
-                                label="Container"
-                                tab.bind="tab"
-                                value="container"
-                                active.bind="tab === 'container'"
-                            ></moo-tab>
-                            <moo-tab
-                                label="Roles"
-                                active.bind="tab === 'roles'"
-                                value="roles"
-                                tab.bind="tab"
-                            ></moo-tab>
-                            <moo-tab
-                                label="Initial Message"
-                                active.bind="tab === 'initial'"
-                                value="initial"
-                                tab.bind="tab"
-                            ></moo-tab>
-                        </moo-tab-bar>
-                    </div>
+                <div class="mb-3">
+                    <moo-tab-bar>
+                        <moo-tab
+                            label="Container"
+                            tab.bind="tab"
+                            value="container"
+                            active.bind="tab === 'container'"
+                        ></moo-tab>
+                        <moo-tab
+                            label="Roles"
+                            active.bind="tab === 'roles'"
+                            value="roles"
+                            tab.bind="tab"
+                        ></moo-tab>
+                        <moo-tab
+                            label="Initial Message"
+                            active.bind="tab === 'initial'"
+                            value="initial"
+                            tab.bind="tab"
+                        ></moo-tab>
+                    </moo-tab-bar>
+                </div>
 
-                    <template if.bind="tab === 'container'">
-                        <form submit.trigger="tab = 'roles'">
-                            <moo-text-field
-                                label="Identifier"
-                                class="w-100 my-2"
-                                placeholder="Container Identifier"
-                                value.bind="container.name"
-                                required
-                            ></moo-text-field>
-                            <moo-text-field
-                                label="Description"
-                                class="w-100 mb-2"
-                                placeholder="Container Description"
-                                value.bind="container.description"
-                            ></moo-text-field>
-                            <discord-channel-selector
-                                required.bind="true"
-                                label="Select Channel for Container"
-                                type.bind="0"
-                                channel-id.two-way="container.discordMessage.discordChannelId"
-                            ></discord-channel-selector>
+                <template if.bind="tab === 'container'">
+                    <form submit.trigger="tab = 'roles'">
+                        <moo-text-field
+                            label="Identifier"
+                            class="w-100 my-2"
+                            placeholder="Container Identifier"
+                            value.bind="container.name"
+                            required
+                        ></moo-text-field>
+                        <moo-text-field
+                            label="Description"
+                            class="w-100 mb-2"
+                            placeholder="Container Description"
+                            value.bind="container.description"
+                        ></moo-text-field>
+                        <discord-channel-selector
+                            required.bind="true"
+                            label="Select Channel for Container"
+                            type.bind="0"
+                            channel-id.two-way="container.discordMessage.discordChannelId"
+                        ></discord-channel-selector>
 
-                            <discord-message-creator
-                                message.two-way="container.discordMessage.message"
-                            ></discord-message-creator>
-
-                            <div class="mt-3 text-end">
-                                <moo-button variant="primary" type="submit">
-                                    Next
-                                </moo-button>
-                            </div>
-                        </form>
-                    </template>
-
-                    <template if.bind="tab === 'roles'">
-                        <discord-role-selector
-                            label="Select Roles"
-                            selected-role.two-way="selectedRole"
-                        ></discord-role-selector>
-
-                        <div class="row g-4 mt-2" if.bind="container.discordRoles">
-                            <div class="col-12 col-lg-6" repeat.for="role of container.discordRoles">
-                                <discord-menu-item item.two-way="role" remove-function.bind="() => removeRole($index)"></discord-menu-item>
-                            </div>
-                        </div>
+                        <discord-message-creator
+                            message.two-way="container.discordMessage.message"
+                        ></discord-message-creator>
 
                         <div class="mt-3 text-end">
-                            <moo-button class="button-primary" type="submit">
-                                ${isNew ? 'Create' : 'Save'}
+                            <moo-button variant="primary" type="submit">
+                                Next
                             </moo-button>
                         </div>
-                    </template>
-                </form>
-            </div>
-        </div>
-        <div class="col-12 col-xl-4">
-            <discord-message-preview message.bind="container.discordMessage.message"></discord-message-preview>
+                    </form>
+                </template>
+
+                <template if.bind="tab === 'roles'">
+                    <discord-role-selector
+                        label="Select Roles"
+                        selected-role.two-way="selectedRole"
+                    ></discord-role-selector>
+
+                    <div class="row g-4 mt-2" if.bind="container.discordRoles">
+                        <div class="col-12 col-lg-6" repeat.for="role of container.discordRoles">
+                            <discord-menu-item item.two-way="role"
+                                               remove-function.bind="() => removeRole($index)"></discord-menu-item>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 text-end">
+                        <moo-button class="button-primary" type="submit">
+                            ${isNew ? 'Create' : 'Save'}
+                        </moo-button>
+                    </div>
+                </template>
+            </form>
         </div>
     </div>
-</template>
+    <div class="col-12 col-xl-4">
+        <discord-message-preview message.bind="container.discordMessage.message"></discord-message-preview>
+    </div>
+</div>

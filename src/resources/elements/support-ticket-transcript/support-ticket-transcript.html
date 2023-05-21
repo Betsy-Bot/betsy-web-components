@@ -1,24 +1,20 @@
-<template>
-    <section id="support-ticket-transcript">
-        <div class="row">
-            <div class="col-6">
-                <div class="participants">
-                    <h5>Participants (${participants.length})</h5>
-                    <div repeat.for="participant of participants">
-                        ${$index + 1}. ${participant.name}
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="participants">
-                    <h5>Closed By</h5>
-                    <div>
-                        ${supportTicket.closedBy} (${supportTicket.closedByDiscordUserId})
-                    </div>
-                </div>
+<div class="row">
+    <div class="col-6">
+        <div class="participants">
+            <h5>Participants (${participants.length})</h5>
+            <div repeat.for="participant of participants">
+                ${$index + 1}. ${participant.name}
             </div>
         </div>
-        <h4 class="mt-5">Transcript</h4>
-        <discord-messages-renderer messages.bind="supportTicket.transcript.messages"></discord-messages-renderer>
-    </section>
-</template>
+    </div>
+    <div class="col-6">
+        <div class="participants">
+            <h5>Closed By</h5>
+            <div>
+                ${supportTicket.closedBy} (${supportTicket.closedByDiscordUserId})
+            </div>
+        </div>
+    </div>
+</div>
+<h4 class="mt-5">Transcript</h4>
+<discord-messages-renderer messages.bind="supportTicket.transcript.messages"></discord-messages-renderer>

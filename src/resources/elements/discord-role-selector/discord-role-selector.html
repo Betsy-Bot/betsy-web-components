@@ -1,21 +1,17 @@
-<template>
-    <section id="discord-role-selector">
-        <moo-select disabled.bind="disabled"
-                    if.bind="roles"
-                    class="standard-betsy-select w-100"
-                    value.bind="selectedRole"
-                    label.bind="label"
-                    required.bind="required">
-            <moo-list>
-                <moo-list-item
-                    repeat.for="role of roles"
-                    label.bind="role.name"
-                    value.bind="role.id"
-                ></moo-list-item>
-            </moo-list>
-        </moo-select>
-        <div else>
-            <moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>
-        </div>
-    </section>
-</template>
+<moo-select disabled.bind="disabled"
+            if.bind="roles"
+            class="standard-betsy-select w-100"
+            value.bind="selectedRole"
+            label.bind="label"
+            required.bind="required">
+    <moo-list>
+        <moo-list-item
+            repeat.for="role of roles"
+            label.bind="role.name"
+            value.bind="role.id"
+        ></moo-list-item>
+    </moo-list>
+</moo-select>
+<div else>
+    <moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>
+</div>

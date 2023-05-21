@@ -1,71 +1,67 @@
-<template>
-    <section id="create-data-command">
-        <div class="row">
-            <div class="col-12 col-lg-8">
-                <feature-header
-                    doc-url="https://docs.betsybot.xyz/features/welcome-messages"
-                    title="${isNew ? 'Create' : 'Edit'} Welcome Message"
-                    subtitle="Create either custom channel welcome messages or direct DM welcome messages."
-                ></feature-header>
+<div class="row">
+    <div class="col-12 col-lg-8">
+        <feature-header
+            doc-url="https://docs.betsybot.xyz/features/welcome-messages"
+            title="${isNew ? 'Create' : 'Edit'} Welcome Message"
+            subtitle="Create either custom channel welcome messages or direct DM welcome messages."
+        ></feature-header>
 
-                <form submit.trigger="save()" if.bind="message">
-                    <div class="row my-2 g-4">
-                        <div class="col-6 h-100">
-                            <label class="me-3">Active?</label>
-                            <moo-switch
-                                selected.bind="message.active"
-                            ></moo-switch>
-                        </div>
-                        <div class="col-6">
-                            <moo-select class="standard-betsy-select w-100"
-                                        value.bind="message.type"
-                                        label="Welcome Message Type"
-                                        required.bind="true">
-                                <moo-list>
-                                    <moo-list-item
-                                        repeat.for="type of types"
-                                        label.bind="type.displayName"
-                                        value.bind="type.value"
-                                    ></moo-list-item>
-                                </moo-list>
-                            </moo-select>
-                        </div>
-                        <div class="col-12 col-lg-6 h-100">
-                            <moo-text-field
-                                class="w-100"
-                                label="Name"
-                                value.bind="message.name"
-                                placeholder="Internal Identifier - Not used in message"
-                                required.bind="true"
-                            ></moo-text-field>
-                        </div>
-                        <div class="col-12 col-lg-6 h-100">
-                            <discord-channel-selector
-                                label="Select Channel"
-                                if.bind="guildId"
-                                channel-id.two-way="message.discordChannelId"
-                                guild-id.bind="guildId"
-                                type.bind="0"
-                                required.bind="message.type == 3"
-                            ></discord-channel-selector>
-                        </div>
-                    </div>
-
-                    <discord-message-creator
-                        message.two-way="message.message"
-                        allow-components.bind="true"
-                    ></discord-message-creator>
-
-                    <div class="text-end mt-3">
-                        <moo-button type="submit" variant="primary">
-                            Save
-                        </moo-button>
-                    </div>
-                </form>
+        <form submit.trigger="save()" if.bind="message">
+            <div class="row my-2 g-4">
+                <div class="col-6 h-100">
+                    <label class="me-3">Active?</label>
+                    <moo-switch
+                        selected.bind="message.active"
+                    ></moo-switch>
+                </div>
+                <div class="col-6">
+                    <moo-select class="standard-betsy-select w-100"
+                                value.bind="message.type"
+                                label="Welcome Message Type"
+                                required.bind="true">
+                        <moo-list>
+                            <moo-list-item
+                                repeat.for="type of types"
+                                label.bind="type.displayName"
+                                value.bind="type.value"
+                            ></moo-list-item>
+                        </moo-list>
+                    </moo-select>
+                </div>
+                <div class="col-12 col-lg-6 h-100">
+                    <moo-text-field
+                        class="w-100"
+                        label="Name"
+                        value.bind="message.name"
+                        placeholder="Internal Identifier - Not used in message"
+                        required.bind="true"
+                    ></moo-text-field>
+                </div>
+                <div class="col-12 col-lg-6 h-100">
+                    <discord-channel-selector
+                        label="Select Channel"
+                        if.bind="guildId"
+                        channel-id.two-way="message.discordChannelId"
+                        guild-id.bind="guildId"
+                        type.bind="0"
+                        required.bind="message.type == 3"
+                    ></discord-channel-selector>
+                </div>
             </div>
-            <div class="col-12 col-lg-4">
-                <discord-message-preview message.two-way="message.message"></discord-message-preview>
+
+            <discord-message-creator
+                message.two-way="message.message"
+                allow-components.bind="true"
+            ></discord-message-creator>
+
+            <div class="text-end mt-3">
+                <moo-button type="submit" variant="primary">
+                    Save
+                </moo-button>
             </div>
-        </div>
-    </section>
-</template>
+        </form>
+    </div>
+    <div class="col-12 col-lg-4">
+        <discord-message-preview message.two-way="message.message"></discord-message-preview>
+    </div>
+</div>

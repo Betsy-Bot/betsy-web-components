@@ -1,19 +1,18 @@
-<template>
-    <section id="discord-channel-selector" class.bind="class">
-        <div class="au-select" if.bind="channels">
-            <moo-select label.bind="label" value.bind="channelId" class="standard-betsy-select w-100" disabled.bind="disabled" required.bind="required">
-                <moo-list>
-                    <moo-list-item
-                        repeat.for="channel of channels"
-                        label.bind="channel.name"
-                        value.bind="channel.id"
-                        if.bind="matchesType(channel)"
-                    ></moo-list-item>
-                </moo-list>
-            </moo-select>
-        </div>
-        <div else>
-            <moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>
-        </div>
-    </section>
-</template>
+<section class.bind="class">
+    <div class="au-select" if.bind="channels">
+        <moo-select label.bind="label" value.bind="channelId" class="standard-betsy-select w-100"
+                    disabled.bind="disabled" required.bind="required">
+            <moo-list>
+                <moo-list-item
+                    repeat.for="channel of channels"
+                    label.bind="channel.name"
+                    value.bind="channel.id"
+                    if.bind="matchesType(channel)"
+                ></moo-list-item>
+            </moo-list>
+        </moo-select>
+    </div>
+    <div else>
+        <moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>
+    </div>
+</section>

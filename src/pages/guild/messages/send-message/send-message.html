@@ -1,40 +1,37 @@
-<template>
-    <section id="send-message py-5">
-        <div class="row g-4">
-            <div class="col-12 col-xl-8">
-                <feature-header
-                    doc-url="https://docs.betsybot.xyz/features/send-message-announcement"
-                    title="Send Message / Announcement"
-                    subtitle="You can use this to send a one-time message to a channel or to all channels within a category."
-                ></feature-header>
-                <div class="mt-4">
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <date-time-picker
-                                label="Send At"
-                                value.two-way="request.sendTime"
-                            ></date-time-picker>
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <discord-channel-selector
-                                label="Select Channel or Category"
-                                if.bind="guildId"
-                                channel-id.two-way="channelId"
-                                guild-id.bind="guildId"
-                            ></discord-channel-selector>
-                        </div>
-                    </div>
+<div class="row g-4">
+    <div class="col-12 col-xl-8">
+        <feature-header
+            doc-url="https://docs.betsybot.xyz/features/send-message-announcement"
+            title="Send Message / Announcement"
+            subtitle="You can use this to send a one-time message to a channel or to all channels within a category."
+        ></feature-header>
+        <div class="mt-4">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <date-time-picker
+                        label="Send At"
+                        value.two-way="request.sendTime"
+                    ></date-time-picker>
                 </div>
-                <div class="mt-3">
-                    <discord-message-creator message.two-way="request.message" allow-components="true"></discord-message-creator>
+                <div class="col-12 col-lg-6">
+                    <discord-channel-selector
+                        label="Select Channel or Category"
+                        if.bind="guildId"
+                        channel-id.two-way="channelId"
+                        guild-id.bind="guildId"
+                    ></discord-channel-selector>
                 </div>
-                <moo-button variant="primary" class="mt-2" click.bind="() => sendMessage()">
-                    Send Message
-                </moo-button>
-            </div>
-            <div class="col-12 col-xl-4">
-                <discord-message-preview message.two-way="request.message"></discord-message-preview>
             </div>
         </div>
-    </section>
-</template>
+        <div class="mt-3">
+            <discord-message-creator message.two-way="request.message"
+                                     allow-components="true"></discord-message-creator>
+        </div>
+        <moo-button variant="primary" class="mt-2" click.bind="() => sendMessage()">
+            Send Message
+        </moo-button>
+    </div>
+    <div class="col-12 col-xl-4">
+        <discord-message-preview message.two-way="request.message"></discord-message-preview>
+    </div>
+</div>

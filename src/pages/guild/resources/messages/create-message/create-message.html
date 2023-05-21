@@ -1,29 +1,27 @@
-<template>
-    <div class="row g-4">
-        <div class="col-12 col-xl-8">
-            <form submit.trigger="saveMessage()">
-                <feature-header
-                    title="Create Message Templates"
-                    subtitle="Create prebuilt messages that can be used in a variety of features throughout the bot's functionality"
-                ></feature-header>
-                <div class="mt-5">
-                    <moo-text-field
-                        label="Identifier"
-                        class="w-100 mb-2"
-                        placeholder="Message Identifier"
-                        value.bind="request.name"
-                        required
-                    ></moo-text-field>
-                    <discord-message-creator message.two-way="request.message"></discord-message-creator>
-                </div>
-                <moo-button class="mt-2" type="submit" variant="primary">
-                    Save Message
-                </moo-button>
-            </form>
-        </div>
-        <div class="col-12 col-xl-4">
-            <discord-message-preview message.two-way="request.message"></discord-message-preview>
-        </div>
+<div class="row g-4">
+    <div class="col-12 col-xl-8">
+        <form submit.trigger="saveMessage()">
+            <feature-header
+                title="Create Message Templates"
+                subtitle="Create prebuilt messages that can be used in a variety of features throughout the bot's functionality"
+            ></feature-header>
+            <div class="mt-5">
+                <moo-text-field
+                    label="Identifier"
+                    class="w-100 mb-2"
+                    placeholder="Message Identifier"
+                    value.bind="request.name"
+                    required
+                ></moo-text-field>
+                <discord-message-creator message.two-way="request.message"></discord-message-creator>
+            </div>
+            <moo-button class="mt-2" type="submit" variant="primary">
+                Save Message
+            </moo-button>
+        </form>
     </div>
-</template>
+    <div class="col-12 col-xl-4">
+        <discord-message-preview message.two-way="request.message"></discord-message-preview>
+    </div>
+</div>
 

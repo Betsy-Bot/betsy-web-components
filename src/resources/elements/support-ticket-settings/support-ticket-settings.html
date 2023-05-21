@@ -1,179 +1,177 @@
-<template>
-    <div class="row g-4 mt-1">
-        <div class="col-6 col-lg-6">
-            <label class="me-3">DM Transcript On Close</label>
-            <moo-switch
-                value.bind="request.sendTranscriptOnClose"
-            ></moo-switch>
-        </div>
-        <div class="col-6 col-lg-6">
-            <label class="me-3">Auto Increment Number</label>
-            <moo-switch
-                value.bind="request.useAutoIncrement"
-            ></moo-switch>
-        </div>
-        <div class="col-6 col-lg-6">
-            <label class="me-3">Allowing Claiming</label>
-            <moo-switch
-                value.bind="request.allowClaiming"
-            ></moo-switch>
-        </div>
-        <div class="col-6 col-lg-6">
-            <label class="me-3">Hide Name</label>
-            <moo-switch
-                value.bind="request.hideName"
-            ></moo-switch>
-        </div>
-        <div class="col-6 col-lg-6">
-            <label class="me-3">Public Transcript</label>
-            <moo-switch
-                value.bind="request.publicTranscript"
-            ></moo-switch>
-        </div>
-        <div class="col-6 col-lg-6">
-
-        </div>
-        <div class="col-12 col-lg-6">
-            <discord-channel-selector
-                label="Select Channel for Audits"
-                if.bind="guildId"
-                channel-id.two-way="request.logChannelId"
-                guild-id.bind="guildId"
-                type.bind="0"
-                required.bind="false"
-                include-null.bind="true"
-            ></discord-channel-selector>
-        </div>
-        <div class="col-12 col-lg-6">
-            <div class="au-select">
-                <moo-select disabled.bind="disabled"
-                            if.bind="options"
-                            class="standard-betsy-select w-100"
-                            value.bind="selectedAuditOption"
-                            label="Select Active Audits"
-                            required.bind="required">
-                    <moo-list>
-                        <moo-list-item
-                            repeat.for="option of options"
-                            label.bind="option | pascalSpacing"
-                            value.bind="option"
-                        ></moo-list-item>
-                    </moo-list>
-                </moo-select>
-            </div>
-            <moo-chip-set input if.bind="request.supportTicketAudits">
-                <!-- Compact notation -->
-                <moo-chip repeat.for="audit of request.supportTicketAudits">
-                    ${audit | pascalSpacing}
-                    <span click.trigger="removeAuditOption($index)">X</span>
-                </moo-chip>
-            </moo-chip-set>
-        </div>
-        <div class="col-12 col-lg-6">
-            <moo-text-field
-                class="w-100"
-                label="Identifier"
-                value.bind="request.identifier"
-                placeholder="Used to identify your support ticket. Not visible to customer"
-                required
-            ></moo-text-field>
-        </div>
-        <div class="col-12 col-lg-6">
-            <discord-channel-selector
-                label="Select Category"
-                if.bind="guildId"
-                channel-id.two-way="request.categoryId"
-                guild-id.bind="guildId"
-                type.bind="4"
-                required.bind="true"
-            ></discord-channel-selector>
-
-        </div>
-        <div class="col-12 col-lg-6">
-            <discord-channel-selector
-                label="Select Channel for Message"
-                if.bind="guildId"
-                channel-id.two-way="request.discordMessage.discordChannelId"
-                guild-id.bind="guildId"
-                type.bind="0"
-                required.bind="true"
-            ></discord-channel-selector>
-        </div>
-        <div class="col-12 col-lg-6">
-            <discord-role-selector
-                label="Select Authorized Roles"
-                selected-role.bind="authorizedRole"
-                guild-id.bind="guildId"
-            ></discord-role-selector>
-            <moo-chip-set input if.bind="roles">
-                <!-- Compact notation -->
-                <moo-chip repeat.for="role of request.assignedRoles">
-                    ${getRoleName(role)}
-                    <span click.trigger="removeRole($index)" trailing>X</span>
-                </moo-chip>
-            </moo-chip-set>
-        </div>
-        <div class="col-12 col-lg-6">
-            <discord-channel-selector
-                label="Select Channel for Closed Tickets"
-                if.bind="guildId"
-                channel-id.two-way="request.closedCategoryId"
-                guild-id.bind="guildId"
-                type.bind="4"
-                include-null.bind="true"
-            ></discord-channel-selector>
-        </div>
-        <div class="col-12 col-lg-6">
-            <moo-text-field
-                class="w-100"
-                label="Created Channel Name Prefix"
-                maxlength="8"
-                value.bind="request.channelPrefix">
-            </moo-text-field>
-        </div>
-        <div class="col-12 col-lg-6">
-            <moo-text-field
-                class="w-100"
-                label="Max Open Per Person"
-                max="10"
-                type="number"
-                value.bind="request.maxOpenPerPerson"
-                placeholder="The maximum amount of tickets a single person can have for this ticket container."
-            ></moo-text-field>
-        </div>
-        <div class="col-12 col-lg-6">
-            <moo-text-field
-                class="w-100"
-                label="Auto Close After (Minutes)"
-                min="5"
-                max="20160"
-                type="number"
-                value.bind="request.autoCloseMinutes"
-                placeholder="When closed the ticket will begin auto closing instead of immediately closing"
-            ></moo-text-field>
-        </div>
-        <div class="col-12 col-lg-6">
-            <discord-form-selector
-                if.bind="guildId"
-                label="Select a Form to Present on Opening"
-                form-id.two-way="request.discordFormId"
-            ></discord-form-selector>
-        </div>
-        <div class="col-12 col-lg-6">
-            <moo-text-field
-                class="w-100"
-                label="Closed Response Text"
-                maxlength="255"
-                value.bind="request.textOptions.closedMessageText">
-            </moo-text-field>
-        </div>
-        <div class="col-12 col-lg-6">
-            <moo-text-field
-                class="w-100"
-                label="Form Data Text"
-                maxlength="255"
-                value.bind="request.textOptions.formDataText">
-            </moo-text-field>
-        </div>
+<div class="row g-4 mt-1">
+    <div class="col-6 col-lg-6">
+        <label class="me-3">DM Transcript On Close</label>
+        <moo-switch
+            value.bind="request.sendTranscriptOnClose"
+        ></moo-switch>
     </div>
-</template>
+    <div class="col-6 col-lg-6">
+        <label class="me-3">Auto Increment Number</label>
+        <moo-switch
+            value.bind="request.useAutoIncrement"
+        ></moo-switch>
+    </div>
+    <div class="col-6 col-lg-6">
+        <label class="me-3">Allowing Claiming</label>
+        <moo-switch
+            value.bind="request.allowClaiming"
+        ></moo-switch>
+    </div>
+    <div class="col-6 col-lg-6">
+        <label class="me-3">Hide Name</label>
+        <moo-switch
+            value.bind="request.hideName"
+        ></moo-switch>
+    </div>
+    <div class="col-6 col-lg-6">
+        <label class="me-3">Public Transcript</label>
+        <moo-switch
+            value.bind="request.publicTranscript"
+        ></moo-switch>
+    </div>
+    <div class="col-6 col-lg-6">
+
+    </div>
+    <div class="col-12 col-lg-6">
+        <discord-channel-selector
+            label="Select Channel for Audits"
+            if.bind="guildId"
+            channel-id.two-way="request.logChannelId"
+            guild-id.bind="guildId"
+            type.bind="0"
+            required.bind="false"
+            include-null.bind="true"
+        ></discord-channel-selector>
+    </div>
+    <div class="col-12 col-lg-6">
+        <div class="au-select">
+            <moo-select disabled.bind="disabled"
+                        if.bind="options"
+                        class="standard-betsy-select w-100"
+                        value.bind="selectedAuditOption"
+                        label="Select Active Audits"
+                        required.bind="required">
+                <moo-list>
+                    <moo-list-item
+                        repeat.for="option of options"
+                        label.bind="option | pascalSpacing"
+                        value.bind="option"
+                    ></moo-list-item>
+                </moo-list>
+            </moo-select>
+        </div>
+        <moo-chip-set input if.bind="request.supportTicketAudits">
+            <!-- Compact notation -->
+            <moo-chip repeat.for="audit of request.supportTicketAudits">
+                ${audit | pascalSpacing}
+                <span click.trigger="removeAuditOption($index)">X</span>
+            </moo-chip>
+        </moo-chip-set>
+    </div>
+    <div class="col-12 col-lg-6">
+        <moo-text-field
+            class="w-100"
+            label="Identifier"
+            value.bind="request.identifier"
+            placeholder="Used to identify your support ticket. Not visible to customer"
+            required
+        ></moo-text-field>
+    </div>
+    <div class="col-12 col-lg-6">
+        <discord-channel-selector
+            label="Select Category"
+            if.bind="guildId"
+            channel-id.two-way="request.categoryId"
+            guild-id.bind="guildId"
+            type.bind="4"
+            required.bind="true"
+        ></discord-channel-selector>
+
+    </div>
+    <div class="col-12 col-lg-6">
+        <discord-channel-selector
+            label="Select Channel for Message"
+            if.bind="guildId"
+            channel-id.two-way="request.discordMessage.discordChannelId"
+            guild-id.bind="guildId"
+            type.bind="0"
+            required.bind="true"
+        ></discord-channel-selector>
+    </div>
+    <div class="col-12 col-lg-6">
+        <discord-role-selector
+            label="Select Authorized Roles"
+            selected-role.bind="authorizedRole"
+            guild-id.bind="guildId"
+        ></discord-role-selector>
+        <moo-chip-set input if.bind="roles">
+            <!-- Compact notation -->
+            <moo-chip repeat.for="role of request.assignedRoles">
+                ${getRoleName(role)}
+                <span click.trigger="removeRole($index)" trailing>X</span>
+            </moo-chip>
+        </moo-chip-set>
+    </div>
+    <div class="col-12 col-lg-6">
+        <discord-channel-selector
+            label="Select Channel for Closed Tickets"
+            if.bind="guildId"
+            channel-id.two-way="request.closedCategoryId"
+            guild-id.bind="guildId"
+            type.bind="4"
+            include-null.bind="true"
+        ></discord-channel-selector>
+    </div>
+    <div class="col-12 col-lg-6">
+        <moo-text-field
+            class="w-100"
+            label="Created Channel Name Prefix"
+            maxlength="8"
+            value.bind="request.channelPrefix">
+        </moo-text-field>
+    </div>
+    <div class="col-12 col-lg-6">
+        <moo-text-field
+            class="w-100"
+            label="Max Open Per Person"
+            max="10"
+            type="number"
+            value.bind="request.maxOpenPerPerson"
+            placeholder="The maximum amount of tickets a single person can have for this ticket container."
+        ></moo-text-field>
+    </div>
+    <div class="col-12 col-lg-6">
+        <moo-text-field
+            class="w-100"
+            label="Auto Close After (Minutes)"
+            min="5"
+            max="20160"
+            type="number"
+            value.bind="request.autoCloseMinutes"
+            placeholder="When closed the ticket will begin auto closing instead of immediately closing"
+        ></moo-text-field>
+    </div>
+    <div class="col-12 col-lg-6">
+        <discord-form-selector
+            if.bind="guildId"
+            label="Select a Form to Present on Opening"
+            form-id.two-way="request.discordFormId"
+        ></discord-form-selector>
+    </div>
+    <div class="col-12 col-lg-6">
+        <moo-text-field
+            class="w-100"
+            label="Closed Response Text"
+            maxlength="255"
+            value.bind="request.textOptions.closedMessageText">
+        </moo-text-field>
+    </div>
+    <div class="col-12 col-lg-6">
+        <moo-text-field
+            class="w-100"
+            label="Form Data Text"
+            maxlength="255"
+            value.bind="request.textOptions.formDataText">
+        </moo-text-field>
+    </div>
+</div>

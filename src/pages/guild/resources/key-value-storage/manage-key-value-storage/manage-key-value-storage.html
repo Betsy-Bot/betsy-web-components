@@ -1,37 +1,32 @@
-<template>
-    <section id="key-value-storage">
-        <feature-header
-            title="Manage Key Value Storage"
-            subtitle="Key value storage can be used in message templating to retrieve key value pairs and present them in a message."
-        ></feature-header>
+<feature-header
+    title="Manage Key Value Storage"
+    subtitle="Key value storage can be used in message templating to retrieve key value pairs and present them in a message."
+></feature-header>
 
-        <div class="row mt-3">
-            <div class="col-12 col-xl-4">
-                <form submit.trigger="save()">
-                    <moo-text-field
-                        label="Identifier"
-                        type="text"
-                        class="w-100 my-2"
-                        value.bind="item.categoryName"
-                        required
-                    ></moo-text-field>
-                    <div>
-                        <label for="deliverOnFetch">Mark Used on Fetch</label>
-                        <moo-switch
-                            id="deliverOnFetch"
-                            value.bind="item.deliverOnFetch"
-                        ></moo-switch>
-                    </div>
-                    <div class="text-end mt-3">
-                        <moo-button type="submit" variant="primary">
-                            Save
-                        </moo-button>
-                    </div>
-                </form>
+<div class="row mt-3">
+    <div class="col-12 col-xl-4">
+        <form submit.trigger="save()">
+            <moo-text-field
+                label="Identifier"
+                type="text"
+                class="w-100 my-2"
+                value.bind="item.categoryName"
+                required
+            ></moo-text-field>
+            <div>
+                <label>Mark Used on Fetch</label>
+                <moo-switch
+                    value.bind="item.deliverOnFetch"
+                ></moo-switch>
             </div>
-            <div class="col-12 col-xl-8 mt-2">
-                <div ref="table"></div>
+            <div class="text-end mt-3">
+                <moo-button type="submit" variant="primary">
+                    Save
+                </moo-button>
             </div>
-        </div>
-    </section>
-</template>
+        </form>
+    </div>
+    <div class="col-12 col-xl-8 mt-2">
+        <div ref="table"></div>
+    </div>
+</div>
