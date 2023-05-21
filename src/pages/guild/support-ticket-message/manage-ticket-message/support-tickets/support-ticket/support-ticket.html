@@ -7,7 +7,7 @@
 
         <div class="my-3">
             <div class="my-3">
-                <moo-button if.bind="!supportTicket.closed" click.trigger="closeTicket()" disabled.bind="closing">
+                <moo-button if.bind="!supportTicket.closed" click.bind="() => closeTicket()" disabled.bind="closing">
                     <span if.bind="!closing">Close Ticket</span>
                     <moo-circular-progress size="50" stroke-width="3" else></moo-circular-progress>
                 </moo-button>
