@@ -3,7 +3,6 @@ import { inject, observable } from "aurelia";
 import { DiscordService } from "../../../services/discord-service";
 import { DiscordNameValueConverter } from "../../../resources/value-converters";
 import { toast } from "lets-toast";
-import { watch } from "@aurelia/runtime-html";
 
 @route({
     path: "reviews",
@@ -69,11 +68,6 @@ export class Reviews {
         }
     }
 
-    async updateSettings() {
-        await this.discordService.updateReviewSettingsForGuild(this.guild);
-        toast("Updated Settings", { severity: "success" });
-    }
-
     async handleSave() {
         if (!this.guild.reviewSettings) {
             this.guild.reviewSettings = {};
@@ -81,6 +75,7 @@ export class Reviews {
         if (!this.guild?.reviewSettings?.reviewsChannelId) {
             return;
         }
-        await this.updateSettings();
+        await this.discordService.updateReviewSettingsForGuild(this.guild);
+        toast("Updated Settings", { severity: "success" });
     }
 }

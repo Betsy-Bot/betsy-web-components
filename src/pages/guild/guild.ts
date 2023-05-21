@@ -119,7 +119,7 @@ export class Guild implements IRouteViewModel {
     async binding() {
         await Promise.all([
             await this.discordService.getDiscordServerInformation(this.guildId),
-            await this.discordService.getDiscordChannels(this.guildId),
+            await this.discordService.getDiscordChannels(),
         ]);
     }
 }
