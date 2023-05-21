@@ -1,8 +1,10 @@
-import {DiscordService} from "../../../services/discord-service";
-import {route, Router} from "@aurelia/router-lite";
-import {toast} from "lets-toast";
-import {inject} from "aurelia";
-import {IRouteViewModel} from "@aurelia/router-lite";
+import { inject } from "aurelia";
+import { route, Router } from "@aurelia/router-lite";
+import { IRouteViewModel } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../services/discord-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "data-commands",
@@ -46,7 +48,7 @@ export class DataCommands implements IRouteViewModel {
                 severity: "success",
             });
         } else {
-            toast("Error", {severity: "error"});
+            toast("Error", { severity: "error" });
         }
     }
 

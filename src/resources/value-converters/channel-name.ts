@@ -1,5 +1,6 @@
-import { DiscordService } from "../../services/discord-service";
 import { inject } from "aurelia";
+
+import { DiscordService } from "../../services/discord-service";
 
 @inject(DiscordService)
 export class ChannelNameValueConverter {

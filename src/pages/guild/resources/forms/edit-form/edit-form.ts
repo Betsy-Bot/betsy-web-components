@@ -1,10 +1,12 @@
-import { DiscordForm } from "../../../../../services/models/discord";
-import { route } from "@aurelia/router-lite";
 import { inject } from "aurelia";
-import { DiscordService } from "../../../../../services/discord-service";
-import { toast } from "lets-toast";
-import DataGrid from "devextreme/ui/data_grid";
+import { route } from "@aurelia/router-lite";
 import { IRouteViewModel } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../../services/discord-service";
+import { DiscordForm } from "../../../../../services/models/discord";
+
+import DataGrid from "devextreme/ui/data_grid";
+import { toast } from "lets-toast";
 @route({
     path: "forms/:formId",
     title: "Manage Form",

@@ -1,4 +1,5 @@
 import { bindable } from 'aurelia';
+
 import './color-picker.scss'
 
 export class ColorPicker {

@@ -1,4 +1,4 @@
-import { inject, IEventAggregator } from "aurelia";
+import { IEventAggregator, inject } from "aurelia";
 import { IRouter } from "@aurelia/router-lite";
 
 import * as discordModels from "./models/discord";

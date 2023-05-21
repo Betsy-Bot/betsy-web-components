@@ -1,5 +1,6 @@
 import { inject } from "aurelia";
 import { IEventAggregator } from "aurelia";
+
 import "./error-banner.scss";
 
 export type ServerError = {

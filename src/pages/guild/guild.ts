@@ -39,6 +39,7 @@ import { Users } from "./resources/users/users";
 import { CreateResponseMessage } from "./response-message/create-response-message/create-response-message";
 import { EditResponseMessage } from "./response-message/edit-response-message/edit-response-message";
 import { ResponseMessage } from "./response-message/response-message";
+import { Reviews } from "./reviews/reviews";
 import { Settings } from "./settings/settings";
 import { Twitch } from "./social-connections/twitch/twitch";
 import { ManageTicketMessage } from "./support-ticket-message/manage-ticket-message/manage-ticket-message";
@@ -48,7 +49,6 @@ import { SupportTicketMessage } from "./support-ticket-message/support-ticket-me
 import { ManageThreadChannel } from "./thread-channels/manage-thread-channel/manage-thread-channel";
 import { ThreadChannels } from "./thread-channels/thread-channels";
 import { Verification } from "./verification/verification";
-import { Reviews } from "./reviews/reviews";
 
 const routes = [
     Dashboard,

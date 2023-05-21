@@ -1,5 +1,5 @@
 import { inject } from "aurelia";
-import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
+import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
 

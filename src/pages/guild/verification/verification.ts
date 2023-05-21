@@ -1,8 +1,10 @@
-import { toast } from "lets-toast";
-import { DiscordService } from "../../../services/discord-service";
 import { inject } from "aurelia";
-import { SessionService } from "../../../services/session-service";
 import { IRouteViewModel, route } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../services/discord-service";
+import { SessionService } from "../../../services/session-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "verification",

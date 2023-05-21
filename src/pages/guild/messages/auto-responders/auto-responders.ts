@@ -1,7 +1,9 @@
-import {toast} from "lets-toast";
-import {DiscordService} from "../../../../services/discord-service";
-import {IRouteViewModel, route, Router} from "@aurelia/router-lite";
-import {inject} from "aurelia";
+import { inject } from "aurelia";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../services/discord-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "auto-responders",
@@ -45,7 +47,7 @@ export class AutoResponders implements IRouteViewModel {
                 severity: "success",
             });
         } else {
-            toast("Error", {severity: "error"});
+            toast("Error", { severity: "error" });
         }
     }
 

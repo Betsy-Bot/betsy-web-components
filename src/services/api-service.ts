@@ -1,6 +1,8 @@
 import { inject } from 'aurelia';
 import { IHttpClient, json } from '@aurelia/fetch-client';
-import {apiEndpoint} from "../environment";
+
+import { apiEndpoint } from "../environment";
+
 import { ApiInterceptor } from "./api-interceptor";
 
 @inject(IHttpClient, ApiInterceptor)
@@ -26,85 +28,85 @@ export class ApiService {
         )
     }
 
-  async _request(path, options) {
-    const result = await this.http.fetch(path, options);
-    if (result) {
-      const status = result.status;
-      if (status === 204) {
+    async _request(path, options) {
+        const result = await this.http.fetch(path, options);
+        if (result) {
+            const status = result.status;
+            if (status === 204) {
+                return null;
+            }
+
+            if (status >= 400) {
+                throw "Error";
+            }
+
+            let response;
+            if (result) {
+                try {
+                    response = await result.json();
+                } catch(e){
+                    response = result;
+                }
+            }
+
+            if (status >= 200 && status < 400) {
+                return response;
+            }
+        }
         return null;
-      }
-
-      if (status >= 400) {
-        throw "Error";
-      }
-
-      let response;
-      if (result) {
-          try {
-              response = await result.json();
-          } catch(e){
-              response = result;
-          }
-      }
-
-      if (status >= 200 && status < 400) {
-        return response;
-      }
-    }
-    return null;
-  }
-
-  async doGet(path, params = null) {
-    const options = {
-      method: 'GET'
-    };
-
-    if (params) {
-      path += `?${new URLSearchParams(params).toString()}`;
     }
 
-    return this._request(path, options);
-  }
+    async doGet(path, params = null) {
+        const options = {
+            method: 'GET'
+        };
 
-  async doPatch(path, body) {
-    const options = {
-      method: 'PATCH',
-      body: json(body)
-    };
+        if (params) {
+            path += `?${new URLSearchParams(params).toString()}`;
+        }
 
-    return this._request(path, options);
-  }
+        return this._request(path, options);
+    }
 
-  async doPost(path, body, isFile = false) {
-    return this._push(path, body, false, isFile);
-  }
+    async doPatch(path, body) {
+        const options = {
+            method: 'PATCH',
+            body: json(body)
+        };
 
-  async doPut(path, body) {
-    return this._push(path, body, true);
-  }
+        return this._request(path, options);
+    }
 
-  async _fileUpload(path, formData) {
-    const options = {
-      method: 'POST',
-      body: formData
-    };
-    return this._request(path, options);
-  }
+    async doPost(path, body, isFile = false) {
+        return this._push(path, body, false, isFile);
+    }
 
-  async doDelete(path) {
-    const options = {
-      method: 'DELETE'
-    };
+    async doPut(path, body) {
+        return this._push(path, body, true);
+    }
 
-    return this._request(path, options);
-  }
+    async _fileUpload(path, formData) {
+        const options = {
+            method: 'POST',
+            body: formData
+        };
+        return this._request(path, options);
+    }
 
-  async _push(path, body, asPut = false, isFile = false) {
-    const options = {
-      method: asPut ? 'PUT' : 'POST',
-      body: isFile ? body : json(body)
-    };
+    async doDelete(path) {
+        const options = {
+            method: 'DELETE'
+        };
 
-    return this._request(path, options);
-  }
+        return this._request(path, options);
+    }
+
+    async _push(path, body, asPut = false, isFile = false) {
+        const options = {
+            method: asPut ? 'PUT' : 'POST',
+            body: isFile ? body : json(body)
+        };
+
+        return this._request(path, options);
+    }
 }

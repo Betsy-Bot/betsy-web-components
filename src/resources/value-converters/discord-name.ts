@@ -1,6 +1,6 @@
-import { DiscordService } from "../../services/discord-service";
 import { inject } from "aurelia";
-import { PLATFORM } from "aurelia";
+
+import { DiscordService } from "../../services/discord-service";
 
 @inject(DiscordService)
 export class DiscordNameValueConverter {
@@ -9,7 +9,7 @@ export class DiscordNameValueConverter {
         if (!value) {
             return;
         }
-        let member = await this.discordService.getGuildMember(value);
+        const member = await this.discordService.getGuildMember(value);
         if (!member?.user?.username) {
             return value;
         }

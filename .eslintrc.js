@@ -22,17 +22,6 @@ module.exports = {
     },
     rules: {
         indent: ["error", 4],
-        "prettier/prettier": [
-            "error",
-            {
-                trailingComma: "all",
-                singleQuote: true,
-                printWidth: 210,
-            },
-            {
-                usePrettierrc: false,
-            },
-        ],
         "require-atomic-updates": "warn",
         "no-console": "warn",
         "unused-imports/no-unused-imports": "error",
@@ -84,24 +73,6 @@ module.exports = {
             rules: {
                 "@typescript-eslint/ban-tslint-comment": "off",
                 indent: ["warn", 4],
-            },
-        },
-        {
-            files: ["*-service.ts", "*-store.ts"],
-            rules: {
-                "@typescript-eslint/explicit-member-accessibility": [
-                    "error",
-                    {
-                        accessibility: "explicit",
-                        overrides: {
-                            accessors: "explicit",
-                            constructors: "no-public",
-                            methods: "explicit",
-                            properties: "explicit",
-                            parameterProperties: "explicit",
-                        },
-                    },
-                ],
             },
         },
         {

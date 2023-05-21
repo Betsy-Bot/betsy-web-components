@@ -1,7 +1,9 @@
-import { DiscordService } from "../../../services/discord-service";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
-import { SessionService } from "../../../services/session-service";
 import { bindable, inject } from "aurelia";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../services/discord-service";
+import { SessionService } from "../../../services/session-service";
+
 import { toast } from "lets-toast";
 
 @route({

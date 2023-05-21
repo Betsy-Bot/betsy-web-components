@@ -1,8 +1,10 @@
-import { DiscordService } from "../../../services/discord-service";
-import { route, Router } from "@aurelia/router-lite";
 import { inject } from "aurelia";
-import { toast } from "lets-toast";
+import { route, Router } from "@aurelia/router-lite";
 import { IRouteViewModel } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../services/discord-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "role-selector",

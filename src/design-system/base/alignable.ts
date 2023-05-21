@@ -12,16 +12,16 @@ export abstract class Alignable {
   @bindable justifyContent?: CSSStyleDeclaration['justifyContent'];
 
   get alignableStyle(): Record<string, string | undefined> {
-    return {
-      alignItems: this.alignItems,
-      alignContent: this.alignContent,
-      alignSelf: this.alignSelf,
-      placeSelf: this.placeSelf,
-      placeItems: this.placeItems,
-      placeContent: this.placeContent,
-      justifySelf: this.justifySelf,
-      justifyItems: this.justifyItems,
-      justifyContent: this.justifyContent,
-    };
+      return {
+          alignItems: this.alignItems,
+          alignContent: this.alignContent,
+          alignSelf: this.alignSelf,
+          placeSelf: this.placeSelf,
+          placeItems: this.placeItems,
+          placeContent: this.placeContent,
+          justifySelf: this.justifySelf,
+          justifyItems: this.justifyItems,
+          justifyContent: this.justifyContent,
+      };
   }
 }

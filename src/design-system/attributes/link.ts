@@ -5,14 +5,14 @@ export class Link implements ICustomAttributeViewModel {
   @bindable public value = '';
 
   constructor(@INode private readonly htmlElement: HTMLElement, @IPlatform private readonly platform: IPlatform) {
-    htmlElement.addEventListener('mousedown', this.clickEvent);
+      htmlElement.addEventListener('mousedown', this.clickEvent);
   }
 
   clickEvent = () => {
-    this.platform.window.open(this.value, '_blank');
+      this.platform.window.open(this.value, '_blank');
   };
 
   detaching() {
-    this.htmlElement.removeEventListener('mousedown', this.clickEvent);
+      this.htmlElement.removeEventListener('mousedown', this.clickEvent);
   }
 }

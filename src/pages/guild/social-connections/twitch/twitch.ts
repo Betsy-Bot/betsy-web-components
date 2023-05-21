@@ -1,7 +1,9 @@
-import { DiscordService } from "../../../../services/discord-service";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
-import { toast } from "lets-toast";
 import { inject } from "aurelia";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../services/discord-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "twitch",

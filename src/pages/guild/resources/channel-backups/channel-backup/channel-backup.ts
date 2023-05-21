@@ -1,8 +1,10 @@
-import { Params, route } from "@aurelia/router-lite";
 import { inject } from "aurelia";
 import { IEventAggregator } from "aurelia";
+import { Params, route } from "@aurelia/router-lite";
+import { IRouter,IRouteViewModel } from "@aurelia/router-lite";
+
 import { DiscordService } from "../../../../../services/discord-service";
-import { IRouteViewModel, IRouter } from "@aurelia/router-lite";
+
 import { toast } from "lets-toast";
 
 @route({

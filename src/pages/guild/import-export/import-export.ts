@@ -1,6 +1,8 @@
-import { route } from "@aurelia/router-lite";
 import { inject, observable } from "aurelia";
+import { route } from "@aurelia/router-lite";
+
 import { DiscordService } from "../../../services/discord-service";
+
 import { toast } from "lets-toast";
 
 @route({
@@ -23,7 +25,7 @@ export class ImportExport {
     attached() {
         this.uploadElement.addEventListener("change", (event) => {
             console.log(event);
-            //@ts-ignore
+            //@ts-expect-error
             const file = event.target.files[0];
 
             if (file) {
@@ -34,7 +36,7 @@ export class ImportExport {
                     const uploadedJSON = event.target.result;
 
                     // Parse the JSON string into a JavaScript object
-                    //@ts-ignore;
+                    //@ts-expect-error;
                     const jsonObject = JSON.parse(uploadedJSON);
                     const count = await this.discordService.importTemplate(
                         jsonObject

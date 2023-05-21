@@ -1,8 +1,10 @@
-import {inject} from "aurelia";
-import {DiscordService} from "../../../services/discord-service";
-import {toast} from "lets-toast";
-import {IEventAggregator} from "aurelia";
-import {IRouteViewModel, route, Router} from "@aurelia/router-lite";
+import { inject } from "aurelia";
+import { IEventAggregator } from "aurelia";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../services/discord-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "response-messages",
@@ -48,7 +50,7 @@ export class ResponseMessage implements IRouteViewModel {
                 severity: "success",
             });
         } else {
-            toast("Error", {severity: "error"});
+            toast("Error", { severity: "error" });
         }
     }
 

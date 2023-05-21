@@ -64,7 +64,7 @@ export class Home implements IRouteViewModel {
         this.otherGuilds = this.userGuilds.filter((g) => !g.can_add);
 
         if (this.user?.adminedServers) {
-            for (let server of this.user?.adminedServers) {
+            for (const server of this.user?.adminedServers) {
                 const foundServerIndex = this.userGuilds.findIndex(
                     (x) => x.id == server.guildId
                 );

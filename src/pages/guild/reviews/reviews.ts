@@ -1,7 +1,9 @@
-import { route, Router } from "@aurelia/router-lite";
 import { inject, observable } from "aurelia";
-import { DiscordService } from "../../../services/discord-service";
+import { route, Router } from "@aurelia/router-lite";
+
 import { DiscordNameValueConverter } from "../../../resources/value-converters";
+import { DiscordService } from "../../../services/discord-service";
+
 import { toast } from "lets-toast";
 
 @route({
@@ -38,8 +40,8 @@ export class Reviews {
             this.discordService.getDiscordServerInformation(this.guildId),
             this.discordService.getDiscordReviews(),
         ]);
-        for (let review of this.reviews) {
-            let name = await this.discordNameValueConverter.toView(
+        for (const review of this.reviews) {
+            const name = await this.discordNameValueConverter.toView(
                 review.discordUserId
             );
             review.displayName = `${name} (${review.discordUserId})`;

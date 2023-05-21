@@ -1,6 +1,7 @@
 import { inject } from "aurelia";
-import { DiscordService } from "../../../../services/discord-service";
 import { IRouteViewModel, route } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../services/discord-service";
 
 @route({
     path: "forms",

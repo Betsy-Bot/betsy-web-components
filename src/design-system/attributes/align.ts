@@ -3,16 +3,16 @@ import { bindable, customAttribute, ICustomAttributeViewModel, INode } from 'aur
 @customAttribute({ name: 'align' })
 export class Align implements ICustomAttributeViewModel {
   @bindable()
-  public value?: string;
+    public value?: string;
 
   constructor(@INode private readonly element: HTMLElement) {}
 
   public afterBind(): void {
-    this.element.style.textAlign = this.value ?? '';
+      this.element.style.textAlign = this.value ?? '';
   }
 
   /* Example of change detection */
   public valueChanged(): void {
-    this.afterBind();
+      this.afterBind();
   }
 }

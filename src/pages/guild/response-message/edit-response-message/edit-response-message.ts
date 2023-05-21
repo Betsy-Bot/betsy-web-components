@@ -1,5 +1,6 @@
 import { IEventAggregator, inject } from "aurelia";
-import { IRouteViewModel, Params, route, IRouter } from "@aurelia/router-lite";
+import { IRouter,IRouteViewModel, Params, route } from "@aurelia/router-lite";
+
 import { DiscordService } from "../../../../services/discord-service";
 import { BaseDiscordCommand } from "../../../../services/models/discord";
 
@@ -51,7 +52,7 @@ export class EditResponseMessage implements IRouteViewModel {
         if (event.detail.action == "ok") {
             await this.discordService.deleteDiscordCommand(this.command.id);
             toast("Response Message Deleted");
-            await this.router.load('../response-messages', {context: this})
+            await this.router.load('../response-messages', { context: this })
         }
     }
 

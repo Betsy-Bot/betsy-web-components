@@ -1,7 +1,9 @@
 import { IEventAggregator } from "aurelia";
-import { DiscordService } from "../../../../services/discord-service";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 import { inject } from "aurelia";
+import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../services/discord-service";
+
 import DataGrid from "devextreme/ui/data_grid";
 
 @route({

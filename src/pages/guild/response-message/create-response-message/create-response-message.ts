@@ -1,12 +1,14 @@
 import { inject } from "aurelia";
+import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../services/discord-service";
 import {
     BaseDiscordCommand,
     DiscordCommandActionType,
     DiscordCommandType,
 } from "../../../../services/models/discord";
-import { DiscordService } from "../../../../services/discord-service";
+
 import { toast } from "lets-toast";
-import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
 
 @route({
     path: "response-messages/0",
@@ -65,7 +67,7 @@ export class CreateResponseMessage implements IRouteViewModel {
             this.command.discordGuildId = this.guildId;
             await this.discordService.createApplicationCommand(this.command);
             toast("Command Created!");
-            await this.router.load(`../response-messages`, {context: this});
+            await this.router.load(`../response-messages`, { context: this });
         } catch (e) {
             console.log(e);
             toast("Failed to create command", { severity: "error" });

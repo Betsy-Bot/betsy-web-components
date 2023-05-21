@@ -1,8 +1,10 @@
 import { IEventAggregator } from "aurelia";
-import { DiscordService } from "../../../../../services/discord-service";
-import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
-import { toast } from "lets-toast";
 import { bindable, inject, observable } from "aurelia";
+import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../../services/discord-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "auto-responders/:responderId",

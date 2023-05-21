@@ -1,9 +1,11 @@
-import { IRouteViewModel, Params, route, Router } from "@aurelia/router-lite";
 import { inject } from "aurelia";
 import { IEventAggregator } from "aurelia";
+import { IRouteViewModel, Params, route, Router } from "@aurelia/router-lite";
+
 import { DiscordService } from "../../../../../services/discord-service";
-import { toast } from "lets-toast";
+
 import DataGrid from "devextreme/ui/data_grid";
+import { toast } from "lets-toast";
 
 @route({
     path: "key-value-storage/:itemId",
@@ -44,7 +46,7 @@ export class ManageKeyValueStorage implements IRouteViewModel {
     dataGrid;
 
     loading(params: Params) {
-        this.itemId = params.itemId as string;
+        this.itemId = params.itemId!;
     }
 
     async attached() {
@@ -80,7 +82,7 @@ export class ManageKeyValueStorage implements IRouteViewModel {
                 this.save();
             },
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
+            // @ts-expect-error
             columns: this.columns,
         });
         this.didLoad = false;

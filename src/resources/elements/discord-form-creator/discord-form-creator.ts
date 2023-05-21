@@ -1,4 +1,5 @@
 import { bindable } from "aurelia";
+
 import {
     DiscordComponentType,
     DiscordForm,

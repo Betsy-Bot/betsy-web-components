@@ -122,7 +122,7 @@ export class MooDataGrid implements ICustomElementViewModel {
                 e.element.querySelector('.dx-datagrid-text-content').classList.remove('dx-text-content-alignment-left');
                 const countEl = document.getElementById('grid-control-data-count');
                 if (this.items && countEl) {
-                    countEl.innerText = 'Total Records: ' + this.items?.length;
+                    countEl.innerText = 'Total Records: ' + this.items.length;
                 } else if (this.dataSource && countEl) {
                     countEl.innerText = 'Total Records: ' + this.dataSource.totalCount();
                 }

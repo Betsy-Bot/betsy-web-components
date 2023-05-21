@@ -1,13 +1,15 @@
 import { IEventAggregator } from "aurelia";
+import { bindable, inject } from "aurelia";
+import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
+import { watch } from "@aurelia/runtime-html";
+
 import { DiscordService } from "../../../../services/discord-service";
-import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
-import { toast } from "lets-toast";
-import { bindable, inject, observable } from "aurelia";
 import {
     DiscordButtonStyle,
     DiscordComponentType,
 } from "../../../../services/models/discord";
-import { watch } from "@aurelia/runtime-html";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "giveaways/:giveawayId",

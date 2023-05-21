@@ -1,4 +1,5 @@
-import { inject, bindable, BindingMode } from "aurelia";
+import { bindable, BindingMode,inject } from "aurelia";
+
 import { DiscordService } from "../../../services/discord-service";
 
 @inject(DiscordService)

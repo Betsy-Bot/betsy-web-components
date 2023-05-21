@@ -1,9 +1,11 @@
-import { route, Router } from "@aurelia/router-lite";
 import { inject } from "aurelia";
 import { IEventAggregator } from "aurelia";
-import { DiscordService } from "../../../../services/discord-service";
-import DataGrid from "devextreme/ui/data_grid";
+import { route, Router } from "@aurelia/router-lite";
 import { IRouteViewModel } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../services/discord-service";
+
+import DataGrid from "devextreme/ui/data_grid";
 
 @route({
     path: "audit-logs",

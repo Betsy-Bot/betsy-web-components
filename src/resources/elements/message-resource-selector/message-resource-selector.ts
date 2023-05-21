@@ -1,4 +1,5 @@
-import {bindable, BindingMode, ICustomElementViewModel, inject} from "aurelia";
+import { bindable, BindingMode, ICustomElementViewModel, inject } from "aurelia";
+
 import { DiscordService } from "../../../services/discord-service";
 
 @inject(DiscordService)

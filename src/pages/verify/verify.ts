@@ -1,9 +1,11 @@
-import { DiscordService } from "../../services/discord-service";
 import { inject } from "aurelia";
-import { botClientId, verifyRedirectUrl } from "../../environment";
-import { toast } from "lets-toast";
-import { SessionService } from "../../services/session-service";
 import { IRouteViewModel, Params, route } from "@aurelia/router-lite";
+
+import { botClientId, verifyRedirectUrl } from "../../environment";
+import { DiscordService } from "../../services/discord-service";
+import { SessionService } from "../../services/session-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: ["verify", "verify/:userId"],
@@ -21,7 +23,7 @@ export class Verify implements IRouteViewModel {
 
     async loading(params: Params) {
         if (params.code) {
-            this.code = params.code as string;
+            this.code = params.code ;
         } else {
             this.userId = params.userId;
         }

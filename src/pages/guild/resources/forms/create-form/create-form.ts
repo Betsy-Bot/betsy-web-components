@@ -1,12 +1,14 @@
+import { inject } from "aurelia";
+import { IEventAggregator } from "aurelia";
+import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../../services/discord-service";
 import {
     DiscordComponentType,
     DiscordForm,
 } from "../../../../../services/models/discord";
-import { inject } from "aurelia";
-import { IEventAggregator } from "aurelia";
-import { DiscordService } from "../../../../../services/discord-service";
+
 import { toast } from "lets-toast";
-import { IRouteViewModel, route, IRouter } from "@aurelia/router-lite";
 
 @route({
     path: "forms/create",
@@ -53,7 +55,7 @@ export class CreateForm implements IRouteViewModel {
             this.didLoad = true;
             await this.discordService.createDiscordForm(this.form);
             toast("Form Created!");
-            await this.router.load( `../forms`, {context: this});
+            await this.router.load( `../forms`, { context: this });
         } catch (e) {
             toast(e, { severity: "error" });
             throw e;
@@ -62,7 +64,5 @@ export class CreateForm implements IRouteViewModel {
         }
     }
 
-    get loadingIndicator() {
-        return '<moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>';
-    }
+    readonly loadingIndicator = '<moo-circular-progress size="50" stroke-width="3"></moo-circular-progress>';
 }

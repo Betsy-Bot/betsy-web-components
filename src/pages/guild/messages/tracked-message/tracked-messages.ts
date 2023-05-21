@@ -1,8 +1,10 @@
 import { IEventAggregator } from "aurelia";
-import { DiscordService } from "../../../../services/discord-service";
 import { inject } from "aurelia";
-import { toast } from "lets-toast";
 import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+
+import { DiscordService } from "../../../../services/discord-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "tracked-messages",

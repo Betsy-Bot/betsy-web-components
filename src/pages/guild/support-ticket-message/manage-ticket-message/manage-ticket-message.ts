@@ -1,19 +1,19 @@
 import { IEventAggregator, inject, observable } from "aurelia";
 import {
+    IRouteContext,
+    IRouter,
     IRouteViewModel,
     Params,
     route,
-    IRouter,
-    IRouteContext,
 } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
-
-import { toast } from "lets-toast";
 import {
     DiscordButtonStyle,
     DiscordComponentType,
 } from "../../../../services/models/discord";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "support-tickets/:supportTicketSettingsId",
@@ -148,7 +148,7 @@ export class ManageTicketMessage implements IRouteViewModel {
             this.isLoading = true;
             this.ticket.discordGuildId = this.guildId;
             await this.discordService.updateSupportTicketSettings(this.ticket);
-            toast("Updated Support Ticket", {severity: "success"})
+            toast("Updated Support Ticket", { severity: "success" })
         } catch (e) {
             toast("Failed to update support ticket creation message", {
                 severity: "error",
