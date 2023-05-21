@@ -1,9 +1,9 @@
 <template>
-    <mdc-select
+    <moo-select
         class="discord-menu-select w-100"
-        label.bind="menu.label"
-        readonly
+        label.bind="menu.placeholder ?? 'Placeholder'"
+        readonly.bind="true"
     >
         <mdc-icon mdc-select-icon>chevron-down</mdc-icon>
-    </mdc-select>
+    </moo-select>
 </template>
