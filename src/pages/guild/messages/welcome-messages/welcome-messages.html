@@ -15,14 +15,6 @@
                 </moo-button>
             </a>
         </div>
-
-        <feature-item-list
-            data.bind="messages"
-            show-toggler.bind="true"
-            toggle-handler.bind="(item) => updateActive(item)"
-            item-click-handler.bind="(item) => goTo(item)"
-            route="../welcome-messages"
-        ></feature-item-list>
     </div>
     <div class="col-4 text-end">
         <moo-switch
@@ -32,3 +24,11 @@
         <label class="me-5">Active?</label>
     </div>
 </div>
+
+<feature-item-list
+    data.bind="messages"
+    show-toggler.bind="true"
+    toggle-handler.bind="(item) => updateActive(item)"
+    item-click-handler.bind="(item) => goTo(item)"
+    route="../welcome-messages"
+></feature-item-list>
