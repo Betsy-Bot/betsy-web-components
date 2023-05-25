@@ -32,7 +32,6 @@ export class SupportTicketSettings {
             if (!this.request.supportTicketAudits) {
                 this.request.supportTicketAudits = [];
             }
-            console.log(this.request);
             this.request.supportTicketAudits.push(this.selectedAuditOption);
             this.selectedAuditOption = null;
         }

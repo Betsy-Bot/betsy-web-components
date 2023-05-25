@@ -14,6 +14,7 @@ import {
 } from "../../../../services/models/discord";
 
 import { toast } from "lets-toast";
+import { watch } from "@aurelia/runtime-html";
 
 @route({
     path: "support-tickets/:supportTicketSettingsId",
@@ -40,7 +41,7 @@ export class ManageTicketMessage implements IRouteViewModel {
     isNew = false;
     isLoading = true;
 
-    @observable authorizedRole;
+    authorizedRole;
 
     ticketTemplate = {
         identifier: "identifier",
@@ -52,8 +53,8 @@ export class ManageTicketMessage implements IRouteViewModel {
                 {
                     title: "Your support channel has been created for you.",
                     description: "We will be with you shortly!",
-                    color: 5726933
-                }
+                    color: 5726933,
+                },
             ],
             components: [
                 {
@@ -63,7 +64,7 @@ export class ManageTicketMessage implements IRouteViewModel {
                             type: DiscordComponentType.Button,
                             label: "Close Ticket",
                             style: DiscordButtonStyle.Danger,
-                            custom_id: 'CloseTicket'
+                            custom_id: "CloseTicket",
                         },
                     ],
                 },
@@ -79,8 +80,8 @@ export class ManageTicketMessage implements IRouteViewModel {
                     {
                         title: "Create a Ticket Using the Button Below!",
                         description: "We will respond ASAP!",
-                        color: 5726933
-                    }
+                        color: 5726933,
+                    },
                 ],
                 components: [
                     {
@@ -110,7 +111,7 @@ export class ManageTicketMessage implements IRouteViewModel {
         ) {
             this.isNew = true;
             this.ticket = this.ticketTemplate;
-            this.ticket.discordMessage.message.components[0].components[0].custom_id = `ButtonCreateTicket:${this.ticket.identifier}`
+            this.ticket.discordMessage.message.components[0].components[0].custom_id = `ButtonCreateTicket:${this.ticket.identifier}`;
         } else {
             [this.ticket] = await Promise.all([
                 await this.discordService.getSupportTicketSettingsById(
@@ -127,12 +128,12 @@ export class ManageTicketMessage implements IRouteViewModel {
         });
     }
 
-    authorizedRoleChanged(newValue, oldvalue) {
+    @watch("authorizedRole")
+    authorizedRoleChanged() {
         if (!this.ticket.assignedRoles) {
             this.ticket.assignedRoles = [];
         }
-        this.ticket.assignedRoles.push(newValue);
-        console.log(this.ticket.assignedRoles)
+        this.ticket.assignedRoles.push(this.authorizedRole);
     }
 
     async submit() {
@@ -148,7 +149,7 @@ export class ManageTicketMessage implements IRouteViewModel {
             this.isLoading = true;
             this.ticket.discordGuildId = this.guildId;
             await this.discordService.updateSupportTicketSettings(this.ticket);
-            toast("Updated Support Ticket", { severity: "success" })
+            toast("Updated Support Ticket", { severity: "success" });
         } catch (e) {
             toast("Failed to update support ticket creation message", {
                 severity: "error",
