@@ -1,5 +1,5 @@
 import { inject } from "aurelia";
-import { IRouteViewModel, route } from "@aurelia/router-lite";
+import { IRouteViewModel, Params, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../../../services/discord-service";
 
@@ -11,7 +11,7 @@ import { DiscordService } from "../../../../../../services/discord-service";
 export class SupportTicket implements IRouteViewModel {
     constructor(private discordService: DiscordService) {}
 
-    guildId: string;
+    guildId: string | undefined;
     settingsId: string;
     supportTicketId: string;
 
@@ -19,7 +19,7 @@ export class SupportTicket implements IRouteViewModel {
     supportTicket;
     closing = false;
 
-    async loading(params) {
+    loading(params: Params) {
         this.settingsId = params.supportTicketSettingsId as string;
         this.supportTicketId = params.ticketId as string;
     }
