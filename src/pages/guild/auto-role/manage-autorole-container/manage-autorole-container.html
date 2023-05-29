@@ -89,8 +89,13 @@
 
                     <div class="row g-4 mt-2" if.bind="container.discordRoles">
                         <div class="col-12 col-lg-6" repeat.for="role of container.discordRoles">
-                            <discord-menu-item item.two-way="role"
-                                               remove-function.bind="() => removeRole($index)"></discord-menu-item>
+                            <discord-menu-item
+                                item.two-way="role"
+                                remove-function.bind="() => removeRole($index)"
+                                move-function.bind="(type) => handleMove(type, $index)"
+                                index.bind="$index"
+                                options-size.bind="container.discordRoles.length"
+                            ></discord-menu-item>
                         </div>
                     </div>
 

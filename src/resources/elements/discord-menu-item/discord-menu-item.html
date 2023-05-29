@@ -1,12 +1,28 @@
 <div class="p-3" elevation="12">
     <div class="row">
-        <div class="col-9">
-            <h5>${item.label}</h5>
+        <div class="col">
+            <h5>${item.label ? item.label : "Enter Label"}</h5>
         </div>
-        <div class="col-3 text-danger fs-4 text-end">
-                 <span click.trigger="removeItem()" class="cursor-pointer">
-                     X
-                 </span>
+        <div class="col">
+            <div class="d-flex justify-content-end">
+                <moo-fab
+                    if.bind="showUp"
+                    class="bottom mx-1"
+                    icon="expand_less"
+                    click.bind="() => handleMove('up')"
+                ></moo-fab>
+                <moo-fab
+                    if.bind="showDown"
+                    class="bottom mx-1"
+                    icon="expand_more"
+                    click.bind="() => handleMove('down')"
+                ></moo-fab>
+                <moo-fab
+                    class="redFab topRight ms-1"
+                    icon="delete"
+                    click.bind="() => removeItem()"
+                ></moo-fab>
+            </div>
         </div>
     </div>
     <moo-text-field

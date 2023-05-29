@@ -1,43 +1,47 @@
-import { bindable } from "aurelia";
+import { bindable, BindingMode } from "aurelia";
 
-import { DiscordButtonStyle, DiscordComponentType } from "../../../services/models/discord";
+import {
+    DiscordButtonStyle,
+    DiscordComponentType,
+} from "../../../services/models/discord";
+import { moveDownInArray, moveUpInArray } from "../../array-utils";
 
 export class DiscordComponentCreator {
-    @bindable components = [];
+    @bindable({ mode: BindingMode.twoWay }) components = [];
     @bindable maxComponents = 5;
 
     componentTypes = [
         {
             label: "Menu",
-            type: DiscordComponentType.MenuSelect
+            type: DiscordComponentType.MenuSelect,
         },
         {
             label: "Button",
-            type: DiscordComponentType.Button
-        }
-    ]
+            type: DiscordComponentType.Button,
+        },
+    ];
     styles = [
         {
-            label: 'Primary',
+            label: "Primary",
             value: 1,
         },
         {
-            label: 'Secondary',
+            label: "Secondary",
             value: 2,
         },
         {
-            label: 'Success',
+            label: "Success",
             value: 3,
         },
         {
-            label: 'Danger',
+            label: "Danger",
             value: 4,
         },
         {
-            label: 'Link',
+            label: "Link",
             value: 5,
-        }
-    ]
+        },
+    ];
 
     attached() {
         if (!this.components) {
@@ -48,17 +52,15 @@ export class DiscordComponentCreator {
     addNewComponentRow() {
         this.components.push({
             type: DiscordComponentType.ActionRow,
-            components: [{
-                type: DiscordComponentType.Button,
-                style: DiscordButtonStyle.Success,
-                custom_id: "",
-                label: "Text"
-            }]
-        })
-    }
-
-    componentsChanged() {
-        console.log(this.components);
+            components: [
+                {
+                    type: DiscordComponentType.Button,
+                    style: DiscordButtonStyle.Success,
+                    custom_id: "",
+                    label: "Text",
+                },
+            ],
+        });
     }
 
     addNewComponent(index: number) {
@@ -66,8 +68,8 @@ export class DiscordComponentCreator {
             type: DiscordComponentType.Button,
             style: DiscordButtonStyle.Success,
             custom_id: "",
-            label: "Text"
-        })
+            label: "Text",
+        });
     }
 
     addMenuOption(index: number) {
@@ -78,10 +80,10 @@ export class DiscordComponentCreator {
             this.components[index].components[0].options = [];
         }
         this.components[index].components[0].options.push({
-            description: '',
-            name: '',
-            custom_id: '',
-            label: '',
+            description: "",
+            name: "",
+            custom_id: "",
+            label: "",
         });
     }
 
@@ -91,6 +93,23 @@ export class DiscordComponentCreator {
 
     removeComponentRow(rowIndex: number) {
         this.components.splice(rowIndex, 1);
+    }
+
+    handleMove(type: string, componentIndex: number, index: number) {
+        switch (type) {
+            case "up":
+                moveUpInArray(
+                    this.components[componentIndex].components[0].options,
+                    index
+                );
+                break;
+            case "down":
+                moveDownInArray(
+                    this.components[componentIndex].components[0].options,
+                    index
+                );
+                break;
+        }
     }
 
     removeComponent(rowIndex: number, componentIndex: number) {

@@ -6,6 +6,10 @@ import { watch } from "@aurelia/runtime-html";
 import { DiscordService } from "../../../../services/discord-service";
 
 import { toast } from "lets-toast";
+import {
+    moveDownInArray,
+    moveUpInArray,
+} from "../../../../resources/array-utils";
 
 @route({
     path: "role-selector/:containerId",
@@ -67,10 +71,10 @@ export class ManageAutoroleContainer implements IRouteViewModel {
         }
     }
 
-    @watch('selectedRole')
+    @watch("selectedRole")
     selectedRoleChanged() {
         console.log(this.selectedRole);
-        const foundRole = this.roles.find(x => x.id == this.selectedRole);
+        const foundRole = this.roles.find((x) => x.id == this.selectedRole);
         console.log(foundRole);
         if (this.container.discordRoles.length >= 25) {
             return toast("A max of 25 roles are allowed for select menus", {
@@ -119,6 +123,17 @@ export class ManageAutoroleContainer implements IRouteViewModel {
                 severity: "error",
             });
             console.log(e);
+        }
+    }
+
+    handleMove(type: string, index: number) {
+        switch (type) {
+            case "up":
+                moveUpInArray(this.container.discordRoles, index);
+                break;
+            case "down":
+                moveDownInArray(this.container.discordRoles, index);
+                break;
         }
     }
 

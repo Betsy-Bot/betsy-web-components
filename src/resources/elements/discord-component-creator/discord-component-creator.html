@@ -26,8 +26,10 @@
                         <moo-select class="standard-betsy-select w-75 mb-2" value.bind="component.type"
                                     label="Select Component Type">
                             <moo-list>
-                                <moo-list-item label.bind="type.label" repeat.for="type of componentTypes"
-                                               value.bind="type.type">
+                                <moo-list-item
+                                    label.bind="type.label"
+                                    repeat.for="type of componentTypes"
+                                    value.bind="type.type">
                                 </moo-list-item>
                             </moo-list>
                         </moo-select>
@@ -48,8 +50,13 @@
                                 Add Option
                             </moo-button>
                             <template repeat.for="item of component.options">
-                                <discord-menu-item item.two-way="item"
-                                                   remove-function.bind="() => removeMenuOption($index)"></discord-menu-item>
+                                <discord-menu-item
+                                    item.two-way="item"
+                                    remove-function.bind="() => removeMenuOption($index)"
+                                    move-function.bind="(type) => handleMove(type, $parent.$index, $index)"
+                                    index.bind="$index"
+                                    options-size.bind="component.options.length"
+                                ></discord-menu-item>
                             </template>
                         </template>
 

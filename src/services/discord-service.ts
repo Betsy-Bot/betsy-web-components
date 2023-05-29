@@ -17,7 +17,7 @@ export class DiscordService {
         guildId: null,
         data: null,
     };
-    discordGuildId;
+    discordGuildId: string | undefined;
     messages;
 
     RESPONSE_MESSAGES = "ResponseMessages";

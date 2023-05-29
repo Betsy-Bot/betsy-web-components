@@ -30,3 +30,7 @@
 .mdc-fab.bottomRight {
     @include fab.shape-radius(0 0 50% 0);
 }
+
+.mdc-fab.bottom {
+    @include fab.shape-radius(0 0 50% 50%);
+}
