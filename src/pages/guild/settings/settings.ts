@@ -23,12 +23,14 @@ export class Settings implements IRouteViewModel {
     isAdmin;
     @bindable selectedRole;
     permissionUserId;
+    roles;
 
     async attached() {
         this.guildId = this.discordService.getLocalDiscordGuildId();
-        [this.guild, this.isAdmin] = await Promise.all([
+        [this.guild, this.isAdmin, this.roles] = await Promise.all([
             await this.discordService.getDiscordServerInformation(this.guildId),
             await this.sessionService.isAdmin(this.guildId),
+            await this.discordService.getDiscordRoles()
         ]);
     }
 
@@ -81,13 +83,17 @@ export class Settings implements IRouteViewModel {
         }
         if (this.selectedRole) {
             this.guild.globalSettings.autoRoles.push({
-                name: this.selectedRole.name,
-                discordRoleId: this.selectedRole.id,
+                name: this.getRoleName(),
+                discordRoleId: this.selectedRole,
             });
         }
     }
 
     async removeRole(index) {
         this.guild.globalSettings.autoRoles.splice(index, 1);
+    }
+
+    getRoleName() {
+        return this.roles?.find(x => x.id == this.selectedRole)?.name;
     }
 }
