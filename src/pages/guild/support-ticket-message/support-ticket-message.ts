@@ -20,23 +20,18 @@ export class SupportTicketMessage implements IRouteViewModel {
 
     featureActive;
     supportTickets;
-    channels;
     didLoad = true;
 
     async binding() {
         this.guildId = this.discordService.getLocalDiscordGuildId();
-        [this.guild, this.supportTickets, this.channels] = await Promise.all([
+        [this.guild, this.supportTickets] = await Promise.all([
             await this.discordService.getDiscordServerInformation(this.guildId),
-            await this.discordService.getDiscordSupportTicketSettings(),
-            await this.discordService.getDiscordChannels(this.guildId),
+            await this.discordService.getDiscordSupportTicketSettings()
         ]);
         for (const ticket of this.supportTickets) {
             if (ticket.discordMessage.active) {
                 ticket.active = true;
             }
-            if (ticket.identifier) continue;
-            const channel = this.channels.find((x) => x.id == ticket.discordMessage.discordChannelId);
-            ticket.identifier = 'Message In Channel - #' + channel.name;
         }
         this.featureActive = this.guild.activeFeatures.includes(this.discordService.SUPPORT_TICKETS);
     }

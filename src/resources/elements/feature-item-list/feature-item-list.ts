@@ -2,7 +2,8 @@ import { bindable, inject } from "aurelia";
 import { IRouteContext, IRouter } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../services/discord-service";
-import { ChannelNameValueConverter } from "../../value-converters/channel-name";
+import { ChannelNameValueConverter } from "../../value-converters";
+import { Column } from 'devextreme/ui/data_grid';
 
 
 export enum ValueConverter {
@@ -20,9 +21,9 @@ export class FeatureItemList {
     @bindable nameSuffix;
     @bindable suffixProperty;
     @bindable trailingIcon;
-    @bindable valueConverter: ValueConverter = null;
+    @bindable valueConverter: ValueConverter;
     @bindable route;
-    columns = [];
+    columns: Column[] = [];
     linkEl: HTMLAnchorElement;
     switchEl: HTMLSpanElement;
     guildId: string;
@@ -84,7 +85,7 @@ export class FeatureItemList {
         if (this.nameOverride) {
             return this.convertValue(item[this.nameOverride]);
         }
-        return this.convertValue(item.name ? item.name : item.title);
+        return this.convertValue(item?.name ? item?.name : item.title);
     }
 
     convertValue(value) {
@@ -119,9 +120,7 @@ export class FeatureItemList {
     };
 
     toggleTemplate = (container, options) => {
-        const switchComponent = this.switchEl
-            .querySelector("button")
-            .cloneNode(true) as HTMLElement;
+        const switchComponent = this.switchEl?.querySelector("button")?.cloneNode(true) as HTMLElement;
         switchComponent.innerText = options.data.active
             ? "Deactivate"
             : "Activate";

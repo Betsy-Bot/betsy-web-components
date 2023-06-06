@@ -14,7 +14,7 @@ export class DiscordService {
     public guildId: string;
     guild;
     guildChannelData = {
-        guildId: null,
+        guildId: "",
         data: null,
     };
     discordGuildId: string | undefined;
@@ -58,11 +58,11 @@ export class DiscordService {
         return this.guild?.id;
     }
 
-    public getLocalDiscordGuildId(): string | undefined {
+    public getLocalDiscordGuildId(): string {
         if (!this.guild) {
             return this.guildId;
         }
-        return this.guild?.guildId;
+        return this.guild.guildId;
     }
 
     getDiscordGuildId() {
