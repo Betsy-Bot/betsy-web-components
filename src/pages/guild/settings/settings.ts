@@ -30,7 +30,7 @@ export class Settings implements IRouteViewModel {
         [this.guild, this.isAdmin, this.roles] = await Promise.all([
             await this.discordService.getDiscordServerInformation(this.guildId),
             await this.sessionService.isAdmin(this.guildId),
-            await this.discordService.getDiscordRoles()
+            await this.discordService.getDiscordRoles(),
         ]);
     }
 
@@ -74,7 +74,7 @@ export class Settings implements IRouteViewModel {
         toast("Updated Auto Roles", { severity: "success" });
     }
 
-    async selectedRoleChanged() {
+    selectedRoleChanged() {
         if (!this.guild.globalSettings) {
             this.guild.globalSettings = {};
         }
@@ -94,6 +94,33 @@ export class Settings implements IRouteViewModel {
     }
 
     getRoleName() {
-        return this.roles?.find(x => x.id == this.selectedRole)?.name;
+        return this.roles?.find((x) => x.id == this.selectedRole)?.name;
+    }
+
+    async toggleCustomBot() {
+        if (
+            window.confirm(
+                `This will ${
+                    this.guild.customBotActive ? "deactivate" : "activate"
+                } the custom bot for your server. Are you sure?`
+            )
+        ) {
+            this.guild.customBotActive = !!this.guild.customBotActive;
+            var response = await this.discordService.toggleCustomBotActive(
+                this.guild.customBotActive
+            );
+            if (response) {
+                toast(
+                    `Custom bot ${
+                        this.guild.customBotActive ? "activate" : "deactivated"
+                    }.`,
+                    { severity: "success" }
+                );
+            } else {
+                toast("Failed to set custom bot status", {
+                    severity: "error",
+                });
+            }
+        }
     }
 }

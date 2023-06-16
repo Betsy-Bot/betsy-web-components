@@ -197,6 +197,7 @@ export class DiscordService {
         };
         return this.guildChannelData.data;
     }
+
     getLocalDiscordChannels() {
         return this.guildChannelData.data;
     }
@@ -372,6 +373,7 @@ export class DiscordService {
     async getTranscriptPublic(ticketId: string) {
         return this.api.doGet(`DiscordSupportTicket/${ticketId}/Public`);
     }
+
     async getSupportTicketById(ticketId: string) {
         return this.api.doGet(`DiscordSupportTicket/${ticketId}`);
     }
@@ -659,6 +661,13 @@ export class DiscordService {
         return this.api.doPost(
             `DiscordGuild/${this.getLocalDiscordGuildId()}/ImportTemplate`,
             request
+        );
+    }
+
+    async toggleCustomBotActive(active: boolean) {
+        return this.api.doPatch(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/ActivateCustomBot`,
+            { active: active }
         );
     }
 }

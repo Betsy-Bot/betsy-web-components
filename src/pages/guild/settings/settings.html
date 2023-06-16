@@ -69,7 +69,15 @@
     <div class="col-12 col-lg-6">
         <form submit.trigger="updateGlobalSettings()">
             <div class="p-4" elevation="12" if.bind="guild">
-                <h4>Custom Bot Settings</h4>
+                <div class="d-flex justify-content-between">
+                    <h4 class="d-inline-flex">Custom Bot Settings</h4>
+                    <div class="d-inline-flex">
+                        <moo-switch
+                            value.bind="guild.customBotActive"
+                            change.bind="() => toggleCustomBot()"
+                        ></moo-switch>
+                    </div>
+                </div>
                 <div class="text-danger fs-6">
                     This feature is for Platinum supporters only. Learn more on our discord.
                 </div>
