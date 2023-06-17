@@ -1,13 +1,13 @@
 <div class="container my-5">
-    <div class="logged-out" if.bind="!ticket">
-        You are not logged in. Click login in the top right.
+    <div if.bind="!isPublic">
+        <div if.bind="!ticket">
+            You are not logged in. Click login in the top right.
+        </div>
+    </div>
+    <div if.bind="ticket">
+        <support-ticket-transcript support-ticket.bind="ticket"></support-ticket-transcript>
     </div>
     <div else>
-        <div if.bind="ticket">
-            <support-ticket-transcript support-ticket.bind="ticket"></support-ticket-transcript>
-        </div>
-        <div else>
-            Failed to retrieve the transcript. Do you have access?
-        </div>
+        Failed to retrieve the transcript. Do you have access?
     </div>
 </div>

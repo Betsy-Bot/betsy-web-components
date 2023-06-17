@@ -370,7 +370,7 @@ export class DiscordService {
         return this.api.doGet(`DiscordSupportTicketSettings/${ticketId}`);
     }
 
-    async getTranscriptPublic(ticketId: string) {
+    async getTranscriptPublic(ticketId: string): Promise<boolean> {
         return this.api.doGet(`DiscordSupportTicket/${ticketId}/Public`);
     }
 
