@@ -7,6 +7,8 @@ import { ActionLog } from "./action-log/action-log";
 import { AutoRole } from "./auto-role/auto-role";
 import { ManageAutoroleContainer } from "./auto-role/manage-autorole-container/manage-autorole-container";
 import { ChannelCleaners } from "./channel-cleaners/channel-cleaners";
+import { CustomCommands } from "./custom-commands/custom-commands";
+import { ManageCustomCommand } from "./custom-commands/manage-custom-command/manage-custom-command";
 import { Dashboard } from "./dashboard/dashboard";
 import { DataCommands } from "./data-commands/data-commands";
 import { EditDataCommand } from "./data-commands/edit-data-command/edit-data-command";
@@ -97,6 +99,8 @@ const routes = [
     ChannelBackup,
     ImportExport,
     Reviews,
+    CustomCommands,
+    ManageCustomCommand
 ];
 
 @route({
@@ -111,7 +115,7 @@ export class Guild implements IRouteViewModel {
     guildId: string;
 
     canLoad(params: Params) {
-        this.guildId = params.guildId;
+        this.guildId = params.guildId!;
         this.discordService.setGuildId(this.guildId);
         return true;
     }

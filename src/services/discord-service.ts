@@ -629,6 +629,12 @@ export class DiscordService {
         );
     }
 
+    async getCustomCommands() {
+        return this.api.doGet(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/Commands`
+        );
+    }
+
     async createDiscordChannelBackup(item: any) {
         return this.api.doPost(`DiscordChannelBackup`, item);
     }

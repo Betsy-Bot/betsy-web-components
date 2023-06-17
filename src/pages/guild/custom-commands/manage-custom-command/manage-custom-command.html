@@ -1,0 +1,12 @@
+<feature-header
+    doc-url="https://docs.betsybot.xyz/features/custom-commands"
+    title="Manage Custom Command"
+    subtitle="Manage your custom command"
+    class="mb-3"
+></feature-header>
+
+<div if.bind="command">
+    <div class="mt-4">
+        <discord-command-creator command.two-way="command"></discord-command-creator>
+    </div>
+</div>

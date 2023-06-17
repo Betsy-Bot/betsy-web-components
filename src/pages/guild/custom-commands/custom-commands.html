@@ -1,0 +1,14 @@
+<feature-header
+    doc-url="https://docs.betsybot.xyz/features/custom-commands"
+    title="Custom Commands"
+    subtitle="Build custom commands and experiences to fit your server"
+    class="mb-3"
+></feature-header>
+
+<feature-item-list
+    data.bind="commands"
+    show-toggler.bind="true"
+    name-prefix="/"
+    route="../custom-commands"
+    toggle-handler.bind="(item) => updateActive(item)"
+></feature-item-list>
