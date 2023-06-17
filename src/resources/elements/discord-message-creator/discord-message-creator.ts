@@ -2,22 +2,19 @@ import { bindable, BindingMode, containerless, ICustomElementViewModel, inject }
 import { watch } from "@aurelia/runtime-html";
 
 import { DiscordService } from "../../../services/discord-service";
-import { DiscordEmbed } from "../../../services/models/discord";
+import { DiscordEmbed, DiscordMessage, DiscordMessageContent } from "../../../services/models/discord";
 
 import './discord-message-creator.scss';
 
 @containerless()
 @inject(DiscordService)
 export class DiscordMessageCreator implements ICustomElementViewModel{
-    @bindable({ mode: BindingMode.twoWay }) message = {
-        embeds: [],
-        components: []
-    };
+    @bindable({ mode: BindingMode.twoWay }) message: DiscordMessageContent | null;
     @bindable single;
     @bindable allowComponents = true;
     @bindable maxComponents = 5;
     @bindable tab = 'embeds';
-    selectedMessage;
+    selectedMessage: DiscordMessage | null;
     @bindable hideTemplate = false;
     @bindable customBuilder;
     jsonDialog;
@@ -29,12 +26,10 @@ export class DiscordMessageCreator implements ICustomElementViewModel{
     @watch('selectedMessage')
     selectedMessageChanged() {
         if (this.selectedMessage) {
-            console.log(this.message);
             const foundMessage = this.discordService.getMessageResourceById(this.selectedMessage);
             if (foundMessage) {
                 this.message = foundMessage.message;
             }
-            console.log(this.message);
             this.selectedMessage = null;
         }
     }
@@ -46,11 +41,12 @@ export class DiscordMessageCreator implements ICustomElementViewModel{
         this.message.embeds.push(new DiscordEmbed())
     }
 
-    deleteEmbed(index) {
-        this.message.embeds.splice(index, 1)
+    deleteEmbed(index: number) {
+        this.message.embeds?.splice(index, 1)
     }
 
     get canCreateEmbed() {
+        if (!this.message?.embeds) return true;
         if (!this.single) {
             return !this.message.embeds || this.message.embeds.length < 10
         } else {
@@ -59,7 +55,6 @@ export class DiscordMessageCreator implements ICustomElementViewModel{
     }
 
     importJson(event) {
-        console.log(event);
         if (event.detail.action == 'ok') {
             this.message = JSON.parse(this.json);
             this.json = "";

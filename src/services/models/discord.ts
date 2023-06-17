@@ -42,13 +42,7 @@ export interface DiscordMessage {
 
 export interface DiscordMessageContent {
     content?: string;
-    embeds?: DiscordMessageEmbed[];
-}
-
-export interface DiscordMessageEmbed {
-    title?: string;
-    description?: string;
-    image?: DiscordMessageImage;
+    embeds?: DiscordEmbed[];
 }
 
 export interface DiscordMessageImage {

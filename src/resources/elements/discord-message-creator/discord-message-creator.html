@@ -61,7 +61,7 @@
                 click.bind="() => addEmbed()">
         Add Embed
     </moo-button>
-    <div class="embed mb-2" repeat.for="embed of message.embeds">
+    <div if.bind="message && message.embeds" class="embed mb-2" repeat.for="embed of message.embeds">
         <embed-editor embed.two-way="embed"></embed-editor>
         <moo-button variant="secondary"
                     class="button-secondary mb-2"

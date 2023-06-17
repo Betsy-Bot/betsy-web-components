@@ -10,19 +10,20 @@ export class DiscordActionCreator {
 
     actions = [
         {
-            label: 'Interaction Response',
+            label: 'Interaction Response (DEPRECATED)',
             description: 'Sends response to the command itself',
-            value: DiscordCommandActionType.MessageResponse
+            value: DiscordCommandActionType.MessageResponse,
+            disabled: true
         },
         {
             label: 'Channel Message',
             description: 'Sends a response to a selected channel',
-            value:  DiscordCommandActionType.MessageChannel
+            value:  DiscordCommandActionType.MessageChannel,
+            disabled: false
         }
     ]
 
     deleteAction() {
         this.deleteFunction();
     }
-
 }

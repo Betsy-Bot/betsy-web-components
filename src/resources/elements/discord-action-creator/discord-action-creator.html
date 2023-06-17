@@ -6,9 +6,10 @@
                     required.bind="true">
             <moo-list>
                 <moo-list-item
-                    repeat.for="act of actions"
-                    label.bind="act.label"
-                    value.bind="act.value"
+                    repeat.for="action of actions"
+                    label.bind="action.label"
+                    value.bind="action.value"
+                    disabled.bind="action.disabled"
                 ></moo-list-item>
             </moo-list>
         </moo-select>

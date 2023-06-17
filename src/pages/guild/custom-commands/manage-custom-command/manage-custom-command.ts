@@ -1,4 +1,4 @@
-import { bindable, IEventAggregator, inject } from "aurelia";
+import { IEventAggregator, inject } from "aurelia";
 import { IRouter, IRouteViewModel, Params, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
@@ -23,6 +23,7 @@ export class ManageCustomCommand implements IRouteViewModel {
     ) {}
 
     command;
+    tab = "settings"
     commandTemplate: BaseDiscordCommand = {
         name: "",
         description: "",
@@ -42,7 +43,6 @@ export class ManageCustomCommand implements IRouteViewModel {
             },
         ],
     };
-    @bindable tab = "form";
     guildId;
     discordApplicationCommandId: string | number | undefined;
     isNew = false;

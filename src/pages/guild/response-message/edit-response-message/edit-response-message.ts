@@ -32,7 +32,7 @@ export class EditResponseMessage implements IRouteViewModel {
         );
     }
 
-    deleteAction(index) {
+    deleteAction(index: number) {
         this.command.discordCommandActions.splice(index, 1);
     }
 

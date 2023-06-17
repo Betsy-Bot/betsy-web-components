@@ -5,8 +5,50 @@
     class="mb-3"
 ></feature-header>
 
-<div if.bind="command">
-    <div class="mt-4">
-        <discord-command-creator command.two-way="command"></discord-command-creator>
+<div if.bind="command" class="row">
+    <div class="col-12 col-xl-8">
+        <moo-tab-bar>
+            <moo-tab
+                label="Settings"
+                tab.bind="tab"
+                value="settings"
+                active.bind="tab === 'settings'"
+            ></moo-tab>
+            <moo-tab
+                label="Actions"
+                active.bind="tab === 'actions'"
+                value="actions"
+                tab.bind="tab"
+            ></moo-tab>
+            <moo-tab
+                label="Interaction Response Message"
+                active.bind="tab === 'response'"
+                value="response"
+                tab.bind="tab"
+            ></moo-tab>
+        </moo-tab-bar>
+        <div class="mt-3">
+            <template switch.bind="tab">
+                <discord-command-creator command.two-way="command" case="settings"></discord-command-creator>
+                <template case="actions">
+                    <div class="my-3" repeat.for="action of command.discordCommandActions">
+                        <discord-action-creator
+                            delete-function.bind="() => deleteAction($index)"
+                            action.two-way="action"
+                        ></discord-action-creator>
+                    </div>
+                </template>
+                <discord-message-creator
+                    case="response"
+                    allow-components.bind="true"
+                    message.two-way="command.responseMessage"
+                ></discord-message-creator>
+            </template>
+        </div>
+    </div>
+    <div class="col-12 col-xl-4">
+        <discord-message-preview
+            message.two-way="command.discordCommandActions[0].discordMessage.message"
+        ></discord-message-preview>
     </div>
 </div>
