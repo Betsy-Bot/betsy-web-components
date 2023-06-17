@@ -428,7 +428,6 @@ export class DiscordService {
     }
 
     getMessageResourceById(id: string) {
-        console.log("messages", this.messages);
         if (this.messages) {
             return this.messages.find((x) => x.id == id);
         }

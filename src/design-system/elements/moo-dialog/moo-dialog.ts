@@ -7,16 +7,16 @@ import {
 import "devextreme/dist/css/dx.material.purple.dark.compact.css";
 import "./moo-dialog.scss";
 
-import { MDCDialog } from "@material/dialog";
+import { MDCDialog, MDCDialogCloseEvent } from "@material/dialog";
 @containerless()
 export class MooDialog implements ICustomElementViewModel {
     @bindable dialogEl: HTMLElement;
     @bindable({ mode: BindingMode.twoWay }) dialog: MDCDialog;
-    @bindable handler;
+    @bindable handler?: (Event) => void;
 
     attached() {
         this.dialog = new MDCDialog(this.dialogEl);
-        this.dialog.listen("MDCDialog:closed", (e) => {
+        this.dialog.listen("MDCDialog:closed", (e: MDCDialogCloseEvent) => {
             if (this.handler) {
                 this.handler(e);
             }
