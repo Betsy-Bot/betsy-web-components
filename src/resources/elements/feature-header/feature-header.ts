@@ -1,5 +1,7 @@
 import {
-    bindable, containerless,
+    bindable,
+    capture,
+    containerless,
     ICustomElementViewModel,
     inject,
 } from "aurelia";
@@ -9,6 +11,7 @@ import "./feature-header.scss";
 
 @containerless()
 @inject(IRouter)
+@capture()
 export class FeatureHeader implements ICustomElementViewModel {
     constructor(private router: IRouter) {}
 

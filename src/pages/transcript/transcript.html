@@ -1,8 +1,6 @@
 <div class="container my-5">
-    <div if.bind="!isPublic">
-        <div if.bind="!ticket">
-            You are not logged in. Click login in the top right.
-        </div>
+    <div if.bind="!isPublic && !ticket">
+        You are not logged in. Click login in the top right.
     </div>
     <div if.bind="ticket">
         <support-ticket-transcript support-ticket.bind="ticket"></support-ticket-transcript>
