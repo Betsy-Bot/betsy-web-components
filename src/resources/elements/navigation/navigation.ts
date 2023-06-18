@@ -1,9 +1,9 @@
 import {
     bindable, containerless,
     ICustomElementViewModel,
-    inject,
+    IEventAggregator,
+    inject
 } from "aurelia";
-import { IEventAggregator } from "aurelia";
 import { IRouter } from "@aurelia/router-lite";
 
 import { botClientId,redirectUrl } from "../../../environment";
@@ -23,9 +23,9 @@ export class Navigation implements ICustomElementViewModel {
 
     @bindable() user: any;
     @bindable isLoading: boolean;
-    guildId: number;
+    guildId: number | null;
     drawer = {
-        open: null,
+        open: false,
     };
     currentRoute;
     donateDialog;
@@ -56,7 +56,7 @@ export class Navigation implements ICustomElementViewModel {
         //this.currentRoute = this.router.;
     }
 
-    async toggleSidebar() {
+    toggleSidebar() {
         const newDrawerStatus = !this.drawer.open;
         this.drawer.open = newDrawerStatus;
         this.sessionService.saveStorageItem(
@@ -67,7 +67,7 @@ export class Navigation implements ICustomElementViewModel {
     }
 
     async logout() {
-        await this.sessionService.clearSession();
+        this.sessionService.clearSession();
         await this.router.load("");
         location.reload();
     }

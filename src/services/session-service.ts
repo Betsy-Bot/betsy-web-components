@@ -22,10 +22,10 @@ export class SessionService {
         window.localStorage.setItem(key, value);
     }
 
-    public getStorageItem(key: string, defaultValue: any = null): string | boolean {
+    public getStorageItem(key: string, defaultValue: boolean): boolean {
         if (window.localStorage[key] !== undefined) {
             try {
-                return JSON.parse(window.localStorage.getItem(key));
+                return JSON.parse(window.localStorage.getItem(key) ?? '') as boolean;
             } catch (e) {
                 return window.localStorage.getItem(key);
             }
