@@ -21,12 +21,7 @@ stages:
                         displayName: Install pnpm
                         inputs:
                             targetType: 'inline'
-                            script: 'wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -'
-                    -   task: Bash@3
-                        displayName: Source pnpm
-                        inputs:
-                            targetType: 'inline'
-                            script: 'source /home/vsts/.bashrc'
+                            script: 'npm i -g pnpm'
                     -   task: Bash@3
                         displayName: Run pnpm i
                         inputs:
