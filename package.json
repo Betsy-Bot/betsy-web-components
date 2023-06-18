@@ -8,16 +8,17 @@
     },
     "license": "UNLICENSED",
     "scripts": {
-        "lint:js": "eslint src test --ext .js,.ts",
-        "lint:html": "htmlhint -c .htmlhintrc src",
-        "lint": "pnpm run lint:js && pnpm run lint:html",
-        "pretest": "pnpm run lint",
-        "start": "vite",
         "build": "rimraf dist && vite build",
         "build:staging": "rimraf dist && vite build --mode staging",
-        "update-services": "npx orval",
+        "lint": "pnpm run lint:js && pnpm run lint:html",
+        "lint:html": "htmlhint -c .htmlhintrc src",
+        "lint:js": "eslint src test --ext .js,.ts",
+        "preinstall": "npx only-allow pnpm",
+        "pretest": "pnpm run lint",
+        "start": "vite",
+        "test": "jest",
         "update-depenencies": "npx npm-check-updates -u",
-        "test": "jest"
+        "update-services": "npx orval"
     },
     "dependencies": {
         "@darkguy10/discord-markdown": "^2.6.0",
