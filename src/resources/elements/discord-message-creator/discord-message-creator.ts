@@ -20,7 +20,7 @@ import { MDCDialog, MDCDialogCloseEvent } from "@material/dialog";
 @containerless()
 @inject(DiscordService)
 export class DiscordMessageCreator implements ICustomElementViewModel {
-    @bindable({ mode: BindingMode.twoWay }) message: DiscordMessageContent = {};
+    @bindable({ mode: BindingMode.twoWay }) message: DiscordMessageContent | null = {};
     @bindable single;
     @bindable allowComponents = true;
     @bindable maxComponents = 5;
@@ -32,6 +32,12 @@ export class DiscordMessageCreator implements ICustomElementViewModel {
     json: string;
 
     constructor(private discordService: DiscordService) {}
+
+    binding() {
+        if (!this.message) {
+            this.message = {};
+        }
+    }
 
     @watch("selectedMessage")
     selectedMessageChanged() {
@@ -47,18 +53,18 @@ export class DiscordMessageCreator implements ICustomElementViewModel {
     }
 
     addEmbed() {
-        if (!this.message.embeds) {
+        if (!this.message?.embeds) {
             this.message.embeds = [];
         }
-        this.message.embeds.push(new DiscordEmbed());
+        this.message?.embeds.push(new DiscordEmbed());
     }
 
     deleteEmbed(index: number) {
-        this.message.embeds?.splice(index, 1);
+        this.message?.embeds?.splice(index, 1);
     }
 
     get canCreateEmbed() {
-        if (!this.message.embeds) return true;
+        if (!this.message?.embeds) return true;
         if (!this.single) {
             return !this.message.embeds || this.message.embeds.length < 10;
         } else {
