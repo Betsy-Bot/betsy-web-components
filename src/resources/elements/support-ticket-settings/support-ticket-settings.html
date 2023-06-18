@@ -35,9 +35,7 @@
     <div class="col-12 col-lg-6">
         <discord-channel-selector
             label="Select Channel for Audits"
-            if.bind="guildId"
             channel-id.two-way="request.logChannelId"
-            guild-id.bind="guildId"
             type.bind="0"
             required.bind="false"
             include-null.bind="true"
@@ -80,7 +78,6 @@
     <div class="col-12 col-lg-6">
         <discord-channel-selector
             label="Select Category"
-            if.bind="guildId"
             channel-id.two-way="request.categoryId"
             guild-id.bind="guildId"
             type.bind="4"
@@ -91,7 +88,6 @@
     <div class="col-12 col-lg-6">
         <discord-channel-selector
             label="Select Channel for Message"
-            if.bind="guildId"
             channel-id.two-way="request.discordMessage.discordChannelId"
             guild-id.bind="guildId"
             type.bind="0"
@@ -102,22 +98,19 @@
         <discord-role-selector
             label="Select Authorized Roles"
             selected-role.bind="authorizedRole"
-            guild-id.bind="guildId"
         ></discord-role-selector>
         <moo-chip-set input if.bind="roles">
             <!-- Compact notation -->
             <moo-chip repeat.for="role of request.assignedRoles">
                 ${getRoleName(role)}
-                <span click.trigger="removeRole($index)" trailing>X</span>
+                <span click.trigger="removeRole($index)">X</span>
             </moo-chip>
         </moo-chip-set>
     </div>
     <div class="col-12 col-lg-6">
         <discord-channel-selector
             label="Select Channel for Closed Tickets"
-            if.bind="guildId"
             channel-id.two-way="request.closedCategoryId"
-            guild-id.bind="guildId"
             type.bind="4"
             include-null.bind="true"
         ></discord-channel-selector>
@@ -153,7 +146,6 @@
     </div>
     <div class="col-12 col-lg-6">
         <discord-form-selector
-            if.bind="guildId"
             label="Select a Form to Present on Opening"
             form-id.two-way="request.discordFormId"
         ></discord-form-selector>
@@ -174,4 +166,37 @@
             value.bind="request.textOptions.formDataText">
         </moo-text-field>
     </div>
+    <div class="col-12 col-lg-6">
+        <discord-role-selector
+            label="Select Prefix Roles"
+            selected-role.bind="roleToAdd.roleId"
+        ></discord-role-selector>
+        <moo-chip-set input if.bind="roles">
+            <!-- Compact notation -->
+            <moo-chip repeat.for="option of request.supportTicketRoleOptions">
+                ${getRoleName(option.roleId)} - ${option.prefixOverride}
+                <span click.trigger="removeRoleOption($index)">X</span>
+            </moo-chip>
+        </moo-chip-set>
+    </div>
 </div>
+
+<confirmation-dialog
+    cancel-text="Cancel"
+    confirm-text="Delete"
+    dialog.two-way="addRoleOptionDialog"
+    handler.bind="(event) => addRoleOption(event)"
+    title="Enter prefix override for role"
+>
+    <moo-text-field
+        class="w-100 mb-2"
+        label="Role Id"
+        value.bind="roleToAdd.roleId">
+    </moo-text-field>
+    <moo-text-field
+        class="w-100"
+        label="Prefix Override"
+        maxlength="16"
+        value.bind="roleToAdd.prefixOverride">
+    </moo-text-field>
+</confirmation-dialog>
