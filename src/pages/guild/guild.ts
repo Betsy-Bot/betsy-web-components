@@ -27,9 +27,8 @@ import { Polls } from "./polls/polls";
 import { AuditLogs } from "./resources/audit-logs/audit-logs";
 import { ChannelBackup } from "./resources/channel-backups/channel-backup/channel-backup";
 import { ChannelBackups } from "./resources/channel-backups/channel-backups";
-import { CreateForm } from "./resources/forms/create-form/create-form";
-import { EditForm } from "./resources/forms/edit-form/edit-form";
 import { Forms } from "./resources/forms/forms";
+import { ManageForm } from "./resources/forms/manage-form/manage-form";
 import { KeyValueStorage } from "./resources/key-value-storage/key-value-storage";
 import { ManageKeyValueStorage } from "./resources/key-value-storage/manage-key-value-storage/manage-key-value-storage";
 import { CreateMessage } from "./resources/messages/create-message/create-message";
@@ -79,8 +78,7 @@ const routes = [
     CreateMessage,
     EditMessage,
     Forms,
-    CreateForm,
-    EditForm,
+    ManageForm,
     KeyValueStorage,
     ManageKeyValueStorage,
     AuditLogs,

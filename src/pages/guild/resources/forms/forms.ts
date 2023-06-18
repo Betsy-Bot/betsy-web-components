@@ -19,8 +19,4 @@ export class Forms implements IRouteViewModel {
         this.guildId = this.discordService.getLocalDiscordGuildId();
         this.forms = await this.discordService.getDiscordForms(this.guildId);
     }
-
-    // goToForm(item) {
-    //     this.router.load(`/guild/${this.guildId}/resources/forms/${item.id}`);
-    // }
 }

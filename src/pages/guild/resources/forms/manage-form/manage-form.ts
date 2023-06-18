@@ -1,9 +1,9 @@
 import { inject } from "aurelia";
-import { route } from "@aurelia/router-lite";
+import { Params, route } from "@aurelia/router-lite";
 import { IRouteViewModel } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../../services/discord-service";
-import { DiscordForm } from "../../../../../services/models/discord";
+import { DiscordComponentType, DiscordForm } from "../../../../../services/models/discord";
 
 import DataGrid from "devextreme/ui/data_grid";
 import { toast } from "lets-toast";
@@ -12,16 +12,15 @@ import { toast } from "lets-toast";
     title: "Manage Form",
 })
 @inject(DiscordService)
-export class EditForm implements IRouteViewModel {
+export class ManageForm implements IRouteViewModel {
     constructor(private discordService: DiscordService) {}
-
-    params;
-    guildId;
-    formId;
+    guildId: string;
+    formId: string;
     showingSubmissions = false;
     detailTemplate;
     rowDetail;
     rowCaption;
+    isNew = false;
 
     form: DiscordForm;
 
@@ -38,16 +37,43 @@ export class EditForm implements IRouteViewModel {
         },
     ];
 
-    loading(params) {
-        this.formId = params.formId;
+    formTemplate: DiscordForm = {
+        customId: "",
+        title: "",
+        description: "",
+        submissions: [],
+        formData: {
+            components: [
+                {
+                    type: DiscordComponentType.ActionRow,
+                    components: [
+                        {
+                            custom_id: "",
+                            type: DiscordComponentType.TextInput,
+                            label: "",
+                        },
+                    ],
+                },
+            ],
+        },
+    };
+
+    loading(params: Params) {
+        this.formId = params.formId!;
+        if (this.formId == "0") {
+            this.form = this.formTemplate;
+            this.isNew = true;
+        }
     }
 
     async attached() {
         this.guildId = this.discordService.getLocalDiscordGuildId();
-        this.form = await this.discordService.getDiscordForm(
-            this.guildId,
-            this.formId
-        );
+        if (!this.isNew) {
+            this.form = await this.discordService.getDiscordForm(
+                this.guildId,
+                this.formId
+            );
+        }
 
         this.detailTemplate = (container, options) => {
             const data = options.data;
@@ -81,7 +107,12 @@ export class EditForm implements IRouteViewModel {
     }
 
     async save() {
-        await this.discordService.updateDiscordForm(this.form);
-        toast("Saved Form", { severity: "success" });
+        if (!this.isNew) {
+            await this.discordService.updateDiscordForm(this.form);
+            toast("Saved Form", { severity: "success" });
+        } else {
+            await this.discordService.createDiscordForm(this.form);
+            toast("Form Created!");
+        }
     }
 }
