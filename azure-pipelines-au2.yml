@@ -6,33 +6,38 @@ trigger:
     - au2
 
 resources:
-    - repo: self
+    -   repo: self
 
 stages:
-    - stage: Build_And_Deploy
-      displayName: Build and Push Docker Image
-      jobs:
-          - job: Npm_Install
-            displayName: Run NPM Install
-            pool:
-                vmImage: ubuntu-latest
-            steps:
-                - task: Bash@3
-                  displayName: Run npm i
-                  inputs:
-                      targetType: 'inline'
-                      script: 'pnpm i'
-                - task: Bash@3
-                  displayName: Run npm run build:qa
-                  inputs:
-                      targetType: 'inline'
-                      script: 'npm run build:staging'
-                - task: Docker@2
-                  inputs:
-                      containerRegistry: 'DigitalOceanRegistry'
-                      repository: 'betsy-production/adminpanel-qa'
-                      command: 'buildAndPush'
-                      Dockerfile: '**/Dockerfile'
-                      tags: |
-                        $(Build.BuildId)
-                        latest
+    -   stage: Build_And_Deploy
+        displayName: Build and Push Docker Image
+        jobs:
+            -   job: Npm_Install
+                displayName: Run NPM Install
+                pool:
+                    vmImage: ubuntu-latest
+                steps:
+                    -   task: Bash@3
+                        displayName: Install pnpm
+                        inputs:
+                            targetType: 'inline'
+                            script: 'npm i -g pnpm'
+                    -   task: Bash@3
+                        displayName: Run pnpm i
+                        inputs:
+                            targetType: 'inline'
+                            script: 'pnpm i'
+                    -   task: Bash@3
+                        displayName: Run npm run build:qa
+                        inputs:
+                            targetType: 'inline'
+                            script: 'npm run build:staging'
+                    -   task: Docker@2
+                        inputs:
+                            containerRegistry: 'DigitalOceanRegistry'
+                            repository: 'betsy-production/adminpanel-qa'
+                            command: 'buildAndPush'
+                            Dockerfile: '**/Dockerfile'
+                            tags: |
+                                $(Build.BuildId)
+                                latest
