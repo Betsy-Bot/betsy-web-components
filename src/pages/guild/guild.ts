@@ -10,8 +10,6 @@ import { ChannelCleaners } from "./channel-cleaners/channel-cleaners";
 import { CustomCommands } from "./custom-commands/custom-commands";
 import { ManageCustomCommand } from "./custom-commands/manage-custom-command/manage-custom-command";
 import { Dashboard } from "./dashboard/dashboard";
-import { DataCommands } from "./data-commands/data-commands";
-import { EditDataCommand } from "./data-commands/edit-data-command/edit-data-command";
 import { Giveaways } from "./giveaways/giveaways";
 import { ManageGiveaways } from "./giveaways/manage-giveaways/manage-giveaways";
 import { ImportExport } from "./import-export/import-export";
@@ -38,9 +36,6 @@ import { CreateMessage } from "./resources/messages/create-message/create-messag
 import { EditMessage } from "./resources/messages/edit-message/edit-message";
 import { Messages } from "./resources/messages/messages";
 import { Users } from "./resources/users/users";
-import { CreateResponseMessage } from "./response-message/create-response-message/create-response-message";
-import { EditResponseMessage } from "./response-message/edit-response-message/edit-response-message";
-import { ResponseMessage } from "./response-message/response-message";
 import { Reviews } from "./reviews/reviews";
 import { Settings } from "./settings/settings";
 import { Twitch } from "./social-connections/twitch/twitch";
@@ -71,11 +66,6 @@ const routes = [
     ManageTrackedMessage,
     WelcomeMessages,
     ManageWelcomeMessage,
-    ResponseMessage,
-    CreateResponseMessage,
-    EditResponseMessage,
-    DataCommands,
-    EditDataCommand,
     Payments,
     ActionLog,
     InviteLinks,
