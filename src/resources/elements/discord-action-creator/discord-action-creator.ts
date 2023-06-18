@@ -58,8 +58,12 @@ export class DiscordActionCreator {
         this.deleteFunction();
     }
 
+    get numberAction() {
+        return parseInt(this.action.type.toString());
+    }
+
     get requiresMessage() {
-        switch (this.action.type) {
+        switch (this.numberAction) {
             case DiscordCommandActionType.MessageChannel:
             case DiscordCommandActionType.MessageResponse:
                 return true;
@@ -69,7 +73,7 @@ export class DiscordActionCreator {
     }
 
     get requiresFormBuilder() {
-        switch (this.action.type) {
+        switch (this.numberAction) {
             case DiscordCommandActionType.OpenForm:
                 return true;
             default:
@@ -78,7 +82,7 @@ export class DiscordActionCreator {
     }
 
     get requiresRestBuilder() {
-        switch (this.action.type) {
+        switch (this.numberAction) {
             case DiscordCommandActionType.SendGetRequest:
             case DiscordCommandActionType.SendPostRequest:
             case DiscordCommandActionType.SendPutRequest:

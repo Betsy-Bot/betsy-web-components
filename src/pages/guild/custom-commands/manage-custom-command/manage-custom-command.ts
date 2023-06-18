@@ -36,6 +36,7 @@ export class ManageCustomCommand implements IRouteViewModel {
     guildId;
     discordApplicationCommandId: string | number | undefined;
     isNew = false;
+    selectedAction = 0;
 
     loading(params: Params) {
         this.discordApplicationCommandId = params.commandId;

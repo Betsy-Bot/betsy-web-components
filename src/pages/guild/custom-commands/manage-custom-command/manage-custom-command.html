@@ -37,17 +37,22 @@
                         click.bind="() => createNewCommandAction()">
                         Add Action
                     </moo-button>
-                    <moo-accordion
-                        class="my-3"
+                    <moo-tab-bar>
+                        <moo-tab
+                            repeat.for="action of command.discordCommandActions"
+                            label="Action ${$index + 1}"
+                            tab.bind="selectedAction"
+                            value.bind="$index"
+                            active.bind="selectedAction === $index"
+                        ></moo-tab>
+                    </moo-tab-bar>
+                    <discord-action-creator
                         repeat.for="action of command.discordCommandActions"
-                        header="Action ${$index + 1}"
-                    >
-                        <discord-action-creator
-                            delete-function.bind="() => deleteAction($index)"
-                            action.bind="action"
-                            command.bind="command"
-                        ></discord-action-creator>
-                    </moo-accordion>
+                        if.bind="selectedAction === $index"
+                        delete-function.bind="() => deleteAction($index)"
+                        action.bind="action"
+                        command.bind="command"
+                    ></discord-action-creator>
                 </template>
                 <discord-message-creator
                     case="response"
