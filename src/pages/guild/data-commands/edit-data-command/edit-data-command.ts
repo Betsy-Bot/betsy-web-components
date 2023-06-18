@@ -1,6 +1,6 @@
 import { IEventAggregator } from "aurelia";
 import { bindable, inject } from "aurelia";
-import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
+import { IRouter, IRouteViewModel, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
 import {
@@ -22,6 +22,7 @@ export class EditDataCommand implements IRouteViewModel {
         private discordService: DiscordService,
         private router: IRouter
     ) {}
+
     command;
     commandTemplate: BaseDiscordCommand = {
         name: "",
@@ -101,36 +102,36 @@ export class EditDataCommand implements IRouteViewModel {
 
     tabChanged() {
         switch (this.tab) {
-        case "rest":
-            if (
-                this.command.discordCommandActions[0].type ==
+            case "rest":
+                if (
+                    this.command.discordCommandActions[0].type ==
                     DiscordCommandActionType.OpenForm
-            ) {
-                return (this.command.discordCommandActions[0].type =
+                ) {
+                    return (this.command.discordCommandActions[0].type =
                         DiscordCommandActionType.SendPostRequest);
-            }
-            break;
-        case "form":
-            if (!this.command.discordCommandActions[0].type) {
-                return (this.command.discordCommandActions[0].type =
+                }
+                break;
+            case "form":
+                if (!this.command.discordCommandActions[0].type) {
+                    return (this.command.discordCommandActions[0].type =
                         DiscordCommandActionType.OpenForm);
-            }
-            break;
+                }
+                break;
         }
     }
 
     getDisplayTextForCommandActionType(type: DiscordCommandActionType) {
         switch (type) {
-        case DiscordCommandActionType.SendPatchRequest:
-            return "PATCH";
-        case DiscordCommandActionType.SendPutRequest:
-            return "PUT";
-        case DiscordCommandActionType.SendPostRequest:
-            return "POST";
-        case DiscordCommandActionType.SendGetRequest:
-            return "GET";
-        case DiscordCommandActionType.SendDeleteRequest:
-            return "DELETE";
+            case DiscordCommandActionType.SendPatchRequest:
+                return "PATCH";
+            case DiscordCommandActionType.SendPutRequest:
+                return "PUT";
+            case DiscordCommandActionType.SendPostRequest:
+                return "POST";
+            case DiscordCommandActionType.SendGetRequest:
+                return "GET";
+            case DiscordCommandActionType.SendDeleteRequest:
+                return "DELETE";
         }
     }
 

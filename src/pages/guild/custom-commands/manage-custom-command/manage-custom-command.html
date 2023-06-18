@@ -1,13 +1,13 @@
-<feature-header
-    doc-url="https://docs.betsybot.xyz/features/custom-commands"
-    title="Manage Custom Command"
-    subtitle="Manage your custom command"
-    class="mb-3"
-></feature-header>
-
-<div if.bind="command" class="row">
+<div class="row">
     <div class="col-12 col-xl-8">
-        <moo-tab-bar>
+        <feature-header
+            doc-url="https://docs.betsybot.xyz/features/custom-commands"
+            title="Manage Custom Command"
+            subtitle="Manage your custom command"
+            class="mb-3"
+        ></feature-header>
+
+        <moo-tab-bar class="mb-3">
             <moo-tab
                 label="Settings"
                 tab.bind="tab"
@@ -21,30 +21,46 @@
                 tab.bind="tab"
             ></moo-tab>
             <moo-tab
-                label="Interaction Response Message"
+                label="Response Message"
                 active.bind="tab === 'response'"
                 value="response"
                 tab.bind="tab"
             ></moo-tab>
         </moo-tab-bar>
-        <div class="mt-3">
-            <template switch.bind="tab">
+        <form submit.trigger="save()">
+            <template if.bind="command" switch.bind="tab">
                 <discord-command-creator command.two-way="command" case="settings"></discord-command-creator>
                 <template case="actions">
-                    <div class="my-3" repeat.for="action of command.discordCommandActions">
+                    <moo-button
+                        variant="primary"
+                        if.bind="command.discordCommandActions.length < 10"
+                        click.bind="() => createNewCommandAction()">
+                        Add Action
+                    </moo-button>
+                    <moo-accordion
+                        class="my-3"
+                        repeat.for="action of command.discordCommandActions"
+                        header="Action ${$index + 1}"
+                    >
                         <discord-action-creator
                             delete-function.bind="() => deleteAction($index)"
-                            action.two-way="action"
+                            action.bind="action"
+                            command.bind="command"
                         ></discord-action-creator>
-                    </div>
+                    </moo-accordion>
                 </template>
                 <discord-message-creator
                     case="response"
                     allow-components.bind="true"
-                    message.two-way="command.responseMessage"
+                    message.bind="command.responseMessage"
                 ></discord-message-creator>
             </template>
-        </div>
+            <div class="text-end mt-3">
+                <moo-button variant="primary" type="submit">
+                    Save
+                </moo-button>
+            </div>
+        </form>
     </div>
     <div class="col-12 col-xl-4">
         <discord-message-preview

@@ -1,12 +1,13 @@
 import {
     bindable,
+    BindingMode,
     containerless,
-    ICustomElementViewModel,     inject,
+    ICustomElementViewModel,
+    IEventAggregator,
+    inject
 } from "aurelia";
-import { IEventAggregator } from "aurelia";
 
 import { DiscordService } from "../../../services/discord-service";
-
 
 @containerless()
 @inject(DiscordService, IEventAggregator)
@@ -15,14 +16,14 @@ export class DiscordFormSelector implements ICustomElementViewModel {
         private discordService: DiscordService,
         private eventAggregator: IEventAggregator
     ) {}
-    @bindable formId: string;
+    @bindable({ mode: BindingMode.twoWay }) formId: string;
     @bindable label;
     @bindable required;
     guildId: string;
     forms;
 
     async attached() {
-        this.guildId = await this.discordService.getLocalDiscordGuildId();
+        this.guildId = this.discordService.getLocalDiscordGuildId();
         this.forms = await this.discordService.getDiscordForms(this.guildId);
     }
 

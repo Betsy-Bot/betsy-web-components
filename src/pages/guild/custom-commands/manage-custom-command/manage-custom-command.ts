@@ -31,28 +31,11 @@ export class ManageCustomCommand implements IRouteViewModel {
         type: DiscordCommandType.Data,
         private: false,
         active: true,
-        discordCommandActions: [
-            {
-                type: DiscordCommandActionType.OpenForm,
-                discordMessage: {
-                    message: {
-                        content: "Request Handled!",
-                        embeds: [],
-                    },
-                },
-            },
-        ],
+        discordCommandActions: [],
     };
     guildId;
     discordApplicationCommandId: string | number | undefined;
     isNew = false;
-    restTypes = [
-        DiscordCommandActionType.SendPostRequest,
-        DiscordCommandActionType.SendPutRequest,
-        DiscordCommandActionType.SendPatchRequest,
-        DiscordCommandActionType.SendGetRequest,
-        DiscordCommandActionType.SendDeleteRequest,
-    ];
 
     loading(params: Params) {
         this.discordApplicationCommandId = params.commandId;
@@ -214,5 +197,21 @@ export class ManageCustomCommand implements IRouteViewModel {
             index,
             1
         );
+    }
+
+    deleteAction(index) {
+        this.command.discordCommandActions.splice(index, 1);
+    }
+
+    createNewCommandAction() {
+        this.command.discordCommandActions.push({
+            type: DiscordCommandActionType.MessageChannel,
+            discordMessage: {
+                message: {
+                    content: null,
+                    embeds: null,
+                },
+            },
+        });
     }
 }

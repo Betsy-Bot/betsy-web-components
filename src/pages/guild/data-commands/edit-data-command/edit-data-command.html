@@ -41,147 +41,7 @@
                     <div class="my-2 fs-6 fw-bolder">
                         REST Requests commands send a POST/PUT/PATCH to your entered API.
                     </div>
-                    <moo-text-field
-                        class="w-100"
-                        label="API Url"
-                        value.bind="command.discordCommandActions[0].restRequestMetadata.apiUrl"
-                        placeholder="https://example.com/api/someEndpoint"
-                        required.bind="true"
-                    ></moo-text-field>
-                    <moo-select
-                        class="standard-betsy-select w-100 mt-2"
-                        value.bind="command.discordCommandActions[0].type"
-                        label="Data Type"
-                        required.bind="true">
-                        <moo-list>
-                            <moo-list-item
-                                repeat.for="type of restTypes"
-                                label.bind="getDisplayTextForCommandActionType(type)"
-                                value.bind="type"
-                            ></moo-list-item>
-                        </moo-list>
-                    </moo-select>
-                    <div class="my-2" style="min-height: 45px;">
-                        <moo-button variant="primary" click.bind="() => addHeader()" type="button">
-                            Add Header
-                        </moo-button>
-                        <div class="row g-4">
-                            <div class="col-12 col-md-6"
-                                 repeat.for="header of command.discordCommandActions[0].restRequestMetadata.requestHeaders">
-                                <div elevation="9" class="p-2">
-                                    <div class="text-end">
-                                        <span class="cursor-pointer" click.trigger="removeHeader($index)">X</span>
-                                    </div>
-                                    <moo-text-field
-                                        class="w-100"
-                                        label="Header Name"
-                                        value.bind="header.name"
-                                        placeholder="Authorization"
-                                        required.bind="true"
-                                    ></moo-text-field>
-                                    <moo-text-field
-                                        class="w-100"
-                                        label="Header Value"
-                                        value.bind="header.value"
-                                        placeholder="Bearer 123.abc.xyz"
-                                        required.bind="true"
-                                    ></moo-text-field>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="my-2" style="min-height: 45px;">
-                        <div class="my-2 fs-6 fw-bolder">
-                            Parameters can be mapped using dot notation.
-                        </div>
-                        <span>someObject.someProperty will end up with JSON that looks like
-                                <br> { "someObject": { "someProperty": "" } }
-                                <br> This can be as deep as you'd like.
-                                <br> <span class="fw-bolder">Reach out in Discord if you need assistance</span>
-                            </span>
-                        <div class="my-2">
-                            <moo-button variant="primary" click.bind="() => addParameter()" type="button">
-                                Add Parameter
-                            </moo-button>
-                        </div>
-                        <div class="row g-4">
-                            <div class="col-12 col-md-6"
-                                 repeat.for="parameter of command.commandInformation.options">
-                                <div elevation="9" class="p-2">
-                                    <div class="text-end">
-                                            <span class="cursor-pointer"
-                                                  click.trigger="removeParameter($index)">X</span>
-                                    </div>
-                                    <discord-command-parameter-creator
-                                        parameter.two-way="parameter"></discord-command-parameter-creator>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="my-2">
-                        <div class="my-2 fs-6 fw-bolder">
-                            Default Data
-                        </div>
-                        <span>
-                                This also uses dot notation and will fill in any data you need for your API
-                                <br>Which are not required to be entered in with the command
-                            </span>
-                        <div class="my-2" style="min-height: 50px;">
-                            <moo-button variant="primary" click.bind="() => addDefaultData()"
-                                        type="button">
-                                Add Default Data
-                            </moo-button>
-                        </div>
-                        <div class="row g-4">
-                            <div class="col-12 col-md-6"
-                                 repeat.for="parameter of command.discordCommandActions[0].restRequestMetadata.defaultRequestData">
-                                <div elevation="9" class="p-2">
-                                    <div class="text-end">
-                                            <span class="cursor-pointer"
-                                                  click.trigger="removeDefaultData($index)">X</span>
-                                    </div>
-                                    <discord-command-parameter-creator
-                                        parameter.two-way="parameter"
-                                        hide-description.bind="true"
-                                        hide-switch.bind="true"
-                                        show-value.bind="true"
-                                    ></discord-command-parameter-creator>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="my-2">
-                        <div class="my-2 fs-6 fw-bolder">
-                            Response Mapping
-                        </div>
-                        <span>
-                                This is optional. If you leave this alone you will receive the entire JSON response in the message.
-                                <br> If you add response mapping parameters ONLY those included in these mappings will be shown.
-                                <br> This also uses dot notation and will fill in any data you need for your API
-                            </span>
-                        <div class="my-2" style="min-height: 50px;">
-                            <moo-button variant="primary" click.bind="() => addResponseMapping()"
-                                        type="button">
-                                Add Response Mapping
-                            </moo-button>
-                        </div>
-                        <div class="row g-4">
-                            <div class="col-12 col-md-6"
-                                 repeat.for="parameter of command.discordCommandActions[0].restRequestMetadata.requestResponseMappings">
-                                <div elevation="9" class="p-2">
-                                    <div class="text-end">
-                                            <span class="cursor-pointer"
-                                                  click.trigger="removeResponseMapping($index)">X</span>
-                                    </div>
-                                    <discord-command-parameter-creator
-                                        parameter.two-way="parameter"
-                                        hide-description.bind="true"
-                                        hide-switch.bind="true"
-                                    ></discord-command-parameter-creator>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <rest-request-builder command.bind="command" action.bind="command.discordCommandActions[0]"></rest-request-builder>
                 </template>
 
 
@@ -192,6 +52,7 @@
                     <discord-action-creator
                         single.bind="true"
                         action.bind="command.discordCommandActions[0]"
+                        command.bind="command"
                         forced-type.bind="true"
                     ></discord-action-creator>
 

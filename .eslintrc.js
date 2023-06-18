@@ -21,7 +21,7 @@ module.exports = {
         jest: true,
     },
     rules: {
-        indent: ["error", 4, { "SwitchCase": 1 }],
+        indent: ["error", 4, { SwitchCase: 1 }],
         "require-atomic-updates": "warn",
         "no-console": "warn",
         "unused-imports/no-unused-imports": "error",

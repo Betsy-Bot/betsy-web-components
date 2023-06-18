@@ -6,10 +6,10 @@
                     required.bind="true">
             <moo-list>
                 <moo-list-item
-                    repeat.for="action of actions"
-                    label.bind="action.label"
-                    value.bind="action.value"
-                    disabled.bind="action.disabled"
+                    repeat.for="act of actions"
+                    label.bind="act.label"
+                    value.bind="act.value"
+                    disabled.bind="act.disabled"
                 ></moo-list-item>
             </moo-list>
         </moo-select>
@@ -22,6 +22,19 @@
 </div>
 
 <discord-message-creator
+    if.bind="requiresMessage"
     allow-components.bind="true"
     message.two-way="action.discordMessage.message"
 ></discord-message-creator>
+
+<discord-form-selector
+    if.bind="requiresFormBuilder"
+    label="Select form to open"
+    form-id.bind="action.discordFormId"
+></discord-form-selector>
+
+<rest-request-builder
+    if.bind="requiresRestBuilder"
+    action.bind="action"
+    command.bind="command"
+></rest-request-builder>

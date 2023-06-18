@@ -20,7 +20,7 @@ import { MDCDialog, MDCDialogCloseEvent } from "@material/dialog";
 @containerless()
 @inject(DiscordService)
 export class DiscordMessageCreator implements ICustomElementViewModel {
-    @bindable({ mode: BindingMode.twoWay }) message: DiscordMessageContent | null;
+    @bindable({ mode: BindingMode.twoWay }) message: DiscordMessageContent = {};
     @bindable single;
     @bindable allowComponents = true;
     @bindable maxComponents = 5;
@@ -58,7 +58,7 @@ export class DiscordMessageCreator implements ICustomElementViewModel {
     }
 
     get canCreateEmbed() {
-        if (!this.message?.embeds) return true;
+        if (!this.message.embeds) return true;
         if (!this.single) {
             return !this.message.embeds || this.message.embeds.length < 10;
         } else {
@@ -68,7 +68,7 @@ export class DiscordMessageCreator implements ICustomElementViewModel {
 
     importJson(event: MDCDialogCloseEvent) {
         if (event.detail.action == "ok") {
-            this.message = JSON.parse(this.json);
+            this.message = JSON.parse(this.json) as DiscordMessageContent;
             this.json = "";
         }
     }
