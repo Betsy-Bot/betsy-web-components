@@ -10,8 +10,8 @@
     "scripts": {
         "lint:js": "eslint src test --ext .js,.ts",
         "lint:html": "htmlhint -c .htmlhintrc src",
-        "lint": "npm run lint:js && npm run lint:html",
-        "pretest": "npm run lint",
+        "lint": "pnpm run lint:js && pnpm run lint:html",
+        "pretest": "pnpm run lint",
         "start": "vite",
         "build": "rimraf dist && vite build",
         "build:staging": "rimraf dist && vite build --mode staging",
