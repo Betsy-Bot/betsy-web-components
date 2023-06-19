@@ -24,6 +24,7 @@ export class MooTextField implements ICustomElementViewModel {
     @bindable minlength: number;
     @bindable maxlength: number;
     @bindable required;
+    @bindable placeholder;
     textField;
 
     attached() {
