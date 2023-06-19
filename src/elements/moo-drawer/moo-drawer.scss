@@ -9,3 +9,9 @@
 .mdc-drawer {
     background-color: rgba(76, 96, 133, 1);
 }
+
+.close-icon {
+    position: absolute;
+    right: 0;
+    z-index: 9999;
+}

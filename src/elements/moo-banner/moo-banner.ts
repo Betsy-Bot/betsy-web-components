@@ -1,16 +1,14 @@
-import {bindable, BindingMode, customElement, ICustomElementViewModel} from 'aurelia';
-import {CloseReason, MDCBanner} from '@material/banner';
-import template from './moo-banner.html';
+import { bindable, BindingMode, containerless, ICustomElementViewModel } from 'aurelia';
+
 import './moo-banner.scss';
 
-@customElement({
-    name: 'moo-banner',
-    template,
-})
+import { CloseReason, MDCBanner } from '@material/banner';
+
+@containerless()
 export class MooBanner implements ICustomElementViewModel {
     @bindable primaryAction;
     @bindable secondaryAction;
-    @bindable({mode: BindingMode.twoWay}) open;
+    @bindable({ mode: BindingMode.twoWay }) open;
     bannerEl: HTMLButtonElement;
     banner: MDCBanner;
 

@@ -1,11 +1,9 @@
-import {bindable, customElement, ICustomElementViewModel} from 'aurelia';
-import template from './moo-accordion.html';
+import { bindable, capture, containerless, ICustomElementViewModel } from 'aurelia';
+
 import './moo-accordion.scss';
 
-@customElement({
-    name: 'moo-accordion',
-    template,
-})
+@containerless()
+@capture()
 export class MooAccordion implements ICustomElementViewModel {
     @bindable header: string;
     accordionItemEl: HTMLElement;
@@ -17,7 +15,7 @@ export class MooAccordion implements ICustomElementViewModel {
             if (header !== element) {
                 header.parentElement.classList.remove('accordion-expanded');
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
+                // @ts-expect-error
                 header.nextElementSibling.style.maxHeight = 0;
             }
         });

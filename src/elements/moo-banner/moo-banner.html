@@ -8,18 +8,18 @@
             </div>
         </div>
         <div class="mdc-banner__actions">
-            <button type="button" class="mdc-button mdc-banner__secondary-action" if.bind="secondaryAction">
+            <moo-button variant="secondary" type="button" class="mdc-banner__secondary-action" if.bind="secondaryAction">
                 <div class="mdc-button__ripple"></div>
                 <div class="mdc-button__label">
                     ${secondaryAction}
                 </div>
-            </button>
-            <button type="button" class="mdc-button mdc-banner__primary-action" if.bind="primaryAction">
+            </moo-button>
+            <moo-button variant="primary" type="button" class="mdc-banner__primary-action" if.bind="primaryAction">
                 <div class="mdc-button__ripple"></div>
                 <div class="mdc-button__label">
                     ${primaryAction}
                 </div>
-            </button>
+            </moo-button>
         </div>
     </div>
 </div>
