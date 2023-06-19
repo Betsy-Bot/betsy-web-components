@@ -4,7 +4,7 @@ import { IRouter } from "@aurelia/router-lite";
 import * as discordModels from "./models/discord";
 import {
     BaseDiscordCommand,
-    DiscordForm,
+    DiscordForm, DiscordGuildUser,
     SendMessageToChannelRequest,
 } from "./models/discord";
 import { ApiService } from "./api-service";
@@ -19,6 +19,7 @@ export class DiscordService {
     };
     discordGuildId: string | undefined;
     messages;
+    localUsers: DiscordGuildUser[] = [];
 
     RESPONSE_MESSAGES = "ResponseMessages";
     DATA_COMMANDS = "DataCommands";
@@ -651,9 +652,13 @@ export class DiscordService {
     }
 
     async getGuildMember(memberId: string) {
-        return this.api.doGet(
+        const foundUser = this.localUsers.find(x => x.user.id == memberId);
+        if (foundUser) return foundUser;
+        const response = await this.api.doGet(
             `User/DiscordUser?discordGuildId=${this.getLocalDiscordGuildId()}&discordUserId=${memberId}`
-        );
+        )  as DiscordGuildUser;
+        this.localUsers.push(response);
+        return response;
     }
 
     async exportTemplate(topics: string[]) {

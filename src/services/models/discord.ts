@@ -221,3 +221,14 @@ export enum DiscordCommandActionType {
     SendPatchRequest = 11,
     SendDeleteRequest = 12,
 }
+
+export class DiscordGuildUser {
+    user: DiscordGuildUserUser;
+    joinedAt: string;
+}
+
+export class DiscordGuildUserUser {
+    id: string;
+    username: string;
+    avatar: string;
+}
