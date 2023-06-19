@@ -45,6 +45,12 @@ export class Reviews {
                 review.discordUserId
             );
             review.displayName = `${name} (${review.discordUserId})`;
+            if (review.targetUserId) {
+                const targetName = await this.discordNameValueConverter.toView(
+                    review.targetUserId
+                );
+                review.targetDisplayName = `${targetName} (${review.targetUserId})`;
+            }
         }
         this.columns = [
             {
@@ -55,6 +61,9 @@ export class Reviews {
             },
             {
                 dataField: "displayName",
+            },
+            {
+                dataField: "targetDisplayName",
             },
             {
                 dataField: "type",

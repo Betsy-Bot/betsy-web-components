@@ -54,11 +54,16 @@
                         command.bind="command"
                     ></discord-action-creator>
                 </template>
-                <discord-message-creator
-                    case="response"
-                    allow-components.bind="true"
-                    message.bind="command.responseMessage"
-                ></discord-message-creator>
+                <template case="response">
+                    <moo-switch value.bind="command.private"></moo-switch>
+                    <label class="mb-3">
+                        Private?
+                    </label>
+                    <discord-message-creator
+                        allow-components.bind="true"
+                        message.bind="command.responseMessage"
+                    ></discord-message-creator>
+                </template>
             </template>
             <div class="text-end mt-3">
                 <moo-button variant="primary" type="submit">
