@@ -197,6 +197,7 @@ export class DiscordComponent {
     max_length?: number;
     placeholder?: string;
     required?: boolean;
+    emoji: DiscordEmoji
 }
 
 export enum DiscordButtonStyle {
@@ -205,6 +206,11 @@ export enum DiscordButtonStyle {
     Success = 3,
     Danger = 4,
     Link = 5,
+}
+
+export class DiscordEmoji {
+    name: string;
+    animated: boolean;
 }
 
 export enum DiscordCommandActionType {
