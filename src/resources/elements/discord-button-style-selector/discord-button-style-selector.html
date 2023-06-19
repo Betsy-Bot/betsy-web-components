@@ -1,0 +1,10 @@
+<moo-select class="standard-betsy-select w-100 mb-2" value.bind="style" label="Select Button Style">
+    <moo-list>
+        <moo-list-item
+            label.bind="sty.label"
+            repeat.for="sty of styles"
+            value.bind="sty.value"
+            click.bind="(value) => style = value"
+        ></moo-list-item>
+    </moo-list>
+</moo-select>

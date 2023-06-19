@@ -3,7 +3,9 @@ import { route, Router } from "@aurelia/router-lite";
 
 import { DiscordNameValueConverter } from "../../../resources/value-converters";
 import { DiscordService } from "../../../services/discord-service";
+import { DiscordButtonStyle } from "../../../services/models/discord";
 
+import { MDCDialog, MDCDialogCloseEvent } from "@material/dialog";
 import { toast } from "lets-toast";
 
 @route({
@@ -22,6 +24,12 @@ export class Reviews {
     guildId;
     reviews: any[];
     columns;
+    tab = 'settings';
+    categoryDialog: MDCDialog;
+    newCategory = {
+        buttonStyle: DiscordButtonStyle.Primary,
+        name: ""
+    }
 
     types = [
         {
@@ -40,6 +48,9 @@ export class Reviews {
             this.discordService.getDiscordServerInformation(this.guildId),
             this.discordService.getDiscordReviews(),
         ]);
+        if (!this.guild.reviewSettings) {
+            this.guild.reviewSettings = {};
+        }
         for (const review of this.reviews) {
             const name = await this.discordNameValueConverter.toView(
                 review.discordUserId
@@ -80,13 +91,18 @@ export class Reviews {
     }
 
     async handleSave() {
-        if (!this.guild.reviewSettings) {
-            this.guild.reviewSettings = {};
-        }
         if (!this.guild?.reviewSettings?.reviewsChannelId) {
             return;
         }
         await this.discordService.updateReviewSettingsForGuild(this.guild);
         toast("Updated Settings", { severity: "success" });
+    }
+
+    addCategory(event: MDCDialogCloseEvent) {
+        if (event.detail.action == "ok") {
+            if (!this.guild.reviewSettings.categories) {
+                this.guild.reviewSettings.categories = [];
+            }
+        }
     }
 }

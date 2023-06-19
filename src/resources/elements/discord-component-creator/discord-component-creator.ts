@@ -20,28 +20,6 @@ export class DiscordComponentCreator {
             type: DiscordComponentType.Button,
         },
     ];
-    styles = [
-        {
-            label: "Primary",
-            value: 1,
-        },
-        {
-            label: "Secondary",
-            value: 2,
-        },
-        {
-            label: "Success",
-            value: 3,
-        },
-        {
-            label: "Danger",
-            value: 4,
-        },
-        {
-            label: "Link",
-            value: 5,
-        },
-    ];
 
     attached() {
         if (!this.components) {

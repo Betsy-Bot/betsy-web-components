@@ -29,3 +29,4 @@ export * from "./discord-menu-item";
 export * from "./discord-emoji-selector";
 export * from "./color-picker";
 export * from './rest-request-builder';
+export * from './discord-button-style-selector';

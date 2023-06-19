@@ -4,21 +4,73 @@
     subtitle="Manage and track your server and user reviews"
 ></feature-header>
 
-<div class="my-3 d-flex" if.bind="guild.reviewSettings">
-    <div class="w-75">
-        <discord-channel-selector
-            label="Select Channel for Reviews"
-            type.bind="0"
-            channel-id.bind="guild.reviewSettings.reviewsChannelId"
-        ></discord-channel-selector>
-    </div>
-    <div class="ms-3 w-25">
-        <moo-button class="w-100 h-100" variant="primary" click.bind="() => handleSave()" type="button">
-            Save
-        </moo-button>
-    </div>
-</div>
+<confirmation-dialog
+    cancel-text="Cancel"
+    confirm-text="Add"
+    dialog.two-way="categoryDialog"
+    handler.bind="(event) => addCategory(event)"
+    title="Are you sure you would like to delete?"
+>
+    <discord-button-style-selector style.bind="component.style"></discord-button-style-selector>
+    <moo-text-field
+        max="12"
+        type="number"
+        class="w-100"
+        label="Discord ID"
+        placeholder="Enter category name"
+        value.bind="newCategory.name"
+    ></moo-text-field>
+</confirmation-dialog>
 
-<template if.bind="reviews && columns">
-    <moo-data-grid items.bind="reviews" columns.bind="columns"></moo-data-grid>
+<moo-tab-bar class="my-3">
+    <moo-tab
+        label="Settings"
+        tab.bind="tab"
+        value="settings"
+        active.bind="tab === 'settings'"
+    ></moo-tab>
+    <moo-tab
+        label="Response Message"
+        tab.bind="tab"
+        value="response"
+        active.bind="tab === 'response'"
+    ></moo-tab>
+    <moo-tab
+        label="Submissions"
+        tab.bind="tab"
+        value="submissions"
+        active.bind="tab === 'submissions'"
+    ></moo-tab>
+</moo-tab-bar>
+<template switch.bind="tab">
+    <div case="settings">
+        <template if.bind="guild.reviewSettings">
+            <discord-channel-selector
+                label="Select Channel for Reviews"
+                type.bind="0"
+                channel-id.bind="guild.reviewSettings.reviewsChannelId"
+            ></discord-channel-selector>
+            <div class="text-end mt-3">
+                <moo-button variant="primary" click.bind="() => handleSave()" type="button">
+                    Save
+                </moo-button>
+            </div>
+        </template>
+    </div>
+
+    <div case="response" class="my-3 row">
+        <div class="col-12 col-xl-8">
+            <discord-message-creator
+                message.two-way="guild.reviewSettings.responseMessage"
+            ></discord-message-creator>
+        </div>
+        <div class="col-12 col-xl-4">
+            <discord-message-preview message.bind="guild.reviewSettings.responseMessage"></discord-message-preview>
+        </div>
+    </div>
+
+    <template case="submissions">
+        <moo-data-grid items.bind="reviews" columns.bind="columns"></moo-data-grid>
+    </template>
 </template>
+

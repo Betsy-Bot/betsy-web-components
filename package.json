@@ -18,7 +18,7 @@
         "start": "vite",
         "test": "jest",
         "update-depenencies": "npx npm-check-updates -u",
-        "update-services": "npx orval"
+        "update-services": "npx orval@latest"
     },
     "dependencies": {
         "@darkguy10/discord-markdown": "^2.6.0",
