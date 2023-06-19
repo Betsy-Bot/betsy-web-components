@@ -96,7 +96,12 @@ body {
 }
 
 .mdc-text-field {
-    @include textfield.placeholder-color(theme.$grey-500)
+    @include textfield.placeholder-color(theme.$grey-500);
+}
+
+.mdc-text-field ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: theme.$grey-500 !important;
+    opacity: 1; /* Firefox */
 }
 
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__affix--prefix {
