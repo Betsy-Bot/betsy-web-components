@@ -28,7 +28,7 @@
 
 .accordion-content {
     max-height: 0;
-    overflow: hidden;
+    overflow: scroll;
     padding: 0 24px;
     transition: all 0.3s ease;
 }

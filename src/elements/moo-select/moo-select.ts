@@ -1,25 +1,39 @@
-import {bindable, BindingMode, customElement, ICustomElementViewModel} from "aurelia";
-import template from "./moo-select.html";
-import {MDCSelect} from '@material/select';
+import {
+    bindable,
+    BindingMode,
+    containerless,
+    ICustomElementViewModel,
+} from "aurelia";
 
-@customElement({
-    name: 'moo-select',
-    template,
-    containerless: true
-})
+import { MDCSelect } from "@material/select";
+
+@containerless()
 export class MooSelect implements ICustomElementViewModel {
     @bindable label;
     @bindable options;
-    @bindable({mode: BindingMode.twoWay}) value;
+    @bindable({ mode: BindingMode.twoWay }) value: string | number | undefined;
     @bindable class;
+    @bindable required: boolean;
+    @bindable readonly: boolean;
     selectEl: HTMLElement;
 
     attached() {
         const select = new MDCSelect(this.selectEl);
-        select.value = this.value;
+        if (this.readonly) {
+            select.disabled = true;
+        }
+        if (this.value) {
+            select.value = this.value.toString();
+        }
 
-        select.listen('MDCSelect:change', () => {
+        select.listen("MDCSelect:change", () => {
             this.value = select.value;
         });
+    }
+
+    get requiredClass() {
+        if (this.required) {
+            return "mdc-select--required";
+        }
     }
 }

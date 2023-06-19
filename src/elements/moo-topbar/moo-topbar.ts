@@ -1,13 +1,10 @@
-import {bindable, customElement, ICustomElementViewModel} from 'aurelia';
-import {MDCTopAppBar} from '@material/top-app-bar';
-import template from './moo-topbar.html';
+import { containerless, ICustomElementViewModel } from 'aurelia';
+
 import './moo-topbar.scss';
 
-@customElement({
-    name: 'moo-topbar',
-    template,
-    containerless: true
-})
+import { MDCTopAppBar } from '@material/top-app-bar';
+
+@containerless()
 export class MooTopbar implements ICustomElementViewModel {
     header: HTMLElement;
     attached() {

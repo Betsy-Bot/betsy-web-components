@@ -1,9 +1,9 @@
-<div class="mdc-select mdc-select--filled ${class}" ref="selectEl">
+<div class="mdc-select mdc-select--filled ${class} ${requiredClass}" ref="selectEl">
     <div class="mdc-select__anchor"
          role="button"
          aria-haspopup="listbox"
          aria-expanded="false"
-         aria-labelledby="demo-label demo-selected-text">
+         aria-required.bind="required">
         <span class="mdc-select__ripple"></span>
         <span id="demo-label" class="mdc-floating-label">${label}</span>
         <span class="mdc-select__selected-text-container">

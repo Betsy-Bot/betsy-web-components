@@ -10,11 +10,11 @@ export abstract class Grid extends Alignable {
   @bindable({ set: numberToPixelsInterceptor }) columnGap?: string;
 
   get gridStyle(): Record<string, string | undefined> {
-    return {
-      gap: this.gap,
-      rowGap: this.rowGap,
-      columnGap: this.columnGap,
-      ...this.alignableStyle,
-    };
+      return {
+          gap: this.gap,
+          rowGap: this.rowGap,
+          columnGap: this.columnGap,
+          ...this.alignableStyle,
+      };
   }
 }

@@ -14,15 +14,15 @@ export abstract class Spaceable {
   @bindable({ set: numberToPixelsInterceptor }) marginTop?: CSSStyleDeclaration['marginTop'];
 
   get spaceStyle(): Record<string, string | undefined> {
-    return {
-      padding: this.padding,
-      paddingLeft: this.paddingLeft,
-      paddingRight: this.paddingRight,
-      paddingTop: this.paddingTop,
-      margin: this.margin,
-      marginLeft: this.marginLeft,
-      marginRight: this.marginRight,
-      marginTop: this.marginTop,
-    };
+      return {
+          padding: this.padding,
+          paddingLeft: this.paddingLeft,
+          paddingRight: this.paddingRight,
+          paddingTop: this.paddingTop,
+          margin: this.margin,
+          marginLeft: this.marginLeft,
+          marginRight: this.marginRight,
+          marginTop: this.marginTop,
+      };
   }
 }

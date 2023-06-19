@@ -43,3 +43,8 @@ body {
 .moo-button-secondary:hover {
     background-color: $moo-button-background-color-secondary-hover;
 }
+
+.moo-button:disabled {
+    background-color: rgba(0,0,0,0.2);
+    color: gray;
+}
