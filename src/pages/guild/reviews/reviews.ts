@@ -24,12 +24,12 @@ export class Reviews {
     guildId;
     reviews: any[];
     columns;
-    tab = 'settings';
+    tab = "settings";
     categoryDialog: MDCDialog;
     newCategory = {
         buttonStyle: DiscordButtonStyle.Primary,
-        name: ""
-    }
+        name: "",
+    };
 
     types = [
         {
@@ -52,17 +52,20 @@ export class Reviews {
             this.guild.reviewSettings = {};
         }
         for (const review of this.reviews) {
-            const name = await this.discordNameValueConverter.toView(
-                review.discordUserId
-            );
+            const name = await this.discordNameValueConverter.toView(review.discordUserId);
             review.displayName = `${name} (${review.discordUserId})`;
             if (review.targetUserId) {
-                const targetName = await this.discordNameValueConverter.toView(
-                    review.targetUserId
-                );
+                const targetName = await this.discordNameValueConverter.toView(review.targetUserId);
                 review.targetDisplayName = `${targetName} (${review.targetUserId})`;
             }
+            if (review.category && !this.types.find(x => x.display == review.category)) {
+                this.types.push({
+                    value: this.types.length,
+                    display: review.category
+                })
+            }
         }
+        console.log(this.types);
         this.columns = [
             {
                 dataField: "message",
@@ -75,6 +78,9 @@ export class Reviews {
             },
             {
                 dataField: "targetDisplayName",
+            },
+            {
+                dataField: "category",
             },
             {
                 dataField: "type",
@@ -103,6 +109,19 @@ export class Reviews {
             if (!this.guild.reviewSettings.categories) {
                 this.guild.reviewSettings.categories = [];
             }
+            this.guild.reviewSettings.categories.push(this.newCategory);
+            this.newCategory = { name: "", buttonStyle: DiscordButtonStyle.Primary };
         }
+    }
+
+    getButtonComponentForCategory(category) {
+        return {
+            style: category.buttonStyle,
+            label: category.name
+        }
+    }
+
+    removeCategory(rowIndex: number) {
+        this.guild.reviewSettings.categories.splice(rowIndex, 1);
     }
 }

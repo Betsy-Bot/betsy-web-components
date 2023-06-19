@@ -1,15 +1,15 @@
 import { bindable, containerless } from "aurelia";
 
-import { DiscordButtonStyle } from "../../../services/models/discord";
+import { DiscordComponent } from "../../../services/models/discord";
 
 import "./discord-button.scss";
 
 @containerless()
 export class DiscordButton {
-    @bindable button;
+    @bindable button: DiscordComponent;
 
-    getButtonClass(style: DiscordButtonStyle) {
-        switch (style) {
+    get buttonClass() {
+        switch (this.button.style) {
             case 1:
                 return "discord-button-primary";
             case 3:

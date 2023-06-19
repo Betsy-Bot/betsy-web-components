@@ -2,6 +2,7 @@
     doc-url="https://docs.betsybot.xyz/features/reviews"
     title="Reviews"
     subtitle="Manage and track your server and user reviews"
+    save-function.bind="() => handleSave()"
 ></feature-header>
 
 <confirmation-dialog
@@ -11,12 +12,11 @@
     handler.bind="(event) => addCategory(event)"
     title="Are you sure you would like to delete?"
 >
-    <discord-button-style-selector style.bind="component.style"></discord-button-style-selector>
+    <discord-button-style-selector style.bind="newCategory.buttonStyle"></discord-button-style-selector>
     <moo-text-field
         max="12"
-        type="number"
         class="w-100"
-        label="Discord ID"
+        label="Category Name"
         placeholder="Enter category name"
         value.bind="newCategory.name"
     ></moo-text-field>
@@ -45,16 +45,41 @@
 <template switch.bind="tab">
     <div case="settings">
         <template if.bind="guild.reviewSettings">
-            <discord-channel-selector
-                label="Select Channel for Reviews"
-                type.bind="0"
-                channel-id.bind="guild.reviewSettings.reviewsChannelId"
-            ></discord-channel-selector>
-            <div class="text-end mt-3">
-                <moo-button variant="primary" click.bind="() => handleSave()" type="button">
-                    Save
+            <div class="d-flex">
+                <discord-channel-selector
+                    class="w-75 me-4"
+                    label="Select Channel for Reviews"
+                    type.bind="0"
+                    channel-id.bind="guild.reviewSettings.reviewsChannelId"
+                ></discord-channel-selector>
+                <moo-button variant="primary" click.bind="() => categoryDialog.open()" type="button">
+                    Create New Review Category
                 </moo-button>
             </div>
+            <template if.bind="guild.reviewSettings.categories">
+                <feature-header
+                    class="my-3"
+                    title="Review Categories"
+                    subtitle="Review Categories will appear as buttons during the review process with the '/review create' command. You will also be able to filter by these categories in the review list."
+                ></feature-header>
+                <div class="row g-4" if.bind="guild.reviewSettings.categories && guild.reviewSettings.categories.length > 0">
+                    <div class="col-12 col-xl-6 position-relative" repeat.for="category of guild.reviewSettings.categories" elevation="12">
+                        <div class="p-4">
+                            <div>
+                                Category Name: ${category.name}
+                            </div>
+                            <div>
+                                Button Preview: <discord-button button.bind="getButtonComponentForCategory(category)"></discord-button>
+                            </div>
+                        </div>
+                        <moo-fab
+                            class="redFab topRight position-absolute top-0 end-0"
+                            icon="delete"
+                            click.bind="() => removeCategory($index)"
+                        ></moo-fab>
+                    </div>
+                </div>
+            </template>
         </template>
     </div>
 

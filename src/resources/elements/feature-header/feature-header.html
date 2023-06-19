@@ -7,7 +7,7 @@
         <moo-fab
             class="mx-2 greenFab"
             icon="add_circle"
-            click.bind="() => handleCreate()"
+            click.bind="() => createFunction()"
             if.bind="createFunction || createRoute"
             route.bind="createRoute"
         ></moo-fab>
@@ -15,15 +15,22 @@
         <moo-fab
             class="mx-2"
             icon="content_copy"
-            click.bind="() => handleCopy()"
+            click.bind="() => copyFunction()"
             if.bind="copyFunction"
         ></moo-fab>
 
         <moo-fab
             class="mx-2 redFab"
             icon="delete"
-            click.bind="() => handleDelete()"
+            click.bind="() => deleteFunction()"
             if.bind="deleteFunction"
+        ></moo-fab>
+
+        <moo-fab
+            class="mx-2 greenFab"
+            icon="save"
+            click.bind="() => saveFunction()"
+            if.bind="saveFunction"
         ></moo-fab>
     </h2>
     <div>
