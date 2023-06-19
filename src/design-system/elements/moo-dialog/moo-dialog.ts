@@ -13,6 +13,7 @@ export class MooDialog implements ICustomElementViewModel {
     @bindable dialogEl: HTMLElement;
     @bindable({ mode: BindingMode.twoWay }) dialog: MDCDialog;
     @bindable handler?: (Event) => void;
+    @bindable title: string;
 
     attached() {
         this.dialog = new MDCDialog(this.dialogEl);

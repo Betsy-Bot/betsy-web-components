@@ -5,6 +5,7 @@
              aria-modal="true"
              aria-labelledby="my-dialog-title"
              aria-describedby="my-dialog-content">
+            <h2 class="mdc-dialog__title" id="my-dialog-title" if.bind="title">${title}</h2>
             <div class="mdc-dialog__content" id="my-dialog-content">
                 <au-slot></au-slot>
             </div>
