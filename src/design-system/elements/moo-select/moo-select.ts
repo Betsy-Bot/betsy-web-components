@@ -27,6 +27,9 @@ export class MooSelect implements ICustomElementViewModel {
         }
 
         select.listen("MDCSelect:change", () => {
+            if (typeof(this.value) == "number") {
+                return this.value = parseInt(select.value);
+            }
             this.value = select.value;
         });
     }

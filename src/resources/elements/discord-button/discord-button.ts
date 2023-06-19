@@ -1,15 +1,14 @@
 import { bindable, containerless } from "aurelia";
 
+import { DiscordButtonStyle } from "../../../services/models/discord";
+
 import "./discord-button.scss";
 
 @containerless()
 export class DiscordButton {
     @bindable button;
 
-    getButtonClass(style: string | number) {
-        if (typeof(style) == 'string') {
-            style = parseInt(style);
-        }
+    getButtonClass(style: DiscordButtonStyle) {
         switch (style) {
             case 1:
                 return "discord-button-primary";
