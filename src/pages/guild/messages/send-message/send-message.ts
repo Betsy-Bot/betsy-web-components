@@ -2,7 +2,7 @@ import { inject } from 'aurelia';
 import { IRouteViewModel, route } from '@aurelia/router-lite';
 
 import { DiscordService } from '../../../../services/discord-service';
-import { SendMessageToChannelRequest } from '../../../../services/models/discord';
+import { ISendMessageToChannelRequest } from '../../../../services/models/discord';
 
 import { toast } from 'lets-toast';
 
@@ -18,7 +18,7 @@ export class SendMessage implements IRouteViewModel {
     guild;
     guildId;
     channels;
-    request: SendMessageToChannelRequest = {
+    request: ISendMessageToChannelRequest = {
         channelType: null,
         message: {
             content: 'Some Content',

@@ -20,8 +20,8 @@ export class SupportTicket implements IRouteViewModel {
     closing = false;
 
     loading(params: Params) {
-        this.settingsId = params.supportTicketSettingsId as string;
-        this.supportTicketId = params.ticketId as string;
+        this.settingsId = params.supportTicketSettingsId!;
+        this.supportTicketId = params.ticketId!;
     }
 
     async attached() {

@@ -1,9 +1,9 @@
-import { BaseDiscordServer } from "./discord";
+import { IBaseDiscordServer } from "./discord";
 
 export interface ProfileResponse {
     token: string,
     id: string,
-    activeServers: BaseDiscordServer[],
+    activeServers: IBaseDiscordServer[],
     discordId: string,
     avatar: string
 }

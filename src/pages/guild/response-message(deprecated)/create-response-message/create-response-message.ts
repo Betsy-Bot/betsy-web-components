@@ -3,9 +3,9 @@ import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
 import {
-    BaseDiscordCommand,
     DiscordCommandActionType,
     DiscordCommandType,
+    IBaseDiscordCommand,
 } from "../../../../services/models/discord";
 
 import { toast } from "lets-toast";
@@ -27,7 +27,7 @@ export class CreateResponseMessage implements IRouteViewModel {
 
     guildId: string;
 
-    command: BaseDiscordCommand = {
+    command: IBaseDiscordCommand = {
         name: null,
         description: null,
         discordGuildId: null,

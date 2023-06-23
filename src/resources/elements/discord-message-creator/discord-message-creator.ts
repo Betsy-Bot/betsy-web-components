@@ -10,7 +10,7 @@ import { watch } from "@aurelia/runtime-html";
 import { DiscordService } from "../../../services/discord-service";
 import {
     DiscordEmbed,
-    DiscordMessageContent,
+    IDiscordMessageContent,
 } from "../../../services/models/discord";
 
 import "./discord-message-creator.scss";
@@ -20,7 +20,7 @@ import { MDCDialog, MDCDialogCloseEvent } from "@material/dialog";
 @containerless()
 @inject(DiscordService)
 export class DiscordMessageCreator implements ICustomElementViewModel {
-    @bindable({ mode: BindingMode.twoWay }) message: DiscordMessageContent | null = {};
+    @bindable({ mode: BindingMode.twoWay }) message: IDiscordMessageContent | null = {};
     @bindable single;
     @bindable allowComponents = true;
     @bindable maxComponents = 5;
@@ -74,7 +74,7 @@ export class DiscordMessageCreator implements ICustomElementViewModel {
 
     importJson(event: MDCDialogCloseEvent) {
         if (event.detail.action == "ok") {
-            this.message = JSON.parse(this.json) as DiscordMessageContent;
+            this.message = JSON.parse(this.json) as IDiscordMessageContent;
             this.json = "";
         }
     }

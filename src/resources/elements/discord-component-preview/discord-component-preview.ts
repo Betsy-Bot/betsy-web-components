@@ -12,10 +12,10 @@ export class DiscordComponentPreview implements ICustomElementViewModel{
             return 'col-12';
         }
         switch (type) {
-        case DiscordComponentType.Button:
-            return 'col-2'
-        case DiscordComponentType.MenuSelect:
-            return 'col-12'
+            case DiscordComponentType.Button:
+                return 'col-2'
+            case DiscordComponentType.MenuSelect:
+                return 'col-12'
         }
     }
 }

@@ -2,11 +2,7 @@ import { IEventAggregator, inject } from "aurelia";
 import { IRouter, IRouteViewModel, Params, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
-import {
-    BaseDiscordCommand,
-    DiscordCommandActionType,
-    DiscordCommandType,
-} from "../../../../services/models/discord";
+import { DiscordCommandActionType, DiscordCommandType,IBaseDiscordCommand } from "../../../../services/models/discord";
 
 import { toast } from "lets-toast";
 
@@ -22,9 +18,9 @@ export class ManageCustomCommand implements IRouteViewModel {
         private router: IRouter
     ) {}
 
-    command;
-    tab = "settings"
-    commandTemplate: BaseDiscordCommand = {
+    command: IBaseDiscordCommand;
+    tab = "settings";
+    commandTemplate: IBaseDiscordCommand = {
         name: "",
         description: "",
         discordGuildId: "",
@@ -33,7 +29,7 @@ export class ManageCustomCommand implements IRouteViewModel {
         active: true,
         discordCommandActions: [],
     };
-    guildId;
+    guildId: string;
     discordApplicationCommandId: string | number | undefined;
     isNew = false;
     selectedAction = 0;
@@ -44,10 +40,7 @@ export class ManageCustomCommand implements IRouteViewModel {
 
     async attached() {
         this.guildId = this.discordService.getLocalDiscordGuildId();
-        if (
-            !this.discordApplicationCommandId ||
-            this.discordApplicationCommandId == 0
-        ) {
+        if (!this.discordApplicationCommandId || this.discordApplicationCommandId == 0) {
             this.isNew = true;
             this.command = this.commandTemplate;
         } else {
@@ -64,18 +57,12 @@ export class ManageCustomCommand implements IRouteViewModel {
         try {
             if (this.isNew) {
                 this.command.discordGuildId = this.guildId;
-                await this.discordService.createApplicationCommand(
-                    this.command
-                );
-                toast("Custom Command Created!", { severity: "success" });
+                await this.discordService.createApplicationCommand(this.command);
                 await this.router.load("../custom-commands", { context: this });
             } else {
                 this.command.discordGuildId = this.guildId;
-                await this.discordService.updateApplicationCommand(
-                    this.command
-                );
-                toast("Custom Command Updated!", { severity: "success" });
-            }
+                await this.discordService.updateApplicationCommand(this.command);
+            }toast(`Custom Command ${this.isNew ? 'Created' : 'Updated'}!`, { severity: "success" });
         } catch (e) {
             console.log(e);
             toast("Failed to create custom command", { severity: "error" });
@@ -85,18 +72,13 @@ export class ManageCustomCommand implements IRouteViewModel {
     tabChanged() {
         switch (this.tab) {
             case "rest":
-                if (
-                    this.command.discordCommandActions[0].type ==
-                    DiscordCommandActionType.OpenForm
-                ) {
-                    return (this.command.discordCommandActions[0].type =
-                        DiscordCommandActionType.SendPostRequest);
+                if (this.command.discordCommandActions[0].type == DiscordCommandActionType.OpenForm) {
+                    return (this.command.discordCommandActions[0].type = DiscordCommandActionType.SendPostRequest);
                 }
                 break;
             case "form":
                 if (!this.command.discordCommandActions[0].type) {
-                    return (this.command.discordCommandActions[0].type =
-                        DiscordCommandActionType.OpenForm);
+                    return (this.command.discordCommandActions[0].type = DiscordCommandActionType.OpenForm);
                 }
                 break;
         }
@@ -121,23 +103,14 @@ export class ManageCustomCommand implements IRouteViewModel {
         if (!this.command.discordCommandActions[0].restRequestMetadata) {
             this.command.discordCommandActions[0].restRequestMetadata = {};
         }
-        if (
-            !this.command.discordCommandActions[0].restRequestMetadata
-                .requestHeaders
-        ) {
-            this.command.discordCommandActions[0].restRequestMetadata.requestHeaders =
-                [];
+        if (!this.command.discordCommandActions[0].restRequestMetadata.requestHeaders) {
+            this.command.discordCommandActions[0].restRequestMetadata.requestHeaders = [];
         }
-        this.command.discordCommandActions[0].restRequestMetadata.requestHeaders.push(
-            {}
-        );
+        this.command.discordCommandActions[0].restRequestMetadata.requestHeaders.push({});
     }
 
     removeHeader(index) {
-        this.command.discordCommandActions[0].restRequestMetadata.requestHeaders.splice(
-            index,
-            1
-        );
+        this.command.discordCommandActions[0].restRequestMetadata.requestHeaders.splice(index, 1);
     }
 
     addParameter() {
@@ -150,57 +123,39 @@ export class ManageCustomCommand implements IRouteViewModel {
         this.command.commandInformation.options.push({ required: true });
     }
 
-    removeParameter(index) {
-        this.command.commandInformation.options.splice(index, 1);
+    removeParameter(index: number) {
+        this.command.commandInformation?.options.splice(index, 1);
     }
 
     addDefaultData() {
         if (!this.command.discordCommandActions[0].restRequestMetadata) {
             this.command.discordCommandActions[0].restRequestMetadata = {};
         }
-        if (
-            !this.command.discordCommandActions[0].restRequestMetadata
-                .defaultRequestData
-        ) {
-            this.command.discordCommandActions[0].restRequestMetadata.defaultRequestData =
-                [];
+        if (!this.command.discordCommandActions[0].restRequestMetadata.defaultRequestData) {
+            this.command.discordCommandActions[0].restRequestMetadata.defaultRequestData = [];
         }
-        this.command.discordCommandActions[0].restRequestMetadata.defaultRequestData.push(
-            {}
-        );
+        this.command.discordCommandActions[0].restRequestMetadata.defaultRequestData.push({});
     }
 
-    removeDefaultData(index) {
-        this.command.discordCommandActions[0].restRequestMetadata.defaultRequestData.splice(
-            index,
-            1
-        );
+    removeDefaultData(index: number) {
+        this.command.discordCommandActions[0].restRequestMetadata.defaultRequestData.splice(index, 1);
     }
 
     addResponseMapping() {
         if (!this.command.discordCommandActions[0].restRequestMetadata) {
             this.command.discordCommandActions[0].restRequestMetadata = {};
         }
-        if (
-            !this.command.discordCommandActions[0].restRequestMetadata
-                .requestResponseMappings
-        ) {
-            this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings =
-                [];
+        if (!this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings) {
+            this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings = [];
         }
-        this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings.push(
-            {}
-        );
+        this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings.push({});
     }
 
-    removeResponseMapping(index) {
-        this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings.splice(
-            index,
-            1
-        );
+    removeResponseMapping(index: number) {
+        this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings.splice(index, 1);
     }
 
-    deleteAction(index) {
+    deleteAction(index: number) {
         this.command.discordCommandActions.splice(index, 1);
     }
 
@@ -209,20 +164,22 @@ export class ManageCustomCommand implements IRouteViewModel {
             type: DiscordCommandActionType.MessageChannel,
             discordMessage: {
                 message: {
-                    content: null,
-                    embeds: null,
+                    content: "",
+                    embeds: [],
                 },
             },
         });
     }
 
     get previewMessage() {
-        return this.command?.responseMessage ?? this.responseMessage
+        return this.command.responseMessage ?? this.responseMessage;
     }
 
     get responseMessage() {
-        if (this.command?.discordCommandActions) {
-            const found = this.command?.discordCommandActions.find(x => x.type == DiscordCommandActionType.MessageResponse);
+        if (this.command.discordCommandActions) {
+            const found = this.command.discordCommandActions.find(
+                (x) => x.type == DiscordCommandActionType.MessageResponse
+            );
             return found?.discordMessage;
         }
     }

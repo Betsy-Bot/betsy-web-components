@@ -106,7 +106,7 @@ export class Settings implements IRouteViewModel {
             )
         ) {
             this.guild.customBotActive = !!this.guild.customBotActive;
-            var response = await this.discordService.toggleCustomBotActive(
+            const response = await this.discordService.toggleCustomBotActive(
                 this.guild.customBotActive
             );
             if (response) {

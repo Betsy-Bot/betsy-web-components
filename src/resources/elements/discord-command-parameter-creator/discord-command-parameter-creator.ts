@@ -17,14 +17,14 @@ export class DiscordCommandParameterCreator {
 
     getOptionName(option: DiscordApplicationCommandOptionType) {
         switch(option) {
-        case DiscordApplicationCommandOptionType.String:
-            return "String"
-        case DiscordApplicationCommandOptionType.Boolean:
-            return "Boolean"
-        case DiscordApplicationCommandOptionType.Integer:
-            return "Integer"
-        case DiscordApplicationCommandOptionType.Number:
-            return "Number"
+            case DiscordApplicationCommandOptionType.String:
+                return "String"
+            case DiscordApplicationCommandOptionType.Boolean:
+                return "Boolean"
+            case DiscordApplicationCommandOptionType.Integer:
+                return "Integer"
+            case DiscordApplicationCommandOptionType.Number:
+                return "Number"
         }
     }
 }

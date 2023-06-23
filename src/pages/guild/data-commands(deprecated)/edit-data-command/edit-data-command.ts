@@ -4,9 +4,9 @@ import { IRouter, IRouteViewModel, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
 import {
-    BaseDiscordCommand,
     DiscordCommandActionType,
     DiscordCommandType,
+    IBaseDiscordCommand,
 } from "../../../../services/models/discord";
 
 import { toast } from "lets-toast";
@@ -24,7 +24,7 @@ export class EditDataCommand implements IRouteViewModel {
     ) {}
 
     command;
-    commandTemplate: BaseDiscordCommand = {
+    commandTemplate: IBaseDiscordCommand = {
         name: "",
         description: "",
         discordGuildId: null,

@@ -1,6 +1,6 @@
 import { bindable, containerless, ICustomElementViewModel } from "aurelia";
 
-import { DiscordEmbed, DiscordEmbedField } from "../../../services/models/discord";
+import { DiscordEmbed, IDiscordEmbedField } from "../../../services/models/discord";
 
 import './embed-editor.scss';
 
@@ -12,7 +12,7 @@ export class EmbedEditor implements ICustomElementViewModel{
         if (!this.embed.fields) {
             this.embed.fields = [];
         }
-        this.embed.fields.push(new class implements DiscordEmbedField {
+        this.embed.fields.push(new class implements IDiscordEmbedField {
             inline: false;
             name: 'Some Name';
             value: 'Value';

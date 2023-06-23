@@ -1,14 +1,14 @@
-export interface ExchangeCodeResponse {
+export interface IExchangeCodeResponse {
     token: string;
     id: string;
 }
 
-export interface DiscordRole {
+export interface IDiscordRole {
     discordRoleId: string;
     discordServerId: string;
 }
 
-export interface BaseDiscordCommand {
+export interface IBaseDiscordCommand {
     id?: string;
     name: string;
     private: boolean;
@@ -16,8 +16,47 @@ export interface BaseDiscordCommand {
     description: string;
     discordGuildId: string;
     type: DiscordCommandType;
-    discordCommandActions: DiscordCommandAction[];
-    commandInformation?: any;
+    discordCommandActions: IDiscordCommandAction[];
+    commandInformation?: IDiscordApplicationCommand;
+    responseMessage?: IDiscordMessageContent;
+}
+
+export interface IDiscordApplicationCommand {
+    id?: string;
+    name: string;
+    description: string;
+    options?: IDiscordApplicationCommandOption[] | null;
+    defaultPermission?: boolean;
+    type: DiscordApplicationCommandType | null;
+}
+
+export interface IDiscordApplicationCommandOption {
+    type: DiscordApplicationCommandOptionType;
+    apiPath: string;
+    name: string;
+    description: string;
+    required: boolean | null;
+    choices: IDiscordApplicationCommandOptionChoice[] | null;
+    channelTypes: DiscordChannelType[] | null;
+    minValue: any;
+    maxValue: any;
+    autocomplete: boolean | null;
+}
+
+export interface IDiscordApplicationCommandOptionChoice {
+    name: string;
+    value: string | number | boolean;
+}
+
+export interface IDiscordPermission {
+    id: string;
+    type: DiscordPermissionType;
+    permission: boolean;
+}
+
+export enum DiscordPermissionType {
+    Role = 1,
+    User = 2
 }
 
 export enum DiscordApplicationCommandType {
@@ -26,44 +65,44 @@ export enum DiscordApplicationCommandType {
     Message = 3,
 }
 
-export interface DiscordCommandAction {
+export interface IDiscordCommandAction {
     id?: string;
     type: number;
     discordChannelId?: number;
     discordCategoryId?: number;
     restRequestMetadata?: any;
-    discordMessage: DiscordMessage;
+    discordMessage: IDiscordMessage;
 }
 
-export interface DiscordMessage {
+export interface IDiscordMessage {
     id?: string;
-    message: DiscordMessageContent;
+    message: IDiscordMessageContent;
 }
 
-export interface DiscordMessageContent {
+export interface IDiscordMessageContent {
     content?: string;
     embeds?: DiscordEmbed[];
 }
 
-export interface DiscordMessageImage {
+export interface IDiscordMessageImage {
     url: string;
 }
 
-export interface SendMessageToChannelRequest {
+export interface ISendMessageToChannelRequest {
     sendTime?: string;
     channelType: DiscordChannelType;
-    message: DiscordMessageContent;
+    message: IDiscordMessageContent;
 }
 
-export interface BaseDiscordServer {
+export interface IBaseDiscordServer {
     guildId: string;
     ownerId: string;
-    roles: DiscordRole[];
-    commands: BaseDiscordCommand[];
+    roles: IDiscordRole[];
+    commands: IBaseDiscordCommand[];
     activeFeatures: string[];
 }
 
-export interface DiscordInvitedWebhookResponse {
+export interface IDiscordInvitedWebhookResponse {
     invited: boolean;
     guildId: string;
 }
@@ -73,24 +112,24 @@ export enum DiscordCommandType {
     Data = 2,
 }
 
-export interface DiscordEmbedField {
+export interface IDiscordEmbedField {
     name: string;
     value: string;
     inline: boolean;
 }
 
-export interface DiscordEmbedFooter {
+export interface IDiscordEmbedFooter {
     text: string;
     icon_url: URL;
 }
 
-export interface DiscordEmbedImage {
+export interface IDiscordEmbedImage {
     url: URL;
     height: number;
     width: number;
 }
 
-export interface DiscordEmbedVideo {
+export interface IDiscordEmbedVideo {
     url: URL;
     height: number;
     width: number;
@@ -101,11 +140,11 @@ export class DiscordEmbed {
     description?: string;
     url?: URL;
     color?: string;
-    fields?: DiscordEmbedField[];
-    footer?: DiscordEmbedFooter;
-    image?: DiscordEmbedImage;
-    thumbnail?: DiscordEmbedImage;
-    video?: DiscordEmbedVideo;
+    fields?: IDiscordEmbedField[];
+    footer?: IDiscordEmbedFooter;
+    image?: IDiscordEmbedImage;
+    thumbnail?: IDiscordEmbedImage;
+    video?: IDiscordEmbedVideo;
     timestamp?: Date;
 }
 
@@ -173,7 +212,7 @@ export class DiscordSupportTicketSettings {
     logChannelId?: string;
     assignedRoles?: string[];
     discordMessageId?: string;
-    discordMessage?: DiscordMessage;
+    discordMessage?: IDiscordMessage;
 }
 
 export enum DiscordComponentType {

@@ -1,4 +1,4 @@
-import { IEventAggregator, inject, observable } from "aurelia";
+import { IEventAggregator, inject } from "aurelia";
 import {
     IRouteContext,
     IRouter,
@@ -6,6 +6,7 @@ import {
     Params,
     route,
 } from "@aurelia/router-lite";
+import { watch } from "@aurelia/runtime-html";
 
 import { DiscordService } from "../../../../services/discord-service";
 import {
@@ -14,7 +15,6 @@ import {
 } from "../../../../services/models/discord";
 
 import { toast } from "lets-toast";
-import { watch } from "@aurelia/runtime-html";
 
 @route({
     path: "support-tickets/:supportTicketSettingsId",

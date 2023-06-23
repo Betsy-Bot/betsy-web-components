@@ -2,7 +2,7 @@ import { IEventAggregator, inject } from "aurelia";
 import { IRouter,IRouteViewModel, Params, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
-import { BaseDiscordCommand } from "../../../../services/models/discord";
+import { IBaseDiscordCommand } from "../../../../services/models/discord";
 
 import { toast } from "lets-toast";
 
@@ -19,7 +19,7 @@ export class EditResponseMessage implements IRouteViewModel {
     ) {}
 
     id: string;
-    command: BaseDiscordCommand;
+    command: IBaseDiscordCommand;
     confirmDeleteDialog;
 
     async loading(params: Params) {

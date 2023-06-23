@@ -18,10 +18,10 @@ export class MooButton implements ICustomElementViewModel {
 
     get colorClass() {
         switch (this.variant) {
-        case "primary":
-            return "";
-        case "secondary":
-            return "moo-button-secondary";
+            case "primary":
+                return "";
+            case "secondary":
+                return "moo-button-secondary";
         }
     }
 

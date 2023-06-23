@@ -6,13 +6,13 @@ import {
 } from "aurelia";
 
 import {
-    DiscordCommandAction,
     DiscordCommandActionType,
+    IDiscordCommandAction,
 } from "../../../services/models/discord";
 
 @containerless()
 export class RestRequestBuilder implements ICustomElementViewModel {
-    @bindable({ mode: BindingMode.twoWay }) action: DiscordCommandAction;
+    @bindable({ mode: BindingMode.twoWay }) action: IDiscordCommandAction;
     @bindable({ mode: BindingMode.twoWay }) command;
 
     getDisplayTextForCommandActionType(type: DiscordCommandActionType) {

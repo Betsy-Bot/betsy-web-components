@@ -45,61 +45,61 @@ export class ApiInterceptor {
         try {
             let data;
             switch (response?.status) {
-            case 400:
-                data = await response.json();
-                this.ea.publish("present-error", {
-                    error: data.message,
-                    header: "Unexpected Error",
-                    details: data.details,
-                    subheader: "Please report this to Betsy Support Server",
-                });
-                break;
-            case 401:
-                this.ea.publish("present-error", {
-                    header: "Unauthorized",
-                    subheader: "You don't have access to this resource",
-                });
-                break;
-            case 403:
-                try {
+                case 400:
                     data = await response.json();
-                    if (data.message == "Expired Token? Please relog") {
-                        toast("Discord Token Expired. Please Login Again", {
-                            severity: "error",
-                        });
-                        await this.clearSession();
+                    this.ea.publish("present-error", {
+                        error: data.message,
+                        header: "Unexpected Error",
+                        details: data.details,
+                        subheader: "Please report this to Betsy Support Server",
+                    });
+                    break;
+                case 401:
+                    this.ea.publish("present-error", {
+                        header: "Unauthorized",
+                        subheader: "You don't have access to this resource",
+                    });
+                    break;
+                case 403:
+                    try {
+                        data = await response.json();
+                        if (data.message == "Expired Token? Please relog") {
+                            toast("Discord Token Expired. Please Login Again", {
+                                severity: "error",
+                            });
+                            await this.clearSession();
+                        }
+                    } catch (e) {
+                        console.log(e);
                     }
-                } catch (e) {
-                    console.log(e);
-                }
-                break;
-            case 404:
-                return null;
-            case 422:
-                data = await response.json();
-                this.ea.publish("present-error", {
-                    errors: data.validationErrors,
-                });
-                toast("Error!", { severity: "error" });
-                break;
-            case 412:
-                data = await response.json();
-                this.ea.publish("present-error", {
-                    error: data.message,
-                    header: "Server Configuration Error",
-                    subheader:
+                    break;
+                case 404:
+                    return null;
+                case 422:
+                    data = await response.json();
+                    this.ea.publish("present-error", {
+                        errors: data.validationErrors,
+                    });
+                    toast("Error!", { severity: "error" });
+                    break;
+                case 412:
+                    data = await response.json();
+                    this.ea.publish("present-error", {
+                        error: data.message,
+                        header: "Server Configuration Error",
+                        subheader:
                             "Please talk to your server admin to resolve.",
-                });
-            case 500:
-                data = await response.json();
-                this.ea.publish("present-error", {
-                    error: data.message,
-                    details: data.details,
-                    header: "Server Error",
-                    subheader:
+                    });
+                case 500:
+                    data = await response.json();
+                    this.ea.publish("present-error", {
+                        error: data.message,
+                        details: data.details,
+                        header: "Server Error",
+                        subheader:
                             "Please create a bug report and include the details below.",
-                });
-                break;
+                    });
+                    break;
             }
             return response;
         } catch (e) {

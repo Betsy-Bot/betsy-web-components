@@ -1,7 +1,7 @@
 import { inject } from 'aurelia';
 import { IEventAggregator } from 'aurelia';
 
-import { ExchangeCodeResponse } from "./models/discord";
+import { IExchangeCodeResponse } from "./models/discord";
 import { ProfileResponse } from "./models/user";
 import { ApiService } from "./api-service";
 import { DiscordService } from "./discord-service";
@@ -13,7 +13,7 @@ export class SessionService {
     public static TOKEN_KEY = 'jwt_token';
     public static SIDEBAR_STATUS_KEY = 'sidebar_open';
 
-    public currentUser: ProfileResponse | ExchangeCodeResponse;
+    public currentUser: ProfileResponse | IExchangeCodeResponse;
 
     constructor(private apiService: ApiService, private discordService: DiscordService, private eventAggregator: IEventAggregator) {
     }
@@ -51,7 +51,7 @@ export class SessionService {
         return response;
     }
 
-    public async getUser(): Promise<ProfileResponse | ExchangeCodeResponse  | boolean> {
+    public async getUser(): Promise<ProfileResponse | IExchangeCodeResponse  | boolean> {
         if (this.isTokenValid()) {
             if (this.currentUser) {
                 return this.currentUser;

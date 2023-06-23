@@ -3,9 +3,9 @@ import { IRouter } from "@aurelia/router-lite";
 
 import * as discordModels from "./models/discord";
 import {
-    BaseDiscordCommand,
     DiscordForm, DiscordGuildUser,
-    SendMessageToChannelRequest,
+    IBaseDiscordCommand,
+    ISendMessageToChannelRequest,
 } from "./models/discord";
 import { ApiService } from "./api-service";
 
@@ -77,7 +77,7 @@ export class DiscordService {
     async exchangeCode(
         code: string,
         redirectUrl?: string
-    ): Promise<discordModels.ExchangeCodeResponse> {
+    ): Promise<discordModels.IExchangeCodeResponse> {
         let path = "Discord/OAuth/ExchangeCode";
         if (redirectUrl) {
             path += "?redirectUrl=" + redirectUrl;
@@ -87,31 +87,31 @@ export class DiscordService {
 
     async createServer(
         guildId: string
-    ): Promise<discordModels.BaseDiscordServer> {
+    ): Promise<discordModels.IBaseDiscordServer> {
         return await this.api.doPost("DiscordGuild", { guildId: guildId });
     }
 
     async createApplicationCommand(
-        command: BaseDiscordCommand
-    ): Promise<discordModels.BaseDiscordCommand> {
+        command: IBaseDiscordCommand
+    ): Promise<discordModels.IBaseDiscordCommand> {
         return await this.api.doPost("Discord/ApplicationCommand", command);
     }
 
     async setupServer(
         guildId: string
-    ): Promise<discordModels.BaseDiscordCommand> {
+    ): Promise<discordModels.IBaseDiscordCommand> {
         return await this.api.doPost(`DiscordGuild/${guildId}/Setup`, {});
     }
 
     async updateApplicationCommand(
-        command: BaseDiscordCommand
-    ): Promise<discordModels.BaseDiscordCommand> {
+        command: IBaseDiscordCommand
+    ): Promise<discordModels.IBaseDiscordCommand> {
         return await this.api.doPatch("Discord/ApplicationCommand", command);
     }
 
     async getResponseMessagesForGuild(
         guildId: string
-    ): Promise<discordModels.BaseDiscordCommand[]> {
+    ): Promise<discordModels.IBaseDiscordCommand[]> {
         return await this.api.doGet(`DiscordGuild/${guildId}/ResponseMessages`);
     }
 
@@ -121,7 +121,7 @@ export class DiscordService {
 
     async getDataCommandsForGuild(
         guildId: string
-    ): Promise<discordModels.BaseDiscordCommand[]> {
+    ): Promise<discordModels.IBaseDiscordCommand[]> {
         return await this.api.doGet(`DiscordGuild/${guildId}/DataCommands`);
     }
 
@@ -138,8 +138,8 @@ export class DiscordService {
 
     async getDiscordCommandDetails(
         id: string
-    ): Promise<discordModels.BaseDiscordCommand> {
-        return await this.api.doGet(`Discord/ApplicationCommand/${id}`);
+    ): Promise<discordModels.IBaseDiscordCommand> {
+        return await this.api.doGet(`Discord/ApplicationCommand/${id}`) as IBaseDiscordCommand;
     }
 
     async deleteDiscordCommand(id: string): Promise<any> {
@@ -210,7 +210,7 @@ export class DiscordService {
     public async setActiveFeaturesForDiscord(
         guildId: string,
         features: string[]
-    ): Promise<discordModels.BaseDiscordServer> {
+    ): Promise<discordModels.IBaseDiscordServer> {
         return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, {
             activeFeatures: features,
         });
@@ -219,7 +219,7 @@ export class DiscordService {
     public async setActiveAuditFeaturesForDiscord(
         guildId: string,
         features: string[]
-    ): Promise<discordModels.BaseDiscordServer> {
+    ): Promise<discordModels.IBaseDiscordServer> {
         return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, {
             activeAuditLogFeatures: features,
         });
@@ -228,7 +228,7 @@ export class DiscordService {
     public async setAuditLogChannelId(
         guildId: string,
         auditLogChannelId: string[]
-    ): Promise<discordModels.BaseDiscordServer> {
+    ): Promise<discordModels.IBaseDiscordServer> {
         return await this.api.doPatch(
             `DiscordGuild/${guildId}/SetAuditLogChannel`,
             { auditLogChannelId: auditLogChannelId }
@@ -238,8 +238,8 @@ export class DiscordService {
     public async sendMessageToChannel(
         guildId: string,
         channelId: string[],
-        message: SendMessageToChannelRequest
-    ): Promise<discordModels.BaseDiscordServer> {
+        message: ISendMessageToChannelRequest
+    ): Promise<discordModels.IBaseDiscordServer> {
         return await this.api.doPatch(
             `DiscordGuild/${guildId}/Channel/${channelId}/SendMessage`,
             message

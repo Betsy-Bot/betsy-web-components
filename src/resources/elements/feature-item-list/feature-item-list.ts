@@ -3,6 +3,7 @@ import { IRouteContext, IRouter } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../services/discord-service";
 import { ChannelNameValueConverter } from "../../value-converters";
+
 import { Column } from 'devextreme/ui/data_grid';
 
 
@@ -90,10 +91,10 @@ export class FeatureItemList {
 
     convertValue(value) {
         switch (this.valueConverter) {
-        case ValueConverter.ChannelName:
-            return this.channelValueConverter.toView(value);
-        default:
-            return value;
+            case ValueConverter.ChannelName:
+                return this.channelValueConverter.toView(value);
+            default:
+                return value;
         }
     }
 
@@ -120,7 +121,7 @@ export class FeatureItemList {
     };
 
     toggleTemplate = (container, options) => {
-        const switchComponent = this.switchEl?.querySelector("button")?.cloneNode(true) as HTMLElement;
+        const switchComponent = this.switchEl.querySelector("button")?.cloneNode(true) as HTMLElement;
         switchComponent.innerText = options.data.active
             ? "Deactivate"
             : "Activate";

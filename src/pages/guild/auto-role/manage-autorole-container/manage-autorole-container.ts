@@ -3,13 +3,13 @@ import { route, Router } from "@aurelia/router-lite";
 import { IRouteViewModel } from "@aurelia/router-lite";
 import { watch } from "@aurelia/runtime-html";
 
-import { DiscordService } from "../../../../services/discord-service";
-
-import { toast } from "lets-toast";
 import {
     moveDownInArray,
     moveUpInArray,
 } from "../../../../resources/array-utils";
+import { DiscordService } from "../../../../services/discord-service";
+
+import { toast } from "lets-toast";
 
 @route({
     path: "role-selector/:containerId",

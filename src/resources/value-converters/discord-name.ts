@@ -10,7 +10,7 @@ export class DiscordNameValueConverter {
             return;
         }
         const member = await this.discordService.getGuildMember(value);
-        if (!member?.user?.username) {
+        if (!member.user.username) {
             return value;
         }
         return member.user.username;

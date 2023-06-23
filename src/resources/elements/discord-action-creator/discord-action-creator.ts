@@ -1,9 +1,9 @@
 import { bindable, BindingMode } from "aurelia";
 
-import { DiscordCommandAction, DiscordCommandActionType } from "../../../services/models/discord";
+import { DiscordCommandActionType,IDiscordCommandAction } from "../../../services/models/discord";
 
 export class DiscordActionCreator {
-    @bindable({ mode: BindingMode.twoWay }) action: DiscordCommandAction;
+    @bindable({ mode: BindingMode.twoWay }) action: IDiscordCommandAction;
     @bindable({ mode: BindingMode.twoWay }) command;
     @bindable deleteFunction: () => void;
     @bindable single;
