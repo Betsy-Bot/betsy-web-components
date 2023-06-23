@@ -145,14 +145,14 @@ export class ManageCustomCommand implements IRouteViewModel {
         if (!this.command.discordCommandActions[0].restRequestMetadata) {
             this.command.discordCommandActions[0].restRequestMetadata = {};
         }
-        if (!this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings) {
+        if (!this.command.discordCommandActions[0].restRequestMetadata?.requestResponseMappings) {
             this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings = [];
         }
-        this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings.push({});
+        this.command.discordCommandActions[0].restRequestMetadata?.requestResponseMappings.push({});
     }
 
     removeResponseMapping(index: number) {
-        this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings.splice(index, 1);
+        this.command.discordCommandActions[0].restRequestMetadata?.requestResponseMappings.splice(index, 1);
     }
 
     deleteAction(index: number) {

@@ -56,7 +56,7 @@ export interface IDiscordPermission {
 
 export enum DiscordPermissionType {
     Role = 1,
-    User = 2
+    User = 2,
 }
 
 export enum DiscordApplicationCommandType {
@@ -70,7 +70,7 @@ export interface IDiscordCommandAction {
     type: number;
     discordChannelId?: number;
     discordCategoryId?: number;
-    restRequestMetadata?: any;
+    restRequestMetadata?: IDiscordCommandActionRequestMetadata;
     discordMessage: IDiscordMessage;
 }
 
@@ -82,6 +82,7 @@ export interface IDiscordMessage {
 export interface IDiscordMessageContent {
     content?: string;
     embeds?: DiscordEmbed[];
+    components?: DiscordComponent[];
 }
 
 export interface IDiscordMessageImage {
@@ -186,7 +187,7 @@ export class DiscordForm {
 }
 
 export class DiscordFormData {
-    components: DiscordComponentWrapper[];
+    components: IDiscordComponentWrapper[];
 }
 
 export class DiscordFormSubmission {
@@ -204,7 +205,7 @@ export class DiscordFormFieldAnswer {
 
 export class DiscordComponentWrapper {
     type: DiscordComponentType;
-    components: DiscordComponent[];
+    components: IDiscordComponent[];
 }
 
 export class DiscordSupportTicketSettings {
@@ -236,7 +237,7 @@ export class DiscordComponent {
     max_length?: number;
     placeholder?: string;
     required?: boolean;
-    emoji: DiscordEmoji
+    emoji: DiscordEmoji;
 }
 
 export enum DiscordButtonStyle {
@@ -276,4 +277,59 @@ export class DiscordGuildUserUser {
     id: string;
     username: string;
     avatar: string;
+}
+
+export interface IDiscordComponentWrapper {
+    type: DiscordComponentType;
+    components: IDiscordComponent[];
+}
+
+export interface IDiscordComponent {
+    type: DiscordComponentType;
+    label: string | null;
+    style: DiscordButtonStyle | null;
+    custom_id: string | null;
+    emoji: DiscordEmoji;
+    min_length: number | null;
+    max_length: number | null;
+    min_values: number | null;
+    max_values: number | null;
+    placeholder: string | null;
+    required: boolean | null;
+    description: string | null;
+    options: IDiscordMenuOption[];
+    value: string | null;
+    url: string | null;
+    disabled: boolean | null;
+}
+
+export interface IDiscordMenuOption {
+    label: string;
+    value: string;
+    description: string;
+    emoji: DiscordEmoji;
+}
+
+export interface IDiscordCommandActionRequestMetadata {
+    apiUrl: string;
+    requestHeaders: IDiscordCommandActionRequestHeader[];
+    defaultRequestData: IDiscordCommandActionDefaultRequestData[];
+    requestResponseMappings: IRestRequestResponseMapping[];
+}
+
+export interface IDiscordCommandActionRequestHeader {
+    name: string;
+    value: string;
+}
+
+export interface IRestRequestResponseMapping {
+    name: string;
+    apiPath: string;
+}
+
+export interface IDiscordCommandActionDefaultRequestData {
+    name: string;
+    value: string;
+    apiPath: string;
+    type: DiscordApplicationCommandOptionType;
 }
