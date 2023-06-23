@@ -28,7 +28,7 @@ export class ApiService {
         )
     }
 
-    async _request(path, options) {
+    async _request(path: string, options?: RequestInit) {
         const result = await this.http.fetch(path, options);
         if (result) {
             const status = result.status;

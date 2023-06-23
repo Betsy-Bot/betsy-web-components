@@ -1,7 +1,8 @@
 import Toast from 'lets-toast';
+import { ToastReturn } from "lets-toast/src";
 
 export class ToastService {
-    private readonly _toast;
+    private readonly _toast: ToastReturn;
     constructor() {
         this._toast = Toast({
             // Delay in miliseconds. Set to 0 for non disappearing toast notifications.

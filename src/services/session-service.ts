@@ -1,8 +1,7 @@
-import { inject } from 'aurelia';
-import { IEventAggregator } from 'aurelia';
+import { IEventAggregator,inject } from 'aurelia';
 
 import { IExchangeCodeResponse } from "./models/discord";
-import { ProfileResponse } from "./models/user";
+import { IProfileResponse } from "./models/user";
 import { ApiService } from "./api-service";
 import { DiscordService } from "./discord-service";
 
@@ -13,16 +12,16 @@ export class SessionService {
     public static TOKEN_KEY = 'jwt_token';
     public static SIDEBAR_STATUS_KEY = 'sidebar_open';
 
-    public currentUser: ProfileResponse | IExchangeCodeResponse;
+    public currentUser: IProfileResponse | IExchangeCodeResponse | null;
 
     constructor(private apiService: ApiService, private discordService: DiscordService, private eventAggregator: IEventAggregator) {
     }
 
-    public saveStorageItem(key: string, value: string) {
-        window.localStorage.setItem(key, value);
+    public saveStorageItem(key: string, value: string | boolean) {
+        window.localStorage.setItem(key, value as string);
     }
 
-    public getStorageItem(key: string, defaultValue: boolean): boolean {
+    public getStorageItem(key: string, defaultValue?: boolean | string) {
         if (window.localStorage[key] !== undefined) {
             try {
                 return JSON.parse(window.localStorage.getItem(key) ?? '') as boolean;
@@ -30,7 +29,7 @@ export class SessionService {
                 return window.localStorage.getItem(key);
             }
         } else {
-            this.saveStorageItem(key, defaultValue);
+            this.saveStorageItem(key, defaultValue ?? "");
             return defaultValue;
         }
     }
@@ -51,7 +50,7 @@ export class SessionService {
         return response;
     }
 
-    public async getUser(): Promise<ProfileResponse | IExchangeCodeResponse  | boolean> {
+    public async getUser(): Promise<IProfileResponse | IExchangeCodeResponse  | boolean> {
         if (this.isTokenValid()) {
             if (this.currentUser) {
                 return this.currentUser;

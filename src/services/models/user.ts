@@ -1,6 +1,6 @@
 import { IBaseDiscordServer } from "./discord";
 
-export interface ProfileResponse {
+export interface IProfileResponse {
     token: string,
     id: string,
     activeServers: IBaseDiscordServer[],

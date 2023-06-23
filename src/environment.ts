@@ -1,17 +1,17 @@
-function redirectUrl() {
-    return import.meta.env.VITE_REDIRECT_URL;
+function redirectUrl(): string {
+    return import.meta.env.VITE_REDIRECT_URL as string;
 }
 
-function verifyRedirectUrl() {
-    return import.meta.env.VITE_VERIFY_REDIRECT_URL;
+function verifyRedirectUrl(): string {
+    return import.meta.env.VITE_VERIFY_REDIRECT_URL as string;
 }
 
-function botClientId() {
-    return import.meta.env.VITE_BOT_CLIENT_ID;
+function botClientId(): string {
+    return import.meta.env.VITE_BOT_CLIENT_ID as string;
 }
 
-function apiEndpoint() {
-    return import.meta.env.VITE_API_ENDPOINT;
+function apiEndpoint(): string {
+    return import.meta.env.VITE_API_ENDPOINT as string;
 }
 
 export default this;
