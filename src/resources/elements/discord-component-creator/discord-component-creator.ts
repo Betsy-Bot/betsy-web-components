@@ -1,9 +1,6 @@
 import { bindable, BindingMode } from "aurelia";
 
-import {
-    DiscordButtonStyle,
-    DiscordComponentType,
-} from "../../../services/models/discord";
+import { DiscordButtonStyle, DiscordComponentType } from "../../../services/models/discord";
 import { moveDownInArray, moveUpInArray } from "../../array-utils";
 
 export class DiscordComponentCreator {
@@ -76,16 +73,10 @@ export class DiscordComponentCreator {
     handleMove(type: string, componentIndex: number, index: number) {
         switch (type) {
             case "up":
-                moveUpInArray(
-                    this.components[componentIndex].components[0].options,
-                    index
-                );
+                moveUpInArray(this.components[componentIndex].components[0].options, index);
                 break;
             case "down":
-                moveDownInArray(
-                    this.components[componentIndex].components[0].options,
-                    index
-                );
+                moveDownInArray(this.components[componentIndex].components[0].options, index);
                 break;
         }
     }
