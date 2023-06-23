@@ -215,4 +215,8 @@ export class ManageCustomCommand implements IRouteViewModel {
             },
         });
     }
+
+    get previewMessage() {
+        return this.command?.responseMessage ?? this.command?.discordCommandActions[0].discordMessage?.message
+    }
 }
