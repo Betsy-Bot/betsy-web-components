@@ -29,7 +29,7 @@ export class ManageCustomCommand implements IRouteViewModel {
         description: "",
         discordGuildId: "",
         type: DiscordCommandType.Data,
-        private: false,
+        private: true,
         active: true,
         discordCommandActions: [],
     };
@@ -217,6 +217,13 @@ export class ManageCustomCommand implements IRouteViewModel {
     }
 
     get previewMessage() {
-        return this.command?.responseMessage ?? this.command?.discordCommandActions[0].discordMessage?.message
+        return this.command?.responseMessage ?? this.responseMessage
+    }
+
+    get responseMessage() {
+        if (this.command?.discordCommandActions) {
+            const found = this.command?.discordCommandActions.find(x => x.type == DiscordCommandActionType.MessageResponse);
+            return found?.discordMessage;
+        }
     }
 }
