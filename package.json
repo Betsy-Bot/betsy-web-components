@@ -112,5 +112,10 @@
                 "isolatedModules": true
             }
         }
+    },
+    "pnpm": {
+        "overrides": {
+            "semver@<7.5.2": ">=7.5.2"
+        }
     }
 }

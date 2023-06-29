@@ -24,14 +24,14 @@ export class DiscordButton {
     }
 
     get displayEmoji() {
-        if (this.button.emoji.name) {
+        if (this.button.emoji?.name) {
             return this.button.emoji.name;
         }
         return null;
     }
 
     get isEmoji() {
-        if (this.button.emoji.name) {
+        if (this.button.emoji?.name) {
             return /\p{Extended_Pictographic}/u.test(this.button.emoji.name);
         }
         return false;

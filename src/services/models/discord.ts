@@ -289,7 +289,7 @@ export interface IDiscordComponent {
     label: string | null;
     style: DiscordButtonStyle | null;
     custom_id: string | null;
-    emoji: DiscordEmoji;
+    emoji?: DiscordEmoji;
     min_length: number | null;
     max_length: number | null;
     min_values: number | null;

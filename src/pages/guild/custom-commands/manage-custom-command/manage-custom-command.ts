@@ -2,8 +2,14 @@ import { IEventAggregator, inject } from "aurelia";
 import { IRouter, IRouteViewModel, Params, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
-import { DiscordCommandActionType, DiscordCommandType,IBaseDiscordCommand } from "../../../../services/models/discord";
+import {
+    DiscordApplicationCommandType,
+    DiscordCommandActionType,
+    DiscordCommandType,
+    IBaseDiscordCommand,
+} from "../../../../services/models/discord";
 
+import { MDCDialogCloseEvent } from "@material/dialog";
 import { toast } from "lets-toast";
 
 @route({
@@ -18,7 +24,7 @@ export class ManageCustomCommand implements IRouteViewModel {
         private router: IRouter
     ) {}
 
-    command: IBaseDiscordCommand;
+    command: IBaseDiscordCommand | null;
     tab = "settings";
     commandTemplate: IBaseDiscordCommand = {
         name: "",
@@ -55,14 +61,15 @@ export class ManageCustomCommand implements IRouteViewModel {
 
     async save() {
         try {
-            if (this.isNew) {
+            if (this.isNew && this.command) {
                 this.command.discordGuildId = this.guildId;
                 await this.discordService.createApplicationCommand(this.command);
                 await this.router.load("../custom-commands", { context: this });
-            } else {
+            } else if (this.command){
                 this.command.discordGuildId = this.guildId;
                 await this.discordService.updateApplicationCommand(this.command);
-            }toast(`Custom Command ${this.isNew ? 'Created' : 'Updated'}!`, { severity: "success" });
+            }
+            toast(`Custom Command ${this.isNew ? "Created" : "Updated"}!`, { severity: "success" });
         } catch (e) {
             console.log(e);
             toast("Failed to create custom command", { severity: "error" });
@@ -72,12 +79,12 @@ export class ManageCustomCommand implements IRouteViewModel {
     tabChanged() {
         switch (this.tab) {
             case "rest":
-                if (this.command.discordCommandActions[0].type == DiscordCommandActionType.OpenForm) {
+                if (this.command?.discordCommandActions[0].type == DiscordCommandActionType.OpenForm) {
                     return (this.command.discordCommandActions[0].type = DiscordCommandActionType.SendPostRequest);
                 }
                 break;
             case "form":
-                if (!this.command.discordCommandActions[0].type) {
+                if (!this.command?.discordCommandActions[0].type) {
                     return (this.command.discordCommandActions[0].type = DiscordCommandActionType.OpenForm);
                 }
                 break;
@@ -100,27 +107,31 @@ export class ManageCustomCommand implements IRouteViewModel {
     }
 
     addHeader() {
-        if (!this.command.discordCommandActions[0].restRequestMetadata) {
+        if (!this.command?.discordCommandActions[0].restRequestMetadata) {
             this.command.discordCommandActions[0].restRequestMetadata = {};
         }
-        if (!this.command.discordCommandActions[0].restRequestMetadata.requestHeaders) {
+        if (!this.command?.discordCommandActions[0].restRequestMetadata?.requestHeaders) {
             this.command.discordCommandActions[0].restRequestMetadata.requestHeaders = [];
         }
-        this.command.discordCommandActions[0].restRequestMetadata.requestHeaders.push({});
+        this.command?.discordCommandActions[0].restRequestMetadata?.requestHeaders.push({});
     }
 
     removeHeader(index) {
-        this.command.discordCommandActions[0].restRequestMetadata.requestHeaders.splice(index, 1);
+        this.command?.discordCommandActions[0].restRequestMetadata?.requestHeaders.splice(index, 1);
     }
 
     addParameter() {
-        if (!this.command.commandInformation) {
-            this.command.commandInformation = {};
+        if (this.command && !this.command.commandInformation) {
+            this.command.commandInformation = {
+                name: "",
+                description: "",
+                type: DiscordApplicationCommandType.ChatInput,
+            };
         }
-        if (!this.command.commandInformation.options) {
+        if (!this.command?.commandInformation.options) {
             this.command.commandInformation.options = [];
         }
-        this.command.commandInformation.options.push({ required: true });
+        this.command?.commandInformation.options.push({ required: true });
     }
 
     removeParameter(index: number) {
@@ -128,39 +139,47 @@ export class ManageCustomCommand implements IRouteViewModel {
     }
 
     addDefaultData() {
-        if (!this.command.discordCommandActions[0].restRequestMetadata) {
+        if (this.command && !this.command.discordCommandActions[0].restRequestMetadata) {
             this.command.discordCommandActions[0].restRequestMetadata = {};
         }
-        if (!this.command.discordCommandActions[0].restRequestMetadata.defaultRequestData) {
+        if (this.command && !this.command.discordCommandActions[0].restRequestMetadata?.defaultRequestData) {
             this.command.discordCommandActions[0].restRequestMetadata.defaultRequestData = [];
         }
-        this.command.discordCommandActions[0].restRequestMetadata.defaultRequestData.push({});
+        this.command?.discordCommandActions[0].restRequestMetadata.defaultRequestData.push({});
     }
 
     removeDefaultData(index: number) {
-        this.command.discordCommandActions[0].restRequestMetadata.defaultRequestData.splice(index, 1);
+        this.command?.discordCommandActions[0].restRequestMetadata?.defaultRequestData.splice(index, 1);
     }
 
     addResponseMapping() {
-        if (!this.command.discordCommandActions[0].restRequestMetadata) {
+        if (this.command && !this.command.discordCommandActions[0].restRequestMetadata) {
             this.command.discordCommandActions[0].restRequestMetadata = {};
         }
-        if (!this.command.discordCommandActions[0].restRequestMetadata?.requestResponseMappings) {
+        if (this.command && !this.command.discordCommandActions[0].restRequestMetadata?.requestResponseMappings && this.command.discordCommandActions[0].restRequestMetadata) {
             this.command.discordCommandActions[0].restRequestMetadata.requestResponseMappings = [];
         }
-        this.command.discordCommandActions[0].restRequestMetadata?.requestResponseMappings.push({});
+        this.command?.discordCommandActions[0].restRequestMetadata?.requestResponseMappings.push({});
     }
 
     removeResponseMapping(index: number) {
-        this.command.discordCommandActions[0].restRequestMetadata?.requestResponseMappings.splice(index, 1);
+        this.command?.discordCommandActions[0].restRequestMetadata?.requestResponseMappings.splice(index, 1);
     }
 
     deleteAction(index: number) {
-        this.command.discordCommandActions.splice(index, 1);
+        this.command?.discordCommandActions.splice(index, 1);
+    }
+
+    async deleteCommand(event: MDCDialogCloseEvent) {
+        if (event.detail.action == "ok" && this.command?.id) {
+            await this.discordService.deleteDiscordCommand(this.command.id);
+            toast("Response Message Deleted");
+            await this.router.load("../custom-commands", { context: this });
+        }
     }
 
     createNewCommandAction() {
-        this.command.discordCommandActions.push({
+        this.command?.discordCommandActions.push({
             type: DiscordCommandActionType.MessageChannel,
             discordMessage: {
                 message: {
@@ -172,11 +191,13 @@ export class ManageCustomCommand implements IRouteViewModel {
     }
 
     get previewMessage() {
-        return this.command.responseMessage ?? this.responseMessage;
+        if (this.command) {
+            return this.command.responseMessage ?? this.responseMessage;
+        }
     }
 
     get responseMessage() {
-        if (this.command.discordCommandActions) {
+        if (this.command?.discordCommandActions) {
             const found = this.command.discordCommandActions.find(
                 (x) => x.type == DiscordCommandActionType.MessageResponse
             );

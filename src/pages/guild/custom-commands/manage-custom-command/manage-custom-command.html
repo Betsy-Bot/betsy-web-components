@@ -1,3 +1,13 @@
+<confirmation-dialog
+    cancel-text="Cancel"
+    confirm-text="Delete"
+    dialog.two-way="confirmDeleteDialog"
+    handler.bind="(event) => deleteCommand(event)"
+    title="Are you sure you would like to delete?"
+>
+    This is a permanent action and cannot be undone
+</confirmation-dialog>
+
 <div class="row">
     <div class="col-12 col-xl-8">
         <feature-header
@@ -5,6 +15,7 @@
             title="Manage Custom Command"
             subtitle="Manage your custom command"
             class="mb-3"
+            delete-function.bind="isNew ? null : () => confirmDeleteDialog.open()"
         ></feature-header>
 
         <moo-tab-bar class="mb-3">

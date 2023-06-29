@@ -50,7 +50,7 @@ export class SessionService {
         return response;
     }
 
-    public async getUser(): Promise<IProfileResponse | IExchangeCodeResponse  | boolean> {
+    public async getUser() {
         if (this.isTokenValid()) {
             if (this.currentUser) {
                 return this.currentUser;
@@ -63,7 +63,7 @@ export class SessionService {
     }
 
     public async refreshProfile() {
-        this.currentUser = await this.apiService.doGet('User/Profile');
+        this.currentUser = await this.apiService.doGet('User/Profile') as IProfileResponse | null;
         if (!this.currentUser) {
             //this.destroyStorageItem(SessionService.TOKEN_KEY);
             toast("Please re-login", { severity: "error" });
@@ -92,19 +92,13 @@ export class SessionService {
         this.eventAggregator.publish('user-updated', null);
     }
 
-    public async isAdmin(guildId): Promise<boolean> {
-        const user = await this.getUser();
+    public async isAdmin(guildId) {
+        const user = await this.getUser() as IProfileResponse | null;
         if (!user) return;
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-expect-error
         for (const server of user.activeServers) {
             if (server.guildId == guildId) return true;
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            //@ts-expect-error
             if (server.ownerId == user.id) return true;
         }
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-expect-error
         for (const server of user.adminedServers) {
             if (server.guildId == guildId) return true;
         }
