@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-8">
+        <feature-header
+            doc-url="https://docs.betsybot.xyz/features/invites"
+            title="Invites"
+            subtitle="Track invites created by your users and provide benefits to them such as roles for achieving milestones. Activate the feature to view your invites"
+        ></feature-header>
+    </div>
+    <div class="col-4 text-end">
+        <moo-switch
+            value.bind="featureActive"
+            change.bind="() => toggleFeature()"
+        ></moo-switch>
+        <label class="me-5">Active?</label>
+    </div>
+</div>
+
+<moo-data-grid if.bind="invites && columns" items.bind="invites" columns.bind="columns"></moo-data-grid>

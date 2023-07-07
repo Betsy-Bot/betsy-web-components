@@ -24,7 +24,6 @@ export class ImportExport {
 
     attached() {
         this.uploadElement.addEventListener("change", (event) => {
-            console.log(event);
             //@ts-expect-error
             const file = event.target.files[0];
 

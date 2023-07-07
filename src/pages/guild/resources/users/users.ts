@@ -30,6 +30,9 @@ export class Users implements IRouteViewModel {
             dataField: "lastKnownName",
         },
         {
+            dataField: "inviteCount",
+        },
+        {
             dataField: "createdDate",
             dataType: "date",
         },

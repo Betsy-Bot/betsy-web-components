@@ -2,20 +2,21 @@ import { inject } from "aurelia";
 import { IRouteViewModel, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../services/discord-service";
+import { IDiscordGuild } from "../../../services/models/discord";
 
 import { toast } from "lets-toast";
 
 @route({
-    path: "invite-links",
+    path: "delete-invite-links",
     title: "Delete Invite Links",
 })
 @inject(DiscordService)
-export class InviteLinks implements IRouteViewModel {
+export class DeleteInviteLinks implements IRouteViewModel {
     constructor(private discordService: DiscordService) {}
 
     guildId: string;
-    guild;
-    featureActive;
+    guild: IDiscordGuild;
+    featureActive: boolean;
     roleId;
     userId;
 
@@ -30,10 +31,7 @@ export class InviteLinks implements IRouteViewModel {
     }
 
     async save() {
-        await this.discordService.setAuditLogChannelId(
-            this.guildId,
-            this.guild.auditLogChannelId
-        );
+        await this.discordService.setAuditLogChannelId(this.guildId, this.guild.auditLogChannelId ?? "");
         toast("Updated audit log channel");
     }
 

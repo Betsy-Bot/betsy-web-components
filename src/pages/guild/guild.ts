@@ -10,10 +10,10 @@ import { ChannelCleaners } from "./channel-cleaners/channel-cleaners";
 import { CustomCommands } from "./custom-commands/custom-commands";
 import { ManageCustomCommand } from "./custom-commands/manage-custom-command/manage-custom-command";
 import { Dashboard } from "./dashboard/dashboard";
+import { DeleteInviteLinks } from "./delete-invite-links/delete-invite-links";
 import { Giveaways } from "./giveaways/giveaways";
 import { ManageGiveaways } from "./giveaways/manage-giveaways/manage-giveaways";
 import { ImportExport } from "./import-export/import-export";
-import { InviteLinks } from "./invite-links/invite-links";
 import { AutoResponders } from "./messages/auto-responders/auto-responders";
 import { ManageAutoResponder } from "./messages/auto-responders/manage-auto-responder/manage-auto-responder";
 import { SendMessage } from "./messages/send-message/send-message";
@@ -29,6 +29,7 @@ import { ChannelBackup } from "./resources/channel-backups/channel-backup/channe
 import { ChannelBackups } from "./resources/channel-backups/channel-backups";
 import { Forms } from "./resources/forms/forms";
 import { ManageForm } from "./resources/forms/manage-form/manage-form";
+import { Invites } from "./resources/invites/invites";
 import { KeyValueStorage } from "./resources/key-value-storage/key-value-storage";
 import { ManageKeyValueStorage } from "./resources/key-value-storage/manage-key-value-storage/manage-key-value-storage";
 import { CreateMessage } from "./resources/messages/create-message/create-message";
@@ -67,7 +68,7 @@ const routes = [
     ManageWelcomeMessage,
     Payments,
     ActionLog,
-    InviteLinks,
+    DeleteInviteLinks,
     AutoRole,
     ManageAutoroleContainer,
     ChannelCleaners,
@@ -88,7 +89,8 @@ const routes = [
     ImportExport,
     Reviews,
     CustomCommands,
-    ManageCustomCommand
+    ManageCustomCommand,
+    Invites
 ];
 
 @route({

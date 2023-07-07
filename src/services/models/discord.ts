@@ -333,3 +333,11 @@ export interface IDiscordCommandActionDefaultRequestData {
     apiPath: string;
     type: DiscordApplicationCommandOptionType;
 }
+
+
+export interface IDiscordGuild {
+    id: string;
+    guildId: string;
+    auditLogChannelId?: string;
+    activeFeatures: string[];
+}

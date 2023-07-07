@@ -4,7 +4,7 @@ import { IRouter } from "@aurelia/router-lite";
 import * as discordModels from "./models/discord";
 import {
     DiscordForm, DiscordGuildUser,
-    IBaseDiscordCommand,
+    IBaseDiscordCommand, IBaseDiscordServer, IDiscordGuild, IExchangeCodeResponse,
     ISendMessageToChannelRequest,
 } from "./models/discord";
 import { ApiService } from "./api-service";
@@ -12,7 +12,7 @@ import { ApiService } from "./api-service";
 @inject(ApiService, IRouter, IEventAggregator)
 export class DiscordService {
     public guildId: string;
-    guild;
+    guild: IDiscordGuild;
     guildChannelData = {
         guildId: "",
         data: null,
@@ -32,12 +32,13 @@ export class DiscordService {
     AUTO_RESPONDERS = "AutoResponders";
     VERIFICATION = "Verification";
     THREAD_CHANNELS = "ThreadChannels";
+    INVITE_LINKS = "InviteLinks"
 
     public get guildChannels(): any {
         return this.guildChannelData.data;
     }
 
-    public setGuildId(value) {
+    public setGuildId(value: string) {
         this.guildId = value;
         this.ea.publish("guild-updated", this.guildId);
     }
@@ -56,7 +57,7 @@ export class DiscordService {
         if (!this.guild) {
             return;
         }
-        return this.guild?.id;
+        return this.guild.id;
     }
 
     public getLocalDiscordGuildId(): string {
@@ -70,7 +71,7 @@ export class DiscordService {
         return this.discordGuildId;
     }
 
-    setDiscordGuildId(guildId) {
+    setDiscordGuildId(guildId: string) {
         this.discordGuildId = guildId;
     }
 
@@ -82,31 +83,31 @@ export class DiscordService {
         if (redirectUrl) {
             path += "?redirectUrl=" + redirectUrl;
         }
-        return await this.api.doPost(path, { code: code });
+        return await this.api.doPost(path, { code: code }) as IExchangeCodeResponse;
     }
 
     async createServer(
         guildId: string
     ): Promise<discordModels.IBaseDiscordServer> {
-        return await this.api.doPost("DiscordGuild", { guildId: guildId });
+        return await this.api.doPost("DiscordGuild", { guildId: guildId }) as IBaseDiscordServer;
     }
 
     async createApplicationCommand(
         command: IBaseDiscordCommand
     ): Promise<discordModels.IBaseDiscordCommand> {
-        return await this.api.doPost("Discord/ApplicationCommand", command);
+        return await this.api.doPost("Discord/ApplicationCommand", command) as IBaseDiscordCommand;
     }
 
     async setupServer(
         guildId: string
     ): Promise<discordModels.IBaseDiscordCommand> {
-        return await this.api.doPost(`DiscordGuild/${guildId}/Setup`, {});
+        return await this.api.doPost(`DiscordGuild/${guildId}/Setup`, {}) as IBaseDiscordCommand;
     }
 
     async updateApplicationCommand(
         command: IBaseDiscordCommand
     ): Promise<discordModels.IBaseDiscordCommand> {
-        return await this.api.doPatch("Discord/ApplicationCommand", command);
+        return await this.api.doPatch("Discord/ApplicationCommand", command) as IBaseDiscordCommand;
     }
 
     async getResponseMessagesForGuild(
@@ -122,7 +123,7 @@ export class DiscordService {
     async getDataCommandsForGuild(
         guildId: string
     ): Promise<discordModels.IBaseDiscordCommand[]> {
-        return await this.api.doGet(`DiscordGuild/${guildId}/DataCommands`);
+        return await this.api.doGet(`DiscordGuild/${guildId}/DataCommands`) as IBaseDiscordCommand[];
     }
 
     async toggleDiscordCommandActive(
@@ -146,7 +147,7 @@ export class DiscordService {
         return await this.api.doDelete(`Discord/ApplicationCommand/${id}`);
     }
 
-    async getDiscordServerInformation(guildId: string): Promise<any> {
+    async getDiscordServerInformation(guildId: string): Promise<IDiscordGuild> {
         if (!this.guild || guildId != this.guild.guildId) {
             this.guild = await this.api.doGet(`DiscordGuild/${guildId}`);
             this.messages = null;
@@ -204,7 +205,7 @@ export class DiscordService {
     }
 
     public async getDiscordRoles() {
-        return this.guild?.guild?.roles;
+        return this.guild.guild?.roles;
     }
 
     public async setActiveFeaturesForDiscord(
@@ -222,28 +223,28 @@ export class DiscordService {
     ): Promise<discordModels.IBaseDiscordServer> {
         return await this.api.doPatch(`DiscordGuild/${guildId}/SetFeatures`, {
             activeAuditLogFeatures: features,
-        });
+        }) as IBaseDiscordServer;
     }
 
     public async setAuditLogChannelId(
         guildId: string,
-        auditLogChannelId: string[]
+        auditLogChannelId: string
     ): Promise<discordModels.IBaseDiscordServer> {
         return await this.api.doPatch(
             `DiscordGuild/${guildId}/SetAuditLogChannel`,
             { auditLogChannelId: auditLogChannelId }
-        );
+        ) as IBaseDiscordServer;
     }
 
     public async sendMessageToChannel(
         guildId: string,
-        channelId: string[],
+        channelId: string,
         message: ISendMessageToChannelRequest
     ): Promise<discordModels.IBaseDiscordServer> {
         return await this.api.doPatch(
             `DiscordGuild/${guildId}/Channel/${channelId}/SendMessage`,
             message
-        );
+        ) as IBaseDiscordServer;
     }
 
     public async getDiscordForms(guildId: string) {
@@ -257,26 +258,26 @@ export class DiscordService {
     public async createDiscordForm(
         form: DiscordForm
     ): Promise<discordModels.DiscordForm> {
-        return this.api.doPost(
+        return await this.api.doPost(
             `DiscordForm/Guild/${this.getLocalDiscordGuildId()}/Forms`,
             form
-        );
+        ) as DiscordForm;
     }
 
     public async updateDiscordForm(
         form: DiscordForm
     ): Promise<discordModels.DiscordForm> {
-        return this.api.doPatch(
+        return await this.api.doPatch(
             `DiscordForm/Guild/${this.getLocalDiscordGuildId()}/Forms`,
             form
-        );
+        ) as DiscordForm;
     }
 
     public async setupSupportTicketMessage(
         guildId: string,
         request: any
     ): Promise<any> {
-        return this.api.doPost(
+        return await this.api.doPost(
             `DiscordGuild/${guildId}/SupportTickets`,
             request
         );
@@ -662,22 +663,28 @@ export class DiscordService {
     }
 
     async exportTemplate(topics: string[]) {
-        return this.api.doGet(
+        return await this.api.doGet(
             `DiscordGuild/${this.getLocalDiscordGuildId()}/ImportTemplate?topics=${topics}`
         );
     }
 
     async importTemplate(request) {
-        return this.api.doPost(
+        return await this.api.doPost(
             `DiscordGuild/${this.getLocalDiscordGuildId()}/ImportTemplate`,
             request
         );
     }
 
     async toggleCustomBotActive(active: boolean) {
-        return this.api.doPatch(
+        return await this.api.doPatch(
             `DiscordGuild/${this.getLocalDiscordGuildId()}/ActivateCustomBot`,
             { active: active }
+        );
+    }
+
+    async getInvites() {
+        return await this.api.doGet(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/Invites`
         );
     }
 }

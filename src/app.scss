@@ -9,60 +9,60 @@
 @use 'material-icons/iconfont/material-icons.css';
 
 body {
-  background-color: #202225;
-  color: lightgray !important;
+    background-color: #202225;
+    color: lightgray !important;
 }
 
 .text-green {
-  color: green;
+    color: green;
 }
 
 .text-blue {
-  color: dodgerblue !important;
+    color: dodgerblue !important;
 }
 
 #drawer {
-.mdc-list-item--selected .mdc-list-item__primary-text, .mdc-list-item--activated .mdc-list-item__primary-text {
-  color: white !important;
-}
+    .mdc-list-item--selected .mdc-list-item__primary-text, .mdc-list-item--activated .mdc-list-item__primary-text {
+        color: white !important;
+    }
 
-.list-item-padding {
-  padding-left: 25px;
-}
+    .list-item-padding {
+        padding-left: 25px;
+    }
 
-.mdc-select__anchor {
-  width: 300px !important;
-}
+    .mdc-select__anchor {
+        width: 300px !important;
+    }
 
-.mdc-drawer__title {
-  text-align: center;
-}
+    .mdc-drawer__title {
+        text-align: center;
+    }
 }
 
 .cursor-pointer {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 a {
-  color: unset;
-  text-decoration: none;
+    color: unset;
+    text-decoration: none;
 }
 
 a:hover {
-  font-weight: bolder;
-  color: unset;
+    font-weight: bolder;
+    color: unset;
 }
 
 .mdc-select--filled.mdc-select--disabled .mdc-select__anchor {
-  background: #36393f;
+    background: #36393f;
 }
 
-.mdc-select--disabled .mdc-select__selected-text-container{
-  color: rgba(0,0,0,0.3);
+.mdc-select--disabled .mdc-select__selected-text-container {
+    color: rgba(0, 0, 0, 0.3);
 }
 
 .mdc-select.mdc-select--disabled .mdc-select__selected-text {
-  color: rgba(255, 255, 255, 0.5) !important
+    color: rgba(255, 255, 255, 0.5) !important
 }
 
 .fs-7 {
