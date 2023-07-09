@@ -17,35 +17,6 @@
         <label class="me-5">Active?</label>
     </div>
 </div>
-<moo-accordion class="my-3">
-    <div if.bind="!isAdmin">
-        <span class="text-danger">Only the owner may edit these settings.</span>
-    </div>
-    <div slot="caption">IP Quality Score</div>
-    <div class="py-3">
-        <div>
-            IPQualityScore is an industry leading anti-fraud platform that comes with a variety of verification options.
-            <br> We use this for looking up information on IP Addresses and Emails
-            <br> Get started on <a href="https://www.ipqualityscore.com/" target="_blank" class="text-blue" external>IP
-            Quality Score</a>
-            <br> IP Quality Score is free for a large amount of requests. Simply add your API key here to start taking
-            advantage
-            <br> Note that gathering information on user's emails requires user login setting on.
-            <br> Don't want to sign up? Ask us in a ticket about getting a provided API key.
-        </div>
-        <form submit.trigger="updateKeys()">
-            <moo-text-field
-                disabled.bind="!isAdmin"
-                class="w-100"
-                label="IP Quality Score API Key"
-                value.bind="guild.ipQualityScoreApiKey"
-            ></moo-text-field>
-            <moo-button variant="primary" disabled.bind="!isAdmin" type="submit">
-                Save
-            </moo-button>
-        </form>
-    </div>
-</moo-accordion>
 <form submit.trigger="save()" if.bind="guild">
     <div class="my-3">
         <discord-role-selector

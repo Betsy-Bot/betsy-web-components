@@ -30,9 +30,6 @@ export class Users implements IRouteViewModel {
             dataField: "lastKnownName",
         },
         {
-            dataField: "inviteCount",
-        },
-        {
             dataField: "createdDate",
             dataType: "date",
         },
@@ -47,9 +44,7 @@ export class Users implements IRouteViewModel {
     ];
 
     async attached() {
-        this.users = await this.discordService.getUsersForGuild(
-            this.discordService.getLocalDiscordGuildId()
-        );
+        this.users = await this.discordService.getUsersForGuild(this.discordService.getLocalDiscordGuildId());
 
         this.detailTemplate = (container, options) => {
             const data = options.data;

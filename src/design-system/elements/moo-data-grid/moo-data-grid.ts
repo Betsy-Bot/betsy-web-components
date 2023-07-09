@@ -1,8 +1,9 @@
-import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
+import { bindable, BindingMode, containerless, ICustomElementViewModel } from "aurelia";
 
-import 'devextreme/dist/css/dx.material.purple.dark.compact.css';
+import "devextreme/dist/css/dx.material.purple.dark.compact.css";
 
-import DataGrid from 'devextreme/ui/data_grid';
+import DataGrid from "devextreme/ui/data_grid";
+
 @containerless()
 export class MooDataGrid implements ICustomElementViewModel {
     @bindable items = null;
@@ -28,7 +29,7 @@ export class MooDataGrid implements ICustomElementViewModel {
     @bindable allowColumnReordering;
     @bindable columnResizingMode;
     @bindable confirmDeleteMessage;
-    @bindable editingMode = 'batch';
+    @bindable editingMode = "batch";
     @bindable allowedPageSizes = [1, 10, 25, 50, 100];
     @bindable popupTitle;
     @bindable formItemOptions;
@@ -39,7 +40,7 @@ export class MooDataGrid implements ICustomElementViewModel {
     @bindable onRowValidating;
     @bindable onToolbarPreparing;
     @bindable onExporting;
-    @bindable onCellPrepared
+    @bindable onCellPrepared;
     @bindable dataSource;
     @bindable onContentReady;
     //Value for storing filters on new accounts/currency/items filters
@@ -51,10 +52,12 @@ export class MooDataGrid implements ICustomElementViewModel {
     @bindable onEditingStart;
     @bindable onEditorPreparing;
     @bindable closeOnOutsideClick;
-    control;
+    @bindable summary;
+    @bindable({ mode: BindingMode.twoWay }) control;
     //Array of editable datetime type fields.
-    valuesDateTime = ['validThrough'];
+    valuesDateTime = ["validThrough"];
     dataGrid;
+    dataGridControl: DataGrid;
 
     attached() {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -63,49 +66,52 @@ export class MooDataGrid implements ICustomElementViewModel {
             allowColumnReordering: this.allowColumnReordering || true,
             filterRow: {
                 visible: this.filterVisible,
-                applyFilter: 'auto'
+                applyFilter: "auto",
             },
             headerFilter: {
-                visible: this.headerFilterVisible
+                visible: this.headerFilterVisible,
             },
             searchPanel: {
                 visible: this.searchPanelVisible,
                 width: 300,
                 text: this.searchPanelText,
-                searchVisibleColumnsOnly: true
+                searchVisibleColumnsOnly: true,
             },
             loadPanel: {
-                width: 100
+                width: 100,
             },
             dataSource: this.items || this.dataSource,
             export: {
-                enabled: true
+                enabled: true,
             },
             columnAutoWidth: true,
             rowAlternationEnabled: true,
-            remoteOperations: this.items ? false : {
-                filtering: true,
-                sorting: true,
-                paging: true,
-                grouping: false,
-                summary: false
-            },
+            remoteOperations: this.items
+                ? false
+                : {
+                      filtering: true,
+                      sorting: true,
+                      paging: true,
+                      grouping: false,
+                      summary: false,
+                  },
             scrolling: {
-                mode: 'standard',
-                showScrollbar: 'always'
+                mode: "standard",
+                showScrollbar: "always",
             },
+            summary: this.summary ?? {},
             paging: {
                 enabled: true,
-                pageSize: 25
+                pageSize: 25,
             },
             stateStoring: {
                 enabled: !this.searchPanelText,
-                type: 'sessionStorage',
-                storageKey: this.storageKey || 'defaultStorageKey'
+                type: "sessionStorage",
+                storageKey: this.storageKey || "defaultStorageKey",
             },
             pager: {
                 showPageSizeSelector: true,
-                allowedPageSizes: this.allowedPageSizes
+                allowedPageSizes: this.allowedPageSizes,
             },
             allowColumnResizing: this.allowColumnResizing || true,
             columnResizingMode: this.columnResizingMode || true,
@@ -118,26 +124,34 @@ export class MooDataGrid implements ICustomElementViewModel {
             onRowPrepared: this.onRowPrepared,
             onRowExpanding: this.onRowExpanding,
             onRowValidating: this.onRowValidating ? (e) => this.onRowValidating(e) : undefined,
-            onContentReady: this.onContentReady ? this.onContentReady : (e) => {
-                e.element.querySelector('.dx-datagrid-text-content').classList.remove('dx-text-content-alignment-left');
-                const countEl = document.getElementById('grid-control-data-count');
-                if (this.items && countEl) {
-                    countEl.innerText = 'Total Records: ' + this.items.length;
-                } else if (this.dataSource && countEl) {
-                    countEl.innerText = 'Total Records: ' + this.dataSource.totalCount();
-                }
-            },
-            onOptionChanged: this.onOptionChangedFunction ? (e) => this.onOptionChangedFunction(e, this.auxFiltersForNewProduct) : undefined,
+            onContentReady: this.onContentReady
+                ? this.onContentReady
+                : (e) => {
+                      e.element
+                          .querySelector(".dx-datagrid-text-content")
+                          .classList.remove("dx-text-content-alignment-left");
+                      const countEl = document.getElementById("grid-control-data-count");
+                      if (this.items && countEl) {
+                          countEl.innerText = "Total Records: " + this.items.length;
+                      } else if (this.dataSource && countEl) {
+                          countEl.innerText = "Total Records: " + this.dataSource.totalCount();
+                      }
+                  },
+            onOptionChanged: this.onOptionChangedFunction
+                ? (e) => this.onOptionChangedFunction(e, this.auxFiltersForNewProduct)
+                : undefined,
             onInitNewRow: this.onInitNewRowFunction ? (e) => this.onInitNewRowFunction(e) : undefined,
-            onRowInserted: this.onRowInsertedFunction ? (e) => this.onRowInsertedFunction(e, this.auxFiltersForNewProduct) : undefined,
+            onRowInserted: this.onRowInsertedFunction
+                ? (e) => this.onRowInsertedFunction(e, this.auxFiltersForNewProduct)
+                : undefined,
             onRowUpdated: this.onRowUpdatedFunction ? (e) => this.onRowUpdatedFunction(e) : undefined,
             onCellPrepared: this.onCellPrepared ? (e) => this.onCellPrepared(e) : undefined,
             onEditingStart: this.onEditingStart ? (e) => this.onEditingStart(e) : undefined,
-            columnChooser: { enabled: this.allowChoosing, mode: 'select' },
+            columnChooser: { enabled: this.allowChoosing, mode: "select" },
             ...this.prepareEditingOptions(),
             masterDetail: {
-                enabled: typeof(this.masterDetail) === 'object' ? false : this.masterDetail,
-                template: this.masterDetail
+                enabled: typeof this.masterDetail === "object" ? false : this.masterDetail,
+                template: this.masterDetail,
             },
         });
     }
@@ -152,7 +166,7 @@ export class MooDataGrid implements ICustomElementViewModel {
             allowAdding: this.allowAdding,
             allowDeleting: this.allowDeleting,
             selectTextOnEditStart: true,
-            startEditAction: 'click',
+            startEditAction: "click",
             mode: this.editingMode, // 'batch' | 'cell' | 'form' | 'popup'
             useIcons: true,
             form: {
@@ -160,18 +174,20 @@ export class MooDataGrid implements ICustomElementViewModel {
                     xs: 2,
                     sm: 2,
                     md: 3,
-                    lg: 4
+                    lg: 4,
                 },
-                items: this.formItemOptions ? [...this.formItemOptions] : undefined
+                items: this.formItemOptions ? [...this.formItemOptions] : undefined,
             },
             popup: {
-                title: this.popupTitle ? this.popupTitle : 'Edit',
+                title: this.popupTitle ? this.popupTitle : "Edit",
                 closeOnOutsideClick: !this.closeOnOutsideClick,
-                showTitle: true
+                showTitle: true,
             },
             texts: {
-                confirmDeleteMessage: this.confirmDeleteMessage || 'Are you sure you want to delete this record? WARNING: This immediately deletes this record.'
-            }
+                confirmDeleteMessage:
+                    this.confirmDeleteMessage ||
+                    "Are you sure you want to delete this record? WARNING: This immediately deletes this record.",
+            },
         };
     }
 
@@ -181,9 +197,9 @@ export class MooDataGrid implements ICustomElementViewModel {
      * @param {Loader to activate} loaderElement
      */
     startLoader(data, loaderElement) {
-        data.component.option('visible', false);
-        loaderElement.classList.remove('d-none');
-        loaderElement.classList.add('d-block');
+        data.component.option("visible", false);
+        loaderElement.classList.remove("d-none");
+        loaderElement.classList.add("d-block");
     }
 
     /**
@@ -192,9 +208,9 @@ export class MooDataGrid implements ICustomElementViewModel {
      * @param {Loader to activate} loaderElement
      */
     endLoader(data, loaderElement) {
-        loaderElement.classList.remove('d-block');
-        loaderElement.classList.add('d-none');
-        data.component.option('visible', true);
+        loaderElement.classList.remove("d-block");
+        loaderElement.classList.add("d-none");
+        data.component.option("visible", true);
     }
 
     onRowExpanding = (e) => {

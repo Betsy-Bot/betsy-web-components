@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mb-3">
     <div class="col-8">
         <feature-header
             doc-url="https://docs.betsybot.xyz/features/invites"
@@ -15,4 +15,10 @@
     </div>
 </div>
 
-<moo-data-grid if.bind="invites && columns" items.bind="invites" columns.bind="columns"></moo-data-grid>
+<moo-data-grid
+    if.bind="invites && columns"
+    items.bind="invites"
+    columns.bind="columns"
+    control.bind="dataGridControl"
+    summary.bind="gridSummary"
+></moo-data-grid>
