@@ -72,8 +72,8 @@ dependencies:
     specifier: ^7.0.7
     version: 7.0.7
   aurelia:
-    specifier: 2.0.0-beta.6
-    version: 2.0.0-beta.6
+    specifier: 2.0.0-beta.7
+    version: 2.0.0-beta.7
   aurelia-fetch-client:
     specifier: ^1.8.2
     version: 1.8.2
@@ -101,20 +101,20 @@ dependencies:
 
 devDependencies:
   '@aurelia/router-lite':
-    specifier: 2.0.0-beta.6
-    version: 2.0.0-beta.6
+    specifier: 2.0.0-beta.7
+    version: 2.0.0-beta.7
   '@aurelia/runtime-html':
-    specifier: 2.0.0-beta.6
-    version: 2.0.0-beta.6
+    specifier: 2.0.0-beta.7
+    version: 2.0.0-beta.7
   '@aurelia/validation-html':
-    specifier: 2.0.0-beta.6
-    version: 2.0.0-beta.6
+    specifier: 2.0.0-beta.7
+    version: 2.0.0-beta.7
   '@aurelia/vite-plugin':
-    specifier: 2.0.0-beta.6
-    version: 2.0.0-beta.6(@types/node@20.3.3)(sass@1.63.6)
+    specifier: 2.0.0-beta.7
+    version: 2.0.0-beta.7(@types/node@20.4.1)(sass@1.63.6)
   '@types/node':
-    specifier: ^20.3.3
-    version: 20.3.3
+    specifier: ^20.4.1
+    version: 20.4.1
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.0.0
     version: 6.0.0(@typescript-eslint/parser@6.0.0)(eslint@8.44.0)(typescript@5.1.6)
@@ -123,7 +123,7 @@ devDependencies:
     version: 6.0.0(eslint@8.44.0)(typescript@5.1.6)
   autoprefixer:
     specifier: ^10.4.14
-    version: 10.4.14(postcss@8.4.24)
+    version: 10.4.14(postcss@8.4.25)
   css-loader:
     specifier: ^6.8.1
     version: 6.8.1(webpack@5.87.0)
@@ -155,11 +155,11 @@ devDependencies:
     specifier: ^1.1.4
     version: 1.1.4
   postcss:
-    specifier: ^8.4.24
-    version: 8.4.24
+    specifier: ^8.4.25
+    version: 8.4.25
   postcss-loader:
     specifier: ^7.3.3
-    version: 7.3.3(postcss@8.4.24)(webpack@5.87.0)
+    version: 7.3.3(postcss@8.4.25)(webpack@5.87.0)
   rimraf:
     specifier: ^5.0.1
     version: 5.0.1
@@ -183,7 +183,7 @@ devDependencies:
     version: 5.1.6
   vite:
     specifier: 4.3.9
-    version: 4.3.9(@types/node@20.3.3)(sass@1.63.6)
+    version: 4.3.9(@types/node@20.4.1)(sass@1.63.6)
 
 packages:
 
@@ -192,121 +192,121 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /@aurelia/fetch-client@2.0.0-beta.6:
-    resolution: {integrity: sha512-izYYLkYOYZTyVrpd5+XBmeVXurB5lqIldU4zM4HQ/ikYtc1wz5YaE/sUVkyNd1aD0TEIS5R94v2U5pFkfkRWbg==}
+  /@aurelia/fetch-client@2.0.0-beta.7:
+    resolution: {integrity: sha512-ESyk6cdEHvg6H2IDN+velk+ON1GgyRxDkyFeOC2Bxeq3WU9r03OlUq3oKQ2wvQxOcgjfR8kai6uONwCcD14jfw==}
     engines: {node: '>=14.17.0'}
     dependencies:
-      '@aurelia/kernel': 2.0.0-beta.6
-      '@aurelia/metadata': 2.0.0-beta.6
+      '@aurelia/kernel': 2.0.0-beta.7
+      '@aurelia/metadata': 2.0.0-beta.7
     dev: false
 
-  /@aurelia/kernel@2.0.0-beta.6:
-    resolution: {integrity: sha512-/NDSAVWez7iEvJ2JjYNYJjBuKGfqpIxSiOfybVIgF9kevEV4/axr0OK04GM6CTKpEvzDTqcNeJBkSNTlainAeg==}
+  /@aurelia/kernel@2.0.0-beta.7:
+    resolution: {integrity: sha512-T2eXGdyfxh9T7xNljUJVbVE2EWsGKtyZYYHmYeE0GoctI6Ia7arN9g191DrXZZslz79nC/1ZFjxcsATx2GipHQ==}
     engines: {node: '>=14.17.0'}
     dependencies:
-      '@aurelia/metadata': 2.0.0-beta.6
-      '@aurelia/platform': 2.0.0-beta.6
+      '@aurelia/metadata': 2.0.0-beta.7
+      '@aurelia/platform': 2.0.0-beta.7
 
-  /@aurelia/metadata@2.0.0-beta.6:
-    resolution: {integrity: sha512-Al63lrdC/AWtGsimp8QxrEfFM+tVKpLt1YwxH83xhGV0vQVBtF9XU/zodXG3x7cvqwpUKOPjENu6vgfk/t1NwQ==}
+  /@aurelia/metadata@2.0.0-beta.7:
+    resolution: {integrity: sha512-/e1PrqErA9eDvw7Wg6LC6z2+F7Kiojfyraq1Sv0OxafiwLq1Oao/TRVL4C0jUZOsRqQ+XXS0iRm+zAQ247Trxg==}
     engines: {node: '>=14.17.0'}
 
-  /@aurelia/platform-browser@2.0.0-beta.6:
-    resolution: {integrity: sha512-K/hqSxZQm/6/8cOitVgfW4tERRghcMtE+s1YHgKBNwa9ZCU38Rd7b+C3TCgZiWfVvVVlnJPKB1u0LkXHjzKArQ==}
-    engines: {node: '>=14.17.0'}
-    dependencies:
-      '@aurelia/platform': 2.0.0-beta.6
-
-  /@aurelia/platform@2.0.0-beta.6:
-    resolution: {integrity: sha512-SlLObWSzpefByXxPNysaZaNECLPUpUsNcOBCTc82ZvmIIWYhUYgwR4iPpLRBw/Puo55xlixaAgkPLC6jiYp46Q==}
-    engines: {node: '>=14.17.0'}
-
-  /@aurelia/plugin-conventions@2.0.0-beta.6:
-    resolution: {integrity: sha512-/XAPg9PFUO5CtSO/vdPewr+45H4KzKGHcrCbwfx3ujGbZOdEjxo6io5MlH1cWEnr6zgcArBxl0jd0c14FnCoog==}
+  /@aurelia/platform-browser@2.0.0-beta.7:
+    resolution: {integrity: sha512-wDzTiu9AzIjkDYitQvnNHjwzH3cmurisp3YwTvdUt5JRwO4qGwWWEea5S2iwSyi9u+xSz/NkWLExb8clVaNMKA==}
     engines: {node: '>=14.17.0'}
     dependencies:
-      '@aurelia/kernel': 2.0.0-beta.6
-      '@aurelia/metadata': 2.0.0-beta.6
-      '@aurelia/platform': 2.0.0-beta.6
-      '@aurelia/runtime': 2.0.0-beta.6
-      '@aurelia/runtime-html': 2.0.0-beta.6
+      '@aurelia/platform': 2.0.0-beta.7
+
+  /@aurelia/platform@2.0.0-beta.7:
+    resolution: {integrity: sha512-yimI627UmzbTL8gwQ8G3sDERjGCAXq7ictekvRc0Nena9fZltu/DS4Rln10cGTMTFKAg2SGQ5zsiiVEVXTm0tg==}
+    engines: {node: '>=14.17.0'}
+
+  /@aurelia/plugin-conventions@2.0.0-beta.7:
+    resolution: {integrity: sha512-4VLpKQPmuRTk3XP50i9RlpCQ9gSzcK6E24XFr3QFS0XE13fW5YFsHFxzPBOvsF1HZK3V2P82nLVKv2fkOYHfYQ==}
+    engines: {node: '>=14.17.0'}
+    dependencies:
+      '@aurelia/kernel': 2.0.0-beta.7
+      '@aurelia/metadata': 2.0.0-beta.7
+      '@aurelia/platform': 2.0.0-beta.7
+      '@aurelia/runtime': 2.0.0-beta.7
+      '@aurelia/runtime-html': 2.0.0-beta.7
       modify-code: 2.1.3
       parse5: 5.1.1
       typescript: 5.0.2
     dev: true
 
-  /@aurelia/route-recognizer@2.0.0-beta.6:
-    resolution: {integrity: sha512-ro0Y6Ksx4r0nAlYZ+VyM+vmXjBksmeN9hRAiq6seMjeWO0G8x/YW/ovI3YLzi4yOATW3QYNM71cJdZv1ufvSdA==}
+  /@aurelia/route-recognizer@2.0.0-beta.7:
+    resolution: {integrity: sha512-Bf1uJ0Vqa4areUkJ9cFz01W1U3K0IMXvH/hxhVXAtH0jKFl0EZ1L17LqfZoe2qRa35xHStHmnjoNEfPaBhohog==}
     engines: {node: '>=14.17.0'}
     dev: true
 
-  /@aurelia/router-lite@2.0.0-beta.6:
-    resolution: {integrity: sha512-84dFVcETMu3S/Kb3DB4js6HTFAcx4iYzpaq+Ssu9ypTYnyrIc4WrKvrCTEkBTKFLzAqvk6TB4Xshpj2W076MSg==}
+  /@aurelia/router-lite@2.0.0-beta.7:
+    resolution: {integrity: sha512-kNOjRs0ONhOJhjwO+vdv21S0rRSyQ0TFmJh6DlOOrACpTI1hhqdgFEEe6iTN8QLPKcFSZi2+y9/3z3jEFxUvZw==}
     engines: {node: '>=14.17.0'}
     dependencies:
-      '@aurelia/kernel': 2.0.0-beta.6
-      '@aurelia/metadata': 2.0.0-beta.6
-      '@aurelia/platform': 2.0.0-beta.6
-      '@aurelia/platform-browser': 2.0.0-beta.6
-      '@aurelia/route-recognizer': 2.0.0-beta.6
-      '@aurelia/runtime': 2.0.0-beta.6
-      '@aurelia/runtime-html': 2.0.0-beta.6
+      '@aurelia/kernel': 2.0.0-beta.7
+      '@aurelia/metadata': 2.0.0-beta.7
+      '@aurelia/platform': 2.0.0-beta.7
+      '@aurelia/platform-browser': 2.0.0-beta.7
+      '@aurelia/route-recognizer': 2.0.0-beta.7
+      '@aurelia/runtime': 2.0.0-beta.7
+      '@aurelia/runtime-html': 2.0.0-beta.7
     dev: true
 
-  /@aurelia/runtime-html@2.0.0-beta.6:
-    resolution: {integrity: sha512-qjiMHEVBwv7NHyeufPD4jcc2l7Oq0VFsX+/zuFQi4SQnJvmtXhwNbceQSideBd4DhRbnaLz72Y5mu88dMypf5g==}
+  /@aurelia/runtime-html@2.0.0-beta.7:
+    resolution: {integrity: sha512-jJJvNEdO1w+UVte+/UHWNuG9i2GrMBQHz/VQ3L3n46ksY4WqkH9lehQYhA35GhUvwxIX9KEbXrhHp+0FBqV0Dg==}
     engines: {node: '>=14.17.0'}
     dependencies:
-      '@aurelia/kernel': 2.0.0-beta.6
-      '@aurelia/metadata': 2.0.0-beta.6
-      '@aurelia/platform': 2.0.0-beta.6
-      '@aurelia/platform-browser': 2.0.0-beta.6
-      '@aurelia/runtime': 2.0.0-beta.6
+      '@aurelia/kernel': 2.0.0-beta.7
+      '@aurelia/metadata': 2.0.0-beta.7
+      '@aurelia/platform': 2.0.0-beta.7
+      '@aurelia/platform-browser': 2.0.0-beta.7
+      '@aurelia/runtime': 2.0.0-beta.7
 
-  /@aurelia/runtime@2.0.0-beta.6:
-    resolution: {integrity: sha512-u3cT3Bdr1fDGBMDY0sj1S11FYD+h2rpbUbH/JEbr7aWoL64RJr4VssagwtCZeymUASEjEnCCgq6cKIKKyISkJg==}
+  /@aurelia/runtime@2.0.0-beta.7:
+    resolution: {integrity: sha512-yNCTKmKJfdblS1v5aKz2JqG2Yanlh4QqGjrzTbah+k+K8owKFaOFrxYh5sTWq5bn0znKbqyoowf1r/VSrDF+3A==}
     engines: {node: '>=14.17.0'}
     dependencies:
-      '@aurelia/kernel': 2.0.0-beta.6
-      '@aurelia/metadata': 2.0.0-beta.6
-      '@aurelia/platform': 2.0.0-beta.6
+      '@aurelia/kernel': 2.0.0-beta.7
+      '@aurelia/metadata': 2.0.0-beta.7
+      '@aurelia/platform': 2.0.0-beta.7
 
-  /@aurelia/validation-html@2.0.0-beta.6:
-    resolution: {integrity: sha512-3lmDhwzNlx5/FJAC03cwuBz/B54NhjPuE3xizWvRm+YYfGXR+z4DNkE3Iv947OjzqOR5O9BICPq8n5a/TUcedQ==}
+  /@aurelia/validation-html@2.0.0-beta.7:
+    resolution: {integrity: sha512-zJRE1slUSQtqsGGYAx87nY1K+FnYeuDOyx8DHtlQQu24WFLxNj4iZUpKMefliQVadL9btD8om2ZVo6zEf859GA==}
     engines: {node: '>=14.17.0'}
     dependencies:
-      '@aurelia/kernel': 2.0.0-beta.6
-      '@aurelia/metadata': 2.0.0-beta.6
-      '@aurelia/platform': 2.0.0-beta.6
-      '@aurelia/platform-browser': 2.0.0-beta.6
-      '@aurelia/runtime': 2.0.0-beta.6
-      '@aurelia/runtime-html': 2.0.0-beta.6
-      '@aurelia/validation': 2.0.0-beta.6
+      '@aurelia/kernel': 2.0.0-beta.7
+      '@aurelia/metadata': 2.0.0-beta.7
+      '@aurelia/platform': 2.0.0-beta.7
+      '@aurelia/platform-browser': 2.0.0-beta.7
+      '@aurelia/runtime': 2.0.0-beta.7
+      '@aurelia/runtime-html': 2.0.0-beta.7
+      '@aurelia/validation': 2.0.0-beta.7
     dev: true
 
-  /@aurelia/validation@2.0.0-beta.6:
-    resolution: {integrity: sha512-SeFDEoPwrL1vwRweuWa5gJnwA8cmu3nvT3GcvB7/FzGzVjXkXf5uOPRATrdPsnRpmpvgtQDKoG+Rs1teqk0Mhw==}
+  /@aurelia/validation@2.0.0-beta.7:
+    resolution: {integrity: sha512-fLxKnNO+S00IzUI+10ZI+wVV1sOSfkAh7HRHiKX4JSw2QUSg6GVB7zH+pVMblyFtYJC8xTaeTwfqmpqns897sA==}
     engines: {node: '>=14.17.0'}
     dependencies:
-      '@aurelia/kernel': 2.0.0-beta.6
-      '@aurelia/metadata': 2.0.0-beta.6
-      '@aurelia/platform': 2.0.0-beta.6
-      '@aurelia/runtime': 2.0.0-beta.6
-      '@aurelia/runtime-html': 2.0.0-beta.6
+      '@aurelia/kernel': 2.0.0-beta.7
+      '@aurelia/metadata': 2.0.0-beta.7
+      '@aurelia/platform': 2.0.0-beta.7
+      '@aurelia/runtime': 2.0.0-beta.7
+      '@aurelia/runtime-html': 2.0.0-beta.7
     dev: true
 
-  /@aurelia/vite-plugin@2.0.0-beta.6(@types/node@20.3.3)(sass@1.63.6):
-    resolution: {integrity: sha512-sK32lNtl8EUvwbqgW4lzvT23+7VTR7aTzeSga5KTVSZlkNoOL69oejGtWD81ueou6qpus78tJi3xA/eNPy690w==}
+  /@aurelia/vite-plugin@2.0.0-beta.7(@types/node@20.4.1)(sass@1.63.6):
+    resolution: {integrity: sha512-hXZiPDykhKbb5lv9G1mvUMJDzzmySYG7k6egCU3M9upncjXdi1FvsiOy4kCnXYNQFlf1C81n9v6rBq6rLSyOvg==}
     engines: {node: '>=14.17.0'}
     dependencies:
-      '@aurelia/kernel': 2.0.0-beta.6
-      '@aurelia/metadata': 2.0.0-beta.6
-      '@aurelia/platform': 2.0.0-beta.6
-      '@aurelia/plugin-conventions': 2.0.0-beta.6
-      '@aurelia/runtime': 2.0.0-beta.6
+      '@aurelia/kernel': 2.0.0-beta.7
+      '@aurelia/metadata': 2.0.0-beta.7
+      '@aurelia/platform': 2.0.0-beta.7
+      '@aurelia/plugin-conventions': 2.0.0-beta.7
+      '@aurelia/runtime': 2.0.0-beta.7
       '@rollup/pluginutils': 5.0.2
       loader-utils: 2.0.4
-      vite: 4.3.9(@types/node@20.3.3)(sass@1.63.6)
+      vite: 4.3.9(@types/node@20.4.1)(sass@1.63.6)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -1686,8 +1686,8 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node@20.3.3:
-    resolution: {integrity: sha512-wheIYdr4NYML61AjC8MKj/2jrR/kDQri/CIpVoZwldwhnIrD/j9jIU5bJ8yBKuB2VhpFV7Ab6G2XkBjv9r9Zzw==}
+  /@types/node@20.4.1:
+    resolution: {integrity: sha512-JIzsAvJeA/5iY6Y/OxZbv1lUcc8dNSE77lb2gnBH+/PJ3lFR1Ccvgwl5JWnHAkNHcRsT0TbpVOsiMKZ1F/yyJg==}
     dev: true
 
   /@types/prop-types@15.7.5:
@@ -2100,20 +2100,20 @@ packages:
     resolution: {integrity: sha512-6erozUK5aaD88PvThs/L87kLsqxqPaBU59PGECr36v9yezhve0BHqpKgbtJ8haHJSiH80K9lsJtXfefedS/3sw==}
     dev: false
 
-  /aurelia@2.0.0-beta.6:
-    resolution: {integrity: sha512-vK7BgrOfHmD+gkeA8lpDXoCZrkvy9ok89B54EpQ6sGOXG15DtwIrMJ/xJH93DkvPlvQRby3AJikV1DSTT2UE3A==}
+  /aurelia@2.0.0-beta.7:
+    resolution: {integrity: sha512-oF+jyxhIMkzvzUarKExcUP11A1TGlEZgAX+wLa3wI3uLukSstWlXdyd+KIwqSQcMDUgb1RDk0BMBRxCgsUDcCg==}
     engines: {node: '>=14.17.0'}
     dependencies:
-      '@aurelia/fetch-client': 2.0.0-beta.6
-      '@aurelia/kernel': 2.0.0-beta.6
-      '@aurelia/metadata': 2.0.0-beta.6
-      '@aurelia/platform': 2.0.0-beta.6
-      '@aurelia/platform-browser': 2.0.0-beta.6
-      '@aurelia/runtime': 2.0.0-beta.6
-      '@aurelia/runtime-html': 2.0.0-beta.6
+      '@aurelia/fetch-client': 2.0.0-beta.7
+      '@aurelia/kernel': 2.0.0-beta.7
+      '@aurelia/metadata': 2.0.0-beta.7
+      '@aurelia/platform': 2.0.0-beta.7
+      '@aurelia/platform-browser': 2.0.0-beta.7
+      '@aurelia/runtime': 2.0.0-beta.7
+      '@aurelia/runtime-html': 2.0.0-beta.7
     dev: false
 
-  /autoprefixer@10.4.14(postcss@8.4.24):
+  /autoprefixer@10.4.14(postcss@8.4.25):
     resolution: {integrity: sha512-FQzyfOsTlwVzjHxKEqRIAdJx9niO6VCBCoEwax/VLSoQF29ggECcPuBqUMZ+u8jCZOPSy8b8/8KnuFbp0SaFZQ==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
@@ -2125,7 +2125,7 @@ packages:
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
-      postcss: 8.4.24
+      postcss: 8.4.25
       postcss-value-parser: 4.2.0
     dev: true
 
@@ -2341,12 +2341,12 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.24)
-      postcss: 8.4.24
-      postcss-modules-extract-imports: 3.0.0(postcss@8.4.24)
-      postcss-modules-local-by-default: 4.0.3(postcss@8.4.24)
-      postcss-modules-scope: 3.0.0(postcss@8.4.24)
-      postcss-modules-values: 4.0.0(postcss@8.4.24)
+      icss-utils: 5.1.0(postcss@8.4.25)
+      postcss: 8.4.25
+      postcss-modules-extract-imports: 3.0.0(postcss@8.4.25)
+      postcss-modules-local-by-default: 4.0.3(postcss@8.4.25)
+      postcss-modules-scope: 3.0.0(postcss@8.4.25)
+      postcss-modules-values: 4.0.0(postcss@8.4.25)
       postcss-value-parser: 4.2.0
       semver: 7.5.2
       webpack: 5.87.0
@@ -3303,13 +3303,13 @@ packages:
     engines: {node: '>=14.18.0'}
     dev: true
 
-  /icss-utils@5.1.0(postcss@8.4.24):
+  /icss-utils@5.1.0(postcss@8.4.25):
     resolution: {integrity: sha512-soFhflCVWLfRNOPU3iv5Z9VUdT44xFRbzjLsEzSr5AQmgqPMTHdU3PMT1Cf1ssx8fLNJDA1juftYl+PUcv3MqA==}
     engines: {node: ^10 || ^12 || >= 14}
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
-      postcss: 8.4.24
+      postcss: 8.4.25
     dev: true
 
   /ignore@5.2.4:
@@ -3605,7 +3605,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.3.3
+      '@types/node': 20.4.1
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true
@@ -4026,7 +4026,7 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
-  /postcss-loader@7.3.3(postcss@8.4.24)(webpack@5.87.0):
+  /postcss-loader@7.3.3(postcss@8.4.25)(webpack@5.87.0):
     resolution: {integrity: sha512-YgO/yhtevGO/vJePCQmTxiaEwER94LABZN0ZMT4A0vsak9TpO+RvKRs7EmJ8peIlB9xfXCsS7M8LjqncsUZ5HA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -4035,50 +4035,50 @@ packages:
     dependencies:
       cosmiconfig: 8.2.0
       jiti: 1.18.2
-      postcss: 8.4.24
+      postcss: 8.4.25
       semver: 7.5.2
       webpack: 5.87.0
     dev: true
 
-  /postcss-modules-extract-imports@3.0.0(postcss@8.4.24):
+  /postcss-modules-extract-imports@3.0.0(postcss@8.4.25):
     resolution: {integrity: sha512-bdHleFnP3kZ4NYDhuGlVK+CMrQ/pqUm8bx/oGL93K6gVwiclvX5x0n76fYMKuIGKzlABOy13zsvqjb0f92TEXw==}
     engines: {node: ^10 || ^12 || >= 14}
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
-      postcss: 8.4.24
+      postcss: 8.4.25
     dev: true
 
-  /postcss-modules-local-by-default@4.0.3(postcss@8.4.24):
+  /postcss-modules-local-by-default@4.0.3(postcss@8.4.25):
     resolution: {integrity: sha512-2/u2zraspoACtrbFRnTijMiQtb4GW4BvatjaG/bCjYQo8kLTdevCUlwuBHx2sCnSyrI3x3qj4ZK1j5LQBgzmwA==}
     engines: {node: ^10 || ^12 || >= 14}
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.24)
-      postcss: 8.4.24
+      icss-utils: 5.1.0(postcss@8.4.25)
+      postcss: 8.4.25
       postcss-selector-parser: 6.0.13
       postcss-value-parser: 4.2.0
     dev: true
 
-  /postcss-modules-scope@3.0.0(postcss@8.4.24):
+  /postcss-modules-scope@3.0.0(postcss@8.4.25):
     resolution: {integrity: sha512-hncihwFA2yPath8oZ15PZqvWGkWf+XUfQgUGamS4LqoP1anQLOsOJw0vr7J7IwLpoY9fatA2qiGUGmuZL0Iqlg==}
     engines: {node: ^10 || ^12 || >= 14}
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
-      postcss: 8.4.24
+      postcss: 8.4.25
       postcss-selector-parser: 6.0.13
     dev: true
 
-  /postcss-modules-values@4.0.0(postcss@8.4.24):
+  /postcss-modules-values@4.0.0(postcss@8.4.25):
     resolution: {integrity: sha512-RDxHkAiEGI78gS2ofyvCsu7iycRv7oqw5xMWn9iMoR0N/7mf9D50ecQqUo5BZ9Zh2vH4bCUR/ktCqbB9m8vJjQ==}
     engines: {node: ^10 || ^12 || >= 14}
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.24)
-      postcss: 8.4.24
+      icss-utils: 5.1.0(postcss@8.4.25)
+      postcss: 8.4.25
     dev: true
 
   /postcss-selector-parser@6.0.13:
@@ -4093,8 +4093,8 @@ packages:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
     dev: true
 
-  /postcss@8.4.24:
-    resolution: {integrity: sha512-M0RzbcI0sO/XJNucsGjvWU9ERWxb/ytp1w6dKtxTKgixdtQDq4rmx/g8W1hnaheq9jgwL/oyEdH5Bc4WwJKMqg==}
+  /postcss@8.4.25:
+    resolution: {integrity: sha512-7taJ/8t2av0Z+sQEvNzCkpDynl0tX3uJMCODi6nT3PfASC7dYCWV9aQ+uiCf+KBD4SEFcu+GvJdGdwzQ6OSjCw==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.6
@@ -4751,7 +4751,7 @@ packages:
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
-  /vite@4.3.9(@types/node@20.3.3)(sass@1.63.6):
+  /vite@4.3.9(@types/node@20.4.1)(sass@1.63.6):
     resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -4776,9 +4776,9 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.3.3
+      '@types/node': 20.4.1
       esbuild: 0.17.19
-      postcss: 8.4.24
+      postcss: 8.4.25
       rollup: 3.26.0
       sass: 1.63.6
     optionalDependencies:
