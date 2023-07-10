@@ -39,17 +39,14 @@
 <moo-data-grid
     if.bind="tab === 'links' && invites && inviteColumns"
     items.bind="invites"
-    columns.bind="columns"
-    control.bind="dataGridControl"
+    columns.bind="inviteColumns"
     summary.bind="gridSummary"
 ></moo-data-grid>
 
 <moo-data-grid
     if.bind="tab === 'user-invites' && guildUserInvites && guildUserInvitesColumns"
-    items.bind="invites"
-    columns.bind="columns"
-    control.bind="dataGridControl"
-    summary.bind="gridSummary"
+    items.bind="guildUserInvites"
+    columns.bind="guildUserInvitesColumns"
 ></moo-data-grid>
 
 <confirmation-dialog
@@ -81,8 +78,8 @@
                 <div promise.bind="inviteRole.discordRoleId | discordRole">
                     <let data.bind="null" err.bind="null"></let>
                     <span then.from-view="data">
-                    Role: ${data}
-                </span>
+                        Role: ${data}
+                    </span>
                 </div>
                 <div>
                     Count: ${inviteRole.count}
