@@ -340,6 +340,16 @@ export interface IDiscordGuild {
     guildId: string;
     auditLogChannelId?: string;
     activeFeatures: string[];
+    inviteSettings: IDiscordGuildInviteSettings;
+}
+
+export interface IDiscordGuildInviteSettings {
+    inviteRoles: IDiscordGuildInviteRole[];
+}
+
+export interface IDiscordGuildInviteRole {
+    discordRoleId: string;
+    count: number
 }
 
 export interface IDiscordGuildUserInvite {

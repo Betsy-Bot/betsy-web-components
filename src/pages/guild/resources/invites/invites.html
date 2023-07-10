@@ -3,7 +3,8 @@
         <feature-header
             doc-url="https://docs.betsybot.xyz/features/invites"
             title="Invites"
-            subtitle="Track invites created by your users and provide benefits to them such as roles for achieving milestones. Activate the feature to view your invites"
+            subtitle="Track invites created by your users and provide benefits to them such as roles for achieving milestones.
+            Activate the feature to view your invites"
         ></feature-header>
     </div>
     <div class="col-4 text-end">
@@ -27,6 +28,12 @@
         value="user-invites"
         active.bind="tab === 'user-invites'"
     ></moo-tab>
+    <moo-tab
+        label="Invite Roles"
+        tab.bind="tab"
+        value="roles"
+        active.bind="tab === 'roles'"
+    ></moo-tab>
 </moo-tab-bar>
 
 <moo-data-grid
@@ -44,3 +51,53 @@
     control.bind="dataGridControl"
     summary.bind="gridSummary"
 ></moo-data-grid>
+
+<confirmation-dialog
+    cancel-text="Cancel"
+    confirm-text="Create"
+    dialog.two-way="createInviteRole"
+    handler.bind="(event) => handleCreateDialog(event)"
+    title="Create new Invite Role"
+>
+    <discord-role-selector
+        label="Select Role"
+        selected-role.two-way="newInviteRole.roleId"
+    ></discord-role-selector>
+    <moo-text-field
+        type="number"
+        class="w-100 mt-2"
+        label="Invite Count"
+        value.bind="newInviteRole.count"
+    ></moo-text-field>
+</confirmation-dialog>
+
+<template if.bind="tab === 'roles'">
+    <moo-button variant="primary" click.bind="() => createInviteRole.open()" type="button">
+        Create New Review Category
+    </moo-button>
+    <div class="row my-3">
+        <div class="col-12 col-xl-6 p-3" repeat.for="inviteRole of guild.inviteSettings.inviteRoles">
+            <div elevation="9" class="p-3 position-relative">
+                <div promise.bind="inviteRole.discordRoleId | discordRole">
+                    <let data.bind="null" err.bind="null"></let>
+                    <span then.from-view="data">
+                    Role: ${data}
+                </span>
+                </div>
+                <div>
+                    Count: ${inviteRole.count}
+                </div>
+                <moo-fab
+                    class="redFab topRight position-absolute top-0 end-0"
+                    icon="delete"
+                    click.bind="() => removeRole($index)"
+                ></moo-fab>
+            </div>
+        </div>
+    </div>
+    <div class="text-end">
+        <moo-button variant="primary" click.bind="() => saveRoles()" type="button">
+            Save
+        </moo-button>
+    </div>
+</template>

@@ -412,6 +412,13 @@ export class DiscordService {
         );
     }
 
+    async updateInviteSettingsForGuild(guild: IDiscordGuild) {
+        return this.api.doPatch(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/InviteSettings`,
+            guild
+        );
+    }
+
     async updateAutoRolesForGuild(guild: any, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/AutoRoles`, guild);
     }

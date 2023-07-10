@@ -5,9 +5,9 @@ import { DiscordService } from "../../services/discord-service";
 @inject(DiscordService)
 export class DiscordNameValueConverter {
     constructor(private discordService: DiscordService) {}
-    public async toView(value: any) {
+    public async toView(value: string) {
         if (!value) {
-            return;
+            return "";
         }
         const member = await this.discordService.getGuildMember(value);
         if (!member.user.username) {
