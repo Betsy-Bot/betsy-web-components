@@ -3,7 +3,7 @@ import { route } from "@aurelia/router-lite";
 
 import { DiscordNameValueConverter } from "../../../../resources/value-converters/discord-name";
 import { DiscordService } from "../../../../services/discord-service";
-import { IDiscordGuild } from "../../../../services/models/discord";
+import { IDiscordGuild, IDiscordGuildUserInvite } from "../../../../services/models/discord";
 
 import DataGrid from "devextreme/ui/data_grid";
 import { toast } from "lets-toast";
@@ -21,8 +21,11 @@ export class Invites {
     featureActive: boolean;
     roleId;
     invites;
-    columns;
+    guildUserInvites: IDiscordGuildUserInvite[];
+    inviteColumns;
+    guildUserInvitesColumns;
     dataGridControl: DataGrid;
+    tab = 'links';
 
     gridSummary = {
         groupItems: [
@@ -39,16 +42,23 @@ export class Invites {
 
     async attached() {
         this.guildId = this.discordService.getLocalDiscordGuildId();
-        [this.guild, this.invites] = await Promise.all([
+        [this.guild, this.invites, this.guildUserInvites] = await Promise.all([
             this.discordService.getDiscordServerInformation(this.guildId),
             this.discordService.getInvites(),
+            this.discordService.getGuildUserInvites()
         ]);
         for (const invite of this.invites) {
             const name = await this.discordNameValueConverter.toView(invite.inviterDiscordUserId);
             invite.displayName = `${name} (${invite.inviterDiscordUserId})`;
         }
+        for (const invite of this.guildUserInvites) {
+            const invitedByName = await this.discordNameValueConverter.toView(invite.invitedBy);
+            invite.invitedByDisplay = `${invitedByName} (${invite.invitedBy})`;
+            const name = await this.discordNameValueConverter.toView(invite.discordUserId);
+            invite.displayName = `${name} (${invite.discordUserId})`;
+        }
         this.featureActive = this.guild.activeFeatures.includes(this.discordService.INVITE_LINKS);
-        this.columns = [
+        this.inviteColumns = [
             {
                 dataField: "code",
             },
@@ -66,6 +76,15 @@ export class Invites {
                 dataField: "expiresAt",
                 dataType: "datetime",
             },
+        ];
+
+        this.guildUserInvitesColumns = [
+            {
+                dataField: "displayName",
+            },
+            {
+                dataField: "invitedByDisplay",
+            }
         ];
     }
 

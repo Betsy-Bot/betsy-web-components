@@ -14,9 +14,31 @@
         <label class="me-5">Active?</label>
     </div>
 </div>
+<moo-tab-bar class="my-3">
+    <moo-tab
+        label="Invite Links"
+        tab.bind="tab"
+        value="links"
+        active.bind="tab === 'links'"
+    ></moo-tab>
+    <moo-tab
+        label="User Invites"
+        tab.bind="tab"
+        value="user-invites"
+        active.bind="tab === 'user-invites'"
+    ></moo-tab>
+</moo-tab-bar>
 
 <moo-data-grid
-    if.bind="invites && columns"
+    if.bind="tab === 'links' && invites && inviteColumns"
+    items.bind="invites"
+    columns.bind="columns"
+    control.bind="dataGridControl"
+    summary.bind="gridSummary"
+></moo-data-grid>
+
+<moo-data-grid
+    if.bind="tab === 'user-invites' && guildUserInvites && guildUserInvitesColumns"
     items.bind="invites"
     columns.bind="columns"
     control.bind="dataGridControl"

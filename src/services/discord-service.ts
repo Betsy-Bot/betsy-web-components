@@ -4,7 +4,7 @@ import { IRouter } from "@aurelia/router-lite";
 import * as discordModels from "./models/discord";
 import {
     DiscordForm, DiscordGuildUser,
-    IBaseDiscordCommand, IBaseDiscordServer, IDiscordGuild, IExchangeCodeResponse,
+    IBaseDiscordCommand, IBaseDiscordServer, IDiscordGuild, IDiscordGuildUserInvite, IExchangeCodeResponse,
     ISendMessageToChannelRequest,
 } from "./models/discord";
 import { ApiService } from "./api-service";
@@ -686,5 +686,11 @@ export class DiscordService {
         return await this.api.doGet(
             `DiscordGuild/${this.getLocalDiscordGuildId()}/Invites`
         );
+    }
+
+    async getGuildUserInvites() {
+        return await this.api.doGet(
+            `DiscordGuild/${this.getLocalDiscordGuildId()}/GuildUserInvites`
+        ) as IDiscordGuildUserInvite[];
     }
 }

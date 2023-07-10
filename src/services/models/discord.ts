@@ -341,3 +341,10 @@ export interface IDiscordGuild {
     auditLogChannelId?: string;
     activeFeatures: string[];
 }
+
+export interface IDiscordGuildUserInvite {
+    id: string;
+    invitedBy: string;
+    discordUserId: string;
+    createdDate: string;
+}
