@@ -1,37 +1,14 @@
-# betsy-admin-panel-au2
+# Betsy Admin Panel - Aurelia 2
+The admin panel for the Discord bot Betsy
 
-This project is bootstrapped by [aurelia/new](https://github.com/aurelia/new).
+## Project Notes
+* This repo uses `pnpm` instead of the typical `npm`. Which provides a wide variety of benefits.
 
-## Start dev web server
+## Project Dependencies
+* Node >= 16
+* pnpm
+  * `npm i -g pnpm`
 
-    npm start
-
-## Build the app in production mode
-
-    npm run build
-
-It builds all files to dist folder. To deploy to production server, copy all the `dist/*` files to production root folder.
-
-For example
-```
-dist/index.html
-dist/foo.12345.js
-```
-Copy to production root folder
-```
-root_folder/index.html
-root_folder/foo.12345.js
-```
-
-## Unit Tests
-
-    npm run test
-
-Run unit tests in watch mode.
-
-    npm run test:watch
-
-
-## Analyze webpack bundle
-
-    npm run analyze
+## Project Setup
+1. Install Dependencies - `pnpm i`
+2. Run the project `pnpm run start`
