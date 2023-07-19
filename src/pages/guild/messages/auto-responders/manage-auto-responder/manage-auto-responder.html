@@ -21,7 +21,7 @@
             ></moo-tab>
         </moo-tab-bar>
 
-        <form submit.trigger="save()">
+        <form submit.trigger="save()" if.bind="responder">
             <div class="col-12 my-3">
                 <moo-switch
                     value.bind="responder.active"

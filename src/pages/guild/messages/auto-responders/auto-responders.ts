@@ -2,6 +2,7 @@ import { inject } from "aurelia";
 import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
+import { IDiscordGuild } from "../../../../services/models/discord";
 
 import { toast } from "lets-toast";
 
@@ -19,7 +20,7 @@ export class AutoResponders implements IRouteViewModel {
 
     guildId: string;
     responders;
-    guild;
+    guild: IDiscordGuild;
     featureActive;
 
     async attached() {

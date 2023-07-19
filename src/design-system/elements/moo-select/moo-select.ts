@@ -22,7 +22,7 @@ export class MooSelect implements ICustomElementViewModel {
         if (this.readonly) {
             select.disabled = true;
         }
-        if (this.value) {
+        if (typeof this.value != "undefined") {
             select.value = this.value.toString();
         }
 
