@@ -13,22 +13,18 @@
         </div>
 
         <div class="row">
-            <div class="col-12 col-md-6 col-xl-4 col-xxl-3" repeat.for="stat of stats">
-                <!--                    <mdc-card class="stat-card stat-card__square">-->
-                <!--                        <mdc-card-primary-action>-->
-                <!--                            <div class="stat-card__square-row">-->
-                <!--                                <mdc-card-media square class="demo-card__media stat-card__media-music text-center">-->
-                <!--                                <span class="material-icons fs-2 mt-3 mx-auto">-->
-                <!--                                    bar_chart-->
-                <!--                                </span>-->
-                <!--                                </mdc-card-media>-->
-                <!--                                <div class="stat-card__info">-->
-                <!--                                    <div mdc-headline5>${stat.title}</div>-->
-                <!--                                    <div mdc-body2>${stat.prefix}${getStat(stat)}</div>-->
-                <!--                                </div>-->
-                <!--                            </div>-->
-                <!--                        </mdc-card-primary-action>-->
-                <!--                    </mdc-card>-->
+            <div class="col-12 col-md-6">
+                <h5>Server Owner:
+                    <template promise.bind="guild.guild.ownerId | discordName">
+                        <let data.bind="null" err.bind="null"></let>
+                        <span then.from-view="data">
+                                    ${data} (${guild.guild.ownerId})
+                                </span>
+                    </template>
+                </h5>
+            </div>
+            <div class="col-12 col-md-6">
+                <h5>Configuration Owner: ${guild.owner?.firstName} (${guild.owner?.discordId})</h5>
             </div>
         </div>
     </div>
