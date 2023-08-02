@@ -340,6 +340,7 @@ export interface IDiscordGuild {
     guildId: string;
     auditLogChannelId?: string;
     activeFeatures: string[];
+    ownerId: string;
     inviteSettings: IDiscordGuildInviteSettings;
 }
 

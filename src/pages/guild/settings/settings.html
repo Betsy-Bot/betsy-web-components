@@ -110,4 +110,24 @@
             </div>
         </form>
     </div>
+    <div class="col-12 col-lg-6">
+        <form submit.trigger="updateConfigurationOwner()">
+            <div class="p-4" elevation="12" if.bind="guild">
+                <h4 class="d-inline-flex">Update Configuration Owner</h4>
+                <moo-text-field
+                    disabled.bind="!isOwner"
+                    type="number"
+                    class="w-100 my-2"
+                    label="Change Configuration Owner"
+                    placeholder="1234567890"
+                    value.bind="newOwnerId"
+                ></moo-text-field>
+                <div class="text-end mt-3">
+                    <moo-button variant="primary" type="submit" disabled.bind="!isOwner">
+                        Save
+                    </moo-button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

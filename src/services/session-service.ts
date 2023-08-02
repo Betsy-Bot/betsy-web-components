@@ -94,7 +94,7 @@ export class SessionService {
 
     public async isAdmin(guildId) {
         const user = await this.getUser() as IProfileResponse | null;
-        if (!user) return;
+        if (!user) return false;
         for (const server of user.activeServers) {
             if (server.guildId == guildId) return true;
             if (server.ownerId == user.id) return true;
@@ -103,5 +103,12 @@ export class SessionService {
             if (server.guildId == guildId) return true;
         }
         return false
+    }
+
+    public async isOwner(ownerId) {
+        const user = await this.getUser() as IProfileResponse | null;
+        if (!user) return false;
+        return ownerId == user.discordId;
+
     }
 }
