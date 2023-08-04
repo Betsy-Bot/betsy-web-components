@@ -19,7 +19,7 @@
                 copy-function.bind="isNew ? null : () => handleClone()"
             ></feature-header>
 
-            <div class="row mt-3 mb-4">
+            <div class="row mt-3 mb-4" if.bind="supportTicketSettingsId != 0">
                 <div class="col-4">
                     <a load="../support-tickets/${supportTicketSettingsId}/submissions">
                         <moo-button>View Created Tickets</moo-button>
