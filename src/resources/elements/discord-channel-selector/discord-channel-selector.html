@@ -4,6 +4,11 @@
                     disabled.bind="disabled" required.bind="required">
             <moo-list>
                 <moo-list-item
+                    if.bind="includeNull"
+                    label="- None - "
+                    value=""
+                ></moo-list-item>
+                <moo-list-item
                     repeat.for="channel of channels"
                     label.bind="channel.name"
                     value.bind="channel.id"
