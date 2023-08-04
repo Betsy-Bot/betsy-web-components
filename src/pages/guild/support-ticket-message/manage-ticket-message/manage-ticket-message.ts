@@ -182,9 +182,11 @@ export class ManageTicketMessage implements IRouteViewModel {
         if (this.ticket?.discordMessage?.message?.components) {
             for (let componentWrapper of this.ticket.discordMessage.message.components) {
                 for (let component of componentWrapper.components) {
-                    let split = component.custom_id.split(':');
-                    if (split[0] == "ButtonCreateTicket")  {
-                        component.custom_id = `ButtonCreateTicket:${this.ticket.identifier}`;
+                    if (component.custom_id) {
+                        let split = component.custom_id.split(':');
+                        if (split[0] == "ButtonCreateTicket")  {
+                            component.custom_id = `ButtonCreateTicket:${this.ticket.identifier}`;
+                        }
                     }
                 }
             }
