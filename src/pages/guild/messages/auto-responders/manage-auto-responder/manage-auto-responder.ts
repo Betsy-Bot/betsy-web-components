@@ -1,6 +1,6 @@
 import { IEventAggregator } from "aurelia";
 import { bindable, inject, observable } from "aurelia";
-import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
+import { IRouter, IRouteViewModel, Params, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../../services/discord-service";
 
@@ -18,7 +18,7 @@ export class ManageAutoResponder implements IRouteViewModel {
         private router: IRouter
     ) {}
 
-    loading(params) {
+    loading(params: Params) {
         this.guildId = params.guildId;
         this.responderId = params.responderId;
     }
@@ -27,7 +27,7 @@ export class ManageAutoResponder implements IRouteViewModel {
     guildId: string;
     @bindable responder;
     phrase;
-    responderId;
+    responderId: string | number;
     isNew: boolean;
     tab = "settings";
     @observable selectedIgnoreChannelId;

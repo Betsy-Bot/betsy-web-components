@@ -22,8 +22,8 @@ export class MooSelect implements ICustomElementViewModel {
         if (this.readonly) {
             select.disabled = true;
         }
-        if (this.value) {
-            select.value = this.value.toString();
+        if (typeof this.value != "undefined") {
+            select.value = this.value?.toString();
         }
 
         select.listen("MDCSelect:change", () => {

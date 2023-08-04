@@ -49,7 +49,7 @@
             </moo-tab-bar>
 
             <form submit.trigger="submit()" if.bind="ticket">
-                <div if.bind="tab === 'settings'">
+                <div show.bind="tab === 'settings'">
                     <support-ticket-settings
                         guild-id.bind="guildId"
                         request.two-way="ticket"
@@ -57,7 +57,7 @@
                     ></support-ticket-settings>
                 </div>
 
-                <div if.bind="tab === 'container'">
+                <div show.bind="tab === 'container'">
                     <discord-message-creator
                         max-components.bind="1"
                         message.bind="ticket.discordMessage.message"
@@ -65,7 +65,7 @@
                     ></discord-message-creator>
                 </div>
 
-                <div if.bind="tab === 'initial'">
+                <div show.bind="tab === 'initial'">
                     <moo-text-field
                         class="w-100"
                         label="Close Button Text"

@@ -103,7 +103,7 @@ export class ManageTicketMessage implements IRouteViewModel {
         this.supportTicketSettingsId = params.supportTicketSettingsId;
     }
 
-    async binding() {
+    async attached() {
         this.guildId = this.discordService.getLocalDiscordGuildId();
         if (
             !this.supportTicketSettingsId ||
