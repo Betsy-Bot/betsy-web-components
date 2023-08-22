@@ -4,10 +4,48 @@
 ></feature-header>
 
 <div class="row mt-4 g-4">
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-lg-6" if.bind="isOwner">
+        <div class="permission-area p-4" elevation="12">
+            <h4>Authorized Owners</h4>
+            <span>Add additional owners to server. These users have full control over your server and data.</span>
+            <form submit.trigger="addAuthorizedOwner()">
+                <div class="row my-2">
+                    <div class="col-10">
+                        <moo-text-field
+                            min="100000000000000000"
+                            max="9999999999999999999"
+                            type="number"
+                            class="w-100"
+                            label="Discord ID"
+                            placeholder="Enter Discord User ID"
+                            value.bind="ownerUserId"
+                        ></moo-text-field>
+                    </div>
+                    <div class="col-2">
+                        <moo-button variant="primary" class="w-100 h-100" type="submit">
+                            Add
+                        </moo-button>
+                    </div>
+                </div>
+                <moo-chip-set input if.bind="guild.authorizedOwners">
+                    <!-- Compact notation -->
+                    <moo-chip repeat.for="user of guild.authorizedOwners">
+                        <template promise.bind="user | discordName">
+                            <let data.bind="null" err.bind="null"></let>
+                            <span then.from-view="data">
+                                    ${data}
+                                </span>
+                        </template>
+                        <span click.trigger="removeOwner($index)" trailing>X</span>
+                    </moo-chip>
+                </moo-chip-set>
+            </form>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6" if.bind="isOwner">
         <div class="permission-area p-4" elevation="12">
             <h4>Authorized Panel Users</h4>
-            <span>Add administrators to help manage your server</span>
+            <span>Add administrators to help manage your server. Authorized users cannot request data transfers.</span>
             <form submit.trigger="addAuthorizedUser()">
                 <div class="row my-2">
                     <div class="col-10">
@@ -23,7 +61,7 @@
                         ></moo-text-field>
                     </div>
                     <div class="col-2">
-                        <moo-button variant="primary" class="w-100 h-100" type="submit" disabled.bind="!isAdmin">
+                        <moo-button variant="primary" class="w-100 h-100" type="submit">
                             Add
                         </moo-button>
                     </div>

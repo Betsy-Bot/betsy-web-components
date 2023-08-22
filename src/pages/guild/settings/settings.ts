@@ -27,6 +27,7 @@ export class Settings implements IRouteViewModel {
     roles;
     newOwnerId: string;
     isOwner: boolean;
+    ownerUserId: string;
 
     async attached() {
         this.guildId = this.discordService.getLocalDiscordGuildId();
@@ -50,6 +51,20 @@ export class Settings implements IRouteViewModel {
         this.guild.authorizedUsers.splice(index, 1);
         await this.discordService.updateAuthorizedUsersForGuild(this.guild, this.guildId);
         toast("Updated Authorized Users", { severity: "success" });
+    }
+
+    async addAuthorizedOwner() {
+        if (this.guild.authorizedOwners.findIndex((x) => x == this.ownerUserId) == -1) {
+            this.guild.authorizedOwners.push(this.ownerUserId);
+        }
+        await this.discordService.updateAuthorizedOwnersForGuild(this.guild, this.guildId);
+        toast("Updated Authorized Owners", { severity: "success" });
+    }
+
+    async removeOwner(index) {
+        this.guild.authorizedOwners.splice(index, 1);
+        await this.discordService.updateAuthorizedOwnersForGuild(this.guild, this.guildId);
+        toast("Updated Authorized Owners", { severity: "success" });
     }
 
     async updateGlobalSettings() {

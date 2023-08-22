@@ -327,6 +327,10 @@ export class DiscordService {
         return this.api.doPatch(`DiscordGuild/${guildId}/AuthorizedUsers`, guild);
     }
 
+    async updateAuthorizedOwnersForGuild(guild: any, guildId: string) {
+        return this.api.doPatch(`DiscordGuild/${guildId}/AuthorizedOwners`, guild);
+    }
+
     async updateGlobalSettingsForGuild(guild: any, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/GlobalSettings`, guild);
     }
