@@ -75,4 +75,10 @@ export class SupportTickets implements IRouteViewModel {
         clone.onclick = () => this.routeToTicket(options.data.id);
         container.append(clone);
     };
+
+    async deleteAction() {
+        if (window.confirm("This will force close all open tickets. Are you sure you would like to do this? This will NOT close tickets 'properly' as channels won't be deleted/moved")) {
+            await this.discordService.closeAllOpenTicketsForSettings(this.settingsId);
+        }
+    }
 }
