@@ -323,6 +323,10 @@ export class DiscordService {
         return this.api.doPatch(`DiscordSupportTicketSettings/${settings.id}`, settings);
     }
 
+    async closeAllOpenTicketsForSettings(settingsId: string) {
+        return this.api.doPatch(`DiscordSupportTicketSettings/${settingsId}/CloseOpenTickets`, {});
+    }
+
     async updateAuthorizedUsersForGuild(guild: any, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/AuthorizedUsers`, guild);
     }
