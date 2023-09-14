@@ -161,7 +161,9 @@
                     ${answer.answer} (${answer.count})
                 </div>
             </div>
-            <h4>Participants</h4>
-            <dx-data-grid items.bind="poll.participants"></dx-data-grid>
+            <template if.bind="poll.participants">
+                <h4>Participants</h4>
+                <moo-data-grid items.bind="poll.participants"></moo-data-grid>
+            </template>
         </div>
     </section>
