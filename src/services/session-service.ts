@@ -92,7 +92,7 @@ export class SessionService {
         this.eventAggregator.publish('user-updated', null);
     }
 
-    public async isAdmin(guildId) {
+    public async isAdmin(guildId: string) {
         const user = await this.getUser() as IProfileResponse | null;
         if (!user) return false;
         for (const server of user.activeServers) {
@@ -102,13 +102,17 @@ export class SessionService {
         for (const server of user.adminedServers) {
             if (server.guildId == guildId) return true;
         }
-        return false
+        return this.isBetsyAdmin(user.discordId);
+
     }
 
-    public async isOwner(ownerId) {
+    public async isOwner(ownerId: string) {
         const user = await this.getUser() as IProfileResponse | null;
         if (!user) return false;
-        return ownerId == user.discordId;
+        return ownerId == user.discordId || this.isBetsyAdmin(user.discordId);
+    }
 
+    public isBetsyAdmin(id: string) {
+        return id == '173475831002300431';
     }
 }
