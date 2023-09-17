@@ -155,6 +155,5 @@ export class ManageGiveaways implements IRouteViewModel {
         this.giveaway.ended = undefined;
         this.isNew = true;
         toast("Cloned Giveaway");
-        this.router.load(`/guild/${this.guildId}/giveaways/0`);
     }
 }

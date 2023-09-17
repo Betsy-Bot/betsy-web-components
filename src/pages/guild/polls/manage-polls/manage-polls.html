@@ -1,169 +1,175 @@
+<confirmation-dialog
+    cancel-text="Cancel"
+    confirm-text="Delete"
+    dialog.two-way="confirmDeleteDialog"
+    handler.bind="(event) => deletePoll(event)"
+    title="Are you sure you would like to delete?"
+>
+    This is a permanent action and cannot be undone
+</confirmation-dialog>
 
-    <confirmation-dialog
-        cancel-text="Cancel"
-        confirm-text="Delete"
-        dialog.two-way="confirmDeleteDialog"
-        handler.bind="(event) => deletePoll(event)"
-        title="Are you sure you would like to delete?"
-    >
-        This is a permanent action and cannot be undone
-    </confirmation-dialog>
+<section id="create-data-command" if.bind="poll">
+    <div class="row">
+        <div class="col-12 col-lg-8">
+            <feature-header
+                doc-url="https://docs.betsybot.xyz/features/polls"
+                title="${isNew ? 'Create' : 'Edit'} Poll"
+                subtitle="Polls will keep a record of the results here for your convenience."
+                copy-function.bind="() => clonePoll()"
+            ></feature-header>
+            <div class="text-end my-4">
+                <moo-button variant="secondary" class="button-secondary" click.bind="() => confirmDeleteDialog.open()">
+                    Delete Poll
+                </moo-button>
+            </div>
+            <moo-switch
+                class="mt-3"
+                value.bind="poll.active"
+            ></moo-switch>
+            <label class="me-5 mb-3">Active?</label>
 
-    <section id="create-data-command" if.bind="poll">
-        <div class="row">
-            <div class="col-12 col-lg-8">
-                <feature-header
-                    doc-url="https://docs.betsybot.xyz/features/polls"
-                    title="${isNew ? 'Create' : 'Edit'} Poll"
-                    subtitle="Polls will keep a record of the results here for your convenience."
-                ></feature-header>
-                <div class="text-end my-4">
-                    <moo-button variant="secondary" class="button-secondary" click.bind="() => confirmDeleteDialog.open()">
-                        Delete Poll
-                    </moo-button>
-                </div>
-                <moo-switch
-                    class="mt-3"
-                    value.bind="poll.active"
-                ></moo-switch>
-                <label class="me-5 mb-3">Active?</label>
+            <moo-tab-bar>
+                <moo-tab
+                    label="Settings"
+                    tab.bind="tab"
+                    value="settings"
+                    active.bind="tab === 'settings'"
+                ></moo-tab>
+                <moo-tab
+                    label="Container"
+                    active.bind="tab === 'container'"
+                    value="container"
+                    tab.bind="tab"
+                ></moo-tab>
+                <moo-tab
+                    label="Options"
+                    active.bind="tab === 'options'"
+                    value="options"
+                    tab.bind="tab"
+                ></moo-tab>
+            </moo-tab-bar>
 
-                <moo-tab-bar>
-                    <moo-tab
-                        label="Settings"
-                        tab.bind="tab"
-                        value="settings"
-                        active.bind="tab === 'settings'"
-                    ></moo-tab>
-                    <moo-tab
-                        label="Container"
-                        active.bind="tab === 'container'"
-                        value="container"
-                        tab.bind="tab"
-                    ></moo-tab>
-                    <moo-tab
-                        label="Options"
-                        active.bind="tab === 'options'"
-                        value="options"
-                        tab.bind="tab"
-                    ></moo-tab>
-                </moo-tab-bar>
-
-                    <div if.bind="tab === 'settings'">
-                        <form submit.trigger="() => tab = 'container'">
-                            <moo-text-field
-                                label="Identifier"
-                                type="text"
-                                class="w-100 my-2"
-                                value.bind="poll.name"
-                                required.bind="true"
-                            ></moo-text-field>
-                            <!--                        <div class="my-2">-->
-                            <!--                            <date-time-picker-->
-                            <!--                                label="End Date Time"-->
-                            <!--                                value.two-way="poll.ends"-->
-                            <!--                            ></date-time-picker>-->
-                            <!--                        </div>-->
-                            <div class="mt-3 mb-2">
-                                <discord-channel-selector
-                                    required.bind="true"
-                                    label="Channel"
-                                    channel-id.two-way="poll.discordChannelId"
-                                ></discord-channel-selector>
-                            </div>
-                            <div class="text-end">
-                                <moo-button variant="primary" type="submit">
-                                    Next
-                                </moo-button>
-                            </div>
-                        </form>
+            <div if.bind="tab === 'settings'">
+                <form submit.trigger="() => tab = 'container'">
+                    <moo-text-field
+                        label="Identifier"
+                        type="text"
+                        class="w-100 my-2"
+                        value.bind="poll.name"
+                        required.bind="true"
+                    ></moo-text-field>
+                    <!--                        <div class="my-2">-->
+                    <!--                            <date-time-picker-->
+                    <!--                                label="End Date Time"-->
+                    <!--                                value.two-way="poll.ends"-->
+                    <!--                            ></date-time-picker>-->
+                    <!--                        </div>-->
+                    <div class="mt-3 mb-2">
+                        <discord-channel-selector
+                            required.bind="true"
+                            label="Channel"
+                            channel-id.two-way="poll.discordChannelId"
+                        ></discord-channel-selector>
                     </div>
-                    <div class="" if.bind="tab === 'container'">
-                        <form submit.trigger="() => tab = 'options'">
-                            <discord-message-creator
-                                allow-components="true"
-                                message.two-way="poll.containerMessage.message"
-                            ></discord-message-creator>
-
-                            <div class="text-end mt-3">
-                                <moo-button type="submit" variant="primary">
-                                    Next
-                                </moo-button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="" if.bind="tab === 'options'">
-                        <form submit.trigger="save()">
-                            <moo-text-field
-                                label="Select Menu Label"
-                                type="text"
-                                class="w-100 my-2"
-                                value.bind="poll.containerMessage.message.components[0].components[0].label"
-                                required
-                            ></moo-text-field>
-                            <div class="p-3" elevation="9">
-                                <moo-text-field
-                                    class="w-100 my-2"
-                                    label="Option Label"
-                                    value.bind="option.label"
-                                ></moo-text-field>
-                                <moo-text-field
-                                    class="w-100 my-2"
-                                    label="Option Description"
-                                    value.bind="option.description"
-                                ></moo-text-field>
-                                <discord-emoji-selector
-                                    value.two-way="option.emoji"
-                                    size.bind="100"
-                                    label="Emoji"
-                                ></discord-emoji-selector>
-
-                                <div class="my-3">
-                                    <moo-button type="button" class="button-primary" click.bind="() => addOption()" disabled.bind="!option.label || !option.description">
-                                        Add Option
-                                    </moo-button>
-                                </div>
-                            </div>
-
-                            <div class="options my-3">
-                                <h5>Options:</h5>
-                                <div class="row">
-                                    <div class="my-3 col-6" repeat.for="option of poll.containerMessage.message.components[0].components[0].options">
-                                        <div class="p-2" elevation="9">
-                                            <div>Label: ${option.label}</div>
-                                            <div>Description: ${option.description}</div>
-                                            <div>Emoji: <img src="https://cdn.discordapp.com/emojis/${option.emoji.id}.webp?size=24&quality=lossless"> ${option.emoji.name}</div>
-                                            <moo-button type="button" class="button-primary" click.bind="() => removeOption($index)">
-                                                Delete Option
-                                            </moo-button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="text-end mt-3">
-                                <moo-button type="submit" class="button-primary">
-                                    Save
-                                </moo-button>
-                            </div>
-                        </form>
+                    <div class="text-end">
+                        <moo-button variant="primary" type="submit">
+                            Next
+                        </moo-button>
                     </div>
                 </form>
             </div>
-            <div class="col-12 col-lg-4">
-                <discord-message-preview message.two-way="poll.containerMessage.message"></discord-message-preview>
+            <div class="" if.bind="tab === 'container'">
+                <form submit.trigger="() => tab = 'options'">
+                    <discord-message-creator
+                        allow-components="true"
+                        message.two-way="poll.containerMessage.message"
+                    ></discord-message-creator>
+
+                    <div class="text-end mt-3">
+                        <moo-button type="submit" variant="primary">
+                            Next
+                        </moo-button>
+                    </div>
+                </form>
+            </div>
+            <div class="" if.bind="tab === 'options'">
+                <form submit.trigger="save()">
+                    <moo-text-field
+                        label="Select Menu Label"
+                        type="text"
+                        class="w-100 my-2"
+                        value.bind="poll.containerMessage.message.components[0].components[0].label"
+                        required
+                    ></moo-text-field>
+                    <div class="p-3" elevation="9">
+                        <moo-text-field
+                            class="w-100 my-2"
+                            label="Option Label"
+                            value.bind="option.label"
+                        ></moo-text-field>
+                        <moo-text-field
+                            class="w-100 my-2"
+                            label="Option Description"
+                            value.bind="option.description"
+                        ></moo-text-field>
+                        <discord-emoji-selector
+                            value.two-way="option.emoji"
+                            size.bind="100"
+                            label="Emoji"
+                        ></discord-emoji-selector>
+
+                        <div class="my-3">
+                            <moo-button type="button" class="button-primary" click.bind="() => addOption()"
+                                        disabled.bind="!option.label || !option.description">
+                                Add Option
+                            </moo-button>
+                        </div>
+                    </div>
+
+                    <div class="options my-3">
+                        <h5>Options:</h5>
+                        <div class="row">
+                            <div class="my-3 col-6"
+                                 repeat.for="option of poll.containerMessage.message.components[0].components[0].options">
+                                <div class="p-2" elevation="9">
+                                    <div>Label: ${option.label}</div>
+                                    <div>Description: ${option.description}</div>
+                                    <div>Emoji: <img
+                                        src="https://cdn.discordapp.com/emojis/${option.emoji.id}.webp?size=24&quality=lossless">
+                                        ${option.emoji.name}
+                                    </div>
+                                    <moo-button type="button" class="button-primary"
+                                                click.bind="() => removeOption($index)">
+                                        Delete Option
+                                    </moo-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-end mt-3">
+                        <moo-button type="submit" class="button-primary">
+                            Save
+                        </moo-button>
+                    </div>
+                </form>
+            </div>
+            </form>
+        </div>
+        <div class="col-12 col-lg-4">
+            <discord-message-preview message.two-way="poll.containerMessage.message"></discord-message-preview>
+        </div>
+    </div>
+    <div class="py-5" if.bind="poll.participants">
+        <h4>Totals</h4>
+        <div class="my-3">
+            <div repeat.for="answer of answers">
+                ${answer.answer} (${answer.count})
             </div>
         </div>
-        <div class="py-5" if.bind="poll.participants">
-            <h4>Totals</h4>
-            <div class="my-3">
-                <div repeat.for="answer of answers">
-                    ${answer.answer} (${answer.count})
-                </div>
-            </div>
-            <template if.bind="poll.participants">
-                <h4>Participants</h4>
-                <moo-data-grid items.bind="poll.participants"></moo-data-grid>
-            </template>
-        </div>
-    </section>
+        <template if.bind="poll.participants">
+            <h4>Participants</h4>
+            <moo-data-grid items.bind="poll.participants"></moo-data-grid>
+        </template>
+    </div>
+</section>

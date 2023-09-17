@@ -1,5 +1,5 @@
 import { bindable, inject } from "aurelia";
-import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
+import { IRouter, IRouteViewModel, Params, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
 import { DiscordComponentType } from "../../../../services/models/discord";
@@ -17,13 +17,14 @@ export class ManagePolls implements IRouteViewModel {
         private router: IRouter
     ) {}
 
-    loading(params) {
+    loading(params: Params) {
+        this.guildId = params.guildId;
         this.pollId = params.pollId;
     }
 
-    guildId: string;
+    guildId: string | undefined;
     @bindable poll;
-    pollId;
+    pollId: string | undefined;
     isNew: boolean;
     answers = [];
     option = {
@@ -67,6 +68,7 @@ export class ManagePolls implements IRouteViewModel {
     tab = "settings";
 
     async attached() {
+        console.log('attahced');
         this.guildId = this.discordService.getLocalDiscordGuildId();
         if (!this.pollId || this.pollId == 0) {
             this.isNew = true;
@@ -132,5 +134,15 @@ export class ManagePolls implements IRouteViewModel {
             index,
             1
         );
+    }
+
+    clonePoll() {
+        this.poll.name = "";
+        this.poll.participants = [];
+        this.poll.id = undefined;
+        this.poll.discordServer = undefined;
+        this.poll.containerMessage.id = undefined;
+        this.isNew = true;
+        toast("Cloned Poll");
     }
 }
