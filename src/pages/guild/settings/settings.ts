@@ -1,5 +1,5 @@
 import { bindable, inject } from "aurelia";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IRouteViewModel, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../services/discord-service";
 import { IDiscordGuild } from "../../../services/models/discord";
@@ -11,11 +11,10 @@ import { toast } from "lets-toast";
     path: "settings",
     title: "Settings",
 })
-@inject(DiscordService, Router, SessionService)
+@inject(DiscordService, SessionService)
 export class Settings implements IRouteViewModel {
     constructor(
         private discordService: DiscordService,
-        private router: Router,
         private sessionService: SessionService,
     ) {}
 

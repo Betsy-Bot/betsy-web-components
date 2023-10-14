@@ -56,7 +56,7 @@ export class ApiService {
         return null;
     }
 
-    async doGet(path, params = null) {
+    async doGet(path: string, params = null): Promise<unknown> {
         const options = {
             method: 'GET'
         };

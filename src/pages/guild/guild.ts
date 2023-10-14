@@ -40,12 +40,15 @@ import { Reviews } from "./reviews/reviews";
 import { Settings } from "./settings/settings";
 import { Twitch } from "./social-connections/twitch/twitch";
 import { ManageTicketMessage } from "./support-ticket-message/manage-ticket-message/manage-ticket-message";
-import { SupportTicket } from "./support-ticket-message/manage-ticket-message/support-tickets/support-ticket/support-ticket";
+import {
+    SupportTicket
+} from "./support-ticket-message/manage-ticket-message/support-tickets/support-ticket/support-ticket";
 import { SupportTickets } from "./support-ticket-message/manage-ticket-message/support-tickets/support-tickets";
 import { SupportTicketMessage } from "./support-ticket-message/support-ticket-message";
 import { ManageThreadChannel } from "./thread-channels/manage-thread-channel/manage-thread-channel";
 import { ThreadChannels } from "./thread-channels/thread-channels";
 import { Verification } from "./verification/verification";
+import { GlobalCommandsManagement } from "./settings/global-commands-management/global-commands-management";
 
 const routes = [
     Dashboard,
@@ -90,7 +93,8 @@ const routes = [
     Reviews,
     CustomCommands,
     ManageCustomCommand,
-    Invites
+    Invites,
+    GlobalCommandsManagement
 ];
 
 @route({
@@ -100,7 +104,8 @@ const routes = [
 })
 @inject(DiscordService)
 export class Guild implements IRouteViewModel {
-    constructor(private discordService: DiscordService) {}
+    constructor(private discordService: DiscordService) {
+    }
 
     guildId: string;
 

@@ -585,7 +585,37 @@ export class DiscordService {
         });
     }
 
-    async getInvites() {
+    async registerAiGlobalCommand(): Promise<unknown> {
+        await this.api.doPost(`DiscordGuild/${this.getLocalDiscordGuildId()}/RegisterGlobalCommands/AI`, {});
+        return;
+    }
+
+    async registerPaymentsGlobalCommand(): Promise<unknown> {
+        await this.api.doPost(`DiscordGuild/${this.getLocalDiscordGuildId()}/RegisterGlobalCommands/Payments`, {});
+        return;
+    }
+
+    async registerTicketGlobalCommand(): Promise<unknown> {
+        await this.api.doPost(`DiscordGuild/${this.getLocalDiscordGuildId()}/RegisterGlobalCommands/Ticket`, {});
+        return;
+    }
+
+    async registerKeyValueGlobalCommand(): Promise<unknown> {
+        await this.api.doPost(`DiscordGuild/${this.getLocalDiscordGuildId()}/RegisterGlobalCommands/KeyValue`, {});
+        return;
+    }
+
+    async registerGiveawayGlobalCommand(): Promise<unknown> {
+        await this.api.doPost(`DiscordGuild/${this.getLocalDiscordGuildId()}/RegisterGlobalCommands/Giveaway`, {});
+        return;
+    }
+
+    async registerReviewGlobalCommand(): Promise<unknown> {
+        await this.api.doPost(`DiscordGuild/${this.getLocalDiscordGuildId()}/RegisterGlobalCommands/Review`, {});
+        return;
+    }
+
+    async getInvites(): Promise<unknown> {
         return await this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/Invites`);
     }
 

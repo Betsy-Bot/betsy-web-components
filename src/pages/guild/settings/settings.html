@@ -140,10 +140,19 @@
                     placeholder="Custom Bot Status"
                     value.bind="guild.customBotStatus"
                 ></moo-text-field>
-                <div class="text-end mt-3">
-                    <moo-button variant="primary" type="submit" disabled.bind="!isAdmin">
-                        Save
-                    </moo-button>
+                <div class="row mt-3">
+                    <div class="col">
+                        <a if.bind="guild.customBotActive" load="../global-commands-management">
+                            <moo-button variant="secondary" type="button" disabled.bind="!guild.customBotActive">
+                                Register Global Commands
+                            </moo-button>
+                        </a>
+                    </div>
+                    <div class="col text-end">
+                        <moo-button variant="primary" type="submit">
+                            Save
+                        </moo-button>
+                    </div>
                 </div>
             </div>
         </form>
