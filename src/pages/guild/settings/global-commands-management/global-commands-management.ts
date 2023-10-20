@@ -1,4 +1,4 @@
-import { bindable, inject } from "aurelia";
+import { inject } from "aurelia";
 import { IRouteViewModel, route } from "@aurelia/router-lite";
 
 import { DiscordService } from "../../../../services/discord-service";
@@ -22,74 +22,46 @@ export class GlobalCommandsManagement implements IRouteViewModel {
     guildId: string;
     guild: IDiscordGuild;
     isAdmin: boolean;
-    @bindable selectedRole;
-    permissionUserId: string;
-    roles;
-    newOwnerId: string;
     isOwner: boolean;
-    ownerUserId: string;
 
     async attached() {
         this.guildId = this.discordService.getLocalDiscordGuildId();
-        [this.guild, this.isAdmin, this.roles] = await Promise.all([
+        [this.guild, this.isAdmin] = await Promise.all([
             await this.discordService.getDiscordServerInformation(this.guildId),
-            await this.sessionService.isAdmin(this.guildId),
-            await this.discordService.getDiscordRoles(),
+            await this.sessionService.isAdmin(this.guildId)
         ]);
         this.isOwner = await this.sessionService.isOwner(this.guild?.guild?.ownerId);
     }
 
-    async registerAiCommand() {
+    async registerCommand(commandType: string) {
         try {
-            await this.discordService.registerAiGlobalCommand();
+            switch(commandType) {
+                case 'Ai':
+                    await this.discordService.registerAiGlobalCommand();
+                    break;
+                case 'Review':
+                    await this.discordService.registerReviewGlobalCommand();
+                    break;
+                case 'KeyValue':
+                    await this.discordService.registerKeyValueGlobalCommand();
+                    break;
+                case 'Giveaway':
+                    await this.discordService.registerGiveawayGlobalCommand();
+                    break;
+                case 'Ticket':
+                    await this.discordService.registerTicketGlobalCommand();
+                    break;
+                case 'Payments':
+                    await this.discordService.registerPaymentsGlobalCommand();
+                    break;
+                case 'Poll':
+                    await this.discordService.registerPollGlobalCommand();
+                    break;
+            }
             toast("Registered Global Command", { severity: "success" });
         } catch {
             toast("Failed to register command", { severity: "error" });
         }
     }
 
-    async registerReviewCommand() {
-        try {
-            await this.discordService.registerReviewGlobalCommand();
-            toast("Registered Global Command", { severity: "success" });
-        } catch {
-            toast("Failed to register command", { severity: "error" });
-        }
-    }
-
-    async registerKeyValueCommand() {
-        try {
-            await this.discordService.registerKeyValueGlobalCommand();
-            toast("Registered Global Command", { severity: "success" });
-        } catch {
-            toast("Failed to register command", { severity: "error" });
-        }
-    }
-
-    async registerGiveawayCommand() {
-        try {
-            await this.discordService.registerGiveawayGlobalCommand();
-            toast("Registered Global Command", { severity: "success" });
-        } catch {
-            toast("Failed to register command", { severity: "error" });
-        }
-    }
-
-    async registerTicketCommand() {
-        try {
-            await this.discordService.registerTicketGlobalCommand();
-            toast("Registered Global Command", { severity: "success" });
-        } catch {
-            toast("Failed to register command", { severity: "error" });
-        }
-    }
-
-    async registerPaymentsCommand() {
-        try {
-            await this.discordService.registerPaymentsGlobalCommand();
-            toast("Registered Global Command", { severity: "success" });
-        } catch {
-            toast("Failed to register command", { severity: "error" });
-        }
-    }
 }

@@ -3,38 +3,44 @@
     subtitle="Manage various global commands for your server"
 ></feature-header>
 
-<div>
-    <moo-button class="mt-4" variant="primary" type="button" click.bind="() => registerAiCommand()">
+<div class="mt-4">
+    <moo-button variant="primary" type="button" click.bind="() => registerCommand('Ai')">
         Register AI Command
     </moo-button>
 </div>
 
-<div>
-    <moo-button class="mt-4" variant="primary" type="button" click.bind="() => registerTicketCommand()">
+<div class="mt-4">
+    <moo-button variant="primary" type="button" click.bind="() => registerCommand('Ticket')">
         Register Tickets Command
     </moo-button>
 </div>
 
-<div>
-    <moo-button class="mt-4" variant="primary" type="button" click.bind="() => registerGiveawayCommand()">
+<div class="mt-4">
+    <moo-button variant="primary" type="button" click.bind="() => registerCommand('Giveaway')">
         Register Giveaway Command
     </moo-button>
 </div>
 
-<div>
-    <moo-button class="mt-4" variant="primary" type="button" click.bind="() => registerReviewCommand()">
+<div class="mt-4">
+    <moo-button variant="primary" type="button" click.bind="() => registerCommand('Review')">
         Register Review Command
     </moo-button>
 </div>
 
-<div>
-    <moo-button class="mt-4" variant="primary" type="button" click.bind="() => registerKeyValueCommand()">
+<div class="mt-4">
+    <moo-button variant="primary" type="button" click.bind="() => registerCommand('KeyValue')">
         Register Key Value Command
     </moo-button>
-
 </div>
-<div>
-    <moo-button class="mt-4" variant="primary" type="button" click.bind="() => registerPaymentsCommand()">
+
+<div class="mt-4">
+    <moo-button variant="primary" type="button" click.bind="() => registerCommand('Payments')">
         Register Payments Command
+    </moo-button>
+</div>
+
+<div class="mt-4">
+    <moo-button variant="primary" type="button" click.bind="() => registerCommand('Poll')">
+        Register Poll Command
     </moo-button>
 </div>

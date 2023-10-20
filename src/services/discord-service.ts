@@ -615,6 +615,11 @@ export class DiscordService {
         return;
     }
 
+    async registerPollGlobalCommand(): Promise<unknown> {
+        await this.api.doPost(`DiscordGuild/${this.getLocalDiscordGuildId()}/RegisterGlobalCommands/Poll`, {});
+        return;
+    }
+
     async getInvites(): Promise<unknown> {
         return await this.api.doGet(`DiscordGuild/${this.getLocalDiscordGuildId()}/Invites`);
     }
