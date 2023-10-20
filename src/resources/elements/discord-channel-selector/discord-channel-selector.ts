@@ -10,10 +10,10 @@ export class DiscordChannelSelector {
 
     @bindable({ mode: BindingMode.twoWay }) channelId: string;
     @bindable type: number;
-    @bindable label;
+    @bindable label: string;
     @bindable required = false;
-    @bindable includeNull;
-    @bindable disabled;
+    @bindable includeNull: boolean;
+    @bindable disabled: boolean;
 
     channels;
 
@@ -21,7 +21,7 @@ export class DiscordChannelSelector {
         this.channels = await this.discordService.getDiscordChannels();
     }
 
-    matchesType(channel) {
+    matchesType(channel: any) {
         return this.type != null ? channel.type === this.type : true;
     }
 }
