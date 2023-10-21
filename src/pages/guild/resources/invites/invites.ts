@@ -3,7 +3,11 @@ import { route } from '@aurelia/router-lite';
 
 import { DiscordNameValueConverter } from '../../../../resources/value-converters/discord-name';
 import { DiscordService } from '../../../../services/discord-service';
-import { IDiscordGuild, IDiscordGuildUserInvite } from '../../../../services/models/discord';
+import {
+    IDiscordGuild,
+    IDiscordGuildInviteWhitelist,
+    IDiscordGuildUserInvite
+} from '../../../../services/models/discord';
 
 import { MDCDialog, MDCDialogCloseEvent } from '@material/dialog';
 import DataGrid from 'devextreme/ui/data_grid';
@@ -130,6 +134,11 @@ export class Invites {
     }
 
     async saveRoles() {
+        await this.discordService.updateInviteSettingsForGuild(this.guild);
+        toast('Updated Invite Settings', { severity: 'success' });
+    }
+
+    async saveInviteSettings() {
         await this.discordService.updateInviteSettingsForGuild(this.guild);
         toast('Updated Invite Settings', { severity: 'success' });
     }
