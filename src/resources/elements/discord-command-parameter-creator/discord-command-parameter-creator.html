@@ -21,10 +21,10 @@
 </moo-select>
 <template if.bind="!hideSwitch">
     <moo-switch
+        label="Required?"
         if.bind="!hideSwitch"
         value.bind="parameter.required"
     ></moo-switch>
-    <label class="me-5">Required?</label>
 </template>
 <moo-text-field
     class="w-100 my-2"

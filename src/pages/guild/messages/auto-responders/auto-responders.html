@@ -1,29 +1,19 @@
-<div class="row" if.bind="featureActive !== undefined">
-    <div class="col-8">
-        <feature-header
-            display-warning.bind="!featureActive && responders.length > 0"
-            doc-url="https://docs.betsybot.xyz/features/auto-responders"
-            title="Auto Responders"
-            subtitle="Respond to commonly asked questions, comments, and more."
-            create-route="../auto-responders/0"
-        ></feature-header>
-    </div>
-    <div class="col-4">
-        <moo-switch
-            value.bind="featureActive"
-            change.bind="() => toggleFeature()"
-        ></moo-switch>
-        <label class="me-5">Active?</label>
-    </div>
-</div>
+<feature-header
+    display-warning.bind="!featureActive && responders.length > 0"
+    doc-url="https://docs.betsybot.xyz/features/auto-responders"
+    title="Auto Responders"
+    subtitle="Respond to commonly asked questions, comments, and more."
+    create-route="../auto-responders/0"
+    include-toggle.bind="true"
+    toggle-function.bind="() => toggleFeature()"
+    feature-active.bind="featureActive"
+></feature-header>
 
-<div>
-    <feature-item-list
-        show-toggler.bind="true"
-        data.bind="responders"
-        show-toggler.bind="false"
-        toggle-handler.bind="(item) => updateActive(item)"
-        item-click-handler.bind="(item) => goTo(item)"
-        route="../auto-responders"
-    ></feature-item-list>
-</div>
+<feature-item-list
+    show-toggler.bind="true"
+    data.bind="responders"
+    show-toggler.bind="false"
+    toggle-handler.bind="(item) => updateActive(item)"
+    item-click-handler.bind="(item) => goTo(item)"
+    route="../auto-responders"
+></feature-item-list>

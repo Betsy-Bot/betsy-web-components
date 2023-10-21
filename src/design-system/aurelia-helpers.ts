@@ -38,6 +38,6 @@ export function createCustomElement<T extends Constructable = Constructable>(
 export const destroyCustomElement = async (
     controller: ICustomElementController
 ): Promise<void> => {
-    await controller.activate(controller, null, null);
+    await controller.activate(controller, null);
     controller.dispose();
 };

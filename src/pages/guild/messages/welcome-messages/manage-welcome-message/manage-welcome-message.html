@@ -9,8 +9,8 @@
         <form submit.trigger="save()" if.bind="message">
             <div class="row my-2 g-4">
                 <div class="col-6 h-100">
-                    <label class="me-3">Active?</label>
                     <moo-switch
+                        label="Active?"
                         selected.bind="message.active"
                     ></moo-switch>
                 </div>

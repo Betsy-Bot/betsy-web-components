@@ -18,10 +18,10 @@
             <form submit.trigger="putContainer()">
                 <div class="col-12 my-3">
                     <moo-switch
+                        label="Active?"
                         value.bind="container.active"
                         change.bind="() => container.active = !!responder.active"
                     ></moo-switch>
-                    <label class="me-5">Active?</label>
                 </div>
 
                 <div class="mb-3">

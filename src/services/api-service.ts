@@ -68,7 +68,7 @@ export class ApiService {
         return this._request(path, options);
     }
 
-    async doPatch(path, body) {
+    async doPatch(path: string, body) {
         const options = {
             method: 'PATCH',
             body: json(body)
@@ -77,15 +77,15 @@ export class ApiService {
         return this._request(path, options);
     }
 
-    async doPost(path, body, isFile = false) {
+    async doPost(path: string, body, isFile = false) {
         return this._push(path, body, false, isFile);
     }
 
-    async doPut(path, body) {
+    async doPut(path: string, body) {
         return this._push(path, body, true);
     }
 
-    async _fileUpload(path, formData) {
+    async _fileUpload(path: string, formData) {
         const options = {
             method: 'POST',
             body: formData
@@ -93,7 +93,7 @@ export class ApiService {
         return this._request(path, options);
     }
 
-    async doDelete(path) {
+    async doDelete(path: string) {
         const options = {
             method: 'DELETE'
         };
@@ -101,7 +101,7 @@ export class ApiService {
         return this._request(path, options);
     }
 
-    async _push(path, body, asPut = false, isFile = false) {
+    async _push(path: string, body, asPut = false, isFile = false) {
         const options = {
             method: asPut ? 'PUT' : 'POST',
             body: isFile ? body : json(body)

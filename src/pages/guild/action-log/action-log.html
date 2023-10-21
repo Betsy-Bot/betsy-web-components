@@ -9,10 +9,10 @@
     </div>
     <div class="col-4 text-end">
         <moo-switch
+            label="Active?"
             value.bind="featureActive"
             change.bind="() => toggleFeature()"
         ></moo-switch>
-        <label class="me-5">Active?</label>
     </div>
 </div>
 
@@ -43,13 +43,11 @@
                 <div class="py-3">${logItem.description}</div>
             </moo-card-header>
             <moo-card-footer class="text-end">
-                Active?
-                <span class="ms-3">
-                                <moo-switch
-                                    value.bind="logItem.active"
-                                    change.bind="() => toggleActionFeature(logItem)"
-                                ></moo-switch>
-                            </span>
+                <moo-switch
+                    label="Active?"
+                    value.bind="logItem.active"
+                    change.bind="() => toggleActionFeature(logItem)"
+                ></moo-switch>
             </moo-card-footer>
         </moo-card>
     </div>

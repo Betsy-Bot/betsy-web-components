@@ -53,9 +53,9 @@
     </section>
     <div if.bind="includeToggle" class="col-4 text-end">
         <moo-switch
+            label="Feature Active"
             value.bind="featureActive"
             change.bind="() => toggleFunction()"
         ></moo-switch>
-        <label class="me-5">Active?</label>
     </div>
 </div>

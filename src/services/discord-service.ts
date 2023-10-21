@@ -146,7 +146,7 @@ export class DiscordService {
         return await this.api.doGet(`DiscordGuild/${guildId}/RequiresLogin`);
     }
 
-    async verifyUser(guildId: string, userId: string): Promise<any> {
+    async verifyUser(guildId: string, userId: string): Promise<unknown> {
         return await this.api.doPost(`DiscordGuild/${guildId}/Verify/${userId}`, {});
     }
 
@@ -180,7 +180,7 @@ export class DiscordService {
         return this.guildChannelData.data;
     }
 
-    public async getDiscordRoles() {
+    public getDiscordRoles() {
         return this.guild.guild?.roles;
     }
 

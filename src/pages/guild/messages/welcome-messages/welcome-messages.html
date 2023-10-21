@@ -1,28 +1,20 @@
-<div class="row" if.bind="featureActive !== undefined">
-    <div class="col-8">
-        <feature-header
-            doc-url="https://docs.betsybot.xyz/features/welcome-messages"
-            title="Welcome Messages"
-            subtitle="Create either custom channel welcome messages or direct DM welcome messages."
-            display-warning.bind="!featureActive && messages.length > 0"
-            create-route="../welcome-messages/0"
-        ></feature-header>
+<feature-header
+    doc-url="https://docs.betsybot.xyz/features/welcome-messages"
+    title="Welcome Messages"
+    subtitle="Create either custom channel welcome messages or direct DM welcome messages."
+    display-warning.bind="!featureActive && messages.length > 0"
+    create-route="../welcome-messages/0"
+    include-toggle.bind="true"
+    toggle-function.bind="() => toggleFeature()"
+    feature-active.bind="featureActive"
+></feature-header>
 
-        <div class="my-3">
-            <a load="../welcome-messages/0">
-                <moo-button variant="primary">
-                    Create New Welcome Message
-                </moo-button>
-            </a>
-        </div>
-    </div>
-    <div class="col-4 text-end">
-        <moo-switch
-            value.bind="featureActive"
-            change.bind="() => toggleFeature()"
-        ></moo-switch>
-        <label class="me-5">Active?</label>
-    </div>
+<div class="my-3">
+    <a load="../welcome-messages/0">
+        <moo-button variant="primary">
+            Create New Welcome Message
+        </moo-button>
+    </a>
 </div>
 
 <feature-item-list

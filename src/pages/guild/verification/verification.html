@@ -11,10 +11,10 @@
     </div>
     <div class="col-4 text-end">
         <moo-switch
+            label="Active?"
             value.bind="featureActive"
             change.bind="() => toggleFeature()"
         ></moo-switch>
-        <label class="me-5">Active?</label>
     </div>
 </div>
 <form submit.trigger="save()" if.bind="guild">
@@ -47,17 +47,17 @@
     </div>
     <div class="my-3">
         <moo-switch
+            label="Block Alts?"
             disabled.bind="!isAdmin"
             value.bind="guild.globalSettings.verificationSettings.blockAlts"
         ></moo-switch>
-        <label class="me-5">Block Alts?</label>
     </div>
     <div class="col-12 my-3">
         <moo-switch
+            label="Require Login?"
             disabled.bind="!isAdmin"
             value.bind="guild.globalSettings.verificationSettings.requireLogin"
         ></moo-switch>
-        <label class="me-5">Require Login?</label>
     </div>
     <div class="text-end">
         <moo-button variant="primary" type="submit" disabled.bind="!isAdmin">
