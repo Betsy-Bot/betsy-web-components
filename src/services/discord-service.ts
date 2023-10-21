@@ -269,13 +269,13 @@ export class DiscordService {
         return this.api.doPatch(`DiscordMessage/${data.id}`, data);
     }
 
-    async toggleDiscordMessageActiveStatus(messageId, active) {
+    async toggleDiscordMessageActiveStatus(messageId, active: boolean) {
         return this.api.doPatch(`DiscordMessage/${messageId}/ToggleActive`, {
             active: active,
         });
     }
 
-    async createTwitchSubscription(request, guildId) {
+    async createTwitchSubscription(request, guildId: string) {
         return this.api.doPost(`DiscordGuild/${guildId}/TwitchEventSubscriptions`, request);
     }
 
@@ -327,15 +327,15 @@ export class DiscordService {
         return this.api.doPatch(`DiscordSupportTicketSettings/${settingsId}/CloseOpenTickets`, {});
     }
 
-    async updateAuthorizedUsersForGuild(guild: any, guildId: string) {
+    async updateAuthorizedUsersForGuild(guild: IDiscordGuild, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/AuthorizedUsers`, guild);
     }
 
-    async updateAuthorizedOwnersForGuild(guild: any, guildId: string) {
+    async updateAuthorizedOwnersForGuild(guild: IDiscordGuild, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/AuthorizedOwners`, guild);
     }
 
-    async updateGlobalSettingsForGuild(guild: any, guildId: string) {
+    async updateGlobalSettingsForGuild(guild: IDiscordGuild, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/GlobalSettings`, guild);
     }
 
@@ -343,7 +343,7 @@ export class DiscordService {
         return this.api.doPatch(`DiscordGuild/${guildId}/ConfigurationOwner/${newOwnerId}`, {});
     }
 
-    async updateReviewSettingsForGuild(guild: any) {
+    async updateReviewSettingsForGuild(guild: IDiscordGuild) {
         return this.api.doPatch(`DiscordGuild/${this.getLocalDiscordGuildId()}/ReviewSettings`, guild);
     }
 
@@ -351,11 +351,11 @@ export class DiscordService {
         return this.api.doPatch(`DiscordGuild/${this.getLocalDiscordGuildId()}/InviteSettings`, guild);
     }
 
-    async updateAutoRolesForGuild(guild: any, guildId: string) {
+    async updateAutoRolesForGuild(guild: IDiscordGuild, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/AutoRoles`, guild);
     }
 
-    async updateApiKyesForGuild(guild: any, guildId: string) {
+    async updateApiKyesForGuild(guild: IDiscordGuild, guildId: string) {
         return this.api.doPatch(`DiscordGuild/${guildId}/ApiKeys`, guild);
     }
 
