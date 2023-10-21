@@ -1,4 +1,4 @@
-import { bindable, capture, containerless, ICustomElementViewModel } from 'aurelia';
+import { bindable, BindingMode, capture, containerless, ICustomElementViewModel } from 'aurelia';
 
 import './feature-header.scss';
 
@@ -14,8 +14,10 @@ export class FeatureHeader implements ICustomElementViewModel {
     @bindable copyFunction: () => void;
     @bindable createFunction: () => void;
     @bindable saveFunction: () => void;
+    @bindable toggleFunction: () => void;
     @bindable createRoute: string;
     @bindable includeToggle: boolean;
+    @bindable({ mode: BindingMode.twoWay }) featureActive: boolean;
     bannerOpen: boolean;
 
     bound() {
