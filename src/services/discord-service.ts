@@ -562,7 +562,7 @@ export class DiscordService {
     }
 
     async getGuildMember(memberId: string) {
-        const foundUser = this.localUsers.find((x) => x.user.id == memberId);
+        const foundUser = this.localUsers.find((x) => x.user?.id == memberId);
         if (foundUser) return foundUser;
         const response = (await this.api.doGet(
             `User/DiscordUser?discordGuildId=${this.getLocalDiscordGuildId()}&discordUserId=${memberId}`,

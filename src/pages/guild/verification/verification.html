@@ -30,7 +30,6 @@
         <discord-channel-selector
             disabled.bind="!isAdmin"
             label="Select Channel for Audits"
-            if.bind="guildId"
             type.bind="0"
             channel-id.two-way="guild.globalSettings.verificationSettings.logChannel"
             guild-id.bind="guildId"
@@ -41,7 +40,6 @@
         <discord-channel-selector
             disabled.bind="!isAdmin"
             label="Select Channel for Verify Button"
-            if.bind="guildId"
             type.bind="0"
             channel-id.two-way="guild.globalSettings.verificationSettings.verifyChannelId"
             guild-id.bind="guildId"
