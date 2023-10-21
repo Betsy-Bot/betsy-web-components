@@ -4,7 +4,6 @@ import {
     ICustomElementViewModel,
 } from 'aurelia';
 import '@material/web/switch/switch';
-import './moo-switch.scss';
 
 import { MdSwitch } from '@material/web/all';
 
