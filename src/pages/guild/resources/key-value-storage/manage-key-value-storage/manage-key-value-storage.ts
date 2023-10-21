@@ -1,15 +1,15 @@
-import { inject } from "aurelia";
-import { IEventAggregator } from "aurelia";
-import { IRouteViewModel, Params, route, Router } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IEventAggregator } from 'aurelia';
+import { IRouteViewModel, Params, route, Router } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../../services/discord-service";
+import { DiscordService } from '../../../../../services/discord-service';
 
-import DataGrid from "devextreme/ui/data_grid";
-import { toast } from "lets-toast";
+import DataGrid from 'devextreme/ui/data_grid';
+import { toast } from 'lets-toast';
 
 @route({
-    path: "key-value-storage/:itemId",
-    title: "Key Value Storage",
+    path: 'key-value-storage/:itemId',
+    title: 'Key Value Storage',
 })
 @inject(IEventAggregator, DiscordService, Router)
 export class ManageKeyValueStorage implements IRouteViewModel {
@@ -25,20 +25,20 @@ export class ManageKeyValueStorage implements IRouteViewModel {
     isNew: boolean;
     table;
     itemTemplate = {
-        discordServerId: "",
+        discordServerId: '',
         storedValues: [],
     };
 
     columns = [
         {
-            dataField: "key",
+            dataField: 'key',
         },
         {
-            dataField: "value",
+            dataField: 'value',
         },
         {
-            dataField: "used",
-            dataType: "boolean",
+            dataField: 'used',
+            dataType: 'boolean',
         },
     ];
 
@@ -51,7 +51,7 @@ export class ManageKeyValueStorage implements IRouteViewModel {
 
     async attached() {
         this.guildId = this.discordService.getLocalDiscordGuildId();
-        if (!this.itemId || this.itemId == "0") {
+        if (!this.itemId || this.itemId == '0') {
             this.itemTemplate.discordServerId =
                 this.discordService.getLocalGuild().id;
             this.isNew = true;
@@ -65,12 +65,12 @@ export class ManageKeyValueStorage implements IRouteViewModel {
             dataSource: this.item.storedValues,
             showBorders: true,
             editing: {
-                mode: "batch",
+                mode: 'batch',
                 allowUpdating: true,
                 allowAdding: true,
                 allowDeleting: true,
                 selectTextOnEditStart: true,
-                startEditAction: "click",
+                startEditAction: 'click',
             },
             onSaved: ({ changes }) => {
                 for (const object of changes) {
@@ -99,10 +99,10 @@ export class ManageKeyValueStorage implements IRouteViewModel {
                     this.item
                 );
             }
-            toast(`Key Value Category ${this.isNew ? "Created" : "Updated"}!`);
+            toast(`Key Value Category ${this.isNew ? 'Created' : 'Updated'}!`);
         } catch (e) {
             console.log(e);
-            toast("Failed to create key value category", { severity: "error" });
+            toast('Failed to create key value category', { severity: 'error' });
         }
     }
 }

@@ -1,19 +1,19 @@
-import { inject } from "aurelia";
-import { route, Router } from "@aurelia/router-lite";
-import { IRouteViewModel } from "@aurelia/router-lite";
-import { watch } from "@aurelia/runtime-html";
+import { inject } from 'aurelia';
+import { route, Router } from '@aurelia/router-lite';
+import { IRouteViewModel } from '@aurelia/router-lite';
+import { watch } from '@aurelia/runtime-html';
 
 import {
     moveDownInArray,
     moveUpInArray,
-} from "../../../../resources/array-utils";
-import { DiscordService } from "../../../../services/discord-service";
+} from '../../../../resources/array-utils';
+import { DiscordService } from '../../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "role-selector/:containerId",
-    title: "Manage Role Selector",
+    path: 'role-selector/:containerId',
+    title: 'Manage Role Selector',
 })
 @inject(DiscordService, Router)
 export class ManageAutoroleContainer implements IRouteViewModel {
@@ -26,7 +26,7 @@ export class ManageAutoroleContainer implements IRouteViewModel {
     containerId;
     container = {
         active: true,
-        discordServerId: "",
+        discordServerId: '',
         type: 1,
         discordMessage: {
             message: {
@@ -37,7 +37,7 @@ export class ManageAutoroleContainer implements IRouteViewModel {
         discordRoles: [],
     };
     isNew = false;
-    tab = "container";
+    tab = 'container';
 
     selectedRole;
     roles;
@@ -48,7 +48,7 @@ export class ManageAutoroleContainer implements IRouteViewModel {
 
     async attached() {
         this.roles = await this.discordService.getDiscordRoles();
-        if (this.containerId && this.containerId != "0") {
+        if (this.containerId && this.containerId != '0') {
             this.container = await this.discordService.getAutoroleContainer(
                 this.containerId
             );
@@ -56,7 +56,7 @@ export class ManageAutoroleContainer implements IRouteViewModel {
                 this.container.discordServerId =
                     this.discordService.getLocalServerId();
                 return toast(
-                    "No container found by this ID. You are now creating a new Auto Role Container."
+                    'No container found by this ID. You are now creating a new Auto Role Container.'
                 );
             }
             const emojis = await this.discordService.getLocalGuild().guild
@@ -71,14 +71,14 @@ export class ManageAutoroleContainer implements IRouteViewModel {
         }
     }
 
-    @watch("selectedRole")
+    @watch('selectedRole')
     selectedRoleChanged() {
         console.log(this.selectedRole);
         const foundRole = this.roles.find((x) => x.id == this.selectedRole);
         console.log(foundRole);
         if (this.container.discordRoles.length >= 25) {
-            return toast("A max of 25 roles are allowed for select menus", {
-                severity: "error",
+            return toast('A max of 25 roles are allowed for select menus', {
+                severity: 'error',
             });
         }
         if (
@@ -91,7 +91,7 @@ export class ManageAutoroleContainer implements IRouteViewModel {
                 name: foundRole.name,
                 label: foundRole.name,
                 value: foundRole.name,
-                description: "",
+                description: '',
                 discordServerId: this.discordService.getLocalServerId(),
             });
         }
@@ -114,13 +114,13 @@ export class ManageAutoroleContainer implements IRouteViewModel {
             }
             toast(
                 `Auto Role Container Successfully ${
-                    this.isNew ? "Created" : "Updated"
+                    this.isNew ? 'Created' : 'Updated'
                 }`,
-                { severity: "success" }
+                { severity: 'success' }
             );
         } catch (e) {
-            toast(`Failed to update Auto Role Container.`, {
-                severity: "error",
+            toast('Failed to update Auto Role Container.', {
+                severity: 'error',
             });
             console.log(e);
         }
@@ -128,10 +128,10 @@ export class ManageAutoroleContainer implements IRouteViewModel {
 
     handleMove(type: string, index: number) {
         switch (type) {
-            case "up":
+            case 'up':
                 moveUpInArray(this.container.discordRoles, index);
                 break;
-            case "down":
+            case 'down':
                 moveDownInArray(this.container.discordRoles, index);
                 break;
         }

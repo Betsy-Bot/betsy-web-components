@@ -1,12 +1,12 @@
-import { IEventAggregator, inject } from "aurelia";
-import { IRouter, IRouteViewModel, route } from "@aurelia/router-lite";
+import { IEventAggregator, inject } from 'aurelia';
+import { IRouter, IRouteViewModel, route } from '@aurelia/router-lite';
 
-import { SessionService } from "../../services/session-service";
-import { UserService } from "../../services/user-service";
-import { WebhookService } from "../../services/websocket-service";
+import { SessionService } from '../../services/session-service';
+import { UserService } from '../../services/user-service';
+import { WebhookService } from '../../services/websocket-service';
 @route({
-    path: ["", "login"],
-    title: "Home",
+    path: ['', 'login'],
+    title: 'Home',
 })
 @inject(SessionService, UserService, WebhookService, IRouter, IEventAggregator)
 export class Home implements IRouteViewModel {
@@ -34,12 +34,12 @@ export class Home implements IRouteViewModel {
 
         this.connection = this.webhookService.subscribeToGuildInvite();
         await this.connection.start();
-        this.connection.on("BotInvited", async (id, name, description) => {
+        this.connection.on('BotInvited', async (id, name, description) => {
             await this.router.load(`guild/${id}`);
         });
         this.isLoading = false;
 
-        this.ea.subscribe("user-updated", (payload) => {
+        this.ea.subscribe('user-updated', (payload) => {
             window.location.reload();
         });
     }
@@ -54,9 +54,9 @@ export class Home implements IRouteViewModel {
 
     async loadGuilds() {
         for (const guild of this.userGuilds) {
-            guild.icon_extension = guild.icon?.startsWith("a_")
-                ? "gif"
-                : "webp";
+            guild.icon_extension = guild.icon?.startsWith('a_')
+                ? 'gif'
+                : 'webp';
             guild.can_add = guild.owner || (guild.permissions & 0x8) == 0x8;
         }
 
@@ -70,9 +70,9 @@ export class Home implements IRouteViewModel {
                 );
                 if (foundServerIndex >= 0) {
                     server.icon = this.userGuilds[foundServerIndex].icon;
-                    server.icon_extension = server.icon?.startsWith("a_")
-                        ? "gif"
-                        : "webp";
+                    server.icon_extension = server.icon?.startsWith('a_')
+                        ? 'gif'
+                        : 'webp';
                 }
             }
         }

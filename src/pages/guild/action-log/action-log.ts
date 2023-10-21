@@ -1,14 +1,14 @@
-import { inject } from "aurelia";
-import { route, Router } from "@aurelia/router-lite";
-import { IRouteViewModel } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { route, Router } from '@aurelia/router-lite';
+import { IRouteViewModel } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../services/discord-service";
+import { DiscordService } from '../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "action-log",
-    title: "Action Log",
+    path: 'action-log',
+    title: 'Action Log',
 })
 @inject(DiscordService, Router)
 export class ActionLog implements IRouteViewModel {
@@ -27,75 +27,75 @@ export class ActionLog implements IRouteViewModel {
     categoryId;
 
     request = {
-        channelId: "",
-        categoryId: "",
+        channelId: '',
+        categoryId: '',
         message: {},
     };
 
-    MESSAGE_EDIT_LOGGING = "MessageEdits";
-    MESSAGE_DELETE_LOGGING = "MessageDeletes";
-    ROLE_CREATE = "RoleCreate";
-    ROLE_UPDATE = "RoleUpdate";
-    ROLE_DELETE = "RoleDelete";
-    MEMBER_BANNED = "MemberBanned";
-    MEMBER_TIMED_OUT = "MemberTimedOut";
-    MEMBER_NICKNAME_CHANGED = "MemberNicknameChange";
+    MESSAGE_EDIT_LOGGING = 'MessageEdits';
+    MESSAGE_DELETE_LOGGING = 'MessageDeletes';
+    ROLE_CREATE = 'RoleCreate';
+    ROLE_UPDATE = 'RoleUpdate';
+    ROLE_DELETE = 'RoleDelete';
+    MEMBER_BANNED = 'MemberBanned';
+    MEMBER_TIMED_OUT = 'MemberTimedOut';
+    MEMBER_NICKNAME_CHANGED = 'MemberNicknameChange';
 
     actionLogItems = [
         {
             value: this.MESSAGE_EDIT_LOGGING,
-            label: "Message Edits",
+            label: 'Message Edits',
             description:
-                "Anytime a message is updated the previous and new message will be logged.",
+                'Anytime a message is updated the previous and new message will be logged.',
             active: false,
         },
         {
             value: this.MESSAGE_DELETE_LOGGING,
-            label: "Message Deletes",
+            label: 'Message Deletes',
             description:
-                "Anytime a message is deleted the deleted message content will be logged.",
+                'Anytime a message is deleted the deleted message content will be logged.',
             active: false,
         },
         {
             value: this.ROLE_CREATE,
-            label: "Role Creations",
+            label: 'Role Creations',
             description:
-                "Anytime a role is created it will be logged. We are not able to see who created the role however.",
+                'Anytime a role is created it will be logged. We are not able to see who created the role however.',
             active: false,
         },
         {
             value: this.ROLE_UPDATE,
-            label: "Role Updates",
+            label: 'Role Updates',
             description:
-                "Anytime a role is updated it will be logged. We are not able to see who updated the role however.",
+                'Anytime a role is updated it will be logged. We are not able to see who updated the role however.',
             active: false,
         },
         {
             value: this.ROLE_DELETE,
-            label: "Role Deletes",
+            label: 'Role Deletes',
             description:
-                "Anytime a role is deleted it will be logged. We are not able to see who deleted the role however.",
+                'Anytime a role is deleted it will be logged. We are not able to see who deleted the role however.',
             active: false,
         },
         {
             value: this.MEMBER_BANNED,
-            label: "Member Banned",
+            label: 'Member Banned',
             description:
-                "Anytime a member on your server is banned it will be logged. We are not able to see who banned however - Check the audit log",
+                'Anytime a member on your server is banned it will be logged. We are not able to see who banned however - Check the audit log',
             active: false,
         },
         {
             value: this.MEMBER_TIMED_OUT,
-            label: "Member Timed Out",
+            label: 'Member Timed Out',
             description:
-                "Anytime a member on your server is timed out it will be logged. We are not able to see who banned however - Check the audit log",
+                'Anytime a member on your server is timed out it will be logged. We are not able to see who banned however - Check the audit log',
             active: false,
         },
         {
             value: this.MEMBER_NICKNAME_CHANGED,
-            label: "Member Nickname Change",
+            label: 'Member Nickname Change',
             description:
-                "Anytime a member on your server updates their name it will be logged. It will show the old and new name",
+                'Anytime a member on your server updates their name it will be logged. It will show the old and new name',
             active: false,
         },
     ];
@@ -135,7 +135,7 @@ export class ActionLog implements IRouteViewModel {
             );
         }
         toast(
-            this.featureActive ? "Toggled feature on" : "Toggled feature off"
+            this.featureActive ? 'Toggled feature on' : 'Toggled feature off'
         );
     }
 
@@ -168,6 +168,6 @@ export class ActionLog implements IRouteViewModel {
             this.guildId,
             this.guild.auditLogChannelId
         );
-        toast("Updated audit log channel");
+        toast('Updated audit log channel');
     }
 }

@@ -1,9 +1,9 @@
 import { inject } from 'aurelia';
 import { IHttpClient, json } from '@aurelia/fetch-client';
 
-import { apiEndpoint } from "../environment";
+import { apiEndpoint } from '../environment';
 
-import { ApiInterceptor } from "./api-interceptor";
+import { ApiInterceptor } from './api-interceptor';
 
 @inject(IHttpClient, ApiInterceptor)
 export class ApiService {
@@ -37,7 +37,7 @@ export class ApiService {
             }
 
             if (status >= 400) {
-                throw "Error";
+                throw 'Error';
             }
 
             let response;

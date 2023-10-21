@@ -1,6 +1,6 @@
-import { bindable } from "aurelia";
+import { bindable } from 'aurelia';
 
-import { DiscordApplicationCommandOptionType } from "../../../services/models/discord";
+import { DiscordApplicationCommandOptionType } from '../../../services/models/discord';
 
 export class DiscordCommandParameterCreator {
     @bindable parameter;
@@ -18,13 +18,13 @@ export class DiscordCommandParameterCreator {
     getOptionName(option: DiscordApplicationCommandOptionType) {
         switch(option) {
             case DiscordApplicationCommandOptionType.String:
-                return "String"
+                return 'String'
             case DiscordApplicationCommandOptionType.Boolean:
-                return "Boolean"
+                return 'Boolean'
             case DiscordApplicationCommandOptionType.Integer:
-                return "Integer"
+                return 'Integer'
             case DiscordApplicationCommandOptionType.Number:
-                return "Number"
+                return 'Number'
         }
     }
 }

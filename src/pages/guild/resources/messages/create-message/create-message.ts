@@ -1,14 +1,14 @@
-import { IEventAggregator } from "aurelia";
-import { inject } from "aurelia";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IEventAggregator } from 'aurelia';
+import { inject } from 'aurelia';
+import { IRouteViewModel, route, Router } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../../services/discord-service";
+import { DiscordService } from '../../../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "messages/create",
-    title: "Create Message",
+    path: 'messages/create',
+    title: 'Create Message',
 })
 @inject(IEventAggregator, DiscordService, Router)
 export class CreateMessage implements IRouteViewModel {
@@ -25,7 +25,7 @@ export class CreateMessage implements IRouteViewModel {
     request = {
         type: 2,
         active: true,
-        discordServerId: "",
+        discordServerId: '',
         message: {},
     };
     guild;
@@ -43,10 +43,10 @@ export class CreateMessage implements IRouteViewModel {
             this.request
         );
         if (response) {
-            toast("Created Message", { severity: "success" });
-            this.router.load("/guild/" + this.guildId + "/resources/messages");
+            toast('Created Message', { severity: 'success' });
+            this.router.load('/guild/' + this.guildId + '/resources/messages');
         } else {
-            toast("Failed to create message", { severity: "error" });
+            toast('Failed to create message', { severity: 'error' });
         }
     }
 }

@@ -1,15 +1,15 @@
-import { inject } from "aurelia";
-import { Params, route } from "@aurelia/router-lite";
-import { IRouteViewModel } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { Params, route } from '@aurelia/router-lite';
+import { IRouteViewModel } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../../services/discord-service";
-import { DiscordComponentType, DiscordForm } from "../../../../../services/models/discord";
+import { DiscordService } from '../../../../../services/discord-service';
+import { DiscordComponentType, DiscordForm } from '../../../../../services/models/discord';
 
-import DataGrid from "devextreme/ui/data_grid";
-import { toast } from "lets-toast";
+import DataGrid from 'devextreme/ui/data_grid';
+import { toast } from 'lets-toast';
 @route({
-    path: "forms/:formId",
-    title: "Manage Form",
+    path: 'forms/:formId',
+    title: 'Manage Form',
 })
 @inject(DiscordService)
 export class ManageForm implements IRouteViewModel {
@@ -26,21 +26,21 @@ export class ManageForm implements IRouteViewModel {
 
     columns = [
         {
-            dataField: "discordUserId",
+            dataField: 'discordUserId',
         },
         {
-            dataField: "discordUsername",
+            dataField: 'discordUsername',
         },
         {
-            dataField: "createdDate",
-            dataType: "datetime",
+            dataField: 'createdDate',
+            dataType: 'datetime',
         },
     ];
 
     formTemplate: DiscordForm = {
-        customId: "",
-        title: "",
-        description: "",
+        customId: '',
+        title: '',
+        description: '',
         submissions: [],
         formData: {
             components: [
@@ -48,9 +48,9 @@ export class ManageForm implements IRouteViewModel {
                     type: DiscordComponentType.ActionRow,
                     components: [
                         {
-                            custom_id: "",
+                            custom_id: '',
                             type: DiscordComponentType.TextInput,
-                            label: "",
+                            label: '',
                         },
                     ],
                 },
@@ -60,7 +60,7 @@ export class ManageForm implements IRouteViewModel {
 
     loading(params: Params) {
         this.formId = params.formId!;
-        if (this.formId == "0") {
+        if (this.formId == '0') {
             this.form = this.formTemplate;
             this.isNew = true;
         }
@@ -77,20 +77,20 @@ export class ManageForm implements IRouteViewModel {
 
         this.detailTemplate = (container, options) => {
             const data = options.data;
-            this.rowCaption.innerText = "Answers for " + data.discordUsername;
+            this.rowCaption.innerText = 'Answers for ' + data.discordUsername;
             container.appendChild(this.rowCaption);
             new DataGrid(this.rowDetail, {
                 columnAutoWidth: true,
                 showBorders: true,
                 columns: [
                     {
-                        dataField: "label",
+                        dataField: 'label',
                     },
                     {
-                        dataField: "value",
+                        dataField: 'value',
                     },
                     {
-                        dataField: "customId",
+                        dataField: 'customId',
                     },
                 ],
                 dataSource: data.answers.fields,
@@ -103,16 +103,16 @@ export class ManageForm implements IRouteViewModel {
         if (answer.label) {
             return answer.label;
         }
-        return "No Label Found";
+        return 'No Label Found';
     }
 
     async save() {
         if (!this.isNew) {
             await this.discordService.updateDiscordForm(this.form);
-            toast("Saved Form", { severity: "success" });
+            toast('Saved Form', { severity: 'success' });
         } else {
             await this.discordService.createDiscordForm(this.form);
-            toast("Form Created!");
+            toast('Form Created!');
         }
     }
 }

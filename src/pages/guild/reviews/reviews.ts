@@ -1,16 +1,16 @@
-import { inject, observable } from "aurelia";
-import { route, Router } from "@aurelia/router-lite";
+import { inject, observable } from 'aurelia';
+import { route, Router } from '@aurelia/router-lite';
 
-import { DiscordNameValueConverter } from "../../../resources/value-converters";
-import { DiscordService } from "../../../services/discord-service";
-import { DiscordButtonStyle } from "../../../services/models/discord";
+import { DiscordNameValueConverter } from '../../../resources/value-converters';
+import { DiscordService } from '../../../services/discord-service';
+import { DiscordButtonStyle } from '../../../services/models/discord';
 
-import { MDCDialog, MDCDialogCloseEvent } from "@material/dialog";
-import { toast } from "lets-toast";
+import { MDCDialog, MDCDialogCloseEvent } from '@material/dialog';
+import { toast } from 'lets-toast';
 
 @route({
-    path: "reviews",
-    title: "Reviews",
+    path: 'reviews',
+    title: 'Reviews',
 })
 @inject(DiscordService, Router, DiscordNameValueConverter)
 export class Reviews {
@@ -24,21 +24,21 @@ export class Reviews {
     guildId;
     reviews: any[];
     columns;
-    tab = "settings";
+    tab = 'settings';
     categoryDialog: MDCDialog;
     newCategory = {
         buttonStyle: DiscordButtonStyle.Primary,
-        name: "",
+        name: '',
     };
 
     types = [
         {
             value: 0,
-            display: "Server Review",
+            display: 'Server Review',
         },
         {
             value: 1,
-            display: "User Review",
+            display: 'User Review',
         },
     ];
 
@@ -68,26 +68,26 @@ export class Reviews {
         console.log(this.types);
         this.columns = [
             {
-                dataField: "message",
+                dataField: 'message',
             },
             {
-                dataField: "rating",
+                dataField: 'rating',
             },
             {
-                dataField: "displayName",
+                dataField: 'displayName',
             },
             {
-                dataField: "targetDisplayName",
+                dataField: 'targetDisplayName',
             },
             {
-                dataField: "category",
+                dataField: 'category',
             },
             {
-                dataField: "type",
+                dataField: 'type',
                 lookup: {
                     dataSource: this.types,
-                    valueExpr: "value",
-                    displayExpr: "display",
+                    valueExpr: 'value',
+                    displayExpr: 'display',
                 },
             },
         ];
@@ -101,16 +101,16 @@ export class Reviews {
             return;
         }
         await this.discordService.updateReviewSettingsForGuild(this.guild);
-        toast("Updated Settings", { severity: "success" });
+        toast('Updated Settings', { severity: 'success' });
     }
 
     addCategory(event: MDCDialogCloseEvent) {
-        if (event.detail.action == "ok") {
+        if (event.detail.action == 'ok') {
             if (!this.guild.reviewSettings.categories) {
                 this.guild.reviewSettings.categories = [];
             }
             this.guild.reviewSettings.categories.push(this.newCategory);
-            this.newCategory = { name: "", buttonStyle: DiscordButtonStyle.Primary };
+            this.newCategory = { name: '', buttonStyle: DiscordButtonStyle.Primary };
         }
     }
 

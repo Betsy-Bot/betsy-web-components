@@ -1,8 +1,8 @@
-import { bindable, containerless } from "aurelia";
+import { bindable, containerless } from 'aurelia';
 
-import { IDiscordComponent } from "../../../services/models/discord";
+import { IDiscordComponent } from '../../../services/models/discord';
 
-import "./discord-button.scss";
+import './discord-button.scss';
 
 @containerless()
 export class DiscordButton {
@@ -11,15 +11,15 @@ export class DiscordButton {
     get buttonClass() {
         switch (this.button.style) {
             case 1:
-                return "discord-button-primary";
+                return 'discord-button-primary';
             case 3:
-                return "discord-button-success";
+                return 'discord-button-success';
             case 2:
-                return "discord-button-secondary";
+                return 'discord-button-secondary';
             case 4:
-                return "discord-button-danger";
+                return 'discord-button-danger';
             case 5:
-                return "discord-button-link";
+                return 'discord-button-link';
         }
     }
 

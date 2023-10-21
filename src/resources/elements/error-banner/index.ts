@@ -1,1 +1,1 @@
-export * from "./error-banner";
+export * from './error-banner';

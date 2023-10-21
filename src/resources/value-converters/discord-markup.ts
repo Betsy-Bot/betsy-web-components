@@ -1,6 +1,6 @@
-import { inject } from "aurelia";
+import { inject } from 'aurelia';
 
-import { DiscordService } from "../../services/discord-service";
+import { DiscordService } from '../../services/discord-service';
 
 import { toHTML } from '@darkguy10/discord-markdown';
 
@@ -47,9 +47,9 @@ export class DiscordMarkupValueConverter {
             b = parseInt(hex.slice(5, 7), 16);
 
         if (alpha) {
-            return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+            return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
         } else {
-            return "rgb(" + r + ", " + g + ", " + b + ")";
+            return 'rgb(' + r + ', ' + g + ', ' + b + ')';
         }
     }
 }

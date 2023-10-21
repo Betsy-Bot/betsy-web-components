@@ -5,11 +5,11 @@ import {
     IAurelia,
     IContainer,
     Resolved,
-} from "aurelia";
+} from 'aurelia';
 import {
     CustomElementDefinition,
     ICustomElementController,
-} from "@aurelia/runtime-html";
+} from '@aurelia/runtime-html';
 
 export function createCustomElement<T extends Constructable = Constructable>(
     component: T,

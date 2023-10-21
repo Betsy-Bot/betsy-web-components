@@ -2,12 +2,12 @@ import {
     bindable, containerless,
     ICustomElementViewModel,
     inject,
-} from "aurelia";
+} from 'aurelia';
 
-import cow from "../../../images/logo.png";
-import { DiscordService } from "../../../services/discord-service";
+import cow from '../../../images/logo.png';
+import { DiscordService } from '../../../services/discord-service';
 
-import "./discord-message-preview.scss";
+import './discord-message-preview.scss';
 
 @containerless()
 @inject(DiscordService)
@@ -25,9 +25,9 @@ export class DiscordMessagePreview implements ICustomElementViewModel {
     discordGuild;
 
     get currentTime() {
-        return new Intl.DateTimeFormat("en", {
-            dateStyle: "long",
-            timeStyle: "short",
+        return new Intl.DateTimeFormat('en', {
+            dateStyle: 'long',
+            timeStyle: 'short',
         }).format(new Date());
     }
 }

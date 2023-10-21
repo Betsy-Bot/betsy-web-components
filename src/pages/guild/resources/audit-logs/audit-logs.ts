@@ -1,15 +1,15 @@
-import { inject } from "aurelia";
-import { IEventAggregator } from "aurelia";
-import { route, Router } from "@aurelia/router-lite";
-import { IRouteViewModel } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IEventAggregator } from 'aurelia';
+import { route, Router } from '@aurelia/router-lite';
+import { IRouteViewModel } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
+import { DiscordService } from '../../../../services/discord-service';
 
-import DataGrid from "devextreme/ui/data_grid";
+import DataGrid from 'devextreme/ui/data_grid';
 
 @route({
-    path: "audit-logs",
-    title: "Audit Logs",
+    path: 'audit-logs',
+    title: 'Audit Logs',
 })
 @inject(IEventAggregator, DiscordService, Router)
 export class AuditLogs implements IRouteViewModel {
@@ -28,15 +28,15 @@ export class AuditLogs implements IRouteViewModel {
     actionTypes = [
         {
             value: 0,
-            text: "Create",
+            text: 'Create',
         },
         {
             value: 1,
-            text: "Update",
+            text: 'Update',
         },
         {
             value: 2,
-            text: "Delete",
+            text: 'Delete',
         },
     ];
 
@@ -52,7 +52,7 @@ export class AuditLogs implements IRouteViewModel {
             showBorders: true,
             filterRow: {
                 visible: true,
-                applyFilter: "auto",
+                applyFilter: 'auto',
             },
             paging: {
                 enabled: true,
@@ -64,19 +64,19 @@ export class AuditLogs implements IRouteViewModel {
             },
             columns: [
                 {
-                    dataField: "tableName",
+                    dataField: 'tableName',
                 },
                 {
-                    dataField: "before",
+                    dataField: 'before',
                 },
                 {
-                    dataField: "after",
+                    dataField: 'after',
                 },
                 {
-                    dataField: "propertyName",
+                    dataField: 'propertyName',
                 },
                 {
-                    dataField: "action",
+                    dataField: 'action',
                     customizeText: (cellInfo) => {
                         if (cellInfo.value) {
                             return this.actionTypes.find(
@@ -86,15 +86,15 @@ export class AuditLogs implements IRouteViewModel {
                     },
                 },
                 {
-                    dataField: "user.firstName",
+                    dataField: 'user.firstName',
                     calculateCellValue: (rowData) => {
                         return (
-                            rowData.user.firstName + "#" + rowData.user.lastName
+                            rowData.user.firstName + '#' + rowData.user.lastName
                         );
                     },
                 },
                 {
-                    dataField: "discordUserId",
+                    dataField: 'discordUserId',
                 },
             ],
         });

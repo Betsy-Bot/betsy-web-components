@@ -5,9 +5,9 @@ import {
     ICustomElementViewModel,
     IEventAggregator,
     inject
-} from "aurelia";
+} from 'aurelia';
 
-import { DiscordService } from "../../../services/discord-service";
+import { DiscordService } from '../../../services/discord-service';
 
 @containerless()
 @inject(DiscordService, IEventAggregator)
@@ -30,7 +30,7 @@ export class DiscordFormSelector implements ICustomElementViewModel {
     //Temp solution because it wasn't clearing it for some reason
     formIdChanged() {
         if (!this.formId) {
-            this.eventAggregator.publish("form-cleared");
+            this.eventAggregator.publish('form-cleared');
         }
     }
 }

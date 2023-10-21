@@ -1,14 +1,14 @@
-import { bindable, inject } from "aurelia";
-import { IRouter, IRouteViewModel, Params, route } from "@aurelia/router-lite";
+import { bindable, inject } from 'aurelia';
+import { IRouter, IRouteViewModel, Params, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
-import { DiscordComponentType } from "../../../../services/models/discord";
+import { DiscordService } from '../../../../services/discord-service';
+import { DiscordComponentType } from '../../../../services/models/discord';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "polls/:pollId",
-    title: "Manage Poll",
+    path: 'polls/:pollId',
+    title: 'Manage Poll',
 })
 @inject(DiscordService, IRouter)
 export class ManagePolls implements IRouteViewModel {
@@ -28,14 +28,14 @@ export class ManagePolls implements IRouteViewModel {
     isNew: boolean;
     answers = [];
     option = {
-        label: "",
-        description: "",
-        value: "",
+        label: '',
+        description: '',
+        value: '',
         emoji: null,
     };
     pollTemplate = {
-        name: "",
-        discordServerId: "",
+        name: '',
+        discordServerId: '',
         type: 3,
         active: true,
         participants: [],
@@ -43,7 +43,7 @@ export class ManagePolls implements IRouteViewModel {
             message: {
                 embeds: [
                     {
-                        title: "A new Poll has started!",
+                        title: 'A new Poll has started!',
                         color: 5726933,
                     },
                 ],
@@ -53,8 +53,8 @@ export class ManagePolls implements IRouteViewModel {
                         components: [
                             {
                                 type: DiscordComponentType.MenuSelect,
-                                customId: "PollAnswer:",
-                                label: "Select your Answer...",
+                                customId: 'PollAnswer:',
+                                label: 'Select your Answer...',
                                 min_values: 1,
                                 max_values: 1,
                                 options: [],
@@ -65,7 +65,7 @@ export class ManagePolls implements IRouteViewModel {
             },
         },
     };
-    tab = "settings";
+    tab = 'settings';
 
     async attached() {
         console.log('attahced');
@@ -93,25 +93,25 @@ export class ManagePolls implements IRouteViewModel {
         try {
             if (this.isNew) {
                 this.poll = await this.discordService.createPoll(this.poll);
-                await this.router.load("../polls", { context: this });
+                await this.router.load('../polls', { context: this });
             } else {
                 this.poll = await this.discordService.updatePoll(this.poll);
             }
-            toast(`Poll ${this.isNew ? "Created" : "Updated"}!`);
+            toast(`Poll ${this.isNew ? 'Created' : 'Updated'}!`);
         } catch (e) {
             console.log(e);
-            toast("Failed to create poll", { severity: "error" });
+            toast('Failed to create poll', { severity: 'error' });
         }
     }
 
     async deletePoll(event) {
-        if (event.detail.action == "ok") {
+        if (event.detail.action == 'ok') {
             try {
                 await this.discordService.deletePollById(this.poll.id);
-                toast("Deleted poll!", { severity: "success" });
-                await this.router.load("../polls", { context: this });
+                toast('Deleted poll!', { severity: 'success' });
+                await this.router.load('../polls', { context: this });
             } catch (e) {
-                toast("Failed to delete poll", { severity: "error" });
+                toast('Failed to delete poll', { severity: 'error' });
                 throw e;
             }
         }
@@ -122,9 +122,9 @@ export class ManagePolls implements IRouteViewModel {
             this.option
         );
         this.option = {
-            label: "",
-            description: "",
-            value: "",
+            label: '',
+            description: '',
+            value: '',
             emoji: null,
         };
     }
@@ -137,12 +137,12 @@ export class ManagePolls implements IRouteViewModel {
     }
 
     clonePoll() {
-        this.poll.name = "";
+        this.poll.name = '';
         this.poll.participants = [];
         this.poll.id = undefined;
         this.poll.discordServer = undefined;
         this.poll.containerMessage.id = undefined;
         this.isNew = true;
-        toast("Cloned Poll");
+        toast('Cloned Poll');
     }
 }

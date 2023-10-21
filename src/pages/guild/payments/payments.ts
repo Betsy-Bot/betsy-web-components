@@ -1,13 +1,13 @@
-import { inject } from "aurelia";
-import { IRouteViewModel, route } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IRouteViewModel, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../services/discord-service";
+import { DiscordService } from '../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "payments",
-    title: "Payments",
+    path: 'payments',
+    title: 'Payments',
 },)
 @inject(DiscordService)
 export class Payments implements IRouteViewModel {
@@ -35,7 +35,7 @@ export class Payments implements IRouteViewModel {
             this.guild,
             this.guildId
         );
-        toast("API Key Updated");
+        toast('API Key Updated');
     }
 
     async toggleFeature() {
@@ -55,7 +55,7 @@ export class Payments implements IRouteViewModel {
             );
         }
         toast(
-            this.featureActive ? "Toggled feature on" : "Toggled feature off"
+            this.featureActive ? 'Toggled feature on' : 'Toggled feature off'
         );
     }
 }

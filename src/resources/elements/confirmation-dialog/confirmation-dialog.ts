@@ -3,11 +3,11 @@ import {
     BindingMode,
     containerless,
     ICustomElementViewModel,
-} from "aurelia";
+} from 'aurelia';
 
-import "./confirmation-dialog.scss";
+import './confirmation-dialog.scss';
 
-import { MDCDialogCloseEvent } from "@material/dialog";
+import { MDCDialogCloseEvent } from '@material/dialog';
 
 @containerless()
 export class ConfirmationDialog implements ICustomElementViewModel {

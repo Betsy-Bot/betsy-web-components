@@ -1,11 +1,11 @@
-import { inject } from "aurelia";
-import { IRouteViewModel, route } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IRouteViewModel, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
+import { DiscordService } from '../../../../services/discord-service';
 
 @route({
-    path: "forms",
-    title: "forms",
+    path: 'forms',
+    title: 'forms',
 })
 @inject(DiscordService)
 export class Forms implements IRouteViewModel {

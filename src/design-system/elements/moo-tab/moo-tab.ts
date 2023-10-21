@@ -1,4 +1,4 @@
-import { bindable, BindingMode, containerless, ICustomElementViewModel } from "aurelia";
+import { bindable, BindingMode, containerless, ICustomElementViewModel } from 'aurelia';
 
 
 @containerless()

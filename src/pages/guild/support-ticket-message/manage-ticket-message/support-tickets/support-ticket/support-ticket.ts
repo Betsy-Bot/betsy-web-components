@@ -1,11 +1,11 @@
-import { inject } from "aurelia";
-import { IRouteViewModel, Params, route } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IRouteViewModel, Params, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../../../services/discord-service";
+import { DiscordService } from '../../../../../../services/discord-service';
 
 @route({
-    path: "support-tickets/:supportTicketSettingsId/submissions/:ticketId",
-    title: "View Support Ticket",
+    path: 'support-tickets/:supportTicketSettingsId/submissions/:ticketId',
+    title: 'View Support Ticket',
 })
 @inject(DiscordService)
 export class SupportTicket implements IRouteViewModel {

@@ -1,52 +1,55 @@
-<section id="discord-feature-header" ...$attrs>
-    <h2>
-        ${title}
+<div class="${includeToggle ? 'row' : null}">
+    <section class="${includeToggle ? 'row' : null}" id="discord-feature-header" ...$attrs>
+        <h2>
+            ${title}
 
-        <moo-fab icon="description" url="${docUrl}" external.bind="true" class="mx-2" if.bind="docUrl"></moo-fab>
+            <moo-fab icon="description" url="${docUrl}" external.bind="true" class="mx-2" if.bind="docUrl"></moo-fab>
 
-        <moo-fab
-            class="mx-2 greenFab"
-            icon="add_circle"
-            click.bind="() => createFunction()"
-            if.bind="createFunction || createRoute"
-            route.bind="createRoute"
-        ></moo-fab>
+            <moo-fab
+                class="mx-2 greenFab"
+                icon="add_circle"
+                click.bind="() => createFunction()"
+                if.bind="createFunction || createRoute"
+                route.bind="createRoute"
+            ></moo-fab>
 
-        <moo-fab
-            class="mx-2"
-            icon="content_copy"
-            click.bind="() => copyFunction()"
-            if.bind="copyFunction"
-        ></moo-fab>
+            <moo-fab
+                class="mx-2"
+                icon="content_copy"
+                click.bind="() => copyFunction()"
+                if.bind="copyFunction"
+            ></moo-fab>
 
-        <moo-fab
-            class="mx-2 redFab"
-            icon="delete"
-            click.bind="() => deleteFunction()"
-            if.bind="deleteFunction"
-        ></moo-fab>
+            <moo-fab
+                class="mx-2 redFab"
+                icon="delete"
+                click.bind="() => deleteFunction()"
+                if.bind="deleteFunction"
+            ></moo-fab>
 
-        <moo-fab
-            class="mx-2 greenFab"
-            icon="save"
-            click.bind="() => saveFunction()"
-            if.bind="saveFunction"
-        ></moo-fab>
-    </h2>
-    <div>
-        ${subtitle}
-    </div>
-
-    <moo-banner
-        class="my-3"
-        secondary-action="Close"
-        open.bind="bannerOpen"
-    >
-        <div class="pb-3">
-            <h5>Warning</h5>
-            <div class="alert-warning">
-                This feature is currently inactive. Use the toggler on the top right to activate this feature.
-            </div>
+            <moo-fab
+                class="mx-2 greenFab"
+                icon="save"
+                click.bind="() => saveFunction()"
+                if.bind="saveFunction"
+            ></moo-fab>
+        </h2>
+        <div>
+            ${subtitle}
         </div>
-    </moo-banner>
-</section>
+
+        <moo-banner
+            class="my-3"
+            secondary-action="Close"
+            open.bind="bannerOpen"
+        >
+            <div class="pb-3">
+                <h5>Warning</h5>
+                <div class="alert-warning">
+                    This feature is currently inactive. Use the toggler on the top right to activate this feature.
+                </div>
+            </div>
+        </moo-banner>
+    </section>
+
+</div>

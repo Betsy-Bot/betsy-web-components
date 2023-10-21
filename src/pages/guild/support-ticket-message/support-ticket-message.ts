@@ -7,8 +7,8 @@ import { DiscordService } from '../../../services/discord-service';
 import { toast } from 'lets-toast';
 
 @route({
-    path: "support-tickets",
-    title: "Support Tickets",
+    path: 'support-tickets',
+    title: 'Support Tickets',
 },)
 @inject(DiscordService, Router)
 export class SupportTicketMessage implements IRouteViewModel {
@@ -40,10 +40,10 @@ export class SupportTicketMessage implements IRouteViewModel {
         ticket.discordMessage.active = !ticket.discordMessage.active;
         if (ticket.discordMessage.active && window.confirm('This will re-create the message for you. Proceed?')) {
             await this.discordService.toggleDiscordMessageActiveStatus(ticket.discordMessage.id, ticket.discordMessage.active);
-            toast(`Active status has been updated for support ticket message`, { severity: 'success' });
+            toast('Active status has been updated for support ticket message', { severity: 'success' });
         } else if (!ticket.discordMessage.active && window.confirm('This will attempt to delete the message for you. Proceed?')) {
             await this.discordService.toggleDiscordMessageActiveStatus(ticket.discordMessage.id, ticket.discordMessage.active);
-            toast(`Active status has been updated for support ticket message`, { severity: 'success' });
+            toast('Active status has been updated for support ticket message', { severity: 'success' });
         }
     }
 

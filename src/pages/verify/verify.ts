@@ -1,14 +1,14 @@
-import { inject } from "aurelia";
-import { IRouteViewModel, Params, route } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IRouteViewModel, Params, route } from '@aurelia/router-lite';
 
-import { botClientId, verifyRedirectUrl } from "../../environment";
-import { DiscordService } from "../../services/discord-service";
-import { SessionService } from "../../services/session-service";
+import { botClientId, verifyRedirectUrl } from '../../environment';
+import { DiscordService } from '../../services/discord-service';
+import { SessionService } from '../../services/session-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: ["verify", "verify/:userId"],
+    path: ['verify', 'verify/:userId'],
 })
 @inject(DiscordService, SessionService)
 export class Verify implements IRouteViewModel {
@@ -47,7 +47,7 @@ export class Verify implements IRouteViewModel {
                 );
                 await this.discordService.verifyLogin();
             } catch (e) {
-                toast("Failed to exchange code", { severity: "error" });
+                toast('Failed to exchange code', { severity: 'error' });
             }
         } else {
             this.success = await this.discordService.verifyUser(
@@ -55,9 +55,9 @@ export class Verify implements IRouteViewModel {
                 this.userId
             );
             if (this.success == null) {
-                toast("Failed to attempt verification.", { severity: "error" });
+                toast('Failed to attempt verification.', { severity: 'error' });
             }
-            console.log("success");
+            console.log('success');
         }
         setTimeout(() => {
             this.isLoading = false;

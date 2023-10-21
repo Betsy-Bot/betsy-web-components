@@ -1,1 +1,1 @@
-export * from "./discord-command-parameter-creator";
+export * from './discord-command-parameter-creator';

@@ -1,15 +1,15 @@
-import { inject } from "aurelia";
-import { IRouteViewModel, route } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IRouteViewModel, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
-import { IDiscordGuild } from "../../../../services/models/discord";
-import { SessionService } from "../../../../services/session-service";
+import { DiscordService } from '../../../../services/discord-service';
+import { IDiscordGuild } from '../../../../services/models/discord';
+import { SessionService } from '../../../../services/session-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "global-commands-management",
-    title: "Global Commands Management",
+    path: 'global-commands-management',
+    title: 'Global Commands Management',
 })
 @inject(DiscordService, SessionService)
 export class GlobalCommandsManagement implements IRouteViewModel {
@@ -58,9 +58,9 @@ export class GlobalCommandsManagement implements IRouteViewModel {
                     await this.discordService.registerPollGlobalCommand();
                     break;
             }
-            toast("Registered Global Command", { severity: "success" });
+            toast('Registered Global Command', { severity: 'success' });
         } catch {
-            toast("Failed to register command", { severity: "error" });
+            toast('Failed to register command', { severity: 'error' });
         }
     }
 

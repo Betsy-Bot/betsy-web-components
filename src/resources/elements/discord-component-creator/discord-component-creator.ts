@@ -1,7 +1,7 @@
-import { bindable, BindingMode } from "aurelia";
+import { bindable, BindingMode } from 'aurelia';
 
-import { DiscordButtonStyle, DiscordComponentType } from "../../../services/models/discord";
-import { moveDownInArray, moveUpInArray } from "../../array-utils";
+import { DiscordButtonStyle, DiscordComponentType } from '../../../services/models/discord';
+import { moveDownInArray, moveUpInArray } from '../../array-utils';
 
 export class DiscordComponentCreator {
     @bindable({ mode: BindingMode.twoWay }) components = [];
@@ -9,11 +9,11 @@ export class DiscordComponentCreator {
 
     componentTypes = [
         {
-            label: "Menu",
+            label: 'Menu',
             type: DiscordComponentType.MenuSelect,
         },
         {
-            label: "Button",
+            label: 'Button',
             type: DiscordComponentType.Button,
         },
     ];
@@ -31,8 +31,8 @@ export class DiscordComponentCreator {
                 {
                     type: DiscordComponentType.Button,
                     style: DiscordButtonStyle.Success,
-                    custom_id: "",
-                    label: "Text",
+                    custom_id: '',
+                    label: 'Text',
                 },
             ],
         });
@@ -42,8 +42,8 @@ export class DiscordComponentCreator {
         this.components[index].components.push({
             type: DiscordComponentType.Button,
             style: DiscordButtonStyle.Success,
-            custom_id: "",
-            label: "Text",
+            custom_id: '',
+            label: 'Text',
         });
     }
 
@@ -55,10 +55,10 @@ export class DiscordComponentCreator {
             this.components[index].components[0].options = [];
         }
         this.components[index].components[0].options.push({
-            description: "",
-            name: "",
-            custom_id: "",
-            label: "",
+            description: '',
+            name: '',
+            custom_id: '',
+            label: '',
         });
     }
 
@@ -72,10 +72,10 @@ export class DiscordComponentCreator {
 
     handleMove(type: string, componentIndex: number, index: number) {
         switch (type) {
-            case "up":
+            case 'up':
                 moveUpInArray(this.components[componentIndex].components[0].options, index);
                 break;
-            case "down":
+            case 'down':
                 moveDownInArray(this.components[componentIndex].components[0].options, index);
                 break;
         }

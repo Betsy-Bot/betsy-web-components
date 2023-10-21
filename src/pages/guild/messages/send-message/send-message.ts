@@ -7,8 +7,8 @@ import { ISendMessageToChannelRequest } from '../../../../services/models/discor
 import { toast } from 'lets-toast';
 
 @route({
-    path: "send-message",
-    title: "Send Message",
+    path: 'send-message',
+    title: 'Send Message',
 },)
 @inject(DiscordService)
 export class SendMessage implements IRouteViewModel {

@@ -1,4 +1,4 @@
-import { bindable, containerless } from "aurelia";
+import { bindable, containerless } from 'aurelia';
 
 import './discord-menu.scss';
 @containerless()

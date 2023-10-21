@@ -29,7 +29,7 @@ export class MooAccordion implements ICustomElementViewModel {
             this.closeAllOtherAccordions(this.accordionHeaderEl);
 
             if (isOpen) {
-                content.style.maxHeight = "0";
+                content.style.maxHeight = '0';
             } else {
                 content.style.maxHeight = (content.scrollHeight + 50) + 'px';
             }

@@ -1,13 +1,13 @@
-import { inject } from "aurelia";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IRouteViewModel, route, Router } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../services/discord-service";
+import { DiscordService } from '../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "thread-channels",
-    title: "Thread Channels",
+    path: 'thread-channels',
+    title: 'Thread Channels',
 })
 @inject(DiscordService, Router)
 export class ThreadChannels implements IRouteViewModel {
@@ -35,7 +35,7 @@ export class ThreadChannels implements IRouteViewModel {
     async updateActive(threadChannel) {
         threadChannel.active = !!threadChannel.active;
         await this.discordService.updateDiscordThreadChannel(threadChannel);
-        toast(`Active status has been updated`, { severity: "success" });
+        toast('Active status has been updated', { severity: 'success' });
     }
 
     async toggleFeature() {
@@ -55,7 +55,7 @@ export class ThreadChannels implements IRouteViewModel {
             );
         }
         toast(
-            this.featureActive ? "Toggled feature on" : "Toggled feature off"
+            this.featureActive ? 'Toggled feature on' : 'Toggled feature off'
         );
     }
 }

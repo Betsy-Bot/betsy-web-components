@@ -2,11 +2,11 @@ import {
     bindable,
     BindingMode, containerless,
     ICustomElementViewModel,
-} from "aurelia";
+} from 'aurelia';
 
-import "./discord-markup-editor.scss";
+import './discord-markup-editor.scss';
 
-import { defineOptions, ink } from "ink-mde";
+import { defineOptions, ink } from 'ink-mde';
 @containerless()
 export class DiscordMarkupEditor implements ICustomElementViewModel {
     @bindable({ mode: BindingMode.twoWay }) value: string;
@@ -18,7 +18,7 @@ export class DiscordMarkupEditor implements ICustomElementViewModel {
         interface: {
             attribution: false,
             toolbar: true,
-            appearance: "dark",
+            appearance: 'dark',
         },
         toolbar: {
             bold: true,

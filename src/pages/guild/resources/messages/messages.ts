@@ -1,12 +1,12 @@
-import { IEventAggregator } from "aurelia";
-import { inject } from "aurelia";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IEventAggregator } from 'aurelia';
+import { inject } from 'aurelia';
+import { IRouteViewModel, route, Router } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
+import { DiscordService } from '../../../../services/discord-service';
 
 @route({
-    path: "messages",
-    title: "Messages",
+    path: 'messages',
+    title: 'Messages',
 })
 @inject(IEventAggregator, DiscordService, Router)
 export class Messages implements IRouteViewModel {

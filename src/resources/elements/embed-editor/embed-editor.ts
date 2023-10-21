@@ -1,6 +1,6 @@
-import { bindable, containerless, ICustomElementViewModel } from "aurelia";
+import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
 
-import { DiscordEmbed, IDiscordEmbedField } from "../../../services/models/discord";
+import { DiscordEmbed, IDiscordEmbedField } from '../../../services/models/discord';
 
 import './embed-editor.scss';
 

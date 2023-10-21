@@ -1,6 +1,6 @@
-import { bindable, containerless, ICustomElementViewModel } from "aurelia";
+import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
 
-import { DiscordComponentType } from "../../../services/models/discord";
+import { DiscordComponentType } from '../../../services/models/discord';
 
 
 @containerless()

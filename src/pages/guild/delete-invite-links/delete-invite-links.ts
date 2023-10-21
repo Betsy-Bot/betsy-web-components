@@ -1,14 +1,14 @@
-import { inject } from "aurelia";
-import { IRouteViewModel, route } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IRouteViewModel, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../services/discord-service";
-import { IDiscordGuild } from "../../../services/models/discord";
+import { DiscordService } from '../../../services/discord-service';
+import { IDiscordGuild } from '../../../services/models/discord';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "delete-invite-links",
-    title: "Delete Invite Links",
+    path: 'delete-invite-links',
+    title: 'Delete Invite Links',
 })
 @inject(DiscordService)
 export class DeleteInviteLinks implements IRouteViewModel {
@@ -31,8 +31,8 @@ export class DeleteInviteLinks implements IRouteViewModel {
     }
 
     async save() {
-        await this.discordService.setAuditLogChannelId(this.guildId, this.guild.auditLogChannelId ?? "");
-        toast("Updated audit log channel");
+        await this.discordService.setAuditLogChannelId(this.guildId, this.guild.auditLogChannelId ?? '');
+        toast('Updated audit log channel');
     }
 
     async toggleFeature() {
@@ -52,7 +52,7 @@ export class DeleteInviteLinks implements IRouteViewModel {
             );
         }
         toast(
-            this.featureActive ? "Toggled feature on" : "Toggled feature off"
+            this.featureActive ? 'Toggled feature on' : 'Toggled feature off'
         );
     }
 
@@ -76,7 +76,7 @@ export class DeleteInviteLinks implements IRouteViewModel {
             this.guild,
             this.guildId
         );
-        toast("Updated Authorized Users", { severity: "success" });
+        toast('Updated Authorized Users', { severity: 'success' });
     }
 
     async removeUser(index) {
@@ -85,7 +85,7 @@ export class DeleteInviteLinks implements IRouteViewModel {
             this.guild,
             this.guildId
         );
-        toast("Updated Authorized Users", { severity: "success" });
+        toast('Updated Authorized Users', { severity: 'success' });
     }
 
     async addAuthorizedRole() {
@@ -108,7 +108,7 @@ export class DeleteInviteLinks implements IRouteViewModel {
             this.guild,
             this.guildId
         );
-        toast("Updated Authorized Roles", { severity: "success" });
+        toast('Updated Authorized Roles', { severity: 'success' });
     }
 
     async removeRole(index) {
@@ -117,6 +117,6 @@ export class DeleteInviteLinks implements IRouteViewModel {
             this.guild,
             this.guildId
         );
-        toast("Updated Authorized Roles", { severity: "success" });
+        toast('Updated Authorized Roles', { severity: 'success' });
     }
 }

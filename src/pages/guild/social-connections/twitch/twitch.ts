@@ -1,13 +1,13 @@
-import { inject } from "aurelia";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IRouteViewModel, route, Router } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
+import { DiscordService } from '../../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "twitch",
-    title: "Twitch",
+    path: 'twitch',
+    title: 'Twitch',
 })
 @inject(DiscordService, Router)
 export class Twitch implements IRouteViewModel {
@@ -23,17 +23,17 @@ export class Twitch implements IRouteViewModel {
     featureActive;
 
     request = {
-        twitchLogin: "",
-        discordChannelId: "",
-        type: "",
+        twitchLogin: '',
+        discordChannelId: '',
+        type: '',
     };
     createDialog;
     deleteDialog;
     lastSelected;
     subscriptionTypes: string[] = [
-        "stream.online",
-        "stream.offline",
-        "channel.follow",
+        'stream.online',
+        'stream.offline',
+        'channel.follow',
         //"channel.update",
         //"channel.subscribe",
         //"channel.subscription.end",
@@ -72,10 +72,10 @@ export class Twitch implements IRouteViewModel {
                 this.subscriptions[foundCommandIndex].active
             );
             toast(`Active status has been updated for /${subscription.name}`, {
-                severity: "success",
+                severity: 'success',
             });
         } else {
-            toast("Error", { severity: "error" });
+            toast('Error', { severity: 'error' });
         }
     }
 
@@ -104,7 +104,7 @@ export class Twitch implements IRouteViewModel {
             );
         }
         toast(
-            this.featureActive ? "Toggled feature on" : "Toggled feature off"
+            this.featureActive ? 'Toggled feature on' : 'Toggled feature off'
         );
     }
 
@@ -114,7 +114,7 @@ export class Twitch implements IRouteViewModel {
             !this.request.discordChannelId ||
             !this.request.type
         ) {
-            toast("Both the Twitch Username and Channel are required.");
+            toast('Both the Twitch Username and Channel are required.');
             return;
         }
         let subscription;
@@ -125,8 +125,8 @@ export class Twitch implements IRouteViewModel {
             );
             if (subscription) {
                 this.subscriptions.push(subscription);
-                toast("Twitch Go-Live Event Subscription Created.");
-                this.createDialog.close("cancel");
+                toast('Twitch Go-Live Event Subscription Created.');
+                this.createDialog.close('cancel');
             }
         } catch (e) {
             console.log(e);
@@ -139,7 +139,7 @@ export class Twitch implements IRouteViewModel {
     }
 
     async handleDeleteModal(event) {
-        if (this.lastSelected && event.detail.action == "ok") {
+        if (this.lastSelected && event.detail.action == 'ok') {
             await this.discordService.deleteTwitchSubscription(
                 this.lastSelected.id,
                 this.guildId

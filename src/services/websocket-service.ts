@@ -1,4 +1,4 @@
-import { apiEndpoint } from "../environment";
+import { apiEndpoint } from '../environment';
 
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 

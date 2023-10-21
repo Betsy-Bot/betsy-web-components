@@ -13,6 +13,7 @@
         "lint": "pnpm run lint:js && pnpm run lint:html",
         "lint:html": "htmlhint -c .htmlhintrc src",
         "lint:js": "eslint src --ext .js,.ts",
+        "lin:fix": "eslint src --ext .js,.ts --fix",
         "preinstall": "npx only-allow pnpm",
         "start": "vite",
         "update-depenencies": "npx npm-check-updates -u",

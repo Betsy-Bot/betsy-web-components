@@ -1,6 +1,6 @@
-import { bindable, BindingMode } from "aurelia";
+import { bindable, BindingMode } from 'aurelia';
 
-import { DiscordCommandActionType,IDiscordCommandAction } from "../../../services/models/discord";
+import { DiscordCommandActionType,IDiscordCommandAction } from '../../../services/models/discord';
 
 export class DiscordActionCreator {
     @bindable({ mode: BindingMode.twoWay }) action: IDiscordCommandAction;

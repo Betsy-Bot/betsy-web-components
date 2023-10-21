@@ -1,4 +1,4 @@
-import { IBaseDiscordServer } from "./discord";
+import { IBaseDiscordServer } from './discord';
 
 export interface IProfileResponse {
     token: string,

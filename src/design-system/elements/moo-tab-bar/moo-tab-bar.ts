@@ -1,4 +1,4 @@
-import { bindable, capture, containerless, ICustomElementViewModel } from "aurelia";
+import { bindable, capture, containerless, ICustomElementViewModel } from 'aurelia';
 
 import './moo-tab-bar.scss';
 

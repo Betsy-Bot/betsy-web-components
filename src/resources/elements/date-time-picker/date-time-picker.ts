@@ -1,7 +1,7 @@
-import { bindable, BindingMode } from "aurelia";
+import { bindable, BindingMode } from 'aurelia';
 
-import { MDCTextField } from "@material/textfield";
-import flatpickr from "flatpickr";
+import { MDCTextField } from '@material/textfield';
+import flatpickr from 'flatpickr';
 
 export class DateTimePicker {
     @bindable({ mode: BindingMode.twoWay }) value: string;

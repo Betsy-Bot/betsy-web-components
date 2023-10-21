@@ -3,14 +3,14 @@ import {
     ICustomElementViewModel,
     IEventAggregator,
     inject
-} from "aurelia";
-import { IRouter } from "@aurelia/router-lite";
+} from 'aurelia';
+import { IRouter } from '@aurelia/router-lite';
 
-import { botClientId,redirectUrl } from "../../../environment";
-import logo from "../../../images/logo.png";
-import { SessionService } from "../../../services/session-service";
+import { botClientId,redirectUrl } from '../../../environment';
+import logo from '../../../images/logo.png';
+import { SessionService } from '../../../services/session-service';
 
-import "./navigation.scss";
+import './navigation.scss';
 
 @containerless()
 @inject(SessionService, IRouter, IEventAggregator)
@@ -44,13 +44,13 @@ export class Navigation implements ICustomElementViewModel {
             SessionService.SIDEBAR_STATUS_KEY,
             true
         );
-        this.ea.subscribe("user-updated", (payload) => {
+        this.ea.subscribe('user-updated', (payload) => {
             this.user = payload;
             if (!this.user) {
                 this.guildId = null;
             }
         });
-        this.ea.subscribe("guild-updated", (payload) => {
+        this.ea.subscribe('guild-updated', (payload) => {
             this.guildId = payload as number;
         });
         //this.currentRoute = this.router.;
@@ -63,12 +63,12 @@ export class Navigation implements ICustomElementViewModel {
             SessionService.SIDEBAR_STATUS_KEY,
             String(newDrawerStatus)
         );
-        this.ea.publish("drawer-updated", newDrawerStatus);
+        this.ea.publish('drawer-updated', newDrawerStatus);
     }
 
     async logout() {
         this.sessionService.clearSession();
-        await this.router.load("");
+        await this.router.load('');
         location.reload();
     }
 

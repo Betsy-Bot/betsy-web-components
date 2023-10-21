@@ -1,34 +1,35 @@
-import { inject } from "aurelia";
-import { route } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { route } from '@aurelia/router-lite';
 
-import { DiscordNameValueConverter } from "../../../../resources/value-converters/discord-name";
-import { DiscordService } from "../../../../services/discord-service";
-import { IDiscordGuild, IDiscordGuildUserInvite } from "../../../../services/models/discord";
+import { DiscordNameValueConverter } from '../../../../resources/value-converters/discord-name';
+import { DiscordService } from '../../../../services/discord-service';
+import { IDiscordGuild, IDiscordGuildUserInvite } from '../../../../services/models/discord';
 
-import { MDCDialog, MDCDialogCloseEvent } from "@material/dialog";
-import DataGrid from "devextreme/ui/data_grid";
-import { toast } from "lets-toast";
+import { MDCDialog, MDCDialogCloseEvent } from '@material/dialog';
+import DataGrid from 'devextreme/ui/data_grid';
+import { toast } from 'lets-toast';
 
 @route({
-    path: "invites",
-    title: "Invites",
+    path: 'invites',
+    title: 'Invites',
 })
 @inject(DiscordService, DiscordNameValueConverter)
 export class Invites {
-    constructor(private discordService: DiscordService, private discordNameValueConverter: DiscordNameValueConverter) {}
+    constructor(private discordService: DiscordService, private discordNameValueConverter: DiscordNameValueConverter) {
+    }
 
     guildId: string;
     guild: IDiscordGuild;
     featureActive: boolean;
-    roleId;
+    roleId: number;
     invites;
     guildUserInvites: IDiscordGuildUserInvite[];
     inviteColumns;
     guildUserInvitesColumns;
     dataGridControl: DataGrid;
-    tab = "links";
+    tab = 'links';
     newInviteRole = {
-        roleId: "",
+        roleId: '',
         count: 1,
     };
     createInviteRole: MDCDialog;
@@ -36,12 +37,12 @@ export class Invites {
     gridSummary = {
         groupItems: [
             {
-                column: "code",
-                summaryType: "count",
+                column: 'code',
+                summaryType: 'count',
             },
             {
-                column: "uses",
-                summaryType: "sum",
+                column: 'uses',
+                summaryType: 'sum',
             },
         ],
     };
@@ -73,30 +74,30 @@ export class Invites {
         this.featureActive = this.guild.activeFeatures.includes(this.discordService.INVITE_LINKS);
         this.inviteColumns = [
             {
-                dataField: "code",
+                dataField: 'code',
             },
             {
-                dataField: "uses",
+                dataField: 'uses',
             },
             {
-                dataField: "maxUses",
+                dataField: 'maxUses',
             },
             {
-                dataField: "displayName",
+                dataField: 'displayName',
                 groupIndex: 0,
             },
             {
-                dataField: "expiresAt",
-                dataType: "datetime",
+                dataField: 'expiresAt',
+                dataType: 'datetime',
             },
         ];
 
         this.guildUserInvitesColumns = [
             {
-                dataField: "displayName",
+                dataField: 'displayName',
             },
             {
-                dataField: "invitedByDisplay",
+                dataField: 'invitedByDisplay',
             },
         ];
     }
@@ -109,11 +110,11 @@ export class Invites {
             this.guild.activeFeatures = this.guild.activeFeatures.filter((x) => x !== this.discordService.INVITE_LINKS);
             await this.discordService.setActiveFeaturesForDiscord(this.guildId, this.guild.activeFeatures);
         }
-        toast(this.featureActive ? "Toggled feature on. Refresh page to see invites" : "Toggled feature off");
+        toast(this.featureActive ? 'Toggled feature on. Refresh page to see invites' : 'Toggled feature off');
     }
 
     handleCreateDialog(event: MDCDialogCloseEvent) {
-        if (event.detail.action == "ok") {
+        if (event.detail.action == 'ok') {
             if (!this.guild.inviteSettings.inviteRoles) {
                 this.guild.inviteSettings.inviteRoles = [];
             }
@@ -130,6 +131,6 @@ export class Invites {
 
     async saveRoles() {
         await this.discordService.updateInviteSettingsForGuild(this.guild);
-        toast("Updated Invite Settings", { severity: "success" });
+        toast('Updated Invite Settings', { severity: 'success' });
     }
 }

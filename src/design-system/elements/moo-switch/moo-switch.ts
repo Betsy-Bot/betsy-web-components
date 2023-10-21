@@ -2,12 +2,12 @@ import {
     bindable,
     BindingMode, containerless,
     ICustomElementViewModel,
-} from "aurelia";
+} from 'aurelia';
 import { watch } from '@aurelia/runtime-html';
 
-import "./moo-switch.scss";
+import './moo-switch.scss';
 
-import { MDCSwitch } from "@material/switch";
+import { MDCSwitch } from '@material/switch';
 
 @containerless()
 export class MooSwitch implements ICustomElementViewModel {
@@ -36,8 +36,8 @@ export class MooSwitch implements ICustomElementViewModel {
 
     get switchClass() {
         if (this.value) {
-            return "mdc-switch--selected";
+            return 'mdc-switch--selected';
         }
-        return "mdc-switch--unselected";
+        return 'mdc-switch--unselected';
     }
 }

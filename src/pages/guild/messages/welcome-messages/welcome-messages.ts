@@ -1,14 +1,14 @@
-import { IEventAggregator } from "aurelia";
-import { inject } from "aurelia";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IEventAggregator } from 'aurelia';
+import { inject } from 'aurelia';
+import { IRouteViewModel, route, Router } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
+import { DiscordService } from '../../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "welcome-messages",
-    title: "Welcome Messages",
+    path: 'welcome-messages',
+    title: 'Welcome Messages',
 })
 @inject(IEventAggregator, DiscordService, Router)
 export class WelcomeMessages implements IRouteViewModel {
@@ -53,7 +53,7 @@ export class WelcomeMessages implements IRouteViewModel {
             );
         }
         toast(
-            this.featureActive ? "Toggled feature on" : "Toggled feature off"
+            this.featureActive ? 'Toggled feature on' : 'Toggled feature off'
         );
     }
 
@@ -68,10 +68,10 @@ export class WelcomeMessages implements IRouteViewModel {
                 this.messages[foundCommandIndex]
             );
             toast(`Active status has been updated for ${message.name}`, {
-                severity: "success",
+                severity: 'success',
             });
         } else {
-            toast("Error", { severity: "error" });
+            toast('Error', { severity: 'error' });
         }
     }
 

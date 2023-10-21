@@ -1,14 +1,14 @@
-import { IEventAggregator } from "aurelia";
-import { inject } from "aurelia";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IEventAggregator } from 'aurelia';
+import { inject } from 'aurelia';
+import { IRouteViewModel, route, Router } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
+import { DiscordService } from '../../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "tracked-messages",
-    title: "Tracked Messages",
+    path: 'tracked-messages',
+    title: 'Tracked Messages',
 })
 @inject(IEventAggregator, DiscordService, Router)
 export class TrackedMessages implements IRouteViewModel {
@@ -33,10 +33,10 @@ export class TrackedMessages implements IRouteViewModel {
         try {
             await this.discordService.updateTrackedMessageActiveStatus(message);
             toast(`Active status has been updated for /${message.name}`, {
-                severity: "success",
+                severity: 'success',
             });
         } catch (e) {
-            toast("Error", { severity: "error" });
+            toast('Error', { severity: 'error' });
         }
     }
 

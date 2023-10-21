@@ -358,4 +358,6 @@ export interface IDiscordGuildUserInvite {
     invitedBy: string;
     discordUserId: string;
     createdDate: string;
+    displayName: string
+    invitedByDisplay: string
 }

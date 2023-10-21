@@ -1,14 +1,14 @@
-import { inject } from "aurelia";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IRouteViewModel, route, Router } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
-import { IDiscordGuild } from "../../../../services/models/discord";
+import { DiscordService } from '../../../../services/discord-service';
+import { IDiscordGuild } from '../../../../services/models/discord';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "auto-responders",
-    title: "Auto Responders",
+    path: 'auto-responders',
+    title: 'Auto Responders',
 })
 @inject(DiscordService, Router)
 export class AutoResponders implements IRouteViewModel {
@@ -45,10 +45,10 @@ export class AutoResponders implements IRouteViewModel {
                 this.responders[foundCommandIndex]
             );
             toast(`Active status has been updated for /${responder.name}`, {
-                severity: "success",
+                severity: 'success',
             });
         } else {
-            toast("Error", { severity: "error" });
+            toast('Error', { severity: 'error' });
         }
     }
 
@@ -75,7 +75,7 @@ export class AutoResponders implements IRouteViewModel {
             );
         }
         toast(
-            this.featureActive ? "Toggled feature on" : "Toggled feature off"
+            this.featureActive ? 'Toggled feature on' : 'Toggled feature off'
         );
     }
 }

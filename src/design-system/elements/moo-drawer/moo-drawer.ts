@@ -2,7 +2,7 @@ import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
 
 import './moo-drawer.scss';
 
-import { MDCDrawer } from "@material/drawer";
+import { MDCDrawer } from '@material/drawer';
 
 @containerless()
 export class MooDrawer implements ICustomElementViewModel {

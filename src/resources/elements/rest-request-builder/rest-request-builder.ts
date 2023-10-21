@@ -3,12 +3,12 @@ import {
     BindingMode,
     containerless,
     ICustomElementViewModel,
-} from "aurelia";
+} from 'aurelia';
 
 import {
     DiscordCommandActionType,
     IDiscordCommandAction,
-} from "../../../services/models/discord";
+} from '../../../services/models/discord';
 
 @containerless()
 export class RestRequestBuilder implements ICustomElementViewModel {
@@ -18,15 +18,15 @@ export class RestRequestBuilder implements ICustomElementViewModel {
     getDisplayTextForCommandActionType(type: DiscordCommandActionType) {
         switch (type) {
             case DiscordCommandActionType.SendPatchRequest:
-                return "PATCH";
+                return 'PATCH';
             case DiscordCommandActionType.SendPutRequest:
-                return "PUT";
+                return 'PUT';
             case DiscordCommandActionType.SendPostRequest:
-                return "POST";
+                return 'POST';
             case DiscordCommandActionType.SendGetRequest:
-                return "GET";
+                return 'GET';
             case DiscordCommandActionType.SendDeleteRequest:
-                return "DELETE";
+                return 'DELETE';
         }
     }
 

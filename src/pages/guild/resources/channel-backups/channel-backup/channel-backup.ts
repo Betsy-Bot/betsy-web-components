@@ -1,15 +1,15 @@
-import { inject } from "aurelia";
-import { IEventAggregator } from "aurelia";
-import { Params, route } from "@aurelia/router-lite";
-import { IRouter,IRouteViewModel } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IEventAggregator } from 'aurelia';
+import { Params, route } from '@aurelia/router-lite';
+import { IRouter,IRouteViewModel } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../../services/discord-service";
+import { DiscordService } from '../../../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "channel-backups/:backupId",
-    title: "Channel Backup",
+    path: 'channel-backups/:backupId',
+    title: 'Channel Backup',
 })
 @inject(IEventAggregator, DiscordService, IRouter)
 export class ChannelBackup implements IRouteViewModel {
@@ -33,12 +33,12 @@ export class ChannelBackup implements IRouteViewModel {
     }
 
     async deleteBackup(event) {
-        if (event.detail.action == "ok") {
+        if (event.detail.action == 'ok') {
             await this.discordService.deleteDiscordChannelBackup(
                 this.channelBackup.id
             );
-            toast("Deleted Channel Backup");
-            await this.router.load("../channel-backups", { context: this });
+            toast('Deleted Channel Backup');
+            await this.router.load('../channel-backups', { context: this });
         }
     }
 }

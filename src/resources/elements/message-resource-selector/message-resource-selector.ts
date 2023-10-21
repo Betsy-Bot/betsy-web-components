@@ -1,6 +1,6 @@
-import { bindable, BindingMode, ICustomElementViewModel, inject } from "aurelia";
+import { bindable, BindingMode, ICustomElementViewModel, inject } from 'aurelia';
 
-import { DiscordService } from "../../../services/discord-service";
+import { DiscordService } from '../../../services/discord-service';
 
 @inject(DiscordService)
 export class MessageResourceSelector implements ICustomElementViewModel {

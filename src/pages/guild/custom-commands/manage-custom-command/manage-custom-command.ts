@@ -1,20 +1,20 @@
-import { IEventAggregator, inject } from "aurelia";
-import { IRouter, IRouteViewModel, Params, route } from "@aurelia/router-lite";
+import { IEventAggregator, inject } from 'aurelia';
+import { IRouter, IRouteViewModel, Params, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
+import { DiscordService } from '../../../../services/discord-service';
 import {
     DiscordApplicationCommandType,
     DiscordCommandActionType,
     DiscordCommandType,
     IBaseDiscordCommand,
-} from "../../../../services/models/discord";
+} from '../../../../services/models/discord';
 
-import { MDCDialogCloseEvent } from "@material/dialog";
-import { toast } from "lets-toast";
+import { MDCDialogCloseEvent } from '@material/dialog';
+import { toast } from 'lets-toast';
 
 @route({
-    path: "custom-commands/:commandId",
-    title: "Manage Custom Command",
+    path: 'custom-commands/:commandId',
+    title: 'Manage Custom Command',
 })
 @inject(IEventAggregator, DiscordService, IRouter)
 export class ManageCustomCommand implements IRouteViewModel {
@@ -25,11 +25,11 @@ export class ManageCustomCommand implements IRouteViewModel {
     ) {}
 
     command: IBaseDiscordCommand | null;
-    tab = "settings";
+    tab = 'settings';
     commandTemplate: IBaseDiscordCommand = {
-        name: "",
-        description: "",
-        discordGuildId: "",
+        name: '',
+        description: '',
+        discordGuildId: '',
         type: DiscordCommandType.Data,
         private: true,
         active: true,
@@ -54,7 +54,7 @@ export class ManageCustomCommand implements IRouteViewModel {
                 this.discordApplicationCommandId as string
             );
             if (this.command.commandInformation) {
-                this.tab = "rest";
+                this.tab = 'rest';
             }
         }
     }
@@ -64,26 +64,26 @@ export class ManageCustomCommand implements IRouteViewModel {
             if (this.isNew && this.command) {
                 this.command.discordGuildId = this.guildId;
                 await this.discordService.createApplicationCommand(this.command);
-                await this.router.load("../custom-commands", { context: this });
+                await this.router.load('../custom-commands', { context: this });
             } else if (this.command){
                 this.command.discordGuildId = this.guildId;
                 await this.discordService.updateApplicationCommand(this.command);
             }
-            toast(`Custom Command ${this.isNew ? "Created" : "Updated"}!`, { severity: "success" });
+            toast(`Custom Command ${this.isNew ? 'Created' : 'Updated'}!`, { severity: 'success' });
         } catch (e) {
             console.log(e);
-            toast("Failed to create custom command", { severity: "error" });
+            toast('Failed to create custom command', { severity: 'error' });
         }
     }
 
     tabChanged() {
         switch (this.tab) {
-            case "rest":
+            case 'rest':
                 if (this.command?.discordCommandActions[0].type == DiscordCommandActionType.OpenForm) {
                     return (this.command.discordCommandActions[0].type = DiscordCommandActionType.SendPostRequest);
                 }
                 break;
-            case "form":
+            case 'form':
                 if (!this.command?.discordCommandActions[0].type) {
                     return (this.command.discordCommandActions[0].type = DiscordCommandActionType.OpenForm);
                 }
@@ -94,15 +94,15 @@ export class ManageCustomCommand implements IRouteViewModel {
     getDisplayTextForCommandActionType(type: DiscordCommandActionType) {
         switch (type) {
             case DiscordCommandActionType.SendPatchRequest:
-                return "PATCH";
+                return 'PATCH';
             case DiscordCommandActionType.SendPutRequest:
-                return "PUT";
+                return 'PUT';
             case DiscordCommandActionType.SendPostRequest:
-                return "POST";
+                return 'POST';
             case DiscordCommandActionType.SendGetRequest:
-                return "GET";
+                return 'GET';
             case DiscordCommandActionType.SendDeleteRequest:
-                return "DELETE";
+                return 'DELETE';
         }
     }
 
@@ -123,8 +123,8 @@ export class ManageCustomCommand implements IRouteViewModel {
     addParameter() {
         if (this.command && !this.command.commandInformation) {
             this.command.commandInformation = {
-                name: "",
-                description: "",
+                name: '',
+                description: '',
                 type: DiscordApplicationCommandType.ChatInput,
             };
         }
@@ -171,10 +171,10 @@ export class ManageCustomCommand implements IRouteViewModel {
     }
 
     async deleteCommand(event: MDCDialogCloseEvent) {
-        if (event.detail.action == "ok" && this.command?.id) {
+        if (event.detail.action == 'ok' && this.command?.id) {
             await this.discordService.deleteDiscordCommand(this.command.id);
-            toast("Response Message Deleted");
-            await this.router.load("../custom-commands", { context: this });
+            toast('Response Message Deleted');
+            await this.router.load('../custom-commands', { context: this });
         }
     }
 
@@ -183,7 +183,7 @@ export class ManageCustomCommand implements IRouteViewModel {
             type: DiscordCommandActionType.MessageChannel,
             discordMessage: {
                 message: {
-                    content: "",
+                    content: '',
                     embeds: [],
                 },
             },

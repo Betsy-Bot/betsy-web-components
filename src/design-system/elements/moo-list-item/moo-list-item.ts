@@ -2,7 +2,7 @@ import {
     bindable,
     BindingMode, containerless,
     ICustomElementViewModel,
-} from "aurelia";
+} from 'aurelia';
 
 
 @containerless()

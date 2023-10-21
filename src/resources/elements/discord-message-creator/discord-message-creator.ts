@@ -4,18 +4,18 @@ import {
     containerless,
     ICustomElementViewModel,
     inject,
-} from "aurelia";
-import { watch } from "@aurelia/runtime-html";
+} from 'aurelia';
+import { watch } from '@aurelia/runtime-html';
 
-import { DiscordService } from "../../../services/discord-service";
+import { DiscordService } from '../../../services/discord-service';
 import {
     DiscordEmbed,
     IDiscordMessageContent,
-} from "../../../services/models/discord";
+} from '../../../services/models/discord';
 
-import "./discord-message-creator.scss";
+import './discord-message-creator.scss';
 
-import { MDCDialog, MDCDialogCloseEvent } from "@material/dialog";
+import { MDCDialog, MDCDialogCloseEvent } from '@material/dialog';
 
 @containerless()
 @inject(DiscordService)
@@ -24,7 +24,7 @@ export class DiscordMessageCreator implements ICustomElementViewModel {
     @bindable single;
     @bindable allowComponents = true;
     @bindable maxComponents = 5;
-    @bindable tab = "embeds";
+    @bindable tab = 'embeds';
     selectedMessage: string | null;
     @bindable hideTemplate = false;
     @bindable customBuilder;
@@ -39,7 +39,7 @@ export class DiscordMessageCreator implements ICustomElementViewModel {
         }
     }
 
-    @watch("selectedMessage")
+    @watch('selectedMessage')
     selectedMessageChanged() {
         if (this.selectedMessage) {
             const foundMessage = this.discordService.getMessageResourceById(
@@ -73,9 +73,9 @@ export class DiscordMessageCreator implements ICustomElementViewModel {
     }
 
     importJson(event: MDCDialogCloseEvent) {
-        if (event.detail.action == "ok") {
+        if (event.detail.action == 'ok') {
             this.message = JSON.parse(this.json) as IDiscordMessageContent;
-            this.json = "";
+            this.json = '';
         }
     }
 

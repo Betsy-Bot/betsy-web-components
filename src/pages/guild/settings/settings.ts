@@ -1,15 +1,15 @@
-import { bindable, inject } from "aurelia";
-import { IRouteViewModel, route } from "@aurelia/router-lite";
+import { bindable, inject } from 'aurelia';
+import { IRouteViewModel, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../services/discord-service";
-import { IDiscordGuild } from "../../../services/models/discord";
-import { SessionService } from "../../../services/session-service";
+import { DiscordService } from '../../../services/discord-service';
+import { IDiscordGuild } from '../../../services/models/discord';
+import { SessionService } from '../../../services/session-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "settings",
-    title: "Settings",
+    path: 'settings',
+    title: 'Settings',
 })
 @inject(DiscordService, SessionService)
 export class Settings implements IRouteViewModel {
@@ -43,13 +43,13 @@ export class Settings implements IRouteViewModel {
             this.guild.authorizedUsers.push(this.permissionUserId);
         }
         await this.discordService.updateAuthorizedUsersForGuild(this.guild, this.guildId);
-        toast("Updated Authorized Users", { severity: "success" });
+        toast('Updated Authorized Users', { severity: 'success' });
     }
 
     async removeUser(index) {
         this.guild.authorizedUsers.splice(index, 1);
         await this.discordService.updateAuthorizedUsersForGuild(this.guild, this.guildId);
-        toast("Updated Authorized Users", { severity: "success" });
+        toast('Updated Authorized Users', { severity: 'success' });
     }
 
     async addAuthorizedOwner() {
@@ -57,32 +57,32 @@ export class Settings implements IRouteViewModel {
             this.guild.authorizedOwners.push(this.ownerUserId);
         }
         await this.discordService.updateAuthorizedOwnersForGuild(this.guild, this.guildId);
-        toast("Updated Authorized Owners", { severity: "success" });
+        toast('Updated Authorized Owners', { severity: 'success' });
     }
 
     async removeOwner(index) {
         this.guild.authorizedOwners.splice(index, 1);
         await this.discordService.updateAuthorizedOwnersForGuild(this.guild, this.guildId);
-        toast("Updated Authorized Owners", { severity: "success" });
+        toast('Updated Authorized Owners', { severity: 'success' });
     }
 
     async updateGlobalSettings() {
         await this.discordService.updateGlobalSettingsForGuild(this.guild, this.guildId);
-        toast("Updated Custom Bot Settings", { severity: "success" });
+        toast('Updated Custom Bot Settings', { severity: 'success' });
     }
 
     async updateConfigurationOwner() {
         try {
             await this.discordService.updateConfigurationOwnerForGuild(this.newOwnerId, this.guildId);
-            toast("Updated Configuration Owner", { severity: "success" });
+            toast('Updated Configuration Owner', { severity: 'success' });
         } catch(e) {
-            toast("Failed to Update", { severity: "error" });
+            toast('Failed to Update', { severity: 'error' });
         }
     }
 
     async updateAutoRolesSettings() {
         await this.discordService.updateAutoRolesForGuild(this.guild, this.guildId);
-        toast("Updated Auto Roles", { severity: "success" });
+        toast('Updated Auto Roles', { severity: 'success' });
     }
 
     selectedRoleChanged() {
@@ -112,19 +112,19 @@ export class Settings implements IRouteViewModel {
         if (
             window.confirm(
                 `This will ${
-                    this.guild.customBotActive ? "deactivate" : "activate"
+                    this.guild.customBotActive ? 'deactivate' : 'activate'
                 } the custom bot for your server. Are you sure?`,
             )
         ) {
             this.guild.customBotActive = !!this.guild.customBotActive;
             const response = await this.discordService.toggleCustomBotActive(this.guild.customBotActive);
             if (response) {
-                toast(`Custom bot ${this.guild.customBotActive ? "activate" : "deactivated"}.`, {
-                    severity: "success",
+                toast(`Custom bot ${this.guild.customBotActive ? 'activate' : 'deactivated'}.`, {
+                    severity: 'success',
                 });
             } else {
-                toast("Failed to set custom bot status", {
-                    severity: "error",
+                toast('Failed to set custom bot status', {
+                    severity: 'error',
                 });
             }
         }

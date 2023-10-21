@@ -1,27 +1,27 @@
-import { bindable } from "aurelia";
+import { bindable } from 'aurelia';
 
 import {
     DiscordComponentType,
     DiscordForm,
     DiscordTextInputType,
-} from "../../../services/models/discord";
+} from '../../../services/models/discord';
 
 export class DiscordFormCreator {
     @bindable form: DiscordForm;
     fieldTypes = [
         {
-            label: "Text Input",
+            label: 'Text Input',
             value: DiscordComponentType.TextInput,
         },
     ];
 
     textInputType = [
         {
-            label: "Short Input",
+            label: 'Short Input',
             value: DiscordTextInputType.Short,
         },
         {
-            label: "Paragraph",
+            label: 'Paragraph',
             value: DiscordTextInputType.Paragraph,
         },
     ];
@@ -31,9 +31,9 @@ export class DiscordFormCreator {
             type: DiscordComponentType.ActionRow,
             components: [
                 {
-                    custom_id: "",
+                    custom_id: '',
                     type: DiscordComponentType.TextInput,
-                    label: "",
+                    label: '',
                 },
             ],
         });

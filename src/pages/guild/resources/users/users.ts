@@ -1,14 +1,14 @@
-import { IEventAggregator } from "aurelia";
-import { inject } from "aurelia";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IEventAggregator } from 'aurelia';
+import { inject } from 'aurelia';
+import { IRouteViewModel, route, Router } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
+import { DiscordService } from '../../../../services/discord-service';
 
-import DataGrid from "devextreme/ui/data_grid";
+import DataGrid from 'devextreme/ui/data_grid';
 
 @route({
-    path: "users",
-    title: "Users",
+    path: 'users',
+    title: 'Users',
 })
 @inject(IEventAggregator, DiscordService, Router)
 export class Users implements IRouteViewModel {
@@ -24,22 +24,22 @@ export class Users implements IRouteViewModel {
     rowCaption;
     columns = [
         {
-            dataField: "discordUserId",
+            dataField: 'discordUserId',
         },
         {
-            dataField: "lastKnownName",
+            dataField: 'lastKnownName',
         },
         {
-            dataField: "createdDate",
-            dataType: "date",
+            dataField: 'createdDate',
+            dataType: 'date',
         },
         {
-            caption: "Email Fraud Score",
-            dataField: "emailInformation.fraudScore",
+            caption: 'Email Fraud Score',
+            dataField: 'emailInformation.fraudScore',
         },
         {
-            caption: "Number of IPs",
-            dataField: "ips.length",
+            caption: 'Number of IPs',
+            dataField: 'ips.length',
         },
     ];
 
@@ -48,41 +48,41 @@ export class Users implements IRouteViewModel {
 
         this.detailTemplate = (container, options) => {
             const data = options.data;
-            this.rowCaption.innerText = "Found Ips for " + data.discordUserId;
+            this.rowCaption.innerText = 'Found Ips for ' + data.discordUserId;
             container.appendChild(this.rowCaption);
             new DataGrid(this.rowDetail, {
                 columnAutoWidth: true,
                 showBorders: true,
                 columns: [
                     {
-                        dataField: "ip",
+                        dataField: 'ip',
                     },
                     {
-                        dataField: "fraudScore",
+                        dataField: 'fraudScore',
                     },
                     {
-                        dataField: "isp",
+                        dataField: 'isp',
                     },
                     {
-                        dataField: "countryCode",
+                        dataField: 'countryCode',
                     },
                     {
-                        dataField: "recentAbuse",
+                        dataField: 'recentAbuse',
                     },
                     {
-                        dataField: "botStatus",
+                        dataField: 'botStatus',
                     },
                     {
-                        dataField: "proxy",
+                        dataField: 'proxy',
                     },
                     {
-                        dataField: "vpn",
+                        dataField: 'vpn',
                     },
                     {
-                        dataField: "tor",
+                        dataField: 'tor',
                     },
                     {
-                        dataField: "mobile",
+                        dataField: 'mobile',
                     },
                 ],
                 dataSource: data.ips,

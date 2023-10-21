@@ -1,14 +1,14 @@
-import { IEventAggregator } from "aurelia";
-import { bindable, inject } from "aurelia";
-import { IRouteViewModel, route, Router } from "@aurelia/router-lite";
+import { IEventAggregator } from 'aurelia';
+import { bindable, inject } from 'aurelia';
+import { IRouteViewModel, route, Router } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../../services/discord-service";
+import { DiscordService } from '../../../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "welcome-messages/:messageId",
-    title: "Manage Welcome Message",
+    path: 'welcome-messages/:messageId',
+    title: 'Manage Welcome Message',
 })
 @inject(IEventAggregator, DiscordService, Router)
 export class ManageWelcomeMessage implements IRouteViewModel {
@@ -27,19 +27,19 @@ export class ManageWelcomeMessage implements IRouteViewModel {
     messageId;
     isNew: boolean;
     messageTemplate = {
-        name: "",
-        discordChannelId: "",
-        discordServerId: "",
+        name: '',
+        discordChannelId: '',
+        discordServerId: '',
         type: 3,
     };
 
     types = [
         {
-            displayName: "Welcome Channel Message",
+            displayName: 'Welcome Channel Message',
             value: 3
         },
         {
-            displayName: "Welcome Direct Message",
+            displayName: 'Welcome Direct Message',
             value: 4
         }
     ]
@@ -60,7 +60,7 @@ export class ManageWelcomeMessage implements IRouteViewModel {
 
     async save() {
         if (!this.message.discordChannelId && this.message.type == 3) {
-            toast("Missing Channel ID or Message Type");
+            toast('Missing Channel ID or Message Type');
             return;
         }
         try {
@@ -73,10 +73,10 @@ export class ManageWelcomeMessage implements IRouteViewModel {
                     this.message
                 );
             }
-            toast(`Welcome Message ${this.isNew ? "Created" : "Updated"}!`);
+            toast(`Welcome Message ${this.isNew ? 'Created' : 'Updated'}!`);
         } catch (e) {
             console.log(e);
-            toast("Failed to create message", { severity: "error" });
+            toast('Failed to create message', { severity: 'error' });
         }
     }
 }

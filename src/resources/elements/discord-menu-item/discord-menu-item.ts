@@ -1,4 +1,4 @@
-import { bindable } from "aurelia";
+import { bindable } from 'aurelia';
 
 export class DiscordMenuItem {
     @bindable item;

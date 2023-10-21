@@ -1,6 +1,6 @@
-import { bindable, BindingMode, capture, containerless, inject } from "aurelia";
+import { bindable, BindingMode, capture, containerless, inject } from 'aurelia';
 
-import { DiscordService } from "../../../services/discord-service";
+import { DiscordService } from '../../../services/discord-service';
 
 @inject(DiscordService)
 @capture()

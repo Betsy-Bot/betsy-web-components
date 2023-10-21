@@ -24,6 +24,7 @@ module.exports = {
         indent: ["error", 4, { SwitchCase: 1 }],
         "require-atomic-updates": "warn",
         "no-console": "warn",
+        "quotes": ["error", "single"],
         "unused-imports/no-unused-imports": "error",
         "no-useless-escape": "off",
         "no-duplicate-imports": "error",

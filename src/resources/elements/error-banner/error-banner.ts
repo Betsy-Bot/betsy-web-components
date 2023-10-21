@@ -1,7 +1,7 @@
-import { inject } from "aurelia";
-import { IEventAggregator } from "aurelia";
+import { inject } from 'aurelia';
+import { IEventAggregator } from 'aurelia';
 
-import "./error-banner.scss";
+import './error-banner.scss';
 
 export type ServerError = {
     type: ErrorBannerTypes;
@@ -24,14 +24,14 @@ export class ErrorBanner {
     errors;
     banner;
     bannerOpen;
-    errorHeader = "Validation Error";
+    errorHeader = 'Validation Error';
     errorSubheader: string;
     details: string;
     error: string;
 
     created() {
         const subscription = this.ea.subscribe(
-            "present-error",
+            'present-error',
             (data: ServerError) => {
                 this.errors = data.errors;
                 this.errorHeader = data.header ?? this.errorHeader;

@@ -34,6 +34,12 @@
         value="roles"
         active.bind="tab === 'roles'"
     ></moo-tab>
+    <moo-tab
+        label="Invite Settings"
+        tab.bind="tab"
+        value="settings"
+        active.bind="tab === 'settings'"
+    ></moo-tab>
 </moo-tab-bar>
 
 <moo-data-grid
@@ -70,7 +76,7 @@
 
 <template if.bind="tab === 'roles'">
     <moo-button variant="primary" click.bind="() => createInviteRole.open()" type="button">
-        Create New Review Category
+        Create New Invite Role
     </moo-button>
     <div class="row my-3">
         <div class="col-12 col-xl-6 p-3" repeat.for="inviteRole of guild.inviteSettings.inviteRoles">
@@ -97,4 +103,8 @@
             Save
         </moo-button>
     </div>
+</template>
+
+<template if.bind="tab === 'settings'">
+    <h4>Minimum Account Age Settings</h4>
 </template>

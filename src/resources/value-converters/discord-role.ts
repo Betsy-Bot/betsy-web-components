@@ -1,13 +1,13 @@
-import { inject } from "aurelia";
+import { inject } from 'aurelia';
 
-import { DiscordService } from "../../services/discord-service";
+import { DiscordService } from '../../services/discord-service';
 
 @inject(DiscordService)
 export class DiscordRoleValueConverter {
     constructor(private discordService: DiscordService) {}
     public async toView(value: string) {
         if (!value) {
-            return "";
+            return '';
         }
         const roles = await this.discordService.getDiscordRoles();
         if (!roles) return value;
@@ -17,7 +17,7 @@ export class DiscordRoleValueConverter {
     getRoleName(roleId, roles): string {
         const found = roles.find((x) => x.id == roleId);
         if (!found) {
-            return "";
+            return '';
         }
         return found?.name;
     }

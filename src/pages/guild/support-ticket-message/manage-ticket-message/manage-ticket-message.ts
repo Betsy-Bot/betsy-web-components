@@ -1,24 +1,24 @@
-import { IEventAggregator, inject } from "aurelia";
+import { IEventAggregator, inject } from 'aurelia';
 import {
     IRouteContext,
     IRouter,
     IRouteViewModel,
     Params,
     route,
-} from "@aurelia/router-lite";
-import { watch } from "@aurelia/runtime-html";
+} from '@aurelia/router-lite';
+import { watch } from '@aurelia/runtime-html';
 
-import { DiscordService } from "../../../../services/discord-service";
+import { DiscordService } from '../../../../services/discord-service';
 import {
     DiscordButtonStyle,
     DiscordComponentType,
-} from "../../../../services/models/discord";
+} from '../../../../services/models/discord';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "support-tickets/:supportTicketSettingsId",
-    title: "Manage Ticket",
+    path: 'support-tickets/:supportTicketSettingsId',
+    title: 'Manage Ticket',
 })
 @inject(IEventAggregator, DiscordService, IRouter, IRouteContext)
 export class ManageTicketMessage implements IRouteViewModel {
@@ -37,22 +37,22 @@ export class ManageTicketMessage implements IRouteViewModel {
 
     ticket;
 
-    tab = "settings";
+    tab = 'settings';
     isNew = false;
     isLoading = true;
 
     authorizedRole;
 
     ticketTemplate = {
-        identifier: "identifier",
+        identifier: 'identifier',
         id: undefined,
-        logChannelId: "",
+        logChannelId: '',
         assignedRoles: [],
         initialMessage: {
             embeds: [
                 {
-                    title: "Your support channel has been created for you.",
-                    description: "We will be with you shortly!",
+                    title: 'Your support channel has been created for you.',
+                    description: 'We will be with you shortly!',
                     color: 5726933,
                 },
             ],
@@ -62,24 +62,24 @@ export class ManageTicketMessage implements IRouteViewModel {
                     components: [
                         {
                             type: DiscordComponentType.Button,
-                            label: "Close Ticket",
+                            label: 'Close Ticket',
                             style: DiscordButtonStyle.Danger,
-                            custom_id: "CloseTicket",
+                            custom_id: 'CloseTicket',
                         },
                     ],
                 },
             ],
         },
-        closeButtonText: "Close",
+        closeButtonText: 'Close',
         discordMessage: {
-            discordChannelId: "",
-            discordCategoryId: "",
+            discordChannelId: '',
+            discordCategoryId: '',
             type: 1,
             message: {
                 embeds: [
                     {
-                        title: "Create a Ticket Using the Button Below!",
-                        description: "We will respond ASAP!",
+                        title: 'Create a Ticket Using the Button Below!',
+                        description: 'We will respond ASAP!',
                         color: 5726933,
                     },
                 ],
@@ -89,7 +89,7 @@ export class ManageTicketMessage implements IRouteViewModel {
                         components: [
                             {
                                 type: DiscordComponentType.Button,
-                                label: "Create Ticket",
+                                label: 'Create Ticket',
                                 style: DiscordButtonStyle.Primary,
                             },
                         ],
@@ -107,7 +107,7 @@ export class ManageTicketMessage implements IRouteViewModel {
         this.guildId = this.discordService.getLocalDiscordGuildId();
         if (
             !this.supportTicketSettingsId ||
-            this.supportTicketSettingsId == "0"
+            this.supportTicketSettingsId == '0'
         ) {
             this.isNew = true;
             this.ticket = this.ticketTemplate;
@@ -122,13 +122,13 @@ export class ManageTicketMessage implements IRouteViewModel {
         this.isLoading = false;
 
         //Temp solution because it wasn't clearing it for some reason
-        this.eventAggregator.subscribe("form-cleared", (payload) => {
+        this.eventAggregator.subscribe('form-cleared', (payload) => {
             this.ticket.discordFormId = null;
             this.ticket.discordForm = null;
         });
     }
 
-    @watch("authorizedRole")
+    @watch('authorizedRole')
     authorizedRoleChanged() {
         if (!this.ticket.assignedRoles) {
             this.ticket.assignedRoles = [];
@@ -149,10 +149,10 @@ export class ManageTicketMessage implements IRouteViewModel {
             this.isLoading = true;
             this.ticket.discordGuildId = this.guildId;
             await this.discordService.updateSupportTicketSettings(this.ticket);
-            toast("Updated Support Ticket", { severity: "success" });
+            toast('Updated Support Ticket', { severity: 'success' });
         } catch (e) {
-            toast("Failed to update support ticket creation message", {
-                severity: "error",
+            toast('Failed to update support ticket creation message', {
+                severity: 'error',
             });
             throw e;
         } finally {
@@ -161,16 +161,16 @@ export class ManageTicketMessage implements IRouteViewModel {
     }
 
     async deleteSupportTicket(event) {
-        if (event.detail.action == "ok") {
+        if (event.detail.action == 'ok') {
             try {
                 await this.discordService.deleteSupportTicketBySettingsId(
                     this.ticket.id
                 );
-                toast("Deleted support message!", { severity: "success" });
-                await this.router.load("../support-tickets", { context: this });
+                toast('Deleted support message!', { severity: 'success' });
+                await this.router.load('../support-tickets', { context: this });
             } catch (e) {
-                toast("Failed to delete support ticket creation message", {
-                    severity: "error",
+                toast('Failed to delete support ticket creation message', {
+                    severity: 'error',
                 });
                 throw e;
             }
@@ -180,11 +180,11 @@ export class ManageTicketMessage implements IRouteViewModel {
     @watch('ticket.identifier')
     updateCorrespondingComponents() {
         if (this.ticket?.discordMessage?.message?.components) {
-            for (let componentWrapper of this.ticket.discordMessage.message.components) {
-                for (let component of componentWrapper.components) {
+            for (const componentWrapper of this.ticket.discordMessage.message.components) {
+                for (const component of componentWrapper.components) {
                     if (component.custom_id) {
-                        let split = component.custom_id.split(':');
-                        if (split[0] == "ButtonCreateTicket")  {
+                        const split = component.custom_id.split(':');
+                        if (split[0] == 'ButtonCreateTicket')  {
                             component.custom_id = `ButtonCreateTicket:${this.ticket.identifier}`;
                         }
                     }
@@ -195,9 +195,9 @@ export class ManageTicketMessage implements IRouteViewModel {
 
     handleClone() {
         this.isNew = true;
-        this.ticket.identifer = "Clone";
+        this.ticket.identifer = 'Clone';
         this.ticket.id = null;
-        toast("Cloned Ticket");
+        toast('Cloned Ticket');
     }
 
     async setupSupportTicket() {
@@ -210,11 +210,11 @@ export class ManageTicketMessage implements IRouteViewModel {
                 this.guildId,
                 this.ticket
             );
-            toast("Created support message!", { severity: "success" });
-            await this.router.load("../support-tickets", { context: this });
+            toast('Created support message!', { severity: 'success' });
+            await this.router.load('../support-tickets', { context: this });
         } catch (e) {
-            toast("Failed to setup support ticket creation message", {
-                severity: "error",
+            toast('Failed to setup support ticket creation message', {
+                severity: 'error',
             });
             throw e;
         } finally {

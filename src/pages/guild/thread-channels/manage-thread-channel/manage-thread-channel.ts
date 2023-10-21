@@ -1,14 +1,14 @@
-import { IEventAggregator } from "aurelia";
-import { bindable, inject } from "aurelia";
-import { IRouter,IRouteViewModel, route } from "@aurelia/router-lite";
+import { IEventAggregator } from 'aurelia';
+import { bindable, inject } from 'aurelia';
+import { IRouter,IRouteViewModel, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
+import { DiscordService } from '../../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "thread-channels/:threadChannelId",
-    title: "Manage Thread Channel",
+    path: 'thread-channels/:threadChannelId',
+    title: 'Manage Thread Channel',
 })
 @inject(IEventAggregator, DiscordService, IRouter)
 export class ManageThreadChannel implements IRouteViewModel {
@@ -29,18 +29,18 @@ export class ManageThreadChannel implements IRouteViewModel {
     isNew: boolean;
     answers = [];
     option = {
-        label: "",
-        description: "",
-        value: "",
+        label: '',
+        description: '',
+        value: '',
         emoji: {},
     };
     threadChannelTemplate = {
-        name: "",
-        discordServerId: "",
+        name: '',
+        discordServerId: '',
         type: 3,
         active: true,
     };
-    tab = "settings";
+    tab = 'settings';
 
     async attached() {
         if (!this.threadChannelId || this.threadChannelId == 0) {
@@ -69,24 +69,24 @@ export class ManageThreadChannel implements IRouteViewModel {
                         this.threadChannel
                     );
             }
-            toast(`Thread Channel ${this.isNew ? "Created" : "Updated"}!`);
-            await this.router.load("../thread-channels", { context: this });
+            toast(`Thread Channel ${this.isNew ? 'Created' : 'Updated'}!`);
+            await this.router.load('../thread-channels', { context: this });
         } catch (e) {
             console.log(e);
-            toast("Failed to update thread channel", { severity: "error" });
+            toast('Failed to update thread channel', { severity: 'error' });
         }
     }
 
     async deleteThreadChannel(event) {
-        if (event.detail.action == "ok") {
+        if (event.detail.action == 'ok') {
             try {
                 await this.discordService.deleteDiscordThreadChannelById(
                     this.threadChannel.id
                 );
-                toast("Deleted thread channel!", { severity: "success" });
-                await this.router.load("../thread-channels", { context: this });
+                toast('Deleted thread channel!', { severity: 'success' });
+                await this.router.load('../thread-channels', { context: this });
             } catch (e) {
-                toast("Failed to delete thread channel", { severity: "error" });
+                toast('Failed to delete thread channel', { severity: 'error' });
                 throw e;
             }
         }

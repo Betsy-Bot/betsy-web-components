@@ -2,9 +2,9 @@ import {
     bindable, BindingMode, containerless,
     ICustomElementViewModel,
     inject,
-} from "aurelia";
+} from 'aurelia';
 
-import { DiscordService } from "../../../services/discord-service";
+import { DiscordService } from '../../../services/discord-service';
 
 
 @containerless()

@@ -2,12 +2,12 @@ import {
     bindable,
     BindingMode, containerless,
     ICustomElementViewModel,
-} from "aurelia";
+} from 'aurelia';
 
-import "devextreme/dist/css/dx.material.purple.dark.compact.css";
-import "./moo-dialog.scss";
+import 'devextreme/dist/css/dx.material.purple.dark.compact.css';
+import './moo-dialog.scss';
 
-import { MDCDialog, MDCDialogCloseEvent } from "@material/dialog";
+import { MDCDialog, MDCDialogCloseEvent } from '@material/dialog';
 @containerless()
 export class MooDialog implements ICustomElementViewModel {
     @bindable dialogEl: HTMLElement;
@@ -17,7 +17,7 @@ export class MooDialog implements ICustomElementViewModel {
 
     attached() {
         this.dialog = new MDCDialog(this.dialogEl);
-        this.dialog.listen("MDCDialog:closed", (e: MDCDialogCloseEvent) => {
+        this.dialog.listen('MDCDialog:closed', (e: MDCDialogCloseEvent) => {
             if (this.handler) {
                 this.handler(e);
             }

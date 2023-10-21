@@ -1,5 +1,5 @@
 import Toast from 'lets-toast';
-import { ToastReturn } from "lets-toast/src";
+import { ToastReturn } from 'lets-toast/src';
 
 export class ToastService {
     private readonly _toast: ToastReturn;

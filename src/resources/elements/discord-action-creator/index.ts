@@ -1,1 +1,1 @@
-export * from "./discord-action-creator";
+export * from './discord-action-creator';

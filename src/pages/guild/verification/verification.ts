@@ -1,14 +1,14 @@
-import { inject } from "aurelia";
-import { IRouteViewModel, route } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IRouteViewModel, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../services/discord-service";
-import { SessionService } from "../../../services/session-service";
+import { DiscordService } from '../../../services/discord-service';
+import { SessionService } from '../../../services/session-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "verification",
-    title: "Verification Settings",
+    path: 'verification',
+    title: 'Verification Settings',
 })
 @inject(DiscordService, SessionService)
 export class Verification implements IRouteViewModel {
@@ -67,7 +67,7 @@ export class Verification implements IRouteViewModel {
             );
         }
         toast(
-            this.featureActive ? "Toggled feature on" : "Toggled feature off"
+            this.featureActive ? 'Toggled feature on' : 'Toggled feature off'
         );
     }
 
@@ -76,6 +76,6 @@ export class Verification implements IRouteViewModel {
             this.guild,
             this.guildId
         );
-        toast("Updated Settings", { severity: "success" });
+        toast('Updated Settings', { severity: 'success' });
     }
 }

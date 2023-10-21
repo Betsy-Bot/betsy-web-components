@@ -1,11 +1,11 @@
-import { inject } from "aurelia";
-import { Params, route } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { Params, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../services/discord-service";
-import { SessionService } from "../../services/session-service";
+import { DiscordService } from '../../services/discord-service';
+import { SessionService } from '../../services/session-service';
 
 @route({
-    path: "transcript/:ticketId",
+    path: 'transcript/:ticketId',
 })
 @inject(DiscordService, SessionService)
 export class Transcript {
@@ -20,7 +20,7 @@ export class Transcript {
     isPublic: boolean;
 
     loading(params: Params) {
-        this.ticketId = params.ticketId ?? "";
+        this.ticketId = params.ticketId ?? '';
     }
 
     async attached() {

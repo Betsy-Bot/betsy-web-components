@@ -1,27 +1,27 @@
-import { bindable, BindingMode } from "aurelia";
+import { bindable, BindingMode } from 'aurelia';
 
 export class DiscordButtonStyleSelector {
     @bindable({ mode: BindingMode.twoWay }) style: string;
 
     styles = [
         {
-            label: "Primary",
+            label: 'Primary',
             value: 1,
         },
         {
-            label: "Secondary",
+            label: 'Secondary',
             value: 2,
         },
         {
-            label: "Success",
+            label: 'Success',
             value: 3,
         },
         {
-            label: "Danger",
+            label: 'Danger',
             value: 4,
         },
         {
-            label: "Link",
+            label: 'Link',
             value: 5,
         },
     ];

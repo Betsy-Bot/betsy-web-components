@@ -1,14 +1,14 @@
-import { IEventAggregator } from "aurelia";
-import { bindable, inject, observable } from "aurelia";
-import { IRouter, IRouteViewModel, Params, route } from "@aurelia/router-lite";
+import { IEventAggregator } from 'aurelia';
+import { bindable, inject, observable } from 'aurelia';
+import { IRouter, IRouteViewModel, Params, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../../services/discord-service";
+import { DiscordService } from '../../../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "auto-responders/:responderId",
-    title: "Manage Auto Responder",
+    path: 'auto-responders/:responderId',
+    title: 'Manage Auto Responder',
 })
 @inject(IEventAggregator, DiscordService, IRouter)
 export class ManageAutoResponder implements IRouteViewModel {
@@ -29,13 +29,13 @@ export class ManageAutoResponder implements IRouteViewModel {
     phrase;
     responderId: string | number;
     isNew: boolean;
-    tab = "settings";
+    tab = 'settings';
     @observable selectedIgnoreChannelId;
     @observable selectedWhitelistChannelId;
     @observable selectedWhitelistCategoryId;
     responderTemplate = {
-        name: "",
-        discordServerId: "",
+        name: '',
+        discordServerId: '',
         phrases: [],
         type: 0,
         ignoredChannels: [],
@@ -46,15 +46,15 @@ export class ManageAutoResponder implements IRouteViewModel {
     types = [
         {
             value: 0,
-            label: "Reply Message",
+            label: 'Reply Message',
         },
         {
             value: 1,
-            label: "DM Message",
+            label: 'DM Message',
         },
         {
             value: 2,
-            label: "Channel Message",
+            label: 'Channel Message',
         },
     ];
 
@@ -77,16 +77,16 @@ export class ManageAutoResponder implements IRouteViewModel {
                 this.responder = await this.discordService.createAutoResponder(
                     this.responder
                 );
-                await this.router.load("../auto-responders", { context: this });
+                await this.router.load('../auto-responders', { context: this });
             } else {
                 this.responder = await this.discordService.updateAutoResponder(
                     this.responder
                 );
             }
-            toast(`Responder ${this.isNew ? "Created" : "Updated"}!`);
+            toast(`Responder ${this.isNew ? 'Created' : 'Updated'}!`);
         } catch (e) {
             console.log(e);
-            toast("Failed to create message", { severity: "error" });
+            toast('Failed to create message', { severity: 'error' });
         }
     }
 

@@ -1,13 +1,13 @@
-import { bindable, containerless, ICustomElementViewModel, inject } from "aurelia";
-import { IRouter } from "@aurelia/router-lite";
+import { bindable, containerless, ICustomElementViewModel, inject } from 'aurelia';
+import { IRouter } from '@aurelia/router-lite';
 
-import { botClientId,redirectUrl } from "../../../environment";
-import { DiscordService } from "../../../services/discord-service";
-import { WebhookService } from "../../../services/websocket-service";
+import { botClientId,redirectUrl } from '../../../environment';
+import { DiscordService } from '../../../services/discord-service';
+import { WebhookService } from '../../../services/websocket-service';
 
 import './server-card.scss';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @containerless()
 @inject(WebhookService, DiscordService, IRouter)
@@ -29,7 +29,7 @@ export class ServerCard implements ICustomElementViewModel {
         this.loading = true;
         try {
             if (await this.discordServerService.setupServer(this.server.id)) {
-                toast("It appears your server is already invited. Taking you there");
+                toast('It appears your server is already invited. Taking you there');
                 return await this.router.load(`guild/${this.server.id}/dashboard`)
             }
 

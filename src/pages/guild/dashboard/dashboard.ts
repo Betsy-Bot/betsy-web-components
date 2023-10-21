@@ -6,8 +6,8 @@ import { DiscordService } from '../../../services/discord-service';
 import './dashboard.scss';
 
 @route({
-    path: "",
-    title: "Dashboard",
+    path: '',
+    title: 'Dashboard',
 },)
 @inject(DiscordService)
 export class Dashboard implements IRouteViewModel {

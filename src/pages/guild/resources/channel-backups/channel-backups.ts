@@ -1,15 +1,15 @@
-import { inject } from "aurelia";
-import { IEventAggregator } from "aurelia";
-import { route, Router } from "@aurelia/router-lite";
-import { IRouteViewModel } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IEventAggregator } from 'aurelia';
+import { route, Router } from '@aurelia/router-lite';
+import { IRouteViewModel } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../services/discord-service";
+import { DiscordService } from '../../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "channel-backups",
-    title: "Channel Backups",
+    path: 'channel-backups',
+    title: 'Channel Backups',
 })
 @inject(IEventAggregator, DiscordService, Router)
 export class ChannelBackups implements IRouteViewModel {
@@ -31,18 +31,18 @@ export class ChannelBackups implements IRouteViewModel {
 
     async handleCreateDialog(event) {
         try {
-            if (event.detail.action == "ok") {
+            if (event.detail.action == 'ok') {
                 const createdChannel =
                     await this.discordService.createDiscordChannelBackup({
                         channelId: this.newChannel,
                         discordServerId: this.discordService.getLocalServerId(),
                     });
-                toast("Created Channel Backup. You must refresh to view it.", {
-                    severity: "success",
+                toast('Created Channel Backup. You must refresh to view it.', {
+                    severity: 'success',
                 });
             }
         } catch (e) {
-            toast("Failed to create channel backup", { severity: "error" });
+            toast('Failed to create channel backup', { severity: 'error' });
         }
     }
 }

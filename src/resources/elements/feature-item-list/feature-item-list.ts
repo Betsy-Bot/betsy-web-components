@@ -1,14 +1,14 @@
-import { bindable, inject } from "aurelia";
-import { IRouteContext, IRouter } from "@aurelia/router-lite";
+import { bindable, inject } from 'aurelia';
+import { IRouteContext, IRouter } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../services/discord-service";
-import { ChannelNameValueConverter } from "../../value-converters";
+import { DiscordService } from '../../../services/discord-service';
+import { ChannelNameValueConverter } from '../../value-converters';
 
 import { Column } from 'devextreme/ui/data_grid';
 
 
 export enum ValueConverter {
-    ChannelName = "ChannelName",
+    ChannelName = 'ChannelName',
 }
 
 @inject(ChannelNameValueConverter, IRouter, DiscordService, IRouteContext)
@@ -39,24 +39,24 @@ export class FeatureItemList {
     binding() {
         this.columns = [
             {
-                caption: "Identifier",
+                caption: 'Identifier',
                 cellTemplate: this.nameTemplate,
                 dataField: this.nameOverride,
                 visibleIndex: 1
             },
             {
-                caption: "",
+                caption: '',
                 cellTemplate: this.linkTemplate,
-                alignment: "center",
+                alignment: 'center',
                 width: 200,
                 visibleIndex: 2
             },
         ];
         if (this.showToggler) {
             this.columns.push({
-                caption: "Active?",
+                caption: 'Active?',
                 cellTemplate: this.toggleTemplate,
-                alignment: "center",
+                alignment: 'center',
                 width: 200,
                 visibleIndex: 3
             });
@@ -69,11 +69,11 @@ export class FeatureItemList {
 
     handleToggleClick(item, switchComponent: HTMLElement) {
         item.active = !item.active;
-        switchComponent.innerText = item.active ? "Deactivate" : "Activate";
+        switchComponent.innerText = item.active ? 'Deactivate' : 'Activate';
         if (item.active) {
-            switchComponent.classList.add("moo-button-secondary");
+            switchComponent.classList.add('moo-button-secondary');
         } else {
-            switchComponent.classList.remove("moo-button-secondary");
+            switchComponent.classList.remove('moo-button-secondary');
         }
         this.toggleHandler(item);
     }
@@ -99,11 +99,11 @@ export class FeatureItemList {
     }
 
     nameTemplate = (container, options) => {
-        const el = document.createElement("span");
+        const el = document.createElement('span');
         el.innerHTML =
-            (this.namePrefix ?? "") +
+            (this.namePrefix ?? '') +
             this.getName(options.data) +
-            (this.nameSuffix ?? "");
+            (this.nameSuffix ?? '');
         container.append(el);
     };
 
@@ -115,20 +115,20 @@ export class FeatureItemList {
 
     linkTemplate = (container, options) => {
         const clone = this.linkEl.cloneNode(true) as HTMLAnchorElement;
-        clone.classList.remove("d-none");
+        clone.classList.remove('d-none');
         clone.onclick = () => this.routeToItem(options.data.id);
         container.append(clone);
     };
 
     toggleTemplate = (container, options) => {
-        const switchComponent = this.switchEl.querySelector("button")?.cloneNode(true) as HTMLElement;
+        const switchComponent = this.switchEl.querySelector('button')?.cloneNode(true) as HTMLElement;
         switchComponent.innerText = options.data.active
-            ? "Deactivate"
-            : "Activate";
+            ? 'Deactivate'
+            : 'Activate';
         if (options.data.active) {
-            switchComponent.classList.add("moo-button-secondary");
+            switchComponent.classList.add('moo-button-secondary');
         } else {
-            switchComponent.classList.remove("moo-button-secondary");
+            switchComponent.classList.remove('moo-button-secondary');
         }
         switchComponent.onclick = () =>
             this.handleToggleClick(options.data, switchComponent);

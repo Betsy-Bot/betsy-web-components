@@ -1,12 +1,12 @@
-import { IEventAggregator } from "aurelia";
-import { inject } from "aurelia";
-import { IRouteContext,IRouter, IRouteViewModel, Params, route } from "@aurelia/router-lite";
+import { IEventAggregator } from 'aurelia';
+import { inject } from 'aurelia';
+import { IRouteContext,IRouter, IRouteViewModel, Params, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../../../services/discord-service";
+import { DiscordService } from '../../../../../services/discord-service';
 
 @route({
-    path: "support-tickets/:supportTicketSettingsId/submissions",
-    title: "Support Tickets",
+    path: 'support-tickets/:supportTicketSettingsId/submissions',
+    title: 'Support Tickets',
 })
 @inject(IEventAggregator, DiscordService, IRouter, IRouteContext)
 export class SupportTickets implements IRouteViewModel {
@@ -33,25 +33,25 @@ export class SupportTickets implements IRouteViewModel {
         this.guildId = this.discordService.getLocalDiscordGuildId();
         this.columns = [
             {
-                dataField: "createdBy",
+                dataField: 'createdBy',
             },
             {
-                dataField: "discordUserId",
+                dataField: 'discordUserId',
             },
             {
-                dataField: "closed",
+                dataField: 'closed',
             },
             {
-                dataField: "closedBy",
+                dataField: 'closedBy',
             },
             {
-                dataField: "createdDate",
-                dataType: "date",
+                dataField: 'createdDate',
+                dataType: 'date',
             },
             {
-                caption: "",
+                caption: '',
                 cellTemplate: this.linkTemplate,
-                alignment: "center",
+                alignment: 'center',
             },
         ];
 
@@ -71,13 +71,13 @@ export class SupportTickets implements IRouteViewModel {
 
     linkTemplate = (container, options) => {
         const clone = this.linkEl.cloneNode(true) as HTMLAnchorElement;
-        clone.classList.remove("d-none");
+        clone.classList.remove('d-none');
         clone.onclick = () => this.routeToTicket(options.data.id);
         container.append(clone);
     };
 
     async deleteAction() {
-        if (window.confirm("This will force close all open tickets. Are you sure you would like to do this? This will NOT close tickets 'properly' as channels won't be deleted/moved")) {
+        if (window.confirm('This will force close all open tickets. Are you sure you would like to do this? This will NOT close tickets \'properly\' as channels won\'t be deleted/moved')) {
             await this.discordService.closeAllOpenTicketsForSettings(this.settingsId);
         }
     }

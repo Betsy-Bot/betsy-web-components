@@ -1,7 +1,7 @@
-import { IEventAggregator, inject } from "aurelia";
-import { IRouter } from "@aurelia/router-lite";
+import { IEventAggregator, inject } from 'aurelia';
+import { IRouter } from '@aurelia/router-lite';
 
-import * as discordModels from "./models/discord";
+import * as discordModels from './models/discord';
 import {
     DiscordForm,
     DiscordGuildUser,
@@ -11,33 +11,33 @@ import {
     IDiscordGuildUserInvite,
     IExchangeCodeResponse,
     ISendMessageToChannelRequest,
-} from "./models/discord";
-import { ApiService } from "./api-service";
+} from './models/discord';
+import { ApiService } from './api-service';
 
 @inject(ApiService, IRouter, IEventAggregator)
 export class DiscordService {
     public guildId: string;
     guild: IDiscordGuild;
     guildChannelData = {
-        guildId: "",
+        guildId: '',
         data: null,
     };
     discordGuildId: string | undefined;
     messages;
     localUsers: DiscordGuildUser[] = [];
 
-    RESPONSE_MESSAGES = "ResponseMessages";
-    DATA_COMMANDS = "DataCommands";
-    BLOCK_INVITES = "BlockInvites";
-    SUPPORT_TICKETS = "SupportTickets";
-    AUDIT_LOG = "AuditLog";
-    TWITCH_SUBSCRIPTIONS = "TwitchSubscriptions";
-    PAYMENTS = "Payments";
-    WELCOME_MESSAGES = "WelcomeMessages";
-    AUTO_RESPONDERS = "AutoResponders";
-    VERIFICATION = "Verification";
-    THREAD_CHANNELS = "ThreadChannels";
-    INVITE_LINKS = "InviteLinks";
+    RESPONSE_MESSAGES = 'ResponseMessages';
+    DATA_COMMANDS = 'DataCommands';
+    BLOCK_INVITES = 'BlockInvites';
+    SUPPORT_TICKETS = 'SupportTickets';
+    AUDIT_LOG = 'AuditLog';
+    TWITCH_SUBSCRIPTIONS = 'TwitchSubscriptions';
+    PAYMENTS = 'Payments';
+    WELCOME_MESSAGES = 'WelcomeMessages';
+    AUTO_RESPONDERS = 'AutoResponders';
+    VERIFICATION = 'Verification';
+    THREAD_CHANNELS = 'ThreadChannels';
+    INVITE_LINKS = 'InviteLinks';
 
     public get guildChannels(): any {
         return this.guildChannelData.data;
@@ -45,7 +45,7 @@ export class DiscordService {
 
     public setGuildId(value: string) {
         this.guildId = value;
-        this.ea.publish("guild-updated", this.guildId);
+        this.ea.publish('guild-updated', this.guildId);
     }
 
     constructor(
@@ -81,19 +81,19 @@ export class DiscordService {
     }
 
     async exchangeCode(code: string, redirectUrl?: string): Promise<discordModels.IExchangeCodeResponse> {
-        let path = "Discord/OAuth/ExchangeCode";
+        let path = 'Discord/OAuth/ExchangeCode';
         if (redirectUrl) {
-            path += "?redirectUrl=" + redirectUrl;
+            path += '?redirectUrl=' + redirectUrl;
         }
         return (await this.api.doPost(path, { code: code })) as IExchangeCodeResponse;
     }
 
     async createServer(guildId: string): Promise<discordModels.IBaseDiscordServer> {
-        return (await this.api.doPost("DiscordGuild", { guildId: guildId })) as IBaseDiscordServer;
+        return (await this.api.doPost('DiscordGuild', { guildId: guildId })) as IBaseDiscordServer;
     }
 
     async createApplicationCommand(command: IBaseDiscordCommand): Promise<discordModels.IBaseDiscordCommand> {
-        return (await this.api.doPost("Discord/ApplicationCommand", command)) as IBaseDiscordCommand;
+        return (await this.api.doPost('Discord/ApplicationCommand', command)) as IBaseDiscordCommand;
     }
 
     async setupServer(guildId: string): Promise<discordModels.IBaseDiscordCommand> {
@@ -101,7 +101,7 @@ export class DiscordService {
     }
 
     async updateApplicationCommand(command: IBaseDiscordCommand): Promise<discordModels.IBaseDiscordCommand> {
-        return (await this.api.doPatch("Discord/ApplicationCommand", command)) as IBaseDiscordCommand;
+        return (await this.api.doPatch('Discord/ApplicationCommand', command)) as IBaseDiscordCommand;
     }
 
     async getResponseMessagesForGuild(guildId: string): Promise<discordModels.IBaseDiscordCommand[]> {
@@ -151,7 +151,7 @@ export class DiscordService {
     }
 
     async verifyLogin(): Promise<any> {
-        return await this.api.doPost(`User/Verify`, {});
+        return await this.api.doPost('User/Verify', {});
     }
 
     async updateVerifiedRole(guildId: string, roleId: string): Promise<any> {
@@ -374,7 +374,7 @@ export class DiscordService {
     }
 
     async createDiscordMessage(message: any) {
-        return this.api.doPost(`DiscordMessage`, message);
+        return this.api.doPost('DiscordMessage', message);
     }
 
     async getDiscordMessageById(id: string) {
@@ -390,7 +390,7 @@ export class DiscordService {
     }
 
     async createChannelCleaner(cleaner: any) {
-        return this.api.doPost(`DiscordChannelCleaner`, cleaner);
+        return this.api.doPost('DiscordChannelCleaner', cleaner);
     }
 
     async updateChannelCleaner(cleaner: any) {
@@ -418,7 +418,7 @@ export class DiscordService {
     }
 
     async createAutoroleContainer(container: any) {
-        return this.api.doPost(`DiscordAutoroleContainer`, container);
+        return this.api.doPost('DiscordAutoroleContainer', container);
     }
 
     async updateAutoroleContainer(container: any) {
@@ -434,7 +434,7 @@ export class DiscordService {
     }
 
     async createAutoResponder(responder: any) {
-        return this.api.doPost(`DiscordAutoResponder`, responder);
+        return this.api.doPost('DiscordAutoResponder', responder);
     }
 
     async updateAutoResponder(responder: any) {
@@ -450,7 +450,7 @@ export class DiscordService {
     }
 
     async createGiveaway(giveaway: any) {
-        return this.api.doPost(`DiscordGiveaway`, giveaway);
+        return this.api.doPost('DiscordGiveaway', giveaway);
     }
 
     async updateGiveaway(giveaway: any) {
@@ -470,7 +470,7 @@ export class DiscordService {
     }
 
     async createPoll(giveaway: any) {
-        return this.api.doPost(`DiscordPoll`, giveaway);
+        return this.api.doPost('DiscordPoll', giveaway);
     }
 
     async updatePoll(giveaway: any) {
@@ -494,7 +494,7 @@ export class DiscordService {
     }
 
     async createDiscordThreadChannels(threadChannel: any) {
-        return this.api.doPost(`DiscordThreadChannel`, threadChannel);
+        return this.api.doPost('DiscordThreadChannel', threadChannel);
     }
 
     async updateDiscordThreadChannel(threadChannel: any) {
@@ -518,7 +518,7 @@ export class DiscordService {
     }
 
     async createKeyValueCategory(keyValueCategory: any) {
-        return this.api.doPost(`KeyValueCategory`, keyValueCategory);
+        return this.api.doPost('KeyValueCategory', keyValueCategory);
     }
 
     async updateKeyValueCategory(keyValueCategory: any) {
@@ -546,7 +546,7 @@ export class DiscordService {
     }
 
     async createDiscordChannelBackup(item: any) {
-        return this.api.doPost(`DiscordChannelBackup`, item);
+        return this.api.doPost('DiscordChannelBackup', item);
     }
 
     async updateDiscordChannelBackup(item: any) {

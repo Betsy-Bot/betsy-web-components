@@ -1,13 +1,13 @@
-import { inject } from "aurelia";
-import { IRouteViewModel, route } from "@aurelia/router-lite";
+import { inject } from 'aurelia';
+import { IRouteViewModel, route } from '@aurelia/router-lite';
 
-import { DiscordService } from "../../../services/discord-service";
+import { DiscordService } from '../../../services/discord-service';
 
-import { toast } from "lets-toast";
+import { toast } from 'lets-toast';
 
 @route({
-    path: "channel-cleaners",
-    title: "Channel Cleaners",
+    path: 'channel-cleaners',
+    title: 'Channel Cleaners',
 })
 @inject(DiscordService)
 export class ChannelCleaners implements IRouteViewModel {
@@ -16,9 +16,9 @@ export class ChannelCleaners implements IRouteViewModel {
     cleaners;
 
     freshRequest = {
-        channelId: "",
-        ageInHours: "",
-        discordServerId: "",
+        channelId: '',
+        ageInHours: '',
+        discordServerId: '',
         active: true,
     };
     request = this.freshRequest;
@@ -40,10 +40,10 @@ export class ChannelCleaners implements IRouteViewModel {
             );
             this.cleaners.push(response);
             this.request = this.freshRequest;
-            toast("Created channel cleaner", { severity: "success" });
+            toast('Created channel cleaner', { severity: 'success' });
         } catch (e) {
             console.log(e);
-            toast("Failed to create channel cleaner", { severity: "error" });
+            toast('Failed to create channel cleaner', { severity: 'error' });
         }
     }
 
@@ -53,16 +53,16 @@ export class ChannelCleaners implements IRouteViewModel {
             const index = this.cleaners.findIndex((x) => x.id == id);
             this.cleaners.splice(index, 1);
             this.request = null;
-            toast("Deleted channel cleaner", { severity: "success" });
+            toast('Deleted channel cleaner', { severity: 'success' });
         } catch (e) {
-            toast("Failed to delete channel cleaner", { severity: "error" });
+            toast('Failed to delete channel cleaner', { severity: 'error' });
         }
     }
 
     async manuallyClean(cleanerId) {
         if (
             window.confirm(
-                "This will run the channel cleaner. If improperly configured you may lose data. Confirm you want to test your cleaner?"
+                'This will run the channel cleaner. If improperly configured you may lose data. Confirm you want to test your cleaner?'
             )
         ) {
             try {
@@ -71,13 +71,13 @@ export class ChannelCleaners implements IRouteViewModel {
                         cleanerId
                     );
                 toast(`Channel Cleaned. Deleted ${response} Messages`, {
-                    severity: "success",
+                    severity: 'success',
                 });
             } catch (e) {
-                toast("Failed to clean channel", { severity: "error" });
+                toast('Failed to clean channel', { severity: 'error' });
             }
         } else {
-            console.log("cancel");
+            console.log('cancel');
         }
     }
 
@@ -85,9 +85,9 @@ export class ChannelCleaners implements IRouteViewModel {
         try {
             await this.discordService.updateChannelCleaner(cleaner);
             this.request = this.freshRequest;
-            toast("Updated channel cleaner", { severity: "success" });
+            toast('Updated channel cleaner', { severity: 'success' });
         } catch (e) {
-            toast("Failed to update channel cleaner", { severity: "error" });
+            toast('Failed to update channel cleaner', { severity: 'error' });
         }
     }
 
