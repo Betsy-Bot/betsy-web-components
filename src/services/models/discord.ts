@@ -346,7 +346,7 @@ export interface IDiscordGuild {
 
 export interface IDiscordGuildInviteSettings {
     inviteRoles: IDiscordGuildInviteRole[];
-    minimumAccountAgeInHours: number;
+    minimumAccountAgeInDays: number;
     inviteWhitelists: IDiscordGuildInviteWhitelist[];
 }
 
@@ -366,5 +366,5 @@ export interface IDiscordGuildUserInvite {
 
 export interface IDiscordGuildInviteWhitelist {
     discordUserId: string,
-     inviteCode: string
- }
+    inviteCode: string
+}

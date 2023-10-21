@@ -103,8 +103,8 @@
     <moo-text-field
         type="number"
         class="w-100 mt-2"
-        label="Minimum Account Age (Hours)"
-        value.bind="guild.inviteSettings.minimumAccountAgeInHours"
+        label="Minimum Account Age (Days)"
+        value.bind="guild.inviteSettings.minimumAccountAgeInDays"
     ></moo-text-field>
     <div class="text-end">
         <moo-button variant="primary" click.bind="() => saveInviteSettings()" type="button">
