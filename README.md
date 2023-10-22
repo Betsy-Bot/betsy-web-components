@@ -1,4 +1,5 @@
-# Betsy Bot Material 3 Web Components
+# Betsy Bot Material 3 Aurelia Web Components
+For use in Aurelia 2 only. Does not support Aurelia 1
 
 ## Start dev web server
 
