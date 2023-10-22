@@ -2,7 +2,7 @@ import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
 
 import './moo-chip-set.scss';
 
-import { MDCChipSet } from "@material/chips";
+import { MDCChipSet } from '@material/chips';
 
 
 @containerless()

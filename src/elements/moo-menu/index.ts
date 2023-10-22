@@ -1,1 +1,1 @@
-export * from "./moo-menu";
+export * from './moo-menu';

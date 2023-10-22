@@ -1,43 +1,29 @@
 import {
     bindable,
-    BindingMode, containerless,
+    BindingMode,
+    containerless,
     ICustomElementViewModel,
-} from "aurelia";
-import { watch } from '@aurelia/runtime-html';
+} from 'aurelia';
 
-import "./moo-switch.scss";
+import '@material/web/switch/switch';
 
-import { MDCSwitch } from "@material/switch";
+import { MdSwitch } from '@material/web/all';
 
 @containerless()
 export class MooSwitch implements ICustomElementViewModel {
     @bindable({ mode: BindingMode.twoWay }) value: boolean;
-    @bindable id;
     @bindable class: string;
-    @bindable change;
-    switchEl: HTMLButtonElement;
-    switch: MDCSwitch;
+    @bindable change: () => void;
+    @bindable label: string;
+    switch: MdSwitch;
 
     attached() {
-        this.switch = new MDCSwitch(this.switchEl);
-    }
-
-    @watch('value')
-    valueChangedHandler() {
         this.switch.selected = this.value;
+        this.switch.addEventListener('change', () => this.handleChange());
     }
 
-    changeValue() {
+    handleChange() {
         this.value = !this.value;
-        if (this.change) {
-            this.change();
-        }
-    }
-
-    get switchClass() {
-        if (this.value) {
-            return "mdc-switch--selected";
-        }
-        return "mdc-switch--unselected";
+        this.change();
     }
 }

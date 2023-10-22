@@ -1,5 +1,5 @@
-import { bindable, BindingMode, containerless, ICustomElementViewModel } from "aurelia";
-import { watch } from "@aurelia/runtime-html";
+import { bindable, BindingMode, containerless, ICustomElementViewModel } from 'aurelia';
+import { watch } from '@aurelia/runtime-html';
 
 import './moo-radio.scss'
 

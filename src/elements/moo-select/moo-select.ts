@@ -3,9 +3,9 @@ import {
     BindingMode,
     containerless,
     ICustomElementViewModel,
-} from "aurelia";
+} from 'aurelia';
 
-import { MDCSelect } from "@material/select";
+import { MDCSelect } from '@material/select';
 
 @containerless()
 export class MooSelect implements ICustomElementViewModel {
@@ -22,18 +22,21 @@ export class MooSelect implements ICustomElementViewModel {
         if (this.readonly) {
             select.disabled = true;
         }
-        if (this.value) {
-            select.value = this.value.toString();
+        if (typeof this.value != 'undefined') {
+            select.value = this.value?.toString();
         }
 
-        select.listen("MDCSelect:change", () => {
+        select.listen('MDCSelect:change', () => {
+            if (typeof(this.value) == 'number') {
+                return this.value = parseInt(select.value);
+            }
             this.value = select.value;
         });
     }
 
     get requiredClass() {
         if (this.required) {
-            return "mdc-select--required";
+            return 'mdc-select--required';
         }
     }
 }

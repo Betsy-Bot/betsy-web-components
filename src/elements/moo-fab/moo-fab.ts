@@ -1,8 +1,8 @@
-import { bindable, containerless, ICustomElementViewModel } from "aurelia";
+import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
 
-import "./moo-fab.scss";
+import './moo-fab.scss';
 
-import { MDCRipple } from "@material/ripple";
+import { MDCRipple } from '@material/ripple';
 
 @containerless()
 export class MooFab implements ICustomElementViewModel {

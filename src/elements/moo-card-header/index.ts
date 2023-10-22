@@ -1,1 +1,1 @@
-export * from "./moo-card-header";
+export * from './moo-card-header';

@@ -1,8 +1,8 @@
-import { bindable, containerless, ICustomElementViewModel } from "aurelia";
+import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
 
-import "./moo-button.scss";
+import './moo-button.scss';
 
-export type MOO_BUTTON_VARIANT = "primary" | "secondary";
+export type MOO_BUTTON_VARIANT = 'primary' | 'secondary';
 
 @containerless()
 export class MooButton implements ICustomElementViewModel {
@@ -10,18 +10,18 @@ export class MooButton implements ICustomElementViewModel {
     @bindable label: string;
     @bindable type: string;
     @bindable icon: string;
-    @bindable variant: MOO_BUTTON_VARIANT = "primary";
-    @bindable class = "";
+    @bindable variant: MOO_BUTTON_VARIANT = 'primary';
+    @bindable class = '';
     @bindable click = undefined;
     @bindable dataMdcDialogAction;
     @bindable disabled = false;
 
     get colorClass() {
         switch (this.variant) {
-        case "primary":
-            return "";
-        case "secondary":
-            return "moo-button-secondary";
+            case 'primary':
+                return '';
+            case 'secondary':
+                return 'moo-button-secondary';
         }
     }
 
@@ -32,6 +32,6 @@ export class MooButton implements ICustomElementViewModel {
     }
 
     get hasClickFunction() {
-        return typeof this.click === "function";
+        return typeof this.click === 'function';
     }
 }

@@ -5,18 +5,17 @@
     "module": "esnext",
     "moduleResolution": "node",
     "skipLibCheck": true,
-    "target": "ES2021",
+    "target": "ES2022",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "importHelpers": true,
     "sourceMap": true,
-    "declaration": true,
+    "strictNullChecks": true
   },
   "include": [
-    "test",
     "src"
   ],
   "files": [
-    "dev-app/resource.d.ts"
+    "src/resource.d.ts"
   ]
 }

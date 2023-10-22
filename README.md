@@ -45,7 +45,7 @@ import * as myPlugin from 'aurelia-ux';
 Aurelia
     // Load all exports from the plugin
     .register(myPlugin)
-    .app(DevApp)
+    .app(App)
     .start();
 ```
 

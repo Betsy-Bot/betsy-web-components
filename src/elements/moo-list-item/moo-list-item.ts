@@ -2,7 +2,7 @@ import {
     bindable,
     BindingMode, containerless,
     ICustomElementViewModel,
-} from "aurelia";
+} from 'aurelia';
 
 
 @containerless()
@@ -14,7 +14,6 @@ export class MooListItem implements ICustomElementViewModel {
     @bindable disabled = false;
 
     clickHandler() {
-        console.log('click value', this.value)
         if (this.click) {
             this.click(this.value);
         }

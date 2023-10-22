@@ -1,11 +1,11 @@
 import {
     bindable, containerless,
     ICustomElementViewModel,
-} from "aurelia";
+} from 'aurelia';
 
-import "./moo-menu.scss";
+import './moo-menu.scss';
 
-import { MDCMenu } from "@material/menu";
+import { MDCMenu } from '@material/menu';
 
 @containerless()
 export class MooMenu implements ICustomElementViewModel {

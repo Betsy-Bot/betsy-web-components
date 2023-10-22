@@ -3,18 +3,18 @@ import {
     BindingMode, containerless,
     ICustomElementViewModel,
     observable,
-} from "aurelia";
+} from 'aurelia';
 
-import "./moo-text-field.scss";
+import './moo-text-field.scss';
 
-import { MDCTextField } from "@material/textfield";
+import { MDCTextField } from '@material/textfield';
 
 @containerless()
 export class MooTextField implements ICustomElementViewModel {
     @bindable({ mode: BindingMode.twoWay }) value;
     @bindable label;
     @bindable class;
-    @bindable type = "text";
+    @bindable type = 'text';
     @bindable rows;
     @bindable cols;
     @observable input: HTMLElement;
@@ -24,6 +24,7 @@ export class MooTextField implements ICustomElementViewModel {
     @bindable minlength: number;
     @bindable maxlength: number;
     @bindable required;
+    @bindable placeholder;
     textField;
 
     attached() {

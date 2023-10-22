@@ -5,11 +5,11 @@ import {
     IAurelia,
     IContainer,
     Resolved,
-} from "aurelia";
+} from 'aurelia';
 import {
     CustomElementDefinition,
     ICustomElementController,
-} from "@aurelia/runtime-html";
+} from '@aurelia/runtime-html';
 
 export function createCustomElement<T extends Constructable = Constructable>(
     component: T,
@@ -38,6 +38,6 @@ export function createCustomElement<T extends Constructable = Constructable>(
 export const destroyCustomElement = async (
     controller: ICustomElementController
 ): Promise<void> => {
-    await controller.activate(controller, null, null);
+    await controller.activate(controller, null);
     controller.dispose();
 };
