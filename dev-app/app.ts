@@ -1,6 +1,6 @@
 import { route } from '@aurelia/router-lite';
 
-@route({ title: 'Besty Bot' })
+@route({ title: 'Home' })
 export class App {
 
 }
