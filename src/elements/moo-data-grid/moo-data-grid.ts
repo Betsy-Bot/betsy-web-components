@@ -60,8 +60,6 @@ export class MooDataGrid implements ICustomElementViewModel {
     dataGridControl: DataGrid;
 
     attached() {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         this.dataGrid = new DataGrid(this.control, {
             allowColumnReordering: this.allowColumnReordering || true,
             filterRow: {
@@ -127,11 +125,13 @@ export class MooDataGrid implements ICustomElementViewModel {
             onContentReady: this.onContentReady
                 ? this.onContentReady
                 : (e) => {
+                    // @ts-ignore
                     e.element
                         .querySelector('.dx-datagrid-text-content')
                         .classList.remove('dx-text-content-alignment-left');
                     const countEl = document.getElementById('grid-control-data-count');
                     if (this.items && countEl) {
+                        // @ts-ignore
                         countEl.innerText = 'Total Records: ' + this.items.length;
                     } else if (this.dataSource && countEl) {
                         countEl.innerText = 'Total Records: ' + this.dataSource.totalCount();

@@ -12,7 +12,7 @@ export class MooButton implements ICustomElementViewModel {
     @bindable icon: string;
     @bindable variant: MOO_BUTTON_VARIANT = 'primary';
     @bindable class = '';
-    @bindable click = undefined;
+    @bindable click: () => void;
     @bindable dataMdcDialogAction;
     @bindable disabled = false;
 

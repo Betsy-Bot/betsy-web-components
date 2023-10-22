@@ -1,6 +1,6 @@
 {
-  "name": "@besty/web-components",
-  "description": "Betsy Web Components",
+  "name": "@bestybot/web-components",
+  "description": "Betsy Material Web 3 Components",
   "version": "0.0.1",
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
   },
   "main": "dist/index.js",
   "files": [
-    "dist"
+    "src"
   ],
   "scripts": {
     "lint:js": "eslint src test --ext .js,.ts",

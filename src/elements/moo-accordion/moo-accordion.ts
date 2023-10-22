@@ -13,6 +13,7 @@ export class MooAccordion implements ICustomElementViewModel {
         const accordionHeaders = document.querySelectorAll('.accordion-header');
         accordionHeaders.forEach(header => {
             if (header !== element) {
+                // @ts-ignore
                 header.parentElement.classList.remove('accordion-expanded');
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error
@@ -24,6 +25,7 @@ export class MooAccordion implements ICustomElementViewModel {
     attached() {
         this.accordionHeaderEl.addEventListener('click', () => {
             const content = this.accordionHeaderEl.nextElementSibling as HTMLElement;
+            // @ts-ignore
             const isOpen = this.accordionHeaderEl.parentElement.classList.contains('accordion-expanded');
 
             this.closeAllOtherAccordions(this.accordionHeaderEl);
@@ -34,6 +36,7 @@ export class MooAccordion implements ICustomElementViewModel {
                 content.style.maxHeight = (content.scrollHeight + 50) + 'px';
             }
 
+            // @ts-ignore
             this.accordionHeaderEl.parentElement.classList.toggle('accordion-expanded');
         });
     }
