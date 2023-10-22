@@ -35,9 +35,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "chart.js": "latest",
     "@aurelia/validation-html": "latest",
-    "@darkguy10/discord-markdown": "^2.6.0",
     "@emoji-mart/data": "^1.1.2",
     "@material/banner": "^14.0.0",
     "@material/card": "^14.0.0",
@@ -59,13 +57,8 @@
     "@material/web": "^1.0.1",
     "@microsoft/signalr": "^7.0.12",
     "aurelia": "2.0.0-beta.8",
-    "aurelia-fetch-client": "^1.8.2",
-    "bootstrap": "^5.3.2",
     "devextreme": "^23.1.5",
-    "emoji-mart": "^5.5.2",
     "flatpickr": "^4.6.13",
-    "ink-mde": "^0.29.1",
-    "lets-toast": "^1.0.1",
     "material-icons": "^1.13.12"
   },
   "devDependencies": {
@@ -78,9 +71,7 @@
     "@typescript-eslint/parser": "^5.47.1",
     "autoprefixer": "^10.4.13",
     "css-loader": "^6.7.3",
-    "dotenv-webpack": "^8.0.1",
     "eslint": "^8.36.0",
-    "html-webpack-plugin": "^5.5.0",
     "htmlhint": "^1.1.4",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
