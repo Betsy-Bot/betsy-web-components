@@ -1,11 +1,12 @@
 {
   "name": "@worm425/betsy-web-components",
   "description": "Betsy Material Web 3 Components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/Betsy-Bot/betsy-web-components"
   },
+  "source": "index.html",
   "author": "Betsy Bot",
   "homepage": "./",
   "license": "MIT",
@@ -160,6 +161,11 @@
         "@semantic-release/github"
       ],
       "preset": "angular"
+    },
+    "aurelia": {
+      "defaultShadowOptions": {
+        "mode": "open"
+      }
     }
   }
 }
