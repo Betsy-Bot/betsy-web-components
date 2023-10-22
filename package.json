@@ -4,14 +4,11 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://dev.azure.com/betsy-bot/Betsy%20Bot%20Public/_git/Betsy%20Web%20Components"
+    "url": "https://github.com/Betsy-Bot/betsy-web-components"
   },
   "author": "Betsy Bot",
   "homepage": "./",
   "license": "MIT",
-  "engines": {
-    "node": ">=16.0.0"
-  },
   "browser": {
     "http": false
   },
@@ -19,8 +16,15 @@
   "files": [
     "src"
   ],
+  "engineStrict": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=7.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.8.0",
   "scripts": {
-    "lint:js": "eslint src test --ext .js,.ts",
+    "lint:js": "eslint src --ext .js,.ts",
     "lint:html": "htmlhint -c .htmlhintrc src",
     "lint": "npm run lint:js && npm run lint:html",
     "clean": "npx -y rimraf node_modules package-lock.json && npm i",
@@ -116,6 +120,36 @@
       "ts-jest": {
         "isolatedModules": true
       }
+    },
+    "release": {
+      "branches": [
+        "release",
+        {
+          "channel": "channel-${name}",
+          "name": "next-major",
+          "prerelease": true
+        },
+        {
+          "channel": "channel-${name}",
+          "name": "preview",
+          "prerelease": true
+        },
+        "+([0-9])?(.{+([0-9]),x}).x"
+      ],
+      "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        [
+          "@semantic-release/changelog",
+          {
+            "changelogTitle": "# Changelog"
+          }
+        ],
+        "@semantic-release/npm",
+        "@semantic-release/git",
+        "@semantic-release/github"
+      ],
+      "preset": "angular"
     }
   }
 }

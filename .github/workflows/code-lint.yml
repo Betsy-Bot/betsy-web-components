@@ -1,0 +1,33 @@
+name: Lint Code
+
+on:
+  push:
+    branches:
+      - release
+      - feature/*
+      - preview
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@d882d12c64e032187b2edb46d3a0d003b7a43598
+
+      - name: Setup Node with pnpm Cache
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Run pnpm Install
+        run: pnpm i
+
+      - name: Code Lint
+        run: pnpm run lint
