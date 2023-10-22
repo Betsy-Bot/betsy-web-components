@@ -1,7 +1,7 @@
 {
   "name": "@worm425/betsy-web-components",
   "description": "Betsy Material Web 3 Components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/Betsy-Bot/betsy-web-components"
@@ -12,15 +12,23 @@
   "browser": {
     "http": false
   },
-  "main": "dist/index.js",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.js",
+  "typings": "./dist/src/index.d.ts",
   "files": [
-    "src"
+    "dist"
   ],
   "engineStrict": true,
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=7.0.0",
     "pnpm": ">=8.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs.js"
+    }
   },
   "packageManager": "pnpm@8.8.0",
   "scripts": {
@@ -63,8 +71,6 @@
   },
   "devDependencies": {
     "@aurelia/testing": "latest",
-    "@aurelia/router-lite": "2.0.0-beta.8",
-    "@aurelia/vite-plugin": "2.0.0-beta.8",
     "@types/jest": "^29.2.4",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
@@ -85,7 +91,19 @@
     "ts-loader": "^9.4.2",
     "tslib": "^2.4.1",
     "typescript": "^4.9.4",
-    "vite": "^4.5.0"
+    "vite": "^4.5.0",
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "rollup-plugin-typescript-paths": "^1.4.0"
+  },
+  "peerDependencies": {
+    "@aurelia/vite-plugin": "latest",
+    "@aurelia/platform-browser": "latest",
+    "@aurelia/kernel": "latest",
+    "@aurelia/runtime": "latest",
+    "@aurelia/runtime-html": "latest",
+    "@aurelia/router-lite": "latest",
+    "@aurelia/validation-html": "latest"
   },
   "jest": {
     "testMatch": [
