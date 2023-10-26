@@ -5,7 +5,9 @@ import * as Elements from './resources/elements';
 import * as ValueConverters from './resources/value-converters';
 import { App } from './app';
 
-import { BetsyWebComponentsPlugin } from '@worm425/betsy-web-components';
+import '@worm425/betsy-web-components/dist/style.css';
+
+import * as BetsyWebComponentsPlugin from '@worm425/betsy-web-components';
 
 await Aurelia
     .register(
