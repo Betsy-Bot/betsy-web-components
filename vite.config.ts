@@ -13,6 +13,7 @@ export default defineConfig({
         manifest: true,
         minify: true,
         reportCompressedSize: true,
+        sourcemap: true,
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
             name: '@worm425/betsy-web-components',
@@ -26,7 +27,7 @@ export default defineConfig({
                     preserveExtensions: true,
                 }),
                 typescript({
-                    sourceMap: false,
+                    sourceMap: true,
                     declaration: true,
                     outDir: 'dist',
                     exclude: ['**/__tests__'],

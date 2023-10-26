@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "noEmit": true,
+    "composite": false,
+    "declaration": true,
     "strict": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -13,7 +15,9 @@
     "importHelpers": true,
     "forceConsistentCasingInFileNames": true,
     "strictNullChecks": true,
-    "rootDir": ".",
+    "rootDir": "src",
+    "declarationDir": "dist/types",
+    "outDir": "dist/esm",
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts"]
 }
