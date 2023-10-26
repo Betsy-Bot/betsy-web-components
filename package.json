@@ -49,7 +49,6 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@aurelia/validation-html": "latest",
     "@emoji-mart/data": "^1.1.2",
     "@material/banner": "^14.0.0",
     "@material/card": "^14.0.0",
@@ -70,13 +69,16 @@
     "@material/top-app-bar": "^14.0.0",
     "@material/web": "^1.0.1",
     "@microsoft/signalr": "^7.0.12",
-    "aurelia": "2.0.0-beta.8",
     "devextreme": "^23.1.5",
     "flatpickr": "^4.6.13",
     "material-icons": "^1.13.12"
   },
   "devDependencies": {
     "@aurelia/testing": "latest",
+    "@aurelia/vite-plugin": "latest",
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.0",
     "@types/jest": "^29.2.4",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
@@ -91,6 +93,7 @@
     "postcss": "^8.4.20",
     "postcss-loader": "^7.0.2",
     "rimraf": "^3.0.2",
+    "rollup-plugin-typescript-paths": "^1.4.0",
     "sass": "^1.59.3",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.2",
@@ -98,18 +101,17 @@
     "tslib": "^2.4.1",
     "typescript": "^4.9.4",
     "vite": "^4.5.0",
-    "@rollup/plugin-commonjs": "^24.1.0",
-    "@rollup/plugin-typescript": "^11.1.0",
-    "rollup-plugin-typescript-paths": "^1.4.0"
+    "vite-plugin-commonjs": "^0.10.0",
+    "unplugin-swc": "^1.4.3"
   },
   "peerDependencies": {
-    "@aurelia/vite-plugin": "latest",
-    "@aurelia/platform-browser": "latest",
     "@aurelia/kernel": "latest",
+    "@aurelia/platform-browser": "latest",
+    "@aurelia/router-lite": "latest",
     "@aurelia/runtime": "latest",
     "@aurelia/runtime-html": "latest",
-    "@aurelia/router-lite": "latest",
-    "@aurelia/validation-html": "latest"
+    "@aurelia/validation-html": "latest",
+    "aurelia": "latest"
   },
   "jest": {
     "testMatch": [
