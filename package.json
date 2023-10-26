@@ -1,7 +1,7 @@
 {
   "name": "@worm425/betsy-web-components",
   "description": "Betsy Material Web 3 Components",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "repository": {
     "type": "git",
     "url": "https://github.com/Betsy-Bot/betsy-web-components"
@@ -111,7 +111,7 @@
     "@aurelia/runtime": "latest",
     "@aurelia/runtime-html": "latest",
     "@aurelia/validation-html": "latest",
-    "aurelia": "latest"
+    "@aurelia/platform": "latest"
   },
   "jest": {
     "testMatch": [

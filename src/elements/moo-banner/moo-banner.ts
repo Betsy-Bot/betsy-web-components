@@ -1,8 +1,7 @@
-import { bindable, BindingMode, containerless, ICustomElementViewModel } from 'aurelia';
-
 import './moo-banner.scss';
 
 import { CloseReason, MDCBanner } from '@material/banner';
+import {bindable, BindingMode, containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
 
 @containerless()
 export class MooBanner implements ICustomElementViewModel {

@@ -1,4 +1,5 @@
-import { bindable, customAttribute, ICustomAttributeViewModel, INode, IPlatform } from 'aurelia';
+import {bindable, customAttribute, ICustomAttributeViewModel, INode} from "@aurelia/runtime-html";
+import {IPlatform} from "@aurelia/kernel";
 
 @customAttribute({ name: 'link', noMultiBindings: true })
 export class Link implements ICustomAttributeViewModel {
@@ -9,6 +10,8 @@ export class Link implements ICustomAttributeViewModel {
   }
 
   clickEvent = () => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
       this.platform.window.open(this.value, '_blank');
   };
 

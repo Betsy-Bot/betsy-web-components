@@ -1,13 +1,7 @@
-import {
-    bindable,
-    BindingMode,
-    containerless,
-    ICustomElementViewModel,
-} from 'aurelia';
-
 import '@material/web/switch/switch';
 
 import { MdSwitch } from '@material/web/all';
+import {bindable, BindingMode, containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
 
 @containerless()
 export class MooSwitch implements ICustomElementViewModel {
