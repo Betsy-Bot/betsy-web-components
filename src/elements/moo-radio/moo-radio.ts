@@ -4,13 +4,13 @@ import './moo-radio.scss'
 
 import { MDCRadio } from '@material/radio';
 
-@containerless()
 export class MooRadio implements ICustomElementViewModel {
-    @bindable label;
+    static containerless = true;
+    @bindable label: string;
     @bindable options;
     @bindable({ mode: BindingMode.twoWay }) model;
     @bindable({ mode: BindingMode.twoWay }) value;
-    @bindable class;
+    @bindable class: string;
     @bindable disabled: boolean;
     checked = false;
     radioEl: HTMLElement;

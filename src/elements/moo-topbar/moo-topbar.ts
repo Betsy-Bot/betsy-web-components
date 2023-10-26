@@ -1,10 +1,10 @@
 import './moo-topbar.scss';
 
 import { MDCTopAppBar } from '@material/top-app-bar';
-import {containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
+import { ICustomElementViewModel } from "@aurelia/runtime-html";
 
-@containerless()
 export class MooTopbar implements ICustomElementViewModel {
+    static containerless = true;
     header: HTMLElement;
     attached() {
         new MDCTopAppBar(this.header);

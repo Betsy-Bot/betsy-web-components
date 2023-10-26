@@ -1,11 +1,12 @@
 import './moo-tab-bar.scss';
 
 import { MDCTabBar } from '@material/tab-bar';
-import {bindable, capture, containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
+import {bindable, ICustomElementViewModel} from "@aurelia/runtime-html";
 
-@containerless()
-@capture()
+
 export class MooTabBar implements ICustomElementViewModel {
+    static containerless = true;
+    static capture = true;
     @bindable id: string;
     @bindable class: string;
     tabBarEl: HTMLButtonElement;
