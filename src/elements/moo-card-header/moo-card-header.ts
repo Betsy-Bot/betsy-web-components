@@ -1,5 +1,4 @@
-import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
-
+import {bindable, containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
 
 @containerless()
 export class MooCardHeader implements ICustomElementViewModel {

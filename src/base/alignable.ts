@@ -1,4 +1,4 @@
-import { bindable } from 'aurelia';
+import {bindable} from "@aurelia/runtime-html";
 
 export abstract class Alignable {
   @bindable alignItems?: CSSStyleDeclaration['alignItems'];

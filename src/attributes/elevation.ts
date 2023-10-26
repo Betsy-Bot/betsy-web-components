@@ -1,4 +1,4 @@
-import { bindable, customAttribute, ICustomAttributeViewModel, INode } from 'aurelia';
+import {bindable, customAttribute, ICustomAttributeViewModel, INode} from "@aurelia/runtime-html";
 
 @customAttribute({ name: 'elevation' })
 export class Elevation implements ICustomAttributeViewModel {

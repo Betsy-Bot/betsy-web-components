@@ -1,8 +1,7 @@
-import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
-
 import './moo-form-field.scss';
 
 import { MDCFormField } from '@material/form-field';
+import {bindable, containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
 
 @containerless()
 export class MooFormField implements ICustomElementViewModel {

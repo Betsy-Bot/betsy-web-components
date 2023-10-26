@@ -1,8 +1,7 @@
-import { containerless, ICustomElementViewModel } from 'aurelia';
-
 import './moo-topbar.scss';
 
 import { MDCTopAppBar } from '@material/top-app-bar';
+import {containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
 
 @containerless()
 export class MooTopbar implements ICustomElementViewModel {
