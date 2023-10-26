@@ -1,7 +1,7 @@
 {
   "name": "@worm425/betsy-web-components",
   "description": "Betsy Material Web 3 Components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/Betsy-Bot/betsy-web-components"
@@ -43,6 +43,7 @@
     "lint:js": "eslint src --ext .js,.ts",
     "lint:html": "htmlhint -c .htmlhintrc src",
     "lint": "npm run lint:js && npm run lint:html",
+    "prepublishOnly": "npm version patch && npx rimraf dist && npm run build",
     "semantic-release": "npx -p @semantic-release/changelog -p @semantic-release/exec -p @semantic-release/git -p @semantic-release/github -p @semantic-release/npm -p @semantic-release/release-notes-generator semantic-release",
     "start": "vite",
     "typecheck": "tsc"
