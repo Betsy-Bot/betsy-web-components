@@ -1,10 +1,10 @@
 import './moo-drawer.scss';
 
 import { MDCDrawer } from '@material/drawer';
-import {bindable, containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
+import {bindable, ICustomElementViewModel} from "@aurelia/runtime-html";
 
-@containerless()
 export class MooDrawer implements ICustomElementViewModel {
+    static containerless = true;
     @bindable open: boolean;
     drawerEl: HTMLElement;
     drawer: MDCDrawer;

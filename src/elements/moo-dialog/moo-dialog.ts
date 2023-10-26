@@ -3,8 +3,9 @@ import './moo-dialog.scss';
 
 import { MDCDialog, MDCDialogCloseEvent } from '@material/dialog';
 import {bindable, BindingMode, containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
-@containerless()
+
 export class MooDialog implements ICustomElementViewModel {
+    static containerless = true;
     @bindable dialogEl: HTMLElement;
     @bindable({ mode: BindingMode.twoWay }) dialog: MDCDialog;
     @bindable handler?: (Event) => void;

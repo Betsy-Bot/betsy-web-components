@@ -1,7 +1,7 @@
 import './moo-card.scss';
 import {bindable, containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
 
-@containerless()
 export class MooCard implements ICustomElementViewModel {
+    static containerless = true;
     @bindable outlined: boolean;
 }

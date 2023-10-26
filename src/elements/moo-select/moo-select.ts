@@ -1,8 +1,8 @@
 import { MDCSelect } from '@material/select';
-import {bindable, BindingMode, containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
+import {bindable, BindingMode, ICustomElementViewModel} from "@aurelia/runtime-html";
 
-@containerless()
 export class MooSelect implements ICustomElementViewModel {
+    static containerless = true;
     @bindable label: string;
     @bindable options;
     @bindable({ mode: BindingMode.twoWay }) value: string | number | undefined;

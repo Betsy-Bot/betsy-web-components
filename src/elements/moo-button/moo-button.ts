@@ -3,8 +3,8 @@ import {bindable, containerless, ICustomElementViewModel} from "@aurelia/runtime
 
 export type MOO_BUTTON_VARIANT = 'primary' | 'secondary';
 
-@containerless()
 export class MooButton implements ICustomElementViewModel {
+    static containerless = true;
     button: HTMLButtonElement;
     @bindable label: string;
     @bindable type: string;

@@ -1,11 +1,11 @@
 import './moo-chip-set.scss';
 
 import { MDCChipSet } from '@material/chips';
-import {bindable, containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
+import {bindable, ICustomElementViewModel} from "@aurelia/runtime-html";
 
 
-@containerless()
 export class MooChipSet implements ICustomElementViewModel {
+    static containerless = true;
     chipSetEl: HTMLElement;
     @bindable size: number;
     attached() {
