@@ -20,6 +20,7 @@
         "update-services": "npx orval@latest"
     },
     "dependencies": {
+        "@worm425/betsy-web-components": "0.0.5",
         "@darkguy10/discord-markdown": "^2.6.0",
         "@emoji-mart/data": "^1.1.2",
         "@material/banner": "^14.0.0",
