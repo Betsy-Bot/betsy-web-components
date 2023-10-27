@@ -3,12 +3,12 @@ import aurelia from '@aurelia/vite-plugin';
 import path from 'path';
 import typescript from '@rollup/plugin-typescript';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
-import commonjs from 'vite-plugin-commonjs'
 import swc from 'unplugin-swc'
+import * as packageJson from './package.json';
+const external: Array<string | RegExp> = Object.keys(packageJson.peerDependencies).concat(Object.keys(packageJson.dependencies)).concat([/(\@material|devextreme)/] as any);
 
 export default defineConfig({
     plugins: [
-        commonjs(),
         aurelia(),
         swc.vite()
     ],
@@ -24,10 +24,8 @@ export default defineConfig({
             formats: ['es', 'cjs'],
         },
         rollupOptions: {
-            external: /node_modules\/.*/,
+            external,
             plugins: [
-                aurelia(),
-                commonjs(),
                 typescriptPaths({
                     preserveExtensions: true,
                 }),
@@ -37,7 +35,7 @@ export default defineConfig({
                     outDir: 'dist',
                     exclude: ['**/__tests__'],
                     tsconfig: './tsconfig.build.json',
-                }),
+                })
             ],
         },
     },
