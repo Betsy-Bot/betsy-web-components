@@ -33,7 +33,8 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./dist/style.css": "./dist/style.css"
   },
   "packageManager": "pnpm@8.8.0",
   "scripts": {
