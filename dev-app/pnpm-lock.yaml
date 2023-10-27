@@ -35,8 +35,8 @@ devDependencies:
     specifier: ^5.60.1
     version: 5.62.0(eslint@8.52.0)(typescript@5.2.2)
   '@worm425/betsy-web-components':
-    specifier: 0.0.11
-    version: 0.0.11
+    specifier: 0.0.13
+    version: 0.0.13
   autoprefixer:
     specifier: ^10.4.14
     version: 10.4.16(postcss@8.4.31)
@@ -2058,8 +2058,8 @@ packages:
       webpack-dev-server: 4.15.1(webpack-cli@5.1.4)(webpack@5.89.0)
     dev: true
 
-  /@worm425/betsy-web-components@0.0.11:
-    resolution: {integrity: sha512-HbEYkTATcwDXlnBfPTi2x2PzVpc5Lq71o0Tfg9yuRpz2TISBqN+MiDWy0cMI3ORVXOOCBO8Um/m4nTuXpjZovw==}
+  /@worm425/betsy-web-components@0.0.13:
+    resolution: {integrity: sha512-4aeH6qXNx89lexI+xeMSyOeHGRIgA2UlES50RLGkowKy9SfnB+skwqqbaFZsm+DVVaZYoNfpIsHezyGd6e5gmw==}
     engines: {node: '>=18.0.0', npm: '>=7.0.0', pnpm: '>=8.0.0'}
     peerDependencies:
       '@aurelia/kernel': latest
