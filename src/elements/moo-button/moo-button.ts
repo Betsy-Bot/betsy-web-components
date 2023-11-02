@@ -1,5 +1,5 @@
 import './moo-button.scss';
-import {bindable, containerless, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
+import {bindable, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
 
 export type MOO_BUTTON_VARIANT = 'primary' | 'secondary';
 import template from './moo-button.html?raw';
