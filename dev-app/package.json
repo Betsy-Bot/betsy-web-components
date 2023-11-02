@@ -12,7 +12,7 @@
     "@aurelia/router": "latest"
   },
   "devDependencies": {
-    "@worm425/betsy-web-components": "0.0.13",
+    "@worm425/betsy-web-components": "0.0.14",
     "eslint": "^8.43.0",
     "@aurelia/testing": "latest",
     "htmlhint": "^1.1.4",
