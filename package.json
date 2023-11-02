@@ -50,7 +50,6 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@emoji-mart/data": "^1.1.2",
     "@material/banner": "^14.0.0",
     "@material/card": "^14.0.0",
     "@material/checkbox": "^14.0.0",
@@ -70,7 +69,6 @@
     "@material/top-app-bar": "^14.0.0",
     "@material/web": "^1.0.1",
     "@microsoft/signalr": "^7.0.12",
-    "devextreme": "^23.1.5",
     "flatpickr": "^4.6.13",
     "material-icons": "^1.13.12",
     "tslib": "^2.4.1"
