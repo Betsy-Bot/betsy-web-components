@@ -11,11 +11,13 @@ Note this plugin project comes with a dev-app. The above command starts the dev 
 
 Install the npm package
 
-    pnpm install @betsybot/web-components
+    npm install @worm425/betsy-web-components
 
 Register the components in your `main.ts` or `main.js` file
 ```js
 import * as BetsyWebComponentsPlugin from '@betsybot/web-components';
+//Don't forget the styles!
+import '@worm425/betsy-web-components/dist/style.css';
 
 Aurelia
     // Load all exports from the plugin
