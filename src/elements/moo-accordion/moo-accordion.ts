@@ -1,10 +1,9 @@
 import './moo-accordion.scss';
-import {bindable, ICustomElementViewModel} from "@aurelia/runtime-html";
+import {bindable, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
 
+import template from './moo-accordion.html?raw';
+@customElement({name:'moo-accordion', template, containerless: true, capture: true})
 export class MooAccordion implements ICustomElementViewModel {
-    static containerless = true;
-    static capture = true;
-
     @bindable header: string;
     accordionItemEl: HTMLElement;
     accordionHeaderEl: HTMLElement;

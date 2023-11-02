@@ -1,10 +1,11 @@
 import './moo-menu.scss';
 
 import { MDCMenu } from '@material/menu';
-import {bindable, containerless, ICustomElementViewModel} from "@aurelia/runtime-html";
+import {bindable, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
 
+import template from './moo-menu.html?raw';
+@customElement({name:'moo-menu', template, containerless: true})
 export class MooMenu implements ICustomElementViewModel {
-    static containerless = true;
     @bindable open = false;
     menuEl: HTMLElement;
     menu: MDCMenu;
