@@ -38,7 +38,7 @@
   },
   "packageManager": "pnpm@8.8.0",
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "npx rimraf dist && tsc && vite build",
     "build:dev": "vite build --mode development",
     "clean": "npx -y rimraf node_modules package-lock.json && npm i",
     "lint:js": "eslint src --ext .js,.ts",
@@ -63,7 +63,6 @@
     "@material/list": "^14.0.0",
     "@material/menu": "^14.0.0",
     "@material/radio": "^14.0.0",
-    "@material/select": "^14.0.0",
     "@material/tab-bar": "^14.0.0",
     "@material/textfield": "^14.0.0",
     "@material/top-app-bar": "^14.0.0",
