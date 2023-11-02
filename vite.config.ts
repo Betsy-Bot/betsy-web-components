@@ -5,41 +5,27 @@ import typescript from '@rollup/plugin-typescript';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
 import swc from 'unplugin-swc'
 import * as packageJson from './package.json';
+import { createFilter } from '@rollup/pluginutils';
 
-const external: Array<string | RegExp> = Object.keys(packageJson.peerDependencies).concat(Object.keys(packageJson.dependencies)).concat([/(\@material|devextreme)/] as any);
+const external: Array<string | RegExp> = Object.keys(packageJson.peerDependencies).concat(Object.keys(packageJson.dependencies)).concat([/(@material|devextreme)/] as any);
+
+
+export const rawHtml = () => {
+    const filter = createFilter('*/.ts', undefined);
+    return {
+        name: 'raw',
+        transform: function transform(code: string, id: string) {
+            if (!filter(id)) return;
+            if (code.includes('__au2ViewDef')) return;
+            code = code.replaceAll(/(import .* from .*).html/g, '$1.html?raw');
+            return { code };
+        },
+    };
+};
 
 export default defineConfig({
     plugins: [
-        aurelia({
-            exclude: [
-                '**/moo-accordion.**',
-                '**/moo-banner.**',
-                '**/moo-button.**',
-                '**/moo-card.**',
-                '**/moo-card-content.**',
-                '**/moo-card-footer.**',
-                '**/moo-card-header.**',
-                '**/moo-checkbox.**',
-                '**/moo-chip.**',
-                '**/moo-chip-set.**',
-                '**/moo-circular-progress.**',
-                '**/moo-data-grid.**',
-                '**/moo-dialog.**',
-                '**/moo-drawer.**',
-                '**/moo-fab.**',
-                '**/moo-form-field.**',
-                '**/moo-list.**',
-                '**/moo-list-item.**',
-                '**/moo-menu.**',
-                '**/moo-radio.**',
-                '**/moo-select.**',
-                '**/moo-switch.**',
-                '**/moo-tab.**',
-                '**/moo-tab-bar.**',
-                '**/moo-text-field.**',
-                '**/moo-topbar.**'
-            ]
-        }),
+        aurelia(),
         swc.vite()
     ],
     build: {
@@ -65,7 +51,8 @@ export default defineConfig({
                     outDir: 'dist',
                     exclude: ['**/__tests__'],
                     tsconfig: './tsconfig.build.json',
-                })
+                }),
+                rawHtml()
             ],
         },
     },
