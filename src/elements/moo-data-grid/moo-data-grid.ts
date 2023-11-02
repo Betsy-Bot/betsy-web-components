@@ -1,10 +1,11 @@
 import 'devextreme/dist/css/dx.material.purple.dark.compact.css';
 
 import DataGrid from 'devextreme/ui/data_grid';
-import {bindable, BindingMode, ICustomElementViewModel} from "@aurelia/runtime-html";
+import {bindable, BindingMode, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
 
+import template from './moo-data-grid.html?raw';
+@customElement({name:'moo-data-grid', template, containerless: true})
 export class MooDataGrid implements ICustomElementViewModel {
-    static containerless = true;
     @bindable items = null;
     @bindable columns;
     @bindable load;

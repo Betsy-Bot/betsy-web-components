@@ -11,7 +11,18 @@ const external: Array<string | RegExp> = Object.keys(packageJson.peerDependencie
 export default defineConfig({
     plugins: [
         aurelia({
-            exclude: '**/moo-button.**'
+            exclude: [
+                '**/moo-accordion.**',
+                '**/moo-banner.**',
+                '**/moo-button.**',
+                '**/moo-card.**',
+                '**/moo-card-content.**',
+                '**/moo-card-footer.**',
+                '**/moo-tab.**',
+                '**/moo-tab-bar.**',
+                '**/moo-text-field.**',
+                '**/moo-topbar.**'
+            ]
         }),
         swc.vite()
     ],
