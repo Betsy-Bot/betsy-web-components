@@ -1,7 +1,6 @@
 import {
     bindable,
     BindingMode,
-    containerless,
     customElement,
     ICustomElementViewModel,
     watch
@@ -9,15 +8,16 @@ import {
 
 import './moo-radio.scss'
 
-import { MDCRadio } from '@material/radio';
+import {MDCRadio} from '@material/radio';
 
 import template from './moo-radio.html?raw';
-@customElement({name:'moo-radio', template, containerless: true})
+
+@customElement({name: 'moo-radio', template, containerless: true})
 export class MooRadio implements ICustomElementViewModel {
     @bindable label: string;
     @bindable options;
-    @bindable({ mode: BindingMode.twoWay }) model;
-    @bindable({ mode: BindingMode.twoWay }) value;
+    @bindable({mode: BindingMode.twoWay}) model;
+    @bindable({mode: BindingMode.twoWay}) value;
     @bindable class: string;
     @bindable disabled: boolean;
     checked = false;
