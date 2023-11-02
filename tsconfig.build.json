@@ -18,6 +18,12 @@
     "rootDir": "src",
     "declarationDir": "dist/types",
     "outDir": "dist/esm",
+    "types": [
+      "vite/client"
+    ]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts"
+  ]
 }

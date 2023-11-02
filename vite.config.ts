@@ -5,11 +5,14 @@ import typescript from '@rollup/plugin-typescript';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
 import swc from 'unplugin-swc'
 import * as packageJson from './package.json';
+
 const external: Array<string | RegExp> = Object.keys(packageJson.peerDependencies).concat(Object.keys(packageJson.dependencies)).concat([/(\@material|devextreme)/] as any);
 
 export default defineConfig({
     plugins: [
-        aurelia(),
+        aurelia({
+            exclude: '**/moo-button.**'
+        }),
         swc.vite()
     ],
     build: {
