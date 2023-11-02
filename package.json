@@ -44,7 +44,7 @@
     "lint:js": "eslint src --ext .js,.ts",
     "lint:html": "htmlhint -c .htmlhintrc src",
     "lint": "npm run lint:js && npm run lint:html",
-    "prepublishOnly": "npm version patch && npx rimraf dist && npm run build",
+    "prepublishOnly": "npx rimraf dist && npm run build && npm version patch",
     "semantic-release": "npx -p @semantic-release/changelog -p @semantic-release/exec -p @semantic-release/git -p @semantic-release/github -p @semantic-release/npm -p @semantic-release/release-notes-generator semantic-release",
     "start": "vite",
     "typecheck": "tsc"
