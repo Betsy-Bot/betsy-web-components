@@ -44,5 +44,4 @@ jobs:
 
       - name: Commit changes
         run: |
-          git commit -am "Automated report"
           git push
