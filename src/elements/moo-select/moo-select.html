@@ -2,32 +2,34 @@
     <h4 class="text-danger">SELECT NEEDS UPDATE</h4>
 </div>
 <md-outlined-select
-        ...$attrs
-        if.bind="selectType === 'outlined'"
-        class.bind="class"
-        required.bind="required"
-        onchange.bind="(e) => handleChange(e)"
-        label.bind="label"
-        value.bind="value"
+    ...$attrs
+    if.bind="selectType === 'outlined'"
+    class.bind="class"
+    required.bind="required"
+    onchange.bind="(e) => handleChange(e)"
+    label.bind="label"
+    value.bind="value"
+    ref="selectEl"
 >
-    <md-select-option aria-label="blank" if.bind="includeNull"></md-select-option>
-    <md-select-option repeat.for="option of options" value.bind="option.value">
+    <md-select-option aria-label="blank" if.bind="includeNull" selected.bind="shouldBeSelected(null)"></md-select-option>
+    <md-select-option repeat.for="option of options" value.bind="option.value" selected.bind="shouldBeSelected(option)">
         <div slot="headline">${option.label}</div>
     </md-select-option>
 </md-outlined-select>
 
 
 <md-filled-select
-        ...$attrs
-        else
-        class.bind="class"
-        required.bind="required"
-        onchange.bind="(e) => handleChange(e)"
-        label.bind="label"
-        value.bind="value"
+    ...$attrs
+    else
+    class.bind="class"
+    required.bind="required"
+    onchange.bind="(e) => handleChange(e)"
+    label.bind="label"
+    value.bind="value"
+    ref="selectEl"
 >
-    <md-select-option aria-label="blank" if.bind="includeNull"></md-select-option>
-    <md-select-option repeat.for="option of options" value.bind="option.value">
+    <md-select-option aria-label="blank" if.bind="includeNull" selected.bind="shouldBeSelected(null)"></md-select-option>
+    <md-select-option repeat.for="option of options" value.bind="option.value" selected.bind="shouldBeSelected(option)">
         <div slot="headline">${option.label}</div>
     </md-select-option>
 </md-filled-select>
