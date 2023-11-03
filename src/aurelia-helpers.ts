@@ -1,15 +1,10 @@
 import {
-    Constructable,
     Controller,
     CustomElement,
-    IAurelia,
-    IContainer,
-    Resolved,
-} from 'aurelia';
-import {
-    CustomElementDefinition,
+    CustomElementDefinition, IAurelia,
     ICustomElementController,
 } from '@aurelia/runtime-html';
+import {Constructable, IContainer, Resolved} from "@aurelia/kernel";
 
 export function createCustomElement<T extends Constructable = Constructable>(
     component: T,

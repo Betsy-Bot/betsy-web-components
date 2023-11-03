@@ -1,7 +1,7 @@
-import { bindable, BindingMode, containerless, ICustomElementViewModel } from 'aurelia';
+import {bindable, BindingMode, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
 
-
-@containerless()
+import template from './moo-tab.html?raw';
+@customElement({name:'moo-tab', template, containerless: true})
 export class MooTab implements ICustomElementViewModel {
     @bindable({ mode: BindingMode.twoWay }) active: boolean;
     @bindable id;

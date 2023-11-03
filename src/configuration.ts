@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
-import { DI } from 'aurelia';
+import {DI} from "@aurelia/kernel";
 
 export const IBetsyWebComponentsConfiguration = DI.createInterface<BetsyWebComponentsConfiguration>('IBetsyWebComponentsConfiguration');
 

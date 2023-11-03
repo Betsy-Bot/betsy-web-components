@@ -1,10 +1,9 @@
-import { bindable, BindingMode, containerless, ICustomElementViewModel } from 'aurelia';
-
 import './moo-checkbox.scss';
-
 import { MDCCheckbox } from '@material/checkbox';
+import {bindable, BindingMode, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
 
-@containerless()
+import template from './moo-checkbox.html?raw';
+@customElement({name:'moo-checkbox', template, containerless: true})
 export class MooCheckbox implements ICustomElementViewModel {
     checkboxEl: HTMLElement;
     @bindable({ mode: BindingMode.twoWay }) checked: boolean;

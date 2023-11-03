@@ -1,10 +1,10 @@
-import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
-
 import './moo-circular-progress.scss';
 
 import { MDCCircularProgress } from '@material/circular-progress';
+import {bindable, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
 
-@containerless()
+import template from './moo-circular-progress.html?raw';
+@customElement({name:'moo-circular-progress', template, containerless: true})
 export class MooCircularProgress implements ICustomElementViewModel {
     progressEl: HTMLElement;
     @bindable size: number;

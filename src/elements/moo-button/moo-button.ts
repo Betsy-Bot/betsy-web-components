@@ -1,10 +1,10 @@
-import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
-
 import './moo-button.scss';
+import {bindable, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
 
 export type MOO_BUTTON_VARIANT = 'primary' | 'secondary';
+import template from './moo-button.html?raw';
 
-@containerless()
+@customElement({name:'moo-button', template, containerless: true})
 export class MooButton implements ICustomElementViewModel {
     button: HTMLButtonElement;
     @bindable label: string;

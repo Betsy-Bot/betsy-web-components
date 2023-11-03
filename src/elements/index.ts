@@ -11,7 +11,6 @@ export * from './moo-text-field';
 export * from './moo-circular-progress';
 export * from './moo-fab';
 export * from './moo-switch';
-export * from './moo-data-grid';
 export * from './moo-tab-bar';
 export * from './moo-tab';
 export * from './moo-select';

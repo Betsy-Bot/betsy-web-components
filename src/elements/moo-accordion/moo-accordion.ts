@@ -1,9 +1,8 @@
-import { bindable, capture, containerless, ICustomElementViewModel } from 'aurelia';
-
 import './moo-accordion.scss';
+import {bindable, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
 
-@containerless()
-@capture()
+import template from './moo-accordion.html?raw';
+@customElement({name:'moo-accordion', template, containerless: true, capture: true})
 export class MooAccordion implements ICustomElementViewModel {
     @bindable header: string;
     accordionItemEl: HTMLElement;
@@ -13,6 +12,7 @@ export class MooAccordion implements ICustomElementViewModel {
         const accordionHeaders = document.querySelectorAll('.accordion-header');
         accordionHeaders.forEach(header => {
             if (header !== element) {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 header.parentElement.classList.remove('accordion-expanded');
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -25,6 +25,7 @@ export class MooAccordion implements ICustomElementViewModel {
     attached() {
         this.accordionHeaderEl.addEventListener('click', () => {
             const content = this.accordionHeaderEl.nextElementSibling as HTMLElement;
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             const isOpen = this.accordionHeaderEl.parentElement.classList.contains('accordion-expanded');
 
@@ -36,6 +37,7 @@ export class MooAccordion implements ICustomElementViewModel {
                 content.style.maxHeight = (content.scrollHeight + 50) + 'px';
             }
 
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             this.accordionHeaderEl.parentElement.classList.toggle('accordion-expanded');
         });

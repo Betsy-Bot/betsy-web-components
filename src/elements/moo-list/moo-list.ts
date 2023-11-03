@@ -1,8 +1,7 @@
-import { containerless, ICustomElementViewModel } from 'aurelia';
-
 import './moo-list.scss';
+import {customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
 
-@containerless()
+import template from './moo-list.html?raw';
+@customElement({name:'moo-list', template, containerless: true})
 export class MooList implements ICustomElementViewModel {
-
 }

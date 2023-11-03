@@ -1,17 +1,24 @@
-import { bindable, BindingMode, containerless, ICustomElementViewModel } from 'aurelia';
-import { watch } from '@aurelia/runtime-html';
+import {
+    bindable,
+    BindingMode,
+    customElement,
+    ICustomElementViewModel,
+    watch
+} from '@aurelia/runtime-html';
 
 import './moo-radio.scss'
 
-import { MDCRadio } from '@material/radio';
+import {MDCRadio} from '@material/radio';
 
-@containerless()
+import template from './moo-radio.html?raw';
+
+@customElement({name: 'moo-radio', template, containerless: true})
 export class MooRadio implements ICustomElementViewModel {
-    @bindable label;
+    @bindable label: string;
     @bindable options;
-    @bindable({ mode: BindingMode.twoWay }) model;
-    @bindable({ mode: BindingMode.twoWay }) value;
-    @bindable class;
+    @bindable({mode: BindingMode.twoWay}) model;
+    @bindable({mode: BindingMode.twoWay}) value;
+    @bindable class: string;
     @bindable disabled: boolean;
     checked = false;
     radioEl: HTMLElement;
