@@ -22,6 +22,9 @@
     "README.md",
     "LICENSE"
   ],
+  "publishConfig": {
+    "message": "%s [skip ci]"
+  },
   "engineStrict": true,
   "engines": {
     "node": ">=18.0.0",
