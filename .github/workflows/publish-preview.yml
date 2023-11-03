@@ -27,7 +27,7 @@ jobs:
         uses: pnpm/action-setup@d882d12c64e032187b2edb46d3a0d003b7a43598
 
       - name: Setup Node with pnpm Cache
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
@@ -37,6 +37,7 @@ jobs:
 
       - name: Run publish
         run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc.
           git config --global user.name 'Betsy CI'
           git config --global user.email 'support@betsybot.xyz'
           pnpm publish --no-git-checks
