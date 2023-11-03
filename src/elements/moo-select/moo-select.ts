@@ -25,7 +25,7 @@ export class MooSelect implements ICustomElementViewModel {
     }
 
     shouldBeSelected(option: IMooSelectOption | null) {
-        if (!this.includeNull && !this.value) {
+        if (this.includeNull && !this.value) {
             return true;
         }
         if (!option) {
