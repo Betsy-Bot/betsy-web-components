@@ -37,7 +37,7 @@ jobs:
 
       - name: Run publish
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc.
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           git config --global user.name 'Betsy CI'
           git config --global user.email 'support@betsybot.xyz'
           pnpm publish --no-git-checks
