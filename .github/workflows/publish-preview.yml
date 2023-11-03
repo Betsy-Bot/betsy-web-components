@@ -36,11 +36,12 @@ jobs:
         run: pnpm i
 
       - name: Run publish
-        run: pnpm publish --no-git-checks
-
-      - name: Commit changes
         run: |
           git config --global user.name 'Betsy CI'
           git config --global user.email 'support@betsybot.xyz'
+          pnpm publish --no-git-checks
+
+      - name: Commit changes
+        run: |
           git commit -am "Automated report"
           git push
