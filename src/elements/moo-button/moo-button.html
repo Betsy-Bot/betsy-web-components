@@ -7,6 +7,15 @@
     <au-slot></au-slot>
 </md-filled-button>
 
+<md-filled-tonal-button
+        ...$attrs
+        if.bind="variant === 'filled-tonal'"
+        disabled.bind="disabled"
+        data-mdc-dialog-action.bind="dataMdcDialogAction"
+>
+    <au-slot></au-slot>
+</md-filled-tonal-button>
+
 <md-outlined-button
     ...$attrs
     if.bind="variant === 'outlined'"
