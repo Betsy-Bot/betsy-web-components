@@ -1,37 +1,22 @@
-import './moo-button.scss';
-import {bindable, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
+import { bindable, customElement, ICustomElementViewModel } from '@aurelia/runtime-html';
 
-export type MOO_BUTTON_VARIANT = 'primary' | 'secondary';
+import '@material/web/icon/icon.js';
+import '@material/web/button/elevated-button.js';
+import '@material/web/button/filled-button.js';
+import '@material/web/button/outlined-button.js';
+import '@material/web/button/text-button.js';
+import '@material/web/button/filled-tonal-button.js';
+
+export type MOO_BUTTON_MD_TYPE = 'filled' | 'outlined' | 'text' | 'elevated';
 import template from './moo-button.html?raw';
 
-@customElement({name:'moo-button', template, containerless: true})
+@customElement({ name: 'moo-button', template, containerless: true, capture: true })
 export class MooButton implements ICustomElementViewModel {
     button: HTMLButtonElement;
     @bindable label: string;
-    @bindable type: string;
+    @bindable mdType: MOO_BUTTON_MD_TYPE = 'filled';
     @bindable icon: string;
-    @bindable variant: MOO_BUTTON_VARIANT = 'primary';
-    @bindable class = '';
     @bindable click: () => void;
     @bindable dataMdcDialogAction;
     @bindable disabled = false;
-
-    get colorClass() {
-        switch (this.variant) {
-            case 'primary':
-                return '';
-            case 'secondary':
-                return 'moo-button-secondary';
-        }
-    }
-
-    handleClick() {
-        if (this.click) {
-            this.click();
-        }
-    }
-
-    get hasClickFunction() {
-        return typeof this.click === 'function';
-    }
 }
