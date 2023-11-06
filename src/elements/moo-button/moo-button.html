@@ -1,6 +1,6 @@
 <md-filled-button
     ...$attrs
-    if.bind="mdType === 'filled'"
+    if.bind="variant === 'filled'"
     disabled.bind="disabled"
     data-mdc-dialog-action.bind="dataMdcDialogAction"
 >
@@ -10,7 +10,7 @@
 
 <md-outlined-button
     ...$attrs
-    if.bind="mdType === 'outlined'"
+    if.bind="variant === 'outlined'"
     disabled.bind="disabled"
     data-mdc-dialog-action.bind="dataMdcDialogAction"
 >
@@ -20,7 +20,7 @@
 
 <md-text-button
     ...$attrs
-    if.bind="mdType === 'text'"
+    if.bind="variant === 'text'"
     disabled.bind="disabled"
     data-mdc-dialog-action.bind="dataMdcDialogAction"
 >
@@ -30,7 +30,7 @@
 
 <md-elevated-button
     ...$attrs
-    if.bind="mdType === 'elevated'"
+    if.bind="variant === 'elevated'"
     disabled.bind="disabled"
     data-mdc-dialog-action.bind="dataMdcDialogAction"
 >
