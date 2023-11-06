@@ -56,9 +56,6 @@ dependencies:
   '@material/icon-button':
     specifier: ^14.0.0
     version: 14.0.0
-  '@material/list':
-    specifier: ^14.0.0
-    version: 14.0.0
   '@material/menu':
     specifier: ^14.0.0
     version: 14.0.0

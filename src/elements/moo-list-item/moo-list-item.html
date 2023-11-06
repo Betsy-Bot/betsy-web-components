@@ -1,10 +1,6 @@
-<a load="${route}" if.bind="route">
-    <li class="mdc-deprecated-list-item ${disabledClass}" data-value="${value}">
-        <span class="mdc-deprecated-list-item__ripple"></span>
-        <span class="mdc-deprecated-list-item__text">${label}</span>
-    </li>
-</a>
-<li class="mdc-deprecated-list-item ${disabledClass}" data-value="${value}" click.trigger="clickHandler()" else>
-    <span class="mdc-deprecated-list-item__ripple"></span>
-    <span class="mdc-deprecated-list-item__text">${label}</span>
-</li>
+<md-list-item>
+    <a load="${route}" if.bind="route">
+        <au-slot></au-slot>
+    </a>
+    <au-slot else></au-slot>
+</md-list-item>
