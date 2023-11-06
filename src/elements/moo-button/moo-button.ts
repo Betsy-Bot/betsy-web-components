@@ -7,7 +7,7 @@ import '@material/web/button/outlined-button.js';
 import '@material/web/button/text-button.js';
 import '@material/web/button/filled-tonal-button.js';
 
-export type MOO_BUTTON_VARIANT = 'filled' | 'outlined' | 'text' | 'elevated';
+export type MOO_BUTTON_VARIANT = 'filled' | 'outlined' | 'text' | 'elevated' | 'filled-tonal';
 import template from './moo-button.html?raw';
 
 @customElement({ name: 'moo-button', template, containerless: true, capture: true })
