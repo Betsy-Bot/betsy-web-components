@@ -1,9 +1,39 @@
-<button class="moo-button ${colorClass} ${class}" ref="button" type="${type}" if.bind="!hasClickFunction" data-mdc-dialog-action.bind="dataMdcDialogAction" disabled.bind="disabled">
-    <span class="material-icons" if.bind="icon">${icon}</span>
-    ${label}<au-slot></au-slot>
-</button>
+<md-filled-button
+    ...$attrs
+    if.bind="mdType === 'filled'"
+    disabled.bind="disabled"
+    data-mdc-dialog-action.bind="dataMdcDialogAction"
+>
+    Filled
+    <au-slot></au-slot>
+</md-filled-button>
 
-<button else class="moo-button ${colorClass} ${class}" ref="button" type="${type}" click.trigger="handleClick()" data-mdc-dialog-action.bind="dataMdcDialogAction" disabled.bind="disabled">
-    <span class="material-icons" if.bind="icon">${icon}</span>
-    ${label}<au-slot></au-slot>
-</button>
+<md-outlined-button
+    ...$attrs
+    if.bind="mdType === 'outlined'"
+    disabled.bind="disabled"
+    data-mdc-dialog-action.bind="dataMdcDialogAction"
+>
+    Outlined
+    <au-slot></au-slot>
+</md-outlined-button>
+
+<md-text-button
+    ...$attrs
+    if.bind="mdType === 'text'"
+    disabled.bind="disabled"
+    data-mdc-dialog-action.bind="dataMdcDialogAction"
+>
+    Text
+    <au-slot></au-slot>
+</md-text-button>
+
+<md-elevated-button
+    ...$attrs
+    if.bind="mdType === 'elevated'"
+    disabled.bind="disabled"
+    data-mdc-dialog-action.bind="dataMdcDialogAction"
+>
+    Elevated
+    <au-slot></au-slot>
+</md-elevated-button>
