@@ -56,9 +56,6 @@ dependencies:
   '@material/icon-button':
     specifier: ^14.0.0
     version: 14.0.0
-  '@material/menu':
-    specifier: ^14.0.0
-    version: 14.0.0
   '@material/radio':
     specifier: ^14.0.0
     version: 14.0.0
@@ -1443,34 +1440,6 @@ packages:
       '@material/shape': 14.0.0
       '@material/theme': 14.0.0
       '@material/typography': 14.0.0
-      tslib: 2.4.1
-    dev: false
-
-  /@material/menu-surface@14.0.0:
-    resolution: {integrity: sha512-wRz3UCrhJ4kRrijJEbvIPRa0mqA5qkQmKXjBH4Xu1ApedZruP+OM3Qb2Bj4XugCA3eCXpiohg+gdyTAX3dVQyw==}
-    dependencies:
-      '@material/animation': 14.0.0
-      '@material/base': 14.0.0
-      '@material/elevation': 14.0.0
-      '@material/feature-targeting': 14.0.0
-      '@material/rtl': 14.0.0
-      '@material/shape': 14.0.0
-      '@material/theme': 14.0.0
-      tslib: 2.4.1
-    dev: false
-
-  /@material/menu@14.0.0:
-    resolution: {integrity: sha512-oU6GjbYnkG6a5nX9HUSege5OQByf6yUteEij8fpf0ci3f5BWf/gr39dnQ+rfl+q119cW0WIEmVK2YJ/BFxMzEQ==}
-    dependencies:
-      '@material/base': 14.0.0
-      '@material/dom': 14.0.0
-      '@material/elevation': 14.0.0
-      '@material/feature-targeting': 14.0.0
-      '@material/list': 14.0.0
-      '@material/menu-surface': 14.0.0
-      '@material/ripple': 14.0.0
-      '@material/rtl': 14.0.0
-      '@material/theme': 14.0.0
       tslib: 2.4.1
     dev: false
 

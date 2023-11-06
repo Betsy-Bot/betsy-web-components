@@ -23,3 +23,4 @@ export * from './moo-chip-set';
 export * from './moo-chip';
 export * from './moo-checkbox';
 export * from './moo-menu';
+export * from './moo-menu-item';
