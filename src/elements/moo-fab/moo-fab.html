@@ -1,15 +1,8 @@
-<button if.bind="!url && !route" class="mdc-fab ${extendedClass} ${class}" aria-label="${icon}" ref="fabEl" click.trigger="handleClick()">
-    <div class="mdc-fab__ripple"></div>
-    <span class="mdc-fab__icon material-icons">${icon}</span>
-    <span class="mdc-fab__label">${label}</span>
-</button>
-<a if.bind="url" href="${url}" class="mdc-fab ${extendedClass} ${class}" aria-label="${icon}" ref="fabEl" external target="_blank">
-    <div class="mdc-fab__ripple"></div>
-    <span class="mdc-fab__icon material-icons">${icon}</span>
-    <span class="mdc-fab__label">${label}</span>
+<a if.bind="url" href.bind="url" ...$attrs>
+    <md-fab variant.bind="variant" label.bind="label">
+        <au-slot></au-slot>
+    </md-fab>
 </a>
-<a if.bind="route" load="${route}" class="mdc-fab ${extendedClass} ${class}" aria-label="${icon}" ref="fabEl">
-    <div class="mdc-fab__ripple"></div>
-    <span class="mdc-fab__icon material-icons">${icon}</span>
-    <span class="mdc-fab__label">${label}</span>
-</a>
+<md-fab else ...$attrs variant.bind="variant" label.bind="label">
+    <au-slot></au-slot>
+</md-fab>
