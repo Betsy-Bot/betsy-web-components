@@ -1,5 +1,7 @@
 <div if.bind="!open">
-    <moo-fab icon="chevron_right" click.bind="() => open = true" class="bottomRight"></moo-fab>
+    <moo-fab click.trigger="() => open = true" class="bottomRight">
+        <moo-icon>chevron_right</moo-icon>
+    </moo-fab>
 </div>
 <aside class="mdc-drawer mdc-drawer--dismissible" ref="drawerEl">
     <div class="close-icon">
