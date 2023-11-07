@@ -18,7 +18,7 @@ Install the npm package
 
 Register the components in your `main.ts` or `main.js` file
 ```js
-import * as BetsyWebComponentsPlugin from '@betsybot/web-components';
+import * as BetsyWebComponentsPlugin from '@worm425/betsy-web-components';
 //Don't forget the styles!
 import '@worm425/betsy-web-components/dist/style.css';
 
