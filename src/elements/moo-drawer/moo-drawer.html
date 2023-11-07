@@ -3,7 +3,9 @@
 </div>
 <aside class="mdc-drawer mdc-drawer--dismissible" ref="drawerEl">
     <div class="close-icon">
-        <moo-fab icon="chevron_left" click.bind="() => open = false" class="topRight"></moo-fab>
+        <moo-fab click.trigger="() => open = false" class="topRight">
+            <moo-icon>chevron_left</moo-icon>
+        </moo-fab>
     </div>
     <div class="mdc-drawer__content">
         <au-slot></au-slot>
