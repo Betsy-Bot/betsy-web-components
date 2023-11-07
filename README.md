@@ -25,3 +25,11 @@ Aurelia
     .app(App)
     .start();
 ```
+
+### Using Icons?
+Add to your index.html
+```html
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Rounded" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp" rel="stylesheet">
+```
