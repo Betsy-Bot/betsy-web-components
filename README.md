@@ -1,7 +1,10 @@
 # Betsy Bot Material 3 Aurelia Web Components
-For use in Aurelia 2 only. Does not support Aurelia 1
+For use in Aurelia 2 only. Does not support Aurelia 1.
+
+Originally created for [Betsy Bot](https://betsybot.xyz/) but now available for anyone to use.
 
 ## Start dev web server
+**Currently not implemented.**
 
     pnpm start
 
@@ -33,3 +36,37 @@ Add to your index.html
     <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Rounded" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp" rel="stylesheet">
 ```
+
+
+### Component List
+
+*   💤 Waiting for Material Web Component
+*   🟡 In progress
+*   ✅ Complete
+
+#### Material 3
+* ✅ Button
+* ✅ Select
+* ✅ Switch
+* ✅ Fab
+* ✅ Icon
+* ✅ List
+* ✅ List item
+* ✅ Menu
+* ✅ Menu Item
+
+#### Material 2
+* 💤 Accordion
+* 💤 Banner
+* 💤 Card (Card Content - Card Footer - Card Header)
+* 🟡 Checkbox
+* 🟡 Chip
+* 🟡 Chipset
+* 🟡 Circular Progress
+* 💤 Dialog
+* 💤 Drawer
+* 🟡 Form Field
+* 🟡 Radio
+* 🟡 Tab bar
+* 🟡 Text Field
+* 💤 Topbar
