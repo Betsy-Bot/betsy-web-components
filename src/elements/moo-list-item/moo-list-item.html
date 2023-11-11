@@ -1,6 +1,8 @@
-<md-list-item>
-    <a load="${route}" if.bind="route">
+<a ...$attrs load="${route}" if.bind="route">
+    <md-list-item>
         <au-slot></au-slot>
-    </a>
-    <au-slot else></au-slot>
+    </md-list-item>
+</a>
+<md-list-item ...$attrs else>
+    <au-slot></au-slot>
 </md-list-item>
