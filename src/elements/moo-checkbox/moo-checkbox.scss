@@ -1,2 +1,4 @@
-@use "@material/checkbox";
-@include checkbox.core-styles;
+.moo-checkbox_align-center {
+    align-items: center;
+    display: flex;
+}
