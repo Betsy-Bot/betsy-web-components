@@ -22,6 +22,6 @@ export * from './moo-radio';
 export * from './moo-select';
 export * from './moo-switch';
 export * from './moo-tab';
-export * from './moo-tab-bar';
+export * from './moo-tabs';
 export * from './moo-text-field';
 export * from './moo-topbar';
