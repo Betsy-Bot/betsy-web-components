@@ -47,9 +47,6 @@ dependencies:
   '@material/drawer':
     specifier: ^14.0.0
     version: 14.0.0
-  '@material/fab':
-    specifier: ^14.0.0
-    version: 14.0.0
   '@material/form-field':
     specifier: ^14.0.0
     version: 14.0.0
@@ -57,9 +54,6 @@ dependencies:
     specifier: ^14.0.0
     version: 14.0.0
   '@material/radio':
-    specifier: ^14.0.0
-    version: 14.0.0
-  '@material/tab-bar':
     specifier: ^14.0.0
     version: 14.0.0
   '@material/textfield':
@@ -1345,24 +1339,6 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /@material/fab@14.0.0:
-    resolution: {integrity: sha512-s4rrw2TLU8ITKopHSTEHuJEFsGEZsb+ijwW16pQt0h9GArxPGaALT+CCJIPjf75D3wPEEMW0vnLj7oMoII2VFg==}
-    dependencies:
-      '@material/animation': 14.0.0
-      '@material/dom': 14.0.0
-      '@material/elevation': 14.0.0
-      '@material/feature-targeting': 14.0.0
-      '@material/focus-ring': 14.0.0
-      '@material/ripple': 14.0.0
-      '@material/rtl': 14.0.0
-      '@material/shape': 14.0.0
-      '@material/theme': 14.0.0
-      '@material/tokens': 14.0.0
-      '@material/touch-target': 14.0.0
-      '@material/typography': 14.0.0
-      tslib: 2.4.1
-    dev: false
-
   /@material/feature-targeting@14.0.0:
     resolution: {integrity: sha512-a5WGgHEq5lJeeNL5yevtgoZjBjXWy6+klfVWQEh8oyix/rMJygGgO7gEc52uv8fB8uAIoYEB3iBMOv8jRq8FeA==}
     dependencies:
@@ -1501,58 +1477,6 @@ packages:
       '@material/feature-targeting': 14.0.0
       '@material/rtl': 14.0.0
       '@material/theme': 14.0.0
-      tslib: 2.4.1
-    dev: false
-
-  /@material/tab-bar@14.0.0:
-    resolution: {integrity: sha512-G/UYEOIcljCHlkj3iCRGIz4zE9RVcsdC9wuOR6LE2rla6EGyT0x2psNlL0pIMROjXoB0HGda/gB90ovzKcbURA==}
-    dependencies:
-      '@material/animation': 14.0.0
-      '@material/base': 14.0.0
-      '@material/density': 14.0.0
-      '@material/elevation': 14.0.0
-      '@material/feature-targeting': 14.0.0
-      '@material/tab': 14.0.0
-      '@material/tab-indicator': 14.0.0
-      '@material/tab-scroller': 14.0.0
-      '@material/theme': 14.0.0
-      '@material/typography': 14.0.0
-      tslib: 2.4.1
-    dev: false
-
-  /@material/tab-indicator@14.0.0:
-    resolution: {integrity: sha512-wfq136fsJGqtCIW8x1wFQHgRr7dIQ9SWqp6WG4FQGHpSzliNDA23/bdBUjh3lX2U+mfbdsFmZWEPy06jg2uc5g==}
-    dependencies:
-      '@material/animation': 14.0.0
-      '@material/base': 14.0.0
-      '@material/feature-targeting': 14.0.0
-      '@material/theme': 14.0.0
-      tslib: 2.4.1
-    dev: false
-
-  /@material/tab-scroller@14.0.0:
-    resolution: {integrity: sha512-wadETsRM7vT4mRjXedaPXxI/WFSSgqHRNI//dORJ6627hoiJfLb5ixwUKTYk9zTz6gNwAlRTrKh98Dr9T7n7Kw==}
-    dependencies:
-      '@material/animation': 14.0.0
-      '@material/base': 14.0.0
-      '@material/dom': 14.0.0
-      '@material/feature-targeting': 14.0.0
-      '@material/tab': 14.0.0
-      tslib: 2.4.1
-    dev: false
-
-  /@material/tab@14.0.0:
-    resolution: {integrity: sha512-jGSQdp6BvZOVnvGbv0DvNDJL2lHYVFtKGehV0gSZ7FrjHK6gZnKZjWOVwt1NPu9ig9zy85vPRFpvFTeje1KZpg==}
-    dependencies:
-      '@material/base': 14.0.0
-      '@material/elevation': 14.0.0
-      '@material/feature-targeting': 14.0.0
-      '@material/focus-ring': 14.0.0
-      '@material/ripple': 14.0.0
-      '@material/rtl': 14.0.0
-      '@material/tab-indicator': 14.0.0
-      '@material/theme': 14.0.0
-      '@material/typography': 14.0.0
       tslib: 2.4.1
     dev: false
 

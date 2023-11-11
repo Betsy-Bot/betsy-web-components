@@ -25,3 +25,4 @@ export * from './moo-tab';
 export * from './moo-tabs';
 export * from './moo-text-field';
 export * from './moo-topbar';
+export * from './moo-tab';
