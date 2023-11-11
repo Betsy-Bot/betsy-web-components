@@ -51,9 +51,11 @@ Add to your index.html
 * ✅ Fab
 * ✅ Icon
 * ✅ List
-* ✅ List item
+  * ✅ List item
 * ✅ Menu
-* ✅ Menu Item
+  * ✅ Menu Item
+* ✅ Tabs
+  * ✅ Tab (With variants)
 
 #### Material 2
 * 💤 Accordion
@@ -67,6 +69,5 @@ Add to your index.html
 * 💤 Drawer
 * 🟡 Form Field
 * 🟡 Radio
-* 🟡 Tab bar
 * 🟡 Text Field
 * 💤 Topbar
