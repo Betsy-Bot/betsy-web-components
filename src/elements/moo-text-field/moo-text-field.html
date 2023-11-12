@@ -1,6 +1,6 @@
 <md-filled-text-field
     ...$attrs
-    value.bind="value"
+    value.bind="value ?? ''"
     if.bind="variant === 'filled'"
     ref="mdElement"
 ></md-filled-text-field>
@@ -8,6 +8,6 @@
 <md-outlined-text-field
     ...$attrs
     else
-    value.bind="value"
+    value.bind="value ?? ''"
     ref="mdElement"
 ></md-outlined-text-field>
