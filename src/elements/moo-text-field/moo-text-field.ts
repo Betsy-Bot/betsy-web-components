@@ -6,10 +6,15 @@ export type MOO_TEXT_FIELD_VARIANT = 'filled' | 'outlined';
 
 @customElement({ name: 'moo-text-field', template, containerless: true, capture: true })
 export class MooTextField implements ICustomElementViewModel {
-    @bindable({ mode: BindingMode.twoWay }) value: string | number | undefined | null;
+    @bindable({ mode: BindingMode.twoWay }) value: string | number | undefined | null = '';
     @bindable variant: MOO_TEXT_FIELD_VARIANT = 'outlined';
     mdElement: HTMLInputElement;
 
+    bound() {
+        if (!this.value) {
+            this.value = '';
+        }
+    }
     attached() {
         this.mdElement.addEventListener('keyup', () => this.value = this.mdElement.value)
     }
