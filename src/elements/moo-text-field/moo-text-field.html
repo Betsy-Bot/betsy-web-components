@@ -1,41 +1,13 @@
-<div switch.bind="type">
-    <label class="mdc-text-field mdc-text-field--filled ${class} ${floatLabelClass}" case.bind="['text', 'number']" ref="input">
-        <span class="mdc-text-field__ripple"></span>
-        <span class="mdc-floating-label" id="my-label-id">${label}</span>
-        <input class="mdc-text-field__input"
-               type.bind="type"
-               aria-labelledby="my-label-id"
-               value.bind="value"
-               required.bind="required"
-               readonly.bind="readonly"
-               minlength.bind="minlength"
-               maxlength.bind="maxlength"
-               min.bind="min"
-               max.bind="max"
-               placeholder.bind="placeholder"
-        >
-    </label>
-    <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--no-label ${class}"
-           case="textarea" ref="input">
-            <span class="mdc-notched-outline">
-              <span class="mdc-notched-outline__leading"></span>
-              <span class="mdc-notched-outline__trailing"></span>
-            </span>
-        <span class="mdc-text-field__resizer">
-              <textarea
-                  class="mdc-text-field__input"
-                  rows.bind="rows"
-                  cols.bind="cols"
-                  aria-label="${label}"
-                  value.bind="value"
-                  readonly.bind="readonly"
-                  minlength.bind="min"
-                  maxlength="max"
-                  placeholder.bind="placeholder"
-              ></textarea>
-            </span>
-    </label>
-    <div class="mdc-text-field-helper-line" if.bind="maxlength">
-        <div class="mdc-text-field-character-counter">${value.length} / ${maxlength}</div>
-    </div>
-</div>
+<md-filled-text-field
+    ...$attrs
+    value.bind="value"
+    if.bind="variant === 'filled'"
+    ref="mdElement"
+></md-filled-text-field>
+
+<md-outlined-text-field
+    ...$attrs
+    value.bind="value"
+    if.bind="variant === 'outlined'"
+    ref="mdElement"
+></md-outlined-text-field>

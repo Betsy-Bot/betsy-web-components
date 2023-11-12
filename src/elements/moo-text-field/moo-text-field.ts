@@ -1,38 +1,16 @@
-import './moo-text-field.scss';
-
-import { MDCTextField } from '@material/textfield';
-import {bindable, BindingMode, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
-import {observable} from "@aurelia/runtime";
+import {bindable, BindingMode, customElement, ICustomElementViewModel} from '@aurelia/runtime-html';
 
 import template from './moo-text-field.html?raw';
-@customElement({name:'moo-text-field', template, containerless: true})
+
+export type MOO_TEXT_FIELD_VARIANT = 'filled' | 'outlined';
+
+@customElement({ name: 'moo-text-field-test', template, containerless: true, capture: true })
 export class MooTextField implements ICustomElementViewModel {
-    @bindable({ mode: BindingMode.twoWay }) value;
-    @bindable label;
-    @bindable class;
-    @bindable type = 'text';
-    @bindable rows;
-    @bindable cols;
-    @observable input: HTMLElement;
-    @bindable readonly;
-    @bindable min: number;
-    @bindable max: number;
-    @bindable minlength: number;
-    @bindable maxlength: number;
-    @bindable required;
-    @bindable placeholder;
-    textField;
+    @bindable({ mode: BindingMode.twoWay }) value: string | number | undefined | null;
+    @bindable variant: MOO_TEXT_FIELD_VARIANT = 'outlined';
+    mdElement: HTMLInputElement;
 
     attached() {
-        if (this.input) {
-            this.textField = new MDCTextField(this.input);
-        }
-    }
-
-    get floatLabelClass(): string {
-        if (this.value == undefined) {
-            return ''
-        }
-        return 'mdc-text-field--label-floating';
+        this.mdElement.addEventListener('keyup', () => this.value = this.mdElement.value)
     }
 }

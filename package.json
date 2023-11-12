@@ -62,7 +62,6 @@
     "@material/form-field": "^14.0.0",
     "@material/icon-button": "^14.0.0",
     "@material/radio": "^14.0.0",
-    "@material/textfield": "^14.0.0",
     "@material/top-app-bar": "^14.0.0",
     "@material/web": "^1.0.1"
   },
