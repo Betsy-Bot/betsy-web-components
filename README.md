@@ -46,22 +46,23 @@ Add to your index.html
 
 #### Material 3
 * ✅ Button
-* ✅ Select
-* ✅ Switch
-* ✅ Fab
+* ✅ Checkbox
 * ✅ Icon
+* ✅ Fab
 * ✅ List
   * ✅ List item
 * ✅ Menu
   * ✅ Menu Item
+* ✅ Select
+* ✅ Switch
 * ✅ Tabs
   * ✅ Tab (With variants)
+* ✅ Text Field
 
 #### Material 2
 * 💤 Accordion
 * 💤 Banner
 * 💤 Card (Card Content - Card Footer - Card Header)
-* 🟡 Checkbox
 * 🟡 Chip
 * 🟡 Chipset
 * 🟡 Circular Progress
@@ -69,5 +70,4 @@ Add to your index.html
 * 💤 Drawer
 * 🟡 Form Field
 * 🟡 Radio
-* 🟡 Text Field
 * 💤 Topbar
