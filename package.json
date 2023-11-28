@@ -1,7 +1,7 @@
 {
   "name": "@betsybot/betsy-web-components",
   "description": "Betsy Material Web 3 Components",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "repository": {
     "type": "git",
     "url": "https://github.com/Betsy-Bot/betsy-web-components"
