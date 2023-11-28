@@ -1,15 +1,15 @@
-<md-assist-chip ...$attrs if.bind="variant === 'assist'">
+<md-assist-chip ...$attrs if.bind="variant === 'assist'" ref="chipEl">
     <au-slot></au-slot>
 </md-assist-chip>
 
-<md-filter-chip ...$attrs if.bind="variant === 'filter'">
+<md-filter-chip ...$attrs if.bind="variant === 'filter'" ref="chipEl">
     <au-slot></au-slot>
 </md-filter-chip>
 
-<md-input-chip ...$attrs if.bind="variant === 'input'">
+<md-input-chip ...$attrs if.bind="variant === 'input'" ref="chipEl">
     <au-slot></au-slot>
 </md-input-chip>
 
-<md-suggestion-chip ...$attrs if.bind="variant === 'suggestion'">
+<md-suggestion-chip ...$attrs if.bind="variant === 'suggestion'" ref="chipEl">
     <au-slot></au-slot>
 </md-suggestion-chip>
