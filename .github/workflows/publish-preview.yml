@@ -40,7 +40,7 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           git config --global user.name 'Betsy CI'
           git config --global user.email 'support@betsybot.xyz'
-          pnpm publish --no-git-checks
+          pnpm publish --access public --no-git-checks
 
       - name: Commit changes
         run: |
