@@ -35,7 +35,7 @@ export default defineConfig({
         sourcemap: true,
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
-            name: '@worm425/betsy-web-components',
+            name: '@betsybot/betsy-web-components',
             fileName: 'index',
             formats: ['es', 'cjs'],
         },
