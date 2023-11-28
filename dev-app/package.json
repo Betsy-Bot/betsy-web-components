@@ -10,7 +10,7 @@
   "dependencies": {
     "aurelia": "latest",
     "@aurelia/router": "latest",
-    "@worm425/betsy-web-components": "0.0.36"
+    "@betsybot/betsy-web-components": "0.0.48"
   },
   "devDependencies": {
     "@aurelia/testing": "latest",
