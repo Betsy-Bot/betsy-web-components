@@ -47,6 +47,8 @@ Add to your index.html
 #### Material 3
 * ✅ Button
 * ✅ Checkbox
+* ✅ Chipset
+* * ✅ Chip (With variants)
 * ✅ Icon
 * ✅ Fab
 * ✅ List
@@ -63,7 +65,6 @@ Add to your index.html
 * 💤 Accordion
 * 💤 Banner
 * 💤 Card (Card Content - Card Footer - Card Header)
-* 🟡 Chip
 * 🟡 Chipset
 * 🟡 Circular Progress
 * 💤 Dialog
