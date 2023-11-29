@@ -1,4 +1,3 @@
-import 'devextreme/dist/css/dx.material.purple.dark.compact.css';
 import './moo-dialog.scss';
 
 import { MDCDialog, MDCDialogCloseEvent } from '@material/dialog';
