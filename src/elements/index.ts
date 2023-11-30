@@ -1,6 +1,7 @@
 export * from './moo-accordion';
 export * from './moo-banner';
 export * from './moo-button';
+export * from './moo-button-icon';
 export * from './moo-card';
 export * from './moo-card-content';
 export * from './moo-card-footer';
