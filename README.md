@@ -2,14 +2,6 @@
 For use in Aurelia 2 only. Does not support Aurelia 1.
 
 Originally created for [Betsy Bot](https://betsybot.xyz/) but now available for anyone to use.
-
-## Start dev web server
-**Currently not implemented.**
-
-    pnpm start
-
-Note this plugin project comes with a dev-app. The above command starts the dev app in `dev-app/` folder. The plugin source code is in `src/` folder.
-
 ## Consume the plugin
 
 Install the npm package
@@ -55,6 +47,7 @@ Add to your index.html
   * ✅ List item
 * ✅ Menu
   * ✅ Menu Item
+* ✅ Progress (With variants)
 * ✅ Select
 * ✅ Switch
 * ✅ Tabs
@@ -66,7 +59,6 @@ Add to your index.html
 * 💤 Banner
 * 💤 Card (Card Content - Card Footer - Card Header)
 * 🟡 Chipset
-* 🟡 Circular Progress
 * 💤 Dialog
 * 💤 Drawer
 * 🟡 Form Field

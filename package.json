@@ -56,7 +56,6 @@
   "dependencies": {
     "@material/banner": "^14.0.0",
     "@material/card": "^14.0.0",
-    "@material/circular-progress": "^14.0.0",
     "@material/dialog": "^14.0.0",
     "@material/drawer": "^14.0.0",
     "@material/form-field": "^14.0.0",
