@@ -58,7 +58,6 @@ Add to your index.html
 * 💤 Accordion
 * 💤 Banner
 * 💤 Card (Card Content - Card Footer - Card Header)
-* 🟡 Chipset
 * 💤 Dialog
 * 💤 Drawer
 * 🟡 Form Field
