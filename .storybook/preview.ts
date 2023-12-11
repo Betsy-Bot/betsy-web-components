@@ -1,4 +1,4 @@
-import type { Preview } from "@storybook/web-components";
+import type { Preview } from "@beggars/aurelia2";
 
 const preview: Preview = {
   parameters: {
