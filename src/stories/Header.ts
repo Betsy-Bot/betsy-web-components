@@ -4,22 +4,22 @@ import { Button } from './Button';
 import './header.css';
 
 type User = {
-  name: string;
+    name: string;
 };
 
 export interface HeaderProps {
-  user?: User;
-  onLogin: () => void;
-  onLogout: () => void;
-  onCreateAccount: () => void;
+    user?: User;
+    onLogin: () => void;
+    onLogout: () => void;
+    onCreateAccount: () => void;
 }
 
 export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => {
-  const loginButton = Button({ size: 'small', onClick: onLogin, label: 'Log in' }).obj;
-  const signupButton = Button({ primary: true, size: 'small', onClick: onCreateAccount, label: 'Sign up' }).obj;
-  const logoutButton = Button({ size: 'small', onClick: onLogout, label: 'Log out' }).obj;
+    const loginButton = Button({ size: 'small', onClick: onLogin, label: 'Log in' }).obj;
+    const signupButton = Button({ primary: true, size: 'small', onClick: onCreateAccount, label: 'Sign up' }).obj;
+    const logoutButton = Button({ size: 'small', onClick: onLogout, label: 'Log out' }).obj;
 
-  const template = html`
+    const template = html`
   <header>
     <div class="storybook-header">
       <div>
@@ -49,14 +49,14 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps
   </header>
 `;
 
-  // Create a temporary container
-  const container = document.createElement('div');
+    // Create a temporary container
+    const container = document.createElement('div');
 
-  // Render the template to the container
-  render(template, container);
+    // Render the template to the container
+    render(template, container);
 
-  // The HTML is now inside the container, so you can retrieve it as a string
-  const htmlString = container.innerHTML;
+    // The HTML is now inside the container, so you can retrieve it as a string
+    const htmlString = container.innerHTML;
 
-  return { template: htmlString, obj: template };
+    return { template: htmlString, obj: template };
 }
