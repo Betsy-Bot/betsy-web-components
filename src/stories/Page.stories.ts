@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/web-components';
+import type { Meta, StoryObj } from "@beggars/aurelia2";
 
 import type { PageProps } from './Page';
 import { Page } from './Page';

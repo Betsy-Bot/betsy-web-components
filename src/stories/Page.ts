@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { html, render } from 'lit';
 import { Header } from './Header';
 import './page.css';
 
@@ -13,14 +13,15 @@ export interface PageProps {
   onCreateAccount: () => void;
 }
 
-export const Page = ({ user, onLogin, onLogout, onCreateAccount }: PageProps) => html`
+export const Page = ({ user, onLogin, onLogout, onCreateAccount }: PageProps) => {
+  const template = html`
   <article>
     ${Header({
-      user,
-      onLogin,
-      onLogout,
-      onCreateAccount,
-    })}
+    user,
+    onLogin,
+    onLogout,
+    onCreateAccount,
+  }).obj}
 
     <section class="storybook-page">
       <h2>Pages in Storybook</h2>
@@ -70,3 +71,16 @@ export const Page = ({ user, onLogin, onLogout, onCreateAccount }: PageProps) =>
     </section>
   </article>
 `;
+
+  // Create a temporary container
+  const container = document.createElement('div');
+
+  // Render the template to the container
+  render(template, container);
+
+  // The HTML is now inside the container, so you can retrieve it as a string
+  const htmlString = container.innerHTML;
+
+  return { template: htmlString };
+
+}

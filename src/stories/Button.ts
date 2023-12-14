@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { html, render } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import './button.css';
 
@@ -30,7 +30,7 @@ export interface ButtonProps {
 export const Button = ({ primary, backgroundColor, size, label, onClick }: ButtonProps) => {
   const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
 
-  return html`
+  const template = html`
     <button
       type="button"
       class=${['storybook-button', `storybook-button--${size || 'medium'}`, mode].join(' ')}
@@ -40,4 +40,15 @@ export const Button = ({ primary, backgroundColor, size, label, onClick }: Butto
       ${label}
     </button>
   `;
+
+  // Create a temporary container
+  const container = document.createElement('div');
+
+  // Render the template to the container
+  render(template, container);
+
+  // The HTML is now inside the container, so you can retrieve it as a string
+  const htmlString = container.innerHTML;
+
+  return { template: htmlString, obj: template };
 };
