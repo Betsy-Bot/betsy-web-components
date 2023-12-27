@@ -8,7 +8,7 @@ import '@material/web/button/text-button.js';
 import '@material/web/button/filled-tonal-button.js';
 
 export type MOO_BUTTON_VARIANT = 'filled' | 'outlined' | 'text' | 'elevated' | 'filled-tonal';
-import template from './moo-button.html?raw';
+import template from './moo-button.html';
 
 export interface IMooButtonProps {
     variant: MOO_BUTTON_VARIANT;

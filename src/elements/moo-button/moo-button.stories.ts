@@ -1,17 +1,27 @@
 import { Meta, StoryObj } from '@beggars/aurelia2';
-import { MooButton, IMooButtonProps } from './moo-button';
+import { MooButton } from './moo-button';
 
-const meta = {
+const meta: Meta<MooButton> = {
     title: 'Components/MooButton',
     component: MooButton,
+    tags: ['autodocs'],
+    argTypes: {
+        icon: { control: 'text' },
+        disabled: { control: 'boolean' },
+        variant: { control: 'text' },
+    },
     args: {
         icon: '',
         disabled: false,
-    }
-} satisfies Meta<IMooButtonProps>;
+        variant: 'filled',
+    },
+    render: () => ({
+        template: '<moo-button icon.bind disabled.bind variant.bind>Moo Button</moo-button>',
+    })
+};
 export default meta;
 
-type Story = StoryObj<IMooButtonProps>;
+type Story = StoryObj<MooButton>;
 
 export const Filled: Story = {
     args: {
