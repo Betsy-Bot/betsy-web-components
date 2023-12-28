@@ -47,9 +47,6 @@ dependencies:
   '@material/form-field':
     specifier: ^14.0.0
     version: 14.0.0
-  '@material/icon-button':
-    specifier: ^14.0.0
-    version: 14.0.0
   '@material/radio':
     specifier: ^14.0.0
     version: 14.0.0

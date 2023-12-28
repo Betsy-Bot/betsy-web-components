@@ -8,7 +8,10 @@ const meta: Meta<MooButton> = {
     argTypes: {
         icon: { control: 'text' },
         disabled: { control: 'boolean' },
-        variant: { control: 'text' },
+        variant: {
+            control: 'select',
+            options: ['filled', 'filled-tonal', 'text', 'elevated']
+        },
     },
     args: {
         icon: '',
