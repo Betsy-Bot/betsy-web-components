@@ -35,5 +35,6 @@ node_modules
 /coverage
 /src/**/*.js
 /src/**/*.js.map
+/storybook-static
 /dev-app/**/*.js
 /dev-app/**/*.js.map

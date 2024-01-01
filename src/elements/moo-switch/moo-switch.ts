@@ -18,6 +18,8 @@ export class MooSwitch implements ICustomElementViewModel {
 
     handleChange() {
         this.value = !this.value;
-        this.change();
+        if (this.change) {
+            this.change();
+        }
     }
 }

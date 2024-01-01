@@ -20,6 +20,11 @@ const config: StorybookConfig = {
     name: getAbsolutePath("@beggars/aurelia2-webpack5"),
     options: { builder: { useSWC: true } },
   },
+  core: {
+    builder: {
+      name: '@storybook/builder-vite',
+    },
+  } as any,
   docs: {
     autodocs: "tag",
   },

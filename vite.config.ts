@@ -49,7 +49,7 @@ export default defineConfig({
                     sourceMap: true,
                     declaration: true,
                     outDir: 'dist',
-                    exclude: ['**/__tests__'],
+                    exclude: ['**/__tests__', '**/*.stories.ts'],
                     tsconfig: './tsconfig.build.json',
                 }),
                 rawHtml()
