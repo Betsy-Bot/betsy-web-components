@@ -7,7 +7,7 @@ import template from './moo-switch.html?raw';
 export class MooSwitch implements ICustomElementViewModel {
     @bindable({ mode: BindingMode.twoWay }) value: boolean;
     @bindable class: string;
-    @bindable change: () => void;
+    @bindable change?: () => void;
     @bindable label: string;
     switch: MdSwitch;
 
@@ -18,6 +18,8 @@ export class MooSwitch implements ICustomElementViewModel {
 
     handleChange() {
         this.value = !this.value;
-        this.change();
+        if (this.change) {
+            this.change();
+        }
     }
 }
