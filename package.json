@@ -40,7 +40,6 @@
     },
     "./dist/style.css": "./dist/style.css"
   },
-  "type": "module",
   "packageManager": "pnpm@8.8.0",
   "scripts": {
     "build": "npx rimraf dist && tsc && vite build",
