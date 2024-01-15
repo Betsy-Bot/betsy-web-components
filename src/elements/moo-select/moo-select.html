@@ -1,16 +1,4 @@
-<div if.bind="!options">
-    <h4 class="text-danger">SELECT NEEDS UPDATE</h4>
-</div>
-<md-outlined-select
-    ...$attrs
-    if.bind="selectType === 'outlined'"
-    class.bind="class"
-    required.bind="required"
-    onchange.bind="(e) => handleChange(e)"
-    label.bind="label"
-    value.bind="value"
-    ref="selectEl"
->
+<md-outlined-select ...$attrs if.bind="variant === 'outlined'" onchange.bind="(e) => handleChange(e)">
     <md-select-option aria-label="blank" if.bind="includeNull" selected.bind="shouldBeSelected(null)">
         -- None --
     </md-select-option>
@@ -20,16 +8,7 @@
 </md-outlined-select>
 
 
-<md-filled-select
-    ...$attrs
-    else
-    class.bind="class"
-    required.bind="required"
-    onchange.bind="(e) => handleChange(e)"
-    label.bind="label"
-    value.bind="value"
-    ref="selectEl"
->
+<md-filled-select ...$attrs else onchange.bind="(e) => handleChange(e)">
     <md-select-option aria-label="blank" if.bind="includeNull" selected.bind="shouldBeSelected(null)">
         -- None --
     </md-select-option>

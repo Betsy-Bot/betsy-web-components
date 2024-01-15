@@ -9,15 +9,11 @@ export type MooSelectType = 'filled' | 'outlined';
 
 import template from './moo-select.html?raw';
 
-@customElement({ name: 'moo-select', template, containerless: true })
+@customElement({ name: 'moo-select', template, containerless: true, capture: true })
 export class MooSelect implements ICustomElementViewModel {
-    @bindable label: string;
     @bindable options: IMooSelectOption[];
     @bindable({ mode: BindingMode.twoWay }) value: string | number | undefined;
-    @bindable class: string;
-    @bindable required: boolean;
-    @bindable readonly: boolean;
-    @bindable selectType: MooSelectType = 'outlined';
+    @bindable variant: MooSelectType = 'outlined';
     @bindable includeNull = false;
 
     handleChange(e: Event) {
