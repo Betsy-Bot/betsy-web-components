@@ -1,10 +1,10 @@
-import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
-
 import './moo-drawer.scss';
 
 import { MDCDrawer } from '@material/drawer';
+import {bindable, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
 
-@containerless()
+import template from './moo-drawer.html?raw';
+@customElement({name:'moo-drawer', template, containerless: true})
 export class MooDrawer implements ICustomElementViewModel {
     @bindable open: boolean;
     drawerEl: HTMLElement;

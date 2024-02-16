@@ -1,11 +1,7 @@
-<button class="mdc-tab ${tabClass}" role="tab" aria-selected="true" tabindex="0" click.trigger="setTab()" type="button">
-          <span class="mdc-tab__content">
-            <span class="mdc-tab__icon material-icons" aria-hidden="true" if.bind="icon">${icon}</span>
-            <span class="mdc-tab__text-label">${label}</span>
-          </span>
-    <span class="mdc-tab-indicator ${indicatorClass}">
-            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-          </span>
-    <span class="mdc-tab__ripple"></span>
-    <div class="mdc-tab__focus-ring"></div>
-</button>
+<md-primary-tab ...$attrs if.bind="variant === 'primary'">
+    <au-slot></au-slot>
+</md-primary-tab>
+
+<md-secondary-tab ...$attrs if.bind="variant === 'secondary'">
+    <au-slot></au-slot>
+</md-secondary-tab>

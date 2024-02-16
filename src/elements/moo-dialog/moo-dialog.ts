@@ -1,14 +1,10 @@
-import {
-    bindable,
-    BindingMode, containerless,
-    ICustomElementViewModel,
-} from 'aurelia';
-
-import 'devextreme/dist/css/dx.material.purple.dark.compact.css';
 import './moo-dialog.scss';
 
 import { MDCDialog, MDCDialogCloseEvent } from '@material/dialog';
-@containerless()
+import {bindable, BindingMode, customElement, ICustomElementViewModel} from "@aurelia/runtime-html";
+
+import template from './moo-dialog.html?raw';
+@customElement({name:'moo-dialog', template, containerless: true})
 export class MooDialog implements ICustomElementViewModel {
     @bindable dialogEl: HTMLElement;
     @bindable({ mode: BindingMode.twoWay }) dialog: MDCDialog;

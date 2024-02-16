@@ -1,42 +1,32 @@
-import {
-    bindable,
-    BindingMode,
-    containerless,
-    ICustomElementViewModel,
-} from 'aurelia';
+import { bindable, BindingMode, customElement, ICustomElementViewModel } from '@aurelia/runtime-html';
 
-import { MDCSelect } from '@material/select';
+export interface IMooSelectOption {
+    label: string;
+    value: string
+}
 
-@containerless()
+export type MooSelectType = 'filled' | 'outlined';
+
+import template from './moo-select.html?raw';
+
+@customElement({ name: 'moo-select', template, containerless: true, capture: true })
 export class MooSelect implements ICustomElementViewModel {
-    @bindable label;
-    @bindable options;
+    @bindable options: IMooSelectOption[];
     @bindable({ mode: BindingMode.twoWay }) value: string | number | undefined;
-    @bindable class;
-    @bindable required: boolean;
-    @bindable readonly: boolean;
-    selectEl: HTMLElement;
+    @bindable variant: MooSelectType = 'outlined';
+    @bindable includeNull = false;
 
-    attached() {
-        const select = new MDCSelect(this.selectEl);
-        if (this.readonly) {
-            select.disabled = true;
-        }
-        if (typeof this.value != 'undefined') {
-            select.value = this.value?.toString();
-        }
-
-        select.listen('MDCSelect:change', () => {
-            if (typeof(this.value) == 'number') {
-                return this.value = parseInt(select.value);
-            }
-            this.value = select.value;
-        });
+    handleChange(e: Event) {
+        this.value = (e.target as HTMLSelectElement).value;
     }
 
-    get requiredClass() {
-        if (this.required) {
-            return 'mdc-select--required';
+    shouldBeSelected(option: IMooSelectOption | null) {
+        if (this.includeNull && !this.value) {
+            return true;
         }
+        if (!option) {
+            return false
+        }
+        return option.value == this.value;
     }
 }

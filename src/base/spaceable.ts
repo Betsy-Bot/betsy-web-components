@@ -1,5 +1,4 @@
-import { bindable } from 'aurelia';
-
+import { bindable } from '@aurelia/runtime-html';
 import { numberToPixelsInterceptor } from '../common';
 
 export abstract class Spaceable {

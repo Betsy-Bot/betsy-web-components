@@ -1,4 +1,4 @@
-import { valueConverter } from 'aurelia';
+import {valueConverter} from "@aurelia/runtime-html";
 
 @valueConverter('take')
 export class TakeValueConverter {

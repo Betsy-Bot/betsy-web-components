@@ -1,4 +1,3 @@
-import { IContainer, IRegistry, Registration } from 'aurelia';
 import { ValidationHtmlConfiguration, ValidationTrigger } from '@aurelia/validation-html';
 
 import * as attributes from './attributes';
@@ -7,6 +6,7 @@ import * as elements from './elements';
 import * as valueConverters from './value-converters';
 
 import './styles/main.scss';
+import {IContainer, IRegistry, Registration} from "@aurelia/kernel";
 
 export class BetsyWebComponentsPlugin implements IRegistry {
     #configuration?: BetsyWebComponentsConfiguration;

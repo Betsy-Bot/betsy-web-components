@@ -1,0 +1,47 @@
+name: Publish Preview Betsy Web Components
+
+on:
+  push:
+    branches:
+      - preview
+
+env:
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Publish Preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.CI_USER_BETSY }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@d882d12c64e032187b2edb46d3a0d003b7a43598
+
+      - name: Setup Node with pnpm Cache
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Run pnpm Install
+        run: pnpm i
+
+      - name: Run publish
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          git config --global user.name 'Betsy CI'
+          git config --global user.email 'support@betsybot.xyz'
+          pnpm publish --access public --no-git-checks
+
+      - name: Commit changes
+        run: |
+          git push

@@ -1,27 +1,7 @@
-import {
-    bindable,
-    BindingMode, containerless,
-    ICustomElementViewModel,
-} from 'aurelia';
+import { bindable, customElement, ICustomElementViewModel } from '@aurelia/runtime-html';
 
-
-@containerless()
+import template from './moo-list-item.html?raw';
+@customElement({ name:'moo-list-item', template, containerless: true, capture: true })
 export class MooListItem implements ICustomElementViewModel {
-    @bindable label;
-    @bindable({ mode: BindingMode.twoWay }) value;
-    @bindable route;
-    @bindable click;
-    @bindable disabled = false;
-
-    clickHandler() {
-        if (this.click) {
-            this.click(this.value);
-        }
-    }
-
-    get disabledClass() {
-        if (this.disabled) {
-            return 'mdc-deprecated-list-item--disabled';
-        }
-    }
+    @bindable route: string;
 }

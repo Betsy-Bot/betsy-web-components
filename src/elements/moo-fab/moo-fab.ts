@@ -1,34 +1,12 @@
-import { bindable, containerless, ICustomElementViewModel } from 'aurelia';
+import {bindable, customElement, ICustomElementViewModel} from '@aurelia/runtime-html';
 
-import './moo-fab.scss';
+import template from './moo-fab.html?raw';
 
-import { MDCRipple } from '@material/ripple';
+export type MOO_FAB_VARIANT = 'primary' | 'secondary' | 'tertiary';
 
-@containerless()
+@customElement({ name: 'moo-fab', template, containerless: true, capture: true })
 export class MooFab implements ICustomElementViewModel {
-    @bindable icon: string;
-    @bindable label: string;
-    @bindable class: string;
-    @bindable click;
-    @bindable external: boolean;
     @bindable url: string;
-    @bindable route: string;
-    fabEl: HTMLElement;
-
-    attached() {
-        new MDCRipple(this.fabEl);
-    }
-
-    handleClick() {
-        if (this.click) {
-            this.click();
-        }
-    }
-
-    get extendedClass() {
-        if (this.label) {
-            return 'mdc-fab--extended'
-        }
-        return 'mdc-fab--mini'
-    }
+    @bindable variant: MOO_FAB_VARIANT;
+    @bindable label: string;
 }
