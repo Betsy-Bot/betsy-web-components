@@ -35,7 +35,6 @@ export class MooBanner implements ICustomElementViewModel {
 
     @watch('open')
     openChanged() {
-        console.log('openChanged');
         if (this.open) {
             this.banner.open();
         } else {
