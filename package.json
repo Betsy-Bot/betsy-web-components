@@ -40,7 +40,7 @@
     },
     "./dist/style.css": "./dist/style.css"
   },
-  "packageManager": "pnpm@8.8.0",
+  "packageManager": "pnpm@9.1.0",
   "scripts": {
     "build": "npx rimraf dist && tsc && vite build",
     "build:dev": "vite build --mode development",
@@ -63,7 +63,7 @@
     "@material/icon-button": "^14.0.0",
     "@material/radio": "^14.0.0",
     "@material/top-app-bar": "^14.0.0",
-    "@material/web": "^1.1.1"
+    "@material/web": "^1.4.1"
   },
   "devDependencies": {
     "@aurelia/testing": "latest",
@@ -92,7 +92,7 @@
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
     "unplugin-swc": "^1.4.4",
-    "vite": "^5.0.11",
+    "vite": "^5.2.11",
     "vite-plugin-commonjs": "^0.10.1"
   },
   "peerDependencies": {
