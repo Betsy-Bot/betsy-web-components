@@ -8,6 +8,8 @@ import template from './moo-banner.html?raw';
 export class MooBanner implements ICustomElementViewModel {
     @bindable primaryAction: string;
     @bindable secondaryAction: string;
+    @bindable secondaryClicked: () => void;
+    @bindable primaryClicked: () => void;
     @bindable({ mode: BindingMode.twoWay }) open: boolean;
     bannerEl: HTMLButtonElement;
     banner: MDCBanner;
@@ -19,8 +21,21 @@ export class MooBanner implements ICustomElementViewModel {
         }
     }
 
+    handlePrimaryClicked() {
+        if (this.primaryClicked) {
+            this.primaryClicked();
+        }
+    }
+
+    handleSecondaryClicked() {
+        if (this.secondaryClicked) {
+            this.secondaryClicked();
+        }
+    }
+
     @watch('open')
     openChanged() {
+        console.log('openChanged');
         if (this.open) {
             this.banner.open();
         } else {
