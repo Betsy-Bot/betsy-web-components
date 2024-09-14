@@ -1,18 +1,21 @@
 import {bindable, customAttribute, ICustomAttributeViewModel, INode} from "@aurelia/runtime-html";
+import {resolve} from "@aurelia/kernel";
 
-@customAttribute({ name: 'align' })
+@customAttribute({name: 'align'})
 export class Align implements ICustomAttributeViewModel {
-  @bindable()
+    @bindable()
     public value?: string;
 
-  constructor(@INode private readonly element: HTMLElement) {}
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    private element: HTMLElement = resolve(INode)
 
-  public afterBind(): void {
-      this.element.style.textAlign = this.value ?? '';
-  }
+    public afterBind(): void {
+        this.element.style.textAlign = this.value ?? '';
+    }
 
-  /* Example of change detection */
-  public valueChanged(): void {
-      this.afterBind();
-  }
+    /* Example of change detection */
+    public valueChanged(): void {
+        this.afterBind();
+    }
 }
