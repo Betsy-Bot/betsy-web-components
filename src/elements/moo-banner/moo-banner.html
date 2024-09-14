@@ -8,13 +8,13 @@
             </div>
         </div>
         <div class="mdc-banner__actions">
-            <moo-button type="button" class="mdc-banner__secondary-action" if.bind="secondaryAction">
+            <moo-button type="button" class="mdc-banner__secondary-action" if.bind="secondaryAction" click.trigger="handleSecondaryClicked()">
                 <div class="mdc-button__ripple"></div>
                 <div class="mdc-button__label">
                     ${secondaryAction}
                 </div>
             </moo-button>
-            <moo-button type="button" class="mdc-banner__primary-action" if.bind="primaryAction">
+            <moo-button type="button" class="mdc-banner__primary-action" if.bind="primaryAction" click.trigger="handlePrimaryClicked()">
                 <div class="mdc-button__ripple"></div>
                 <div class="mdc-button__label">
                     ${primaryAction}
