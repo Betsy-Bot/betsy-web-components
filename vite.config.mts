@@ -25,12 +25,16 @@ export const rawHtml = () => {
 
 export default defineConfig({
     plugins: [
-        aurelia(),
+        aurelia({ enableConventions: true, hmr: true }),
         swc.vite()
     ],
+    esbuild: {
+        target: 'es2022',
+    },
     build: {
         manifest: true,
         minify: true,
+        target: 'es2022',
         reportCompressedSize: true,
         sourcemap: true,
         lib: {

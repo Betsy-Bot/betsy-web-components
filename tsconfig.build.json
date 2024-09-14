@@ -4,8 +4,6 @@
     "composite": false,
     "declaration": true,
     "strict": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "module": "esnext",
     "moduleResolution": "node",
     "skipLibCheck": true,
