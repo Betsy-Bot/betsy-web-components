@@ -1,4 +1,4 @@
-<md-outlined-select ...$attrs if.bind="variant === 'outlined'" onchange.bind="(e) => handleChange(e)">
+<md-outlined-select ...$attrs if.bind="variant === 'outlined'" onchange.bind="(e) => handleChange(e)" ref="selectEl">
     <md-select-option aria-label="blank" if.bind="includeNull" selected.bind="shouldBeSelected(null)">
         -- None --
     </md-select-option>
@@ -8,7 +8,7 @@
 </md-outlined-select>
 
 
-<md-filled-select ...$attrs else onchange.bind="(e) => handleChange(e)">
+<md-filled-select ...$attrs else onchange.bind="(e) => handleChange(e)" ref="selectEl">
     <md-select-option aria-label="blank" if.bind="includeNull" selected.bind="shouldBeSelected(null)">
         -- None --
     </md-select-option>

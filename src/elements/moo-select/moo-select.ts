@@ -8,6 +8,7 @@ export interface IMooSelectOption {
 export type MooSelectType = 'filled' | 'outlined';
 
 import template from './moo-select.html?raw';
+import {MdFilledSelect, MdOutlinedSelect} from "@material/web/all";
 
 @customElement({ name: 'moo-select', template, containerless: true, capture: true })
 export class MooSelect implements ICustomElementViewModel {
@@ -15,9 +16,14 @@ export class MooSelect implements ICustomElementViewModel {
     @bindable({ mode: BindingMode.twoWay }) value: string | number | undefined;
     @bindable variant: MooSelectType = 'outlined';
     @bindable includeNull = false;
+    selectEl: MdFilledSelect | MdOutlinedSelect;
 
     handleChange(e: Event) {
         this.value = (e.target as HTMLSelectElement).value;
+    }
+
+    public reset() {
+        this.selectEl.reset();
     }
 
     shouldBeSelected(option: IMooSelectOption | null) {

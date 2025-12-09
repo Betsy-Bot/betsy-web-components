@@ -30,7 +30,7 @@
     "engines": {
         "node": ">=18.0.0",
         "npm": ">=7.0.0",
-        "pnpm": ">=8.0.0"
+        "pnpm": ">=10.0.0"
     },
     "exports": {
         ".": {
@@ -40,7 +40,7 @@
         },
         "./dist/style.css": "./dist/style.css"
     },
-    "packageManager": "pnpm@9.10.0",
+    "packageManager": "pnpm@10.9.0",
     "scripts": {
         "build": "npx rimraf dist && tsc && vite build",
         "build:dev": "vite build --mode development",
@@ -52,6 +52,7 @@
         "lint:js": "eslint src --ext .js,.ts",
         "lint:html": "htmlhint -c .htmlhintrc src",
         "lint": "npm run lint:js && npm run lint:html",
+        "publish": "pnpm publish --access public",
         "prepublishOnly": "npx rimraf dist && npm run build && npm version patch",
         "semantic-release": "npx -p @semantic-release/changelog -p @semantic-release/exec -p @semantic-release/git -p @semantic-release/github -p @semantic-release/npm -p @semantic-release/release-notes-generator semantic-release",
         "start": "vite",
